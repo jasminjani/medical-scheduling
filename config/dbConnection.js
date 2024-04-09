@@ -11,7 +11,7 @@ const conn = mysql.createConnection({
 }).promise();
 
 
-conn.connect().then(()=> console.log('DB Connected')).catch((err)=> console.log(err))
+// conn.connect().then(()=> console.log('DB Connected')).catch((err)=> console.log(err))
 
 
 module.exports = conn;
