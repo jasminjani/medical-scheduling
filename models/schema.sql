@@ -1,3 +1,4 @@
+
 create database medical_scheduling;
 
 use medical_scheduling;
@@ -9,17 +10,7 @@ create table roles(
 	updated_at timestamp null default current_timestamp on update current_timestamp
 );
 
-create table login_attempts(
-	id int primary key auto_increment,
-    user_id int,
-	email varchar(255),
-    password varchar(255),
-	status bool not null, 
-    attempts int,
-    created_at timestamp default current_timestamp,
-    foreign key (user_id) references users(id)
-    );
-    
+
 
 create table permissions(
 	id int primary key auto_increment,
@@ -59,6 +50,18 @@ create table users(
     foreign key (role_id) references roles(id)
 );
 
+create table login_attempts(
+	id int primary key auto_increment,
+    user_id int,
+	email varchar(255),
+    password varchar(255),
+	status bool not null, 
+    attempts int,
+    created_at timestamp default current_timestamp,
+    foreign key (user_id) references users(id)
+);
+    
+    
 create table clinic_hospitals(
 	id int primary key auto_increment,
     name varchar(255) not null,
