@@ -9,7 +9,7 @@
 - A4 - Grishma Sao
 - A5 - Jani Jasmin
 - A6 - 
-- A7 - 
+- A7 - Yash Babaria
 
 ## Project status
 
