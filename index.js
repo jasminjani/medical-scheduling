@@ -23,9 +23,11 @@ app.use("/public", express.static(path.join(__dirname, "/public")));
 
 // import routes file
 const userRouter = require("./routes/userRoute");
+const hospitalRoute = require("./routes/hospitalRoute");
 
 // setup middleware of rotues file
 app.use("/", userRouter);
+app.use(hospitalRoute);
 
 // server is running on PORT
 app.listen(PORT, () => {
