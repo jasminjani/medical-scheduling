@@ -24,6 +24,7 @@ app.use("/public", express.static(path.join(__dirname, "/public")));
 
 // import routes file
 const userRouter = require("./routes/userRoute");
+const hospitalRoute = require("./routes/hospitalRoute");
 const doctorRoute = require("./routes/doctorRouter");
 const specialitiesRoute = require("./routes/doctorSpecialitiesRouter")
 
@@ -31,7 +32,7 @@ const specialitiesRoute = require("./routes/doctorSpecialitiesRouter")
 app.use("/", userRouter);
 app.use("/",doctorRoute);
 app.use("/",specialitiesRoute);
-
+app.use("/",hospitalRoute);
 
 // server is running on PORT
 app.listen(PORT, () => {
