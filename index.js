@@ -11,7 +11,7 @@ const conn = require("./config/dbConnection");
 const PORT = process.env.PORT
 
 // middleware
-app.use(express.json());
+// app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
@@ -24,6 +24,7 @@ app.use("/public", express.static(path.join(__dirname, "/public")));
 
 // import routes file
 const userRouter = require("./routes/userRoute");
+const prescriptionRouter = require("./routes/prescriptionRoutes");
 const hospitalRoute = require("./routes/hospitalRoute");
 const doctorRoute = require("./routes/doctorRouter");
 const specialitiesRoute = require("./routes/doctorSpecialitiesRouter")
@@ -33,6 +34,7 @@ app.use("/", userRouter);
 app.use("/",doctorRoute);
 app.use("/",specialitiesRoute);
 app.use("/",hospitalRoute);
+app.use("/",prescriptionRouter);
 
 // server is running on PORT
 app.listen(PORT, () => {
