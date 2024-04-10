@@ -11,7 +11,7 @@ const conn = require("./config/dbConnection");
 const PORT = process.env.PORT
 
 // middleware
-// app.use(express.json());
+app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
@@ -30,17 +30,10 @@ const hospitalRoute = require("./routes/hospitalRoute");
 const doctorRoute = require("./routes/doctorRouter");
 const specialitiesRoute = require("./routes/doctorSpecialitiesRouter")
 
-// setup middleware of rotues file
-app.use("/", userRouter);
-app.use("/",doctorRoute);
-app.use("/",specialitiesRoute);
-app.use("/",hospitalRoute);
-app.use("/",prescriptionRouter);
-
 // use root router in index file
 app.use('/', router);
 
 // server is running on PORT
 app.listen(PORT, () => {
-  console.log(`server is running on port: http://localhost:${PORT}`);
+  console.log(`server is running on port: ${PORT}`);
 });
