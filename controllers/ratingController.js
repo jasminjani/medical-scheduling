@@ -33,7 +33,7 @@ exports.updateRating = async (req, res) => {
 
     console.log("Data deleted!!");
 
-    let [data] = await conn.query(query [patient_id]);
+    let [data] = await conn.query(query, [patient_id]);
   }
   catch (error) {
     return res.status(500).json({

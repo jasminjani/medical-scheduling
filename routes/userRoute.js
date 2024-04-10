@@ -6,6 +6,7 @@ const { imgStorage, fileStorage } = require("../utils/multer");
 const multer = require("multer");
 const imgUpload = multer({ storage: imgStorage });
 const fileUpload = multer({ storage: fileStorage });
+
 const { createUser, login, getAllUser, logout, getUserById, deleteUser, generateToken } = require("../controllers/userController");
 const passport = require('passport');
 
