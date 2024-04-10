@@ -1,7 +1,17 @@
 const express = require('express');
-const router1 = require('./paymentsRouter');
+const paymentRouter = require('./paymentsRouter');
+const doctorRouter = require('./doctorRouter');
+const doctorSpecialitiesRouter = require('./doctorSpecialitiesRouter');
+const hospitalRouter = require('./hospitalRoute');
+const prescriptionRouter = require('./prescriptionRoutes');
+const userRouter = require('./userRoute');
 const router = express.Router();
 
-router.use('/user', router1);
+router.use('/', paymentRouter);
+router.use("/", userRouter);
+router.use("/", doctorRouter);
+router.use("/", doctorSpecialitiesRouter);
+router.use("/", hospitalRouter);
+router.use("/", prescriptionRouter);
 
 module.exports = router;
