@@ -28,12 +28,12 @@ const router = require("./routes/rootRouter");
 const prescriptionRouter = require("./routes/prescriptionRoutes");
 const hospitalRoute = require("./routes/hospitalRoute");
 const doctorRoute = require("./routes/doctorRouter");
-const specialitiesRoute = require("./routes/doctorSpecialitiesRouter")
+const specialitiesRoute = require("./routes/doctorSpecialitiesRouter");
 
 // use root router in index file
 app.use('/', router);
 
 // server is running on PORT
 app.listen(PORT, () => {
-  console.log(`server is running on port: http://localhost:${PORT}`);
+  console.log(`server is running on port: ${PORT}`);
 });
