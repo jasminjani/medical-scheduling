@@ -1,8 +1,16 @@
 const conn = require('../config/dbConnection.js')
 
 exports.createSpecialities = async (req, res) => {
+  const { speciality } = req.body
+
+  if(!speciality)
+  {
+    return res.status(500).json({
+      success: false,
+      message: "Please Fill Field"
+    })
+  }
   try {
-    const { speciality } = req.body
     await conn.query(`insert into specialities (speciality) values (?)`, [speciality])
   } catch (error) {
     res.status(500).json({
