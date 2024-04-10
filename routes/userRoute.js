@@ -6,7 +6,6 @@ const multer = require("multer");
 const imgUpload = multer({ storage: imgStorage });
 const fileUpload = multer({ storage: fileStorage });
 
-router.route("/user")
-.get(allUser);
+// router.route("/user").get(allUser);
 
 module.exports = router;
