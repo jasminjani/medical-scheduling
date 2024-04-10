@@ -5,6 +5,7 @@ const doctorSpecialitiesRouter = require('./doctorSpecialitiesRouter');
 const hospitalRouter = require('./hospitalRoute');
 const prescriptionRouter = require('./prescriptionRoutes');
 const userRouter = require('./userRoute');
+const nearByDoctorsRouter = require('./nearByDoctorsRouter');
 const router = express.Router();
 
 router.use('/', paymentRouter);
@@ -13,5 +14,6 @@ router.use("/", doctorRouter);
 router.use("/", doctorSpecialitiesRouter);
 router.use("/", hospitalRouter);
 router.use("/", prescriptionRouter);
+router.use('/', nearByDoctorsRouter)
 
 module.exports = router;
