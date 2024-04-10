@@ -8,7 +8,7 @@ const userRouter = require('./userRoute');
 const router = express.Router();
 
 router.use('/', paymentRouter);
-router.use("/", userRouter);
+router.use("/api", userRouter);
 router.use("/", doctorRouter);
 router.use("/", doctorSpecialitiesRouter);
 router.use("/", hospitalRouter);

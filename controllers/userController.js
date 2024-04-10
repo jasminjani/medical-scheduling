@@ -15,6 +15,7 @@ exports.createUser = async (req, res) => {
       dob,
       gender,
       phone,
+      city,
       address,
       password,
       confirmPassword,
@@ -29,6 +30,7 @@ exports.createUser = async (req, res) => {
       !email ||
       !dob ||
       !gender ||
+      !city ||
       !phone ||
       !address ||
       !password ||
@@ -36,6 +38,7 @@ exports.createUser = async (req, res) => {
     ) {
       return res.status(400).json({
         success: false,
+        body:req.body,
         message: "Please fill all the fields",
       });
     }
@@ -57,7 +60,7 @@ exports.createUser = async (req, res) => {
     } catch (error) {
       return res.status(500).json({
         success: false,
-        message: "Internal server Error",
+        message: error.message,
       });
     }
 
@@ -88,7 +91,7 @@ exports.createUser = async (req, res) => {
     let verification_token = crypto.randomUUID();
 
     // make query for insert the data
-    let sql = "insert into users (fname,lname,email,dob,gender,phone,password,salt,address,role_id,activation_token,profile) values (?)";
+    let sql = "insert into users (fname,lname,email,dob,gender,phone,password,salt,city,address,role_id,activation_token,profile) values (?)";
 
     // execute the query
     try {
@@ -102,8 +105,9 @@ exports.createUser = async (req, res) => {
           phone,
           hashPassword,
           random_salt,
+          city,
           address,
-          role_id,
+          1,
           verification_token,
           profile
         ]
@@ -112,6 +116,7 @@ exports.createUser = async (req, res) => {
     } catch (error) {
       return res.status(500).json({
         success: false,
+        error:error.message,
         message: "Internal server Error",
       });
     }
@@ -133,6 +138,7 @@ exports.createUser = async (req, res) => {
     } catch (error) {
       return res.status(500).json({
         success: false,
+        error:error.message,
         message: "Internal server Error",
       });
     }
@@ -176,7 +182,7 @@ exports.login = async (req, res) => {
     } catch (error) {
       return res.status(500).json({
         success: false,
-        message: "Internal server Error",
+        message: error.message,
       });
     }
 
