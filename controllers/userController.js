@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const conn = require("../../config/dbConnect");
+const conn = require("../config/dbConnection");
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 dotenv.config();
