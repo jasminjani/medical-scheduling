@@ -6,13 +6,12 @@ require("dotenv").config();
 
 // database connection
 const conn = require("./config/dbConnection");
-
 const PORT = process.env.PORT;
 
 // passport configuration
 const passport = require("passport");
-const { passportConfig } = require("./middlewares/authMiddleware");
-passportConfig(passport);
+const {passportConfig} = require('./middlewares/authMiddleware')
+passportConfig(passport)
 
 // middleware
 app.use(passport.initialize());
@@ -34,7 +33,6 @@ const prescriptionRouter = require("./routes/prescriptionRoutes");
 const hospitalRoute = require("./routes/hospitalRoute");
 const doctorRoute = require("./routes/doctorRouter");
 const specialitiesRoute = require("./routes/doctorSpecialitiesRouter");
-const { passportConfig } = require("./middlewares/authMiddleware");
 
 // use root router in index file
 app.use("/", router);
