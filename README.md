@@ -3,7 +3,7 @@
 
 ## Contributor
 
-- A1 -  
+- A1 - Alpesh Prajapati 
 - A2 - Ashish Zapadiya
 - A3 - 
 - A4 - Grishma Sao
