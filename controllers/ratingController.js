@@ -7,8 +7,8 @@ exports.rating = async (req, res) => {
     // console.log(req.params);
     console.log(req.body);
 
-    // const { patient_id, doctor_id } = req.params;
-    const { patient_id, doctor_id, rating, review } = req.body;
+    const { patient_id, doctor_id } = req.params;
+    const { rating, review } = req.body;
 
     let query = `insert into rating_and_reviews (patient_id, doctor_id, rating, review) values(?,?,?,?)`;
     console.log("Data added to DB");
@@ -28,12 +28,12 @@ exports.rating = async (req, res) => {
 exports.updateRating = async (req, res) => {
   try {
 
-    console.log(req.body);
+    const { patient_id} = req.params;
+    let query = `delete from rating_and_reviews where patient_id=?`;
 
-    const { patient_id, doctor_id, rating, review } = req.body
-    let query = `update rating_and_reviews set patient_id=?, doctor_id=?, rating=?, review=? where patient_id=?`;
+    console.log("Data deleted!!");
 
-    let [data] = await conn.query(query [patient_id, doctor_id, rating, review]);
+    let [data] = await conn.query(query [patient_id]);
   }
   catch (error) {
     return res.status(500).json({
