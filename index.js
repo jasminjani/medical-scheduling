@@ -42,5 +42,5 @@ app.use('/', router);
 
 // server is running on PORT
 app.listen(PORT, () => {
-  console.log(`server is running on port: http://localhost:${PORT}`);
+  console.log(`server is running on port: ${PORT}`);
 });
