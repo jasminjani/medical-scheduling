@@ -10,7 +10,6 @@ const multer = require("multer");
 const imgUpload = multer({ storage: imgStorage });
 const fileUpload = multer({ storage: fileStorage });
 const { allUser, createUser } = require("../controllers/userController");
-const { createSlots } = require("../controllers/slotController");
 
 
 
