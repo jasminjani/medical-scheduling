@@ -1,15 +1,21 @@
-
 const express = require('express');
-
 const { createSlots, getSingleSlots, bookingSlot, getAllSlots } = require('../controllers/slotController');
-
 const { rating } = require('../controllers/ratingController');
 const router = express.Router();
 const { imgStorage, fileStorage } = require("../utils/multer");
 const multer = require("multer");
 const imgUpload = multer({ storage: imgStorage });
 const fileUpload = multer({ storage: fileStorage });
-const { allUser, createUser } = require("../controllers/userController");
+const { createUser, login, getAllUser, logout, getUserById, deleteUser, generateToken } = require("../controllers/userController");
+const passport = require('passport');
+
+router.route('/register').post(imgUpload.single('profile'),createUser)
+router.route('/users').get(passport.authenticate('jwt',{session:false}),getAllUser)
+router.route('/login').post(login)
+router.route('/logout').post(logout)
+router.route('/user/:id').post(getUserById)
+router.route('/user/:id').delete(deleteUser)
+router.route('/generateToken').post(generateToken)
 
 router.route("/:patient_id/review/:doctor_id").post(rating);
 
