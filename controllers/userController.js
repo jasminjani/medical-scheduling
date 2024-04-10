@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const conn = require("../../config/dbConnect");
+const conn = require("../config/dbConnection");
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -15,6 +15,7 @@ exports.createUser = async (req, res) => {
       dob,
       gender,
       phone,
+      city,
       address,
       password,
       confirmPassword,
@@ -29,6 +30,7 @@ exports.createUser = async (req, res) => {
       !email ||
       !dob ||
       !gender ||
+      !city ||
       !phone ||
       !address ||
       !password ||
@@ -36,6 +38,7 @@ exports.createUser = async (req, res) => {
     ) {
       return res.status(400).json({
         success: false,
+        body:req.body,
         message: "Please fill all the fields",
       });
     }
@@ -57,7 +60,7 @@ exports.createUser = async (req, res) => {
     } catch (error) {
       return res.status(500).json({
         success: false,
-        message: "Internal server Error",
+        message: error.message,
       });
     }
 
@@ -88,7 +91,7 @@ exports.createUser = async (req, res) => {
     let verification_token = crypto.randomUUID();
 
     // make query for insert the data
-    let sql ="insert into users (fname,lname,email,dob,gender,phone,password,salt,address,role_id,activation_token,profile) values (?)";
+    let sql = "insert into users (fname,lname,email,dob,gender,phone,password,salt,city,address,role_id,activation_token,profile) values (?)";
 
     // execute the query
     try {
@@ -102,8 +105,9 @@ exports.createUser = async (req, res) => {
           phone,
           hashPassword,
           random_salt,
+          city,
           address,
-          role_id,
+          1,
           verification_token,
           profile
         ]
@@ -112,6 +116,7 @@ exports.createUser = async (req, res) => {
     } catch (error) {
       return res.status(500).json({
         success: false,
+        error:error.message,
         message: "Internal server Error",
       });
     }
@@ -133,6 +138,7 @@ exports.createUser = async (req, res) => {
     } catch (error) {
       return res.status(500).json({
         success: false,
+        error:error.message,
         message: "Internal server Error",
       });
     }
@@ -176,7 +182,7 @@ exports.login = async (req, res) => {
     } catch (error) {
       return res.status(500).json({
         success: false,
-        message: "Internal server Error",
+        message: error.message,
       });
     }
 
@@ -198,7 +204,7 @@ exports.login = async (req, res) => {
       let payload = {
         id: result[0].id,
         email: result[0].email,
-        role_id:result[0].role_id,
+        role_id: result[0].role_id,
       };
 
       // remove password from the user obj
@@ -391,7 +397,7 @@ exports.deleteUser = async (req, res) => {
     sql = "update users set is_deleted=true,deleted_at=? where id=?";
 
     // execute query
-    [result] = await conn.query(sql, [new Date(Date.now()),id]);
+    [result] = await conn.query(sql, [new Date(Date.now()), id]);
 
     // check deleted or not
     if (!result.affectedRows) {
@@ -703,3 +709,4 @@ exports.getCurrentUser = async (req, res) => {
     });
   }
 };
+
