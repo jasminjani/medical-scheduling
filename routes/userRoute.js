@@ -10,7 +10,6 @@ const multer = require("multer");
 const imgUpload = multer({ storage: imgStorage });
 const fileUpload = multer({ storage: fileStorage });
 const { allUser, createUser } = require("../controllers/userController");
-const { createSlots } = require("../controllers/slotController");
 
 
 
@@ -18,5 +17,6 @@ router.route("/:patient_id/review/:doctor_id").post(rating);
 
 router.route("/slot/:doctor_id").post(createSlots)
 router.route("/slot/:doctor_id/:date").get(getSlots);
+router.route("/")
 
 module.exports = router;

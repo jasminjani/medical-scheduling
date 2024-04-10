@@ -74,3 +74,11 @@ exports.getSlots = async (req, res) => {
     return res.status(500).json({ success: false, message: error.message });
   }
 }
+
+exports.bookingSlot = async (req, res) => {
+  try {
+    const { patient_id, slot_id } = req.params;
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+}
