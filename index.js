@@ -11,7 +11,7 @@ const conn = require("./config/dbConnection");
 const PORT = process.env.PORT
 
 // middleware
-// app.use(express.json());
+app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
