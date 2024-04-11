@@ -1,4 +1,4 @@
 exports.demoHomeController = (req, res) => {
 
-  res.render('demoHomePage');
+  res.render('pages/demoHomePage');
 }
