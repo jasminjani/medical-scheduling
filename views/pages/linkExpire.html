@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Link expire</title>
+  <style>
+    .active-button {
+      text-align: center;
+      margin-top: 9%;
+    }
+
+    .btn-size {
+      margin: auto;
+      height: 33px;
+      width: 185px;
+      border-radius: 5px;
+      background-color: #4147e6;
+      padding-top: 12px;
+    }
+
+    .btn-text {
+      color: #ffff;
+      text-decoration: none;
+      font-size: 17px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="active-button">
+    <div>
+      <img src="../../public/image/linkExpire.png" alt="Verification link has been expired!">
+    </div>
+    <p class="btn-size"><a href="" class="btn-text" id="generate-token">Generate new link</a></p>
+
+    <input type="hidden" id="active-account">
+  </div>
+
+</body>
+
+</html>
