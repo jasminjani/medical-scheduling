@@ -152,13 +152,14 @@ exports.getAllSlots = async (req, res) => {
 
     try {
 
-      const query = 'select * from time_slots where doctor_id = ? and date >= NOW()';
+      const query = 'select * from time_slots where doctor_id = ? and CAST(date AS datetime) >= NOW()';
 
       const [data] = await conn.query(query, [doctor_id]);
 
       console.log(data);
 
     } catch (error) {
+      console.log(error);
       return res.status(500).json({ success: false, message: error.message });
     }
 
