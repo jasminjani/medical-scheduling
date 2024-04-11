@@ -1,0 +1,65 @@
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 2000px;
+  padding: 20px 20px;
+  /* border: solid black; */
+}
+
+.body {
+  width: 800px;
+  display: flex;
+  gap: 80px;
+}
+
+/* .sidebarHeader {
+  display: flex;
+  gap: 50px;
+} */
+
+.sideBar {
+  max-width: 230px;
+  border: 1px solid black;
+}
+
+p {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.header {
+  display: flex;
+  gap: 740px;
+  /* border: 1px solid black;   */
+}
+
+.full {
+  border: 1px solid black;
+}
+
+.textHeader {
+  margin-left: 20px;
+}
+
+.profilePic {
+  height: 50px;
+  margin-top: 17px;
+  margin-right: 20px;
+}
+
+.department, .doctor{
+  height: 40px;
+  width: 200px;
+  text-align: center;
+  border-radius: 30px 30px;
+}
+
+/* .doctor {
+  height: 40px;
+  width: 200px;
+  text-align: center;
+  border-radius: 30px 30px;
+} */

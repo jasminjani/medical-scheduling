@@ -1,0 +1,130 @@
+*{
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1800px;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.body {
+  width: 800px;
+  display: flex;
+  gap: 90px;
+}
+
+.sideBar {
+  max-width: 300px;
+  border: 1px solid black;
+  text-align: center;
+}
+
+p {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.topBar {
+  display: flex;
+  gap: 780px;
+  /* margin-left: 220px; */
+  /* border: 1px solid black; */
+
+  .heading {
+    margin-left: 20px;
+  }
+
+  .profilePic {
+    margin-top: 7px;
+    height: 50px;
+    /* margin-right: 20px; */
+  }
+}
+
+.mainContent {
+  display: flex;
+  gap: 150px;
+  margin-top: 40px;
+  /* margin-left: 220px; */
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: rgb(227, 248, 255);
+}
+
+.head {
+  /* margin-left: 220px; */
+  margin-top: 60px;
+  text-align: center;
+}
+
+.textHome {
+  margin-left: 50px;
+  max-width: 900px;
+  text-align: center;
+  /* border: 1px solid black; */
+  font-size: 61px;
+}
+
+.image1 {
+  height: 300px;
+  max-width: 800px;
+  margin-right: 50px;
+}
+
+input {
+  height: 40px;
+  width: 120px;
+}
+
+.pics {
+  display: flex;
+  gap: 60px;
+  padding-top: 20px;
+  /* margin-left: 70px; */
+  height: 300px;
+  padding-bottom: 30px;
+}
+
+.appoint{
+  display: flex;
+  gap: 40px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: rgb(227, 248, 255);
+}
+
+.textAppoint {
+  margin-left: 50px;
+  max-width: 500px;
+  font-size: 50px;
+  /* border: 1px solid black; */
+}
+
+.imgAppoint {
+  max-width: 800px;
+  margin-right: 50px;
+}
+
+.doctors {
+  height: 300px;
+}
+
+#appoint{
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+
+.footer {
+  margin-top: 40px;
+  text-align: center;
+  border: 1px solid black;
+}
