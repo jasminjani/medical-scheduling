@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/viewpatient.css">
+  </head>
+  <body>
+    <div class="A4-section">
+      <div class="A4-container">
+        <div class="A4-header">
+          <h1>Profile Details</h1>
+        </div>
+        <div class="A4-Content">
+            <table>
+                <tr>
+                    <td>Firstname:</td>
+                    <td>Grishma</td>
+                </tr>
+                <tr>
+                    <td>Lastname:</td>
+                    <td>Sao</td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td>grishmasao1510@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>Contact Number:</td>
+                    <td>9316896321</td>
+                </tr>
+                <tr>
+                    <td>Gender:</td>
+                    <td>Female</td>
+                </tr>
+                <tr>
+                    <td>DOB:</td>
+                    <td>15-10-2002</td>
+                </tr>
+                <tr>
+                    <td>Address:</td>
+                    <td>108,Radhe Krishna Society,Sarkhej,Ahmedabad</td>
+                </tr>
+                <tr>
+                    <td>BloodGroup:</td>
+                    <td>B+</td>
+                </tr>
+            </table>
+          </div>
+          <div class="A4-prescription">
+            <button class="A4-addPrescription" onclick="addprescreption()">Add Prescription</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        function addprescreption(){
+            window.location.href="./createprescription.html"
+        }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+:root {
+  --blue: #0167ce;
+  --white: #ffffff;
+}
+.A4-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  font-family: sans-serif;
+}
+body {
+  background-color: aliceblue;
+}
+.A4-header {
+  text-align: center;
+  padding: 55px 0px;
+  h1 {
+    font-size: 35px;
+  }
+}
+.A4-Content {
+  padding: 1px 292px;
+  font-size: 22px;
+  /* table,
+  th,
+  tr,
+  td {
+    border: 1px solid black;
+  } */
+  td {
+    height: 60px;
+    width: 418px;
+    word-wrap: anywhere;
+  }
+}
+table {
+  background-color: var(--white);
+}
+.A4-prescription {
+  text-align: center;
+  padding: 64px 0px;
+}
+.A4-addPrescription {
+  height: 50px;
+  width: 211px;
+  font-size: 18px;
+  background-color: var(--blue);
+  color: var(--white);
+  border-radius: 7px;
+}
+.A4-addPrescription:hover {
+  background-color: #025bb4;
+}
