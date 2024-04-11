@@ -155,6 +155,12 @@ exports.getDoctorReview = async (req, res) => {
     const query = `select doctor_details.hospital_id, doctor_details.qualification, doctor_details.consultancy_fees, rating_and_reviews.patient_id, rating_and_reviews.rating, rating_and_reviews.review from doctor_details inner join rating_and_reviews on doctor_details.doctor_id = rating_and_reviews.doctor_id where doctor_details.doctor_id = ?`;
 
     let [data] = await conn.query(query, [doctor_id]);
+    console.log(data);
+
+    return res.status(200).json ({
+      success: true,
+      message: "Doctor reviews displayed!!"
+    });
   }
   catch{
     return res.status(500).json({
