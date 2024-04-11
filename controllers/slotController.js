@@ -38,7 +38,7 @@ exports.createSlots = async (req, res) => {
 
             const [isValid] = await conn.query(query, [doctor_id, dayArray[i][0], start_time]);
 
-            console.log(isValid);
+            // console.log(isValid);
 
           } catch (error) {
             return res.status(500).json({ success: false, message: error.message });
@@ -50,7 +50,6 @@ exports.createSlots = async (req, res) => {
 
             const [slots] = await conn.query(query, [doctor_id, dayArray[i][0], start_time, end_time]);
 
-            return res.status(200).json({ success: true, message: "slots created successfully" });
 
           } catch (error) {
             return res.status(500).json({ success: false, message: error.message });
@@ -59,6 +58,7 @@ exports.createSlots = async (req, res) => {
         }
       }
     }
+    return res.status(200).json({ success: true, message: "slots created successfully" });
 
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
@@ -73,7 +73,7 @@ exports.getSingleSlots = async (req, res) => {
 
     try {
 
-      const query = "select * from time_slots where doctor_id = ? and date = ?";
+      const query = "select * from time_slots where doctor_id = ? and date = ? and is_booked = 0 and is_deleted = 0";
 
       const [slots] = await conn.query(query, [doctor_id, date]);
 
@@ -98,11 +98,13 @@ exports.bookingSlot = async (req, res) => {
 
     try {
 
-      const query = "select * from time_slots where id = ?";
+      const query = "select * from time_slots inner join slot_bookings on time_slots.id = slot_bookings.slot_id where time_slots.id = ? and (slot_bookings.is_canceled = ? or time_slots.is_booked=? or time_slots.is_deleted=?)";
 
-      const [slotExist] = await conn.query(query, [slot_id]);
+      const [slotExist] = await conn.query(query, [slot_id, 0, 1, 1]);
 
-      if (slotExist[0].is_booked) return res.status(404).json({ success: false, message: "slot already booked" });
+      console.log(slotExist);
+
+      if (slotExist.length !== 0) return res.status(404).json({ success: false, message: "slot already booked" });
 
     } catch (error) {
       return res.status(500).json({ success: false, message: error.message });
@@ -145,6 +147,7 @@ exports.bookingSlot = async (req, res) => {
   }
 }
 
+// Doctors can get all upcoming slots
 exports.getAllSlots = async (req, res) => {
   try {
 
@@ -152,11 +155,11 @@ exports.getAllSlots = async (req, res) => {
 
     try {
 
-      const query = 'select * from time_slots where doctor_id = ? and CAST(date AS datetime) >= NOW()';
+      const query = 'select * from time_slots where doctor_id = ? and date > CAST(NOW() as DATE)';
 
       const [data] = await conn.query(query, [doctor_id]);
 
-      console.log(data);
+      return res.status(200).json({ success: true, message: data });
 
     } catch (error) {
       console.log(error);
@@ -165,6 +168,127 @@ exports.getAllSlots = async (req, res) => {
 
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
+  }
+}
+
+// Doctors can delete slots
+exports.deleteSlot = async (req, res) => {
+  try {
+
+    const { doctor_id, slot_id } = req.params;
+
+    try {
+
+      const query = "select * from time_slots where doctor_id = ? and id = ? and is_deleted = ?";
+
+      const [checkSlot] = await conn.query(query, [doctor_id, slot_id, 0]);
+
+      if (checkSlot.length === 0) return res.status(500).json({ success: false, message: "you can not cancel this slot" });
+
+
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ success: false, message: error.message });
+    }
+
+    try {
+
+      const query = "update time_slots set is_deleted = ?,deleted_at = NOW() where id = ?";
+
+      const [deleted] = await conn.query(query, [1, slot_id]);
+
+    } catch (error) {
+      console.log(error);
+
+      return res.status(500).json({ success: false, message: error.message });
+    }
+
+    try {
+
+      const query = "update slot_bookings set is_deleted = ?,deleted_at = NOW() where slot_id = ?";
+
+      const [deleted] = await conn.query(query, [1, slot_id]);
+
+    } catch (error) {
+      console.log(error);
+
+      return res.status(500).json({ success: false, message: error.message });
+    }
+
+    try {
+
+      const query = "update payments set is_refunded = ? where slot_id = ?";
+
+      const [refunded] = await conn.query(query, [1, slot_id]);
+
+      return res.status(200).json({ success: true, message: "slot deleted successfully" });
+
+    } catch (error) {
+      console.log(error);
+
+      return res.status(500).json({ success: false, message: error.message });
+    }
+
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+}
+
+// Patients can cancel slots
+exports.cancelSlot = async (req, res) => {
+
+  try {
+
+    const { patient_id, slot_id } = req.params;
+
+    try {
+
+      const query = "select * from slot_bookings where patient_id = ? and slot_id = ? and is_deleted = ?";
+
+      const [checkBook] = await conn.query(query, [patient_id, slot_id, 0]);
+
+      if (checkBook.length === 0) return res.status(500).json({ success: false, message: "you can not cancel this slot" });
+
+    } catch (error) {
+      return res.status(500).json({ success: false, message: error.message });
+    }
+
+    try {
+
+      const query = "update slot_bookings set is_canceled = ? where slot_id = ? and patient_id = ?";
+
+      const [canceled] = await conn.query(query, [1, slot_id, patient_id]);
+
+    } catch (error) {
+      return res.status(500).json({ success: false, message: error.message });
+    }
+
+    try {
+
+      const query = "update time_slots set is_booked = ? where id = ?";
+
+      const [canceled] = await conn.query(query, [0, slot_id]);
+
+    } catch (error) {
+      return res.status(500).json({ success: false, message: error.message });
+    }
+
+    try {
+
+      const query = "update payments set is_refunded = ? where slot_id = ?";
+
+      const [refunded] = await conn.query(query, [1, slot_id]);
+
+      return res.status(200).json({ success: true, message: "slot canceled successfully" });
+
+    } catch (error) {
+      return res.status(500).json({ success: false, message: error.message });
+    }
+
+
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+
   }
 }
 
