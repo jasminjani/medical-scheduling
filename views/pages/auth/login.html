@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/public/css/auth/login.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="form">
+            <div class="content">
+            <h2>Login</h2>
+            <form action="/login" class="user" method="post">
+                <div class="email">
+                    <label for="email">Email: </label>
+                    <input type="text" name="email" id="email" placeholder="Enter your email" class="dvalid">
+                </div>
+
+                <div class="password">
+                    <label for="lname">Password:</label>
+                    <input type="password" name="password" id="password" placeholder="Enter your password" class="dvalid">
+                </div>
+                <div class="forgot-pass">
+                    <p><a href="/forgot-password" id="forgot-password">Forgot Password?</a></p>
+                </div>
+
+                <div class="submit">
+                    <input type="submit" id="submit" value="Login">
+                </div>
+
+                <div class="or">
+                    <div class="left"></div>
+                    <p>OR</p>
+                    <div class="right"></div>
+                </div>
+                <div class="mv-btn">
+                    <p>Create New Account? <a href="/register">register</a></p>
+                </div>
+            </form>
+            <div class="link"></div>
+        </div>
+        </div>
+    </div>
+
+
+    <script src="/public/javascript/auth/script.js"></script>
+    <script src="/public/javascript/auth/login.js"></script>
+</body>
+
+</html>
