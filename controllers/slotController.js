@@ -1,5 +1,13 @@
 const conn = require("../config/dbConnection");
 
+exports.createSlotsPage = async (req, res) => {
+  try {
+    res.render("pages/slotPanel/addSlots");
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+}
+
 // Doctors can create slots
 exports.createSlots = async (req, res) => {
   try {
