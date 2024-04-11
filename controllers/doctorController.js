@@ -156,7 +156,12 @@ exports.getDoctorReview = async (req, res) => {
 
     let [data] = await conn.query(query, [doctor_id]);
 
-    log
+    console.log(data);
+
+    return res.status(200).json ({
+      success: true,
+      message: "Doctor reviews displayed!!"
+    });
   }
   catch {
     return res.status(500).json({

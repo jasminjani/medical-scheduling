@@ -11,7 +11,9 @@ router.route("/doctorCreateProfile")
 .post(createDoctor)
 
 router.route("/doctorProfile/:id")
-  .get(doctorDisplay).post(getDoctorReview)
+  .get(doctorDisplay)
+
+router.route("/reviews/:doctor_id").get(getDoctorReview)
 
 router.route("/doctorProfile/:id")
   .put(updateDoctorDetails)
