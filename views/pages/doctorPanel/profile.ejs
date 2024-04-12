@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/doctorPanel/dashboard.css">
+  <link rel="stylesheet" href="/css/doctorPanel/profile.css">
+  <link rel="stylesheet" href="/css/sideBar/sidebar.css">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div class="a7-container">
+    <%- include('../../common/doctorSideBar.ejs') %>
+   
+    <div class="a7-main-profile">
+
+      <div class="a7-profile-section">
+
+          <div class="a7-btn-flex-end">
+            <div class="a7-edit-btn"><a id="edtbtn" href="">Edit Profile</a></div>
+          </div>
+          
+        <div class="a7-profile-title">
+          <h1>Profile Details</h1>
+        </div>
+        <div class="a7-card">
+          <div class="a7-card-box">
+            <div class="a7-card-color">
+              <div class="a7-profile-info" id="divprofile">
+              </div>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+    </div>
+    </div>
+
+</body>
+<script>
+    let baseUrl = (window.location).href;
+    let Id = baseUrl.substring(baseUrl.lastIndexOf('/') + 1);
+
+    document.getElementById('edtbtn').href = `http://localhost:8000/updatedoctorProfile/${Id}`
+    document.getElementById('viewprofile').href = `http://localhost:8000/doctorProfile/${Id}`
+ const profileDetailData = async() =>{
+
+  
+    let fetchdata = await fetch(`http://localhost:8000/doctorData/${Id}`)
+    let data = await fetchdata.json()
+    let key = Object.keys(data[0])
+    key.forEach(item => {
+      let divinfo = document.createElement("div")
+      divinfo.setAttribute("class", "a7-field")
+      let dlabel = document.createElement("label")
+      dlabel.innerHTML = item
+      let drinfo = document.createElement("span")
+      drinfo.innerHTML = data[0][item]
+      divinfo.append(dlabel)
+      divinfo.append(drinfo)
+      document.getElementById("divprofile").appendChild(divinfo)
+    });
+  }
+  profileDetailData()
+  // fetchFun()
+</script>
+
+</html>

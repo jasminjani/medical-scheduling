@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UserData</title>
+    <link rel="stylesheet" type="text/css" href="/css/auth/register.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="form">
+            <div class="content">
+                <h2>Register Doctor Details</h2>
+                <form action="" class="user" method="post">
+
+                    <div class="fname">
+                        <label for="fname">doctor_id: </label>
+                        <input type="text" name="doctor_id"   class="dvalid">
+                    </div>
+
+                    <div class="fname">
+                        <label for="fname">Qualification: </label>
+                        <input type="text" name="qualification" id="fname" placeholder="Enter Qualification" class="dvalid">
+                    </div>
+                   
+                    <div class="email">
+                        <label for="consultancy_fees">consultancy_fees: </label>
+                        <input type="text" name="consultancy_fees" id="consultancy_fees" placeholder="Enter consultancy_fees" class="dvalid">
+                    </div>
+                  
+    
+                   
+                    <div class="phone">
+                        <label for="phone">Phone Number: </label>
+                        <input type="text" id="phone" name="phone" class="dvalid" placeholder="Enter Phone Number">
+                    </div>
+                    <div class="city">
+                        <label for="city">Speciality:</label>
+                            <select name="speciality" id="speciality" class="dvalid">
+                                <option value="">--Select Speciality--</option>
+                               
+                            </select>
+                    </div>
+
+
+                    <div class="phone">
+                        <label for="phone">Hospital Name: </label>
+                        <input type="text" id="name" name="name" class="dvalid" placeholder="Enter Hospital Name">
+                    </div>
+
+                    <div class="address">
+                        <label for="">Address: </label>
+                        <textarea name="location" id="address" cols="30" rows="3" placeholder="Enter Address"></textarea>
+                    </div>
+
+                     <div class="phone">
+                        <label for="phone">GST No:</label>
+                        <input type="text" id="name" name="gst_no" class="dvalid" placeholder="Enter GST Number">
+                    </div>
+
+                    <div class="phone">
+                        <label for="phone">City:</label>
+                        <input type="text" id="name" name="city" class="dvalid" placeholder="Enter City">
+                    </div>
+
+                    <div class="phone">
+                        <label for="phone">Pincode:</label>
+                        <input type="text" id="name" name="pincode" class="dvalid" placeholder="Enter Pincode">
+                    </div>
+
+
+
+                    <div class="submit">
+                        <input type="submit" id="submit" value="Register">
+                    </div>
+                   
+                </form>
+                <div class="link"></div>
+            </div>
+        </div>
+
+    </div>
+
+<script src="/javascript/doctorPanel/fetchSpeciality.js"></script>
+  
+</body>
+
+</html>
