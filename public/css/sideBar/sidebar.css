@@ -1,16 +1,6 @@
-:root {
-  --blue: #0969da;
-  --white: #ffffff;
-}
-
-.A4-container {
-  max-width: 1440px;
-  margin: 0 auto;
-  display: flex;
-}
 .A4-sidenav {
   height: 100%;
-  width: 348px;
+  width: 350px;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -21,55 +11,38 @@
     sans-serif;
 }
 
-/* .sidenav a {
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-} */
-.A4-main {
-  margin-left: 160px; /* Same as the width of the sidenav */
-  font-size: 25px; /* Increased text to enable scrolling */
-  padding-left: 200px;
-}
 
-/* .sidenav a:hover {
-  color: #0a0606;
-} */
-@media screen and (max-height: 450px) {
-  .A4-sidenav {
-    padding-top: 15px;
-  }
-  .A4-sidenav a {
-    font-size: 18px;
-  }
-}
 .A4-profile {
   display: flex;
   gap: 15px;
   padding-top: 57px;
   padding-left: 13px;
 }
+
 .A4-profileimage {
   height: 80px;
   width: 76px;
   border-radius: 50px;
   background-color: #c8c6c6;
 }
+
 .A4-profilephoto {
   padding: 20px 0px;
 }
+
 .A4-accountname {
   word-wrap: break-word;
   width: 70%;
   padding: 14px 0px;
 }
+
 .A4-username {
+  margin-top: 20px;
   font-size: 20px;
 }
+
 .A4-useremail {
-  margin-top: -10px;
+  margin-top: 10px;
 }
 
 /* CSS */
@@ -115,11 +88,13 @@
   box-shadow: none;
   color: #2c5777;
 }
+
 .A4-logout {
   padding: 26px 40px;
   text-decoration: none;
   color: #39739d;
 }
+
 .A4-lists {
   a {
     padding: 33px 83px;
@@ -128,13 +103,27 @@
     color: black;
     display: block;
   }
+
   .A4-list-item:hover {
     border-right: 5px solid #1b66d6;
+
     a {
       color: #1b66d6;
     }
   }
 }
+
 .A4-sidenavupperbox {
   border-bottom: 1px solid #8080803d;
+}
+
+
+@media screen and (max-height: 450px) {
+  .A4-sidenav {
+    padding-top: 15px;
+  }
+
+  .A4-sidenav a {
+    font-size: 18px;
+  }
 }
