@@ -122,3 +122,14 @@ table {
   background-color: var(--blue);
   cursor: pointer;
 }
+
+input {
+  padding: 7px;
+  font-size: 1.1rem;
+}
+
+.a2-submit-specialties{
+  width: auto;
+  height: auto;
+  padding: 10px;
+}
