@@ -88,32 +88,29 @@ exports.createDoctor = async (req, res) => {
 }
 
 
-
-exports.doctorDisplay = async (req, res) => {
-
-  try {
-    const doctor_id = req.params.id
-    const [result] = await conn.query(`select doctor_details.id,clinic_hospitals.id as hospital_id, fname,lname,email,gender,dob,phone,address,profile,name,location,gst_no,city,pincode,speciality, qualification, consultancy_fees from doctor_details inner join users on  doctor_details.doctor_id = users.id inner join doctor_has_specialities on doctor_details.doctor_id = doctor_has_specialities.doctor_id inner join clinic_hospitals on clinic_hospitals.id = doctor_details.hospital_id inner join specialities on specialities.id = doctor_has_specialities.speciality_id where doctor_details.doctor_id = ?;`, [doctor_id])
-    res.send(result)
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: error.message
-    })
-  }
-}
-
-exports.updateDoctorDetails = async (req, res) => {
+exports.updatePutDoctorDetails = async (req, res) => {
 
   let doctor_id = req.params.id
-  const { name, location, gst_no, city, pincode, qualification, consultancy_fees, id, hospital_id } = req.body;
-  // console.log(req.body);
+  const { fname,lname, dob,gender, phone ,address ,name, location, gst_no, city, pincode, qualification, consultancy_fees, id, hospital_id } = req.body;
+  console.log(req.body);
 
   // validate
   if (!id) {
     return res.status(500).json({
       success: false,
       message: "Internal server Error"
+    })
+  }
+
+  try {
+     try{
+       let [result] = await conn.query(`update users set fname = ?,lname = ?,dob=?,gender=?,phone = ?,address = ? where users.id = ? and role_id = ?`, [fname, lname, dob,gender, phone, address,doctor_id,2])
+     }
+  catch(error){
+    console.log(error);
+    return res.json({
+      success:false,
+      message:error.message
     })
   }
 
@@ -126,7 +123,7 @@ exports.updateDoctorDetails = async (req, res) => {
 
   try {
     let [result] = await conn.query(`update clinic_hospitals set name = ?, location = ?, gst_no =?,city = ?,pincode =? where clinic_hospitals.id = ?`, [name, location, gst_no, city, pincode, hospital_id, doctor_id])
-    console.log(result);
+   
   } catch (error) {
     return res.status(500).json({
       success: false,
@@ -135,16 +132,27 @@ exports.updateDoctorDetails = async (req, res) => {
   }
   try {
     let [result] = await conn.query(`update doctor_details set qualification = ?,consultancy_fees= ? where doctor_details.id = ? and doctor_id = ?`, [qualification, consultancy_fees, id, doctor_id])
-    return res.json({
-      result,
-      success: true
-    })
+    
   } catch (error) {
     return res.status(500).json({
       success: false,
       message: error.message
     })
   }
+   res.json({success:true,message:"Update Successfully"})
+  } catch (error) {
+    return res.json({
+      success: false,
+      message: error.message
+    })
+  }
+
+  // try {
+  //   let [result] = await conn.query(`update doctor_has_specialities set speciality_id = ? where `)
+  // } catch (error) {
+    
+  // }
+
 
 }
 
@@ -170,3 +178,54 @@ exports.getDoctorReview = async (req, res) => {
     })
   }
 }
+
+
+
+// render controller date: 12-04-2024
+
+exports.doctorDisplay = async (req, res) => {
+  await res.render('pages/doctorPanel/profile')
+}
+
+exports.updateGetDoctorDisplay = async(req,res)=>{
+    await res.render('pages/doctorPanel/editprofile')
+} 
+
+
+
+// json controller
+
+exports.doctorData = async (req, res) => {
+
+  try {
+    const doctor_id = req.params.id
+
+    const [result] = await conn.query(`select doctor_details.id,clinic_hospitals.id as hospital_id, fname,lname,email,gender,dob,phone,address,name,location,gst_no,city,pincode,speciality, qualification, consultancy_fees from doctor_details inner join users on  doctor_details.doctor_id = users.id inner join doctor_has_specialities on doctor_details.doctor_id = doctor_has_specialities.doctor_id inner join clinic_hospitals on clinic_hospitals.id = doctor_details.hospital_id inner join specialities on specialities.id = doctor_has_specialities.speciality_id where doctor_details.doctor_id = ?;`, [doctor_id])
+    res.json(result)
+      } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message
+    })
+  }
+}
+
+
+exports.updateGetDoctorData = async (req, res) => {
+
+  try {
+    const doctor_id =  req.params.id
+
+    const [result] = await conn.query(`select doctor_details.id, doctor_details.doctor_id,clinic_hospitals.id as hospital_id, fname,lname,email,gender,dob,phone,address,name,location,gst_no,city,pincode,speciality, qualification, consultancy_fees from doctor_details inner join users on  doctor_details.doctor_id = users.id inner join doctor_has_specialities on doctor_details.doctor_id = doctor_has_specialities.doctor_id inner join clinic_hospitals on clinic_hospitals.id = doctor_details.hospital_id inner join specialities on specialities.id = doctor_has_specialities.speciality_id where doctor_details.doctor_id = ?;`, [doctor_id])
+     res.json(result)
+
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message
+    })
+  }
+}
+
+
+

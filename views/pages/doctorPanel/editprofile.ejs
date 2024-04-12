@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/doctorPanel/dashboard.css">
+  <link rel="stylesheet" href="/css/doctorPanel/profile.css">
+  <title>Edit Profile</title>
+</head>
+
+<body>
+
+  <div class="a7-container">
+
+    <div class="a7-header">
+      <div class="a7-logo"><img src="/image/dlogo1.png" alt=""></div>
+      <div class="a7-doctor-banner">
+        <h1>Welcome Dr name</h1>
+      </div>
+      <div class="a7-profile"><a href="" id="viewprofile"><img src="/image/dprofile.png" alt=""></a></div>
+    </div>
+  </div>
+  <div class="a7-container">
+    <div class="a7-main-profile">
+      <div class="a7-profile-section">
+        <div class="a7-profile-title">
+          <h1>Edit Profile Details</h1>
+        </div>
+        <div class="a7-card">
+          <div class="a7-card-box">
+            <div class="a7-card-color">
+              <div class="a7-profile-info">
+                <form action="" id="myform" method="post">
+                  <div class="a7-field-inp"><label for="">doctor_details_id:</label>
+                    <input type="text" name="id" id="" class="a7-form-input" value="" />
+                  </div>
+                  <div class="a7-field-inp"><label for="">doctor_id:</label>
+                    <input type="text" name="doctor_id" id="" class="a7-form-input" value="" />
+                  </div>
+                  <div class="a7-field-inp"><label for="">hospital_id:</label>
+                    <input type="text" name="hospital_id" id="" class="a7-form-input" value="" />
+                  </div>
+                  <div class="a7-field-inp"><label for="">Firstname:</label>
+                    <input type="text" name="fname" id="" class="a7-form-input" value="" />
+                  </div>
+                  <div class="a7-field-inp">
+                    <label for="">Lastname:</label>
+                    <input type="text" name="lname" id="" class="a7-form-input" value="" />
+                  </div>
+                  <div class="a7-field-inp">
+                    <label for="">Email:</label>
+                    <input type="text" name="email" id="" class="a7-form-input" value="" disabled/>
+                  </div>
+
+                  <div>
+                    <label for="">Gender:</label>
+                    <input type="radio" name="gender" id="" class="a7-form-input" value="male" />Male
+                    <input type="radio" name="gender" id="" class="a7-form-input" value="female" />Female
+                  </div>
+
+
+                  <div class="a7-field-inp">
+                    <label for="">Date of Birth:</label>
+                    <input type="text" name="dob" id="" class="a7-form-input" value="" />
+                  </div>
+                  <div class="a7-field-inp">
+                    <label for="">Contact:</label>
+                    <input type="text" name="phone" id="" class="a7-form-input" value="" />
+                  </div>
+                  <div class="a7-field-inp">
+                    <label for="">Address:</label>
+                    <input type="text" name="address" id="" class="a7-form-input" value="" />
+                  </div>
+                  <div class="a7-field-inp">
+                    <label for="">Qualification:</label>
+                    <input type="text" name="qualification" id="" class="a7-form-input" value="" />
+                  </div>
+                  <div class="a7-field-inp">
+                    <label for="">Speciality:</label>
+                    <select name="speciality" id="speciality">
+                      <option value="select">select</option>
+                    
+                      <option value="Anesthesiologists">Anesthesiologists</option>
+                    </select>
+                  </div>
+                  <div class="a7-field-inp">
+                    <label for="">Consultancy Fees:</label>
+                    <input type="text" name="consultancy_fees" id="" class="a7-form-input" value="" />
+                  </div>
+                  <div class="a7-field-inp">
+                    <label for="">Hospital Name:</label>
+                    <input type="text" name="name" id="" class="a7-form-input" value="" />
+                  </div>
+                  <div class="a7-field-inp">
+                    <label for="">GST_no:</label>
+                    <input type="text" name="gst_no" id="" class="a7-form-input" value="" />
+                  </div>
+
+                  <div class="a7-field-inp">
+                    <label for="">Location:</label>
+                    <input type="text" name="location" id="" class="a7-form-input" value="" />
+                  </div>
+                  <div class="a7-field-inp">
+                    <label for="">City:</label>
+                    <input type="text" name="city" id="" class="a7-form-input" value="" />
+                  </div>
+                  <div class="a7-field-inp">
+                    <label for="">Pincode:</label>
+                    <input type="text" name="pincode" id="" class="a7-form-input" value="" />
+                  </div>
+
+                  <div class="a7-field-inp">
+                    <input type="submit" name="" id="" class="a7-update-btn" value="Update" />
+                  </div>
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script>
+  let baseUrl = (window.location).href;
+  let Id = baseUrl.substring(baseUrl.lastIndexOf('/') + 1);
+      document.getElementById('viewprofile').href =`http://localhost:8000/doctorProfile/${Id}`
+    const fetchData = async () => {
+
+     
+
+      
+      let fetchdata = await fetch(`http://localhost:8000/updateDoctorData/${Id}`)
+      let data = await fetchdata.json()
+
+      let key = Object.keys(data[0])
+
+      key.forEach(element => {
+
+        if (element == 'gender') {
+          let radio = document.getElementsByName('gender')
+          radio.forEach(ele => {
+            if (ele.value == data[0][element]) {
+              ele.checked = true;
+            }
+          });
+        }
+        else {
+          document.getElementsByName(element)[0].value = data[0][element]
+        }
+      });
+    }
+
+    fetchData()
+
+    const specialityFetch = async () =>{
+      const fetchData = await fetch("http://localhost:8000/specialities")
+      const data = await fetchData.json()
+      let key = Object.keys(data)
+ 
+      key.forEach(element => {
+          let dtkey = Object.keys(data[element])
+          
+         dtkey.forEach(ele => {
+
+          let option = document.createElement("option")
+          option.value = data[element][ele]
+          option.textContent = data[element][ele]
+          document.getElementById(ele).append(option)
+          console.log(ele);     
+         });       
+      });
+
+    }
+
+    specialityFetch()
+  </script>
+</body>
+
+</html>

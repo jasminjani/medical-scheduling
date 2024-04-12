@@ -9,4 +9,7 @@ router.route('/specialities')
 router.route('/specialities')
 .get(allSpecialities)
 
+
+
+
 module.exports = router
