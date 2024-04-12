@@ -4,21 +4,26 @@
 
 .container {
   margin: 0 auto;
-  max-width: 2000px;
-  padding: 20px 20px;
-  /* border: solid black; */
+  max-width: 1260px;
+  padding: 20px 15px;
+  border: 1px solid black;
 }
 
 .body {
   width: 800px;
   display: flex;
-  gap: 80px;
+  gap: 70px;
 }
 
 /* .sidebarHeader {
   display: flex;
   gap: 50px;
 } */
+
+a {
+  text-decoration: none;
+  color: black;
+}
 
 .sideBar {
   max-width: 230px;
@@ -30,31 +35,54 @@ p {
   font-weight: 700;
 }
 
-.header {
-  display: flex;
-  gap: 740px;
-  /* border: 1px solid black;   */
-}
-
 .full {
   border: 1px solid black;
 }
 
+.header {
+  display: flex;
+  gap: 680px;
+  /* border: 1px solid black;   */
+}
+
 .textHeader {
   margin-left: 20px;
+  width: 165px;
 }
 
 .profilePic {
   height: 50px;
-  margin-top: 17px;
+  margin-top: 10px;
   margin-right: 20px;
 }
 
+hr {
+  border-color: #96d0ec;
+}
+
+.appointmentForm {
+  margin: 20px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  border: 1px solid black;
+  padding-bottom: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin-left: 70px;
+  padding-left: 20px;
+  padding-bottom: 50px;
+  gap: 60px;
+}
+
 .department, .doctor{
+  margin-top: 15px;
   height: 40px;
   width: 200px;
-  text-align: center;
-  border-radius: 30px 30px;
+  text-align: left;
+  border-radius: 10px 10px;
 }
 
 /* .doctor {
@@ -63,3 +91,57 @@ p {
   text-align: center;
   border-radius: 30px 30px;
 } */
+
+
+.dateTime {
+  margin-top: 20px;
+  margin-right: 70px;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+[type="date"] {
+  background: rgb(255, 255, 255);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.time {
+  input {
+      height: 30px;
+      width: 80px;
+  }
+}
+
+.timer {
+  margin-left: 88px;
+  margin-top: 10px;
+}
+
+
+input {
+  height: 30px;
+  width: 120px;
+  /* border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px; */
+}
+
+.submit {
+  margin-left: 200px;
+  background-color: #47bbfa;
+  /* color: rgb(255, 255, 255); */
+  /* border: solid rgb(35, 118, 243); */
+  /* height: 42px;
+  width: 10px; */
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.footer { 
+  text-align: center;
+  border: 1px solid black;
+}
