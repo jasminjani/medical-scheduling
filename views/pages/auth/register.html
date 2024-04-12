@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UserData</title>
+    <link rel="stylesheet" type="text/css" href="/public/css/auth/register.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="form">
+            <div class="content">
+                <h2>Registration</h2>
+                <form action="/register" class="user" method="post">
+                    <div class="fname">
+                        <label for="fname">First Name: </label>
+                        <input type="text" name="fname" id="fname" placeholder="Enter First Name" class="dvalid">
+                    </div>
+                    <div class="lname">
+                        <label for="lname">Last Name: </label>
+                        <input type="text" name="lname" id="lname" placeholder="Enter Last Name" class="dvalid">
+                    </div>
+                    <div class="email">
+                        <label for="email">Email: </label>
+                        <input type="text" name="email" id="email" placeholder="Enter Email" class="dvalid">
+                    </div>
+                    <div class="dob">
+                        <label for="dob">Date Of Birth: </label>
+                        <div class="date-format">
+                            <input type="text" name="year" id="year" class="dvalid" placeholder="Year">
+                            <input type="text" name="month" id="month" class="dvalid" placeholder="Month">
+                            <input type="text" name="day" id="day" class="dvalid" placeholder="Day">
+                        </div>
+    
+                    </div>
+                    <div class="gender">
+                        <label for="gender">Gender:
+                            <input type="radio" name="gender" value="male" id="male"><label for="male">Male</label>
+                            <input type="radio" name="gender" value="female" id="female"><label
+                                for="female">Female</label></label>
+                    </div>
+                    <div class="phone">
+                        <label for="phone">Phone Number: </label>
+                        <input type="text" id="phone" name="phone" class="dvalid" placeholder="Enter Phone Number">
+                    </div>
+                    <div class="city">
+                        <label for="city">City:</label>
+                            <select name="city" id="city" class="dvalid">
+                                <option value="">--Select State--</option>
+                                <option value="Dhanera">Dhanera</option>
+                                <option value="Ahmedabad">Ahmedabad</option>
+
+                            </select>
+                    </div>
+                    <div class="address">
+                        <label for="">Address: </label>
+                        <textarea name="address" id="address" cols="30" rows="3" placeholder="Enter Address"></textarea>
+                    </div>
+
+                    <div class="profile">
+                        <label for="profile">Profile: </label>
+                        <input type="file" name="profile" accept="image/*" id="profile">
+                    </div>
+
+                    <div class="password">
+                        <label for="lname">Password: </label>
+                        <input type="password" name="password" id="password" placeholder="Enter a password"
+                            class="dvalid">
+                    </div>
+                    <div class="confirmPassword">
+                        <label for="confirmPassword">Confirm Password: </label>
+                        <input type="password" name="confirmPassword" id="confirmPassword"
+                            placeholder="Re-enter the same password" class="dvalid">
+                    </div>
+
+                    <div class="submit">
+                        <input type="submit" id="submit" value="Register">
+                    </div>
+                    <div class="or">
+                        <div class="left"></div>
+                        <p>OR</p>
+                        <div class="right"></div>
+                    </div>
+                    <div class="mv-btn">
+                        <p>Already have an Account? <a href="/media/login">login</a></p>
+                    </div>
+                </form>
+                <div class="link"></div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="/public/javascript/auth/script.js"></script>
+    <script src="/public/javascript/auth/register.js"></script>
+</body>
+
+</html>
