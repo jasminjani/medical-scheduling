@@ -7,39 +7,87 @@
   margin: 0 auto;
   font-family: sans-serif;
 }
-body {
-  background-color: aliceblue;
-}
-.A4-header {
-  text-align: center;
-  padding: 55px 0px;
+
+.A4-title {
+  padding: 55px 418px;
   h1 {
-    font-size: 35px;
+    /* text-align: center; */
+    font-size: 30px;
   }
 }
-.A4-Content {
+/* .A4-Content {
   padding: 1px 292px;
   font-size: 22px;
-  /* table,
-  th,
-  tr,
-  td {
-    border: 1px solid black;
-  } */
   td {
     height: 60px;
     width: 418px;
     word-wrap: anywhere;
   }
+} */
+.A4-Content {
+  padding: 0px 211px;
+  font-size: 20px;
+  table,
+  tr,
+  th,
+  td {
+    border-radius: 5px;
+    padding: 5px;
+  }
+  td {
+    height: 40px;
+    word-wrap: anywhere;
+  }
+}
+#A4-table-title {
+  width: 300px;
+  background-color: rgb(219, 236, 250);
 }
 table {
-  background-color: var(--white);
+  background-color: aliceblue;
+}
+
+#A4-table-content {
+  width: 700px;
+  background-color: white;
 }
 .A4-prescription {
-  text-align: center;
-  padding: 64px 0px;
+  padding: 65px 439px;
 }
 .A4-addPrescription {
+  height: 50px;
+  width: 211px;
+  font-size: 16px;
+  background-color: var(--blue);
+  color: var(--white);
+  border-radius: 7px;
+}
+.A4-addPrescription:hover {
+  background-color: #085097;
+}
+.A4-main {
+  display: block;
+  padding-left: 350px;
+}
+/* //add prescrption */
+.A4-submitBtn {
+  padding: 40px 274px;
+}
+.A4-submitbtn {
+  height: 50px;
+  width: 211px;
+  font-size: 16px;
+  background-color: var(--blue);
+  color: var(--white);
+  border-radius: 7px;
+}
+.A4-submitbtn:hover {
+  background-color: #085097;
+}
+.A4-GetPdf {
+  padding: 0px 274px;
+}
+.A4-Getpdf {
   height: 50px;
   width: 211px;
   font-size: 18px;
@@ -47,6 +95,28 @@ table {
   color: var(--white);
   border-radius: 7px;
 }
-.A4-addPrescription:hover {
+.A4-Getpdf:hover {
   background-color: #025bb4;
+}
+.A4-PrescriptionDetails {
+  font-size: 20px;
+  /* padding: 75px 194px; */
+  padding: 71px 134px;
+}
+#diagnosis {
+  width: 372px;
+  height: 34px;
+  font-size: 18px;
+}
+#prescription {
+  font-size: 18px;
+}
+#myForm {
+  background-color: aliceblue;
+  padding: 55px;
+  border-radius: 22px;
+}
+#prescriptionerror {
+  font-size: 14px;
+  color: red;
 }
