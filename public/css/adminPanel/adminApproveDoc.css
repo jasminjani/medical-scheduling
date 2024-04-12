@@ -12,6 +12,11 @@
   margin: 0;
 }
 
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 body {
   display: flex;
   gap: 20px;
@@ -58,6 +63,10 @@ tbody {
   text-align: center;
 }
 
+tbody td {
+  padding: 10px 0;
+}
+
 .approve-tbl-head th {
   border-bottom: 2px solid var(--blue);
   padding: 10px 0;
@@ -65,4 +74,62 @@ tbody {
 
 table {
   border-collapse: collapse;
+}
+
+.a2-add-specialty {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  width: 95%;
+  padding: 20px 0;
+  background-color: var(--light-blue);
+}
+
+.a2-form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-direction: column;
+  gap: 30px;
+}
+
+.a2-specialties {
+  display: flex;
+  gap: 20px
+}
+
+.a2-specialties label {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.a2-add-spclt-btn {
+  position: relative;
+  margin: 20px 0;
+  height: 35px;
+}
+
+.a2-add-spclt-btn p {
+  position: absolute;
+  /* right: -20; */
+  right: 60px;
+}
+
+.a2-add-spclt-btn p:hover {
+  color: var(--white);
+  background-color: var(--blue);
+  cursor: pointer;
+}
+
+input {
+  padding: 7px;
+  font-size: 1.1rem;
+}
+
+.a2-submit-specialties{
+  width: auto;
+  height: auto;
+  padding: 10px;
 }
