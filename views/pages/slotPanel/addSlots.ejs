@@ -5,13 +5,101 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link href="/stylesheets/output.css" rel="stylesheet">
+  <!-- <link href="/stylesheets/output.css" rel="stylesheet"> -->
   <link rel="stylesheet" href="css/slotPanel/slotPanel.css">
   <script src="javascript/slotPanel/slotPanel.js" defer></script>
 </head>
 
 <body>
-  <h1 class="bg-green-600">Hello</h1>
+  <section id="A3_addSlot">
+    <div class="container">
+      <div class="row">
+        <h3 id="A3_heading">Add Schedule</h3>
+        <span>
+          <label for="slot_gap">Slots Time :</label>
+          <select name="slot_gap" id="slot_gap">
+            <option value="10">10</option>
+            <option value="20" selected>20</option>
+            <option value="30">30</option>
+            <option value="45">45</option>
+          </select>
+        </span>
+      </div>
+      <form id="myform" method="post">
+        <div class="row">
+          <div class="date">
+            <input type="date" name="day1[]" id="date_1">
+          </div>
+          <div class="times">
+            <!-- <input type="text" name="day1" class="A3-time"> -->
+            <input type="button" class="A3-buttons" value="Add">
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="date">
+            <input type="date" name="day2[]" id="date_2">
+          </div>
+          <div class="times">
+            <!-- <input type="text" name="day1" class="A3-time"> -->
+            <input type="button" class="A3-buttons" value="Add">
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="date">
+            <input type="date" name="day3[]" id="date_3">
+          </div>
+          <div class="times">
+            <!-- <input type="text" name="day1" class="A3-time"> -->
+            <input type="button" class="A3-buttons" value="Add">
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="date">
+            <input type="date" name="day4[]" id="date_4">
+          </div>
+          <div class="times">
+            <!-- <input type="text" name="day1"> -->
+            <input type="button" class="A3-buttons" value="Add">
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="date">
+            <input type="date" name="day5[]" id="date_5">
+          </div>
+          <div class="times">
+            <!-- <input type="text" name="day1" class="A3-time"> -->
+            <input type="button" class="A3-buttons" value="Add">
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="date">
+            <input type="date" name="day6[]" id="date_6">
+          </div>
+          <div class="times">
+            <!-- <input type="text" name="day1" class="A3-time"> -->
+            <input type="button" class="A3-buttons" value="Add">
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="date">
+            <input type="date" name="day7[]" id="date_7">
+          </div>
+          <div class="times">
+            <!-- <input type="text" name="day1" class="A3-time"> -->
+            <input type="button" class="A3-buttons" value="Add">
+          </div>
+        </div>
+        <hr>
+        <input class="A3-buttons" id="generateSlot" type="button" value="Generate Slots" onclick="handleGenerate()">
+      </form>
+    </div>
+  </section>
 </body>
 
 </html>
