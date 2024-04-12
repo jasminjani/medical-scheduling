@@ -75,7 +75,8 @@ form input {
 .date-format{
   display: flex;
   align-items: center;
-  flex-direction: row;;
+  flex-direction: row;
+
 }
 
 #address{
