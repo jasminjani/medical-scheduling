@@ -2,11 +2,11 @@
   <div class="A4-sidenavupperbox">
     <div class="A4-profile">
       <div class="A4-profilephoto">
-        <a href="#"><img src="/assets/sideBar/profile-icon-png-898.png" alt="profile" class="A4-profileimage" /></a>
+        <a href="" id="viewprofile"><img src="/assets/sideBar/profile-icon-png-898.png" alt="profile" class="A4-profileimage" /></a>
       </div>
       <div class="A4-accountname">
-        <p class="A4-username">Doctor Name</p>
-        <p class="A4-useremail">doctor123@gmail.com</p>
+        <p class="A4-username" id="name"></p>
+        <p class="A4-useremail" id="email"></p>
       </div>
     </div>
     <div class="A4-logout">
@@ -16,20 +16,32 @@
 
   <div class="A4-lists">
     <div class="A4-list-item">
-      <a href="#">Dashboard</a>
+      <a href="" id="viewdashboard">Dashboard</a>
     </div>
     <div class="A4-list-item">
       <a href="#">Schedule</a>
     </div>
     <div class="A4-list-item">
-      <a href="#">My Patients</a>
+      <a href="" id="viewpatient">My Patients</a>
     </div>
     <div class="A4-list-item">
       <a href="#">Paymets History</a>
     </div>
   </div>
 </div>
-
+<script>
+    const fetchSideBarDetails = async()=>{
+      let fetchData = await fetch(`http://localhost:8000/doctorSideBarDetail/4`)
+      let data = await fetchData.json()
+      console.log(data);
+      let key = Object.keys(data[0])
+      key.forEach(element => {
+        console.log(key);
+        document.getElementById(element).innerHTML = data[0][element]
+      });
+    }
+    fetchSideBarDetails()
+</script>
 
 <!-- ============ -->
 
