@@ -2,182 +2,360 @@
 create database medical_scheduling;
 
 use medical_scheduling;
+-- MySQL dump 10.13  Distrib 8.0.36, for Linux (x86_64)
+--
+-- Host: localhost    Database: medical_scheduling
+-- ------------------------------------------------------
+-- Server version	8.0.36-0ubuntu0.20.04.1
 
-create table roles(
-	id int primary key auto_increment,
-    role varchar(255) not null,
-    created_at timestamp null default current_timestamp,
-	updated_at timestamp null default current_timestamp on update current_timestamp
-);
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+--
+-- Table structure for table `clinic_hospitals`
+--
 
+DROP TABLE IF EXISTS `clinic_hospitals`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `clinic_hospitals` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `location` varchar(255) NOT NULL,
+  `gst_no` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `pincode` int NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-create table permissions(
-	id int primary key auto_increment,
-    permission varchar(255) not null,
-    created_at timestamp null default current_timestamp,
-	updated_at timestamp null default current_timestamp on update current_timestamp
-);
+--
+-- Table structure for table `doctor_details`
+--
 
-create table role_has_permissions(
-	id int primary key auto_increment, role_id int, permission_id int,
-	created_at timestamp default current_timestamp, 
-	updated_at timestamp default current_timestamp on update current_timestamp,
-    foreign key (role_id) references roles(id), 
-    foreign key (permission_id) references permissions(id)
-); 
+DROP TABLE IF EXISTS `doctor_details`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `doctor_details` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `doctor_id` int DEFAULT NULL,
+  `hospital_id` int DEFAULT NULL,
+  `qualification` varchar(255) NOT NULL,
+  `consultancy_fees` int NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `doctor_id` (`doctor_id`),
+  KEY `hospital_id` (`hospital_id`),
+  CONSTRAINT `doctor_details_ibfk_1` FOREIGN KEY (`doctor_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `doctor_details_ibfk_2` FOREIGN KEY (`hospital_id`) REFERENCES `clinic_hospitals` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-create table users(
-	id int primary key auto_increment,
-    fname varchar(255) not null,
-    lname varchar(255) not null,
-    email varchar(255) unique not null,
-    gender varchar(50) not null,
-    dob date not null,
-    phone bigint not null,
-    city varchar(255) not null,
-    address varchar(512) not null,
-    password varchar(255) not null,
-    salt varchar(50) not null,
-    role_id int,
-    activation_token varchar(255) not null,
-    is_active bool not null default false,
-    profile varchar(255) ,
-    is_deleted bool default false,
-    created_at timestamp null default current_timestamp,
-	updated_at timestamp null default current_timestamp on update current_timestamp,
-    deleted_at timestamp,
-    foreign key (role_id) references roles(id)
-);
+--
+-- Table structure for table `doctor_has_specialities`
+--
 
-create table login_attempts(
-	id int primary key auto_increment,
-    user_id int,
-	email varchar(255),
-    password varchar(255),
-	status bool not null, 
-    attempts int,
-    created_at timestamp default current_timestamp,
-    foreign key (user_id) references users(id)
-);
-    
-    
-create table clinic_hospitals(
-	id int primary key auto_increment,
-    name varchar(255) not null,
-    location varchar(255) not null,
-    gst_no varchar(255) not null,
-    city varchar(255) not null,
-    pincode int not null,
-    created_at timestamp null default current_timestamp,
-	updated_at timestamp null default current_timestamp on update current_timestamp
-);
+DROP TABLE IF EXISTS `doctor_has_specialities`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `doctor_has_specialities` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `doctor_id` int DEFAULT NULL,
+  `speciality_id` int DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `doctor_id` (`doctor_id`),
+  KEY `speciality_id` (`speciality_id`),
+  CONSTRAINT `doctor_has_specialities_ibfk_1` FOREIGN KEY (`doctor_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `doctor_has_specialities_ibfk_2` FOREIGN KEY (`speciality_id`) REFERENCES `specialities` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-create table doctor_details(
-	id int primary key auto_increment,
-    doctor_id int,
-    hospital_id int,
-    qualification varchar(255) not null,
-    consultancy_fees int not null,
-    created_at timestamp null default current_timestamp,
-	updated_at timestamp null default current_timestamp on update current_timestamp,
-    foreign key (doctor_id) references users(id),
-    foreign key (hospital_id) references clinic_hospitals(id)
-);
+--
+-- Table structure for table `login_attempts`
+--
 
-create table specialities(
-	id int primary key auto_increment,
-    speciality varchar(255) not null,
-    created_at timestamp null default current_timestamp,
-	updated_at timestamp null default current_timestamp on update current_timestamp
-);
+DROP TABLE IF EXISTS `login_attempts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `login_attempts` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `login_attempts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-create table doctor_has_specialities(
-	id int primary key auto_increment,
-    doctor_id int,
-    speciality_id int,
-    created_at timestamp null default current_timestamp,
-	updated_at timestamp null default current_timestamp on update current_timestamp,
-    foreign key (doctor_id) references users(id),
-    foreign key (speciality_id) references specialities(id)
-);
+--
+-- Table structure for table `patient_details`
+--
 
-create table time_slots(
-	id int primary key auto_increment,
-    doctor_id int,
-    date date not null,
-    start_time time not null,
-    end_time time not null,
-    is_booked bool not null default false,
-    is_deleted bool default false,
-    created_at timestamp null default current_timestamp,
-	updated_at timestamp null default current_timestamp on update current_timestamp,
-    deleted_at timestamp,
-    foreign key (doctor_id) references users(id) 
-);
+DROP TABLE IF EXISTS `patient_details`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `patient_details` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `patient_id` int DEFAULT NULL,
+  `blood_group` varchar(10) NOT NULL,
+  `medical_history` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `patient_id` (`patient_id`),
+  CONSTRAINT `patient_details_ibfk_1` FOREIGN KEY (`patient_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-create table slot_bookings(
-	id int primary key auto_increment,
-    slot_id int,
-    patient_id int,
-    booking_date date not null,
-    is_deleted bool default false,
-    created_at timestamp null default current_timestamp,
-	updated_at timestamp null default current_timestamp on update current_timestamp,
-    deleted_at timestamp,
-	foreign key (slot_id) references time_slots(id),
-    foreign key (patient_id) references users(id)
-);
+--
+-- Table structure for table `payments`
+--
 
-create table prescriptions(
-	id int primary key auto_increment,
-    doctor_id int,
-    patient_id int,
-    prescription varchar(1234) not null,
-    diagnoses varchar(512) not null,
-    created_at timestamp null default current_timestamp,
-	updated_at timestamp null default current_timestamp on update current_timestamp,
-	foreign key (doctor_id) references users(id),
-    foreign key (patient_id) references users(id)
-);
+DROP TABLE IF EXISTS `payments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `payments` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `patient_id` int DEFAULT NULL,
+  `doctor_id` int DEFAULT NULL,
+  `slot_id` int DEFAULT NULL,
+  `payment_amount` int NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `doctor_id` (`doctor_id`),
+  KEY `patient_id` (`patient_id`),
+  KEY `slot_id` (`slot_id`),
+  CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`doctor_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `payments_ibfk_2` FOREIGN KEY (`patient_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `payments_ibfk_3` FOREIGN KEY (`slot_id`) REFERENCES `time_slots` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-create table payments(
-	id int primary key auto_increment,
-    patient_id int,
-    doctor_id int,
-    slot_id int,
-    payment_amount int not null,
-    status varchar(255) not null,
-    created_at timestamp null default current_timestamp,
-	updated_at timestamp null default current_timestamp on update current_timestamp,
-    foreign key (doctor_id) references users(id),
-    foreign key (patient_id) references users(id),
-    foreign key (slot_id) references time_slots(id)
-);
+--
+-- Table structure for table `permissions`
+--
 
+DROP TABLE IF EXISTS `permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `permissions` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `permission` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-create table rating_and_reviews(
-	id int primary key auto_increment,
-    patient_id int,
-    doctor_id int,
-    rating int not null,
-    review varchar(255) not null,
-    created_at timestamp null default current_timestamp,
-	updated_at timestamp null default current_timestamp on update current_timestamp,
-    foreign key (doctor_id) references users(id),
-    foreign key (patient_id) references users(id)
-);
+--
+-- Table structure for table `prescriptions`
+--
 
-create table patient_details(
-	id int primary key auto_increment,
-    patient_id int,
-    blood_group varchar(10) not null,
-    medical_history varchar(255),
-	created_at timestamp null default current_timestamp,
-	updated_at timestamp null default current_timestamp on update current_timestamp,
-    foreign key (patient_id) references users(id)
-);
+DROP TABLE IF EXISTS `prescriptions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `prescriptions` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `doctor_id` int DEFAULT NULL,
+  `patient_id` int DEFAULT NULL,
+  `prescription` varchar(1234) NOT NULL,
+  `diagnoses` varchar(512) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `doctor_id` (`doctor_id`),
+  KEY `patient_id` (`patient_id`),
+  CONSTRAINT `prescriptions_ibfk_1` FOREIGN KEY (`doctor_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `prescriptions_ibfk_2` FOREIGN KEY (`patient_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `rating_and_reviews`
+--
+
+DROP TABLE IF EXISTS `rating_and_reviews`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `rating_and_reviews` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `patient_id` int DEFAULT NULL,
+  `doctor_id` int DEFAULT NULL,
+  `rating` int NOT NULL,
+  `review` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `doctor_id` (`doctor_id`),
+  KEY `patient_id` (`patient_id`),
+  CONSTRAINT `rating_and_reviews_ibfk_1` FOREIGN KEY (`doctor_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `rating_and_reviews_ibfk_2` FOREIGN KEY (`patient_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `role_has_permissions`
+--
+
+DROP TABLE IF EXISTS `role_has_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `role_has_permissions` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `role_id` int DEFAULT NULL,
+  `permission_id` int DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `role_id` (`role_id`),
+  KEY `permission_id` (`permission_id`),
+  CONSTRAINT `role_has_permissions_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`),
+  CONSTRAINT `role_has_permissions_ibfk_2` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `roles`
+--
+
+DROP TABLE IF EXISTS `roles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `roles` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `role` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `slot_bookings`
+--
+
+DROP TABLE IF EXISTS `slot_bookings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `slot_bookings` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `slot_id` int DEFAULT NULL,
+  `patient_id` int DEFAULT NULL,
+  `booking_date` date NOT NULL,
+  `is_deleted` tinyint(1) DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `slot_id` (`slot_id`),
+  KEY `patient_id` (`patient_id`),
+  CONSTRAINT `slot_bookings_ibfk_1` FOREIGN KEY (`slot_id`) REFERENCES `time_slots` (`id`),
+  CONSTRAINT `slot_bookings_ibfk_2` FOREIGN KEY (`patient_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `specialities`
+--
+
+DROP TABLE IF EXISTS `specialities`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `specialities` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `speciality` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `time_slots`
+--
+
+DROP TABLE IF EXISTS `time_slots`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `time_slots` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `doctor_id` int DEFAULT NULL,
+  `date` date NOT NULL,
+  `start_time` time NOT NULL,
+  `end_time` time NOT NULL,
+  `is_booked` tinyint(1) NOT NULL DEFAULT '0',
+  `is_deleted` tinyint(1) DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `doctor_id` (`doctor_id`),
+  CONSTRAINT `time_slots_ibfk_1` FOREIGN KEY (`doctor_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `fname` varchar(255) NOT NULL,
+  `lname` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `gender` varchar(50) NOT NULL,
+  `dob` date NOT NULL,
+  `phone` bigint NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `address` varchar(512) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `salt` varchar(50) NOT NULL,
+  `role_id` int DEFAULT NULL,
+  `activation_token` varchar(255) NOT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT '0',
+  `profile` varchar(255) DEFAULT NULL,
+  `is_deleted` tinyint(1) DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `token_created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`),
+  KEY `role_id` (`role_id`),
+  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2024-04-12 10:05:52
 
 CREATE TABLE states (
 	id int primary key auto_increment,

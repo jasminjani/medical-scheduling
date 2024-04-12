@@ -14,20 +14,10 @@ exports.createSlots = async (req, res) => {
     const { day1, day2, day3, day4, day5, day6, day7 } = req.body;
     const { doctor_id } = req.params;
 
+    console.log(req.body);
+
     const dayArray = [day1, day2, day3, day4, day5, day6, day7]
     for (let i = 0; i < 7; i++) {
-
-      try {
-
-        const query = "select * from time_slots where date = ?";
-
-        const [slotExist] = await conn.query(query, [dayArray[i][0]]);
-
-        if (slotExist.length > 0) return res.status(404).json({ success: false, message: "slot already generated" });
-
-      } catch (error) {
-        return res.status(500).json({ success: false, message: error.message });
-      }
 
       if (dayArray[i].length > 1) {
         for (let j = 1; j < dayArray[i].length; j++) {
