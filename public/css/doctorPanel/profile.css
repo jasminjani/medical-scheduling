@@ -13,10 +13,12 @@
 }
 
 .a7-main-profile{
-  width: 100%;
-  margin: 0 auto;
-  padding: 15px;
+  width: 70%;
+  margin-left: 350px;
+  /* padding: 15px; */
 }
+
+
 
 
 
@@ -42,7 +44,7 @@
   width: 50%;
   word-wrap: break-word;
   font-size: 14px;
-  color: #585ce5;
+  color: #2c5777;
   line-height: 2;
 }
 
@@ -65,7 +67,7 @@
   border: none;
   padding: 10px 25px 12px 8px;
   font-size: 14px;
-  color: #585ce5;
+  color:#2c5777;
 
 }
 
@@ -73,7 +75,7 @@
 
 .a7-edit-btn a{
   text-decoration: none;
-  color: #ffff;
+  color: #2c5777;
   font-size: 16px;
   font-weight: 600;
 }
@@ -86,7 +88,7 @@
   align-items: center;
   justify-content: flex-end ;
   padding: 0 20px;
-  background-color:#585ce5;
+  background-color:#b3d3ea;
   border-radius: 20px;
 }
 
@@ -95,14 +97,13 @@
   padding: 10px 20px;
   border-radius: 15px;
   border: none;
-  background-color: #585ce5;
-  color: #ffff;
+  background-color: #b3d3ea;
+  color:#2c5777;
   font-size: 18px;
 }
 
 .a7-btn-flex-end{
-  display: flex;
-  justify-content: flex-end;
+  margin-left: 80%;
 }
 
 

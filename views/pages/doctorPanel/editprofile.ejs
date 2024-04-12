@@ -6,22 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/doctorPanel/dashboard.css">
   <link rel="stylesheet" href="/css/doctorPanel/profile.css">
+  <link rel="stylesheet" href="/css/sideBar/sidebar.css">
   <title>Edit Profile</title>
 </head>
 
 <body>
 
   <div class="a7-container">
-
-    <div class="a7-header">
-      <div class="a7-logo"><img src="/image/dlogo1.png" alt=""></div>
-      <div class="a7-doctor-banner">
-        <h1>Welcome Dr name</h1>
-      </div>
-      <div class="a7-profile"><a href="" id="viewprofile"><img src="/image/dprofile.png" alt=""></a></div>
-    </div>
-  </div>
-  <div class="a7-container">
+    <%- include('../../common/doctorSideBar.ejs') %>
     <div class="a7-main-profile">
       <div class="a7-profile-section">
         <div class="a7-profile-title">
@@ -32,14 +24,14 @@
             <div class="a7-card-color">
               <div class="a7-profile-info">
                 <form action="" id="myform" method="post">
-                  <div class="a7-field-inp"><label for="">doctor_details_id:</label>
-                    <input type="text" name="id" id="" class="a7-form-input" value="" />
+                  <div class="a7-field-inp">
+                    <input type="text" name="id" id="" class="a7-form-input" value="" hidden/>
                   </div>
-                  <div class="a7-field-inp"><label for="">doctor_id:</label>
-                    <input type="text" name="doctor_id" id="" class="a7-form-input" value="" />
+                  <div class="a7-field-inp">
+                    <input type="text" name="doctor_id" id="" class="a7-form-input" value="" hidden/>
                   </div>
-                  <div class="a7-field-inp"><label for="">hospital_id:</label>
-                    <input type="text" name="hospital_id" id="" class="a7-form-input" value="" />
+                  <div class="a7-field-inp">
+                    <input type="text" name="hospital_id" id="" class="a7-form-input" value="" hidden/>
                   </div>
                   <div class="a7-field-inp"><label for="">Firstname:</label>
                     <input type="text" name="fname" id="" class="a7-form-input" value="" />
@@ -124,15 +116,17 @@
   </div>
   </div>
 
+    
+
+
+  <script src="/javascript/doctorPanel/fetchSpeciality.js"></script>
   <script>
+
+
   let baseUrl = (window.location).href;
   let Id = baseUrl.substring(baseUrl.lastIndexOf('/') + 1);
       document.getElementById('viewprofile').href =`http://localhost:8000/doctorProfile/${Id}`
-    const fetchData = async () => {
-
-     
-
-      
+    const fetchData = async () => {      
       let fetchdata = await fetch(`http://localhost:8000/updateDoctorData/${Id}`)
       let data = await fetchdata.json()
 
@@ -156,27 +150,7 @@
 
     fetchData()
 
-    const specialityFetch = async () =>{
-      const fetchData = await fetch("http://localhost:8000/specialities")
-      const data = await fetchData.json()
-      let key = Object.keys(data)
  
-      key.forEach(element => {
-          let dtkey = Object.keys(data[element])
-          
-         dtkey.forEach(ele => {
-
-          let option = document.createElement("option")
-          option.value = data[element][ele]
-          option.textContent = data[element][ele]
-          document.getElementById(ele).append(option)
-          console.log(ele);     
-         });       
-      });
-
-    }
-
-    specialityFetch()
   </script>
 </body>
 

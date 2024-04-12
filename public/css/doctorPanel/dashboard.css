@@ -10,61 +10,6 @@
   padding: 0 15px;
 }
 
-
-
-.a7-sidebar-nav {
-  display: flex;
-  width: 20%;
-  flex-direction: column;
-  border-radius: 0 25px 25px 0;
-  justify-content: space-between;
-  background-color: #585ce5;
-  padding: 20px;
-}
-
-.a7-logo img {
-  height: 150px;
-  width: 150px;
-}
-
-.a7-navbar ul li {
-  list-style: none;
-}
-
-.a7-navbar a {
-  text-decoration: none;
-  color: #ffffff;
-  font-size: 20px;
-  line-height: 3;
-  font-weight: 600;
-}
-
-.a7-navbar ul {
-  display: flex;
-  flex-direction: column;
-
-}
-
-
-.a7-profile {
-  background-color: red;
-  height: 80px;
-  width: 80px;
-  border-radius: 90%;
-}
-
-.a7-profile img {
-  height: 80px;
-  width: 80px;
-  border-radius: 90%;
-}
-
-
-
-.a7-doctor-banner h1 {
-  color: #585ce5;
-}
-
 .a7-table-title{
   color:#4d4d4d;
   font-size: 25px;
@@ -73,8 +18,8 @@
 }
 
 .a7-right-bar {
-  width: 80%;
-  
+  width: 70%;
+  margin-left: 350px;
 }
 
 .a7-main {
@@ -88,7 +33,6 @@
 .a7-counter-3 img {
   height: 80px;
   width: 80px;
-  /* border-radius: 90%; */
 }
 
 .a7-counter-section {
@@ -101,6 +45,7 @@
 }
 
 .a7-doctor-pannel {
+
   display: flex;
 }
 
@@ -126,7 +71,7 @@
 .a7-table-header {
   display: flex;
   font-size: 20px;
-  color: #585ce5;
+  color: #2c5777;
   line-height: 3;
   font-weight: 600;
 }
@@ -136,7 +81,7 @@
   line-height: 1;
   font-size: 15px;
   align-items: center;
-  color: #ababab;
+  color: #171717;
   gap: 95px;
 }
 
@@ -152,8 +97,8 @@
 .a7-table-border .a7-pres-btn {
   padding: 15px 25px;
   border-radius: 20px;
-  color: #ffffff;
-  background-color: #585ce5;
+  color:#2c5777;
+  background-color: #b3d3ea;
 }
 
 .a7-card-se6 {

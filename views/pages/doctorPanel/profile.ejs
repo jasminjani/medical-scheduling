@@ -6,27 +6,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/doctorPanel/dashboard.css">
   <link rel="stylesheet" href="/css/doctorPanel/profile.css">
+  <link rel="stylesheet" href="/css/sideBar/sidebar.css">
   <title>Document</title>
 </head>
 
 <body>
 
   <div class="a7-container">
-
-    <div class="a7-header">
-      <div class="a7-logo"><img src="/image/dlogo1.png" alt=""></div>
-      <div class="a7-doctor-banner">
-        <h1>Welcome Dr name</h1>
-      </div>
-      <div class="a7-profile"><a id="viewprofile" href=""><img src="/image/dprofile.png" alt=""></a></div>
-    </div>
-  </div>
-  <div class="a7-container">
-    <div class="a7-btn-flex-end">
-      <div class="a7-edit-btn"><a id="edtbtn" href="">Edit Profile</a></div>
-    </div>
+    <%- include('../../common/doctorSideBar.ejs') %>
+   
     <div class="a7-main-profile">
+
       <div class="a7-profile-section">
+
+          <div class="a7-btn-flex-end">
+            <div class="a7-edit-btn"><a id="edtbtn" href="">Edit Profile</a></div>
+          </div>
+          
         <div class="a7-profile-title">
           <h1>Profile Details</h1>
         </div>
@@ -38,9 +34,11 @@
             </div>
           </div>
         </div>
+      
       </div>
     </div>
-  </div>
+    </div>
+
 </body>
 <script>
     let baseUrl = (window.location).href;

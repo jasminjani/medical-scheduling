@@ -1,5 +1,26 @@
 const conn = require('../config/dbConnection.js')
 
+
+exports.doctorDashBoard = (req, res)=> {
+  res.render('pages/doctorPanel/dashboard')
+}
+
+exports.getDoctorSideBarDetail = async (req,res) => {
+    try {
+      const id = req.params.id
+      const [result] = await conn.query(`select concat(fname, " ",lname) as name,email from users where role_id = ? and users.id = ?`,[2,id])
+      res.json(result)
+      
+    } catch (error) {
+      return res.status(500).json({
+        success:false,
+        message:error.message
+      })
+    }
+}
+
+
+
 exports.allDoctor = async (req, res) => {
 
   try {
@@ -16,7 +37,7 @@ exports.allDoctor = async (req, res) => {
 
 exports.createDoctor = async (req, res) => {
   try {
-    const { doctor_id, speciality_id, name, location, gst_no, city, pincode, qualification, consultancy_fees } = req.body
+    const { doctor_id, speciality, name, location, gst_no, city, pincode, qualification, consultancy_fees } = req.body
     let hospital_id
     console.log(req.body);
 
@@ -24,23 +45,23 @@ exports.createDoctor = async (req, res) => {
     if (!name || !location || !gst_no || !city || !pincode) {
       return res.status(500).json({
         success: false,
-        message: "Please fill details"
+        message: "Please fill Hospital details "
       })
     }
 
     // validate doctor_details
-    if (!doctor_id || !hospital_id || !qualification || !consultancy_fees) {
+    if (!doctor_id ||  !qualification || !consultancy_fees) {
       return res.status(500).json({
         success: false,
-        message: "Please fill Details"
+        message: "Please fill Doctor Details"
       })
     }
 
     // validate doctor_has_speciality
-    if (!doctor_id || !speciality_id) {
+    if (!doctor_id || !speciality) {
       return res.status(500).json({
         success: false,
-        message: "Please fill Details"
+        message: "Please fill Speciality Details"
       })
     }
 
@@ -69,13 +90,17 @@ exports.createDoctor = async (req, res) => {
     }
 
     try {
-      await conn.query(`insert into doctor_has_specialities (doctor_id,speciality_id) values (?,?)`, [doctor_id, speciality_id])
+      await conn.query(`insert into doctor_has_specialities (doctor_id,speciality_id) values (?,?)`, [doctor_id, speciality])
     } catch (error) {
       return res.status(500).json({
         success: false,
         message: error.message
       })
     }
+    res.status(200).json({
+      success:true,
+      message:"inserted Successfully"
+    })
   }
 
   catch (error) {
@@ -91,7 +116,7 @@ exports.createDoctor = async (req, res) => {
 exports.updatePutDoctorDetails = async (req, res) => {
 
   let doctor_id = req.params.id
-  const { fname,lname, dob,gender, phone ,address ,name, location, gst_no, city, pincode, qualification, consultancy_fees, id, hospital_id } = req.body;
+  const { fname,lname, dob,gender, phone ,address ,name, location, gst_no, city, pincode, qualification, consultancy_fees, id, hospital_id,speciality } = req.body;
   console.log(req.body);
 
   // validate
@@ -139,6 +164,19 @@ exports.updatePutDoctorDetails = async (req, res) => {
       message: error.message
     })
   }
+
+  // try {
+  //   let [result] = await conn.query(`update doctor_has_specialities set speciality_id = ? where  doctor_id =?`[speciality,doctor_id])
+  //   // console.log(result);
+    
+  // } catch (error) {
+  //   console.log(error);
+  //   return res.json({
+
+  //     success: false,
+  //     message: error.message
+  //   })
+  // }
    res.json({success:true,message:"Update Successfully"})
   } catch (error) {
     return res.json({
@@ -208,6 +246,10 @@ exports.doctorData = async (req, res) => {
       message: error.message
     })
   }
+}
+
+exports.becomeDoctorDetail = async (req,res)=>{
+  res.render('pages/doctorPanel/doctorDetails')
 }
 
 

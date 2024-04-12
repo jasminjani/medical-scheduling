@@ -2,10 +2,11 @@ const express = require('express')
 const router = express.Router()
 
 // import Controller File
-const { allDoctor, createDoctor, doctorDisplay, updatePutDoctorDetails, getDoctorReview, doctorData, updateGetDoctorData, updateGetDoctorDisplay } = require('../controllers/doctorController');
+const { becomeDoctorDetail,doctorDashBoard, getDoctorSideBarDetail,allDoctor, createDoctor, doctorDisplay, updatePutDoctorDetails, getDoctorReview, doctorData, updateGetDoctorData, updateGetDoctorDisplay } = require('../controllers/doctorController');
 
 router.route("/doctorProfile")
 .get(allDoctor)
+
 
 
 
@@ -33,10 +34,16 @@ router.route("/doctorProfile/:id")
   .get(doctorDisplay)
 
 
+router.route("/doctorCreateProfile")
+  .get(becomeDoctorDetail)
+
 router.route("/updatedoctorProfile/:id")
   .get(updateGetDoctorDisplay)
 
 
-router.route("") 
-  
+router.route("/doctorDashBoard")
+.get(doctorDashBoard)
+ 
+router.route('/doctorSideBarDetail/:id')
+  .get(getDoctorSideBarDetail)
   module.exports = router
