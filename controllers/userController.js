@@ -4,6 +4,25 @@ const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 dotenv.config();
 
+// get => /register
+exports.getCreateUserForm = async (req,res)=>{
+  try {
+    return res.render('./pages/auth/register')
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
+// get => /register
+exports.getLoginForm = async (req,res)=>{
+  try {
+    return res.render('./pages/auth/login')
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
+
 // post => /register
 exports.createUser = async (req, res) => {
   try {
@@ -108,7 +127,7 @@ exports.createUser = async (req, res) => {
           random_salt,
           city,
           address,
-          1,
+          1, // default role is patient so role_id = 1
           verification_token,
           profile,
         ],
@@ -173,7 +192,7 @@ exports.login = async (req, res) => {
     let result;
 
     try {
-      let sql = "select * from users where email=?";
+      let sql = "select * from users where email=? and is_active=1";
       [result] = await conn.query(sql, [email]);
     } catch (error) {
       return res.status(500).json({
@@ -396,20 +415,23 @@ exports.deleteUser = async (req, res) => {
 
 exports.activationForm = async (req, res) => {
   try {
-    let token = req.query.token;
+    let token = req.query.activationKey;
     let email = req.query.email;
 
     if (!token || !email) {
-      return res.render("404");
+      return res.render("./common/404");
     }
 
-    let html = `<div class="active-button">
-                        <h4>Thank you for Registration !</h4>
-                        <p>Click on Below Link to Activate Your Account !</p>
-                        <a href="http://localhost:8000/media/verify/?token=${token}&email=${email}">http://localhost:8000/media/verify/?token=${token}&email=${email}</a>
-                    </div>`;
+    let html = `<div class="container">
+    <div class="thanks-registration">
+      <p><img src="/assets/done.png" class="done" alt=""></p>
+      <p class="thanks-msg">Thank You for Your Registration!</p>
+      <p class="activate-msg">Click on Below Link to Activate Your Account</p>
+      <p class="activate-link"><a href="http://localhost:8000/activate/?activationKey=${token}&email=${email}" target="_blank">http://localhost:8000/activate/?activationKey=${token}&email=${email}</a></p>
+    </div>
+  </div>`;
 
-    return res.render("login-registration/activationForm", { html });
+    return res.render("./pages/auth/activationForm", { html });
   } catch (error) {
     res.status(500).json({
       success: false,

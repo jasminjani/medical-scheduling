@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f5f7fa;
+}
+
+.container {
+  padding: 30px 0;
+  max-width: 1080px;
+  width: 100%;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+
+.done{
+  width: 16rem;
+}
+
+.thanks-registration{
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.thanks-msg{
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.activate-msg{
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.activate-link a{
+  text-decoration: none;
+  color: rgb(0, 38, 255);
+}
