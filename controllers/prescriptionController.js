@@ -28,6 +28,43 @@ exports.createPrescription = async (req, res) => {
   }
 };
 
+// exports.updateDetails = async (req, res) => {
+//   console.log("in updateDetails");
+//   try {
+//     const id = req.params.patient_id;
+//     console.log(id);
+//     let query = `select * from prescriptions where patient_id=?`;
+//     let result = await conn.query(query, [id]);
+//     res.send(result);
+//     res.json({
+//       msg: result,
+//     });
+//   } catch (error) {
+//     return res.status(500).json({
+//       success: false,
+//       message: error.message,
+//     });
+//   }
+// };
+
+// exports.updatePrescription = async (req, res) => {
+//   try {
+//     const id = req.params.id;
+//     const { prescription, diagnoses } = req.body;
+//     let query = `UPDATE prescriptions SET diagnoses=?,prescription=? where patient_id=? `;
+//     let result = await conn.query(query, [diagnoses, prescription, id]);
+//     res.send(result);
+//     res.json({
+//       msg: "Updation in pescriptions completed",
+//     });
+//   } catch (error) {
+//     return res.status(500).json({
+//       success: false,
+//       message: error.message,
+//     });
+//   }
+// };
+
 exports.getPrescriptionOfUser = async (req, res) => {
   try {
     let id = req.params.patient_id;
