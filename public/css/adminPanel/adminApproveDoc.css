@@ -1,7 +1,8 @@
 :root {
   --light-blue: #d2ebf9;
-  --blue: #0077d3;
   --brown: #e7e7e7;
+  --blue: #0969da;
+  --white: #ffffff;
 }
 
 
@@ -16,13 +17,6 @@ body {
   gap: 20px;
 }
 
-
-.a1-sidebar {
-
-  width: 250px;
-  height: 100vh;
-  border: 1px solid rgb(190, 190, 190);
-}
 
 .a2-btn {
   width: 80px;
@@ -50,10 +44,12 @@ body {
 
 .a2-approve-table-div {
   width: 100%;
+  margin-left: 400px;
 }
 
 .a2-approve-table {
   width: 95%;
+  height: 100%;
   padding: 10px;
   border: 1px solid var(--brown);
 }
@@ -67,6 +63,6 @@ tbody {
   padding: 10px 0;
 }
 
-table{
+table {
   border-collapse: collapse;
 }
