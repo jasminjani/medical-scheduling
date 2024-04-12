@@ -19,12 +19,13 @@
         <div class="full">
           <div class="header">
             <h3 class="textHeader">Appointment Form</h3>
-            <img src="../../../public/assets/profile.png" alt="profile" class="profilePic">
+            <a href="./patientProfile.html"><img src="../../../public/assets/profile.png" alt="profile" class="profilePic"></a>
           </div>
-          <hr>
-          <div class="form">
-            <fieldset>
-                <h2></h2>
+          <hr class="line">
+
+          <section class="appointmentForm">
+            <div class="form">
+              <div class="department">
                 <label for="department"><b>Department:</b></label>
                 <select name="doctorDepartment" id="departments" class="department">
                   <option value="department">Select Department</option>
@@ -34,7 +35,9 @@
                   <option value="medicine">Medicine</option>
                   <option value="pediatric">Pediatric</option>
                 </select>
-            
+              </div>
+
+              <div class="doctor">
                 <label for="doctor"><b>Doctor:</b></label>
                 <select name="doctors" class="doctor">
                   <option value="department">Select Doctor</option>
@@ -44,13 +47,45 @@
                   <option value="medicine">Medicine</option>
                   <option value="pediatric">Pediatric</option>
                 </select>
-              </fieldset>
-          </div>
+              </div>
+            </div>
+
+            <hr class="line">
+
+            <div class="dateTime">
+              <div class="date">
+                <label for="selectDate"><b>Select Date:</b></label>
+                <input type="date" name="selectDate" id="date" placeholder="Select Appointment Date">
+              </div>
+
+              <div class="time">
+                <label for="selectTime"><b>Select Time:</b></label>
+                <input type="button" name="times" id="time1" value="10:00">
+                <input type="button" name="times" id="time1" value="10:00">
+                <input type="button" name="times" id="time1" value="10:00">
+                <input type="button" name="times" id="time1" value="10:00">
+                <br>
+                <div class="timer">
+                  <input type="button" name="times" id="time1" value="10:00">
+                  <input type="button" name="times" id="time1" value="10:00">
+                  <input type="button" name="times" id="time1" value="10:00">
+                  <input type="button" name="times" id="time1" value="10:00">
+                </div>
+                <br><br>
+                <a href="./patientProfile.html"><input type="button" name="booked" id="slotBook" value="Book" class="submit"></a>
+              </div>
+            </div>
+        </section>
+
         </div>
       </div>
       <br><br>
 
+      <div class="footer">
+        <p>footercontent</p>
+      </div>
     </section>
+    
   </div>
 </body>
 
