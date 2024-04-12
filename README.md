@@ -1,4 +1,4 @@
-# HMS-Alpha-Team
+# Medical-Scheduling-A-Alpha-Team
 
 
 ## Contributor
