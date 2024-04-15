@@ -22,6 +22,14 @@ const generateCityCombo = async () => {
   return html;
 };
 
+exports.homePage = async(req,res)=>{
+  try {
+    return res.render('./common/homepage')
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
 // get => /register
 exports.getCreateUserForm = async (req, res) => {
   try {
@@ -113,8 +121,6 @@ exports.createUser = async (req, res) => {
 
     // generate hashpassword
     let hashPassword;
-    let random_salt = Math.random().toString(36).substring(2, 6);
-    password += random_salt;
     try {
       let bcryptsalt = await bcrypt.genSaltSync(10);
       hashPassword = await bcrypt.hash(password, bcryptsalt);
@@ -129,7 +135,7 @@ exports.createUser = async (req, res) => {
 
     // make query for insert the data
     let sql =
-      "insert into users (fname,lname,email,dob,gender,phone,password,salt,city,address,role_id,activation_token,profile) values (?)";
+      "insert into users (fname,lname,email,dob,gender,phone,password,city,address,role_id,activation_token) values (?)";
 
     // execute the query
     try {
@@ -142,12 +148,10 @@ exports.createUser = async (req, res) => {
           gender,
           phone,
           hashPassword,
-          random_salt,
           city,
           address,
           1, // default role is patient so role_id = 1
           verification_token,
-          profile,
         ],
       ]);
     } catch (error) {
@@ -229,8 +233,7 @@ exports.login = async (req, res) => {
 
     // user found the verify DB password with entered password
     let hashPassword = result[0].password;
-    let newPassword = password + result[0].salt;
-    if (await bcrypt.compare(newPassword, hashPassword)) {
+    if (await bcrypt.compare(password, hashPassword)) {
       // both are same
 
       //if db password and user's password matched then put the entry in login_attempts as accept
