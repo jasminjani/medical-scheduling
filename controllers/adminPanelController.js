@@ -15,7 +15,10 @@ exports.adminPanelControllers = (req, res) => {
 
 // exports.adminPanelControllers = (req, res) => {
 
-//   res.render('pages/adminPanel/addDocSpecialty')
-// }
+//   res.render("pages/adminPanel/adminShowPatient");
+// };
 
+// exports.adminPanelControllers = (req, res) => {
+//   res.render("pages/adminPanel/addDocSpecialty");
+// };
 

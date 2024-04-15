@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Appointment Form</title>
   <link rel="stylesheet" href="../../../public/css/patientCSS/appointment.css">
+  <script src="../../../public/javascript/patientPanel/appointment.js"></script>
 </head>
 
 <body>
@@ -28,7 +29,7 @@
               <div class="department">
                 <label for="department"><b>Department:</b></label>
                 <select name="doctorDepartment" id="departments" class="department">
-                  <option value="department">Select Department</option>
+                  <!-- <option value="department">Select Department</option> -->
                   <option value="cardiology">Cardiology</option>
                   <option value="dental">Dental</option>
                   <option value="neurology">Neurology</option>
@@ -39,8 +40,8 @@
 
               <div class="doctor">
                 <label for="doctor"><b>Doctor:</b></label>
-                <select name="doctors" class="doctor">
-                  <option value="department">Select Doctor</option>
+                <select name="doctors" class="doctor" id="doctors">
+                  <!-- <option value="department">Select Doctor</option> -->
                   <option value="cardiology">Cardiology</option>
                   <option value="dental">Dental</option>
                   <option value="neurology">Neurology</option>
@@ -54,26 +55,47 @@
 
             <div class="dateTime">
               <div class="date">
-                <label for="selectDate"><b>Select Date:</b></label>
-                <input type="date" name="selectDate" id="date" placeholder="Select Appointment Date">
+                <label for="selectDate" class="label"><b>Select Date:</b></label>
+                <!-- <input type="date" name="selectDate" id="date" placeholder="Select Appointment Date"> -->
+                <input placeholder="Type Date" type="text" onfocus="(this.type = 'date')"  id="date">
               </div>
 
+              <label for="selectTime"><b>Select Time:</b></label>
               <div class="time">
-                <label for="selectTime"><b>Select Time:</b></label>
-                <input type="button" name="times" id="time1" value="10:00">
-                <input type="button" name="times" id="time1" value="10:00">
-                <input type="button" name="times" id="time1" value="10:00">
-                <input type="button" name="times" id="time1" value="10:00">
-                <br>
-                <div class="timer">
-                  <input type="button" name="times" id="time1" value="10:00">
-                  <input type="button" name="times" id="time1" value="10:00">
-                  <input type="button" name="times" id="time1" value="10:00">
-                  <input type="button" name="times" id="time1" value="10:00">
+                
+                <div>
+                  <input type="button" name="times" id="time1" value="10:00" onclick="btnTime1()">
                 </div>
-                <br><br>
-                <a href="./patientProfile.html"><input type="button" name="booked" id="slotBook" value="Book" class="submit"></a>
+                <div>
+                  <input type="button" name="times" id="time2" value="10:00" onclick="btnTime2()">
+                </div>
+                <div>
+                  <input type="button" name="times" id="time3" value="10:00" onclick="btnTime3()">
+                </div>
+                <div>
+                  <input type="button" name="times" id="time4" value="10:00" onclick="btnTime4()">
+                </div>
+                <!-- <div class="timer"> -->
+                <div>
+                  <input type="button" name="times" id="time5" value="10:00" onclick="btnTime5()">
+                </div>
+                <div>
+                  <input type="button" name="times" id="time6" value="10:00" onclick="btnTime6()">
+                </div>
+                <div>
+                  <input type="button" name="times" id="time7" value="10:00" onclick="btnTime7()">
+                </div>
+                <div>
+                  <input type="button" name="times" id="time8" value="10:00" onclick="btnTime8()">
+                </div>
+                <!-- </div> -->
               </div>
+
+                <br>
+              
+                <a href="./patientProfile.html"><input type="button" name="booked" id="slotBook" value="Book" class="submit"></a>
+              
+              
             </div>
         </section>
 
