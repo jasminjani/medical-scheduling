@@ -1,0 +1,61 @@
+<div class="sidenav">
+  <div class="sidenavupperbox">
+    <div class="profile">
+      <div class="profilephoto">
+        <a href="" id="viewprofile"><img src="/public/assets/sideBar/profile-icon-png-898.png" alt="profile"
+            class="profileimage" /></a>
+      </div>
+      <div class="accountname">
+        <p class="username" id="name">Doctor Name</p>
+        <p class="useremail" id="email">doctor123@gmail.com</p>
+      </div>
+    </div>
+    <div class="logout">
+      <P class="btn-logout">Log out</P>
+    </div>
+  </div>
+
+  <div class="lists">
+    <div class="list-item">
+      <i class="fa-solid fa-house list-item-img"></i>
+      <a href="" id="viewdashboard">Dashboard</a>
+    </div>
+    <div class="list-item">
+      <i class="fa-solid fa-calendar-days list-item-img"></i>
+      <a href="#">Schedule</a>
+    </div>
+    <div class="list-item">
+      <i class="fa-solid fa-bed-pulse list-item-img"></i>
+      <a href="" id="viewpatient">My Patients</a>
+    </div>
+    <div class="list-item">
+      <i class="fa-regular fa-credit-card list-item-img"></i>
+      <a href="#">Payment History</a>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  const fetchSideBarDetails = async () => {
+    let fetchData = await fetch(`http://localhost:8000/doctorSideBarDetail/4`)
+    let data = await fetchData.json()
+    console.log(data);
+    let key = Object.keys(data[0])
+    key.forEach(element => {
+      console.log(key);
+      document.getElementById(element).innerHTML = data[0][element]
+    });
+  }
+  fetchSideBarDetails()
+</script>
+
+
+
+<!-- aa banne css side bar mate link kari lejo
+
+  for icons :-
+  <link rel="stylesheet" href="/public/fontawesome-free-6.5.2-web/css/all.min.css">
+
+  for sidebar css :-
+  <link rel="stylesheet" href="/public/css/sideBar/newSidebar.css"> -->
