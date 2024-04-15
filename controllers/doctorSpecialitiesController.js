@@ -12,6 +12,10 @@ exports.createSpecialities = async (req, res) => {
   }
   try {
     await conn.query(`insert into specialities (speciality) values (?)`, [speciality])
+    res.status(200).json({
+      success:true,
+      message: "inserted field"
+    })
   } catch (error) {
     res.status(500).json({
       success: false,
