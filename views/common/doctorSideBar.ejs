@@ -31,12 +31,14 @@
 </div>
 <script>
     const fetchSideBarDetails = async()=>{
-      let fetchData = await fetch(`http://localhost:8000/doctorSideBarDetail/4`)
+       let baseUrl = (window.location).href;
+      let Id = baseUrl.substring(baseUrl.lastIndexOf('/') + 1);
+      let fetchData = await fetch(`http://localhost:8000/doctorSideBarDetail/${Id}`)
       let data = await fetchData.json()
-      console.log(data);
+      // console.log(data);
       let key = Object.keys(data[0])
       key.forEach(element => {
-        console.log(key);
+        // console.log(key);
         document.getElementById(element).innerHTML = data[0][element]
       });
     }

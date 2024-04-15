@@ -41,8 +41,8 @@
                     <input type="text" name="lname" id="" class="a7-form-input" value="" />
                   </div>
                   <div class="a7-field-inp">
-                    <label for="">Email:</label>
-                    <input type="text" name="email" id="" class="a7-form-input" value="" disabled/>
+                    <!-- <label for="">Email:</label> -->
+                    <input type="text" name="email" id="" class="a7-form-input" value="" hidden/>
                   </div>
 
                   <div>
@@ -71,9 +71,8 @@
                   <div class="a7-field-inp">
                     <label for="">Speciality:</label>
                     <select name="speciality" id="speciality">
-                      <option value="select">select</option>
+                      <option value="123" >--Select Speciality--</option>
                     
-                      <option value="Anesthesiologists">Anesthesiologists</option>
                     </select>
                   </div>
                   <div class="a7-field-inp">
@@ -115,13 +114,8 @@
     </div>
   </div>
   </div>
-
-    
-
-
-  <script src="/javascript/doctorPanel/fetchSpeciality.js"></script>
+<script src="/javascript/doctorPanel/fetchSpeciality.js"></script>
   <script>
-
 
   let baseUrl = (window.location).href;
   let Id = baseUrl.substring(baseUrl.lastIndexOf('/') + 1);
@@ -143,15 +137,13 @@
           });
         }
         else {
-          document.getElementsByName(element)[0].value = data[0][element]
+        document.getElementsByName(element)[0].value = data[0][element]
         }
       });
     }
-
     fetchData()
-
- 
   </script>
+  
 </body>
 
 </html>

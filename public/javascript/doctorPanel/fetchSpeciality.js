@@ -5,14 +5,10 @@ const specialityFetch = async () => {
 
   key.forEach(element => {
     let dtkey = Object.keys(data[element])
-    
-   
-
       let option = document.createElement("option")
       option.value = data[element][dtkey[0]]
       option.textContent = data[element][dtkey[1]]
       document.getElementById(dtkey[1]).appendChild(option)
- 
   });
 
 }

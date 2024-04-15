@@ -39,7 +39,7 @@ exports.createDoctor = async (req, res) => {
   try {
     const { doctor_id, speciality, name, location, gst_no, city, pincode, qualification, consultancy_fees } = req.body
     let hospital_id
-    console.log(req.body);
+    // console.log(req.body);
 
     // validte hospital_detail
     if (!name || !location || !gst_no || !city || !pincode) {
@@ -113,10 +113,10 @@ exports.createDoctor = async (req, res) => {
 }
 
 
-exports.updatePutDoctorDetails = async (req, res) => {
+exports.updateDoctorDetails = async (req, res) => {
 
   let doctor_id = req.params.id
-  const { fname,lname, dob,gender, phone ,address ,name, location, gst_no, city, pincode, qualification, consultancy_fees, id, hospital_id,speciality } = req.body;
+  const { fname, lname, dob, gender, phone, address, name, location, gst_no, city, pincode, qualification, consultancy_fees, id, hospital_id, speciality } = req.body;
   console.log(req.body);
 
   // validate
@@ -129,7 +129,7 @@ exports.updatePutDoctorDetails = async (req, res) => {
 
   try {
      try{
-       let [result] = await conn.query(`update users set fname = ?,lname = ?,dob=?,gender=?,phone = ?,address = ? where users.id = ? and role_id = ?`, [fname, lname, dob,gender, phone, address,doctor_id,2])
+     await conn.query(`update users set fname = ?,lname = ?,dob=?,gender=?,phone = ?,address = ? where users.id = ? and role_id = ?`, [fname, lname, dob,gender, phone, address,doctor_id,2])
      }
   catch(error){
     console.log(error);
@@ -156,7 +156,8 @@ exports.updatePutDoctorDetails = async (req, res) => {
     })
   }
   try {
-    let [result] = await conn.query(`update doctor_details set qualification = ?,consultancy_fees= ? where doctor_details.id = ? and doctor_id = ?`, [qualification, consultancy_fees, id, doctor_id])
+
+  await conn.query(`update doctor_details set qualification = ?,consultancy_fees= ? where doctor_details.id = ? and doctor_id = ?`, [qualification, consultancy_fees, id, doctor_id])
     
   } catch (error) {
     return res.status(500).json({
@@ -165,18 +166,20 @@ exports.updatePutDoctorDetails = async (req, res) => {
     })
   }
 
-  // try {
-  //   let [result] = await conn.query(`update doctor_has_specialities set speciality_id = ? where  doctor_id =?`[speciality,doctor_id])
-  //   // console.log(result);
-    
-  // } catch (error) {
-  //   console.log(error);
-  //   return res.json({
+  try {
 
-  //     success: false,
-  //     message: error.message
-  //   })
-  // }
+    await conn.query(`update doctor_has_specialities set speciality_id = ? where  doctor_id =?`,[speciality,doctor_id])
+    
+    
+  } catch (error) {
+    console.log(error);
+    return res.json({
+
+      success: false,
+      message: error.message
+    })
+  }
+
    res.json({success:true,message:"Update Successfully"})
   } catch (error) {
     return res.json({
@@ -184,14 +187,6 @@ exports.updatePutDoctorDetails = async (req, res) => {
       message: error.message
     })
   }
-
-  // try {
-  //   let [result] = await conn.query(`update doctor_has_specialities set speciality_id = ? where `)
-  // } catch (error) {
-    
-  // }
-
-
 }
 
 exports.getDoctorReview = async (req, res) => {
@@ -231,6 +226,8 @@ exports.updateGetDoctorDisplay = async(req,res)=>{
 
 
 
+
+
 // json controller
 
 exports.doctorData = async (req, res) => {
@@ -238,7 +235,7 @@ exports.doctorData = async (req, res) => {
   try {
     const doctor_id = req.params.id
 
-    const [result] = await conn.query(`select doctor_details.id,clinic_hospitals.id as hospital_id, fname,lname,email,gender,dob,phone,address,name,location,gst_no,city,pincode,speciality, qualification, consultancy_fees from doctor_details inner join users on  doctor_details.doctor_id = users.id inner join doctor_has_specialities on doctor_details.doctor_id = doctor_has_specialities.doctor_id inner join clinic_hospitals on clinic_hospitals.id = doctor_details.hospital_id inner join specialities on specialities.id = doctor_has_specialities.speciality_id where doctor_details.doctor_id = ?;`, [doctor_id])
+    const [result] = await conn.query(`select doctor_details.id,clinic_hospitals.id as hospital_id, fname,lname,email,gender,dob,phone,address,name,location,gst_no,city,pincode,speciality , qualification, consultancy_fees from doctor_details inner join users on  doctor_details.doctor_id = users.id inner join doctor_has_specialities on doctor_details.doctor_id = doctor_has_specialities.doctor_id inner join clinic_hospitals on clinic_hospitals.id = doctor_details.hospital_id inner join specialities on specialities.id = doctor_has_specialities.speciality_id where doctor_details.doctor_id = ?;`, [doctor_id])
     res.json(result)
       } catch (error) {
     return res.status(500).json({
@@ -258,7 +255,7 @@ exports.updateGetDoctorData = async (req, res) => {
   try {
     const doctor_id =  req.params.id
 
-    const [result] = await conn.query(`select doctor_details.id, doctor_details.doctor_id,clinic_hospitals.id as hospital_id, fname,lname,email,gender,dob,phone,address,name,location,gst_no,city,pincode,speciality, qualification, consultancy_fees from doctor_details inner join users on  doctor_details.doctor_id = users.id inner join doctor_has_specialities on doctor_details.doctor_id = doctor_has_specialities.doctor_id inner join clinic_hospitals on clinic_hospitals.id = doctor_details.hospital_id inner join specialities on specialities.id = doctor_has_specialities.speciality_id where doctor_details.doctor_id = ?;`, [doctor_id])
+    const [result] = await conn.query(`select specialities.id as speciality,doctor_details.id, doctor_details.doctor_id,clinic_hospitals.id as hospital_id, fname,lname,email,gender,dob,phone,address,name,location,gst_no,city,pincode, qualification, consultancy_fees from doctor_details inner join users on  doctor_details.doctor_id = users.id inner join doctor_has_specialities on doctor_details.doctor_id = doctor_has_specialities.doctor_id inner join clinic_hospitals on clinic_hospitals.id = doctor_details.hospital_id inner join specialities on specialities.id = doctor_has_specialities.speciality_id where doctor_details.doctor_id = ?;`, [doctor_id])
      res.json(result)
 
   } catch (error) {

@@ -2,12 +2,10 @@ const express = require('express')
 const router = express.Router()
 
 // import Controller File
-const { becomeDoctorDetail,doctorDashBoard, getDoctorSideBarDetail,allDoctor, createDoctor, doctorDisplay, updatePutDoctorDetails, getDoctorReview, doctorData, updateGetDoctorData, updateGetDoctorDisplay } = require('../controllers/doctorController');
+const { becomeDoctorDetail,doctorDashBoard, getDoctorSideBarDetail,allDoctor, createDoctor, doctorDisplay, updateDoctorDetails, getDoctorReview, doctorData, updateGetDoctorData, updateGetDoctorDisplay } = require('../controllers/doctorController');
 
 router.route("/doctorProfile")
 .get(allDoctor)
-
-
 
 
 router.route("/doctorCreateProfile")
@@ -18,7 +16,7 @@ router.route("/doctorCreateProfile")
   .get(getDoctorReview)
   
   router.route("/updatedoctorProfile/:id")
-    .post(updatePutDoctorDetails)
+    .post(updateDoctorDetails)
 
 
 
