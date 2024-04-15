@@ -17,7 +17,7 @@
 
                     <div class="fname">
                         <label for="fname">doctor_id: </label>
-                        <input type="text" name="doctor_id"   class="dvalid">
+                        <input type="text" name="doctor_id"   class="dvalid"  hidden>
                     </div>
 
                     <div class="fname">
@@ -60,9 +60,13 @@
                         <input type="text" id="name" name="gst_no" class="dvalid" placeholder="Enter GST Number">
                     </div>
 
-                    <div class="phone">
-                        <label for="phone">City:</label>
-                        <input type="text" id="name" name="city" class="dvalid" placeholder="Enter City">
+
+                    <div class="city">
+                        <label for="city">City:</label>
+                        <select name="city" id="city" class="dvalid">
+                            <option value="">--Select Speciality--</option>
+                    
+                        </select>
                     </div>
 
                     <div class="phone">
@@ -83,8 +87,8 @@
 
     </div>
 
-<script src="/javascript/doctorPanel/fetchSpeciality.js"></script>
-  
+    <script src="/javascript/doctorPanel/fetchSpeciality.js"></script>
+    
 </body>
 
 </html>
