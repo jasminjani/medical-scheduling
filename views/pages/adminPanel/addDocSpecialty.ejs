@@ -33,48 +33,24 @@
 
         <h2 class="a2-approve-h2">Pending Request</h2>
 
-        <table class="a2-approve-table">
+        <table class="a2-approve-table" id="pending-request-tbl">
           <tr class="approve-tbl-head">
             <th>No.</th>
             <th>Specialty Name</th>
-            <th>Doctor Name</th>
             <th>Add Specialty</th>
           </tr>
-          <tbody id="a2-tbody">
-            <tr>
-              <td>1.</td>
-              <td>ABC</td>
-              <td>ABC</td>
-              <td class="a2-btn">Add</td>
-            </tr>
-          </tbody>
+          <tbody id="pending-speciality"></tbody>
         </table>
 
       </div>
     </div>
 
     <script>
-      async function getSpecialties() {
-        let response = await fetch("/get-specialties");
-
-        return await response.json();
-      }
-
-      function addNewSpecialty() {
-        let div = document.createElement("div");
-
-        let str = `
-        <div class="a2-specialties">
-          <label for="specialties">New Doctor Specialties : </label>
-          <input type="text" name="specialties">
-        </div>`;
-
-        div.innerHTML = str;
-        document.getElementById("a2-form-id").appendChild(div);
-      }
 
       async function makeSpecialtiesTable() {
-        let allSpecialties = await getSpecialties();
+        let response = await fetch("/get-specialties");
+
+        let allSpecialties = await response.json();
 
         const tbody = document.getElementById("a2-tbody");
 
@@ -95,14 +71,55 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ "id": id })
           });
-          console.log(id);
+          if (response.ok) {
+            alert("Delete Specialty successfully ");
+            location.reload()
+          }
+
         } catch (error) {
           console.log(error);
         }
 
       }
       makeSpecialtiesTable();
-      
+
+
+      async function getNewSpecialty() {
+        let response = await fetch("/get-new-specialties");
+
+        let newSpecialty = await response.json();
+        const tbody = document.getElementById("pending-speciality");
+
+        newSpecialty.forEach((specialties) => {
+          let strTD = `<tr>
+            <td>${specialties.id}</td> 
+            <td>${specialties.speciality}</td>
+            <td class="a2-btn" onclick=addSpecialty(${specialties.id})>Add</tr>`
+          tbody.innerHTML += strTD;
+        });
+
+
+
+      }
+
+      getNewSpecialty()
+
+      async function addSpecialty(id) {
+
+        let response = await fetch('/add-specialty', {
+          method: 'post',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ 'id': id })
+
+        });
+
+        if (response.ok) {
+          alert("Add Specialty successfully ");
+          location.reload()
+        }
+
+
+      }
     </script>
 </body>
 
