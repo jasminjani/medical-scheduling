@@ -1,34 +1,45 @@
-<div class="A4-sidenav">
-  <div class="A4-sidenavupperbox">
-    <div class="A4-profile">
-      <div class="A4-profilephoto">
-        <a href="" id="viewprofile"><img src="/assets/sideBar/profile-icon-png-898.png" alt="profile" class="A4-profileimage" /></a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/sideBar/sidebar.css">
+</head>
+<body>
+  <div class="A4-sidenav">
+    <div class="A4-sidenavupperbox">
+      <div class="A4-profile">
+        <div class="A4-profilephoto">
+          <a href="" id="viewprofile"><img src="/assets/sideBar/profile-icon-png-898.png" alt="profile" class="A4-profileimage" /></a>
+        </div>
+        <div class="A4-accountname">
+          <p class="A4-username" id="name"></p>
+          <p class="A4-useremail" id="email"></p>
+        </div>
       </div>
-      <div class="A4-accountname">
-        <p class="A4-username" id="name"></p>
-        <p class="A4-useremail" id="email"></p>
+      <div class="A4-logout">
+        <button class="A4-logoutBtn">Log Out</button>
       </div>
     </div>
-    <div class="A4-logout">
-      <button class="A4-logoutBtn">Log Out</button>
+  
+    <div class="A4-lists">
+      <div class="A4-list-item">
+        <a href="" id="viewdashboard">Dashboard</a>
+      </div>
+      <div class="A4-list-item">
+        <a href="#">Schedule</a>
+      </div>
+      <div class="A4-list-item">
+        <a href="" id="viewpatient">My Patients</a>
+      </div>
+      <div class="A4-list-item">
+        <a href="#">Paymets History</a>
+      </div>
     </div>
   </div>
-
-  <div class="A4-lists">
-    <div class="A4-list-item">
-      <a href="" id="viewdashboard">Dashboard</a>
-    </div>
-    <div class="A4-list-item">
-      <a href="#">Schedule</a>
-    </div>
-    <div class="A4-list-item">
-      <a href="" id="viewpatient">My Patients</a>
-    </div>
-    <div class="A4-list-item">
-      <a href="#">Paymets History</a>
-    </div>
-  </div>
-</div>
+</body>
+</html>
 <script>
     const fetchSideBarDetails = async()=>{
       let fetchData = await fetch(`http://localhost:8000/doctorSideBarDetail/4`)
