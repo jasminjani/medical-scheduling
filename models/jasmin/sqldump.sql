@@ -425,6 +425,7 @@ DROP TABLE IF EXISTS `specialities`;
 CREATE TABLE `specialities` (
   `id` int NOT NULL AUTO_INCREMENT,
   `speciality` varchar(255) NOT NULL,
+  `status` int DEFAULT '0',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
@@ -437,7 +438,6 @@ CREATE TABLE `specialities` (
 
 LOCK TABLES `specialities` WRITE;
 /*!40000 ALTER TABLE `specialities` DISABLE KEYS */;
-INSERT INTO `specialities` VALUES (1,'Orthopedic','2024-04-10 05:05:55','2024-04-10 05:11:28'),(2,'Cardiology','2024-04-10 05:05:55','2024-04-10 05:11:28'),(3,'Physiotherapy','2024-04-10 05:05:55','2024-04-10 05:11:28'),(4,'Dermatology','2024-04-10 05:05:55','2024-04-10 05:11:28'),(5,'Anesthesiology','2024-04-10 05:05:55','2024-04-10 05:11:28'),(6,'neurosurgeon','2024-04-10 05:05:55','2024-04-10 05:11:28');
 /*!40000 ALTER TABLE `specialities` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -554,4 +554,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-10 11:49:06
+-- Dump completed on 2024-04-15 15:05:20
