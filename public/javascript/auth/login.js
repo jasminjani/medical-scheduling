@@ -68,13 +68,13 @@ submit.addEventListener('click', async (e) => {
             data = await data.json();
             console.log(data);
             
-            // if (data.success) {
-            //     window.location = "/media"
-            // }
-            // else{
-            //     document.querySelector('.link').innerHTML = `<p>${data.message}</p>`;
-            //     document.querySelector('.link').style.color = "red";
-            // }
+            if (data.success) {
+                window.location = "/"
+            }
+            else{
+                document.querySelector('.link').innerHTML = `<p>${data.message}</p>`;
+                document.querySelector('.link').style.color = "red";
+            }
         }
 
     }
