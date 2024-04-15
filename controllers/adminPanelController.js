@@ -1,7 +1,7 @@
-// exports.adminPanelControllers = (req, res) => {
-
-//   res.render('pages/adminPanel/adminApproveDoc')
-// }
+exports.adminPanelControllers = (req, res) => {
+  
+  res.render('pages/adminPanel/adminApproveDoc')
+}
 
 // exports.adminPanelControllers = (req, res) => {
 
@@ -9,9 +9,16 @@
 // }
 
 // exports.adminPanelControllers = (req, res) => {
+
+//   res.render('pages/adminPanel/adminShowPatient')
+// }
+
+// exports.adminPanelControllers = (req, res) => {
+
 //   res.render("pages/adminPanel/adminShowPatient");
 // };
 
-exports.adminPanelControllers = (req, res) => {
-  res.render("pages/adminPanel/addDocSpecialty");
-};
+// exports.adminPanelControllers = (req, res) => {
+//   res.render("pages/adminPanel/addDocSpecialty");
+// };
+
