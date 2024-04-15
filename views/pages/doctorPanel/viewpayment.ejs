@@ -3,22 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./css/viewfeedback.css">
-  <link rel="stylesheet" href="./css/dashboard.css">
+  <link rel="stylesheet" href="/css/doctorPanel/viewfeedback.css">
+  <link rel="stylesheet" href="/css/doctorPanel/dashboard.css">
   <title>View Payment</title>
 </head>
 <body>
 
-  <div class="a7-container">
-
-    <div class="a7-header">
-      <div class="a7-logo"><img src="./assets/logo1.png" alt=""></div>
-      <div class="a7-doctor-banner">
-        <h1>Welcome Dr name</h1>
-      </div>
-      <div class="a7-profile"><a href="./profile.html"><img src="./assets/profile.png" alt=""></a></div>
-    </div>
-  </div>
 
   <div class="a7-appointment-tbl">
 
@@ -36,29 +26,30 @@
           <td><span>Slot Date</span></td>
           <td><span>Payment Date</span></td>
         </tr>
-
-        <tr class="a7-feedback-table-data">
-          <td><span>Yash</span> </td>
-          <td><span> 500</span> </td>
-          <td><span>9:00 to 9:30</span> </td>
-          <td><span>2024-04-01 </span> </td>
-          <td> <span>2024-04-01</span> </td>
-        </tr>
-      <tr class="a7-feedback-table-data">
-        <td><span>Yash</span> </td>
-        <td><span> 500</span> </td>
-        <td><span>9:00 to 9:30</span> </td>
-        <td><span>2024-04-01 </span> </td>
-        <td> <span>2024-04-01</span> </td>
-      </tr>
-      <tr class="a7-feedback-table-data">
-        <td><span>Yash</span> </td>
-        <td><span> 500</span> </td>
-        <td><span>9:00 to 9:30</span> </td>
-        <td><span>2024-04-01 </span> </td>
-        <td> <span>2024-04-01</span> </td>
-      </tr>
+        <!-- fetch data using AJAX  -->
+        <tr class="a7-feedback-table-data" id="rowdata"></tr>
+        
+      
       </table>
     </div></div>
+    <script src="/javascript/doctorPanel/urlPath.js"></script>
+    <script>
+          const fetchPaymentData = async() =>{
+              const fetchdata = await fetch(`http://localhost:8000/doctorPaymentData/${Id}`)
+              const data = await fetchdata.json()
+              let key = Object.keys(data[0])
+              key.forEach(element => {
+                console.log(element);
+                    let tddata = document.createElement("td")
+                    let span = document.createElement("span")
+                    span.innerHTML = data[0][element]
+                    tddata.append(span)
+                    document.getElementById("rowdata").appendChild(tddata)
+
+              });
+          }
+
+          fetchPaymentData( )
+    </script>
 </body>
 </html>
