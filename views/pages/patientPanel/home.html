@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home Page</title>
   <link rel="stylesheet" href="../../../public/css/patientCSS/patientHomePage.css">
+  <script src="../../../public/javascript/patientPanel/home.js"></script>
 </head>
 
 <body>
@@ -40,23 +41,35 @@
               <u><h2>Our Doctors</h2></u>
               <p class="textMiddle">We provide a wide range of creative services for clients. But the most important thing
                 is that of pleasure.</p>
+                <br>
                 <div class="doctorDepartment">
-                  <br>
                   <!-- <form> -->
-                    <input type="button" name="allDepartment" id="depAll" value="All Department">
-                    <input type="button" name="cardiology" id="depCardio" value="Cardiology">
-                    <input type="button" name="dental" id="depDental" value="Dental">
-                    <input type="button" name="neurology" id="depNeurology" value="Neurology">
-                    <input type="button" name="medicine" id="depMedicine" value="Medicine">
-                    <input type="button" name="pedia" id="depPedia" value="Pediatric">
+                    <div>
+                      <input type="button" name="allDepartment" id="depAll" value="All Department" onclick="depAll()">
+                    </div>
+                    <div>
+                      <input type="button" name="cardiology" id="depCardio" value="Cardiology" onclick="depCardio()">
+                    </div>
+                    <div>
+                      <input type="button" name="dental" id="depDental" value="Dental" onclick="depDental()">
+                    </div>
+                    <div>
+                      <input type="button" name="neurology" id="depNeurology" value="Neurology" onclick="depNeuro()">
+                    </div>
+                    <div>
+                      <input type="button" name="medicine" id="depMedicine" value="Medicine" onclick="depMed()">
+                    </div>
+                    <div>
+                      <input type="button" name="pedia" id="depPedia" value="Pediatric" onclick="depPedia()">
+                    </div>
+                    <br>
                   <!-- </form> -->
                 </div>
-                <br>
                 <div class="pics">
-                  <img src="../../../public/assets/doctor1.jpg" alt="doctor1">
-                  <img src="../../../public/assets/doctor2.jpg" alt="doctor2">
-                  <img src="../../../public/assets/doctor1.jpg" alt="doctor2">
-                  <img src="../../../public/assets/doctor2.jpg" alt="doctor2">
+                  <img src="../../../public/assets/doctor1.jpg" alt="doctor1" id="image1">
+                  <img src="../../../public/assets/doctor2.jpg" alt="doctor2" id="image2">
+                  <img src="../../../public/assets/doctor1.jpg" alt="doctor2" id="image3">
+                  <img src="../../../public/assets/doctor2.jpg" alt="doctor2" id="image4">
                 </div>
                 <hr>
                 <br><br>
