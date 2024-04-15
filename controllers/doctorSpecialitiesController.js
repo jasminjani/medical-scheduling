@@ -20,10 +20,14 @@ exports.createSpecialities = async (req, res) => {
   }
 }
 
+
+
+
+// json controller
 exports.allSpecialities = async (req, res) => {
   try {
-    [result] = await conn.query(`select * from specialities`)
-    res.send(result)
+    [result] = await conn.query(`select id as speciality_id,speciality from specialities`)
+    res.json(result)
   } catch (error) {
     return res.status(500).json({
       success: false,

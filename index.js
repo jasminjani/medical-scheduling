@@ -8,8 +8,8 @@ const PORT = process.env.PORT;
 
 // passport configuration
 const passport = require("passport");
-const { passportConfig } = require('./middlewares/authMiddleware')
-passportConfig(passport)
+const { passportConfig } = require("./middlewares/authMiddleware");
+passportConfig(passport);
 
 // set view engine
 app.set("view engine", "ejs");
@@ -24,14 +24,12 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
-
 // use root router in index file
 const rootRouter = require("./routes/rootRouter");
 app.use("/", rootRouter);
 
-
 // server is running on PORT
 app.listen(PORT, () => {
   console.log(`server is running on port: http://localhost:${PORT}`);
-  console.log('use this command : npm run tailwind');
+  console.log("use this command : npm run tailwind");
 });

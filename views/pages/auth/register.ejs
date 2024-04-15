@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UserData</title>
-    <link rel="stylesheet" type="text/css" href="/public/css/auth/register.css">
+    <link rel="stylesheet" type="text/css" href="/css/auth/register.css">
 </head>
 
 <body>
@@ -39,7 +39,7 @@
                         <label for="gender">Gender:
                             <input type="radio" name="gender" value="male" id="male"><label for="male">Male</label>
                             <input type="radio" name="gender" value="female" id="female"><label
-                                for="female">Female</label></label>
+                            for="female">Female</label></label>
                     </div>
                     <div class="phone">
                         <label for="phone">Phone Number: </label>
@@ -56,12 +56,12 @@
                     </div>
                     <div class="address">
                         <label for="">Address: </label>
-                        <textarea name="address" id="address" cols="30" rows="3" placeholder="Enter Address"></textarea>
+                        <textarea name="address" id="address" cols="30" rows="3" placeholder="Enter Address" class="dvalid"></textarea>
                     </div>
 
                     <div class="profile">
                         <label for="profile">Profile: </label>
-                        <input type="file" name="profile" accept="image/*" id="profile">
+                        <input type="file" name="profile" accept="image/*" id="profile" class="dvalid">
                     </div>
 
                     <div class="password">
@@ -84,7 +84,7 @@
                         <div class="right"></div>
                     </div>
                     <div class="mv-btn">
-                        <p>Already have an Account? <a href="/media/login">login</a></p>
+                        <p>Already have an Account? <a href="/login">login</a></p>
                     </div>
                 </form>
                 <div class="link"></div>
@@ -94,8 +94,8 @@
     </div>
 
 
-    <script src="/public/javascript/auth/script.js"></script>
-    <script src="/public/javascript/auth/register.js"></script>
+    <script src="/javascript/auth/script.js"></script>
+    <script src="/javascript/auth/register.js"></script>
 </body>
 
 </html>
