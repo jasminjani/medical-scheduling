@@ -11,6 +11,7 @@ for (let i = 0; i < rows.length; i++) {
     error.innerHTML = "";
     const d = date.getElementsByTagName("input")[0].value;
     if (!d) return error.innerHTML = "please select valid date";
+    // console.log(Math.floor((new Date(d).valueOf() - new Date().valueOf()) / 86400000));
     if (new Date(d) < new Date()) return error.innerHTML = "please select upcoming dates";
     if (times.children.length > 1 && !times.children[times.children.length - 2].value) return error.innerHTML = "please fill previous slot";
     const newNode = document.createElement("input");
