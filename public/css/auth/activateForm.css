@@ -42,7 +42,50 @@ body {
   text-align: center;
 }
 
+.activate-link{
+  text-align: center;
+}
+
 .activate-link a{
+  text-align: center;
   text-decoration: none;
-  color: rgb(0, 38, 255);
+  color: blue;
+}
+
+
+
+/* hurray form css */
+.success-page {
+  text-align: center;
+  margin-top: 9%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.success-page img{
+  mix-blend-mode: multiply;
+}
+
+.btn-size {
+  border-radius: 5px;
+  background-color: #4147e6;
+}
+
+.btn-text {
+  color: #ffff;
+  text-decoration: none;
+  font-size: 19px;
+  display: block;
+  padding: 7px 15px;
+}
+
+.text-font {
+  font-size: 25px;
+}
+
+.img {
+  mix-blend-mode: multiply;
+  width: 400px;
 }
