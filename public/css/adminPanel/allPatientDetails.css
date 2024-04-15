@@ -47,6 +47,11 @@ input {
   cursor: pointer;
 }
 
+#a5-btn-search:hover {
+  color: var(--white);
+  background-color: var(--blue);
+}
+
 .a5-searchbox {
   border: 1px solid var(--black);
   display: flex;
@@ -58,21 +63,22 @@ input {
 }
 
 #a5-user-table {
-  border: 1px solid var(--black);
+  border-collapse: collapse;
+  border: 1px solid var(--brown);
   border-radius: 5px;
   width: 100%;
   margin: 15px 0;
 }
 
-td,
-th {
+td {
   text-align: center;
-  padding: 3px 0;
+  padding: 8px 0;
 }
 
 th {
-  box-shadow: 0 3px var(--blue);
+  box-shadow: 0 2px var(--blue);
   padding: 10px 0;
+  text-align: center;
 }
 
 .a5-btn {
@@ -83,4 +89,9 @@ th {
   padding-top: 8px;
   cursor: pointer;
   margin: auto;
+}
+
+.a5-btn:hover {
+  color: var(--white);
+  background-color: var(--blue);
 }

@@ -7,21 +7,56 @@
   <link rel="stylesheet" href="/public/css/sideBar/newSidebar.css">
   <link rel="stylesheet" href="/public/fontawesome-free-6.5.2-web/css/all.min.css">
   <link rel="stylesheet" href="/public/css/adminPanel/allPatientDetails.css">
-  <title>User Details</title>
-  <style>
-
-  </style>
+  <title>All User Details</title>
 </head>
 
 <body>
 
   <div class="a5-container">
 
-    <div class="a5-sectioin">
+    <div class="a5-sidenav">
+
+      <div class="a5-sidenavupperbox">
+        <div class="a5-profile">
+          <div class="a5-profilephoto">
+            <a href="#"><img src="/public/assets/sideBar/profile-icon-png-898.png" alt="profile"
+                class="a5-profileimage" /></a>
+          </div>
+          <div class="a5-accountname">
+            <p class="a5-username">Admin Name</p>
+            <p class="a5-useremail">admin123@gmail.com</p>
+          </div>
+        </div>
+        <div class="a5-logout">
+          <P class="a5-btn-logout">Log out</P>
+        </div>
+      </div>
+
+      <div class="a5-lists">
+        <div class="a5-list-item">
+          <i class="fa-solid fa-house a5-list-item-img"></i>
+          <a href="#">Dashboard</a>
+        </div>
+        <div class="a5-list-item">
+          <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
+          <a href="#">Doctors</a>
+        </div>
+        <div class="a5-list-item">
+          <i class="fa-solid fa-bed-pulse a5-list-item-img"></i>
+          <a href="#">Patients</a>
+        </div>
+        <div class="a5-list-item">
+          <i class="fa-solid fa-award a5-list-item-img"></i>
+          <a href="#">Add Specialties</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="a5-section">
 
       <div class="a5-search">
         <div class="a5-searchbox">
-          <img src="../../public/image/search.svg" alt="">
+          <img src="/public/assets/adminPanel/icons/search.svg" alt="">
           <input type="text" name="searchUser" id="a5-searchUser" placeholder="Search Patient name">
         </div>
         <p id="a5-btn-search">Search</p>
@@ -29,7 +64,7 @@
 
       <div class="a5-all-user">
 
-        <h3>All Patients</h3>
+        <h2>All Patients</h2>
 
         <div class="a5-user-table">
 
