@@ -40,3 +40,8 @@ form .row .times {
 #generateSlot {
   margin-left: 45%;
 }
+
+.error {
+  color: red;
+  font-size: 14px;
+}
