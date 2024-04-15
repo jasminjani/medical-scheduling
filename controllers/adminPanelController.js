@@ -9,11 +9,9 @@
 // }
 
 // exports.adminPanelControllers = (req, res) => {
-
-//   res.render('pages/adminPanel/adminShowPatient')
-// }
+//   res.render("pages/adminPanel/adminShowPatient");
+// };
 
 exports.adminPanelControllers = (req, res) => {
-
-  res.render('pages/adminPanel/addDocSpecialty')
-}
+  res.render("pages/adminPanel/addDocSpecialty");
+};
