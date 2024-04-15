@@ -68,7 +68,7 @@
 }
 
 .a5-btn-logout:hover {
-  background-color: #585ce5;
+  background-color: #0969da;
   color: #ffffff;
   /* transform: translate(5px); */
   transition: 0.3s;
@@ -102,7 +102,7 @@
 }
 
 .a5-list-item:hover {
-  background-color: #585ce5;
+  background-color: #0969da;
   transform: translate(5px);
   border-radius: 5px;
   transition: 0.3s;
