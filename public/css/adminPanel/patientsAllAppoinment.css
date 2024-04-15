@@ -1,0 +1,179 @@
+:root {
+  --light-blue: #d2ebf9;
+  --brown: #e7e7e7;
+  --blue: #0969da;
+  --white: #ffffff;
+  --black: black;
+  --darkblue: darkblue
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+.a5-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.a5-section {
+  width: 94%;
+  margin: 0 auto;
+  padding-left: 300px;
+}
+
+.a5-patient {
+  margin: 35px auto;
+  display: flex;
+  padding: 35px;
+  border-radius: 25px;
+  background-color: var(--light-blue);
+}
+
+.a5-patient-img>img {
+  height: 250px;
+  width: 250px;
+}
+
+.a5-patient-details {
+  width: 100%;
+}
+
+h1 {
+  text-align: center;
+  box-shadow: 0 3px var(--blue);
+  padding-bottom: 10px;
+}
+
+.a5-patient-more-detail {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 11px;
+}
+
+.a5-details>p {
+  margin: 15px 0;
+}
+
+.a5-bold {
+  font-weight: bold;
+}
+
+.a5-patient-address {
+  width: 70%;
+  margin: auto;
+}
+
+/* code for doctor detail */
+
+.a5-all-doctor {
+  margin: 20px 0;
+}
+
+#a5-doctor-table {
+  border-collapse: collapse;
+  border: 1px solid var(--brown);
+  border-radius: 5px;
+  width: 100%;
+  margin: 15px 0;
+}
+
+td {
+  text-align: center;
+  padding: 8px 0;
+}
+
+th {
+  box-shadow: 0 2px var(--blue);
+  padding: 10px 0;
+  text-align: center;
+}
+
+.a5-btn {
+  height: 33px;
+  width: 100px;
+  border-radius: 3px;
+  background-color: var(--light-blue);
+  padding-top: 8px;
+  cursor: pointer;
+  text-align: center;
+  margin: auto;
+}
+
+.a5-btn:hover {
+  color: var(--white);
+  background-color: var(--blue);
+}
+
+.a5-doctor-section {
+  margin: 35px auto;
+  display: flex;
+  padding: 35px;
+  border-radius: 25px;
+  background-color: var(--light-blue);
+}
+
+h2 {
+  padding-bottom: 8px;
+}
+
+.a5-doctor-card {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.a5-doctor-card>h3 {
+  text-align: center;
+  padding-bottom: 8px;
+  color: var(--darkblue);
+}
+
+.a5-doctor-detail {
+  display: flex;
+  justify-content: space-between;
+}
+
+.a5-doctor-more-detail>p,
+.a5-prescription>p {
+  margin: 10px 0;
+}
+
+/* POPUP CSS */
+
+.a5-popup {
+  display: none;
+  position: fixed;
+  padding: 10px;
+  left: 20%;
+  right: 20%;
+  margin-left: -150px;
+  top: 30%;
+  margin-top: -100px;
+  background: var(--white);
+  z-index: 20;
+}
+
+#a5-popup:after {
+  position: fixed;
+  content: "";
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -2;
+}
+
+#a5-popup:before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: var(--white);
+  z-index: -1;
+}

@@ -1,0 +1,86 @@
+:root {
+  --light-blue: #d2ebf9;
+  --brown: #e7e7e7;
+  --blue: #0969da;
+  --white: #ffffff;
+  --black: black;
+  --darkblue: darkblue
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+.a5-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.a5-section {
+  width: 94%;
+  margin: 0 auto;
+  padding-left: 300px;
+}
+
+.a5-search {
+  margin: 35px auto;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+input {
+  border: none;
+  width: 400px;
+}
+
+#a5-btn-search {
+  height: 40px;
+  width: 100px;
+  border-radius: 3px;
+  background-color: var(--light-blue);
+  padding-top: 11px;
+  margin-left: 13px;
+  cursor: pointer;
+}
+
+.a5-searchbox {
+  border: 1px solid var(--black);
+  display: flex;
+  border-radius: 3px;
+}
+
+.a5-all-user {
+  margin: 20px 0;
+}
+
+#a5-user-table {
+  border: 1px solid var(--black);
+  border-radius: 5px;
+  width: 100%;
+  margin: 15px 0;
+}
+
+td,
+th {
+  text-align: center;
+  padding: 3px 0;
+}
+
+th {
+  box-shadow: 0 3px var(--blue);
+  padding: 10px 0;
+}
+
+.a5-btn {
+  height: 33px;
+  width: 100px;
+  border-radius: 3px;
+  background-color: var(--light-blue);
+  padding-top: 8px;
+  cursor: pointer;
+  margin: auto;
+}
