@@ -5,8 +5,14 @@ let rows = form.getElementsByClassName("row");
 for (let i = 0; i < rows.length; i++) {
   const addButton = rows[i].getElementsByClassName("A3-buttons");
   const times = rows[i].getElementsByClassName("times")[0];
+  const error = rows[i].getElementsByClassName("error")[0];
+  const date = rows[i].getElementsByClassName("date")[0];
   addButton[0].addEventListener("click", (e) => {
-    // if (!times.children[times.children.length - 2].value) 
+    error.innerHTML = "";
+    const d = date.getElementsByTagName("input")[0].value;
+    if (!d) return error.innerHTML = "please select valid date";
+    if (new Date(d) < new Date()) return error.innerHTML = "please select upcoming dates";
+    if (times.children.length > 1 && !times.children[times.children.length - 2].value) return error.innerHTML = "please fill previous slot";
     const newNode = document.createElement("input");
     newNode.setAttribute("type", "text");
     newNode.setAttribute("name", `day${i + 1}`);
