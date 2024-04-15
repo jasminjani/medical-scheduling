@@ -77,12 +77,24 @@ hr {
   gap: 60px;
 }
 
+option {
+  font-size: 20px;
+  text-align: center;
+}
+
 .department, .doctor{
   margin-top: 15px;
-  height: 40px;
+  height: 50px;
   width: 200px;
   text-align: left;
   border-radius: 10px 10px;
+}
+
+#departments, #doctors {
+  /* border: 2px solid #0097e6; */
+  background: none;
+  display: block;
+  border: 2px solid black;
 }
 
 /* .doctor {
@@ -102,6 +114,52 @@ hr {
   gap: 30px;
 }
 
+.date {
+  width: 220px;
+  height: 100px;
+  padding: 10px;
+  /* position: absolute; */
+  /* top: 69%;
+  left: 62.4%; */
+  /* margin-top: 10px; */
+  margin-left: -20px;
+  display: grid;
+  grid-template-columns: auto auto;
+  /* transform: translate(-50%,-50%); */
+  /* background: #191919; */
+  border: none;
+  border-radius: 25px;
+  text-align: center;
+}
+
+.label {
+  width: 100px;
+  height: 30px;
+  text-align: center;
+  margin-top: 8px;
+}
+
+#date {
+  /* border: 2px solid #0097e6; */
+  background: none;
+  display: block;
+  margin: auto auto;
+  padding: 15px 40px;
+  margin-top: -0.01px;
+  border: 2px solid black;
+  /* margin-left: 10px; */
+  width: 200px;
+  /* outline: none; */
+  /* color: white; */
+  border-radius: 10px 10px;
+  text-align: center;
+  transition: 250ms width ease, 250ms border-color ease;
+}
+
+#date:hover{
+  width: 210px;
+}
+
 [type="date"] {
   background: rgb(255, 255, 255);
   border-top-right-radius: 10px;
@@ -111,34 +169,78 @@ hr {
 }
 
 .time {
-  input {
-      height: 30px;
-      width: 80px;
-  }
+  /* padding-top: 100px; */
+  max-width: 800px;
+  display: grid;
+  grid-template-columns: auto auto auto ;
+  grid-template-rows: auto auto auto;
+  row-gap: 10px;
 }
 
-.timer {
+/* input {
+  height: 30px;
+  width: 80px;
+} */
+
+#time1:hover {
+  background-color: #e12454;
+}
+
+#time2:hover {
+  background-color: #e12454;
+}
+
+#time3:hover {
+  background-color: #e12454;
+}
+
+#time4:hover {
+  background-color: #e12454;
+}
+
+#time5:hover {
+  background-color: #e12454;
+}
+
+#time6:hover {
+  background-color: #e12454;
+}
+
+#time7:hover {
+  background-color: #e12454;
+}
+
+#time8:hover {
+  background-color: #e12454;
+}
+
+/* .timer {
   margin-left: 88px;
   margin-top: 10px;
-}
+} */
 
 
 input {
   height: 30px;
-  width: 120px;
+  width: 90px;
   /* border-top-right-radius: 30px;
   border-bottom-right-radius: 30px; */
 }
 
 .submit {
-  margin-left: 200px;
-  background-color: #47bbfa;
+  margin-left: 140px;
+  background-color: #aee3ff;
   /* color: rgb(255, 255, 255); */
   /* border: solid rgb(35, 118, 243); */
   /* height: 42px;
   width: 10px; */
   font-size: 14px;
   font-weight: 600;
+}
+
+.submit:hover {
+  background-color: rgb(41, 41, 255);
+  color: white;
 }
 
 .footer { 

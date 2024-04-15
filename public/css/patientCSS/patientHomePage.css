@@ -65,12 +65,6 @@ p {
   background-color: rgb(227, 248, 255);
 }
 
-.head {
-  /* margin-left: 220px; */
-  margin-top: 60px;
-  text-align: center;
-}
-
 .textHome {
   margin-left: 50px;
   max-width: 900px;
@@ -82,12 +76,61 @@ p {
 .image1 {
   height: 300px;
   max-width: 800px;
-  margin-right: 50px;
+  margin-right: 50px;  
 }
+
+.head {
+  /* margin-left: 220px; */
+  margin-top: 60px;
+  text-align: center;
+}
+
+.doctorDepartment {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto;
+  margin-left: 30px;
+  max-width: 820px;
+  column-gap: 20px;
+}
+
+.doctorDepartment input:hover{
+  background-color: #e12454;
+}
+
+/* #depAll:hover {
+  background-color: #e12454;
+  color: white;
+}
+
+#depCardio:hover {
+  background-color: #e12454;
+  color: white;
+}
+
+#depDental:hover {
+  background-color: #e12454;
+  color: white;
+}
+
+#depNeurology:hover {
+  background-color: #e12454;
+  color: white;
+}
+
+#depMedicine:hover {
+  background-color: #e12454;
+  color: white;
+}
+
+#depPedia:hover {
+  background-color: #e12454;
+  color: white;
+} */
 
 input {
   height: 40px;
   width: 120px;
+  font-weight: 600;
 }
 
 .pics {
