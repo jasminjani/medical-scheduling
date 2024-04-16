@@ -1,3 +1,9 @@
+:root {
+  --light-blue: #b3d3ea;
+  --brown: #e7e7e7;
+  --blue: #0969da;
+  --white: #ffffff;
+}
 .A4-sidenav {
   height: 100%;
   width: 350px;
@@ -10,7 +16,6 @@
   font-family: -apple-system, system-ui, "Segoe UI", "Liberation Sans",
     sans-serif;
 }
-
 
 .A4-profile {
   display: flex;
@@ -47,7 +52,7 @@
 
 /* CSS */
 .A4-logoutBtn {
-  background-color: #b3d3ea;
+  background-color: var(--light-blue);
   border-radius: 3px;
   box-shadow: rgba(255, 255, 255, 0.7) 0 1px 0 0 inset;
   box-sizing: border-box;
@@ -75,8 +80,8 @@
 
 .A4-logoutBtn:hover,
 .A4-logoutBtn:focus {
-  background-color: #9db6c9;
-  color: #264b68;
+  background-color: var(--blue);
+  color: var(--white);
 }
 
 .A4-logoutBtn:focus {
@@ -115,9 +120,7 @@
 
 .A4-sidenavupperbox {
   border-bottom: 1px solid #8080803d;
-  margin: 0 15px;
 }
-
 
 @media screen and (max-height: 450px) {
   .A4-sidenav {
