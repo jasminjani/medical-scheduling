@@ -1,7 +1,12 @@
+:root {
+  --light-blue: #d2ebf9;
+  --brown: #e7e7e7;
+  --blue: #0969da;
+  --white: #ffffff;
+}
+
 * {
   box-sizing: border-box;
-  font-family: -apple-system, system-ui, "Segoe UI", "Liberation Sans",
-  sans-serif;
 }
 
 html {
@@ -16,7 +21,6 @@ body {
 .container {
   max-width: 1280px;
   margin: 0 auto;
-  border: 2px solid black;
   padding: 10px;
   margin-left: 400px;
 }
@@ -25,5 +29,45 @@ body {
   visibility: hidden;
 }
 
+.A3-row-2 table {
+  border: 1px solid var(--brown);
+  border-collapse: collapse;
+  width: 100%;
+}
 
+.A3-row-2 table td,
+th {
+  padding: 10px;
+  text-align: center;
+}
 
+.A3-row-2 table thead th {
+  border-bottom: 2px solid var(--blue);
+}
+
+.A3-row-2 table input[type="button"] {
+  background-color: #b3d3ea;
+  border-radius: 3px;
+  box-shadow: rgba(255, 255, 255, 0.7) 0 1px 0 0 inset;
+  box-sizing: border-box;
+  color: #2c5777;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", "Liberation Sans",
+    sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.15385;
+  margin: 0;
+  outline: none;
+  padding: 8px 0.8em;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+  padding: 10px;
+  border-radius: 5px;
+}
