@@ -68,8 +68,12 @@ form input {
   padding: 6px;
   border-radius: 3px;
   border: 1px solid lightgray;
-  outline: none;
   font-weight: 400;
+}
+
+form input:focus{
+  outline-style: solid;
+  outline-color: #1e84d3;
 }
 
 .date-format{

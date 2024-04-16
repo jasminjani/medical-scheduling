@@ -34,7 +34,7 @@ exports.passportConfig = (passport) => {
 
       // if user present then call next with payload
       if (result.length > 0) {
-        return next(null, payload);
+        return next(null, result[0]);
       } else {
         // if user not present then call next with empty data
         return next(null, false);
