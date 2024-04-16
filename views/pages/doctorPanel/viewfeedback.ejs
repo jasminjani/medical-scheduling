@@ -4,18 +4,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="/css/doctorPanel/dashboard.css">
   <link rel="stylesheet" href="/css/doctorPanel/viewfeedback.css">
+  <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
   <title>view Feedback</title>
 </head>
 
 <body>
 
- 
-
-  <div class="a7-appointment-tbl">
+<div class="a7-container">
+  <%- include('../../common/newSidebar/doctorSidebar.ejs') %>
+  <div class="a7-appointment-tbl a7-mr-300">
 
     <div class="a7-feedback-table-row">
+      <div class="search-box"><input type="text" name="search" id="search"><i class="fa fa-search" aria-hidden="true"></i>
+</div>
       <div class="a7-feedback-title">
         <div>View Feedback</div>
       </div>
@@ -27,30 +33,29 @@
           <td><span>Message</span></td>
           <td><span>Date</span></td>
         </tr>
-
-        <tr class="a7-feedback-table-data" id="rowdata">
-        
-        </tr>
-       
-        
+        <!-- fetch data database -->
+        <tr class="a7-feedback-table-data" id="rowdata"></tr>
       </table>
-    </div></div>
-    <script src="/javascript/doctorPanel/urlPath.js"></script>
-    <script>
-        const fetchDataFun = async()=>{
+    </div>
+  </div>
+  </div>
+  <script src="/javascript/doctorPanel/urlPath.js"></script>
+  <script src="/javascript/doctorPanel/sidebar.js"></script>
+  <script>
+    const fetchDataFun = async () => {
 
-          let fetchdata = await fetch(`http://localhost:8000/reviews/${Id}`) 
-          let data = await fetchdata.json()
-        console.log(data);
-          let key = Object.keys(data[0])
-          key.forEach(element => {
-              let tddata = document.createElement("td")
-              tddata.innerHTML = data[0][element]
-              document.getElementById("rowdata").append(tddata)
-          });
-        }
-
-        fetchDataFun()
-    </script>
+      let fetchdata = await fetch(`http://localhost:8000/reviews`)
+      let data = await fetchdata.json()
+      console.log(data);
+      let key = Object.keys(data[0])
+      key.forEach(element => {
+        let tddata = document.createElement("td")
+        tddata.innerHTML = data[0][element]
+        document.getElementById("rowdata").append(tddata)
+      });
+    }
+    fetchDataFun()
+  </script>
 </body>
+
 </html>
