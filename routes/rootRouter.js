@@ -18,6 +18,6 @@ router.use('/', nearByDoctorsRouter);
 router.use('/',adminRouter);
 
 
-router.get('/', demoHomeController);
+router.get('/demo', demoHomeController);
 
 module.exports = router;

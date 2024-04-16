@@ -190,7 +190,7 @@ exports.getDates = async (req, res) => {
 
     try {
 
-      const query = 'SELECT DISTINCT date as dates from time_slots where date > CAST(NOW() as DATE) order by dates limit 7';
+      const query = 'SELECT DISTINCT date as dates,DAYNAME(date) as day from time_slots where doctor_id = ? and is_deleted = ? and date > CAST(NOW() as DATE) order by dates limit 7';
 
       const [data] = await conn.query(query, [doctor_id, 0]);
 
