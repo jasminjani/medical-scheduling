@@ -4,25 +4,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./css/dashboard.css">
-  <link rel="stylesheet" href="./css/viewfeedback.css">
-  <title>view Feedback</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/css/doctorPanel/dashboard.css">
+  <link rel="stylesheet" href="/css/doctorPanel/viewfeedback.css">
+  <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
+  <title>view Patient History</title>
 </head>
 
 <body>
 
+
   <div class="a7-container">
-
-    <div class="a7-header">
-      <div class="a7-logo"><img src="./assets/logo1.png" alt=""></div>
-      <div class="a7-doctor-banner">
-        <h1>Welcome Dr name</h1>
-      </div>
-      <div class="a7-profile"><a href="./profile.html"><img src="./assets/profile.png" alt=""></a></div>
-    </div>
-  </div>
-
-  <div class="a7-appointment-tbl">
+      <%- include('../../common/newSidebar/doctorSidebar.ejs') %>
+  <div class="a7-appointment-tbl a7-mr-300">
 
     <div class="a7-feedback-table-row">
       <div class="a7-feedback-title">
@@ -30,46 +26,51 @@
       </div>
       <table>
 
-        <tr class="a7-feedback-table-header">
-          <td><span>Firstname</span> </td>
-          <td><span>Lastname</span></td>
-          <td><span>Email</span></td>
-          <td><span>Gender</span></td>
-          <td><span>Date of Birth</span></td>
+        <tr class="a7-feedback-table-header" >
+          <td><span>Name</span> </td>
+          <td><span>Gender</span></td>         
           <td><span>Contact</span></td>
+          <td><span>Appointment Date</span></td>
+          <td><span>Appointment Time</span></td>
           <td><span>More Details</span></td>
         </tr>
-
-        <tr class="a7-feedback-table-data">
-          <td><span>Yash</span> </td>
-          <td><span> Babaria</span> </td>
-          <td><span>yash@gmail.com</span> </td>
-          <td><span>male </span> </td>
-          <td> <span>2024-04-01</span></td>
-          <td><span>9898802790</span> </td>
-          <td > <a href="" class="a7-view-btn" >View More</a> </td>
-        </tr>
-        <tr class="a7-feedback-table-data">
-          <td><span>Yash</span> </td>
-          <td><span> Babaria</span> </td>
-          <td><span>yash@gmail.com</span> </td>
-          <td><span>male </span> </td>
-          <td> <span>2024-04-01</span></td>
-          <td><span>9898802790</span> </td>
-          <td > <a href="" class="a7-view-btn">View More</a> </td>
-        </tr>
-        <tr class="a7-feedback-table-data">
-          <td><span>Yash</span> </td>
-          <td><span> Babaria</span> </td>
-          <td><span>yash@gmail.com</span> </td>
-          <td><span>male </span> </td>
-          <td> <span>2024-04-01</span></td>
-          <td><span>9898802790</span> </td>
-          <td > <a href="" class="a7-view-btn">View More</a> </td>
-        </tr>
+      <!-- Fetch data database -->
+        <tr class="a7-feedback-table-data" id="rowdata"> </tr>
+  
       </table>
     </div>
     </div>
+    </div>
+    <script src="/javascript/doctorPanel/urlPath.js"></script>
+    <script src="/javascript/doctorPanel/sidebar.js"></script>
+    <script>
+   
+        const fetchData = async()=>{
+          let fetchdata = await fetch(`http://localhost:8000/getPatientData/`)
+          let data = await fetchdata.json()
+          let key = Object.keys(data[0])
+          let pat 
+          key.forEach(element => {
+
+              if(element == 'patient_id'){
+                pat = data[0][element]
+                document.getElementById("rowdata").innerHTML += `<td hidden><span>${data[0][element]}</span></td>`
+               
+              }
+              else
+              {
+              let tddata = document.createElement("td")
+              let span = document.createElement("span")
+              span.textContent = data[0][element]
+              tddata.append(span)
+              document.getElementById("rowdata").append(tddata)
+              }
+            });
+             document.getElementById("rowdata").innerHTML += `<td> <a href='http://localhost:8000/viewPatientHistory/${pat}' class="a7-view-btn"  >View More</a>  </td>`
+           
+        }
+        fetchData()
+    </script>
 </body>
 
 </html>
