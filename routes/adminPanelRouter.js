@@ -1,6 +1,8 @@
 const express = require('express')
 const { adminPanelControllers } = require('../controllers/adminPanelController');
 const { getSpecialties, deleteSpecialty, getNewSpecialties, addNewSpecialties } = require('../controllers/adminGetSpecialtiesController');
+const { displayAllPatient, searchPatientByName } = require('../controllers/adminPanelPatientController');
+const { patientAllAppointment } = require('../controllers/patientAllAppointController');
 const { pendingDoctos, individualDoctor, approveDoctor, rejectDoctor, getAllDoctors, deleteDoctor } = require('../controllers/adminApproveDoc');
 const adminRouter = express.Router()
 
@@ -21,6 +23,9 @@ adminRouter.route('/approve-doctor/:id').get(approveDoctor);
 adminRouter.route('/reject-doctor/:id').get(rejectDoctor);
 
 
+adminRouter.route('/admin/all-patient').get(displayAllPatient);
+adminRouter.route('/admin/display-search-patient/:searchedName').get(searchPatientByName);
+adminRouter.route('/admin/patient-appointment/:patient_id').get(patientAllAppointment);
 // all doctor list in admin panel
 adminRouter.route('/get-all-doctors').get(getAllDoctors);
 adminRouter.route('/delete-doctor/:id').get(deleteDoctor);
