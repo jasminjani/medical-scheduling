@@ -134,6 +134,7 @@ exports.createUser = async (req, res) => {
     let verification_token = crypto.randomUUID();
 
     // make query for insert the data
+
     let sql =
       "insert into users (fname,lname,email,dob,gender,phone,password,city,address,role_id,activation_token) values (?)";
 
@@ -161,6 +162,20 @@ exports.createUser = async (req, res) => {
         message: "Internal server Error",
       });
     }
+
+
+    try {
+      let sql = "insert into profile_pictures (profile_picture,user_id) values (?)";
+      await conn.query(sql,[[profile,result.insertId]])
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error: error.message,
+        message: "Internal server Error",
+      });
+    }
+
+
 
     // data inserted
     if (!result.affectedRows) {
