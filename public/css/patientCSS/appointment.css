@@ -160,13 +160,13 @@ option {
   width: 210px;
 }
 
-[type="date"] {
+/* [type="date"] {
   background: rgb(255, 255, 255);
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
-}
+} */
 
 .time {
   /* padding-top: 100px; */
@@ -181,8 +181,11 @@ option {
   height: 30px;
   width: 80px;
 } */
+.time input:hover {
+  background-color: #e12454;
+}
 
-#time1:hover {
+/* #time1:hover {
   background-color: #e12454;
 }
 
@@ -212,7 +215,7 @@ option {
 
 #time8:hover {
   background-color: #e12454;
-}
+} */
 
 /* .timer {
   margin-left: 88px;
