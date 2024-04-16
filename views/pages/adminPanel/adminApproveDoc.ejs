@@ -25,7 +25,7 @@
 
         <h2 class="a2-approve-h2">Approve new Doctors</h2>
 
-        <h4 class="a2-approve-h4">All Doctors (8) </h4>
+        <h4 class="a2-approve-h4">All Doctors <span id="total-pending-doc"></span></h4>
 
         <table class="a2-approve-table">
           <tr class="approve-tbl-head">
@@ -33,93 +33,50 @@
               <th>ID</th>
               <th>Doctor Name</th>
               <th>Email</th>
-              <th>Specialties</th>
+              <th>qualification</th>
               <th>Status</th>
             </div>
           </tr>
 
-          <tbody>
-            <tr>
-              <td>1.</td>
-              <td>ABC</td>
-              <td>abc@abc.com</td>
-              <td>neurologists</td>
-              <td>
-                <p class="a2-btn">Approve</p>
-              </td>
-            </tr>
-            <tr>
-              <td>1.</td>
-              <td>ABC</td>
-              <td>abc@abc.com</td>
-              <td>neurologists</td>
-              <td>
-                <p class="a2-btn">Approve</p>
-              </td>
-            </tr>
-            <tr>
-              <td>1.</td>
-              <td>ABC</td>
-              <td>abc@abc.com</td>
-              <td>neurologists</td>
-              <td>
-                <p class="a2-btn">Approve</p>
-              </td>
-            </tr>
-            <tr>
-              <td>1.</td>
-              <td>ABC</td>
-              <td>abc@abc.com</td>
-              <td>neurologists</td>
-              <td>
-                <p class="a2-btn">Approve</p>
-              </td>
-            </tr>
-            <tr>
-              <td>1.</td>
-              <td>ABC</td>
-              <td>abc@abc.com</td>
-              <td>neurologists</td>
-              <td>
-                <p class="a2-btn">Approve</p>
-              </td>
-            </tr>
-            <tr>
-              <td>1.</td>
-              <td>ABC</td>
-              <td>abc@abc.com</td>
-              <td>neurologists</td>
-              <td>
-                <p class="a2-btn">Approve</p>
-              </td>
-            </tr>
-            <tr>
-              <td>1.</td>
-              <td>ABC</td>
-              <td>abc@abc.com</td>
-              <td>neurologists</td>
-              <td>
-                <p class="a2-btn">Approve</p>
-              </td>
-            </tr>
-            <tr>
-              <td>1.</td>
-              <td>ABC</td>
-              <td>abc@abc.com</td>
-              <td>neurologists</td>
-              <td>
-                <p class="a2-btn">Approve</p>
-              </td>
-            </tr>
-
-          </tbody>
-
+          <tbody id="approve-tbl-body"></tbody>
 
         </table>
 
       </div>
     </div>
 
+
+    <script>
+
+      async function getPendingDoc() {
+
+        let resp = await fetch('/get-pending-doctor');
+
+        let allPendingDoctors = await resp.json();
+        document.getElementById('total-pending-doc').innerHTML = `(${allPendingDoctors.length})`
+
+
+        const tbody = document.getElementById('approve-tbl-body');
+        allPendingDoctors.forEach(doc => {
+
+          let str = `<tr>
+            <td>${doc.id}</td>
+            <td>${doc.doctor_name}</td>
+            <td>${doc.email}</td>
+            <td>${doc.qualification}</td>
+            <td class="a2-btn" onclick="approveDoc(${doc.id})">Approve</td>
+          </tr>`;
+
+          tbody.innerHTML += str
+        });
+      }
+
+      getPendingDoc()
+
+      async function approveDoc(id) {
+        location.href =`/individual-doctor/${id}`;
+      }
+    </script>
 </body>
 
 </html>

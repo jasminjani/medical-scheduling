@@ -7,9 +7,10 @@ const {
   generatePDF,
   updatePrescription,
   updateDetails,
+  showDetails,
 } = require("../controllers/prescriptionController");
 
-router.route("/createprescription/").post(createPrescription);
+router.route("/createprescription").post(createPrescription);
 
 // router.route("/updatedetails/:patient_id").get(updateDetails);
 
@@ -22,5 +23,7 @@ router
   .get(getPrescriptionOfDoctor);
 
 router.route("/generatePDFofprescripton").get(generatePDF);
+
+router.route("/createprescription").get(showDetails);
 
 module.exports = router;

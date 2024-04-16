@@ -1,0 +1,143 @@
+:root {
+  --primarycolor: #0A76D8;
+  --primarycolorhover: #006dd3;
+  --btnice: #D8EBFA;
+  --btnnicetext: #1b62b3;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* container css */
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+
+/* header section */
+
+.header {
+  padding: 10px 0;
+  box-shadow: 0 0 10px black;
+}
+
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo{
+  width: 50px;
+  height: 50px;
+  border: 1px solid rgb(187, 187, 187);
+  border-radius: 50%;
+} 
+
+.logo a img{
+  border-radius: 50%;
+  width: 100%;
+  /* height: 100%; */
+}
+
+.nav-items ul {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-items ul li {
+  list-style-type: none;
+}
+
+.nav-items ul li a {
+  text-decoration: none;
+  color: #1d4868;
+}
+
+
+.nav-items ul li button {
+  color: #1565D8;
+  background-color: #ffffff;
+  padding: 8px 10px;
+  border-radius: 5px;
+  border: 1px solid #1565D8;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.nav-items ul li button:hover {
+  color: #ffffff;
+  background-color: #1565D8;
+}
+
+/* main content */
+
+#main {
+  margin: 50px 0;
+}
+
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 -15px;
+  flex-wrap: wrap;
+}
+
+.hero-right {
+  max-width: 500px;
+  margin: 0 auto;
+  width: 100%;
+  object-fit: cover;
+}
+
+.hero-right  img {
+  max-width: 500px;
+  transform: scaleX(-1);
+  width: 100%;
+}
+
+
+.hero-left {
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
+}
+
+.hero-title {
+  font-size: 40px;
+  color: #183B56;
+  line-height: 3rem;
+}
+
+.hero-subtitle {
+  font-size: 16px;
+  line-height: 1.7rem;
+  color: #183B56;
+}
+
+
+.hero-left .btn {
+  background-color: #1565D8;
+  text-decoration: none;
+  border: none;
+  color: #ffffff;
+  padding: 17px 27px;
+  font-weight: bold;
+  font-size: 17px;
+  border-radius: 5px;
+}

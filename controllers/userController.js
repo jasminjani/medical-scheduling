@@ -4,24 +4,50 @@ const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 dotenv.config();
 
-// get => /register
-exports.getCreateUserForm = async (req,res)=>{
+// city combo
+const generateCityCombo = async () => {
+  let [result] = await conn.query("select * from cities order by city");
+
+  if (!result.length) {
+    let html = "";
+    return html;
+  }
+
+  let html = `<option value="">--Select State--</option>`;
+
+  result.forEach((value) => {
+    html += `<option value="${value.city}">${value.city} </option>`;
+  });
+
+  return html;
+};
+
+exports.homePage = async(req,res)=>{
   try {
-    return res.render('./pages/auth/register')
+    return res.render('./common/homepage')
   } catch (error) {
-    console.log(error.message)
+    console.log(error.message);
   }
 }
 
 // get => /register
-exports.getLoginForm = async (req,res)=>{
+exports.getCreateUserForm = async (req, res) => {
   try {
-    return res.render('./pages/auth/login')
+    let html = await generateCityCombo();
+    return res.render("./pages/auth/register", { html });
   } catch (error) {
-    console.log(error.message)
+    console.log(error.message);
   }
-}
+};
 
+// get => /register
+exports.getLoginForm = async (req, res) => {
+  try {
+    return res.render("./pages/auth/login");
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 
 // post => /register
 exports.createUser = async (req, res) => {
@@ -95,8 +121,6 @@ exports.createUser = async (req, res) => {
 
     // generate hashpassword
     let hashPassword;
-    let random_salt = Math.random().toString(36).substring(2, 6);
-    password += random_salt;
     try {
       let bcryptsalt = await bcrypt.genSaltSync(10);
       hashPassword = await bcrypt.hash(password, bcryptsalt);
@@ -111,7 +135,7 @@ exports.createUser = async (req, res) => {
 
     // make query for insert the data
     let sql =
-      "insert into users (fname,lname,email,dob,gender,phone,password,salt,city,address,role_id,activation_token,profile) values (?)";
+      "insert into users (fname,lname,email,dob,gender,phone,password,city,address,role_id,activation_token) values (?)";
 
     // execute the query
     try {
@@ -124,12 +148,10 @@ exports.createUser = async (req, res) => {
           gender,
           phone,
           hashPassword,
-          random_salt,
           city,
           address,
           1, // default role is patient so role_id = 1
           verification_token,
-          profile,
         ],
       ]);
     } catch (error) {
@@ -211,8 +233,7 @@ exports.login = async (req, res) => {
 
     // user found the verify DB password with entered password
     let hashPassword = result[0].password;
-    let newPassword = password + result[0].salt;
-    if (await bcrypt.compare(newPassword, hashPassword)) {
+    if (await bcrypt.compare(password, hashPassword)) {
       // both are same
 
       //if db password and user's password matched then put the entry in login_attempts as accept
@@ -442,40 +463,47 @@ exports.activationForm = async (req, res) => {
 
 exports.activationAccount = async (req, res) => {
   try {
-    let token = req.query.token;
+    let token = req.query.activationKey;
     let email = req.query.email;
 
     let result;
     try {
-      let sql = "select * from users where email=? and activation_token=?";
+      let sql =
+        "select * from users where email=? and activation_token=? and is_active=0";
       [result] = await conn.query(sql, [email, token]);
     } catch (error) {
       return res.status(500).json({
-        success: false,
+        success: "false",
         message: error.message,
       });
     }
 
     if (result.length <= 0) {
-      let html = `<div class="active-button">
-                            <p>Token is invalid or expired!</p>
-                        </div>`;
-      return res.render("login-registration/activationForm", { html });
+      let html = ` <div class="success-page">
+                  <div>
+                    <img src="/assets/linkExpire.png" alt="Verification link has been expired!">
+                  </div>
+                  </div>`;
+      return res.render("./pages/auth/activationForm", { html });
     }
 
     let diff = new Date(Date.now()) - new Date(result[0].token_created_at);
     let mins = Math.floor((diff % 86400000) / 60000); // minutes
 
-    if (mins > 30 && result[0].isActivated == false) {
-      let html = `<div class="active-button">
-                            <p>Verification link has been expired!, <a href="" id="generate-token">click here</a> to Generate new link!</p>
-                            <input type="hidden" id="active-account">
-                        </div>`;
-      return res.render("login-registration/activationForm", { html });
+    if (mins > 30) {
+      let html = ` <div class="success-page">
+      <div>
+        <img src="/assets/linkExpire.png" alt="Verification link has been expired!">
+      </div>
+      <p class="btn-size"><a href="" class="btn-text" id="generate-token">Generate new link</a></p>
+  
+      <input type="hidden" id="active-account">
+    </div>`;
+      return res.render("./pages/auth/activationForm", { html });
     }
 
     try {
-      let sql = "update users set isActivated=true where email=?";
+      let sql = "update users set is_active=true where email=?";
       [result] = await conn.query(sql, [email]);
     } catch (error) {
       return res.status(500).json({
@@ -484,12 +512,14 @@ exports.activationAccount = async (req, res) => {
       });
     }
 
-    let html = `<div class="active-button">
-                            <h4>Hurray</h4>
-                            <p>Your Account is Activated!</p>
-                            <a href="http://localhost:8000/media/login">Go to Login</a>
-                        </div>`;
-    return res.render("login-registration/activationForm", { html });
+    let html = `<div class="success-page">
+    <div>
+      <img class="img" src="/assets/activationLinkSuccess.gif" alt="Hurray">
+    </div>
+    <p class="text-font">Your Account is Activated!</p>
+    <p class="btn-size"><a class="btn-text" href="/login">Go to Login</a></p>
+  </div>`;
+    return res.render("./pages/auth/activationForm", { html });
   } catch (error) {
     res.status(500).json({
       success: false,

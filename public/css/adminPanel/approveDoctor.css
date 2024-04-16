@@ -1,0 +1,112 @@
+:root {
+  --blue: #0167ce;
+  --white: #ffffff;
+}
+
+.A4-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  font-family: sans-serif;
+}
+
+.A4-main {
+  display: block;
+  padding-left: 350px;
+}
+
+.A4-title {
+  padding: 55px 418px;
+
+  h1 {
+    /* text-align: center; */
+    font-size: 30px;
+  }
+}
+
+.A4-Content {
+  padding: 0px 211px;
+  font-size: 20px;
+
+  table,
+  tr,
+  th,
+  td {
+    border-radius: 5px;
+    padding: 5px;
+  }
+
+  td {
+    height: 40px;
+    word-wrap: anywhere;
+  }
+}
+
+#A4-table-title {
+  width: 200px;
+  background-color: rgb(219, 236, 250);
+}
+
+table {
+  background-color: aliceblue;
+}
+
+.A4-clinic-deatils-button {
+  padding: 65px 439px;
+}
+
+.A4-clinic-deatils-btn {
+  height: 50px;
+  width: 211px;
+  font-size: 16px;
+  background-color: var(--blue);
+  color: var(--white);
+  border-radius: 7px;
+}
+
+.A4-clinic-deatils-btn:hover {
+  background-color: #085097;
+}
+
+.A4-clinic-details-content {
+  display: none;
+  padding: 0px 211px;
+  font-size: 20px;
+
+  table,
+  tr,
+  th,
+  td {
+    border-radius: 5px;
+    padding: 5px;
+  }
+
+  td {
+    height: 40px;
+    word-wrap: anywhere;
+  }
+}
+
+.A4-approve-reject-btns {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 70px;
+  margin-left: -350px;
+  margin-bottom: 70px;
+}
+
+.A4-approve-doctor-btn {
+  height: 45px;
+  width: 163px;
+  background-color: rgb(2, 104, 2);
+  font-size: 16px;
+  color: var(--white);
+}
+
+.A4-reject-doctor-btn {
+  height: 45px;
+  width: 163px;
+  background-color: rgb(212, 7, 7);
+  font-size: 16px;
+  color: var(--white);
+}

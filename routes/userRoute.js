@@ -7,17 +7,44 @@ const multer = require("multer");
 const imgUpload = multer({ storage: imgStorage });
 const fileUpload = multer({ storage: fileStorage });
 
-const { createUser, login, getAllUser, logout, getUserById, deleteUser, generateToken, createUserForm, getCreateUserForm, getLoginForm, activationForm } = require("../controllers/userController");
+const { createUser, login, getAllUser, logout, getUserById, deleteUser, generateToken, createUserForm, getCreateUserForm, getLoginForm, activationForm, activationAccount, getCurrentUser, homePage } = require("../controllers/userController");
 const passport = require('passport');
 
-router.route('/register').get(getCreateUserForm).post(imgUpload.single('profile'), createUser)
-router.route('/users').get(passport.authenticate('jwt', { session: false }), getAllUser)
-router.route('/login').get(getLoginForm).post(login)
-router.route('/logout').post(logout)
-router.route('/user/:id').post(getUserById)
-router.route('/user/:id').delete(deleteUser)
-router.route('/generateToken').post(generateToken)
-router.route('/account-activation').get(activationForm)
+router.route("/")
+.get(homePage)
+
+router.route('/register')
+.get(getCreateUserForm)
+.post(imgUpload.single('profile'), createUser)
+
+router.route('/users')
+.get(passport.authenticate('jwt', { session: false }), getAllUser)
+
+router.route('/login')
+.get(getLoginForm)
+.post(login)
+
+router.route('/current-user')
+.get(passport.authenticate('jwt',{session:false,failureRedirect:"/login"}),getCurrentUser)
+
+router.route('/logout')
+.post(logout)
+
+router.route('/user/:id')
+.post(getUserById)
+
+router.route('/user/:id')
+.delete(deleteUser)
+
+router.route('/generateToken')
+.post(generateToken)
+
+router.route('/account-activation')
+.get(activationForm)
+
+router.route('/activate')
+.get(activationAccount)
+
 
 
 
