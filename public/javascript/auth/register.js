@@ -227,7 +227,7 @@ submit.addEventListener("click", async (e) => {
       });
 
       data = await data.json();
-      console.log(data)
+      console.log(data.user)
       if (data?.success) {
         let activelink = document.getElementsByClassName("active-link");
         for (let i = 0; i < activelink.length; i++) {
