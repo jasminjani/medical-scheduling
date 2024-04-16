@@ -5,12 +5,12 @@
   <div class="a5-sidenavupperbox">
     <div class="a5-profile">
       <div class="a5-profilephoto">
-        <a href="" id="a5-viewprofile"><img src="assets/sideBar/profile-icon-png-898.png" alt="profile"
-            class="a5-profileimage" /></a>
+        <a href="" id="viewprofile"><img src="" alt="profile"
+            class="a5-profileimage" id="profile"/></a>
       </div>
       <div class="a5-accountname">
-        <p class="a5-username" id="name">Doctor Name</p>
-        <p class="a5-useremail" id="email">doctor123@gmail.com</p>
+        <p class="a5-username" id="name"></p>
+        <p class="a5-useremail" id="email"></p>
       </div>
     </div>
     <div class="a5-logout">
@@ -21,11 +21,11 @@
   <div class="a5-lists">
     <div class="a5-list-item">
       <i class="fa-solid fa-house a5-list-item-img"></i>
-      <a href="" id="a5-viewdashboard">Dashboard</a>
+      <a href="" id="viewdashboard">Dashboard</a>
     </div>
     <div class="a5-list-item">
       <i class="fa-solid fa-calendar-days a5-list-item-img"></i>
-      <a href="#">Schedule</a>
+      <a href="">Schedule</a>
     </div>
     <div class="a5-list-item">
       <i class="fa-solid fa-bed-pulse a5-list-item-img"></i>
@@ -33,26 +33,34 @@
     </div>
     <div class="a5-list-item">
       <i class="fa-regular fa-credit-card a5-list-item-img"></i>
-      <a href="#">Payment History</a>
+      <a href="" id="paymenthistory">Payment History</a>
+    </div>
+    <div class="a5-list-item">
+      <i class="fa fa-comments" ></i>
+      <a href="" id="viewfeedback">Feedback</a>
     </div>
   </div>
 </div>
+   
 
-
-
-<!-- <script>
-  const fetchSideBarDetails = async () => {
-    let fetchData = await fetch(`http://localhost:8000/doctorSideBarDetail/4`)
+<script>
+  async function fetchSideBarDetails() {
+   
+    let fetchData = await fetch(`http://localhost:8000/doctorSideBarDetail/`)
     let data = await fetchData.json()
-    console.log(data);
     let key = Object.keys(data[0])
     key.forEach(element => {
-      console.log(key);
-      document.getElementById(element).innerHTML = data[0][element]
+      // if (element == 'profile') {
+      //   document.getElementById("profile").src = `/uploads/imgs/${data[0][element]}`
+      // }
+      // else {
+        document.getElementById(element).innerHTML = data[0][element]
+      // }
     });
   }
   fetchSideBarDetails()
-</script> -->
+</script>
+
 
 
 

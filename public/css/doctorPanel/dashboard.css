@@ -19,7 +19,7 @@
 
 .a7-right-bar {
   width: 70%;
-  margin-left: 350px;
+  margin-left: 300px;
 }
 
 .a7-main {
@@ -39,7 +39,6 @@
   display: flex;
   align-items: center;
   padding: 35px;
-  border-radius: 25px 0px 0px 0px;
   background-color: #f4f7f8;
   gap: 20px;
 }
@@ -55,7 +54,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
- 
 }
 
 .a7-table-row {
@@ -145,7 +143,6 @@ border-radius: 0px 0px 0px 25px;
 
 
 .a7-header {
-
   display: flex;
   background-color: #ffffff;
   align-items: center;
@@ -159,7 +156,6 @@ border-radius: 0px 0px 0px 25px;
   width: 100%;
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   justify-content: space-between;
   padding: 25px;
   background-color: #ffffff;
@@ -190,6 +186,10 @@ border-radius: 0px 0px 0px 25px;
 
 .a7-text-content-se6 p{
   font-size: 15px;
+}
+
+.a7-mr-300 {
+  margin-left: 300px;
 }
 
 /* .footer-header{
@@ -257,3 +257,4 @@ border-radius: 0px 0px 0px 25px;
 .right-side-footer{
   width: 40%;
 } */
+
