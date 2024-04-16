@@ -41,8 +41,8 @@
                     <input type="text" name="lname" id="" class="a7-form-input" value="" />
                   </div>
                   <div class="a7-field-inp">
-                    <label for="">Email:</label>
-                    <input type="text" name="email" id="" class="a7-form-input" value="" disabled/>
+                    <!-- <label for="">Email:</label> -->
+                    <input type="text" name="email" id="" class="a7-form-input" value="" hidden/>
                   </div>
 
                   <div>
@@ -71,9 +71,7 @@
                   <div class="a7-field-inp">
                     <label for="">Speciality:</label>
                     <select name="speciality" id="speciality">
-                      <option value="select">select</option>
-                    
-                      <option value="Anesthesiologists">Anesthesiologists</option>
+                      <option value="123" >--Select Speciality--</option>   
                     </select>
                   </div>
                   <div class="a7-field-inp">
@@ -95,8 +93,11 @@
                   </div>
                   <div class="a7-field-inp">
                     <label for="">City:</label>
-                    <input type="text" name="city" id="" class="a7-form-input" value="" />
+                    <select name="city" id="city">
+                      <option value="">--Select City--</option>
+                    </select>
                   </div>
+                  
                   <div class="a7-field-inp">
                     <label for="">Pincode:</label>
                     <input type="text" name="pincode" id="" class="a7-form-input" value="" />
@@ -115,16 +116,10 @@
     </div>
   </div>
   </div>
-
-    
-
-
-  <script src="/javascript/doctorPanel/fetchSpeciality.js"></script>
+<script src="/javascript/doctorPanel/fetchSpeciality.js"></script>
+<script src="/javascript/doctorPanel/urlPath.js"></script>
   <script>
 
-
-  let baseUrl = (window.location).href;
-  let Id = baseUrl.substring(baseUrl.lastIndexOf('/') + 1);
       document.getElementById('viewprofile').href =`http://localhost:8000/doctorProfile/${Id}`
     const fetchData = async () => {      
       let fetchdata = await fetch(`http://localhost:8000/updateDoctorData/${Id}`)
@@ -143,15 +138,14 @@
           });
         }
         else {
-          document.getElementsByName(element)[0].value = data[0][element]
+          let a = document.getElementsByName(element)[0].value = data[0][element]
+          console.log(a);
         }
       });
     }
-
     fetchData()
-
- 
   </script>
+  
 </body>
 
 </html>

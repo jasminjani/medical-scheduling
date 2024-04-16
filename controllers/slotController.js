@@ -145,17 +145,50 @@ exports.bookingSlot = async (req, res) => {
   }
 }
 
-// Doctors can get all upcoming slots
-exports.getAllSlots = async (req, res) => {
+// Slot Page Render
+exports.getSlotsPage = async (req, res) => {
+  try {
+    res.render("pages/slotPanel/upcomingSlots");
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+}
+
+// Get All Dates
+exports.getDates = async (req, res) => {
   try {
 
     const { doctor_id } = req.params;
 
     try {
 
-      const query = 'select * from time_slots where doctor_id = ? and date > CAST(NOW() as DATE)';
+      const query = 'SELECT DISTINCT date as dates from time_slots where date > CAST(NOW() as DATE) order by dates limit 7';
 
-      const [data] = await conn.query(query, [doctor_id]);
+      const [data] = await conn.query(query, [doctor_id, 0]);
+
+      return res.status(200).json({ success: true, message: data });
+
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ success: false, message: error.message });
+    }
+
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+}
+
+// Doctors can get all upcoming slots
+exports.getAllSlots = async (req, res) => {
+  try {
+
+    const { doctor_id, date } = req.params;
+
+    try {
+
+      const query = 'SELECT time_slots.id,time_slots.date,time_slots.start_time,time_slots.end_time,users.fname as patient_name,users.phone FROM time_slots left join slot_bookings on time_slots.id = slot_bookings.slot_id left join users on slot_bookings.patient_id = users.id where time_slots.doctor_id = ? and time_slots.date > CAST(NOW() as DATE) and time_slots.is_deleted=? and date = ? order by time_slots.date';
+
+      const [data] = await conn.query(query, [doctor_id, 0, date]);
 
       return res.status(200).json({ success: true, message: data });
 
@@ -219,7 +252,8 @@ exports.deleteSlot = async (req, res) => {
 
       const [refunded] = await conn.query(query, [1, slot_id]);
 
-      return res.status(200).json({ success: true, message: "slot deleted successfully" });
+      // return res.status(200).json({ success: true, message: "slot deleted successfully" });
+      res.redirect("/upcomingSlots");
 
     } catch (error) {
       console.log(error);

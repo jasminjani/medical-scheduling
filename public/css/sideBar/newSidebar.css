@@ -1,0 +1,129 @@
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+.a5-sidenav {
+  height: 100%;
+  width: 300px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  border-right: 1px solid #8080803d;
+  /* font-family: -apple-system, system-ui, "Segoe UI", "Liberation Sans", sans-serif; */
+}
+
+.a5-profile {
+  display: flex;
+  gap: 15px;
+  padding-top: 25px;
+  padding-left: 17px;
+}
+
+.a5-profileimage {
+  height: 80px;
+  width: 76px;
+  border-radius: 50px;
+  background-color: #c8c6c6;
+}
+
+.a5-profilephoto {
+  padding-top: 20px;
+}
+
+.a5-accountname {
+  word-wrap: break-word;
+  width: 70%;
+  padding: 14px 0px;
+}
+
+.a5-username {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.a5-useremail {
+  margin-top: 10px;
+  font-size: 15px;
+}
+
+.a5-logout {
+  margin-bottom: 20px;
+  margin-top: 13px;
+}
+
+.a5-btn-logout {
+  height: 40px;
+  width: 150px;
+  border-radius: 4px;
+  background-color: #d7ebf9;
+  padding-top: 9px;
+  cursor: pointer;
+  text-align: center;
+  margin: 10px auto;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.a5-btn-logout:hover {
+  background-color: #0969da;
+  color: #ffffff;
+  /* transform: translate(5px); */
+  transition: 0.3s;
+}
+
+.a5-lists {
+  margin-top: 6px;
+  margin-left: 6px;
+}
+
+.a5-list-item {
+  display: flex;
+  padding: 0 20px;
+  margin: 2px 0;
+  margin-right: 17px;
+  transition: 0.3s;
+}
+
+.a5-list-item-img {
+  color: black;
+  margin-top: 13px;
+}
+
+.a5-list-item>a {
+  padding: 10px 0;
+  margin: 0 10px;
+  text-decoration: none;
+  font-size: 20px;
+  color: black;
+  display: block;
+}
+
+.a5-list-item:hover {
+  background-color: #0969da;
+  transform: translate(5px);
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.a5-list-item:hover a,
+.a5-list-item:hover i {
+  color: #ffffff;
+}
+
+.a5-sidenavupperbox {
+  border-bottom: 1px solid #8080803d;
+}
+
+
+@media screen and (max-height: 450px) {
+  .a5-sidenav {
+    padding-top: 15px;
+  }
+
+  .a5-sidenav a {
+    font-size: 18px;
+  }
+}
