@@ -12,8 +12,8 @@ exports.createHospital = async (req, res) => {
       })
     }
 
-    let sql = `INSERT INTO clinic_hospitals (name, location, gst_no, city, pincode) VALUES (?, ?, ?, ?, ?)`;
-    let [createHospital] = await conn.query(sql, [name, location, gstNo, city, pincode]);
+    const sql = `INSERT INTO clinic_hospitals (name, location, gst_no, city, pincode) VALUES (?, ?, ?, ?, ?)`;
+    const [createHospital] = await conn.query(sql, [name, location, gstNo, city, pincode]);
     res.send(createHospital)
 
   } catch (error) {

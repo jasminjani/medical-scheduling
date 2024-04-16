@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
+  <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
+  <link rel="stylesheet" href="/css/adminPanel/allPatientDetails.css">
+  <title>All User Details</title>
+</head>
+
+<body>
+
+  <div class="a5-container">
+
+    <%- include('../../common/newSidebar/adminSidebar') %>
+
+      <div class="a5-section">
+
+        <div class="a5-search">
+          <div class="a5-searchbox">
+            <img src="/assets/adminPanel/icons/search.svg" alt="">
+            <input type="text" name="searchUser" id="a5-searchPatient" placeholder="Search Patient name" tabindex="1">
+          </div>
+          <p id="a5-btn-search" onclick="searchPatient()" tabindex="2">Search</p>
+        </div>
+
+        <div class="a5-all-user">
+
+          <h2>All Patients</h2>
+
+          <div class="a5-user-table">
+
+            <table id="a5-user-table">
+              <tbody id="a5-tbody">
+
+                <tr>
+                  <th>First name</th>
+                  <th>Last name</th>
+                  <th>email</th>
+                  <th>Details</th>
+                </tr>
+
+                <% allPatient.forEach(element=> { %>
+                  <tr>
+                    <td>
+                      <%= element.fname %>
+                    </td>
+                    <td>
+                      <%= element.lname %>
+                    </td>
+                    <td>
+                      <%= element.email %>
+                    </td>
+                    <td>
+                      <p class="a5-btn" onclick="window.location.href='/admin/patient-appointment/<%= element.id %>'">
+                        Detail</p>
+                    </td>
+                  </tr>
+                  <% }); %>
+
+              </tbody>
+            </table>
+
+          </div>
+
+        </div>
+
+      </div>
+
+  </div>
+
+</body>
+
+<script>
+
+  async function searchPatient() {
+
+    const searchedName = document.getElementById('a5-searchPatient').value;
+
+    const url = `http://localhost:8000/admin/display-search-patient/${searchedName}`;
+    const response = await fetch(url);
+    const result = await response.json();
+
+    const html = `<tr>
+                  <th>First name</th>
+                  <th>Last name</th>
+                  <th>email</th>
+                  <th>Details</th>
+                </tr>`;
+
+    document.getElementById('a5-tbody').innerHTML = html;
+
+    result.allPatient.forEach(element => {
+      const html2 = `<tr>
+                  <td>${element.fname}</td>
+                  <td>${element.lname}</td>
+                  <td>${element.email}</td>
+                  <td><p class="a5-btn" onclick="window.location.href='/admin/patient-appointment/${element.id}'">Detail</p></td>
+                </tr>`
+
+      document.getElementById('a5-tbody').innerHTML = document.getElementById('a5-tbody').innerHTML + html2;
+
+    });
+
+  }
+
+  let searchBtn = document.getElementById('a5-btn-search');
+
+  searchBtn.addEventListener('keyup', function (event) {
+    try {
+      if (event.key === 'Enter') {
+        searchPatient();
+      }
+    } catch (e) { console.log(e); }
+  });
+
+</script>
+
+</html>
