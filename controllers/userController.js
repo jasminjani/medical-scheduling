@@ -134,6 +134,7 @@ exports.createUser = async (req, res) => {
     let verification_token = crypto.randomUUID();
 
     // make query for insert the data
+
     let sql =
       "insert into users (fname,lname,email,dob,gender,phone,password,city,address,role_id,activation_token) values (?)";
 
@@ -161,6 +162,20 @@ exports.createUser = async (req, res) => {
         message: "Internal server Error",
       });
     }
+
+
+    try {
+      let sql = "insert into profile_pictures (profile_picture,user_id) values (?)";
+      await conn.query(sql,[[profile,result.insertId]])
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error: error.message,
+        message: "Internal server Error",
+      });
+    }
+
+
 
     // data inserted
     if (!result.affectedRows) {
@@ -212,7 +227,6 @@ exports.login = async (req, res) => {
     }
     // execute the query to find user in DB by email
     let result;
-
     try {
       let sql = "select * from users where email=? and is_active=1";
       [result] = await conn.query(sql, [email]);
@@ -251,6 +265,19 @@ exports.login = async (req, res) => {
         });
       }
 
+      let profile;
+      try {
+        let sql = "select * from profile_pictures where user_id = ? order by created_at desc;";
+        let [data] = await conn.query(sql,[result[0].id]);
+        profile = data[0].profile_picture;
+      } catch (error) {
+        return res.status(500).json({
+          success: false,
+          error: error.message,
+          message: "Internal Server Error",
+        });
+      }
+
       // generate token for the cookie
       let payload = {
         id: result[0].id,
@@ -267,6 +294,7 @@ exports.login = async (req, res) => {
 
       // set token into userObj
       newObj.token = token;
+      newObj.profile = profile;
 
       return res
         .cookie("token", token, {
