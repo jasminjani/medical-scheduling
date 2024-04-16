@@ -19,7 +19,7 @@
 
 .a7-feedback-table-data {
   line-height: 2;
-  font-size: 18px;
+  font-size: 14px;
   color: #ababab;
   text-align: center;
 }
@@ -31,8 +31,8 @@
 
 .a7-feedback-table-header {
   color: #4d4d4d;
-  font-size: 25px;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 600;
   line-height: 2;
 }
 

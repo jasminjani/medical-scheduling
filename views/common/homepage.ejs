@@ -1,57 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Medical Scheduling</title>
+    <link rel="stylesheet" href="/css/homepage.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Medical Scheduling</title>
-  <link rel="stylesheet" href="/css/homepage.css">
-</head>
-<body>
-  
+  <body>
     <!-- Header section -->
 
     <header class="header">
       <div class="container">
-          <div class="navbar">
-              <div class="logo">
-                  <a href=""><img src="/assets/logo.png" alt="logo"></a>
-              </div>
-              <nav class="nav-items">
-                  <ul>
-                      <li><a href="">Home</a></li>
-                      <li><a href="#">About Us</a></li>
-                      <li><a href="#">Login</a></li>
-                      <li><a href="#">Register</a></li>
-                      <li><button>Book Your Appointment</button></li>
-                  </ul>
-              </nav>
+        <div class="navbar">
+          <div class="logo">
+            <a href=""><img src="/assets/logo.png" alt="logo" /></a>
           </div>
+          <nav class="nav-items">
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="#about-us">About Us</a></li>
+              <li id="login"><a href="/login">Login</a></li>
+              <li id="register"><a href="/register">Register</a></li>
+              <li><a href="/bookSlot">Book Your Appointment</a></li>
+            </ul>
+          </nav>
+        </div>
       </div>
-  </header>
+    </header>
 
-  <!-- main content -->
-  <main id="main">
+    <!-- main content -->
+    <main id="main">
       <!-- hero section -->
       <section class="hero-section">
-          <div class="container">
-              <div class="hero">
-                 
-                  <div class="hero-left">
-                      <h1 class="hero-title">Book Your Doctor Appointment</h1>
-                      <p class="hero-subtitle">A Healthier Tomorrow Starts Today: Schedule Your Appointment!
-                        Your Wellness, Our Expertise: Set Up Your Appointment Today.</p>
-                      <a class="btn" href="">Book Your Appointment</a>
-                  </div>
+        <div class="container">
+          <div class="hero">
+            <div class="hero-left">
+              <h1 class="hero-title">Book Your Doctor Appointment</h1>
+              <p class="hero-subtitle">
+                A Healthier Tomorrow Starts Today: Schedule Your Appointment!
+                Your Wellness, Our Expertise: Set Up Your Appointment Today.
+              </p>
+              <a class="btn" href="">Book Your Appointment</a>
+            </div>
 
-                  <div class="hero-right">
-                    <img src="/assets/doctor.png" alt="" >
-                </div>
-              </div>
+            <div class="hero-right">
+              <img src="/assets/doctor.png" alt="" />
+            </div>
           </div>
+        </div>
       </section>
-  </main>
 
-</body>
+      <!-- booking-step-section -->
+      <section class="booking-steps-section">
+        <div class="container">
+          <div class="section-heading">
+            <p class="steps-title">How It Works!</p>
+            <p class="steps-subtitle">
+              Discover, book, and experience personalized healthcare
+              effortlessly with our user-friendly Doctor Appointment Website.
+            </p>
+          </div>
+          <div class="booking-steps">
+            <div class="step-data">
+              <div class="img">
+                <img src="/assets/users-icon.png" alt="" />
+                <span>1</span>
+              </div>
+              <p class="step">Find A Doctor</p>
+              <p class="desc">
+                Discover skilled doctors based on specialization and location.
+              </p>
+            </div>
+            <div class="step-data">
+              <div class="img">
+                <img src="/assets/calendar.png" alt="" /> <span>2</span>
+              </div>
+              <p class="step">Book Appointment</p>
+              <p class="desc">
+                Effortlessly book appointment at your convenience.
+              </p>
+            </div>
+            <div class="step-data">
+              <div class="img">
+                <img src="/assets/solution.png" alt="" /> <span>3</span>
+              </div>
+              <p class="step">Get Services</p>
+              <p class="desc">
+                Receive personalized healthcare services tailored to your needs.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- about us section -->
+      <section class="about-section" id="about-us">
+        <div class="container">
+          <div class="section-heading">
+            <p class="steps-title">About Us</p>
+          </div>
+          <div class="about-content">
+            <div class="about-left">
+              <img src="/assets/doctor-about.png" alt="" />
+            </div>
+            <div class="about-right">
+              <p class="about-right-title">We Take Care Of Your Healthy Life</p>
+              <p class="desc">
+                <span
+                  >ALPHA Is An Online Doctor Appointment Booking Application
+                  Where The Patients Can Book Appointments To Consult Doctors.
+                  The Patients Can Book Appointment Anytime, Anywhere With Thier
+                  Desired Doctors According To Thier Problem.</span
+                >
+                <span
+                  >After Creating An Account, The User Can Book A Slot Or They
+                  Can Even Cancel Tha Appointment. Once The Patient Consulted
+                  The Doctor, The Reports Are Also Provided in The Application
+                  itself. Also The Medical Prescription By The Doctor is
+                  Provided in The User Account.</span
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo"><img src="/assets/logo.png" alt=""></div>
+                <p class="copyright">&#169; Copyright 2024 Alpha Inc. All rights reserved</p>
+                <div class="social-icons">
+                    <img src="/assets/instagram.png" alt="">
+                    <img src="/assets/facebook.png" alt="">
+                    <img src="/assets/twitter.png" alt="">
+                    <img src="/assets/youtube.png" alt="">
+                </div>
+            </div>
+        </div>
+    </footer>
+  </body>
 </html>

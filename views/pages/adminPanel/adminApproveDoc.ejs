@@ -5,7 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>admin Approve Doctors</title>
-  <link rel="stylesheet" href="/css/sideBar/sidebar.css" />
+
+  <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
+  <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
+
   <link rel="stylesheet" href="/css/adminPanel/adminApproveDoc.css">
 
 </head>
@@ -17,7 +20,7 @@
     <h1>sidebar</h1>
   </div> -->
 
-  <%- include('../../common/adminSideBar') %>
+  <%- include('../../common/newSidebar/adminSidebar.ejs') %>
 
     <div class="a2-approve-table-div">
       <div class="container">
@@ -29,13 +32,13 @@
 
         <table class="a2-approve-table">
           <tr class="approve-tbl-head">
-            <div class="bottom">
-              <th>ID</th>
-              <th>Doctor Name</th>
-              <th>Email</th>
-              <th>qualification</th>
-              <th>Status</th>
-            </div>
+
+            <th>ID</th>
+            <th>Doctor Name</th>
+            <th>Email</th>
+            <th>qualification</th>
+            <th>Status</th>
+
           </tr>
 
           <tbody id="approve-tbl-body"></tbody>
@@ -74,7 +77,7 @@
       getPendingDoc()
 
       async function approveDoc(id) {
-        location.href =`/individual-doctor/${id}`;
+        location.href = `/individual-doctor/${id}`;
       }
     </script>
 </body>
