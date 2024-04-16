@@ -118,7 +118,7 @@ exports.updateDoctorDetails = async (req, res) => {
 
   //doctor_id get token
   let doctor_id = req.user.id
-  const { fname, lname, dob, gender, phone, address, name, location, gst_no, city, pincode, qualification, consultancy_fees, id, hospital_id, speciality } = req.body;
+  const { fname, lname, dob, gender, phone, address, name, location, gst_no, dcity, city, pincode, qualification, consultancy_fees, id, hospital_id, speciality } = req.body;
 
 
   // validate
@@ -131,7 +131,7 @@ exports.updateDoctorDetails = async (req, res) => {
 
   try {
     try {
-      await conn.query(`update users set fname = ?,lname = ?,dob=?,gender=?,phone = ?,address = ?,city = ? where users.id = ? and role_id = ?`, [fname, lname, dob, gender, phone, address, city, doctor_id, 2])
+      await conn.query(`update users set fname = ?,lname = ?,dob=?,gender=?,phone = ?,address = ?,city = ? where users.id = ? and role_id = ?`, [fname, lname, dob, gender, phone, address, dcity, doctor_id, 2])
     }
     catch (error) {
       console.log(error);
