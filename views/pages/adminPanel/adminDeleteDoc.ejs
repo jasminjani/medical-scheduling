@@ -10,122 +10,77 @@
   <link rel="stylesheet" href="/css/sideBar/sidebar.css" />
   <link rel="stylesheet" href="/css/adminPanel/adminApproveDoc.css">
 
-  
+
 </head>
 
 <body>
-  
-  <!-- <div class="a2-sidebar">
-    <h1>Admin Panel</h1>
-    <h1>sidebar</h1>
-  </div> -->
+
 
   <%- include('../../common/adminSideBar') %>
-  <%# include('../../common/doctorSideBar') %>
-  <%# include('../../common/patientSideBar') %>
 
     <div class="a2-approve-table-div">
+      <div class="container">
+        <p class="a2-back-btn a2-btn"><img src="/assets/adminPanel/icons/back-iceblue.svg" alt="Back"> Back</p>
 
-      <p class="a2-back-btn a2-btn"><img src="/assets/adminPanel/icons/back-iceblue.svg" alt="Back"> Back</p>
+        <h2 class="a2-approve-h2">All Doctors <span id="all-doctors-count"></span></h2>
 
-      <h2 class="a2-approve-h2">Delete Doctors</h2>
 
-      <h4 class="a2-approve-h4">All Doctors (100+) </h4>
+        <table class="a2-approve-table">
+          <tr class="approve-tbl-head">
 
-      <table class="a2-approve-table">
-        <tr class="approve-tbl-head">
-          <div class="bottom">
             <th>ID</th>
             <th>Doctor Name</th>
             <th>Email</th>
-            <th>Specialties</th>
+            <th>Qualification</th>
             <th>Status</th>
-          </div>
-        </tr>
 
-        <tbody>
-          <div class="border"></div>
-          <tr>
-            <td>1.</td>
-            <td>ABC</td>
-            <td>abc@abc.com</td>
-            <td>neurologists</td>
-            <td>
-              <p class="a2-btn">Delete</p>
-            </td>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>ABC</td>
-            <td>abc@abc.com</td>
-            <td>neurologists</td>
-            <td>
-              <p class="a2-btn">Delete</p>
-            </td>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>ABC</td>
-            <td>abc@abc.com</td>
-            <td>neurologists</td>
-            <td>
-              <p class="a2-btn">Delete</p>
-            </td>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>ABC</td>
-            <td>abc@abc.com</td>
-            <td>neurologists</td>
-            <td>
-              <p class="a2-btn">Delete</p>
-            </td>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>ABC</td>
-            <td>abc@abc.com</td>
-            <td>neurologists</td>
-            <td>
-              <p class="a2-btn">Delete</p>
-            </td>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>ABC</td>
-            <td>abc@abc.com</td>
-            <td>neurologists</td>
-            <td>
-              <p class="a2-btn">Delete</p>
-            </td>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>ABC</td>
-            <td>abc@abc.com</td>
-            <td>neurologists</td>
-            <td>
-              <p class="a2-btn">Delete</p>
-            </td>
-          </tr>
-          <tr>
-            <td>1.</td>
-            <td>ABC</td>
-            <td>abc@abc.com</td>
-            <td>neurologists</td>
-            <td>
-              <p class="a2-btn">Delete</p>
-            </td>
           </tr>
 
-        </tbody>
+          <tbody id="get-all-doctors"></tbody>
+
+        </table>
 
 
-      </table>
-
-
+      </div>
     </div>
 
+    <script>
+
+      async function getAllDoctors() {
+
+        const resp = await fetch('/get-all-doctors');
+
+        const data = await resp.json();
+
+        document.getElementById('all-doctors-count').innerHTML = ` (${data.length})`
+        const tbody = document.getElementById('get-all-doctors');
+
+        data.forEach(doc => {
+          let tds = `<tr>
+          <td>${doc.doctor_id}</td>
+          <td>${doc.fname} ${doc.lname}</td>
+          <td>${doc.email}</td>
+          <td>${doc.qualification}</td>
+          <td><p class="a2-btn" onclick="deleteDoctor(${doc.doctor_id})">Delete</p></td>
+          </tr>`;
+
+          tbody.innerHTML += tds;
+        });
+
+
+
+      }
+      getAllDoctors()
+
+
+
+      async function deleteDoctor(id) {
+        let resp = await fetch(`/delete-doctor/${id}`);
+        location.reload()
+      }
+
+
+    </script>
 </body>
 
 </html>

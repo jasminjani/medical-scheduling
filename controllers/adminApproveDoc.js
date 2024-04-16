@@ -1,5 +1,34 @@
 const conn = require("../config/dbConnection");
 
+
+exports.getAllDoctors = async (req, res) => {
+
+  try {
+    const sql = `select *,a.doctor_id from doctor_details where status = 1`;
+    const sql2 = `select * from users a 
+    inner join doctor_details b on a.id = b.doctor_id 
+    inner join clinic_hospitals c on b.hospital_id = c.id where b.status=1 order by a.id`;
+
+    const [result] = await conn.query(sql2);
+
+    res.json(result);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+exports.deleteDoctor = async (req, res) => {
+
+  const docID = req.params.id;
+  console.log(docID);
+
+  const sql = `update doctor_details set status = -1 where doctor_id =?`
+  let [result] = await conn.query(sql, [docID]);
+
+  res.status(200).send();
+}
+
+
 exports.pendingDoctos = async (req, res) => {
 
   try {

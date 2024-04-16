@@ -29,13 +29,13 @@
 
         <table class="a2-approve-table">
           <tr class="approve-tbl-head">
-            <div class="bottom">
-              <th>ID</th>
-              <th>Doctor Name</th>
-              <th>Email</th>
-              <th>qualification</th>
-              <th>Status</th>
-            </div>
+
+            <th>ID</th>
+            <th>Doctor Name</th>
+            <th>Email</th>
+            <th>qualification</th>
+            <th>Status</th>
+
           </tr>
 
           <tbody id="approve-tbl-body"></tbody>
@@ -74,7 +74,7 @@
       getPendingDoc()
 
       async function approveDoc(id) {
-        location.href =`/individual-doctor/${id}`;
+        location.href = `/individual-doctor/${id}`;
       }
     </script>
 </body>
