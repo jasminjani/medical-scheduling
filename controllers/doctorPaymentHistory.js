@@ -1,9 +1,10 @@
 const conn = require("../config/dbConnection");
 
-exports.getPaymentHistorys = async (req, res) => {
+exports.patientHistory = async (req, res) => {
   try {
 
     let doctor_id = req.user.id;
+    // let doctor_id = 2;
 
     if (!doctor_id) {
       return res.status(500).json({
@@ -12,16 +13,50 @@ exports.getPaymentHistorys = async (req, res) => {
       })
     }
 
-    const sql = `SELECT  time_slots.doctor_id, time_slots.date AS slote_date, time_slots.start_time, time_slots.end_time, slot_bookings.slot_id, slot_bookings.patient_id, slot_bookings.booking_date AS payment_date, payments.payment_amount, users.fname, users.lname 
+    const sql = `SELECT time_slots.doctor_id, users.id AS patient_id, users.fname, users.lname, users.phone
     FROM time_slots 
     JOIN slot_bookings ON time_slots.id = slot_bookings.slot_id  
-    JOIN payments ON time_slots.id = payments.slot_id
     JOIN users ON slot_bookings.patient_id = users.id
-    WHERE time_slots.doctor_id = ? AND time_slots.is_booked = 1 AND time_slots.is_deleted = 0`;
+    WHERE time_slots.doctor_id = ? AND time_slots.is_booked = 1 AND time_slots.is_deleted = 0 GROUP BY users.id`;
 
-    const [paymentDetails] = await conn.query(sql, [doctor_id]);
+    const [patientHistory] = await conn.query(sql, [doctor_id]);
 
-    res.render('pages/doctorPanel/viewpayment', { paymentDetails: paymentDetails })
+    res.send({ patientHistory: patientHistory })
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    })
+  }
+}
+
+
+exports.searchpatientHistory = async (req, res) => {
+  try {
+
+    let doctor_id = req.user.id;
+    // let doctor_id = 2;
+    let { search } = req.params;
+
+    if (!doctor_id) {
+      return res.status(500).json({
+        success: false,
+        message: "doctor id not found"
+      })
+    }
+
+    const sql = `SELECT time_slots.doctor_id, users.id AS patient_id, users.fname, users.lname, users.phone
+    FROM time_slots 
+    JOIN slot_bookings ON time_slots.id = slot_bookings.slot_id  
+    JOIN users ON slot_bookings.patient_id = users.id
+    WHERE time_slots.doctor_id = ? AND time_slots.is_booked = 1 AND time_slots.is_deleted = 0 
+    AND (users.fname LIKE '${search}%' OR users.lname LIKE '${search}%' OR users.phone LIKE '${search}%')
+    GROUP BY users.id`;
+
+    const [patientHistory] = await conn.query(sql, [doctor_id]);
+
+    res.send({ patientHistory: patientHistory })
 
   } catch (error) {
     res.status(500).json({
