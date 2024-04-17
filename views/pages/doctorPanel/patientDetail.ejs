@@ -70,7 +70,7 @@
 
                     </div>
                   </div>
-                  <div class="a5-prescription" id="medicineDetail">
+                  <div class="a5-prescription" id="medicineDetail"  >
 
                   </div>
                 </div>
@@ -113,8 +113,7 @@
     });
     }
 
-
-  async function profileDetailData() {
+   const profileDetailData = async () =>{
     let fetchData = await fetch(`http://localhost:8000/viewPatientDetailsData/${Id}`)
     let data = await fetchData.json()
     let Key = Object.keys(data[0])
@@ -147,9 +146,6 @@
   }
 
 
- 
-
-
   funcId = function (id) {
     return document.getElementById(id);
   }
@@ -158,20 +154,25 @@
    
     const fetchData = await fetch(`http://localhost:8000/patientPrescriptionData/${Id}/${date}`)
     const data = await fetchData.json()
-    const key = Object.keys(data[0])
+    const key = Object.keys(data)
+    console.log(data);
     document.getElementById("appointmentdt").innerHTML = "";
     document.getElementById("medicineDetail").innerHTML = "";
-    key.forEach(element => {
 
-      if (element == 'Appointment Date' || element == 'Appointment Time') {
-        document.getElementById("appointmentdt").innerHTML += `
-               <p><span class="a5-bold" >${element}</span> ${data[0][element]}</p>`
-      }
-      else {
+    
+    key.forEach(item => {
+
+      const dtkey = Object.keys(data[item])
+
+    dtkey.forEach(element => {
+      
+   
+     
         document.getElementById("medicineDetail").innerHTML += `
-               <p><span class="a5-bold">${element}:</span>${data[0][element]}</p>
+              <div> <p><span class="a5-bold">${element}:</span>${data[item][element]}</p></div>
               `
-      }
+      
+       });  
     });
     funcId(id).style.display = 'block';
   }
@@ -183,15 +184,6 @@
 
   patientAppointmentDetail()
   profileDetailData()
- 
-
-
-
-
 </script>
-
-
-
-
 
 </html>

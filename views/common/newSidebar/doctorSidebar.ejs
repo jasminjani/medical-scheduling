@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="a5-logout">
-      <P class="a5-btn-logout">Log out</P>
+      <P class="a5-btn-logout"><a href="" id="logout">Log out </a></P>
     </div>
   </div>
 
@@ -38,20 +38,24 @@
   </div>
 </div>
 
-
+<script src="/javascript/doctorPanel/sidebar.js"></script>
 <script>
+
+  document.getElementById("logout").href = "http://localhost:8000/logout"
+
   async function fetchSideBarDetails() {
 
     let fetchData = await fetch(`http://localhost:8000/doctorSideBarDetail/`)
     let data = await fetchData.json()
     let key = Object.keys(data[0])
     key.forEach(element => {
-      // if (element == 'profile') {
-      //   document.getElementById("profile").src = `/uploads/imgs/${data[0][element]}`
-      // }
-      // else {
-      document.getElementById(element).innerHTML = data[0][element]
-      // }
+      if (element == 'profile_picture') {
+        console.log(data[0][element]);
+        document.getElementById("profile").src = `/imgs/${data[0][element]}`
+      }
+      else {
+        document.getElementById(element).innerHTML = data[0][element]
+      }
     });
   }
   fetchSideBarDetails()

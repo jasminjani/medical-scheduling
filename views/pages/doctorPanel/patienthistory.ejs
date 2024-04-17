@@ -14,8 +14,6 @@
 </head>
 
 <body>
-
-
   <div class="a7-container">
     <%- include('../../common/newSidebar/doctorSidebar.ejs') %>
       <div class="a7-appointment-tbl a7-mr-300">
@@ -38,8 +36,8 @@
         </div>
       </div>
   </div>
-  <script src="/javascript/doctorPanel/urlPath.js"></script>
-  <script src="/javascript/doctorPanel/sidebar.js"></script>
+  
+
   <script>
 
     const fetchData = async () => {
@@ -63,7 +61,6 @@
         }
       });
       document.getElementById("rowdata").innerHTML += `<td> <a href='http://localhost:8000/viewPatientHistory/${pat}' class="a7-view-btn"  >View More</a>  </td>`
-
     }
     fetchData()
   </script>
