@@ -13,6 +13,18 @@ let output =
 	document.getElementById("output");
 
 // Funtion to update rating
+
+function openRate() {
+	// document.getElementById('showRate').style.dispaly = "block"
+	document.getElementById('rate').style.display = "block"
+	document.getElementById('bodyContent').style.opacity = "50%"
+}
+
+function closeRate() {
+	document.getElementById('rate').style.display = "none"
+	document.getElementById('bodyContent').style.opacity = "100%"
+}
+
 function gfg(n) {
 	remove();
 	for (let i = 0; i < n; i++) {
