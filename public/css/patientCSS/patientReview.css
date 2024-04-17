@@ -1,0 +1,72 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+  
+  body {
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  /* background: hsl(137, 46%, 24%); */
+  font-family: "Poppins", sans-serif;
+  }
+  
+  .card {
+  max-width: 33rem;
+  background: #cac6c6;
+  margin: 20px 20px;
+  padding: 1rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  border-radius: 0.5rem;
+  }
+
+  .heading {
+    padding-top: 10px;
+  }
+  
+  .textHead {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .star {
+  font-size: 10vh;
+  cursor: pointer;
+  }
+  
+  .one {
+  color: rgb(255, 0, 0);
+  }
+  
+  .two {
+  color: rgb(255, 106, 0);
+  }
+  
+  .three {
+  color: rgb(255, 218, 51);
+  }
+  
+  .four {
+  color: rgb(218, 252, 27);
+  }
+  
+  .five {
+  color: rgb(24, 159, 14);
+  }
+  
+  .reviewPatient {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  #rev {
+    line-height: 1.5;
+    letter-spacing: 1px;
+  }

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
+  <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
+  <link rel="stylesheet" href="/css/adminPanel/patientsAllAppoinment.css">
+  <title>User Details</title>
+</head>
+
+<body>
+
+  <div class="a5-container">
+
+    <%- include('../../common/newSidebar/adminSidebar') %>
+      <% console.log(patientDetails[0]); %>
+
+        <div class="a5-section">
+
+          <div class="a5-patient">
+            <div class="a5-patient-img">
+              <img src="/assets/adminPanel/patient.png" alt="image">
+            </div>
+            <div class="a5-patient-details">
+              <h1>
+                <%= patientDetails[0].fname + " " + patientDetails[0].lname %>
+              </h1>
+              <div class="a5-patient-more-detail">
+                <div class="a5-details">
+                  <p><span class="a5-bold">Email :</span>
+                    <%= patientDetails[0].email %>
+                  </p>
+                  <p><span class="a5-bold">Contact :</span>
+                    <%= patientDetails[0].phone %>
+                  </p>
+                  <p><span class="a5-bold">DOB :</span>
+                    <%= patientDetails[0].dob %>
+                  </p>
+                </div>
+                <div class="a5-details">
+                  <p><span class="a5-bold">Gender :</span>
+                    <%= patientDetails[0].gender %>
+                  </p>
+                  <p><span class="a5-bold">City :</span>
+                    <%= patientDetails[0].city %>
+                  </p>
+                  <p><span class="a5-bold">Blood group :</span>
+                    <%= patientDetails[0].blood_group %>
+                  </p>
+                </div>
+              </div>
+              <div class="a5-patient-address">
+                <p><span class="a5-bold">address : </span>
+                  <%= patientDetails[0].address %>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="a5-section">
+
+          <div class="a5-all-doctor">
+
+            <h2>Patient Appointment</h2>
+
+            <div class="a5-doctor-table">
+
+              <table id="a5-doctor-table">
+
+                <tr>
+                  <th>ID</th>
+                  <th>Doctor Name</th>
+                  <th>Speciality</th>
+                  <th>Appointment Date</th>
+                  <th>Details</th>
+                </tr>
+
+                <tr>
+                  <td>1</td>
+                  <td>Jani Jasmin</td>
+                  <td>neurologist</td>
+                  <td>2024-01-22</td>
+                  <td>
+                    <p onclick="show('a5-popup')" class="a5-btn">Detail</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>2</td>
+                  <td>Jani Jasmin</td>
+                  <td>neurologist</td>
+                  <td>2024-01-22</td>
+                  <td>
+                    <p onclick="show('a5-popup')" class="a5-btn">Detail</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>3</td>
+                  <td>Jani Jasmin</td>
+                  <td>neurologist</td>
+                  <td>2024-01-22</td>
+                  <td>
+                    <p onclick="show('a5-popup')" class="a5-btn">Detail</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>4</td>
+                  <td>Jani Jasmin</td>
+                  <td>neurologist</td>
+                  <td>2024-01-22</td>
+                  <td>
+                    <p onclick="show('a5-popup')" class="a5-btn">Detail</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>5</td>
+                  <td>Jani Jasmin</td>
+                  <td>neurologist</td>
+                  <td>2024-01-22</td>
+                  <td>
+                    <p onclick="show('a5-popup')" class="a5-btn">Detail</p>
+                  </td>
+
+
+              </table>
+
+              <div class="a5-popup" id="a5-popup">
+
+                <div class="a5-doctor-section">
+                  <div class="a5-doctor-card">
+                    <h3>Dr. Jani Jasmin</h3>
+                    <div class="a5-doctor-detail">
+                      <div class="a5-doctor-more-detail">
+                        <p><span class="a5-bold">Speciality :</span> neurologist</p>
+                        <p><span class="a5-bold">Hospital :</span> Zydus Lifesciences</p>
+                      </div>
+                      <div class="a5-doctor-more-detail">
+                        <p><span class="a5-bold">Appointment Date :</span> 2024-04-10</p>
+                        <p><span class="a5-bold">Time :</span> 10:00 - 10:45</p>
+                      </div>
+                    </div>
+                    <div class="a5-prescription">
+                      <p><span class="a5-bold">Prescription :</span> Lorem ipsum dolor sit amet consectetur adipisicing
+                        elit.
+                        Ipsum
+                        eaque nihil consequatur
+                        nisi praesentium explicabo obcaecati quasi molestias reprehenderit, sint iure eius. Aspernatur,
+                        ipsam
+                        pariatur.</p>
+                      <p><span class="a5-bold">Diagnosis :</span> Lorem ipsum dolor sit amet consectetur adipisicing
+                        elit.
+                        Ullam
+                        non
+                        expedita sint debitis quo
+                        labore sequi enim voluptatum. Voluptatum, sapiente! Doloribus perspiciatis quaerat voluptas
+                        velit?
+                        Lorem
+                        ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt excepturi obcaecati quas, unde at,
+                        voluptate
+                        fugit distinctio quibusdam magni porro tempora. Nihil quos odit dolor numquam? Nostrum
+                        perferendis
+                        molestias aperiam rem labore explicabo aliquid, beatae ad, modi autem incidunt placeat a at
+                        fugiat!
+                        Eum!
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <p class="a5-btn" onclick="hide('a5-popup')"> Close </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+  </div>
+
+
+
+
+
+
+</body>
+
+<script>
+
+  funcId = function (id) {
+    return document.getElementById(id);
+  }
+
+  let show = function (id) {
+    funcId(id).style.display = 'block';
+  }
+  let hide = function (id) {
+    funcId(id).style.display = 'none';
+  }
+
+</script>
+
+</html>

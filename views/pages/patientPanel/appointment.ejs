@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Appointment Form</title>
+    <link
+      rel="stylesheet"
+      href="/css/patientCSS/appointment.css"
+    />
+  </head>
+
+  <body>
+    <div class="main">
+      <section class="container">
+        <div class="full">
+          <div class="header">
+            <h3 class="textHeader">Appointment Form</h3>
+            <a href="./patientProfile.html"
+              ><img
+                src="/assets/profile.png"
+                alt="profile"
+                class="profilePic"
+            /></a>
+          </div>
+          <hr />
+          <section class="appointmentForm">
+            <div class="form">
+              <div class="department">
+                <label for="department"><b>Department:</b></label>
+                <select
+                  name="doctorDepartment"
+                  id="departments"
+                  class="department"
+                >
+                  <!-- <option value="department">Select Department</option> -->
+                  <option value="cardiology">Cardiology</option>
+                  <option value="dental">Dental</option>
+                  <option value="neurology">Neurology</option>
+                  <option value="medicine">Medicine</option>
+                  <option value="pediatric">Pediatric</option>
+                </select>
+              </div>
+
+              <div class="doctor">
+                <label for="doctor"><b>Doctor:</b></label>
+                <select name="doctors" class="doctor" id="doctors">
+                  <!-- <option value="department">Select Doctor</option> -->
+                  <option value="cardiology">Cardiology</option>
+                  <option value="dental">Dental</option>
+                  <option value="neurology">Neurology</option>
+                  <option value="medicine">Medicine</option>
+                  <option value="pediatric">Pediatric</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- <hr class="line"> -->
+
+            <div class="dateTime">
+              <div class="date">
+                <label for="selectDate" class="label"
+                  ><b>Select Date:</b></label
+                >
+                <input
+                  type="date"
+                  name="selectDate"
+                  id="date"
+                  placeholder="Select Appointment Date"
+                />
+                <!-- <input placeholder="Type Date" type="text" onfocus="(this.type = 'date')"  id="date"> -->
+              </div>
+
+              <label for="selectTime"><b>Select Time:</b></label>
+              <div class="time">
+                <div>
+                  <input
+                    type="button"
+                    name="times"
+                    id="time1"
+                    value="10:00"
+                    onclick="btnTime1()"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="button"
+                    name="times"
+                    id="time2"
+                    value="10:00"
+                    onclick="btnTime2()"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="button"
+                    name="times"
+                    id="time3"
+                    value="10:00"
+                    onclick="btnTime3()"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="button"
+                    name="times"
+                    id="time4"
+                    value="10:00"
+                    onclick="btnTime4()"
+                  />
+                </div>
+                <!-- <div class="timer"> -->
+                <div>
+                  <input
+                    type="button"
+                    name="times"
+                    id="time5"
+                    value="10:00"
+                    onclick="btnTime5()"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="button"
+                    name="times"
+                    id="time6"
+                    value="10:00"
+                    onclick="btnTime6()"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="button"
+                    name="times"
+                    id="time7"
+                    value="10:00"
+                    onclick="btnTime7()"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="button"
+                    name="times"
+                    id="time8"
+                    value="10:00"
+                    onclick="btnTime8()"
+                  />
+                </div>
+                <!-- </div> -->
+              </div>
+
+              <br />
+
+              <a href="./patientProfile.html"
+                ><input
+                  type="button"
+                  name="booked"
+                  id="slotBook"
+                  value="Book"
+                  class="submit"
+              /></a>
+            </div>
+          </section>
+        </div>
+      </section>
+    </div>
+
+
+    <script src="/javascript/patientPanel/appointment.js"></script>
+  </body>
+</html>
