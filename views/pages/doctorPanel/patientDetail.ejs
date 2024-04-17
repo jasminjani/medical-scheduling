@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
+  <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
+  <link rel="stylesheet" href="/css/adminPanel/patientsAllAppoinment.css">
+  <title>User Details</title>
+</head>
+
+<body>
+
+  <div class="a5-container">
+
+    <%- include('../../common/newSidebar/doctorSidebar') %>
+
+
+      <div class="a5-section">
+
+        <div class="a5-patient">
+          <div class="a5-patient-img">
+            <img src="/assets/adminPanel/patient.png" alt="image">
+          </div>
+          <div class="a5-patient-details">
+            <h1 id="patientname">
+              <!-- fetch patient Name -->
+            </h1>
+            <!-- fetch patient basic Detail -->
+            <div class="a5-patient-more-detail">
+              <div class="a5-details" id="patientbasicdetail">
+              </div>
+              <div class="a5-details" id="patientaddressdetail">
+              </div>
+            </div>
+            <!-- fetch patient address -->
+            <div class="a5-patient-address" id="patientaddress">
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="a5-section">
+
+        <div class="a5-all-doctor">
+
+          <h2>Patient Appointment</h2>
+
+          <div class="a5-doctor-table">
+
+            <table id="trdetail">
+
+              <tr>
+                <th>Appointment Date</th>
+                <th>Details</th>
+              </tr>
+
+            </table>
+
+            <div class="a5-popup" id="a5-popup">
+
+              <div class="a5-doctor-section">
+                <div class="a5-doctor-card">
+
+                  <div class="a5-doctor-detail">
+
+                    <div class="a5-doctor-more-detail" id="appointmentdt">
+
+                    </div>
+                  </div>
+                  <div class="a5-prescription" id="medicineDetail"  >
+
+                  </div>
+                </div>
+              </div>
+
+              <p class="a5-btn" onclick="hide('a5-popup')"> Close </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+  </div>
+</body>
+<script src="/javascript/doctorPanel/urlPath.js"></script>
+
+<script>
+ 
+  const patientAppointmentDetail = async () => {
+    let fetchdata = await fetch(`http://localhost:8000/getpatientHistoryData/${Id}`)
+    let data = await fetchdata.json()
+    let key = Object.keys(data)
+    key.forEach(element => {
+      let dtkey = Object.keys(data[element])
+      dtkey.forEach(item => {
+        if (item == "Appointment Date") {
+
+          document.getElementById("trdetail").innerHTML += `
+              <tr>
+              <td class="tddata">${data[element][item]}</td>
+              <td>
+                  <p onclick=show('a5-popup','${data[element][item]}') class="a5-btn">Detail</p>
+                </td>
+                </tr>`
+        }
+      });
+    });
+    }
+
+   const profileDetailData = async () =>{
+    let fetchData = await fetch(`http://localhost:8000/viewPatientDetailsData/${Id}`)
+    let data = await fetchData.json()
+    let Key = Object.keys(data[0])
+    Key.forEach(item => {
+      if (item == "Name") {
+        document.getElementById("patientname").innerHTML = data[0][item]
+      }
+      if (item == 'Date of Birth' || item == 'Email' || item == 'Contact') {
+        document.getElementById("patientbasicdetail").innerHTML += `
+
+              <p><span class="a5-bold">${item}:</span>
+                  ${data[0][item]}
+              </p>`
+      }
+      if (item == 'Gender' || item == 'Blood Group' || item == 'City') {
+        document.getElementById("patientaddressdetail").innerHTML += `
+              <p><span class="a5-bold">${item}:</span>
+                  ${data[0][item]}
+              </p>`
+      }
+      if (item == "Address") {
+        document.getElementById("patientaddress").innerHTML +=
+          `<p><span class="a5-bold">${item}: </span>
+         ${data[0][item]}
+      </p>`
+      }
+
+
+    });
+  }
+
+
+  funcId = function (id) {
+    return document.getElementById(id);
+  }
+
+  let show =async function (id, date) {
+   
+    const fetchData = await fetch(`http://localhost:8000/patientPrescriptionData/${Id}/${date}`)
+    const data = await fetchData.json()
+    const key = Object.keys(data)
+    console.log(data);
+    document.getElementById("appointmentdt").innerHTML = "";
+    document.getElementById("medicineDetail").innerHTML = "";
+
+    
+    key.forEach(item => {
+
+      const dtkey = Object.keys(data[item])
+
+    dtkey.forEach(element => {
+      
+   
+     
+        document.getElementById("medicineDetail").innerHTML += `
+              <div> <p><span class="a5-bold">${element}:</span>${data[item][element]}</p></div>
+              `
+      
+       });  
+    });
+    funcId(id).style.display = 'block';
+  }
+  let hide = function (id) {
+    funcId(id).style.display = 'none';
+
+  }
+
+
+  patientAppointmentDetail()
+  profileDetailData()
+</script>
+
+</html>

@@ -17,7 +17,8 @@
   line-height: 2;
 }
 
-.a7-right-bar {
+
+.a7-doctor-pannel{
   width: 70%;
   margin-left: 300px;
 }
@@ -43,10 +44,7 @@
   gap: 20px;
 }
 
-.a7-doctor-pannel {
 
-  display: flex;
-}
 
 .a7-appointment-tbl {
   background-color: #f4f7f8;
