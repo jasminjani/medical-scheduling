@@ -7,17 +7,21 @@
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
   <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
   <link rel="stylesheet" href="/css/adminPanel/patientsAllAppoinment.css">
-  <script src="/javascript/adminPanel/patientAllAppointment.js"></script>
+  <script src="/javascript/adminPanel/patientAllAppointment.js" defer></script>
   <title>User Details</title>
 </head>
 
 <body>
 
-  <div class="a5-container">
 
-    <%- include('../../common/newSidebar/adminSidebar') %>
 
-      <div class="a5-section">
+  <%- include('../../common/newSidebar/adminSidebar') %>
+
+    <div class="a5-section">
+      <div class="a5-container">
+        <a href="/admin/all-patient" style="text-decoration: none; color: black;">
+          <p class="a2-back-btn a2-btn"><img src="/assets/adminPanel/icons/back-iceblue.svg" alt="Back"> Back</p>
+        </a>
 
         <div class="a5-patient">
           <div class="a5-patient-img">
@@ -59,10 +63,11 @@
           </div>
         </div>
       </div>
+    </div>
 
 
-      <div class="a5-section">
-
+    <div class="a5-section">
+      <div class="a5-container">
         <div class="a5-all-doctor">
 
           <h2>Patient Appointment</h2>
@@ -109,10 +114,10 @@
           </div>
 
         </div>
-
       </div>
+    </div>
 
-  </div>
+    </div>
 
 </body>
 

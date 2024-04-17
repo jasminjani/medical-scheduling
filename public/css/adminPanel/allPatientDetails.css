@@ -16,7 +16,7 @@
 .a5-container {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 15px;
+  /* padding: 0 15px; */
 }
 
 .a5-section {
@@ -94,4 +94,35 @@ th {
 .a5-btn:hover {
   color: var(--white);
   background-color: var(--blue);
+}
+
+
+.a2-btn {
+  width: 80px;
+  height: 30px;
+  padding: 5px;
+  text-align: center;
+  margin: 5px auto;
+
+  display: flex;
+  justify-content: center;
+
+  border-radius: 3px;
+
+  background-color: var(--light-blue);
+}
+
+.a2-btn:hover {
+
+  cursor: pointer;
+  color: var(--white);
+  background-color: var(--blue);
+}
+
+.a2-back-btn {
+  margin: 20px 0;
+}
+
+.a2-approve-h2 {
+  margin: 30px 0;
 }
