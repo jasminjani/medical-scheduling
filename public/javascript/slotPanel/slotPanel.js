@@ -1,6 +1,7 @@
 let form = document.getElementById("myform");
 let rows = form.getElementsByClassName("row");
 
+window.location.href.split("/").pop() === "addSlot" ? document.getElementById("A3-add").style.backgroundColor = "#3984af" : "";
 
 for (let i = 0; i < rows.length; i++) {
   const addButton = rows[i].getElementsByClassName("A3-buttons");

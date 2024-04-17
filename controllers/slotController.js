@@ -63,6 +63,34 @@ exports.createSlots = async (req, res) => {
   }
 }
 
+const specialitiesCombo = async ()=>{
+
+    let sql = "select * from specialities where approved = 1 order by speciality";
+    let[result] = await conn.query(sql);
+
+    let html = "";
+    
+    result.forEach((speciality)=>{
+      html += `<option value=${speciality.speciality}>${speciality.speciality}</option>`;
+    })
+    
+    return html;
+}
+
+
+const DoctorCobmo = async (id)=>{
+  let sql = "select * from doctor_has_specialities where speciality_id = ?";
+  let[result] = await conn.query(sql,[id]);
+
+  let html = "";
+  
+  result.forEach((speciality)=>{
+    html += `<option value=${speciality.speciality}>${speciality.speciality}</option>`;
+  })
+  
+  return html;
+}
+
 // Patients can see the slots of doctors
 exports.getSingleSlots = async (req, res) => {
   try {
@@ -70,12 +98,12 @@ exports.getSingleSlots = async (req, res) => {
     const { doctor_id, date } = req.params;
 
     try {
-
       const query = "select * from time_slots where doctor_id = ? and date = ? and is_booked = 0 and is_deleted = 0";
 
       const [slots] = await conn.query(query, [doctor_id, date]);
 
-      return res.status(200).json({ success: true, message: slots });
+      // return res.status(200).json({ success: true, message: slots });
+      return res.render('pages/patientPanel/appointment')
 
     } catch (error) {
       return res.status(500).json({ success: false, message: error.message });
@@ -162,7 +190,7 @@ exports.getDates = async (req, res) => {
 
     try {
 
-      const query = 'SELECT DISTINCT date as dates from time_slots where date > CAST(NOW() as DATE) order by dates limit 7';
+      const query = 'SELECT DISTINCT date as dates,DAYNAME(date) as day from time_slots where doctor_id = ? and is_deleted = ? and date > CAST(NOW() as DATE) order by dates limit 7';
 
       const [data] = await conn.query(query, [doctor_id, 0]);
 

@@ -38,7 +38,7 @@ body {
   background-color: var(--light-blue);
 }
 
-.a2-btn:hover{
+.a2-btn:hover {
 
   cursor: pointer;
   color: var(--white);
@@ -56,7 +56,7 @@ body {
 
 .a2-approve-table-div {
   width: 100%;
-  margin-left: 400px;
+  margin-left: 350px;
 }
 
 .a2-approve-table {
@@ -135,8 +135,21 @@ input {
   font-size: 1.1rem;
 }
 
-.a2-submit-specialties{
+.a2-submit-specialties {
   width: auto;
   height: auto;
   padding: 10px;
+}
+
+#a2-conformtion-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 400px;
+  height: 400px;
+
+  transform: translate(-50%, -50%);
+
+  background-color: var(--brown);
 }

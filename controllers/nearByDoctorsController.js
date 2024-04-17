@@ -13,8 +13,8 @@ exports.nearByDoctores = async (req, res) => {
       })
     }
 
-    let sql = `SELECT * FROM clinic_hospitals JOIN doctor_details ON doctor_details.hospital_id = clinic_hospitals.id JOIN users ON users.id =doctor_details.doctor_id WHERE clinic_hospitals.city in (select city from users where id = ?)`;
-    let [nearByDoctores] = await conn.query(sql, [patientId]);
+    const sql = `SELECT * FROM clinic_hospitals JOIN doctor_details ON doctor_details.hospital_id = clinic_hospitals.id JOIN users ON users.id =doctor_details.doctor_id WHERE clinic_hospitals.city in (select city from users where id = ?)`;
+    const [nearByDoctores] = await conn.query(sql, [patientId]);
     res.send(nearByDoctores)
 
   } catch (error) {
@@ -38,8 +38,8 @@ exports.nearByDoctoresOnSearch = async (req, res) => {
       })
     }
 
-    let sql = `SELECT * FROM clinic_hospitals JOIN doctor_details ON doctor_details.hospital_id = clinic_hospitals.id JOIN users ON users.id =doctor_details.doctor_id WHERE clinic_hospitals.city LIKE "${city}%"`;
-    let [nearByDoctoresOnSearch] = await conn.query(sql);
+    const sql = `SELECT * FROM clinic_hospitals JOIN doctor_details ON doctor_details.hospital_id = clinic_hospitals.id JOIN users ON users.id =doctor_details.doctor_id WHERE clinic_hospitals.city LIKE "${city}%"`;
+    const [nearByDoctoresOnSearch] = await conn.query(sql);
     res.send(nearByDoctoresOnSearch)
 
   } catch (error) {

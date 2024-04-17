@@ -16,19 +16,19 @@
             <form action="/login" class="user" method="post">
                 <div class="email">
                     <label for="email">Email: </label>
-                    <input type="text" name="email" id="email" placeholder="Enter your email" class="dvalid">
+                    <input type="text" name="email" id="email" placeholder="Enter your email" class="dvalid" tabindex="1">
                 </div>
 
                 <div class="password">
                     <label for="lname">Password:</label>
-                    <input type="password" name="password" id="password" placeholder="Enter your password" class="dvalid">
+                    <input type="password" name="password" id="password" placeholder="Enter your password" class="dvalid" tabindex="2">
                 </div>
                 <div class="forgot-pass">
-                    <p><a href="/forgot-password" id="forgot-password">Forgot Password?</a></p>
+                    <p tabindex="4"><a href="/forgot-password" id="forgot-password">Forgot Password?</a></p>
                 </div>
 
                 <div class="submit">
-                    <input type="submit" id="submit" value="Login">
+                    <input type="submit" id="submit" value="Login" tabindex="3">
                 </div>
 
                 <div class="or">
@@ -37,7 +37,7 @@
                     <div class="right"></div>
                 </div>
                 <div class="mv-btn">
-                    <p>Create New Account? <a href="/register">register</a></p>
+                    <p>Create New Account? <a href="/register" tabindex="5">register</a></p>
                 </div>
             </form>
             <div class="link"></div>
