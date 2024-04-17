@@ -21,6 +21,8 @@ const {
   doctorData,
   updateGetDoctorData,
   updateGetDoctorDisplay,
+  patientDetailsData,
+  patientPrescriptionData
 } = require("../controllers/doctorController");
 const passport = require("passport");
 
@@ -166,5 +168,12 @@ router
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
     getPatientHistoryDetail
   );
+
+ router.route("/viewPatientDetailsData/:patient_id")
+   .get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),patientDetailsData) 
+
+
+router.route("/patientPrescriptionData/:patient_id/:date")
+  .get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }), patientPrescriptionData)
 
 module.exports = router;

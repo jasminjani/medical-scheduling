@@ -7,183 +7,182 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="/css/doctorPanel/dashboard.css">
-  <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
+    <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
+  <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css">
   <title>Document</title>
 </head>
 
 <body>
 
   <!-- Main -->
+
   <div class="a7-container">
 
-    <div class="a7-doctor-pannel">
-   
-          <%- include('../../common/newSidebar/doctorSidebar.ejs') %>
-        
-     
-      <div class="a7-right-bar ">
+    <%- include(`../../common/newSidebar/doctorSidebar.ejs`) %>
 
-        <div class="a7-counter-section">
-          <div class="a7-counter-card">
-            <div class="a7-label">
-              <h4>Total Appointments</h4>
+      <div class="a7-doctor-pannel ">
+        <div class="a7-right-bar ">
+          <div class="a7-counter-section">
+            <div class="a7-counter-card">
+              <div class="a7-label">
+                <h4>Total Appointments</h4>
+              </div>
+              <div class="a7-counter">
+                <div class="a7-counter-1"><img src="/assets/doctorPanel/dtotal_appointment.png" alt=""></div>
+                <div class="a7-label-count">
+                  <h4>120+</h4>
+                </div>
+              </div>
             </div>
-            <div class="a7-counter">
-              <div class="a7-counter-1"><img src="/assets/doctorPanel/dtotal_appointment.png" alt=""></div>
-              <div class="a7-label-count">
-                <h4>120+</h4>
+            <div class="a7-counter-card">
+              <div class="a7-label">
+                <h4>Total Patients</h4>
+              </div>
+              <div class="a7-counter">
+                <div class="a7-counter-2"><img src="/assets/doctorPanel/dtotal_patients.png" alt=""></div>
+                <div class="a7-label-count">
+                  <h4>120+</h4>
+                </div>
+              </div>
+            </div>
+            <div class="a7-counter-card">
+              <div class="a7-label">
+                <h4>Total Revenue</h4>
+              </div>
+              <div class="a7-counter">
+                <div class="a7-counter-3"><img src="/assets/doctorPanel/drevenue.png" alt=""></div>
+                <div class="a7-label-count">
+                  <h4>120+</h4>
+                </div>
               </div>
             </div>
           </div>
-          <div class="a7-counter-card">
-            <div class="a7-label">
-              <h4>Total Patients</h4>
-            </div>
-            <div class="a7-counter">
-              <div class="a7-counter-2"><img src="/assets/doctorPanel/dtotal_patients.png" alt=""></div>
-              <div class="a7-label-count">
-                <h4>120+</h4>
+
+          <!-- Appointment -->
+          <div class="a7-appointment-tbl">
+
+            <div class="a7-table-row">
+              <div class="a7-table-title">
+                <span>Today Appointments</span>
+              </div>
+              <div class="a7-table-header">
+                <span class="a7-table-border">Id</span>
+                <span class="a7-table-border"> Patient Name </span>
+                <span class="a7-table-border"> Appointment Time</span>
+                <span class="a7-table-border"> Describe Prescription</span>
+              </div>
+
+              <div class="a7-table-data">
+                <span class="a7-table-border">1</span>
+                <span class="a7-table-border" style="padding: 0 25px;"> Yash </span>
+                <span class="a7-table-border"> 9:00 to 9:30 </span>
+                <span class="a7-table-border"> <span class="a7-pres-btn">View Patient History</span>
+              </div>
+
+              <div class="a7-table-data">
+                <span class="a7-table-border">1</span>
+                <span class="a7-table-border" style="padding: 0 25px;"> Yash </span>
+                <span class="a7-table-border"> 9:00 to 9:30 </span>
+                <span class="a7-table-border"> <span class="a7-pres-btn">View Patient History</span>
+              </div>
+
+              <div class="a7-table-data">
+                <span class="a7-table-border">1</span>
+                <span class="a7-table-border" style="padding: 0 25px;"> Yash </span>
+                <span class="a7-table-border"> 9:00 to 9:30 </span>
+                <span class="a7-table-border"> <span class="a7-pres-btn">View Patient History</span>
               </div>
             </div>
           </div>
-          <div class="a7-counter-card">
-            <div class="a7-label">
-              <h4>Total Revenue</h4>
-            </div>
-            <div class="a7-counter">
-              <div class="a7-counter-3"><img src="/assets/doctorPanel/drevenue.png" alt=""></div>
-              <div class="a7-label-count">
-                <h4>120+</h4>
+
+          <!-- feedback -->
+          <div class="a7-feedback">
+
+            <div class="a7-feedback-section">
+              <div class="a7-table-title">
+                <span>Feedback</span>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Appointment -->
-        <div class="a7-appointment-tbl">
-
-          <div class="a7-table-row">
-            <div class="a7-table-title">
-              <span>Today Appointments</span>
-            </div>
-            <div class="a7-table-header">
-              <span class="a7-table-border">Id</span>
-              <span class="a7-table-border"> Patient Name </span>
-              <span class="a7-table-border"> Appointment Time</span>
-              <span class="a7-table-border"> Describe Prescription</span>
-            </div>
-
-            <div class="a7-table-data">
-              <span class="a7-table-border">1</span>
-              <span class="a7-table-border" style="padding: 0 25px;"> Yash </span>
-              <span class="a7-table-border"> 9:00 to 9:30 </span>
-              <span class="a7-table-border"> <span class="a7-pres-btn">View Patient History</span>
-            </div>
-
-            <div class="a7-table-data">
-              <span class="a7-table-border">1</span>
-              <span class="a7-table-border" style="padding: 0 25px;"> Yash </span>
-              <span class="a7-table-border"> 9:00 to 9:30 </span>
-              <span class="a7-table-border"> <span class="a7-pres-btn">View Patient History</span>
-            </div>
-
-            <div class="a7-table-data">
-              <span class="a7-table-border">1</span>
-              <span class="a7-table-border" style="padding: 0 25px;"> Yash </span>
-              <span class="a7-table-border"> 9:00 to 9:30 </span>
-              <span class="a7-table-border"> <span class="a7-pres-btn">View Patient History</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- feedback -->
-        <div class="a7-feedback">
-
-          <div class="a7-feedback-section">
-            <div class="a7-table-title">
-              <span>Feedback</span>
-            </div>
-            <div class="a7-card">
-              <div class="a7-card-se6">
-                <div class="a7-card-box-se6">
-                  <div class="a7-card-color-se6">
-                    <div class="a7-profile-se6">
-                      <img src="/assets/doctorPanel/dprofile.png" alt="">
-                    </div>
-                    <!-- <div class="a7-rating-se6">
+              <div class="a7-card">
+                <div class="a7-card-se6">
+                  <div class="a7-card-box-se6">
+                    <div class="a7-card-color-se6">
+                      <div class="a7-profile-se6">
+                        <img src="/assets/doctorPanel/dprofile.png" alt="">
+                      </div>
+                      <!-- <div class="a7-rating-se6">
             <img src="assets/Star 2.png" alt="">
             <img src="assets/Star 2.png" alt="">
             <img src="assets/Star 2.png" alt="">
             <img src="assets/Star 2.png" alt="">
             <img src="assets/Star 2.png" alt="">
           </div> -->
-                    <div class="a7-text-content-se6">
-                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora fugit vel suscipit magnam?
-                        Dignissimos aperiam repellendus voluptatem nihil, quas provident laborum consequatur obcaecati
-                        quia dicta reprehenderit eum corporis sit assumenda!
-                      </p>
-                      <div class="a7-signature-se6">
-                        <h3>Lorem</h3>
-                        <p>Manager</p>
+                      <div class="a7-text-content-se6">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora fugit vel suscipit magnam?
+                          Dignissimos aperiam repellendus voluptatem nihil, quas provident laborum consequatur obcaecati
+                          quia dicta reprehenderit eum corporis sit assumenda!
+                        </p>
+                        <div class="a7-signature-se6">
+                          <h3>Lorem</h3>
+                          <p>Manager</p>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="a7-card-se6">
-                <div class="a7-card-box-se6">
-                  <div class="a7-card-color-se6">
-                    <div class="a7-profile-se6">
-                      <img src="/assets/doctorPanel/dprofile.png" alt="">
-                    </div>
-                    <!-- <div class="a7-rating-se6">
+                <div class="a7-card-se6">
+                  <div class="a7-card-box-se6">
+                    <div class="a7-card-color-se6">
+                      <div class="a7-profile-se6">
+                        <img src="/assets/doctorPanel/dprofile.png" alt="">
+                      </div>
+                      <!-- <div class="a7-rating-se6">
                   <img src="assets/Star 2.png" alt="">
                   <img src="assets/Star 2.png" alt="">
                   <img src="assets/Star 2.png" alt="">
                   <img src="assets/Star 2.png" alt="">
                   <img src="assets/Star 2.png" alt="">
                 </div> -->
-                    <div class="a7-text-content-se6">
-                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora fugit vel suscipit magnam?
-                        Dignissimos
-                        aperiam repellendus voluptatem nihil, quas provident laborum consequatur obcaecati quia dicta
-                        reprehenderit
-                        eum corporis sit assumenda!
-                      </p>
-                      <div class="a7-signature-se6">
-                        <h3>Lorem</h3>
-                        <p>Manager</p>
+                      <div class="a7-text-content-se6">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora fugit vel suscipit magnam?
+                          Dignissimos
+                          aperiam repellendus voluptatem nihil, quas provident laborum consequatur obcaecati quia dicta
+                          reprehenderit
+                          eum corporis sit assumenda!
+                        </p>
+                        <div class="a7-signature-se6">
+                          <h3>Lorem</h3>
+                          <p>Manager</p>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="a7-card-se6">
-                <div class="a7-card-box-se6">
-                  <div class="a7-card-color-se6">
-                    <div class="a7-profile-se6">
-                      <img src="/assets/doctorPanel/dprofile.png" alt="">
-                    </div>
-                    <!-- <div class="a7-rating-se6">
+                <div class="a7-card-se6">
+                  <div class="a7-card-box-se6">
+                    <div class="a7-card-color-se6">
+                      <div class="a7-profile-se6">
+                        <img src="/assets/doctorPanel/dprofile.png" alt="">
+                      </div>
+                      <!-- <div class="a7-rating-se6">
                     <img src="assets/Star 2.png" alt="">
                     <img src="assets/Star 2.png" alt="">
                     <img src="assets/Star 2.png" alt="">
                     <img src="assets/Star 2.png" alt="">
                     <img src="assets/Star 2.png" alt="">
                   </div> -->
-                    <div class="a7-text-content-se6">
-                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora fugit vel suscipit magnam?
-                        Dignissimos
-                        aperiam repellendus voluptatem nihil, quas provident laborum consequatur obcaecati quia dicta
-                        reprehenderit
-                        eum corporis sit assumenda!
-                      </p>
-                      <div class="a7-signature-se6">
-                        <h3>Lorem</h3>
-                        <p>Manager</p>
+                      <div class="a7-text-content-se6">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora fugit vel suscipit magnam?
+                          Dignissimos
+                          aperiam repellendus voluptatem nihil, quas provident laborum consequatur obcaecati quia dicta
+                          reprehenderit
+                          eum corporis sit assumenda!
+                        </p>
+                        <div class="a7-signature-se6">
+                          <h3>Lorem</h3>
+                          <p>Manager</p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -192,11 +191,11 @@
             </div>
           </div>
         </div>
+
       </div>
-    </div>
   </div>
-  <script src="/javascript/doctorPanel/urlPath.js"></script>
-<script src="/javascript/doctorPanel/sidebar.js"></script>
+  <script src="/javascript/doctorPanel/sidebar.js"></script>
+ 
 </body>
 
 </html>

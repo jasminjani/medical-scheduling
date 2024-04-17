@@ -217,25 +217,21 @@ exports.getDoctorReview = async (req, res) => {
 
 exports.getPatientDetail = async (req, res) => {
   req.params.id
-  await res.render('pages/doctorPanel/viewpatient')
-}
-
-exports.getPatientHistoryDetail = async (req, res) => {
-  req.params.patient_id
   await res.render('pages/doctorPanel/patienthistory')
 }
 
 exports.getPatientHistoryDetail = async (req, res) => {
-  req.params.patient_id;
-  await res.render("pages/doctorPanel/patienthistory");
-};
+  req.params.patient_id
+  await res.render('pages/doctorPanel/patientDetail')
+}
+
 
 // json controller
 
 exports.getPatientData = async (req, res) => {
   const id = req.user.id
   try {
-    const [result] = await conn.query(`select slot_bookings.patient_id, concat(fname," ",lname)as name,gender,phone,date as appointment_date,concat(start_time," to ",end_time) as appointment_time from slot_bookings inner join time_slots on slot_bookings.slot_id = time_slots.id inner join patient_details on slot_bookings.patient_id = patient_details.patient_id inner join users on patient_details.patient_id = users.id where time_slots.doctor_id = ?;`, [id])
+    const [result] = await conn.query(`select slot_bookings.patient_id, concat(fname," ",lname)as name,phone from slot_bookings inner join time_slots on slot_bookings.slot_id = time_slots.id inner join patient_details on slot_bookings.patient_id = patient_details.patient_id inner join users on patient_details.patient_id = users.id where time_slots.doctor_id = ?;`, [id])
     res.json(result)
   } catch (error) {
     return res.json({
@@ -324,13 +320,48 @@ exports.patientHistoryData = async (req, res) => {
   try {
     const patient_id = req.params.patient_id
     const doctor_id = req.user.id
-    console.log(doctor_id);
-    const [result] = await conn.query(`select concat(fname," ",lname)as Name,dob as "Date Of Birth",gender as Gender,phone as Contact,email as Email,blood_group as "Blood Group", date as "Appointment Date",concat(start_time," to ",end_time) as "Appointment Time" ,address as Address,city as City, diagnoses as Diagnoses, prescription as Prescription, medical_history as "Medical History" from slot_bookings inner join time_slots on slot_bookings.slot_id = time_slots.id inner join patient_details inner join prescriptions on patient_details.patient_id = prescriptions.patient_id on slot_bookings.patient_id = patient_details.patient_id inner join users on patient_details.patient_id = users.id where slot_bookings.patient_id = ? and time_slots.doctor_id = ?;`, [patient_id, doctor_id])
+    const [result] = await conn.query(`select date as "Appointment Date",concat(start_time," to ",end_time) as "Appointment Time" ,diagnoses as Diagnoses,
+ prescription as Prescription from slot_bookings
+ inner join time_slots on slot_bookings.slot_id = time_slots.id 
+ inner join prescriptions on slot_bookings.patient_id = prescriptions.patient_id 
+ where slot_bookings.patient_id = ? and prescriptions.doctor_id = ? and convert(prescriptions.created_at, date) = date;`, [patient_id, doctor_id])
+    
     res.json(result)
   } catch (error) {
     return res.json({
       success: false,
       message: error.message
+    })
+  }
+}
+
+exports.patientDetailsData = async (req,res)=>{
+  const patient_id = req.params.patient_id
+  const doctor_id = req.user.id
+
+  try {
+    const [result] = await conn.query(`select concat(fname, " ", lname) as Name,gender as Gender, phone as Contact, email as Email,city as City, address as Address,blood_group as "Blood Group", dob as "Date of Birth" from slot_bookings inner join patient_details on slot_bookings.patient_id = patient_details.patient_id inner join users on patient_details.patient_id = users.id inner join time_slots on slot_bookings.slot_id = time_slots.id  where slot_bookings.patient_id = ? and time_slots.doctor_id = ? limit 0,1;`,[patient_id,doctor_id])
+    res.json(result)
+  } catch (error) {
+    return res.json({
+      success: false,
+      message: error.message
+    })
+  } 
+}
+
+exports.patientPrescriptionData = async (req,res)=>{
+  const patient_id = req.params.patient_id
+  const doctor_id = req.user.id
+  const date = req.params.date
+
+  try {
+    const [result] =await conn.query(`select date as "Appointment Date",concat(start_time," to ",end_time) as "Appointment Time" ,diagnoses as Diagnoses, prescription as Prescription from slot_bookings inner join time_slots on slot_bookings.slot_id = time_slots.id inner join prescriptions on slot_bookings.patient_id = prescriptions.patient_id  where slot_bookings.patient_id = ? and prescriptions.doctor_id = ? and convert(prescriptions.created_at, date) = date and time_slots.date = ?;`,[patient_id,doctor_id,date])
+    res.json(result)
+  } catch (error) {
+    return res.json({
+      success:false,
+      message:error.message
     })
   }
 }
