@@ -1,5 +1,5 @@
-const express = require('express')
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 // import Controller File
 const { becomeDoctorDetail, getPatientHistoryDetail, patientHistoryData, getPatientData, getPatientDetail, doctorReviewData, getPaymentHistory, doctorPaymentData, doctorDashBoard, getCityCombo, getDoctorSideBarDetail, allDoctor, createDoctor, doctorDisplay, updateDoctorDetails, getDoctorReview, doctorData, updateGetDoctorData, updateGetDoctorDisplay } = require('../controllers/doctorController');
 const passport = require('passport');
@@ -30,30 +30,56 @@ router.route("/updatedoctorProfile")
 
 
 // Router show json format Data date:- 12-04-2024
-router.route("/doctorData")
-  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), doctorData)
+router
+  .route("/doctorData")
+  .get(
+    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    doctorData
+  );
 
-router.route("/cityCombo")
-  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getCityCombo)
+router
+  .route("/cityCombo")
+  .get(
+    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    getCityCombo
+  );
 
-router.route("/doctorPaymentData")
-  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), doctorPaymentData)
+router
+  .route("/doctorPaymentData")
+  .get(
+    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    doctorPaymentData
+  );
 
+router
+  .route("/updateDoctorData")
+  .get(
+    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    updateGetDoctorData
+  );
 
-router.route("/updateDoctorData")
-  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), updateGetDoctorData)
+router
+  .route("/reviews")
+  .get(
+    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    doctorReviewData
+  );
 
-router.route("/reviews")
-  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), doctorReviewData)
+router
+  .route("/getPatientData")
+  .get(
+    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    getPatientData
+  );
 
-router.route("/getPatientData")
-  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getPatientData)
+router
+  .route("/getpatientHistoryData/:patient_id")
+  .get(
+    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    patientHistoryData
+  );
 
-router.route("/getpatientHistoryData/:patient_id")
-  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), patientHistoryData)
-
-
-
+router.route("/reviews/:id").get(doctorReviewData);
 
 // Router show doctor details date:- 12-04-2024
 router.route("/doctorProfile")
