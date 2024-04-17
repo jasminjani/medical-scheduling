@@ -55,7 +55,7 @@ body {
 
 }
 
-.doctor-panel h2 {
+.doctor-panel h3 {
   background-color: var(--light-blue);
   padding: 10px 50px;
 
@@ -65,6 +65,7 @@ body {
 
 .a2-approve-h2,
 .a2-all-doctors-panel,
+.a2-reject-doc-panel,
 .a2-approve-h4 {
   margin: 20px 0;
 }

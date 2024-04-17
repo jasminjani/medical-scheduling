@@ -7,7 +7,7 @@ exports.getAllDoctors = async (req, res) => {
     const sql = `select *,a.doctor_id from doctor_details where approved = 1`;
     const sql2 = `select * from users a 
     inner join doctor_details b on a.id = b.doctor_id 
-    inner join clinic_hospitals c on b.hospital_id = c.id where b.approved=1 order by a.id`;
+    inner join clinic_hospitals c on b.hospital_id = c.id  order by a.id`;
 
     const [result] = await conn.query(sql2);
 
@@ -29,21 +29,6 @@ exports.deleteDoctor = async (req, res) => {
 }
 
 
-exports.pendingDoctos = async (req, res) => {
-
-  try {
-
-    let sql = `select a.id,concat(a.fname,' ',a.lname) as doctor_name,a.email,b.qualification from users a
-    inner join doctor_details b on a.id = b.doctor_id where b.approved = 0`
-    const [result] = await conn.query(sql)
-
-    res.json(result);
-
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 
 exports.individualDoctor = async (req, res) => {
 
@@ -55,7 +40,7 @@ exports.individualDoctor = async (req, res) => {
     c.name,c.location,c.city,c.gst_no from users a 
     inner join doctor_details b on a.id = b.doctor_id 
     inner join clinic_hospitals c on b.hospital_id = c.id
-    where b.approved = 0 and a.id = ?`
+    where b.approved in (-1,0) and a.id = ?`
 
     let [result] = await conn.query(sql, [docID]);
     // console.log(result);
@@ -77,7 +62,7 @@ exports.approveDoctor = async (req, res) => {
     const docID = req.params.id;
     // console.log(typeof docID);
 
-    let sql1 = `update doctor_details set approved=1 where doctor_id =? and approved=0`
+    let sql1 = `update doctor_details set approved=1 where doctor_id =? and approved in (-1,0)`
     let sql2 = `update users set role_id = 2 where id = ? and role_id =1`
 
     await conn.query(sql1, [docID]);

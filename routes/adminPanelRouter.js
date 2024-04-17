@@ -3,9 +3,11 @@ const { getSpecialties, deleteSpecialty, getNewSpecialties, addNewSpecialties } 
 const { individualDoctor, pendingDoctos, approveDoctor, rejectDoctor, getAllDoctors, deleteDoctor } = require('../controllers/adminModule/adminApproveDocController');
 const { displayAllPatient, searchPatientByName } = require('../controllers/adminPanelPatientController');
 const { patientAllAppointment } = require('../controllers/patientAllAppointController');
-const { adminDeleteDoctors, adminApproveDoctors, adminGetAllPatients, adminAddSpecialites, adminDashboard } = require('../controllers/adminModule/adminPanelController')
+const { adminDeleteDoctors, adminApproveDoctors, adminGetAllPatients, adminAddSpecialites, adminDashboard } = require('../controllers/adminModule/adminPanelController');
+const passport = require('passport');
 const adminRouter = express.Router()
 
+adminRouter.use(passport.authenticate('jwt', { session: false, failureRedirect: '/login' }))
 // admin sidebar routes
 adminRouter.route('/admin').get(adminDashboard)
 adminRouter.route('/admin/all-doctors').get(adminDeleteDoctors)
@@ -22,19 +24,19 @@ adminRouter.route('/add-specialty').post(addNewSpecialties);
 
 // approve doctor panel in admin panel
 adminRouter.route('/individual-doctor/:id').get(individualDoctor);
-adminRouter.route('/get-pending-doctor').get(pendingDoctos);
 adminRouter.route('/approve-doctor/:id').get(approveDoctor);
 adminRouter.route('/reject-doctor/:id').get(rejectDoctor);
+
+
+// all doctor list in admin panel
+adminRouter.route('/get-all-doctors').get(getAllDoctors);
+adminRouter.route('/delete-doctor/:id').get(deleteDoctor);
 
 
 adminRouter.route('/admin/all-patient').get(displayAllPatient);
 adminRouter.route('/admin/display-search-patient/:searchedName').get(searchPatientByName);
 adminRouter.route('/admin/patient-appointment/:patient_id').get(patientAllAppointment);
 
-
-// all doctor list in admin panel
-adminRouter.route('/get-all-doctors').get(getAllDoctors);
-adminRouter.route('/delete-doctor/:id').get(deleteDoctor);
 
 
 
