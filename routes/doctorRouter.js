@@ -2,7 +2,8 @@ const express = require('express')
 const router = express.Router()
 // import Controller File
 const { becomeDoctorDetail, getPatientHistoryDetail, patientHistoryData, getPatientData, getPatientDetail, doctorReviewData, getPaymentHistory, doctorPaymentData, doctorDashBoard, getCityCombo, getDoctorSideBarDetail, allDoctor, createDoctor, doctorDisplay, updateDoctorDetails, getDoctorReview, doctorData, updateGetDoctorData, updateGetDoctorDisplay } = require('../controllers/doctorController');
-const passport = require('passport')
+const passport = require('passport');
+const { getPaymentHistorys } = require('../controllers/doctorPaymentHistory');
 
 
 router.route("/allDoctorProfile")
@@ -72,8 +73,11 @@ router.route("/doctorDashBoard")
 router.route('/doctorSideBarDetail')
   .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getDoctorSideBarDetail)
 
+// router.route('/doctorPaymentHistory')
+//   .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getPaymentHistory)
+
 router.route('/doctorPaymentHistory')
-  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getPaymentHistory)
+  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getPaymentHistorys)
 
 router.route('/viewPatientHistory/:patient_id')
   .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getPatientHistoryDetail)
