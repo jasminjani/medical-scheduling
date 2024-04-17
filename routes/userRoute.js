@@ -57,8 +57,8 @@ router.route("/slot/:doctor_id").post(createSlots)
 router.route("/slot").get(passport.authenticate('jwt',{session:false,failureRedirect:"/login"}),getBookingSlots);
 
 router.route('/getDoctors').post(DoctorCobmo)
-router.route("/slot/:doctor_id/:date").get(passport.authenticate('jwt',{session:false,failureRedirect:"/login"}),getSingleSlots);
-router.route("/:patient_id/book/:slot_id").post(bookingSlot);
+router.route("/slots").post(passport.authenticate('jwt',{session:false,failureRedirect:"/login"}),getSingleSlots);
+router.route("/bookslot").post(passport.authenticate('jwt',{session:false,failureRedirect:"/login"}), bookingSlot);
 router.route("/upcomingSlots").get(getSlotsPage);
 router.route("/dates/:doctor_id").get(getDates);
 router.route("/slots/:doctor_id/:date").get(getAllSlots);

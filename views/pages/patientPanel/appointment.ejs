@@ -5,27 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Appointment Form</title>
     <link rel="stylesheet" href="/css/patientCSS/appointment.css" />
+    <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
+    <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css" />
+    <script src="/sweetalert2/sweetalert2.min.js"></script>
+
   </head>
 
   <body>
+
+    <%- include('../../common/newSidebar/patientSidebar') %>
+
     <div class="main">
       <section class="container">
         <div class="full">
           <div class="header">
             <h3 class="textHeader">Appointment Form</h3>
-            <a href="./patientProfile.html"
-              ><img src="/assets/profile.png" alt="profile" class="profilePic"
-            /></a>
           </div>
-          <hr />
+
           <section class="appointmentForm">
             <div class="form">
               <div class="specialities">
-                <label for="specialities"><b>Department:</b></label>
+                <label for="specialities"><b>Speciality:</b></label>
                 <select
                   name="specialities"
                   id="specialities"
-                  class="specialities"
+                  class="specialities dvalid"
                 >
                   <option value="" data-unique="">--Select--</option>
                   <%- html %>
@@ -34,13 +38,8 @@
 
               <div class="doctor">
                 <label for="doctor"><b>Doctor:</b></label>
-                <select name="doctors" class="doctor" id="doctors">
-                  <!-- <option value="department">Select Doctor</option> -->
-                  <option value="cardiology">Cardiology</option>
-                  <option value="dental">Dental</option>
-                  <option value="neurology">Neurology</option>
-                  <option value="medicine">Medicine</option>
-                  <option value="pediatric">Pediatric</option>
+                <select name="doctors" class="doctor dvalid" id="doctors">
+                  <option value="">--Select Doctor--</option>
                 </select>
               </div>
             </div>
@@ -54,101 +53,32 @@
                 >
                 <input
                   type="date"
-                  name="selectDate"
+                  name="date"
                   id="date"
+                  class="dvalid"
                   placeholder="Select Appointment Date"
                 />
                 <!-- <input placeholder="Type Date" type="text" onfocus="(this.type = 'date')"  id="date"> -->
               </div>
 
-              <label for="selectTime"><b>Select Time:</b></label>
-              <div class="time">
-                <div>
-                  <input
-                    type="button"
-                    name="times"
-                    id="time1"
-                    value="10:00"
-                    onclick="btnTime1()"
-                  />
-                </div>
-                <div>
-                  <input
-                    type="button"
-                    name="times"
-                    id="time2"
-                    value="10:00"
-                    onclick="btnTime2()"
-                  />
-                </div>
-                <div>
-                  <input
-                    type="button"
-                    name="times"
-                    id="time3"
-                    value="10:00"
-                    onclick="btnTime3()"
-                  />
-                </div>
-                <div>
-                  <input
-                    type="button"
-                    name="times"
-                    id="time4"
-                    value="10:00"
-                    onclick="btnTime4()"
-                  />
-                </div>
-                <!-- <div class="timer"> -->
-                <div>
-                  <input
-                    type="button"
-                    name="times"
-                    id="time5"
-                    value="10:00"
-                    onclick="btnTime5()"
-                  />
-                </div>
-                <div>
-                  <input
-                    type="button"
-                    name="times"
-                    id="time6"
-                    value="10:00"
-                    onclick="btnTime6()"
-                  />
-                </div>
-                <div>
-                  <input
-                    type="button"
-                    name="times"
-                    id="time7"
-                    value="10:00"
-                    onclick="btnTime7()"
-                  />
-                </div>
-                <div>
-                  <input
-                    type="button"
-                    name="times"
-                    id="time8"
-                    value="10:00"
-                    onclick="btnTime8()"
-                  />
-                </div>
-                <!-- </div> -->
+              <div class="appointments">
+                <label for="appointments"><b>Available Slots:</b></label>
+                <select
+                  name="appointments"
+                  class="appointments dvalid"
+                  id="appointments"
+                >
+                  <option value="">--Select Slot--</option>
+                </select>
               </div>
 
-              <br />
-
-              <a href="./patientProfile.html"
-                ><input
-                  type="button"
-                  name="booked"
-                  id="slotBook"
-                  value="Book"
-                  class="submit"
-              /></a>
+              <input
+                type="submit"
+                name="booked"
+                id="slotBook"
+                value="Book"
+                class="submit"
+              />
             </div>
           </section>
         </div>
