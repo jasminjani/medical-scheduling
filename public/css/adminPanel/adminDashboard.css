@@ -84,3 +84,19 @@
   border-radius: 5px;
   background-color: var(--brown);
 }
+
+.a2-best-doctor-scroll {
+  display: flex;
+  gap: 20px;
+}
+
+.a2-best-performance-doctors {
+  display: flex;
+}
+
+.a2-doctor-profile {
+  width: 25%;
+  height: 300px;
+  margin: 0 10px;
+  background-color: var(--light-blue);
+}
