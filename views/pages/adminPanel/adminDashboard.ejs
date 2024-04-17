@@ -8,16 +8,65 @@
 
   <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
-  <link rel="stylesheet" href="/css/adminPanel/adminApproveDoc.css">
+  <link rel="stylesheet" href="/css/adminPanel/adminDashboard.css">
 
 
 </head>
 
 <body>
-  
-    <%- include('../../common/newSidebar/adminSidebar.ejs') %>
-      <div></div>
-  
+
+  <%- include('../../common/newSidebar/adminSidebar.ejs') %>
+    <div class="a2-amdin-dashboard">
+      <div class="a2-container">
+
+        <div class="a2-dashboard-status">
+          <h2>Status</h2>
+          <div class="a2-dashboard-status-cards">
+            <div class="a2-card">
+              <div class="card-itams"><span id="doctors-count">10+</span> Doctors</div>
+              <div class="card-itams">
+                <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
+              </div>
+            </div>
+            <div class="a2-card">
+              <div class="card-itams"><span id="patients-count">100+</span> Patients</div>
+              <div class="card-itams">
+                <i class="fa-solid fa-bed-pulse a5-list-item-img"></i>
+              </div>
+            </div>
+            <div class="a2-card">
+              <div class="card-itams"><span id="appointments-count">10+</span> Todays Appointments</div>
+              <div class="card-itams">
+                <i class="fa-solid fa-bed-pulse a5-list-item-img"></i>
+              </div>
+            </div>
+            <div class="a2-card">
+              <div class="card-itams"><span id="revenue-count">20 M</span> Total Revenue</div>
+              <div class="card-itams">
+                <i class="fa-solid fa-award a5-list-item-img"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="a2-admin-reviews">
+          <!-- from main home page -->
+          
+        </div>
+
+      </div>
+    </div>
+
+
+    <script>
+      const doctorsCount = document.getElementById('doctors-count');
+      const patientsCount = document.getElementById('patients-count');
+      const appointmentsCount = document.getElementById('appointments-count');
+      const revenueCount = document.getElementById('revenue-count');
+
+
+    </script>
 
 </body>
 

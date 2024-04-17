@@ -1,0 +1,86 @@
+:root {
+  --light-blue: #d2ebf9;
+  --brown: #e7e7e7;
+  --blue: #0969da;
+  --white: #ffffff;
+  --black: #000000;
+}
+
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.a2-container {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.a2-btn {
+  width: 80px;
+  height: 30px;
+  padding: 5px;
+  text-align: center;
+  margin: 5px auto;
+
+  display: flex;
+  justify-content: center;
+
+  border-radius: 3px;
+
+  background-color: var(--light-blue);
+}
+
+.a2-btn:hover {
+
+  cursor: pointer;
+  color: var(--white);
+  background-color: var(--blue);
+}
+
+
+
+/* dashboad */
+.a2-amdin-dashboard {
+  margin-left: 350px;
+}
+
+.a2-dashboard-status {
+  margin: 20px 0;
+}
+
+.a2-dashboard-status-cards {
+  margin: 20px 0;
+  padding: 20px;
+
+
+  display: flex;
+  justify-content: space-between;
+
+  /* border: 1px solid var(--brown); */
+  width: 90%;
+}
+
+.a2-card {
+
+  display: flex;
+  align-items: center;
+
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid var(--brown);
+}
+
+.card-itams {
+  padding: 0 5px 10px 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-itams i {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: var(--brown);
+}
