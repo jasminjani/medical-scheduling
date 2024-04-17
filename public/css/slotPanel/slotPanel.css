@@ -20,6 +20,10 @@ body {
   padding: 0;
 }
 
+hr{
+  color: var(--blue);
+}
+
 .container {
   max-width: 1280px;
   padding: 10px;
@@ -99,6 +103,19 @@ form .row .times {
 
 #myform .row input[type="text"],
 #myform .row input[type="date"] {
+  border-radius: 8px;
+  color: #2c5777;
+  cursor: pointer;
+  font-family: -apple-system, system-ui, "Segoe UI", "Liberation Sans",
+    sans-serif;
+  outline: none;
+  font-weight: 400;
+  line-height: 1.15385;
+  text-align: center;
+  padding: 5px;
+}
+
+#slot_gap{
   border-radius: 8px;
   color: #2c5777;
   cursor: pointer;
