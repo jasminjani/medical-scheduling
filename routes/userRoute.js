@@ -1,5 +1,5 @@
 const express = require('express');
-const { createSlots, getSingleSlots, bookingSlot, getAllSlots, deleteSlot, cancelSlot, createSlotsPage, getSlotsPage, getDates, getBookSlotPage } = require('../controllers/slotController');
+const { createSlots, getSingleSlots, bookingSlot, getAllSlots, deleteSlot, cancelSlot, createSlotsPage, getSlotsPage, getDates, getBookSlotPage, getBookingSlots, DoctorCobmo } = require('../controllers/slotController');
 const { rating } = require('../controllers/ratingController');
 const router = express.Router();
 const { imgStorage, fileStorage } = require("../utils/multer");
@@ -53,6 +53,10 @@ router.route("/:patient_id/review/:doctor_id").post(rating);
 // Slots controller
 router.route("/addSlot").get(createSlotsPage);
 router.route("/slot/:doctor_id").post(createSlots)
+
+router.route("/slot").get(passport.authenticate('jwt',{session:false,failureRedirect:"/login"}),getBookingSlots);
+
+router.route('/getDoctors').post(DoctorCobmo)
 router.route("/slot/:doctor_id/:date").get(passport.authenticate('jwt',{session:false,failureRedirect:"/login"}),getSingleSlots);
 router.route("/:patient_id/book/:slot_id").post(bookingSlot);
 router.route("/upcomingSlots").get(getSlotsPage);

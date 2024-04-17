@@ -157,3 +157,23 @@ function btnTime8() {
   document.getElementById('time1').style.backgroundColor = "white"
   document.getElementById('time1').style.color = "black"
 }
+
+
+let specialities = document.getElementById('specialities');
+
+
+specialities.addEventListener('change',async(e)=>{
+  let selectedIndex = specialities.options.selectedIndex;
+  let optionId = specialities.children[selectedIndex].dataset.unique;
+  console.log(optionId)
+
+  let data = await fetch('/getDoctors',{
+    method:"POST",
+    body:JSON.stringify({id:optionId}),
+    headers:{
+      "Content-type":"application/json"
+    }
+  })
+
+  console.log(await data.json())
+})

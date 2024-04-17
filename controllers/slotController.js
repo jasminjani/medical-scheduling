@@ -69,16 +69,19 @@ const specialitiesCombo = async ()=>{
     let[result] = await conn.query(sql);
 
     let html = "";
-    
+
     result.forEach((speciality)=>{
-      html += `<option value=${speciality.speciality}>${speciality.speciality}</option>`;
+      html += `<option value=${speciality.speciality} data-unique="${speciality.id}">${speciality.speciality}</option>`;
     })
     
     return html;
 }
 
-
-const DoctorCobmo = async (id)=>{
+// doctorCombo Data
+exports.DoctorCobmo = async (req,res)=>{
+  let id = req.body.id;
+  console.log(req.body)
+  console.log(id)
   let sql = "select * from doctor_has_specialities where speciality_id = ?";
   let[result] = await conn.query(sql,[id]);
 
@@ -88,9 +91,15 @@ const DoctorCobmo = async (id)=>{
     html += `<option value=${speciality.speciality}>${speciality.speciality}</option>`;
   })
   
-  return html;
+  return res.json({html:html});
 }
 
+
+exports.getBookingSlots = async(req,res)=>{
+  let html = await specialitiesCombo();
+  // console.log(html)
+  return res.render('pages/patientPanel/appointment',{html})
+}
 // Patients can see the slots of doctors
 exports.getSingleSlots = async (req, res) => {
   try {
