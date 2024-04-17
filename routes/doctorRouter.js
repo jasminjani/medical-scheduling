@@ -1,9 +1,31 @@
 const express = require("express");
 const router = express.Router();
 // import Controller File
-const { becomeDoctorDetail, getPatientHistoryDetail, patientHistoryData, getPatientData, getPatientDetail, doctorReviewData, getPaymentHistory, doctorPaymentData, doctorDashBoard, getCityCombo, getDoctorSideBarDetail, allDoctor, createDoctor, doctorDisplay, updateDoctorDetails, getDoctorReview, doctorData, updateGetDoctorData, updateGetDoctorDisplay } = require('../controllers/doctorController');
-const passport = require('passport');
-const { getPaymentHistorys } = require('../controllers/doctorPaymentHistory');
+const {
+  becomeDoctorDetail,
+  getPatientHistoryDetail,
+  patientHistoryData,
+  getPatientData,
+  getPatientDetail,
+  doctorReviewData,
+  getPaymentHistory,
+  doctorPaymentData,
+  doctorDashBoard,
+  getCityCombo,
+  getDoctorSideBarDetail,
+  allDoctor,
+  createDoctor,
+  doctorDisplay,
+  updateDoctorDetails,
+  getDoctorReview,
+  doctorData,
+  updateGetDoctorData,
+  updateGetDoctorDisplay,
+  patientDetailsData,
+  patientPrescriptionData,
+  logoutController
+} = require("../controllers/doctorController");
+const passport = require("passport");
 
 
 router.route("/allDoctorProfile")
@@ -108,4 +130,13 @@ router.route('/doctorPaymentHistory')
 router.route('/viewPatientHistory/:patient_id')
   .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getPatientHistoryDetail)
 
-module.exports = router
+ router.route("/viewPatientDetailsData/:patient_id")
+   .get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),patientDetailsData) 
+
+
+router.route("/patientPrescriptionData/:patient_id/:date")
+  .get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }), patientPrescriptionData)
+
+router.route("/logout").get(logoutController)  
+
+module.exports = router;
