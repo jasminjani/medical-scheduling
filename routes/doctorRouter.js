@@ -3,7 +3,8 @@ const router = express.Router()
 // import Controller File
 const { becomeDoctorDetail, getPatientHistoryDetail, patientHistoryData, getPatientData, getPatientDetail, doctorReviewData, getPaymentHistory, doctorPaymentData, doctorDashBoard, getCityCombo, getDoctorSideBarDetail, allDoctor, createDoctor, doctorDisplay, updateDoctorDetails, getDoctorReview, doctorData, updateGetDoctorData, updateGetDoctorDisplay } = require('../controllers/doctorController');
 const passport = require('passport');
-const { getPaymentHistorys } = require('../controllers/doctorPaymentHistory');
+const { patientHistory, searchpatientHistory } = require('../controllers/doctorPaymentHistory');
+const { getPatientPayment } = require('../controllers/doctorPatientPaymentHistory');
 
 
 router.route("/allDoctorProfile")
@@ -11,7 +12,7 @@ router.route("/allDoctorProfile")
 
 
 router.route("/doctorCreateProfile")
-  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), becomeDoctorDetail)  
+  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), becomeDoctorDetail)
 
 router.route("/doctorCreateProfile")
   .post(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), createDoctor)
@@ -20,13 +21,13 @@ router.route("/doctorCreateProfile")
 router.route("/updatedoctorProfile")
   .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), updateGetDoctorDisplay)
 
-  
-  router.route("/updatedoctorProfile")
+
+router.route("/updatedoctorProfile")
   .post(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), updateDoctorDetails)
-  
-  
-  router.route('/getDoctorReview')
-    .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getDoctorReview)
+
+
+router.route('/getDoctorReview')
+  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getDoctorReview)
 
 
 // Router show json format Data date:- 12-04-2024
@@ -50,7 +51,7 @@ router.route("/getPatientData")
   .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getPatientData)
 
 router.route("/getpatientHistoryData/:patient_id")
-  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), patientHistoryData)
+  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getPatientPayment)
 
 
 
@@ -73,11 +74,15 @@ router.route("/doctorDashBoard")
 router.route('/doctorSideBarDetail')
   .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getDoctorSideBarDetail)
 
-// router.route('/doctorPaymentHistory')
-//   .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getPaymentHistory)
-
 router.route('/doctorPaymentHistory')
-  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getPaymentHistorys)
+  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getPaymentHistory)
+
+// belowe 2 API for payment history
+router.route('/doctorPaymentHistorys')
+  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), patientHistory)
+
+router.route('/searchPaymentHistory/:search')
+  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), searchpatientHistory)
 
 router.route('/viewPatientHistory/:patient_id')
   .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getPatientHistoryDetail)

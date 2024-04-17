@@ -7,13 +7,13 @@
   <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
   <link rel="stylesheet" href="/css/adminPanel/allPatientDetails.css">
-  <script src="/javascript/adminPanel/allPatientDetail.js"></script>
+  <!-- <script src="/javascript/adminPanel/allPatientDetail.js"></script> -->
   <!-- <link rel="stylesheet" href="/css/doctorPanel/viewfeedback.css">
   <link rel="stylesheet" href="/css/doctorPanel/dashboard.css"> -->
   <title>View Payment</title>
 </head>
 
-<body>
+<body onload="fetchPatients()">
 
   <div class="a5-container">
 
@@ -38,15 +38,6 @@
             <table id="a5-user-table">
               <tbody id="a5-tbody">
 
-                <tr>
-                  <th>Name</th>
-                  <th>Payment Amount</th>
-                  <th>Slot Time</th>
-                  <th>Slot Date</th>
-                  <th>Payment Date</th>
-                  <th>Details</th>
-                </tr>
-
               </tbody>
             </table>
 
@@ -62,21 +53,6 @@
 
 <!-- <script src="/javascript/doctorPanel/urlPath.js"></script> -->
 <script src="/javascript/doctorPanel/sidebar.js"></script>
-<script>
-  const fetchPaymentData = async () => {
-    const fetchdata = await fetch(`http://localhost:8000/doctorPaymentData/`)
-    const data = await fetchdata.json()
-    let key = Object.keys(data[0])
-    key.forEach(element => {
-      console.log(element);
-      let tddata = document.createElement("td")
-      let span = document.createElement("span")
-      span.innerHTML = data[0][element]
-      tddata.append(span)
-      document.getElementById("rowdata").appendChild(tddata)
-    });
-  }
-  fetchPaymentData()
-</script>
+<script src="/javascript/doctorPanel/viewPayment.js"></script>
 
 </html>
