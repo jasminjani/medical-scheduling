@@ -17,8 +17,7 @@ app.set("views", "./views");
 
 // setup static file path for css,imgs,js or other files
 app.use(express.static(path.join(__dirname, "/public")));
-app.use("/sweetalert2", express.static(path.join(__dirname, '/node_modules/sweetalert2/dist')));
-
+app.use("/sweetalert2", express.static(path.join(__dirname, '/node_modules/sweetalert2/dist')))
 // middleware
 app.use(passport.initialize());
 app.use(express.json());
