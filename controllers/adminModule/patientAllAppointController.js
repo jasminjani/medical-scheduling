@@ -1,10 +1,10 @@
-const conn = require("../config/dbConnection");
+const conn = require("../../config/dbConnection");
 
 exports.patientAllAppointment = async (req, res) => {
   try {
 
     const { patient_id } = req.params;
-
+    
     if (!patient_id) {
       return res.status(500).json({
         success: false,
@@ -39,7 +39,8 @@ exports.patientAllAppointment = async (req, res) => {
     //     message: error.message
     //   })
     // }
-
+    console.log(allAppointment);
+    console.log(patientDetails);
     res.render('pages/adminPanel/patientAllAppointment', { patientDetails: patientDetails, allAppointment: allAppointment });
 
   } catch (error) {
@@ -49,6 +50,7 @@ exports.patientAllAppointment = async (req, res) => {
     })
   }
 };
+
 
 
 exports.appointmentDetails = async (req, res) => {
