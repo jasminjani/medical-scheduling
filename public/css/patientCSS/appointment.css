@@ -17,6 +17,11 @@
   margin-left: 330px;
 }
 
+/* .sidebarHeader {
+  display: flex;
+  gap: 50px;
+} */
+
 a {
   text-decoration: none;
   color: black;

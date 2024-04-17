@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Bookings</title>
+  <meta name="viewport" content="width=device-width, 
+				initial-scale=1" />
+  <link rel="stylesheet" href="/public/css/patientCSS/patientSlotBooked.css" />
+  <link rel="stylesheet" href="/public/css/patientCSS/patientReview.css" />
+  <script src="/public/javascript/patientPanel/patientReview.js"></script>
+
+</head>
+
+<body>
+  <div class="main">
+    <section class="container">
+      <div class="body" id="bodyContent">
+        <div class="sideBar">
+          <p class="side">content__sidebar</p>
+        </div>
+        <div class="full">
+          <div class="header">
+            <h3 class="textHeader">Patient Profile</h3>
+            <a href="./patientProfile.html"><img src="../../../public/assets/profile.png" alt="profilePic" class="profilePic"></a>
+          </div>
+          <hr>
+          <br>
+          
+          <section class="bookings">
+            <div class="slotBooked">
+              <h3>My Booking History :</h3>
+              <div class="table">
+
+                <div class="upcoming">
+                  <h4>Upcoming Bookings</h4><br>
+                
+                  <table id="content">
+                      <tr>
+                        <th>Doctor Name</th>
+                        <th>Booking Date</th>
+                        <th>Booking Time</th>
+                      </tr>
+                    
+                      <tr>
+                        <td>ABC</td>
+                        <td>2024-04-21</td>
+                        <td>10:30</td>
+                      </tr>
+
+                      <tr>
+                        <td>XYZ</td>
+                        <td>2024-05-14</td>
+                        <td>14:00</td>
+                      </tr>
+                  </table>
+                </div>
+                <br>
+
+                <div class="past">
+                  <h4>Past Bookings</h4><br>
+                
+                  <table id="content">
+                      <tr>
+                        <th>Doctor Name</th>
+                        <th>Booking Date</th>
+                        <th>Booking Time</th>
+                        <th>Prescription</th>
+                        <th>Rate Doctor</th>
+                      </tr>
+                    
+                      <tr>
+                        <td>ABC</td>
+                        <td>2024-03-21</td>
+                        <td>10:30</td>
+                        <td>#pdf</td>
+                        <th><a href="#rate" onclick="openRate()" id="showRate">Rate Doctor</a></th>
+                      </tr>
+
+                      <tr>
+                        <td>XYZ</td>
+                        <td>2024-03-14</td>
+                        <td>14:00</td>
+                        <td>#pdf</td>
+                        <th><a href="#rate" onclick="openRate()" id="showRate">Rate Doctor</a></th>
+                      </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="rate">
+    <!-- <h1>JavaScript Star Rating</h1> -->
+    <div class="heading">
+      <div>Hi patient mind answering one question?</div>
+      <div class="textHead">How would you rate the doctor!</div>
+    </div>
+    <br>
+    <span onclick="gfg(1)" class="star">★
+    </span>
+    <span onclick="gfg(2)" class="star">★
+    </span>
+    <span onclick="gfg(3)" class="star">★
+    </span>
+    <span onclick="gfg(4)" class="star">★
+    </span>
+    <span onclick="gfg(5)" class="star">★
+    </span>
+
+    <form action="" method="post">
+      <!-- <h3 id="output">
+        Rating is: 0/5
+      </h3> -->
+      <b>Rating :</b> <input type="text" name="rating" id="output" readonly>
+      <br><br>
+      <div class="reviewPatient">
+        <label for="review"><b>Review:</b></label>
+        <textarea name="patientReview" id="rev" cols="30" rows="5">  
+        </textarea>
+      </div>
+      <br>
+      <input type="button" name="ratingDone" id="rateGo" value="Done" onclick="closeRate()">
+    </form>
+  </div>
+</body>
+
+</html>
