@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="/css/doctorPanel/dashboard.css">
+  <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css">
   <link rel="stylesheet" href="/css/doctorPanel/profile.css">
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
   <title>Edit Profile</title>
@@ -68,6 +68,12 @@
                     <input type="text" name="address" id="" class="a7-form-input" value="" />
                   </div>
                   <div class="a7-field-inp">
+                    <label for="">Doctor City:</label>
+                    <select name="dcity" id="dcity" >
+                      <option value="">--Select City--</option>
+                    </select>
+                  </div>
+                  <div class="a7-field-inp">
                     <label for="">Qualification:</label>
                     <input type="text" name="qualification" id="" class="a7-form-input" value="" />
                   </div>
@@ -96,7 +102,7 @@
                   </div>
                   <div class="a7-field-inp">
                     <label for="">City:</label>
-                    <select name="city" id="city">
+                    <select name="city" id="city" >
                       <option value="">--Select City--</option>
                     </select>
                   </div>
@@ -120,13 +126,11 @@
   </div>
   </div>
 <script src="/javascript/doctorPanel/fetchSpeciality.js"></script>
-<script src="/javascript/doctorPanel/urlPath.js"></script>
-<script src="/javascript/doctorPanel/sidebar.js"></script>
   <script>
 
-      document.getElementById('viewprofile').href =`http://localhost:8000/doctorProfile/${Id}`
+      // document.getElementById('viewprofile').href =`http://localhost:8000/doctorProfile/`
     const fetchData = async () => {      
-      let fetchdata = await fetch(`http://localhost:8000/updateDoctorData/${Id}`)
+      let fetchdata = await fetch(`http://localhost:8000/updateDoctorData/`)
       let data = await fetchdata.json()
 
       let key = Object.keys(data[0])

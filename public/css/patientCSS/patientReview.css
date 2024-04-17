@@ -4,24 +4,33 @@
   box-sizing: border-box;
   }
   
-  body {
+  /* body {
   min-height: 50vh;
   display: flex;
   align-items: center;
   text-align: center;
   justify-content: center;
-  /* background: hsl(137, 46%, 24%); */
   font-family: "Poppins", sans-serif;
-  }
+  } */
   
-  .card {
+  #rate {
   max-width: 33rem;
   background: #cac6c6;
+  text-align: center  ;
   margin: 20px 20px;
   padding: 1rem;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   width: 100%;
   border-radius: 0.5rem;
+  display: none;
+
+  position: fixed;
+  z-index: 1;
+  left: 373px;
+  top: 33px;
+  overflow: auto;
+  background-color: rgb(139, 139, 139);
+  color: white;
   }
 
   .heading {
@@ -41,23 +50,30 @@
   }
   
   .one {
-  color: rgb(255, 0, 0);
+  color: rgb(0, 0, 0);
   }
   
   .two {
-  color: rgb(255, 106, 0);
+  color: rgb(0, 0, 0);
   }
   
   .three {
-  color: rgb(255, 218, 51);
+  color: rgb(0, 0, 0);
   }
   
   .four {
-  color: rgb(218, 252, 27);
+  color: rgb(0, 0, 0);
   }
   
   .five {
-  color: rgb(24, 159, 14);
+  color: rgb(0, 0, 0);
+  }
+
+  #output {
+    height: 30px;
+    width: 30px;
+    font-size: 20px;
+    text-align: center;
   }
   
   .reviewPatient {
@@ -69,4 +85,14 @@
   #rev {
     line-height: 1.5;
     letter-spacing: 1px;
+  }
+
+  #rateGo {
+    height: 30px;
+    width: 70px;
+    border-radius: 20px;
+  }
+
+  #rateGo:hover {
+    background-color: #aee3ff;
   }
