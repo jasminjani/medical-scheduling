@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/prescription/createPrescription.css" />
+    <link rel="stylesheet" href="/css/sideBar/sidebar.css" />
+  </head>
+  <body>
+    <div class="A4-section">
+      <div class="A4-container">
+        <%- include('../../common/adminSideBar') %>
+
+        <div class="A4-main">
+          <div class="A4-title">
+            <h1>Patient Details</h1>
+          </div>
+          <div class="A4-Content">
+            <table>
+              <tr>
+                <td class="A4-table-title">Firstname:</td>
+                <td class="A4-table-content"></td>
+              </tr>
+              <tr>
+                <td class="A4-table-title">Lastname:</td>
+                <td class="A4-table-content"></td>
+              </tr>
+              <tr>
+                <td class="A4-table-title">Email:</td>
+                <td class="A4-table-content"></td>
+              </tr>
+              <tr>
+                <td class="A4-table-title">Contact Number:</td>
+                <td class="A4-table-content"></td>
+              </tr>
+              <tr>
+                <td class="A4-table-title">Gender:</td>
+                <td class="A4-table-content"></td>
+              </tr>
+              <tr>
+                <td class="A4-table-title">DOB:</td>
+                <td class="A4-table-content"></td>
+              </tr>
+              <tr>
+                <td class="A4-table-title">Address:</td>
+                <td class="A4-table-content"></td>
+              </tr>
+              <tr>
+                <td class="A4-table-title">BloodGroup:</td>
+                <td class="A4-table-content"></td>
+              </tr>
+            </table>
+          </div>
+          <div class="A4-prescription">
+            <input
+              type="button"
+              value="Add Prescription"
+              class="A4-addPrescription"
+              id="A4-addprescription"
+              onclick="addprescreption()"
+            />
+            <br /><br />
+            <input
+              type="button"
+              value="Home"
+              class="A4-addPrescription"
+              id="A4-home"
+              onclick="goToHome()"
+            />
+            <br /><br />
+            <input
+              type="button"
+              value="Get PDF"
+              class="A4-addPrescription"
+              id="A4-generatePdf"
+              onclick="generatePDF()"
+            />
+          </div>
+
+          <div class="A4-PrescriptionDetails">
+            <h3>Enter Details here:</h3>
+            <form action="" id="myForm">
+              <input type="hidden" value="" name="patient_id" id="id" />
+              <label for="diagnosis">Diagnosis:</label>
+              <input
+                type="text"
+                name="diagnosis"
+                id="diagnosis"
+                onkeypress="removeError('prescriptionerror')"
+              />
+              <p id="diagnosiserror"></p>
+              <br /><br />
+              <label for="prescription">Prescription:</label>
+              <textarea
+                id="prescription"
+                name="prescription"
+                rows="6"
+                cols="50"
+                onkeypress="removeError('prescriptionerror')"
+              ></textarea>
+              <p id="prescriptionerror"></p>
+              <br />
+
+              <div class="A4-submitBtn">
+                <input
+                  type="button"
+                  value="Submit"
+                  class="A4-submitbtn"
+                  onclick=" return submitPrescription()"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/javascript/prescription/createPrescription.js"></script>
+  </body>
+</html>

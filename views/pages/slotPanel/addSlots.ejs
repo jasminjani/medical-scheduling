@@ -8,11 +8,15 @@
   <!-- <link href="/stylesheets/output.css" rel="stylesheet"> -->
   <link rel="stylesheet" href="css/slotPanel/slotPanel.css">
   <link rel="stylesheet" href="fontawesome-free-6.5.2-web/css/all.min.css">
+  <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
   <script src="javascript/slotPanel/slotPanel.js" defer></script>
+  <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css">
+  <script src="/sweetalert2/sweetalert2.min.js"></script>
 </head>
 
 <body>
   <section id="A3-+Slot">
+    <%-include("../../common/newSidebar/doctorSidebar")%>
     <div class="container">
       <div class="A3-row-1">
         <a id="A3-view" href="/upcomingSlots"><i class="fa-regular fa-eye"></i></a>
@@ -24,10 +28,13 @@
           <span>
             <label for="slot_gap">Slots Time :</label>
             <select name="slot_gap" id="slot_gap">
-              <option value="10">10</option>
-              <option value="20" selected>20</option>
-              <option value="30">30</option>
-              <option value="45">45</option>
+              <option value="10">10 min</option>
+              <option value="20" selected>20 min</option>
+              <option value="30">30 min</option>
+              <option value="45">45 min</option>
+              <option value="60">1 hr</option>
+              <option value="90">1.5 hr</option>
+              <option value="120">2 hr</option>
             </select>
           </span>
         </div>
@@ -37,7 +44,7 @@
               <input type="date" name="day1[]" id="date_1">
             </div>
             <div class="times">
-              <!-- <input type="text" name="day1" class="A3-time"> -->
+              <!-- <input type="text" name="day1" class="A3-time" id="abcd"> -->
               <input type="button" class="A3-buttons" value="+">
             </div>
             <span class="error"></span>
@@ -113,8 +120,9 @@
         </form>
       </div>
     </div>
-    <%-include("../../common/newSidebar/doctorSidebar")%>
+  
   </section>
+  
 </body>
 
 </html>

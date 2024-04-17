@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
+    <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="/css/prescription/prescriptionOfAllPatient.css"
+    />
+  </head>
+  <body>
+    <div class="A4-section">
+      <div class="A4-container">
+        <%- include('../../common/newSidebar/adminSidebar.ejs') %>
+
+        <div class="A4-main">
+          <div class="A4-title">
+            <h2>Prescription Details</h2>
+          </div>
+          <div class="A4-Content">
+            <form action="">
+              <input type="hidden" value="" id="input" />
+              <table id="myTable">
+                <tr>
+                  <th>Sr No</th>
+                  <th>Appointment Date</th>
+                  <th>Patient Name</th>
+                  <th>Diagnosis</th>
+                  <th>Prescription</th>
+                </tr>
+              </table>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const fetchData = async () => {
+        let res = await fetch(
+          window.location.origin + `/getprescriptionofdoctor`
+        );
+        const resjson = await res.json();
+
+        console.log(resjson.message[0]);
+        resjson.message[0].forEach(function (element, index) {
+          console.log(element.patient_name);
+          let table = document.getElementById("myTable");
+          let str = `
+            <tr>
+              <td>${index + 1}</td>
+              <td>${element.created_at}</td>
+              <td>${element.patient_name}</td>
+              <td>${element.diagnoses}</td>
+              <td><input type="button" value="Get PDF"><input type="button" value="Edit Prescription"></td>
+            </tr>
+          `;
+          table.innerHTML += str;
+        });
+      };
+
+      fetchData();
+    </script>
+  </body>
+</html>

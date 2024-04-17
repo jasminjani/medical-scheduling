@@ -1,4 +1,4 @@
-*{
+* {
   box-sizing: border-box;
 }
 
@@ -35,6 +35,7 @@ p {
   display: flex;
   flex-direction: column;
   align-items: end;
+  max-width: 947px;
 }
 
 .topBar {
@@ -62,6 +63,7 @@ p {
   /* margin-left: 220px; */
   padding-top: 20px;
   padding-bottom: 20px;
+  margin-right: 40px;
   background-color: rgb(227, 248, 255);
 }
 
@@ -76,7 +78,15 @@ p {
 .image1 {
   height: 300px;
   max-width: 800px;
-  margin-right: 50px;  
+  margin-right: 50px;
+}
+
+.middle {
+  max-width: 947px;
+}
+
+.child {
+  height: 250px;
 }
 
 .head {
@@ -93,39 +103,9 @@ p {
   column-gap: 20px;
 }
 
-.doctorDepartment input:hover{
+.doctorDepartment input:hover {
   background-color: #e12454;
 }
-
-/* #depAll:hover {
-  background-color: #e12454;
-  color: white;
-}
-
-#depCardio:hover {
-  background-color: #e12454;
-  color: white;
-}
-
-#depDental:hover {
-  background-color: #e12454;
-  color: white;
-}
-
-#depNeurology:hover {
-  background-color: #e12454;
-  color: white;
-}
-
-#depMedicine:hover {
-  background-color: #e12454;
-  color: white;
-}
-
-#depPedia:hover {
-  background-color: #e12454;
-  color: white;
-} */
 
 input {
   height: 40px;
@@ -133,16 +113,101 @@ input {
   font-weight: 600;
 }
 
+/* .cover {
+  position: relative;
+  padding: 0px 30px;
+  margin-top: 100px;
+}
+
+.left {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.right {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+} */
+
 .pics {
   display: flex;
   gap: 60px;
   padding-top: 20px;
   /* margin-left: 70px; */
-  height: 300px;
+  height: 315px;
+  max-width: 890px;
   padding-bottom: 30px;
+  margin-bottom: 50px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+
+  
+
+  /* position: relative;
+  width: 100%;
+  padding: 40px 0px;
+  height: auto;
+  flex-wrap: nowrap;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; */
 }
 
-.appoint{
+h4 {
+  margin-top: 250px;
+}
+
+.childPic {
+  display: inline-block;
+}
+
+/* .child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 250px;
+  height: 200px;
+  padding: 0px 15px;
+  margin: 1px 10px;
+  border: 1px solid #f1f1f1;
+  overflow: hidden;
+  -webkit-box-shadow: 0px 0px 15px 2px rgb(0 0 0 / 10%);;
+  box-shadow: 0px 0px 15px 2px rgb(0 0 0 / 10%);;
+}
+
+.child img, .child > svg {
+  position: absolute;
+  width: 190px;
+  height: 100px;
+  object-position: center;
+  /* background: #03A9F4; */
+/* } */
+
+.scroll-images::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+  background-color: #aaa;
+}
+
+.scroll-images::-webkit-scrollbar-thumb {
+  background-color: black;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 25px;
+} */
+
+.appoint {
   display: flex;
   gap: 40px;
   padding-top: 20px;
@@ -151,8 +216,7 @@ input {
 }
 
 .textAppoint {
-  margin-left: 50px;
-  max-width: 500px;
+  max-width: 400px;
   font-size: 50px;
   /* border: 1px solid black; */
 }
@@ -166,7 +230,12 @@ input {
   height: 300px;
 }
 
-#appoint{
+.appoint {
+  display: flex;
+  gap: 80px;
+}
+
+#appoint {
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
   border-top-left-radius: 30px;

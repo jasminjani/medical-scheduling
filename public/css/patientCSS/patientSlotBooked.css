@@ -1,0 +1,85 @@
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1260px;
+  padding: 20px 37px;
+  border: 1px solid black;
+}
+
+.body {
+  width: 800px;
+  display: flex;
+  gap: 50px;
+}
+
+.sideBar {
+  max-width: 230px;
+  border: 1px solid black;
+}
+
+.side {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+a {
+  text-decoration: none;
+  font-weight: 901;
+}
+
+.full {
+  border: 1px solid black;
+}
+
+.header {
+  display: flex;
+  gap: 670px;
+  /* border: 1px solid black;   */
+}
+
+.textHeader {
+  width: 150px;
+  margin-left: 20px;
+}
+
+.profilePic {
+  height: 50px;
+  margin-top: 10px;
+  margin-right: 20px;
+}
+
+hr {
+  border-color: #96d0ec;
+}
+
+.slotBooked {
+  margin: 20px;
+}
+
+.upcoming {
+  margin-left: 50px;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.past {
+  margin-left: 50px;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+#content {
+  margin-left: 100px;
+  /* border: 1px solid black; */
+}
+
+table, th, tr, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: center;
+  width: 500px;
+  height: 30px;
+}
