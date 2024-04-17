@@ -19,7 +19,7 @@
     <div class="A4-main">
       <div class="A4-container">
 
-        <a href="/admin" style="text-decoration: none; color: black;">
+        <a href="/admin/all-doctors" style="text-decoration: none; color: black;">
           <p class="a2-back-btn a2-btn"><img src="/assets/adminPanel/icons/back-iceblue.svg" alt="Back"> Back</p>
         </a>
 
@@ -138,7 +138,7 @@
 
         const resp = await fetch(`/approve-doctor/${id}`);
         alert("Doctor Approved....!");
-        (resp.ok) ? location.href = '/admin' : '';
+        (resp.ok) ? location.href = '/admin/all-doctors' : '';
 
       }
 

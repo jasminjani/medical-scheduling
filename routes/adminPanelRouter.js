@@ -1,9 +1,9 @@
 const express = require('express');
 const { getSpecialties, deleteSpecialty, getNewSpecialties, addNewSpecialties } = require('../controllers/adminModule/adminGetSpecialtiesController');
-const { individualDoctor, pendingDoctos, approveDoctor, rejectDoctor, getAllDoctors, deleteDoctor } = require('../controllers/adminModule/adminApproveDocController');
-const { displayAllPatient, searchPatientByName } = require('../controllers/adminPanelPatientController');
-const { patientAllAppointment, appointmentDetails } = require('../controllers/patientAllAppointController');
-const { adminDeleteDoctors, adminApproveDoctors, adminGetAllPatients, adminAddSpecialites, adminDashboard } = require('../controllers/adminModule/adminPanelController');
+const { individualDoctor, approveDoctor, rejectDoctor, getAllDoctors, deleteDoctor } = require('../controllers/adminModule/adminApproveDocController');
+const { displayAllPatient, searchPatientByName, getAllPatients } = require('../controllers/adminModule/adminPanelPatientController');
+const { patientAllAppointment, appointmentDetails } = require('../controllers/adminModule/patientAllAppointController');
+const { adminDeleteDoctors, adminApproveDoctors, adminAddSpecialites, adminDashboard } = require('../controllers/adminModule/adminPanelController');
 const passport = require('passport');
 
 
@@ -14,7 +14,6 @@ adminRouter.use(passport.authenticate('jwt', { session: false, failureRedirect: 
 adminRouter.route('/admin').get(adminDashboard)
 adminRouter.route('/admin/all-doctors').get(adminDeleteDoctors)
 adminRouter.route('/admin/approve-doctors').get(adminApproveDoctors)
-adminRouter.route('/admin/all-patient').get(adminGetAllPatients)
 adminRouter.route('/admin/add-specialites').get(adminAddSpecialites)
 
 // add specialties in admin panel
@@ -31,6 +30,7 @@ adminRouter.route('/reject-doctor/:id').get(rejectDoctor);
 
 
 // Display all patient and search patient
+adminRouter.route('/admin/get-all-patient').get(getAllPatients);
 adminRouter.route('/admin/all-patient').get(displayAllPatient);
 adminRouter.route('/admin/display-search-patient/:searchedName').get(searchPatientByName);
 
