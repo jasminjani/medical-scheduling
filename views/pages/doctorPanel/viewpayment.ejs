@@ -62,7 +62,7 @@
       <table>
 
         <tr class="a7-feedback-table-header">
-         
+
           <td><span>Name</span> </td>
           <td><span>Payment Amount</span></td>
           <td><span>Slot Time</span></td>
@@ -71,47 +71,30 @@
         </tr>
         <!-- fetch data using AJAX  -->
         <tr class="a7-feedback-table-data" id="rowdata"></tr>
-        
-      
-      </table>
-    </div></div>
-    </div>
-      
-    <script>
-          const fetchPaymentData = async() =>{
-              const fetchdata = await fetch(`http://localhost:8000/doctorPaymentData/`)
-              const data = await fetchdata.json()
-              let key = Object.keys(data[0])
-              key.forEach(element => {
-                console.log(element);
-                    let tddata = document.createElement("td")
-                    let span = document.createElement("span")
-                    span.innerHTML = data[0][element]
-                    tddata.append(span)
-                    document.getElementById("rowdata").appendChild(tddata)
-              });
-          }
-          fetchPaymentData( )
-    </script>
-</body>
 
-<!-- <script src="/javascript/doctorPanel/urlPath.js"></script> -->
-<script src="/javascript/doctorPanel/sidebar.js"></script>
-<script>
-  const fetchPaymentData = async () => {
-    const fetchdata = await fetch(`http://localhost:8000/doctorPaymentData/`)
-    const data = await fetchdata.json()
-    let key = Object.keys(data[0])
-    key.forEach(element => {
-      console.log(element);
-      let tddata = document.createElement("td")
-      let span = document.createElement("span")
-      span.innerHTML = data[0][element]
-      tddata.append(span)
-      document.getElementById("rowdata").appendChild(tddata)
-    });
-  }
-  fetchPaymentData()
-</script>
+
+      </table>
+  </div>
+  </div>
+  </div>
+
+  <script src="/javascript/doctorPanel/sidebar.js"></script>
+  <script>
+    const fetchPaymentData = async () => {
+      const fetchdata = await fetch(`http://localhost:8000/doctorPaymentData/`)
+      const data = await fetchdata.json()
+      let key = Object.keys(data[0])
+      key.forEach(element => {
+        console.log(element);
+        let tddata = document.createElement("td")
+        let span = document.createElement("span")
+        span.innerHTML = data[0][element]
+        tddata.append(span)
+        document.getElementById("rowdata").appendChild(tddata)
+      });
+    }
+    fetchPaymentData()
+  </script>
+</body>
 
 </html>
