@@ -18,24 +18,25 @@
   margin: 0 auto;
 }
 
-.a2-btn {
-  width: 80px;
-  height: 30px;
-  padding: 5px;
-  text-align: center;
-  margin: 5px auto;
 
+.a2-best-doctor-scroll {
   display: flex;
-  justify-content: center;
+  gap: 20px;
 
-  border-radius: 3px;
-
-  background-color: var(--light-blue);
+  margin: 30px 200px;
+  justify-content: end;
 }
 
-.a2-btn:hover {
+
+.a2-btn-admin {
 
   cursor: pointer;
+  padding: 5px 10px;
+  background-color: var(--light-blue);
+  border-radius: 3px;
+}
+
+.a2-btn-admin:hover {
   color: var(--white);
   background-color: var(--blue);
 }
@@ -98,5 +99,30 @@
   width: 25%;
   height: 300px;
   margin: 0 10px;
+
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px var(--brown);
   background-color: var(--light-blue);
 }
+
+.a2-doctor-img {
+  width: 100%;
+  height: 200px;
+  margin: 0 auto;
+  background-color: var(--brown);
+}
+
+.a2-doctor-img img {
+  width: 70%;
+  height: 200px;
+  padding: 0 10px;
+}
+
+.a2-doctor-details {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
