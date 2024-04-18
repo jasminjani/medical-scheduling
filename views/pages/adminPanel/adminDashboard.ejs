@@ -50,9 +50,53 @@
         </div>
 
 
+        <div>
+          <h3>Best Performance Doctors</h3>
+          <div class="a2-best-doctor-scroll">
+            <p class="a2-btn-admin">left</p>
+            <p class="a2-btn-admin">rigth</p>
+          </div>
+
+          <div class="a2-best-performance-doctors">
+
+            <div class="a2-doctor-profile">
+              <div class="a2-doctor-img">
+                <img src="/assets/doctor2.png" alt="doctor photo">
+              </div>
+              <div class="a2-doctor-details">
+                <h3 class="a2-doctor-name">Ashish Zapadiya</h3>
+                <p class="a2-doctor-specialty">Neurology</p>
+              </div>
+            </div>
+            <div class="a2-doctor-profile">
+              <div class="a2-doctor-img">
+                <img src="/assets/doctor2.png" alt="doctor photo">
+              </div>
+              <div class="a2-doctor-details">
+                <h3 class="a2-doctor-name">Ashish Zapadiya</h3>
+                <p class="a2-doctor-specialty">Neurology</p>
+
+              </div>
+            </div>
+            <div class="a2-doctor-profile">
+              <div class="a2-doctor-img">
+                <img src="/assets/doctor2.png" alt="doctor photo">
+              </div>
+              <div class="a2-doctor-details">
+                <h3 class="a2-doctor-name">Ashish Zapadiya</h3>
+                <p class="a2-doctor-specialty">Neurology</p>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- revies panel -->
         <div class="a2-admin-reviews">
           <!-- from main home page -->
-          
+
         </div>
 
       </div>
@@ -65,7 +109,19 @@
       const appointmentsCount = document.getElementById('appointments-count');
       const revenueCount = document.getElementById('revenue-count');
 
+      async function forProfilePhoto() {
 
+        let resp = await fetch('/profile-photo');
+        let data = await resp.json();
+
+
+        document.querySelector('.a5-username').innerHTML = data.name;
+        document.querySelector('.a5-useremail').innerHTML = data.email;
+
+
+      }
+
+      forProfilePhoto()
     </script>
 
 </body>

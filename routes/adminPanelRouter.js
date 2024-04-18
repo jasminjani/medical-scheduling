@@ -5,11 +5,17 @@ const { displayAllPatient, searchPatientByName, getAllPatients } = require('../c
 const { patientAllAppointment, appointmentDetails } = require('../controllers/adminModule/patientAllAppointController');
 const { adminDeleteDoctors, adminApproveDoctors, adminAddSpecialites, adminDashboard } = require('../controllers/adminModule/adminPanelController');
 const passport = require('passport');
+const { profilePhoto } = require('../controllers/adminModule/profilePhotoController');
 
 
 const adminRouter = express.Router()
 
 adminRouter.use(passport.authenticate('jwt', { session: false, failureRedirect: '/login' }))
+
+// profile photo
+adminRouter.route('/profile-photo').get(profilePhoto)
+
+
 // admin sidebar routes
 adminRouter.route('/admin').get(adminDashboard)
 adminRouter.route('/admin/all-doctors').get(adminDeleteDoctors)
