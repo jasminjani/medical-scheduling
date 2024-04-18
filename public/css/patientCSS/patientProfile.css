@@ -1,207 +1,177 @@
+:root {
+  --light-blue: #d2ebf9;
+  --light-blue-border: #3984af;
+  --brown: #e7e7e7;
+  --blue: #0969da;
+  --white: #ffffff;
+  --black: #07090c;
+}
+
 * {
   box-sizing: border-box;
 }
 
-.container {
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  /* overflow: hidden; */
+}
+
+.A3-container {
+  max-width: 1280px;
   margin: 0 auto;
-  max-width: 1260px;
-  padding: 20px 37px;
-  border: 1px solid black;
+  padding: 10px;
+  margin-left: 350px;
 }
 
-.body {
-  width: 800px;
+.A3-row-2 table {
+  border: 1px solid var(--brown);
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.A3-row-2 table td,
+th {
+  padding: 12px;
+  text-align: center;
+}
+
+.A3-row-2 table thead th {
+  border-bottom: 2px solid var(--blue);
+}
+
+.A3-row-1 {
   display: flex;
-  gap: 50px;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
 }
 
-.sideBar {
-  max-width: 230px;
-  border: 1px solid black;
-}
-
-.side {
-  font-size: 30px;
-  font-weight: 700;
-}
-
-a {
+.A3-row-1 a{
+  background-color: var(--light-blue);
+  padding: 20px;
+  color: var(--black);
+  cursor: pointer;
   text-decoration: none;
-  color: black;
 }
 
-.full {
-  border: 1px solid black;
+
+.A3-row-2 table input[type="button"] {
+  background-color: #b3d3ea;
+  border-radius: 3px;
+  box-shadow: rgba(255, 255, 255, 0.7) 0 1px 0 0 inset;
+  box-sizing: border-box;
+  color: #2c5777;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", "Liberation Sans",
+    sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.15385;
+  margin: 0;
+  outline: none;
+  padding: 8px 0.8em;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+  padding: 10px;
+  border-radius: 5px;
 }
 
-.header {
+.A3-row-2 table input[type="button"]:hover {
+  background-color: var(--light-blue-border);
+  color: var(--black);
+}
+
+.A3-modal {
+  visibility: hidden;
+  position:fixed;
+  top: 25%;
+  left: 35%;
+  padding: 20px;
+  border: 1px solid var(--brown);
+  background-color: var(--light-blue);
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px var(--light-blue);
+  max-height: 410px;
+  overflow-y: scroll;
+}
+
+.A3-modal .A3-row-3 {
   display: flex;
-  gap: 670px;
-  /* border: 1px solid black;   */
-}
-
-.textHeader {
-  width: 150px;
-  margin-left: 20px;
-}
-
-.profilePic {
-  height: 50px;
-  margin-top: 10px;
-  margin-right: 20px;
-}
-
-hr {
-  border-color: #96d0ec;
-}
-
-.user {
-  font-size: 20px;
-}
-
-.mainBody {
-  border: 1px solid black;
-  margin-right: 20px;
-  margin-bottom: 20px;
-  display: grid;
-  grid-template-columns: 30% 70%;
-}
-
-.img {
-  width: 100px;
-  height: 100px;
-  position: relative;
-  overflow: hidden;
-  border-radius: 50%;
-  margin-top: 10px;
-  border: 1px solid black;
-}
-
-.userPic {
-  display: inline;
-  margin: 0 auto;
-  margin-left: 15%;
-  height: 100%;
-  width: auto;
-
-}
-
-.details {
-  margin-left: 20px;
-}
-
-.info {
-  margin-left: 30px;
-  margin-bottom: 10px;
-}
-
-.imageInfo {
-  border: 1px solid black;
-  max-width: 200px;
-  margin: 20px 20px;
-  display: grid;
-  justify-content: center;
-}
-
-.other {
-  border: 1px solid black;
-  max-width: 200px;
-  margin: 20px 20px;
-  display: grid;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.general {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.right {
-  margin-top: 20px;
-  margin-right: 20px;
-  margin-bottom: 20px;
-  border: 1px solid black;
-}
-
-.myappoint {
-  margin-left: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.next {
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-bottom: 20px;
-  border: 1px solid black;
-}
-
-.upcoming {
-  /* border: 1px solid black; */
-  margin: 10px 10px;
-}
-
-.data {
-  margin: 10px 10px;
-  border: 1px solid black;
-}
-
-.data1 {
-  border: 1px solid black;
-  display: grid;
-  height: 50px;
   align-items: center;
-  grid-template-columns: auto auto auto auto auto;
-  margin: 10px 10px;
-  padding-left: 40px;
+  justify-content: space-between;
+  margin: 10px;
 }
 
-.data2 {
-  border: 1px solid black;
-  display: grid;
-  height: 50px;
+.A3-modal input[type="button"],.A3-delete-main input[type="button"]{
+  background-color: var(--white);
+  border-radius: 3px;
+  box-shadow: rgba(255, 255, 255, 0.7) 0 1px 0 0 inset;
+  box-sizing: border-box;
+  color: #2c5777;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", "Liberation Sans",
+    sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.15385;
+  margin: 0;
+  outline: none;
+  padding: 8px 0.8em;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.A3-modal input[type="button"]:hover,.A3-delete-main input[type="button"]:hover {
+  background-color: var(--light-blue-border);
+  color: var(--black);
+}
+
+.A3-modal > h4{
+  margin-left: 12px;
+}
+
+.A3-modal .card{
+  padding: 10px;
+  display: flex;
   align-items: center;
-  grid-template-columns: auto auto auto auto auto;
-  margin: 10px 10px;
-  padding-left: 40px;
+  gap: 20px;
 }
 
-.last {
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-bottom: 10px;
-  margin-top: 20px;
-  border: 1px solid black;
+.A3-modal .card .col{
+  background-color: var(--white);
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid var(--brown);
+  min-width: 250px;
 }
 
-.previous {
-  /* border: 1px solid black; */
-  margin: 10px 10px;
-}
-
-.pastData {
-  margin: 10px 10px;
-  border: 1px solid black;
-}
-
-.pastData1 {
-  border: 1px solid black;
-  display: grid;
-  height: 50px;
+.A3-modal .card .col p{
+  padding: 10px;
+  display: flex;
   align-items: center;
-  grid-template-columns: auto auto auto auto auto;
-  margin: 10px 10px;
-  padding-left: 40px;
+  gap: 10px;
 }
 
-.pastData2 {
-  border: 1px solid black;
-  display: grid;
-  height: 50px;
-  align-items: center;
-  grid-template-columns: auto auto auto auto auto;
-  margin: 10px 10px;
-  padding-left: 40px;
+.A3-modal .card .col p img{
+  width: 25px;
+  height: 25px;
 }
-
