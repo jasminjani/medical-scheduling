@@ -18,11 +18,27 @@ function openRate() {
 	// document.getElementById('showRate').style.dispaly = "block"
 	document.getElementById('rate').style.display = "block"
 	document.getElementById('bodyContent').style.opacity = "50%"
+	document.getElementById('rate').style.opacity = "100%"
+}
+
+function submitRate() {
+	// document.getElementById('rate').style.display = "none"
+	// document.getElementById('bodyContent').style.opacity = "100%"
+	document.getElementById('thanksText').style.display = "block"
+	document.getElementById('rate').style.opacity = "40%"
+	document.getElementById('output').value = ""
+	document.getElementById('rev').value = ""
+	document.querySelectorAll('.star').value = ""
+}
+
+function closeThanks() {
+	document.getElementById('rate').style.display = "none"
+	document.getElementById('thanksText').style.display = "none"
+	document.getElementById('bodyContent').style.opacity = "100%"
 }
 
 function closeRate() {
 	document.getElementById('rate').style.display = "none"
-	document.getElementById('bodyContent').style.opacity = "100%"
 }
 
 function gfg(n) {
