@@ -7,27 +7,30 @@
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
   <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
   <link rel="stylesheet" href="/css/adminPanel/allPatientDetails.css">
-  <script src="/javascript/adminPanel/allPatientDetail.js"></script>
+  <script src="/javascript/adminPanel/allPatientDetail.js" defer></script>
   <title>All User Details</title>
 </head>
 
 <body>
 
-  <div class="a5-container">
 
-    <%- include('../../common/newSidebar/adminSidebar') %>
 
-      <div class="a5-section">
+  <%- include('../../common/newSidebar/adminSidebar') %>
 
-        <div class="a5-search">
+    <div class="a5-section">
+      <div class="a5-container">
+        <!-- <div class="a5-search">
           <div class="a5-searchbox">
             <img src="/assets/adminPanel/icons/search.svg" alt="">
             <input type="text" name="searchUser" id="a5-searchPatient" placeholder="Search Patient name" tabindex="1">
           </div>
           <p id="a5-btn-search" onclick="searchPatient()" tabindex="2">Search</p>
-        </div>
+        </div> -->
 
         <div class="a5-all-user">
+          <a href="/admin" style="text-decoration: none; color: black;">
+            <p class="a2-back-btn a2-btn"><img src="/assets/adminPanel/icons/back-iceblue.svg" alt="Back"> Back</p>
+          </a>
 
           <h2>All Patients</h2>
 
@@ -35,42 +38,22 @@
 
             <table id="a5-user-table">
               <tbody id="a5-tbody">
-
                 <tr>
                   <th>First name</th>
                   <th>Last name</th>
                   <th>email</th>
                   <th>Details</th>
                 </tr>
-
-                <% allPatient.forEach(element=> { %>
-                  <tr>
-                    <td>
-                      <%= element.fname %>
-                    </td>
-                    <td>
-                      <%= element.lname %>
-                    </td>
-                    <td>
-                      <%= element.email %>
-                    </td>
-                    <td>
-                      <p class="a5-btn" onclick="window.location.href='/admin/patient-appointment/<%= element.id %>'">
-                        Detail</p>
-                    </td>
-                  </tr>
-                  <% }); %>
-
               </tbody>
             </table>
 
           </div>
 
         </div>
-
       </div>
+    </div>
 
-  </div>
+
 
 </body>
 

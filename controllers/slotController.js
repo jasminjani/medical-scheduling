@@ -71,44 +71,44 @@ const specialitiesCombo = async () => {
   let sql = "select * from specialities where approved = 1 order by speciality";
   let [result] = await conn.query(sql);
 
-    let html = "";
+  let html = "";
 
-    result.forEach((speciality)=>{
-      html += `<option value=${speciality.speciality} data-unique="${speciality.id}">${speciality.speciality.toUpperCase()}</option>`;
-    })
-    
-    return html;
+  result.forEach((speciality) => {
+    html += `<option value=${speciality.speciality} data-unique="${speciality.id}">${speciality.speciality.toUpperCase()}</option>`;
+  })
+
+  return html;
 }
 
 // doctorCombo Data
-exports.DoctorCobmo = async (req,res)=>{
+exports.DoctorCobmo = async (req, res) => {
   let id = req.body.id;
-  
+
   let sql = `select d.doctor_id as doctor_id, concat(u.fname," ", u.lname) as name, dd.consultancy_fees from doctor_has_specialities as d 
   inner join 
   users as u on d.doctor_id = u.id inner join doctor_details as dd on d.doctor_id= dd.doctor_id where speciality_id=?;`;
-  let[result] = await conn.query(sql,[id]);
+  let [result] = await conn.query(sql, [id]);
 
   let html = `<option value="">--Select Doctor--</option>`;
-  
-  result.forEach((doctor)=>{
+
+  result.forEach((doctor) => {
     html += `<option value=${doctor.name} data-consultancy_fees="${doctor.consultancy_fees}" data-did="${doctor.doctor_id}">${doctor.name}</option>`;
   })
-  
-  return res.json({html:html});
+
+  return res.json({ html: html });
 }
 
 
-exports.getBookingSlots = async(req,res)=>{
+exports.getBookingSlots = async (req, res) => {
   let html = await specialitiesCombo();
-  return res.render('pages/patientPanel/appointment',{html})
+  return res.render('pages/patientPanel/appointment', { html })
 }
 
-const generateSlotCombo = async(result)=>{
+const generateSlotCombo = async (result) => {
   let html = `<option value="">--Select slot--</option>`;
-  
-  result.forEach((slot)=>{
-    html += `<option value=${slot.start_time+"-"+slot.id} data-sid="${slot.id}">${slot.start_time+" - "+slot.end_time}</option>`;
+
+  result.forEach((slot) => {
+    html += `<option value=${slot.start_time + "-" + slot.id} data-sid="${slot.id}">${slot.start_time + " - " + slot.end_time}</option>`;
   })
 
   return html;
@@ -184,11 +184,12 @@ exports.bookingSlot = async (req, res) => {
 
       const query = "insert into payments(patient_id,doctor_id,slot_id,payment_amount,status) values(?,?,?,?,'1')";
 
-      const [payment] = await conn.query(query, [patientId, doctorId,slotId,paymentAmount]);
+      const [payment] = await conn.query(query, [patientId, doctorId, slotId, paymentAmount]);
 
       return res.status(200).json({ success: true, message: "slot booked successfully" });
 
     } catch (error) {
+      console.log(error);
       return res.status(500).json({ success: false, message: error.message });
     }
 
@@ -238,9 +239,11 @@ exports.getAllSlots = async (req, res) => {
 
     try {
 
-      const query = 'SELECT time_slots.id,time_slots.date,time_slots.start_time,time_slots.end_time,users.fname as patient_name,users.phone FROM time_slots left join slot_bookings on time_slots.id = slot_bookings.slot_id left join users on slot_bookings.patient_id = users.id where time_slots.doctor_id = ? and time_slots.date >= CAST(NOW() as DATE) and time_slots.is_deleted=? and date = ? order by time_slots.date';
+      // const query = 'SELECT time_slots.id,time_slots.date,time_slots.start_time,time_slots.end_time,users.fname as patient_name,users.phone FROM time_slots left join slot_bookings on time_slots.id = slot_bookings.slot_id left join users on slot_bookings.patient_id = users.id where time_slots.doctor_id = ? and time_slots.date >= CAST(NOW() as DATE) and time_slots.is_deleted = ? and date = ? and slot_bookings.is_canceled != ? order by time_slots.date';
 
-      const [data] = await conn.query(query, [doctor_id, 0, date]);
+      const query = 'select time_slots.id, time_slots.start_time,time_slots.end_time, concat(users.fname," ",users.lname) as patient_name,users.phone from time_slots  left join slot_bookings on time_slots.id =  slot_bookings.slot_id left join users on slot_bookings.patient_id = users.id where time_slots.date = ? and time_slots.is_deleted = ? and time_slots.doctor_id = ?';
+
+      const [data] = await conn.query(query, [date, 0, doctor_id]);
 
       return res.status(200).json({ success: true, message: data });
 
