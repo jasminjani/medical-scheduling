@@ -6,6 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="/css/prescription/createPrescription.css" />
     <link rel="stylesheet" href="/css/sideBar/sidebar.css" />
+    
   </head>
   <body>
     <div class="A4-section">
@@ -13,6 +14,7 @@
         <%- include('../../common/adminSideBar') %>
 
         <div class="A4-main">
+          <div class="A4-backbtn"><p class="A4-back-btn A4-btn" onclick="back()"><img src="/assets/adminPanel/icons/back-iceblue.svg" id="A4-arrow-img" alt="Back"> Back</p></div>
           <div class="A4-title">
             <h1>Patient Details</h1>
           </div>
@@ -54,7 +56,7 @@
           </div>
           <div class="A4-prescription">
             <input type="button" value="Add Prescription" class="A4-addPrescription" id="A4-addprescription" onclick="addprescreption()"/><br /><br />
-            <input type="button" value="Home" class="A4-addPrescription" id="A4-home" onclick="goToHome()"/><br /><br />
+            <!-- <input type="button" value="Home" class="A4-addPrescription" id="A4-home" onclick="goToHome()"/><br /><br /> -->
             <input type="button" value="Get PDF" class="A4-addPrescription" id="A4-generatePdf" onclick="generatePDF()"/>
           </div>
 
