@@ -1,6 +1,10 @@
 const conn = require("../config/dbConnection");
 
-exports.patientHistory = async (req, res) => {
+exports.paymentHistory = async (req, res) => {
+  await res.render('pages/doctorPanel/viewpayment')
+}
+
+exports.showpaymentHistory = async (req, res) => {
   try {
 
     let doctor_id = req.user.id;
@@ -32,7 +36,7 @@ exports.patientHistory = async (req, res) => {
 }
 
 
-exports.searchpatientHistory = async (req, res) => {
+exports.searchPaymentHistory = async (req, res) => {
   try {
 
     let doctor_id = req.user.id;

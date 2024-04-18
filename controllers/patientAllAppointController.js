@@ -60,3 +60,7 @@ exports.patientPayments = async(req,res)=>{
     return res.status(500).json({ success: false, message: error.message })
   }
 }
+
+exports.paymentHistory = async (req, res) => {
+  await res.render('pages/patientPanel/paymentHistory');
+}
