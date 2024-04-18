@@ -50,7 +50,6 @@
     let key = Object.keys(data[0])
     key.forEach(element => {
       if (element == 'profile_picture') {
-        console.log(data[0][element]);
         document.getElementById("profile").src = `/imgs/${data[0][element]}`
       }
       else {

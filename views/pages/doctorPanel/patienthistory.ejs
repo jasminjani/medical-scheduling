@@ -4,66 +4,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css">
-  <link rel="stylesheet" href="/css/doctorPanel/viewfeedback.css">
+  <link rel="stylesheet" href="/public/fontawesome-free-6.5.2-web/css/all.min.css">
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
-  <title>view Patient History</title>
+  <link rel="stylesheet" href="/css/adminPanel/patientsAllAppoinment.css">
+  <!-- <link rel="stylesheet" href="/css/doctorPanel/dashboard.css">
+  <link rel="stylesheet" href="/css/doctorPanel/profile.css"> -->
+  <title>Document</title>
 </head>
 
 <body>
-  <div class="a7-container">
-    <%- include('../../common/newSidebar/doctorSidebar.ejs') %>
-      <div class="a7-appointment-tbl a7-mr-300">
 
         <div class="a7-feedback-table-row">
           <div class="a7-feedback-title">
             <div>View Patient History</div>
           </div>
-          <table>
-
+          <table id="rowtable">
             <tr class="a7-feedback-table-header">
               <td><span>Name</span> </td>
               <td><span>Contact</span></td>
               <td><span>More Details</span></td>
             </tr>
-            <!-- Fetch data database -->
-            <tr class="a7-feedback-table-data" id="rowdata"> </tr>
-
           </table>
         </div>
-      </div>
-  </div>
-  
+
 
   <script>
 
     const fetchData = async () => {
-      let fetchdata = await fetch(`http://localhost:8000/getPatientData/`)
+      let fetchdata = await fetch(`/getPatientData`)
       let data = await fetchdata.json()
-      let key = Object.keys(data[0])
-      let pat
-      key.forEach(element => {
-
-        if (element == 'patient_id') {
-          pat = data[0][element]
-          document.getElementById("rowdata").innerHTML += `<td hidden><span>${data[0][element]}</span></td>`
-
-        }
-        else {
-          let tddata = document.createElement("td")
+      let patient_id = 1
+      let key = Object.keys(data)
+      let table = document.getElementById("rowtable")
+      key.forEach(item => {
+        const dtkey = Object.keys(data[item])
+        let tr = document.createElement("tr")
+        tr.setAttribute("class","a7-feedback-table-data")
+        dtkey.forEach(ele => {
+          let td = document.createElement("td")
           let span = document.createElement("span")
-          span.textContent = data[0][element]
-          tddata.append(span)
-          document.getElementById("rowdata").append(tddata)
-        }
+          if(ele == "patient_id")
+          {
+              td.style.display = 'none'
+              patient_id = data[item][ele]
+            span.innerText = data[item][ele]
+          }
+          else
+          {
+             span.innerText = data[item][ele]
+          }
+          td.appendChild(span)
+          tr.appendChild(td)
+        })
+       
+        let btntd = document.createElement("td")
+        let anchortag = document.createElement("a")
+            btntd.append(anchortag)
+            anchortag.setAttribute("class","a7-view-btn")
+            anchortag.textContent = `View More`
+            anchortag.href = `/viewPatientHistory/${patient_id}`
+            tr.appendChild(btntd)
+            table.appendChild(tr)
       });
-      document.getElementById("rowdata").innerHTML += `<td> <a href='http://localhost:8000/viewPatientHistory/${pat}' class="a7-view-btn"  >View More</a>  </td>`
     }
     fetchData()
   </script>
 </body>
+
+<!-- <script src="/javascript/doctorPanel/urlPath.js"></script> -->
+<script src="/javascript/doctorPanel/sidebar.js"></script>
+<script src="/javascript/doctorPanel/patientHistory.js"></script>
 
 </html>

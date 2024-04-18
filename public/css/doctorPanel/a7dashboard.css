@@ -98,25 +98,26 @@
 }
 
 .a7-card-se6 {
-  height: 500px;
+  height: 450px;
   width: 35%;
   padding: 25px 25px;
 }
 
 .a7-card-box-se6 {
-  height: 450px;
+  height: 370px;
   background-color: #F3F7FD;
   padding: 10px;
 }
 
 .a7-card-color-se6 {
   display: flex;
-  height: 430px;
+  height: 350px;
   flex-direction: column;
   align-items: center;
   text-align: center;
   background-color: #ffffff;
-  padding: 25px;
+  padding: 25px 0 0 0;
+  gap: 15px;
 }
 
 .a7-feedback {

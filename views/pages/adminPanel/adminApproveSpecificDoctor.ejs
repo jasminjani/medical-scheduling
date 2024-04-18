@@ -5,19 +5,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Approve Doctor</title>
-  <link rel="stylesheet" href="/css/sideBar/sidebar.css" />
+
+  <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
+  <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
   <link rel="stylesheet" href="/css/adminPanel/approveDoctor.css" />
+
 </head>
 
 <body>
 
-  <%- include('../../common/adminSideBar') %>
+  <%- include('../../common/newSidebar/adminSidebar.ejs') %>
 
     <div class="A4-main">
       <div class="A4-container">
-        <div class="A4-title">
-          <h1>Doctor Details</h1>
-        </div>
+
+        <a href="/admin/all-doctors" style="text-decoration: none; color: black;">
+          <p class="a2-back-btn a2-btn"><img src="/assets/adminPanel/icons/back-iceblue.svg" alt="Back"> Back</p>
+        </a>
+
+        <h2 class="a2-approve-h2">Doctor Details</h2>
+
         <div class="A4-Content">
           <table>
             <tr>
@@ -131,7 +138,7 @@
 
         const resp = await fetch(`/approve-doctor/${id}`);
         alert("Doctor Approved....!");
-        (resp.ok) ? location.href = '/admin' : '';
+        (resp.ok) ? location.href = '/admin/all-doctors' : '';
 
       }
 

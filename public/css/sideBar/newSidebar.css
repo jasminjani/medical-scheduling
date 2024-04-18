@@ -4,6 +4,11 @@
   padding: 0px;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 .a5-sidenav {
   height: 100%;
   width: 300px;
@@ -65,6 +70,11 @@
   margin: 10px auto;
   font-size: 18px;
   transition: 0.3s;
+}
+
+.a5-btn-logout a{
+    text-decoration: none;
+    color: #577f9c;
 }
 
 .a5-btn-logout:hover {
