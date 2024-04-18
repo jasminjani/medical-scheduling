@@ -82,13 +82,8 @@ const openDeleteModal = async (doctor_id, slot_id) => {
   });
 }
 
-const handleDeleteClose = () => {
-  document.getElementsByClassName("A3-delete-modal")[0].style.visibility = "hidden";
-}
-
 const handleClose = () => {
   document.getElementsByClassName("A3-modal")[0].style.visibility = "hidden";
-  document.getElementsByClassName("A3-delete-modal")[0].style.visibility = "hidden";
 }
 
 

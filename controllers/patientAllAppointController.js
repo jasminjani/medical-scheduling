@@ -47,7 +47,7 @@ exports.patientPayments = async(req,res)=>{
     const { patient_id } = req.params;
 
     try {
-      const query = "select slot_bookings.booking_date,time_slots.date,time_slots.start_time,time_slots.end_time,users.fname,users.lname,users.phone,users.email,doctor_details.qualification,clinic_hospitals.name,clinic_hospitals.location,clinic_hospitals.pincode,payments.status,payments.payment_amount,payments.is_refunded from slot_bookings inner join time_slots on slot_bookings.slot_id = time_slots.id inner join users on time_slots.doctor_id = users.id inner join doctor_details on time_slots.doctor_id = doctor_details.doctor_id inner join clinic_hospitals on doctor_details.hospital_id = clinic_hospitals.id inner join payments on payments.patient_id = slot_bookings.patient_id where slot_bookings.patient_id = ?";
+      const query = 'select time_slots.doctor_id,time_slots.date,time_slots.start_time,time_slots.end_time, concat(users.fname," ",users.lname) as doctor_name,users.phone,users.email,payments.payment_amount ,payments.is_refunded from payments inner join time_slots on time_slots.id = payments.slot_id inner join users on time_slots.doctor_id = users.id where patient_id = ?'
 
       const [data] = await conn.query(query, [patient_id]);
 
