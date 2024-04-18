@@ -9,7 +9,7 @@ const fileUpload = multer({ storage: fileStorage });
 
 const { createUser, login, getAllUser, logout, getUserById, deleteUser, generateToken, createUserForm, getCreateUserForm, getLoginForm, activationForm, activationAccount, getCurrentUser, homePage } = require("../controllers/userController");
 const passport = require('passport');
-const { patientBookings, patientPayments } = require('../controllers/patientAllAppointController');
+const { patientBookings, patientPayments, paymentHistory } = require('../controllers/patientAllAppointController');
 
 router.route("/")
 .get(homePage)
@@ -69,5 +69,6 @@ router.route("/:patient_id/cancel/:slot_id").put(cancelSlot)
 // Patients panel details(patientAllControllers)
 router.route("/bookings/:patient_id").get(patientBookings);
 router.route("/payments/:patient_id").get(patientPayments) 
+router.route("/patient-paymentHistory").get(paymentHistory)
 
 module.exports = router;

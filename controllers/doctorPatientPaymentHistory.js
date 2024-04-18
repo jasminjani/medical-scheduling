@@ -1,6 +1,10 @@
 const conn = require("../config/dbConnection");
 
-exports.getPatientPayment = async (req, res) => {
+exports.patientPaymentHistory = async (req, res) => {
+  await res.render('pages/doctorPanel/patientPaymentHistory');
+};
+
+exports.showPatientPayment = async (req, res) => {
   try {
 
     let doctor_id = req.user.id;
@@ -35,7 +39,7 @@ exports.getPatientPayment = async (req, res) => {
 }
 
 // This controller is for searching in particular patient payment history table but not in use
-exports.searchPaymentHistory = async (req, res) => {
+exports.searchPatientPayment = async (req, res) => {
   try {
 
     let doctor_id = req.user.id;
@@ -57,7 +61,7 @@ exports.searchPaymentHistory = async (req, res) => {
     JOIN users ON slot_bookings.patient_id = users.id
     JOIN patient_details ON slot_bookings.patient_id = patient_details.patient_id
     WHERE time_slots.doctor_id = ? AND slot_bookings.patient_id = ? AND time_slots.is_booked = 1 AND time_slots.is_deleted = 0
-    AND (time_slots.date LIKE '${search}%' OR time_slots.start_time LIKE '${search}%' OR time_slots.end_time LIKE '${search}%' OR slot_bookings.booking_date LIKE '${search}%' OR payments.payment_amount LIKE '${search}%' OR users.fname LIKE '${search}%' OR users.lname LIKE '${search}%' OR users.email LIKE '${search}%' OR users.gender LIKE '${search}%' OR users.phone LIKE '${search}%' OR users.city LIKE '${search}%' OR users.dob LIKE '${search}%' OR users.address LIKE '${search}%' OR patient_details.blood_group LIKE '${search}%')`;
+    AND (time_slots.date LIKE '${search}%' OR time_slots.start_time LIKE '${search}%' OR time_slots.end_time LIKE '${search}%' OR slot_bookings.booking_date LIKE '${search}%' OR payments.payment_amount LIKE '${search}%')`;
 
     const [paymentDetails] = await conn.query(sql, [doctor_id]);
 
