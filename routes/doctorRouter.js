@@ -121,11 +121,11 @@ router.route("/doctorDashBoard")
 router.route('/doctorSideBarDetail')
   .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getDoctorSideBarDetail)
 
-// router.route('/doctorPaymentHistory')
-//   .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getPaymentHistory)
-
 router.route('/doctorPaymentHistory')
-  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getPaymentHistorys)
+  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getPaymentHistory)
+
+// router.route('/doctorPaymentHistory')
+//   .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getPaymentHistorys)
 
 router.route('/viewPatientHistory/:patient_id')
   .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getPatientHistoryDetail)
