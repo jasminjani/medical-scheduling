@@ -11,7 +11,24 @@
 </head>
 
 <body>
+<style>
+  .div-field{
+    display: flex;
+  }
 
+  .mediInfo{
+    display: flex;
+    flex-direction: column;
+  }
+
+  #medicineDetail {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  }
+
+ 
+</style>
   <div class="a5-container">
 
     <%- include('../../common/newSidebar/doctorSidebar') %>
@@ -20,8 +37,8 @@
       <div class="a5-section">
 
         <div class="a5-patient">
-          <div class="a5-patient-img">
-            <img src="/assets/adminPanel/patient.png" alt="image">
+          <div class="a5-patient-img" id="patientProfile" class="A7-profile" >
+          
           </div>
           <div class="a5-patient-details">
             <h1 id="patientname">
@@ -118,6 +135,10 @@
     let data = await fetchData.json()
     let Key = Object.keys(data[0])
     Key.forEach(item => {
+      if(item == "profile_picture")
+      {
+        document.getElementById("patientProfile").innerHTML = `  <img src='/imgs/${data[0][item]}' alt="image" >`
+      }
       if (item == "Name") {
         document.getElementById("patientname").innerHTML = data[0][item]
       }
@@ -163,16 +184,25 @@
     key.forEach(item => {
 
       const dtkey = Object.keys(data[item])
+      let div = document.createElement('div')
+          div.setAttribute("class","mediInfo")
 
     dtkey.forEach(element => {
-      
-   
-     
-        document.getElementById("medicineDetail").innerHTML += `
-              <div> <p><span class="a5-bold">${element}:</span>${data[item][element]}</p></div>
-              `
-      
-       });  
+            let para = document.createElement("p")  
+            let fieldDiv = document.createElement("div")
+            fieldDiv.setAttribute("class","div-field")
+            let span = document.createElement("span")
+            span.setAttribute("class","a5-bold")
+            span.innerText = element+':'
+            para.textContent = data[item][element]
+            fieldDiv.appendChild(span)
+            fieldDiv.appendChild(para)
+            div.append(fieldDiv)
+        // document.getElementById("mediInfo").innerHTML += `
+        //        <p><span class="a5-bold">${element}:</span>${data[item][element]}</p>`
+       });
+
+        document.getElementById("medicineDetail").appendChild(div)
     });
     funcId(id).style.display = 'block';
   }
