@@ -65,7 +65,7 @@
 }
 
 
-.nav-items ul li button {
+.nav-items ul li .book-appointment {
   color: #1565D8;
   background-color: #ffffff;
   padding: 8px 10px;
@@ -75,7 +75,7 @@
   font-weight: bold;
 }
 
-.nav-items ul li button:hover {
+.nav-items ul li .book-appointment:hover {
   color: #ffffff;
   background-color: #1565D8;
 }

@@ -8,13 +8,15 @@
   <!-- <link href="/stylesheets/output.css" rel="stylesheet"> -->
   <link rel="stylesheet" href="css/slotPanel/slotPanel.css">
   <link rel="stylesheet" href="fontawesome-free-6.5.2-web/css/all.min.css">
+  <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
   <script src="javascript/slotPanel/slotPanel.js" defer></script>
   <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css">
   <script src="/sweetalert2/sweetalert2.min.js"></script>
 </head>
 
 <body>
-  <section id="A3-addSlot">
+  <section id="A3-+Slot">
+    <%-include("../../common/newSidebar/doctorSidebar")%>
     <div class="container">
       <div class="A3-row-1">
         <a id="A3-view" href="/upcomingSlots"><i class="fa-regular fa-eye"></i></a>
@@ -118,8 +120,9 @@
         </form>
       </div>
     </div>
-    <%-include("../../common/newSidebar/doctorSidebar")%>
+  
   </section>
+  
 </body>
 
 </html>

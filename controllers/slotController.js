@@ -71,46 +71,69 @@ const specialitiesCombo = async () => {
   let sql = "select * from specialities where approved = 1 order by speciality";
   let [result] = await conn.query(sql);
 
-  let html = "";
+    let html = "";
 
-  result.forEach((speciality) => {
-    html += `<option value=${speciality.speciality}>${speciality.speciality}</option>`;
+    result.forEach((speciality)=>{
+      html += `<option value=${speciality.speciality} data-unique="${speciality.id}">${speciality.speciality.toUpperCase()}</option>`;
+    })
+    
+    return html;
+}
+
+// doctorCombo Data
+exports.DoctorCobmo = async (req,res)=>{
+  let id = req.body.id;
+  
+  let sql = `select d.doctor_id as doctor_id, concat(u.fname," ", u.lname) as name, dd.consultancy_fees from doctor_has_specialities as d 
+  inner join 
+  users as u on d.doctor_id = u.id inner join doctor_details as dd on d.doctor_id= dd.doctor_id where speciality_id=?;`;
+  let[result] = await conn.query(sql,[id]);
+
+  let html = `<option value="">--Select Doctor--</option>`;
+  
+  result.forEach((doctor)=>{
+    html += `<option value=${doctor.name} data-consultancy_fees="${doctor.consultancy_fees}" data-did="${doctor.doctor_id}">${doctor.name}</option>`;
+  })
+  
+  return res.json({html:html});
+}
+
+
+exports.getBookingSlots = async(req,res)=>{
+  let html = await specialitiesCombo();
+  return res.render('pages/patientPanel/appointment',{html})
+}
+
+const generateSlotCombo = async(result)=>{
+  let html = `<option value="">--Select slot--</option>`;
+  
+  result.forEach((slot)=>{
+    html += `<option value=${slot.start_time+"-"+slot.id} data-sid="${slot.id}">${slot.start_time+" - "+slot.end_time}</option>`;
   })
 
   return html;
 }
 
-
-const DoctorCobmo = async (id) => {
-  let sql = "select * from doctor_has_specialities where speciality_id = ?";
-  let [result] = await conn.query(sql, [id]);
-
-  let html = "";
-
-  result.forEach((speciality) => {
-    html += `<option value=${speciality.speciality}>${speciality.speciality}</option>`;
-  })
-
-  return html;
-}
 
 // Patients can see the slots of doctors
 exports.getSingleSlots = async (req, res) => {
   try {
 
-    const { doctor_id, date } = req.params;
+    const { doctor_id, date } = req.body;
 
+    let result;
     try {
       const query = "select * from time_slots where doctor_id = ? and date = ? and is_booked = 0 and is_deleted = 0";
 
-      const [slots] = await conn.query(query, [doctor_id, date]);
-
-      // return res.status(200).json({ success: true, message: slots });
-      return res.render('pages/patientPanel/appointment')
-
+      [result] = await conn.query(query, [doctor_id, date]);
     } catch (error) {
       return res.status(500).json({ success: false, message: error.message });
     }
+
+    let html = await generateSlotCombo(result);
+    return res.status(200).json({ success: true, html: html });
+    // return res.render('pages/patientPanel/appointment')
+
 
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
@@ -121,15 +144,13 @@ exports.getSingleSlots = async (req, res) => {
 exports.bookingSlot = async (req, res) => {
   try {
 
-    const { patient_id, slot_id } = req.params;
-
-    const { payment_amount, doctor_id } = req.body;
-
+    const { paymentAmount, slotId, doctorId } = req.body;
+    const patientId = req.user.id;
     try {
 
       const query = "select * from time_slots inner join slot_bookings on time_slots.id = slot_bookings.slot_id where time_slots.id = ? and (slot_bookings.is_canceled = ? or time_slots.is_booked=? or time_slots.is_deleted=?)";
 
-      const [slotExist] = await conn.query(query, [slot_id, 0, 1, 1]);
+      const [slotExist] = await conn.query(query, [slotId, 0, 1, 1]);
 
       // console.log(slotExist);
 
@@ -143,7 +164,7 @@ exports.bookingSlot = async (req, res) => {
 
       const query = 'insert into slot_bookings (`slot_id`,`patient_id`,`booking_date`) values (?,?,NOW())';
 
-      const [book] = await conn.query(query, [slot_id, patient_id]);
+      const [book] = await conn.query(query, [slotId, patientId]);
 
     } catch (error) {
       return res.status(500).json({ success: false, message: error.message });
@@ -153,7 +174,7 @@ exports.bookingSlot = async (req, res) => {
 
       const query = "update time_slots set is_booked = 1 where id = ?";
 
-      const [book] = await conn.query(query, [slot_id]);
+      const [book] = await conn.query(query, [slotId]);
 
     } catch (error) {
       return res.status(500).json({ success: false, message: error.message });
@@ -163,7 +184,7 @@ exports.bookingSlot = async (req, res) => {
 
       const query = "insert into payments(patient_id,doctor_id,slot_id,payment_amount,status) values(?,?,?,?,'1')";
 
-      const [payment] = await conn.query(query, [patient_id,doctor_id, slot_id, payment_amount]);
+      const [payment] = await conn.query(query, [patientId,doctorId, slotId, paymentAmount]);
 
       return res.status(200).json({ success: true, message: "slot booked successfully" });
 
