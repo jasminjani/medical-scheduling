@@ -10,13 +10,14 @@ const {
   showDetails,
   home,
   allPatientPriscription,
+  editPrescriptionHome
 } = require("../controllers/prescriptionController");
 
 router.route("/createprescription").post(createPrescription);
 
-// router.route("/updatedetails/:patient_id").get(updateDetails);
+router.route("/updatedetails/:id").get(updateDetails);
 
-// router.route("/updatePrescription").post(updatePrescription);
+router.route("/updatePrescription/:id").post(updatePrescription);
 
 router.route("/getprescriptionofuser").get(getPrescriptionOfUser);
 
@@ -26,8 +27,10 @@ router.route("/generatePDFofprescripton/:id").get(generatePDF);
 
 router.route("/createprescription").get(showDetails);
 
-router.route("/home").get(home);
+router.route("/prescription").get(home);
 
-router.route("/allPatientPriscription").get(allPatientPriscription);
+router.route("/prescriptiondetails").get(allPatientPriscription);
+
+router.route("/editprescription/:id").get(editPrescriptionHome);
 
 module.exports = router;

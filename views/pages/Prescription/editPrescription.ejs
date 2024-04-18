@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
+  <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
+  <link rel="stylesheet" href="/css/prescription/editPrescription.css"/>
+</head>
+<body>
+  <div class="A4-section">
+    <div class="A4-container">
+      <%- include('../../common/newSidebar/adminSidebar.ejs') %>
+      <div class="A4-main">
+        <h2 class="A4-heading1">Edit your Prescription here:</h2>
+        <!-- <div class="A4-content"> -->
+          <!-- <form action="">
+            <div class="firstp">
+            <p class="A4-title">Patient Name</p>
+            <p class="A4-table-content"></p>
+            </div>
+            <div class="firstp">
+            <p class="A4-title">Appointment Date</p>
+            <p class="A4-table-content"></p>
+            </div>
+            <div class="firstp">
+            <p class="A4-title">Diagnosis</p>
+            <p class="A4-table-content"></p>
+            </div>
+            <div class="firstp">
+            <p class="A4-title">Prescription</p>
+            <p class="A4-table-content"></p>
+            </div>
+          </form> -->
+        <!-- </div> -->
+        <div class="A4-content">
+          <form action="" id='myForm'>
+          <table class="myTable">
+            <tr>
+              <td class="A4-table-title">Patient Name</td>
+              <td class="A4-table-data"><input type="text" value="" class="A4-table-content" id="data1"></td>
+            </tr>
+            <tr>
+              <td class="A4-table-title">Appointment Date</td>
+              <td class="A4-table-data"><input type="text" value="" class="A4-table-content" id="data2"></td>
+            </tr>
+            <tr>
+              <td class="A4-table-title">Diagnosis</td>
+              <td class="A4-table-data"><input type="text" value="" class="A4-table-content" id="data3"></td>
+            </tr>
+            <tr>
+              <td class="A4-table-title">Prescription</td>
+              <td class="A4-table-data"><textarea name="" id="" class="A4-table-content"></textarea></td>
+            </tr>
+          </table>
+          </form>
+        </div>
+        <div class="A4-editPrescription-Buttons">
+          <input type="button" value="Home" id="A4-Home-Button" onclick="home()">
+          <input type="button" value="Edit" id="A4-Edit-Button" onclick="editPrescription(`<%= id %>`)">
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+
+  let id=`<%= id %>`;
+  console.log(id);
+
+  const fetchdata=async()=>{
+    let res=await fetch(window.location.origin + `/updatedetails/${id}`);
+    let resjson=await res.json();
+
+    const ele = document.getElementsByClassName("A4-table-content");
+    console.log(ele);
+    const keys = Object.keys(resjson.result[0]);
+    let i=0;
+
+    keys.forEach((element) => {
+        ele[i].value = resjson.result[0][element];
+        i++;
+    });
+  }
+
+  fetchdata();
+
+  const editPrescription=async(id)=>{
+
+    try{
+
+    const form = document.getElementById("myForm");
+    console.log(form);
+    const obj = new URLSearchParams(new FormData(form));
+    console.log(obj);
+    console.log(id+"iddddddddddddddddd");
+    let res=await fetch(location.origin+`/updatePrescription/${id}`,
+            {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                method: "POST",
+                body: obj
+            });
+  }
+  catch(error){
+    console.log(error);
+  }          
+  }
+</script>
+</html>

@@ -81,5 +81,5 @@ const generatePDF = async () => {
 };
 
 const goToHome = async () => {
-  location.href = `/home`;
+  location.href = `/prescription`;
 };
