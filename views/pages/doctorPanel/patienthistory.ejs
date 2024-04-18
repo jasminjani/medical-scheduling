@@ -4,19 +4,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css">
-  <link rel="stylesheet" href="/css/doctorPanel/viewfeedback.css">
+  <link rel="stylesheet" href="/public/fontawesome-free-6.5.2-web/css/all.min.css">
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
-  <title>view Patient History</title>
+  <link rel="stylesheet" href="/css/adminPanel/patientsAllAppoinment.css">
+  <!-- <link rel="stylesheet" href="/css/doctorPanel/dashboard.css">
+  <link rel="stylesheet" href="/css/doctorPanel/profile.css"> -->
+  <title>Document</title>
 </head>
 
 <body>
-  <div class="a7-container">
-    <%- include('../../common/newSidebar/doctorSidebar.ejs') %>
-      <div class="a7-appointment-tbl a7-mr-300">
 
         <div class="a7-feedback-table-row">
           <div class="a7-feedback-title">
@@ -30,8 +26,6 @@
             </tr>
           </table>
         </div>
-      </div>
-  </div>
 
 
   <script>
@@ -76,5 +70,9 @@
     fetchData()
   </script>
 </body>
+
+<!-- <script src="/javascript/doctorPanel/urlPath.js"></script> -->
+<script src="/javascript/doctorPanel/sidebar.js"></script>
+<script src="/javascript/doctorPanel/patientHistory.js"></script>
 
 </html>

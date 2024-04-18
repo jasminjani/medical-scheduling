@@ -1,0 +1,24 @@
+td {
+  text-align: center;
+  padding: 15px 0;
+}
+
+.table-heading {
+  display: flex;
+  justify-content: space-between;
+}
+
+.combo-box {
+  font-size: 17px;
+}
+
+select {
+  background-color: var(--light-blue);
+  border: none;
+  width: 105px;
+  text-align: center;
+  border-radius: 4px;
+  height: 38px;
+  font-size: inherit;
+  font-family: inherit;
+}

@@ -61,24 +61,21 @@ exports.createPrescription = async (req, res) => {
   }
 };
 
-// exports.updateDetails = async (req, res) => {
-//   console.log("in updateDetails");
-//   try {
-//     const id = req.params.patient_id;
-//     console.log(id);
-//     let query = `select * from prescriptions where patient_id=?`;
-//     let result = await conn.query(query, [id]);
-//     res.send(result);
-//     res.json({
-//       msg: result,
-//     });
-//   } catch (error) {
-//     return res.status(500).json({
-//       success: false,
-//       message: error.message,
-//     });
-//   }
-// };
+exports.updateDetails = async (req, res) => {
+  console.log("in updateDetails");
+  try {
+    const id = req.params.id;
+    console.log(id);
+    let query = `select concat(users.fname," ",users.lname) as patient_name,convert(prescriptions.created_at,date),diagnoses,prescription from prescriptions join users on prescriptions.patient_id= users.id where prescriptions.id=?`;
+    let [result] = await conn.query(query, [id]);
+    res.status(200).json({success:true,result: result});
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
 
 // exports.updatePrescription = async (req, res) => {
 //   try {
@@ -180,7 +177,7 @@ exports.getPrescriptionOfDoctor = async (req, res) => {
       [id]
     );
     const count = result[0].count;
-    const query = `select prescriptions.created_at,prescriptions.diagnoses,prescriptions.id,concat(users.fname," ",users.lname) as patient_name from prescriptions join users on prescriptions.patient_id= users.id where doctor_id=?`;
+    const query = `select prescriptions.created_at,prescriptions.diagnoses,prescriptions.id,concat(users.fname," ",users.lname) as patient_name from prescriptions join users on prescriptions.patient_id= users.id where doctor_id=? order by prescriptions.created_at`;
     const result2 = await conn.query(query, [id]);
     return res.status(200).json({ success: true, message: result2, count });
   } catch (error) {
@@ -190,5 +187,17 @@ exports.getPrescriptionOfDoctor = async (req, res) => {
     });
   }
 };
+
+exports.editPrescriptionHome=async (req,res)=>{
+  try{
+    const id=req.params.id;
+    return res.render('pages/Prescription/editPrescription.ejs',{id})
+  }catch(error){
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+}
 
 // id, doctor_id, patient_id, prescription, diagnoses, created_at, updated_at;

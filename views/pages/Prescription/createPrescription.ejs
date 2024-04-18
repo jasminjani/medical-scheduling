@@ -53,29 +53,9 @@
             </table>
           </div>
           <div class="A4-prescription">
-            <input
-              type="button"
-              value="Add Prescription"
-              class="A4-addPrescription"
-              id="A4-addprescription"
-              onclick="addprescreption()"
-            />
-            <br /><br />
-            <input
-              type="button"
-              value="Home"
-              class="A4-addPrescription"
-              id="A4-home"
-              onclick="goToHome()"
-            />
-            <br /><br />
-            <input
-              type="button"
-              value="Get PDF"
-              class="A4-addPrescription"
-              id="A4-generatePdf"
-              onclick="generatePDF()"
-            />
+            <input type="button" value="Add Prescription" class="A4-addPrescription" id="A4-addprescription" onclick="addprescreption()"/><br /><br />
+            <input type="button" value="Home" class="A4-addPrescription" id="A4-home" onclick="goToHome()"/><br /><br />
+            <input type="button" value="Get PDF" class="A4-addPrescription" id="A4-generatePdf" onclick="generatePDF()"/>
           </div>
 
           <div class="A4-PrescriptionDetails">
@@ -83,32 +63,15 @@
             <form action="" id="myForm">
               <input type="hidden" value="" name="patient_id" id="id" />
               <label for="diagnosis">Diagnosis:</label>
-              <input
-                type="text"
-                name="diagnosis"
-                id="diagnosis"
-                onkeypress="removeError('prescriptionerror')"
-              />
-              <p id="diagnosiserror"></p>
-              <br /><br />
+              <input type="text" name="diagnosis" id="diagnosis" onkeypress="removeError('prescriptionerror')"/>
+              <p id="diagnosiserror"></p><br /><br />
+
               <label for="prescription">Prescription:</label>
-              <textarea
-                id="prescription"
-                name="prescription"
-                rows="6"
-                cols="50"
-                onkeypress="removeError('prescriptionerror')"
-              ></textarea>
-              <p id="prescriptionerror"></p>
-              <br />
+              <textarea id="prescription" name="prescription" rows="6" cols="50" onkeypress="removeError('prescriptionerror')"></textarea>
+              <p id="prescriptionerror"></p><br />
 
               <div class="A4-submitBtn">
-                <input
-                  type="button"
-                  value="Submit"
-                  class="A4-submitbtn"
-                  onclick=" return submitPrescription()"
-                />
+                <input type="button" value="Submit" class="A4-submitbtn" onclick=" return submitPrescription()"/>
               </div>
             </form>
           </div>

@@ -22,6 +22,36 @@ const generateCityCombo = async () => {
   return html;
 };
 
+exports.getDoctorDetailForHomePage = async (req,res)=>{
+  try {
+    let result;
+    try {
+      let sql = `select u.id,u.fname,u.lname,pp.profile_picture,
+      count(rr.id) as total_reviews, avg(rr.rating) as rating from doctor_details as dd
+      inner join 
+      users as u on u.id = dd.doctor_id
+      inner join profile_pictures as pp on pp.user_id = u.id
+      inner join rating_and_reviews as rr on u.id = rr.doctor_id
+      where pp.is_active = 1 group by u.id,pp.created_at,pp.profile_picture ; `
+      [result] = await conn.query(sql);
+    } catch (error) {
+      console.log(error)
+    }
+    try {
+      let sql = `select ds.doctor_id,s.speciality from doctor_has_specialities as ds inner join specialities as s on s.id = ds.speciality_id; `
+      let [result] = await conn.query(sql);
+    } catch (error) {
+      console.log(error)
+    }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: error.message,
+      message: "Internal server Error",
+    });
+  }
+}
+
 exports.homePage = async(req,res)=>{
   try {
     return res.render('./common/homepage')
