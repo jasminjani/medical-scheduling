@@ -23,7 +23,11 @@
               <li><a href="#about-us">About Us</a></li>
               <li id="login"><a href="/login">Login</a></li>
               <li id="register"><a href="/register">Register</a></li>
-              <li><a href="/slot" class="book-appointment">Book Your Appointment</a></li>
+              <li>
+                <a href="/slot" class="book-appointment"
+                  >Book Your Appointment</a
+                >
+              </li>
             </ul>
           </nav>
         </div>
@@ -95,6 +99,108 @@
         </div>
       </section>
 
+      <!-- our doctor section -->
+      <section class="our-doctors-section">
+        <div class="container">
+          <div class="section-heading">
+            <p class="steps-title">Our Doctors</p>
+            <p class="steps-subtitle">
+              We provide a wide range of creative services for clients. But the
+              most important thing is that of pleasure.
+            </p>
+          </div>
+
+          <!-- search bar of doctor -->
+          <div class="all-doctors">
+            <div class="search-doctor">
+              <div class="specialities">
+                <select name="speciality" id="speciality">
+                  <option value="" disabled selected>Select speciality</option>
+                  <option value="">MS</option>
+                  <option value="">MD</option>
+                  <option value="">MBBS</option>
+                </select>
+              </div>
+              <p class="or">OR</p>
+              <div class="doctor-names">
+                <input
+                  type="text"
+                  name="dname"
+                  id="dname"
+                  list="doctor-name"
+                  placeholder="Search Doctor by name"
+                />
+
+                <datalist id="doctor-name">
+                  <option value="ms">MS</option>
+                  <option value="md">MD</option>
+                  <option value="mbbs">MBBS</option>
+                </datalist>
+
+                <div class="search-btn">
+                  <input type="submit" class="btn" value="Search" />
+                </div>
+              </div>
+            </div>
+
+
+            <div class="doctors">
+              <div class="cards">
+            
+                <div class="card">
+                  <div class="img">
+                    <img src="/assets/doctor.png" alt="" >
+                  </div>
+                  <div class="details">
+                    <p class="name">doctor2</p>
+                    <p class="speciality">MS</p>
+                  </div>
+                  <p class="rating">
+                    <img src="/assets/gstar.png" width="15px" alt="">
+                    <img src="/assets/gstar.png" width="15px" alt="">
+                    <img src="/assets/gstar.png" width="15px" alt="">
+                    <img src="/assets/gstar.png" width="15px" alt="">
+                    <img src="/assets/gstar.png" width="15px" alt="">
+                  </p>
+                </div>
+                <div class="card">
+                  <div class="img">
+                    <img src="/assets/doctor.png" alt="" >
+                  </div>
+                  <div class="details">
+                    <p class="name">doctor2</p>
+                    <p class="speciality">MS</p>
+                  </div>
+                  <p class="rating">
+                    <img src="/assets/gstar.png" width="15px" alt="">
+                    <img src="/assets/gstar.png" width="15px" alt="">
+                    <img src="/assets/gstar.png" width="15px" alt="">
+                    <img src="/assets/gstar.png" width="15px" alt="">
+                    <img src="/assets/gstar.png" width="15px" alt="">
+                  </p>
+                </div>
+                <div class="card">
+                  <div class="img">
+                    <img src="/assets/doctor.png" alt="" >
+                  </div>
+                  <div class="details">
+                    <p class="name">doctor2</p>
+                    <p class="speciality">MS</p>
+                  </div>
+                  <p class="rating">
+                    <img src="/assets/gstar.png" width="15px" alt="">
+                    <img src="/assets/gstar.png" width="15px" alt="">
+                    <img src="/assets/gstar.png" width="15px" alt="">
+                    <img src="/assets/gstar.png" width="15px" alt="">
+                    <img src="/assets/gstar.png" width="15px" alt="">
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- about us section -->
       <section class="about-section" id="about-us">
         <div class="container">
@@ -128,6 +234,7 @@
       </section>
     </main>
 
+    <!-- footer section -->
     <footer id="footer">
         <div class="container">
             <div class="footer-content">
