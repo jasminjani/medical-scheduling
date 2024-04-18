@@ -36,6 +36,7 @@
 .a5-patient-img>img {
   height: 250px;
   width: 250px;
+  border-radius: 100%;
 }
 
 .a5-patient-details {

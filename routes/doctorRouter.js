@@ -8,7 +8,6 @@ const {
   getPatientData,
   getPatientDetail,
   doctorReviewData,
-  getPaymentHistory,
   doctorPaymentData,
   doctorDashBoard,
   getCityCombo,
@@ -23,7 +22,10 @@ const {
   updateGetDoctorDisplay,
   patientDetailsData,
   patientPrescriptionData,
-  logoutController
+  logoutController,
+  dashBoardCount,
+  dashBoardReviews,
+
 } = require("../controllers/doctorController");
 const passport = require("passport");
 
@@ -52,6 +54,12 @@ router.route("/updatedoctorProfile")
 
 
 // Router show json format Data date:- 12-04-2024
+
+router.route("/dashBoardReviews")
+  .get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),dashBoardReviews)
+router.route("/dashBoardCount")
+  .get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }), dashBoardCount)
+
 router
   .route("/doctorData")
   .get(
@@ -124,8 +132,8 @@ router.route('/doctorSideBarDetail')
 // router.route('/doctorPaymentHistory')
 //   .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getPaymentHistory)
 
-router.route('/doctorPaymentHistory')
-  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getPaymentHistorys)
+// router.route('/doctorPaymentHistory')
+//   .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getPaymentHistorys)
 
 router.route('/viewPatientHistory/:patient_id')
   .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getPatientHistoryDetail)
@@ -138,5 +146,7 @@ router.route("/patientPrescriptionData/:patient_id/:date")
   .get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }), patientPrescriptionData)
 
 router.route("/logout").get(logoutController)  
+
+
 
 module.exports = router;

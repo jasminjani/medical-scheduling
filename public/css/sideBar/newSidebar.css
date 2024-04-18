@@ -67,6 +67,11 @@
   transition: 0.3s;
 }
 
+.a5-btn-logout a{
+    text-decoration: none;
+    color: #577f9c;
+}
+
 .a5-btn-logout:hover {
   background-color: #0969da;
   color: #ffffff;

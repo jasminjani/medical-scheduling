@@ -7,6 +7,7 @@ exports.doctorDashBoard = (req, res) => {
 exports.getDoctorSideBarDetail = async (req, res) => {
   try {
     //doctor_id get token
+    
     const doctor_id = req.user.id;
     const id = req.params.id;
     const [result] = await conn.query(
@@ -231,7 +232,7 @@ exports.getPatientHistoryDetail = async (req, res) => {
 exports.getPatientData = async (req, res) => {
   const id = req.user.id
   try {
-    const [result] = await conn.query(`select slot_bookings.patient_id, concat(fname," ",lname)as name,phone from slot_bookings inner join time_slots on slot_bookings.slot_id = time_slots.id inner join patient_details on slot_bookings.patient_id = patient_details.patient_id inner join users on patient_details.patient_id = users.id where time_slots.doctor_id = ?;`, [id])
+    const [result] = await conn.query(`select slot_bookings.patient_id, concat(fname," ",lname)as name,phone from slot_bookings inner join time_slots on slot_bookings.slot_id = time_slots.id inner join patient_details on slot_bookings.patient_id = patient_details.patient_id inner join users on patient_details.patient_id = users.id where time_slots.doctor_id = ? group by patient_details.id;`, [id])
     res.json(result)
   } catch (error) {
     return res.json({
@@ -265,7 +266,7 @@ exports.updateGetDoctorData = async (req, res) => {
     // doctor_id get token
     const doctor_id = req.user.id
 
-    const [result] = await conn.query(`select specialities.id as speciality,doctor_details.id, doctor_details.doctor_id,clinic_hospitals.id as hospital_id, fname,lname,email,gender,dob,phone,users.city as dcity,address,name,location,gst_no,clinic_hospitals.city,pincode, qualification, consultancy_fees from doctor_details inner join users on  doctor_details.doctor_id = users.id inner join doctor_has_specialities on doctor_details.doctor_id = doctor_has_specialities.doctor_id inner join clinic_hospitals on clinic_hospitals.id = doctor_details.hospital_id inner join specialities on specialities.id = doctor_has_specialities.speciality_id where doctor_details.doctor_id = ?;`, [doctor_id])
+    const [result] = await conn.query(`select specialities.id as speciality,doctor_details.id, doctor_details.doctor_id,clinic_hospitals.id as hospital_id, fname,lname,email,gender,dob,phone,users.city as dcity,profile_picture,address,name,location,gst_no,clinic_hospitals.city,pincode, qualification, consultancy_fees from doctor_details inner join users on  doctor_details.doctor_id = users.id inner join doctor_has_specialities on doctor_details.doctor_id = doctor_has_specialities.doctor_id inner join profile_pictures on users.id = profile_pictures.user_id inner join clinic_hospitals on clinic_hospitals.id = doctor_details.hospital_id inner join specialities on specialities.id = doctor_has_specialities.speciality_id where doctor_details.doctor_id = ?;`, [doctor_id])
     res.json(result)
 
     
@@ -336,7 +337,7 @@ exports.patientDetailsData = async (req,res)=>{
   const doctor_id = req.user.id
 
   try {
-    const [result] = await conn.query(`select concat(fname, " ", lname) as Name,gender as Gender, phone as Contact, email as Email,city as City, address as Address,blood_group as "Blood Group", dob as "Date of Birth" from slot_bookings inner join patient_details on slot_bookings.patient_id = patient_details.patient_id inner join users on patient_details.patient_id = users.id inner join time_slots on slot_bookings.slot_id = time_slots.id  where slot_bookings.patient_id = ? and time_slots.doctor_id = ? limit 0,1;`,[patient_id,doctor_id])
+    const [result] = await conn.query(`select concat(fname, " ", lname) as Name,profile_picture,gender as Gender, phone as Contact, email as Email,city as City, address as Address,blood_group as "Blood Group", dob as "Date of Birth" from slot_bookings inner join patient_details on slot_bookings.patient_id = patient_details.patient_id inner join users on patient_details.patient_id = users.id inner join time_slots on slot_bookings.slot_id = time_slots.id inner join profile_pictures on users.id = profile_pictures.user_id where slot_bookings.patient_id = ? and time_slots.doctor_id = ? limit 0,1;`,[patient_id,doctor_id])
     res.json(result)
   } catch (error) {
     return res.json({
@@ -365,4 +366,30 @@ exports.patientPrescriptionData = async (req,res)=>{
 exports.logoutController = async(req,res)=>{
   res.clearCookie('token')
   res.status(200).redirect('/login')
+}
+
+exports.dashBoardCount = async(req,res)=>{
+  let doctor_id = req.user.id
+  try {
+    let [result] = await conn.query(`select sum(payment_amount) as revenue, count(patient_id) as patient, count(slot_id) as slot from payments where doctor_id = 3 and is_refunded = 0;`,[doctor_id]);
+    res.json(result)
+  } catch (error) {
+    return res.json({
+      success: false,
+      message: error.message
+    })
+  }
+}
+
+
+exports.dashBoardReviews = async(req,res)=>{
+  let doctor_id = req.user.id
+  try {
+    let [result] = await conn.query(`select concat(fname," ",lname) as Name,email,rating,review,profile_picture from rating_and_reviews inner join users on rating_and_reviews.patient_id = users.id inner join profile_pictures on rating_and_reviews.patient_id = profile_pictures.user_id where doctor_id=?;`,[doctor_id])
+    res.json(result)
+  } catch (error) {
+     return res.json({success: false,
+    message: error.message
+  })
+}
 }

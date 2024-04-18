@@ -22,45 +22,56 @@
           <div class="a7-feedback-title">
             <div>View Patient History</div>
           </div>
-          <table>
-
+          <table id="rowtable">
             <tr class="a7-feedback-table-header">
               <td><span>Name</span> </td>
               <td><span>Contact</span></td>
               <td><span>More Details</span></td>
             </tr>
-            <!-- Fetch data database -->
-            <tr class="a7-feedback-table-data" id="rowdata"> </tr>
-
           </table>
         </div>
       </div>
   </div>
-  
+
 
   <script>
 
     const fetchData = async () => {
-      let fetchdata = await fetch(`http://localhost:8000/getPatientData/`)
+      let fetchdata = await fetch(`/getPatientData`)
       let data = await fetchdata.json()
-      let key = Object.keys(data[0])
-      let pat
-      key.forEach(element => {
-
-        if (element == 'patient_id') {
-          pat = data[0][element]
-          document.getElementById("rowdata").innerHTML += `<td hidden><span>${data[0][element]}</span></td>`
-
-        }
-        else {
-          let tddata = document.createElement("td")
+      let patient_id = 1
+      let key = Object.keys(data)
+      let table = document.getElementById("rowtable")
+      key.forEach(item => {
+        const dtkey = Object.keys(data[item])
+        let tr = document.createElement("tr")
+        tr.setAttribute("class","a7-feedback-table-data")
+        dtkey.forEach(ele => {
+          let td = document.createElement("td")
           let span = document.createElement("span")
-          span.textContent = data[0][element]
-          tddata.append(span)
-          document.getElementById("rowdata").append(tddata)
-        }
+          if(ele == "patient_id")
+          {
+              td.style.display = 'none'
+              patient_id = data[item][ele]
+            span.innerText = data[item][ele]
+          }
+          else
+          {
+             span.innerText = data[item][ele]
+          }
+          td.appendChild(span)
+          tr.appendChild(td)
+        })
+       
+        let btntd = document.createElement("td")
+        let anchortag = document.createElement("a")
+            btntd.append(anchortag)
+            anchortag.setAttribute("class","a7-view-btn")
+            anchortag.textContent = `View More`
+            anchortag.href = `/viewPatientHistory/${patient_id}`
+            tr.appendChild(btntd)
+            table.appendChild(tr)
       });
-      document.getElementById("rowdata").innerHTML += `<td> <a href='http://localhost:8000/viewPatientHistory/${pat}' class="a7-view-btn"  >View More</a>  </td>`
     }
     fetchData()
   </script>
