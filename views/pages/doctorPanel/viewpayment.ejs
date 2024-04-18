@@ -11,13 +11,13 @@
   <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css">
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
   <link rel="stylesheet" href="/css/adminPanel/allPatientDetails.css">
-  <script src="/javascript/adminPanel/allPatientDetail.js"></script>
+  <!-- <script src="/javascript/adminPanel/allPatientDetail.js"></script> -->
   <!-- <link rel="stylesheet" href="/css/doctorPanel/viewfeedback.css">
   <link rel="stylesheet" href="/css/doctorPanel/dashboard.css"> -->
   <title>View Payment</title>
 </head>
 
-<body>
+<body onload="fetchPatients()">
 
   <div class="a5-container">
 
@@ -41,15 +41,6 @@
 
             <table id="a5-user-table">
               <tbody id="a5-tbody">
-
-                <tr>
-                  <th>Name</th>
-                  <th>Payment Amount</th>
-                  <th>Slot Time</th>
-                  <th>Slot Date</th>
-                  <th>Payment Date</th>
-                  <th>Details</th>
-                </tr>
 
               </tbody>
             </table>
