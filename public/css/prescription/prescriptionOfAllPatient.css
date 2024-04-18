@@ -4,6 +4,12 @@
   --blue: #0969da;
   --white: #ffffff;
 }
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
 .A4-container {
   max-width: 1440px;
   margin: 0 auto;
@@ -21,7 +27,7 @@
   display: block;
   padding-left: 350px;
 }
-.A4-Content {
+/* .A4-Content {
   table,
   tr,
   th,
@@ -31,7 +37,7 @@
   table{
     width: 1088px;
   }
-}
+} */
 .A4-Pagination-component{
   display: flex;
   gap: 2px;
@@ -58,3 +64,104 @@
   padding: 22px;
   border-radius: 22px;
 }
+#a5-btn-search {
+  height: 40px;
+  width: 100px;
+  border-radius: 3px;
+  background-color: var(--light-blue);
+  padding-top: 11px;
+  margin-left: 13px;
+  cursor: pointer;
+}
+
+#a5-btn-search:hover {
+  color: var(--white);
+  background-color: var(--blue);
+}
+
+.a5-searchbox {
+  border: 1px solid var(--black);
+  display: flex;
+  border-radius: 3px;
+  border: 1px solid;
+}
+.a5-search {
+  margin: 35px auto;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+/* input {
+  border: none;
+  width: 400px;
+} */
+#a5-searchPatient{
+  border: none;
+  width: 400px;
+}
+#A4-content{
+  border-collapse: collapse;
+  border: 1px solid var(--brown);
+  border-radius: 5px;
+  width: 100%;
+  margin: 15px 0;
+}
+td {
+   text-align: center;
+  padding: 10px 12px;
+}
+th {
+  box-shadow: 0 2px var(--blue);
+  padding: 10px 0;
+  text-align: center;
+}
+#A4-getpdf-btn{
+  height: 30px;
+  width: 112px;
+  background-color: var(--light-blue);
+  border: 1px aliceblue;
+  font-size: 15px;
+  border-radius: 5px;
+  color: #2c5777;
+  margin: 0px 5px;
+}
+#A4-editprescription-btn{
+  height: 30px;
+  width: 150px;
+  background-color: var(--light-blue);
+  border: 1px aliceblue;
+  font-size: 15px;
+  border-radius: 5px;
+  color: #2c5777;
+  margin: 0px 5px;
+}
+#A4-getpdf-btn:hover,#A4-editprescription-btn:hover{
+  background-color: var(--blue);
+  color: var(--white);
+}
+.A4-btn {
+  width: 120px;
+  height: 30px;
+  padding: 5px;
+  text-align: center;
+  margin: 5px auto;
+
+  display: flex;
+  justify-content: center;
+
+  border-radius: 3px;
+
+  background-color: var(--light-blue);
+}
+
+.A4-btn:hover {
+
+  cursor: pointer;
+  color: var(--white);
+  background-color: var(--blue);
+}
+
+.A4-back-btn {
+  margin: 50px 0;
+}
+

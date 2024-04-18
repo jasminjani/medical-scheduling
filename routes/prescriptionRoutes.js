@@ -1,4 +1,5 @@
 const express = require("express");
+const passport = require('passport');
 const router = express.Router();
 const {
   createPrescription,
@@ -13,11 +14,13 @@ const {
   editPrescriptionHome
 } = require("../controllers/prescriptionController");
 
+router.use(passport.authenticate('jwt',{session:false,failureRedirect:"/login"}));
+
 router.route("/createprescription").post(createPrescription);
 
 router.route("/updatedetails/:id").get(updateDetails);
 
-// router.route("/updatePrescription").post(updatePrescription);
+router.route("/updatePrescription/:id").post(updatePrescription);
 
 router.route("/getprescriptionofuser").get(getPrescriptionOfUser);
 

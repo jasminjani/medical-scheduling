@@ -11,7 +11,7 @@
 }
 
 .A4-title {
-  padding: 55px 418px;
+  padding: 0px 418px;
   h1 {
     /* text-align: center; */
     font-size: 30px;
@@ -27,7 +27,7 @@
   }
 } */
 .A4-Content {
-  padding: 0px 211px;
+  padding: 27px 211px;
   font-size: 20px;
   table,
   tr,
@@ -54,7 +54,7 @@ table {
   background-color: white;
 }
 .A4-prescription {
-  padding: 65px 439px;
+  padding: 25px 439px;
 }
 .A4-addPrescription {
   height: 50px;
@@ -114,7 +114,7 @@ table {
 .A4-PrescriptionDetails {
   font-size: 20px;
   /* padding: 75px 194px; */
-  padding: 71px 134px;
+  padding: 0px 134px;
 }
 #diagnosis {
   width: 372px;
@@ -132,4 +132,34 @@ table {
 #prescriptionerror {
   font-size: 14px;
   color: red;
+}
+.A4-btn {
+  width: 120px;
+  height: 30px;
+  padding: 5px;
+  text-align: center;
+  margin: 5px auto;
+  display: flex;
+  justify-content: center;
+  border-radius: 3px;
+  background-color: var(--light-blue);
+  color: #2c5777;
+}
+
+.A4-btn:hover {
+
+  cursor: pointer;
+  color: var(--white);
+  background-color: var(--blue);
+}
+
+.A4-back-btn {
+  margin: 20px 0;
+  padding-top: 10px;
+}
+.A4-backbtn{
+  padding: 15px 78px;
+}
+#A4-arrow-img{
+  margin-bottom: 10px;
 }

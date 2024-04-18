@@ -22,7 +22,6 @@ const removeError = async (id) => {
 document.getElementsByClassName("A4-PrescriptionDetails")[0].style.display =
   "none";
 document.getElementById("A4-generatePdf").style.display = "none";
-document.getElementById("A4-home").style.display = "none";
 
 let insert_id;
 
@@ -35,7 +34,6 @@ const submitPrescription = async () => {
     document.getElementsByClassName("A4-PrescriptionDetails")[0].style.display =
       "none";
     document.getElementById("A4-generatePdf").style.display = "block";
-    document.getElementById("A4-home").style.display = "block";
 
     const form = document.getElementById("myForm");
     const obj = new URLSearchParams(new FormData(form));
@@ -80,6 +78,6 @@ const generatePDF = async () => {
   location.href = `/generatePDFofprescripton/${insert_id}`;
 };
 
-const goToHome = async () => {
-  location.href = `/home`;
+const back = async () => {
+  location.href = `/prescription`;
 };
