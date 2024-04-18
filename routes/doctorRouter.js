@@ -8,7 +8,6 @@ const {
   getPatientData,
   getPatientDetail,
   doctorReviewData,
-  getPaymentHistory,
   doctorPaymentData,
   doctorDashBoard,
   getCityCombo,
@@ -23,7 +22,10 @@ const {
   updateGetDoctorDisplay,
   patientDetailsData,
   patientPrescriptionData,
-  logoutController
+  logoutController,
+  dashBoardCount,
+  dashBoardReviews,
+
 } = require("../controllers/doctorController");
 const passport = require("passport");
 const { paymentHistory, showpaymentHistory, searchPaymentHistory } = require("../controllers/doctorPaymentHistory");
@@ -54,6 +56,12 @@ router.route('/getDoctorReview')
 
 
 // Router show json format Data date:- 12-04-2024
+
+router.route("/dashBoardReviews")
+  .get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),dashBoardReviews)
+router.route("/dashBoardCount")
+  .get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }), dashBoardCount)
+
 router
   .route("/doctorData")
   .get(
@@ -176,6 +184,8 @@ router.route('/showPatientHistoryData/:patient_id')
 
 // router.route('/searchedPaymentHistory/:patient_id/:search')
 //   .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), searchPatientPayment);
+
+
 
 
 

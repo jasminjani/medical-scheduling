@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
+  <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
   <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css">
   <title>Document</title>
 </head>
@@ -29,8 +29,8 @@
               </div>
               <div class="a7-counter">
                 <div class="a7-counter-1"><img src="/assets/doctorPanel/dtotal_appointment.png" alt=""></div>
-                <div class="a7-label-count">
-                  <h4>120+</h4>
+                <div class="a7-label-count" id="appointment">
+                  <!-- <h4>120+</h4> -->
                 </div>
               </div>
             </div>
@@ -40,8 +40,8 @@
               </div>
               <div class="a7-counter">
                 <div class="a7-counter-2"><img src="/assets/doctorPanel/dtotal_patients.png" alt=""></div>
-                <div class="a7-label-count">
-                  <h4>120+</h4>
+                <div class="a7-label-count" id="patient">
+                  <!-- <h4>120+</h4> -->
                 </div>
               </div>
             </div>
@@ -51,8 +51,8 @@
               </div>
               <div class="a7-counter">
                 <div class="a7-counter-3"><img src="/assets/doctorPanel/drevenue.png" alt=""></div>
-                <div class="a7-label-count">
-                  <h4>120+</h4>
+                <div class="a7-label-count" id="revenue">
+                  <!-- <h4>120+</h4> -->
                 </div>
               </div>
             </div>
@@ -102,100 +102,126 @@
               <div class="a7-table-title">
                 <span>Feedback</span>
               </div>
-              <div class="a7-card">
-                <div class="a7-card-se6">
-                  <div class="a7-card-box-se6">
-                    <div class="a7-card-color-se6">
-                      <div class="a7-profile-se6">
-                        <img src="/assets/doctorPanel/dprofile.png" alt="">
-                      </div>
-                      <!-- <div class="a7-rating-se6">
-            <img src="assets/Star 2.png" alt="">
-            <img src="assets/Star 2.png" alt="">
-            <img src="assets/Star 2.png" alt="">
-            <img src="assets/Star 2.png" alt="">
-            <img src="assets/Star 2.png" alt="">
-          </div> -->
-                      <div class="a7-text-content-se6">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora fugit vel suscipit magnam?
-                          Dignissimos aperiam repellendus voluptatem nihil, quas provident laborum consequatur obcaecati
-                          quia dicta reprehenderit eum corporis sit assumenda!
-                        </p>
-                        <div class="a7-signature-se6">
-                          <h3>Lorem</h3>
-                          <p>Manager</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div class="a7-card" id="feedbackCard">
 
-                <div class="a7-card-se6">
-                  <div class="a7-card-box-se6">
-                    <div class="a7-card-color-se6">
-                      <div class="a7-profile-se6">
-                        <img src="/assets/doctorPanel/dprofile.png" alt="">
-                      </div>
-                      <!-- <div class="a7-rating-se6">
-                  <img src="assets/Star 2.png" alt="">
-                  <img src="assets/Star 2.png" alt="">
-                  <img src="assets/Star 2.png" alt="">
-                  <img src="assets/Star 2.png" alt="">
-                  <img src="assets/Star 2.png" alt="">
-                </div> -->
-                      <div class="a7-text-content-se6">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora fugit vel suscipit magnam?
-                          Dignissimos
-                          aperiam repellendus voluptatem nihil, quas provident laborum consequatur obcaecati quia dicta
-                          reprehenderit
-                          eum corporis sit assumenda!
-                        </p>
-                        <div class="a7-signature-se6">
-                          <h3>Lorem</h3>
-                          <p>Manager</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
 
-                <div class="a7-card-se6">
-                  <div class="a7-card-box-se6">
-                    <div class="a7-card-color-se6">
-                      <div class="a7-profile-se6">
-                        <img src="/assets/doctorPanel/dprofile.png" alt="">
-                      </div>
-                      <!-- <div class="a7-rating-se6">
-                    <img src="assets/Star 2.png" alt="">
-                    <img src="assets/Star 2.png" alt="">
-                    <img src="assets/Star 2.png" alt="">
-                    <img src="assets/Star 2.png" alt="">
-                    <img src="assets/Star 2.png" alt="">
-                  </div> -->
-                      <div class="a7-text-content-se6">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora fugit vel suscipit magnam?
-                          Dignissimos
-                          aperiam repellendus voluptatem nihil, quas provident laborum consequatur obcaecati quia dicta
-                          reprehenderit
-                          eum corporis sit assumenda!
-                        </p>
-                        <div class="a7-signature-se6">
-                          <h3>Lorem</h3>
-                          <p>Manager</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+
+       
               </div>
             </div>
           </div>
         </div>
-
       </div>
   </div>
-  
- 
+
+
+  <script>
+    const fetchCountData = async () => {
+      const fetchData = await fetch(`http://localhost:8000/dashBoardCount`)
+      const data = await fetchData.json()
+      let key = Object.keys(data[0])
+      key.forEach(element => {
+        if (element == 'patient') {
+          document.getElementById(element).innerHTML = `<h4>${data[0][element]}</h4>`
+        }
+        if (element == 'revenue') {
+          document.getElementById(element).innerHTML = `<h4>${data[0][element]}</h4>`
+        }
+
+        if (element == 'slot') {
+          document.getElementById("appointment").innerHTML = `<h4>${data[0][element]}</h4>`
+        }
+      });
+    }
+    fetchCountData()
+
+    const fetchReviewData = async ()=>{
+      const fetchData = await fetch(`http://localhost:8000/dashBoardReviews`)
+      const data = await fetchData.json()
+      let key = Object.keys(data)
+      let feedbackCard = document.getElementById("feedbackCard")
+      key.forEach(element => {
+       
+            let dtkey = Object.keys(data[element])
+
+        let div1Card = document.createElement("div")
+        div1Card.setAttribute("class", "a7-card-se6")
+        let div2CardBox = document.createElement("div")
+        div2CardBox.setAttribute("class", "a7-card-box-se6")
+        let div3Color = document.createElement("div")
+        div3Color.setAttribute("class", "a7-card-color-se6")
+        let div4Profile = document.createElement("div")
+        div4Profile.setAttribute("class", "a7-profile-se6")
+        let div5Rating = document.createElement("div")
+        div5Rating.setAttribute("class", "a7-rating-se6")
+        let div6TextContent = document.createElement("div")
+        div6TextContent.setAttribute("class", "a7-text-content-se6")
+        let div7Signature = document.createElement("div")
+        div7Signature.setAttribute("class", "a7-signature-se6")
+
+            dtkey.forEach(item => {
+
+            
+                if (item == 'profile_picture') {
+                 let imageProfile = document.createElement("img")
+                 imageProfile.src = `/imgs/${data[element][item]}`
+                    div4Profile.appendChild(imageProfile)
+                }
+                else if(item == 'rating'){
+                
+                  for(let i=0; i<5; i++)
+                  {
+
+                    if(i>= data[element][item]){
+                         let img = document.createElement("img")
+                         img.style.height="15px"
+                         img.style.width="16px"
+                      img.src = `/assets/doctorPanel/star-empty-icon.webp`
+
+                      div5Rating.appendChild(img)
+                    }
+                    else{
+                      let img = document.createElement("img")
+                       img.style.height = "15px"
+                      img.style.width = "16px"
+                      img.src = `/assets/doctorPanel/images.png`
+                      div5Rating.appendChild(img)
+                    }
+                
+                  }
+                }
+                else if(item == "review"){
+                  let para = document.createElement("p")
+                  para.textContent = data[element][item]
+                  div6TextContent.appendChild(para)
+                }
+                else if(item == "Name"){
+                  let name = document.createElement("h3")
+                  name.textContent =  data[element][item]
+                  div7Signature.appendChild(name)
+                }
+                else if(item == "email"){
+                    let email = document.createElement("p")
+                    email.textContent = data[element][item]
+                    div7Signature.appendChild(email)
+                }
+            });
+
+
+            div3Color.appendChild(div4Profile)
+            div3Color.appendChild(div5Rating)  
+            div3Color.appendChild(div6TextContent)
+            div3Color.appendChild(div7Signature)
+            div2CardBox.appendChild(div3Color)
+            div1Card.appendChild(div2CardBox)
+            feedbackCard.appendChild(div1Card)
+
+
+
+      });
+    }
+    fetchReviewData()
+  </script>
 </body>
 
 </html>

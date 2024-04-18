@@ -12,42 +12,63 @@
   <title>Document</title>
 </head>
 
-<body onload="fetchPaymentData()">
+<body>
 
-  <div class="a5-container">
-
-    <%- include('../../common/newSidebar/doctorSidebar') %>
-
-      <div class="a5-section" id="a5-patient-basic-details">
-
-
-      </div>
-
-      <div class="a5-section">
-
-        <div class="a5-all-doctor">
-
-          <h2>Patient Appointment</h2>
-
-          <div class="a5-doctor-table">
-
-            <table id="a5-doctor-table">
-
-              <tbody id="a5-tbody">
-
-
-              </tbody>
-
-            </table>
-
+        <div class="a7-feedback-table-row">
+          <div class="a7-feedback-title">
+            <div>View Patient History</div>
           </div>
-
+          <table id="rowtable">
+            <tr class="a7-feedback-table-header">
+              <td><span>Name</span> </td>
+              <td><span>Contact</span></td>
+              <td><span>More Details</span></td>
+            </tr>
+          </table>
         </div>
 
-      </div>
 
-  </div>
+  <script>
 
+    const fetchData = async () => {
+      let fetchdata = await fetch(`/getPatientData`)
+      let data = await fetchdata.json()
+      let patient_id = 1
+      let key = Object.keys(data)
+      let table = document.getElementById("rowtable")
+      key.forEach(item => {
+        const dtkey = Object.keys(data[item])
+        let tr = document.createElement("tr")
+        tr.setAttribute("class","a7-feedback-table-data")
+        dtkey.forEach(ele => {
+          let td = document.createElement("td")
+          let span = document.createElement("span")
+          if(ele == "patient_id")
+          {
+              td.style.display = 'none'
+              patient_id = data[item][ele]
+            span.innerText = data[item][ele]
+          }
+          else
+          {
+             span.innerText = data[item][ele]
+          }
+          td.appendChild(span)
+          tr.appendChild(td)
+        })
+       
+        let btntd = document.createElement("td")
+        let anchortag = document.createElement("a")
+            btntd.append(anchortag)
+            anchortag.setAttribute("class","a7-view-btn")
+            anchortag.textContent = `View More`
+            anchortag.href = `/viewPatientHistory/${patient_id}`
+            tr.appendChild(btntd)
+            table.appendChild(tr)
+      });
+    }
+    fetchData()
+  </script>
 </body>
 
 <!-- <script src="/javascript/doctorPanel/urlPath.js"></script> -->
