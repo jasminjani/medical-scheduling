@@ -26,6 +26,8 @@ const {
   logoutController
 } = require("../controllers/doctorController");
 const passport = require("passport");
+const { paymentHistory, showpaymentHistory, searchPaymentHistory } = require("../controllers/doctorPaymentHistory");
+const { patientPaymentHistory, showPatientPayment, searchPatientPayment } = require("../controllers/doctorPatientPaymentHistory");
 
 
 router.route("/allDoctorProfile")
@@ -33,7 +35,7 @@ router.route("/allDoctorProfile")
 
 
 router.route("/doctorCreateProfile")
-  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), becomeDoctorDetail)  
+  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), becomeDoctorDetail)
 
 router.route("/doctorCreateProfile")
   .post(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), createDoctor)
@@ -42,13 +44,13 @@ router.route("/doctorCreateProfile")
 router.route("/updatedoctorProfile")
   .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), updateGetDoctorDisplay)
 
-  
-  router.route("/updatedoctorProfile")
+
+router.route("/updatedoctorProfile")
   .post(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), updateDoctorDetails)
-  
-  
-  router.route('/getDoctorReview')
-    .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getDoctorReview)
+
+
+router.route('/getDoctorReview')
+  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getDoctorReview)
 
 
 // Router show json format Data date:- 12-04-2024
@@ -124,19 +126,60 @@ router.route('/doctorSideBarDetail')
 // router.route('/doctorPaymentHistory')
 //   .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getPaymentHistory)
 
-router.route('/doctorPaymentHistory')
-  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getPaymentHistorys)
 
 router.route('/viewPatientHistory/:patient_id')
   .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getPatientHistoryDetail)
 
- router.route("/viewPatientDetailsData/:patient_id")
-   .get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),patientDetailsData) 
+router.route("/viewPatientDetailsData/:patient_id")
+  .get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }), patientDetailsData)
 
 
 router.route("/patientPrescriptionData/:patient_id/:date")
   .get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }), patientPrescriptionData)
 
-router.route("/logout").get(logoutController)  
+router.route("/logout").get(logoutController)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//jasmin jani dt:- 18/04/2024
+
+
+// for doctor panel payment history
+router.route('/doctorPaymentHistory')
+  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), paymentHistory);
+
+router.route('/showpaymentHistory')
+  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), showpaymentHistory);
+
+router.route('/searchedPaymentHistory/:search')
+  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), searchPaymentHistory);
+
+// for patient payment history in payment history
+router.route('/doctorPaymentHistory/:patient_id')
+  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), patientPaymentHistory);
+
+router.route('/showPatientHistoryData/:patient_id')
+  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), showPatientPayment);
+
+// router.route('/searchedPaymentHistory/:patient_id/:search')
+//   .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), searchPatientPayment);
+
+
+
+
+
 
 module.exports = router;
