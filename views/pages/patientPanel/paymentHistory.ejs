@@ -4,37 +4,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Payment History</title>
   <!-- CSS for Sidebar -->
   <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
   <!-- CSS for container -->
   <link rel="stylesheet" href="/css/adminPanel/allPatientDetails.css">
-  <!-- <link rel="stylesheet" href="/css/doctorPanel/viewfeedback.css"> -->
-  <!-- <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css"> -->
-  <!-- <link rel="stylesheet" href="/css/doctorPanel/viewfeedback.css">
-  <link rel="stylesheet" href="/css/doctorPanel/dashboard.css"> -->
-  <title>View Payment</title>
+  <!-- CSS for status drop-down -->
+  <link rel="stylesheet" href="/css/patientCSS/paymentHistory.css">
+  <!-- JS  -->
+  <script src="/javascript/patientPanel/paymentHistory.js"></script>
 </head>
 
 <body onload="fetchPaymentHistory()">
 
   <div class="a5-container">
 
-    <%- include('../../common/newSidebar/doctorSidebar') %>
+    <%- include('../../common/newSidebar/patientSidebar') %>
 
       <div class="a5-section">
 
         <div class="a5-search">
           <div class="a5-searchbox">
             <img src="/assets/adminPanel/icons/search.svg" alt="">
-            <input type="text" name="searchUser" id="a5-searchPatient" placeholder="Search Patient name" tabindex="1">
+            <input type="text" name="searchUser" id="a5-searchPatient" placeholder="Search" tabindex="1">
           </div>
           <p id="a5-btn-search" onclick="searchPaymentHistory()" tabindex="2">Search</p>
         </div>
 
         <div class="a5-all-user">
+          <div class="table-heading">
 
-          <h2>View Payment History</h2>
+            <h2>Payment History</h2>
+            <div class="combo-box">Status :
+              <select name="status" id="paymentStatus" onchange="appendPaymentHistory('result')">
+                <option value="0" selected>success</option>
+                <option value="1">Refund</option>
+              </select>
+            </div>
+          </div>
 
           <div class="a5-user-table">
 
@@ -54,9 +62,5 @@
 
 
 </body>
-
-<!-- <script src="/javascript/doctorPanel/urlPath.js"></script> -->
-<script src="/javascript/doctorPanel/sidebar.js"></script>
-<script src="/javascript/doctorPanel/paymentHistory.js"></script>
 
 </html>
