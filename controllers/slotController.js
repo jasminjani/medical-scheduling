@@ -123,7 +123,7 @@ exports.bookingSlot = async (req, res) => {
 
     const { patient_id, slot_id } = req.params;
 
-    const { payment_amount } = req.body;
+    const { payment_amount, doctor_id } = req.body;
 
     try {
 
@@ -161,13 +161,14 @@ exports.bookingSlot = async (req, res) => {
 
     try {
 
-      const query = "insert into payments(patient_id,slot_id,payment_amount,status) values(?,?,?,'1')";
+      const query = "insert into payments(patient_id,doctor_id,slot_id,payment_amount,status) values(?,?,?,?,'1')";
 
-      const [payment] = await conn.query(query, [patient_id, slot_id, payment_amount]);
+      const [payment] = await conn.query(query, [patient_id,doctor_id, slot_id, payment_amount]);
 
       return res.status(200).json({ success: true, message: "slot booked successfully" });
 
     } catch (error) {
+      console.log(error);
       return res.status(500).json({ success: false, message: error.message });
     }
 
