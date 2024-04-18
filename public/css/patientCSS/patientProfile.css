@@ -152,9 +152,9 @@ hr {
   display: grid;
   height: 50px;
   align-items: center;
-  grid-template-columns: auto auto auto auto auto;
+  grid-template-columns: auto auto auto auto auto auto;
   margin: 10px 10px;
-  padding-left: 40px;
+  padding-left: 25px;
 }
 
 .data2 {
@@ -162,9 +162,9 @@ hr {
   display: grid;
   height: 50px;
   align-items: center;
-  grid-template-columns: auto auto auto auto auto;
+  grid-template-columns: auto auto auto auto auto auto;
   margin: 10px 10px;
-  padding-left: 40px;
+  padding-left: 25px;
 }
 
 .last {
@@ -205,3 +205,15 @@ hr {
   padding-left: 40px;
 }
 
+.submit {
+  background-color: #aee3ff;
+  border: none;
+  width: 60px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 9px;
+}
+
+.submit:hover {
+  background-color: rgb(41, 205, 255);
+}
