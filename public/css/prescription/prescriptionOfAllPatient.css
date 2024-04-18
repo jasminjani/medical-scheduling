@@ -28,4 +28,33 @@
   td {
     border: 1px solid black;
   }
+  table{
+    width: 1088px;
+  }
+}
+.A4-Pagination-component{
+  display: flex;
+  gap: 2px;
+}
+#tabledata{
+  text-align: center;
+}
+
+.A4-PrescriptionDetails {
+  font-size: 20px;
+  /* padding: 75px 194px; */
+  padding: 71px 134px;
+}
+#diagnosis {
+  width: 372px;
+  height: 34px;
+  font-size: 18px;
+}
+#prescription {
+  font-size: 18px;
+}
+#myForm {
+  background-color: aliceblue;
+  padding: 22px;
+  border-radius: 22px;
 }
