@@ -1,4 +1,5 @@
 const express = require("express");
+const passport = require('passport');
 const router = express.Router();
 const {
   createPrescription,
@@ -12,6 +13,8 @@ const {
   allPatientPriscription,
   editPrescriptionHome
 } = require("../controllers/prescriptionController");
+
+router.use(passport.authenticate('jwt',{session:false,failureRedirect:"/login"}));
 
 router.route("/createprescription").post(createPrescription);
 

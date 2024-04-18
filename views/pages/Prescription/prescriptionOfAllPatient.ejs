@@ -14,9 +14,20 @@
         <%- include('../../common/newSidebar/adminSidebar.ejs') %>
 
         <div class="A4-main">
-          <div class="A4-title">
+          <!-- <div class="A4-title">
             <h2>Prescription Details</h2>
+          </div> -->
+          <p class="A4-back-btn A4-btn" onclick="back()"><img src="/assets/adminPanel/icons/back-iceblue.svg" alt="Back"> Back</p>
+
+          <div class="a5-search">
+  
+              <div class="a5-searchbox">
+                <img src="/assets/adminPanel/icons/search.svg" alt="">
+                <input type="text" name="searchUser" id="a5-searchPatient" placeholder="Search Patient name" tabindex="1">
+              </div>
+              <p id="a5-btn-search" onclick="searchPatient()" tabindex="2">Search</p>
           </div>
+
           <div class="A4-Pagination-component">
                 <div class="home"><button onclick="home()" id="homebtn"><<</button></div>
                 <div class="previous"><button onclick="previous()" id="previousbtn"><</button></div>
@@ -25,9 +36,9 @@
                 <div class="end"><button onclick="end()" id="endbtn">>></button></div>
           </div> 
 
-          <div class="A4-Content">
+          <div class="A4-content">
             <form action="">
-              <table id="myTable">
+              <table id="A4-content">
                 <thead>
                   <tr>
                     <th>Appointment Date</th>
@@ -109,7 +120,7 @@
               <td>${value.created_at}</td>
               <td>${value.patient_name}</td>
               <td>${value.diagnoses}</td>
-              <td><input type="button" value="Get PDF" onclick="generatePDF(${value.id})"><input type="button" value="Edit Prescription" onclick="editPrescription(${value.id})"></td>
+              <td><input type="button" value="Get PDF" onclick="generatePDF(${value.id})" id="A4-getpdf-btn"><input type="button" value="Edit Prescription" onclick="editPrescription(${value.id})" id="A4-editprescription-btn"></td>
             </tr>`
             })
 

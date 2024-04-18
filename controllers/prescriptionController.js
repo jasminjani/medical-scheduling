@@ -38,6 +38,7 @@ exports.createPrescription = async (req, res) => {
   try {
     // const decode = jwt.verify(token, process.env.JWT_SECRET);
     // console.log(decode);
+    console.log(req.user);
     const doctor_id = "3";
     const { patient_id, prescription, diagnosis } = req.body;
 
@@ -62,10 +63,8 @@ exports.createPrescription = async (req, res) => {
 };
 
 exports.updateDetails = async (req, res) => {
-  console.log("in updateDetails");
   try {
     const id = req.params.id;
-    console.log(id);
     let query = `select concat(users.fname," ",users.lname) as patient_name,convert(prescriptions.created_at,date),diagnoses,prescription from prescriptions join users on prescriptions.patient_id= users.id where prescriptions.id=?`;
     let [result] = await conn.query(query, [id]);
     res.status(200).json({success:true,result: result});
@@ -81,15 +80,14 @@ exports.updatePrescription = async (req, res) => {
   try {
     console.log("in updateprescription");
     const id = req.params.id;
-    const { prescription, diagnoses } = req.body;
-    console.log(id,prescription,diagnoses);
+    const { prescription, diagnosis } = req.body;
+    console.log(id,prescription,diagnosis);
     let query = `UPDATE prescriptions SET diagnoses=?,prescription=? where id=? `;
-    let result = await conn.query(query, [diagnoses, prescription, id]);
+    let result = await conn.query(query, [diagnosis, prescription, id]);
     res.json({
-      msg: "Updation in pescriptions completed",
-      result
+      msg: "Updation in pescriptions completed"
     });
-    console.log("in updateprescription");
+    console.log("completed");
   } catch (error) {
     return res.status(500).json({
       success: false,

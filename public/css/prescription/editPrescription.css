@@ -18,14 +18,14 @@
   border: 1px solid black;
 } */
 .myTable{
-  margin: 30px 0px;
+  margin: 20px 0px;
   background-color: aliceblue;
   padding: 10px;
 }
 .A4-table-title{
   width: 180px;
   min-width: 180px;
-  height: 35px;
+  height: 50px;
   background-color: rgb(219, 236, 250);
   border-radius: 5px;
   text-align: center;
@@ -34,26 +34,63 @@
 .A4-table-data{
   background-color: white;
   border-radius: 5px;
-  padding-left: 10px;
+  padding-left: 3px;
   word-wrap: anywhere;
 }
+#data3:focus,textarea:focus{ 
+    outline: none !important;
+    border-color: #719ECE;
+    box-shadow: 0 0 10px #719ECE;
+ }
+
 #data1,#data2,#data3{
     background-color: transparent;
     border: 0px solid;
-    height: 20px;
+    height: 25px;
     width: 160px;
     min-width: 160px;
     color: black;
-    width: 500px;
+    width: 780px;
     word-wrap: anywhere;
     font-size: 16px;
 }
+#data3{
+  height: 40px;
+}
+#data1,#data2{
+  color: #2c5777;
+  font-weight: 500;
+  font-size: 18px;
+}
+#data3:focus{
+  border-color: #2c5777;
+}
+#data1:focus,#data2:focus{
+  outline: none;
+}
+
 textarea{
   border: 0px solid;
   max-width: 780px;
   min-width: 780px;
+  min-height: 120px;
+  height: 40px;
   
 }
+
+
+.A4-patientname,.A4-appointmentdate{
+  display: flex;
+  gap: 5px;
+  color: #2c5777;
+  font-size: 15px;
+}
+.A4-patientname{
+  padding-top: 27px;
+}
+/* input:focus,textarea:focus{
+  outline: none;
+} */
 /* .firstp{
   display: flex;
 }
@@ -63,7 +100,7 @@ p{
 .A4-content{
   max-width: 1000px;
 }
-#A4-Home-Button {
+#A4-Home-Button,#A4-Edit-Button{
   height: 40px;
   width: 185px;
   background-color: var(--light-blue);
@@ -72,17 +109,8 @@ p{
   border-radius: 5px;
   color: #2c5777;
 }
-#A4-Edit-Button {
-  height: 40px;
-  width: 185px;
-  background-color: var(--light-blue);
-  border: 1px aliceblue;
-  font-size: 17px;
-  border-radius: 5px;
-  color: #2c5777;
-}
-.A4-editPrescription-Buttons{
-  padding: 30px 340px;
+.A4-editPrescription-Button{
+  padding: 30px 450px;
   display: flex;
   gap: 15px;
 
@@ -93,4 +121,31 @@ p{
 }
 .A4-heading1{
   color: #2c5777;
+  padding-top: 55px
 }
+.A4-btn {
+  width: 120px;
+  height: 30px;
+  padding: 5px;
+  text-align: center;
+  margin: 5px auto;
+
+  display: flex;
+  justify-content: center;
+
+  border-radius: 3px;
+
+  background-color: var(--light-blue);
+}
+
+.A4-btn:hover {
+
+  cursor: pointer;
+  color: var(--white);
+  background-color: var(--blue);
+}
+
+.A4-back-btn {
+  margin: 20px 0;
+}
+
