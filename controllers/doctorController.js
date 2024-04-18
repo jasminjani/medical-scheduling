@@ -268,7 +268,7 @@ exports.updateGetDoctorData = async (req, res) => {
     const [result] = await conn.query(`select specialities.id as speciality,doctor_details.id, doctor_details.doctor_id,clinic_hospitals.id as hospital_id, fname,lname,email,gender,dob,phone,users.city as dcity,address,name,location,gst_no,clinic_hospitals.city,pincode, qualification, consultancy_fees from doctor_details inner join users on  doctor_details.doctor_id = users.id inner join doctor_has_specialities on doctor_details.doctor_id = doctor_has_specialities.doctor_id inner join clinic_hospitals on clinic_hospitals.id = doctor_details.hospital_id inner join specialities on specialities.id = doctor_has_specialities.speciality_id where doctor_details.doctor_id = ?;`, [doctor_id])
     res.json(result)
 
-    
+
   } catch (error) {
     return res.status(500).json({
       success: false,
@@ -320,9 +320,9 @@ exports.patientHistoryData = async (req, res) => {
   try {
     console.log("Hello");
     const patient_id = req.params.patient_id
-    const doctor_id = 1;
-    const [result] = await conn.query(`select date as "Appointment Date"  from slot_bookings inner join time_slots on slot_bookings.slot_id = time_slots.id where slot_bookings.patient_id = ? and time_slots.doctor_id = ? group by (date)`, [patient_id, doctor_id])
-    
+    const doctor_id = req.user.id
+    const [result] = await conn.query(`select  date as "Appointment Date"  from slot_bookings inner join time_slots on slot_bookings.slot_id = time_slots.id where slot_bookings.patient_id = ? and time_slots.doctor_id = ? group by (date)`, [patient_id, doctor_id])
+
     res.json(result)
   } catch (error) {
     console.log(error);
@@ -332,38 +332,38 @@ exports.patientHistoryData = async (req, res) => {
   }
 }
 
-exports.patientDetailsData = async (req,res)=>{
+exports.patientDetailsData = async (req, res) => {
   const patient_id = req.params.patient_id
   const doctor_id = req.user.id
 
   try {
-    const [result] = await conn.query(`select concat(fname, " ", lname) as Name,gender as Gender, phone as Contact, email as Email,city as City, address as Address,blood_group as "Blood Group", dob as "Date of Birth" from slot_bookings inner join patient_details on slot_bookings.patient_id = patient_details.patient_id inner join users on patient_details.patient_id = users.id inner join time_slots on slot_bookings.slot_id = time_slots.id  where slot_bookings.patient_id = ? and time_slots.doctor_id = ? limit 0,1;`,[patient_id,doctor_id])
+    const [result] = await conn.query(`select concat(fname, " ", lname) as Name,gender as Gender, phone as Contact, email as Email,city as City, address as Address,blood_group as "Blood Group", dob as "Date of Birth" from slot_bookings inner join patient_details on slot_bookings.patient_id = patient_details.patient_id inner join users on patient_details.patient_id = users.id inner join time_slots on slot_bookings.slot_id = time_slots.id  where slot_bookings.patient_id = ? and time_slots.doctor_id = ? limit 0,1;`, [patient_id, doctor_id])
     res.json(result)
   } catch (error) {
     return res.json({
       success: false,
       message: error.message
     })
-  } 
+  }
 }
 
-exports.patientPrescriptionData = async (req,res)=>{
+exports.patientPrescriptionData = async (req, res) => {
   const patient_id = req.params.patient_id
   const doctor_id = req.user.id
   const date = req.params.date
 
   try {
-    const [result] = await conn.query(`select time_slots.start_time,time_slots.end_time,prescriptions.prescription,prescriptions.diagnoses from prescriptions inner join time_slots on prescriptions.slot_id = time_slots.id where prescriptions.patient_id = ? and prescriptions.doctor_id = ? and time_slots.date = ?;`,[patient_id,doctor_id,date])
+    const [result] = await conn.query(`select time_slots.start_time,time_slots.end_time,prescriptions.prescription,prescriptions.diagnoses from prescriptions inner join time_slots on prescriptions.slot_id = time_slots.id where prescriptions.patient_id = ? and prescriptions.doctor_id = ? and time_slots.date = ?;`, [patient_id, doctor_id, date])
     res.json(result)
   } catch (error) {
     return res.json({
-      success:false,
-      message:error.message
+      success: false,
+      message: error.message
     })
   }
 }
 
-exports.logoutController = async(req,res)=>{
+exports.logoutController = async (req, res) => {
   res.clearCookie('token')
   res.status(200).redirect('/login')
 }
