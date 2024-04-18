@@ -318,14 +318,15 @@ exports.doctorReviewData = async (req, res) => {
 
 exports.patientHistoryData = async (req, res) => {
   try {
+    console.log("Hello");
     const patient_id = req.params.patient_id
     const doctor_id = req.user.id
     const [result] = await conn.query(`select  date as "Appointment Date"  from slot_bookings inner join time_slots on slot_bookings.slot_id = time_slots.id where slot_bookings.patient_id = ? and time_slots.doctor_id = ? group by (date)`, [patient_id, doctor_id])
 
     res.json(result)
   } catch (error) {
+    console.log(error);
     return res.json({
-      success: false,
       message: error.message
     })
   }
