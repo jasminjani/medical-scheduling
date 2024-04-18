@@ -1,5 +1,7 @@
 :root {
-  --blue: #0167ce;
+  --light-blue: #d2ebf9;
+  --brown: #e7e7e7;
+  --blue: #0969da;
   --white: #ffffff;
 }
 
@@ -109,4 +111,34 @@ table {
   background-color: rgb(212, 7, 7);
   font-size: 16px;
   color: var(--white);
+}
+
+.a2-btn {
+  width: 80px;
+  height: 30px;
+  padding: 5px;
+  text-align: center;
+  margin: 5px auto;
+
+  display: flex;
+  justify-content: center;
+
+  border-radius: 3px;
+
+  background-color: var(--light-blue);
+}
+
+.a2-btn:hover {
+
+  cursor: pointer;
+  color: var(--white);
+  background-color: var(--blue);
+}
+
+.a2-back-btn {
+  margin: 20px 0;
+}
+
+.a2-approve-h2 {
+  margin: 30px 0;
 }
