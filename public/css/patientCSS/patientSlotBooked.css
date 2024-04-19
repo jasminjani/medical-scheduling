@@ -85,6 +85,11 @@ hr {
   background-color: rgb(139, 139, 139);
   color: white;
   border: 2px solid white;
+  cursor: pointer;
+}
+
+#cancelPage:hover {
+  background-color: rgb(85, 85, 85);
 }
 
 .star {
