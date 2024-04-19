@@ -66,7 +66,7 @@ exports.createSlots = async (req, res) => {
   }
 }
 
-const specialitiesCombo = async () => {
+exports.specialitiesCombo = async () => {
 
   let sql = "select * from specialities where approved = 1 order by speciality";
   let [result] = await conn.query(sql);
@@ -100,7 +100,7 @@ exports.DoctorCobmo = async (req, res) => {
 
 
 exports.getBookingSlots = async (req, res) => {
-  let html = await specialitiesCombo();
+  let html = await this.specialitiesCombo();
   return res.render('pages/patientPanel/appointment', { html })
 }
 
