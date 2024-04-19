@@ -38,10 +38,7 @@
     width: 1088px;
   }
 } */
-.A4-Pagination-component{
-  display: flex;
-  gap: 2px;
-}
+
 #tabledata{
   text-align: center;
 }
