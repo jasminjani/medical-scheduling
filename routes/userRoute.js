@@ -9,8 +9,7 @@ const fileUpload = multer({ storage: fileStorage });
 
 const { createUser, login, getAllUser, logout, getUserById, deleteUser, generateToken, createUserForm, getCreateUserForm, getLoginForm, activationForm, activationAccount, getCurrentUser, homePage, getDoctorDetailForHomePage, getDoctorDetails } = require("../controllers/userController");
 const passport = require('passport');
-const { patientPayments, patientProfile, patientUpcomingBookings, patientPastBookings } = require('../controllers/patientAllAppointController');
-const { paymentHistory } = require('../controllers/doctorPaymentHistory');
+const { paymentHistory,patientPayments, patientProfile, patientUpcomingBookings, patientPastBookings, patientPastProfile } = require('../controllers/patientAllAppointController');
 
 router.route("/")
 .get(homePage)
@@ -65,10 +64,11 @@ router.route("/upcomingSlots").get(getSlotsPage);
 router.route("/dates/:doctor_id").get(getDates);
 router.route("/slots/:doctor_id/:date").get(getAllSlots);
 router.route("/:doctor_id/delete/:slot_id").get(deleteSlot);
-router.route("/:patient_id/cancel/:slot_id").put(cancelSlot)
+router.route("/:patient_id/cancel/:slot_id").get(cancelSlot)
 
 // Patients panel details(patientAllControllers)
 router.route("/patientUpcomingSlots").get(patientProfile);
+router.route("/patientPastSlots").get(patientPastProfile);
 router.route("/bookings/:patient_id").get(patientUpcomingBookings);
 router.route("/pastbookings/:patient_id").get(patientPastBookings);
 router.route("/payments/:patient_id").get(patientPayments) 
