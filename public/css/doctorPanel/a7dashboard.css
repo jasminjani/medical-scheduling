@@ -64,30 +64,51 @@
   /* align-items: center; */
 }
 
+.a7-tbl{
+  height: 300px;
+  overflow: scroll;
+}
+
 .a7-table-header {
-  display: flex;
+display: flex;
+position: sticky;
+top: 0px;
+background-color: #ffffff;
   font-size: 20px;
   color: #2c5777;
   line-height: 3;
   font-weight: 600;
+  justify-content: center;
+  gap: 45px;
+  margin-left: 22px;
 }
 
 .a7-table-data {
-  display: flex;
-  line-height: 1;
+display: flex;
+  /* line-height: 1; */
   font-size: 15px;
   align-items: center;
   color: #171717;
-  gap: 95px;
+  gap: 121px;
+  line-height: 4;
+  margin-left: 40px;
 }
+
+.a7-btn-style{
+  padding: 0px;
+    height: 45px;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 .a7-table-border {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 0 0 10px 50px;
-  /* gap: 20px; */
-}
+ }
 
 
 .a7-table-border .a7-pres-btn {
@@ -99,7 +120,6 @@
 
 .a7-card-se6 {
   height: 450px;
-  width: 35%;
   padding: 25px 25px;
 }
 
@@ -107,6 +127,7 @@
   height: 370px;
   background-color: #F3F7FD;
   padding: 10px;
+  width: 250px;
 }
 
 .a7-card-color-se6 {
@@ -129,9 +150,42 @@ border-radius: 0px 0px 0px 25px;
 
 }
 
+
+.a7-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.a7-pagination-btn {
+  display: flex;
+  width: 5%;
+  margin: 0px;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  padding: 10px;
+}
+
+
 .a7-card{
   display: flex;
+  overflow: scroll;
+  /* animation: a7-card-se6 10s linear infinite; */
 }
+
+/* @keyframes a7-card {
+  0% {
+    transform: translate3d(100%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(-100%, 0, 0);
+  }
+} */
+
 .a7-feedback-section{
   display: flex;
   flex-direction: column;
@@ -141,6 +195,29 @@ border-radius: 0px 0px 0px 25px;
 }
 
 
+.black-banner {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 40px;
+  font-family: var(--meriweather-font-family);
+  width: 100%;
+  height: 100px;
+  background-color: var(--black-color);
+  overflow: hidden;
+  white-space: nowrap;
+  animation: black-banner 10s linear infinite;
+}
+
+
+
+
+
+
+
+
+
+
+
 .a7-header {
   display: flex;
   background-color: #ffffff;
@@ -148,6 +225,8 @@ border-radius: 0px 0px 0px 25px;
   justify-content: space-between;
   padding:  0px 20px;
 }
+
+
 
 
 .a7-counter-card {

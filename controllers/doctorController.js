@@ -11,8 +11,8 @@ exports.getDoctorSideBarDetail = async (req, res) => {
     const doctor_id = req.user.id;
     const id = req.params.id;
     const [result] = await conn.query(
-      `select concat(fname, " ",lname) as name,profile_picture,email from users inner join profile_pictures on users.id = profile_pictures.user_id where role_id = ? and users.id = ?;`,
-      [2, doctor_id]
+      `select concat(fname, " ",lname) as name,profile_picture,email from users inner join profile_pictures on users.id = profile_pictures.user_id where role_id = ? and users.id = ? and profile_pictures.is_active = ?;`,
+      [2, doctor_id,1]
     );
     res.json(result);
   } catch (error) {
@@ -124,8 +124,8 @@ exports.updateDoctorDetails = async (req, res) => {
   //doctor_id get token
   let doctor_id = req.user.id
   const { fname, lname, dob, gender, phone, address, name, location, gst_no, dcity, city, pincode, qualification, consultancy_fees, id, hospital_id, speciality } = req.body;
-
-
+  let profile_picture = req.file?.filename || ""
+  
   // validate
   if (!id) {
     return res.status(500).json({
@@ -136,7 +136,7 @@ exports.updateDoctorDetails = async (req, res) => {
 
   try {
     try {
-      await conn.query(`update users set fname = ?,lname = ?,dob=?,gender=?,phone = ?,address = ?,city = ? where users.id = ? and role_id = ?`, [fname, lname, dob, gender, phone, address, dcity, doctor_id, 2])
+      await conn.query(`update users set fname = ?,lname = ?,dob=?,gender=?,phone = ?,address = ? where users.id = ? and role_id = ?`, [fname, lname, dob, gender, phone, address,  doctor_id, 2])
     }
     catch (error) {
       console.log(error);
@@ -188,6 +188,29 @@ exports.updateDoctorDetails = async (req, res) => {
         message: error.message,
       });
     }
+
+    if(!profile_picture == ""){
+      try{
+        await conn.query(`update profile_pictures set is_active = ? where user_id = ?`,[0,doctor_id])
+      }
+      catch(error){
+        return res.json({
+          success: false,
+          message: error.message
+        })
+      }
+
+      try {
+      await conn.query(
+        `insert into profile_pictures (profile_picture,user_id) values (?,?)`,[profile_picture,doctor_id]
+      )
+    } catch (error) {
+      return res.json({
+        success: false,
+        message:error.message
+      })
+    }
+   }
 
     res.json({ success: true, message: "Update Successfully" });
   } catch (error) {
@@ -247,7 +270,7 @@ exports.doctorData = async (req, res) => {
     // doctor_id get token
     const doctor_id = req.user.id
     console.log(doctor_id);
-    const [result] = await conn.query(`select doctor_details.id,clinic_hospitals.id as hospital_id,concat(fname," ",lname) as Name,email as Email,gender as Gender,dob as "Date of Birth",phone as Contact,address as Address,users.city as "Doctor City",name as "Hospital Name",location as "Hospital Address",gst_no as "GST No",clinic_hospitals.city as City,pincode as Pincode,speciality as Speciality,qualification as Qualificaiton,consultancy_fees as "Consultancy Fees" from doctor_details inner join users on  doctor_details.doctor_id = users.id inner join doctor_has_specialities on doctor_details.doctor_id = doctor_has_specialities.doctor_id inner join clinic_hospitals on clinic_hospitals.id = doctor_details.hospital_id inner join specialities on specialities.id = doctor_has_specialities.speciality_id where doctor_details.doctor_id = ?;`, [doctor_id])
+    const [result] = await conn.query(`select doctor_details.id,clinic_hospitals.id as hospital_id,concat(fname," ",lname) as Name,email as Email,gender as Gender,dob as "Date of Birth",phone as Contact,address as Address,name as "Hospital Name",location as "Hospital Address",gst_no as "GST No",clinic_hospitals.city as City,pincode as Pincode,speciality as Speciality,qualification as Qualificaiton,consultancy_fees as "Consultancy Fees" from doctor_details inner join users on  doctor_details.doctor_id = users.id inner join doctor_has_specialities on doctor_details.doctor_id = doctor_has_specialities.doctor_id inner join clinic_hospitals on clinic_hospitals.id = doctor_details.hospital_id inner join specialities on specialities.id = doctor_has_specialities.speciality_id where doctor_details.doctor_id = ?;`, [doctor_id])
     res.json(result)
   } catch (error) {
     return res.status(500).json({
@@ -266,7 +289,7 @@ exports.updateGetDoctorData = async (req, res) => {
     // doctor_id get token
     const doctor_id = req.user.id
 
-    const [result] = await conn.query(`select specialities.id as speciality,doctor_details.id, doctor_details.doctor_id,clinic_hospitals.id as hospital_id, fname,lname,email,gender,dob,phone,users.city as dcity,profile_picture,address,name,location,gst_no,clinic_hospitals.city,pincode, qualification, consultancy_fees from doctor_details inner join users on  doctor_details.doctor_id = users.id inner join doctor_has_specialities on doctor_details.doctor_id = doctor_has_specialities.doctor_id inner join profile_pictures on users.id = profile_pictures.user_id inner join clinic_hospitals on clinic_hospitals.id = doctor_details.hospital_id inner join specialities on specialities.id = doctor_has_specialities.speciality_id where doctor_details.doctor_id = ?;`, [doctor_id])
+    const [result] = await conn.query(`select specialities.id as speciality,doctor_details.id, doctor_details.doctor_id,clinic_hospitals.id as hospital_id, fname,lname,email,gender,dob,phone,profile_picture,address,name,location,gst_no,clinic_hospitals.city,pincode, qualification, consultancy_fees from doctor_details inner join users on  doctor_details.doctor_id = users.id inner join doctor_has_specialities on doctor_details.doctor_id = doctor_has_specialities.doctor_id inner join profile_pictures on users.id = profile_pictures.user_id inner join clinic_hospitals on clinic_hospitals.id = doctor_details.hospital_id inner join specialities on specialities.id = doctor_has_specialities.speciality_id where doctor_details.doctor_id = ? and profile_pictures.is_active = ?;`, [doctor_id,1])
     res.json(result)
 
 
@@ -306,7 +329,7 @@ exports.doctorPaymentData = async (req, res) => {
 exports.doctorReviewData = async (req, res) => {
   try {
     const doctor_id = req.user.id;
-    let [data] = await conn.query(`select concat(fname," ",lname) as name, rating_and_reviews.rating, rating_and_reviews.review ,rating_and_reviews.created_at as date from rating_and_reviews inner join users on rating_and_reviews.patient_id = users.id where rating_and_reviews.doctor_id = ?`, [doctor_id]);
+    let [data] = await conn.query(`select concat(fname," ",lname) as name, rating_and_reviews.rating, rating_and_reviews.review ,convert(rating_and_reviews.created_at,date) as date from rating_and_reviews inner join users on rating_and_reviews.patient_id = users.id where rating_and_reviews.doctor_id = ?`, [doctor_id]);
     res.json(data)
   }
   catch (error) {
@@ -386,11 +409,24 @@ exports.dashBoardCount = async(req,res)=>{
 exports.dashBoardReviews = async(req,res)=>{
   let doctor_id = req.user.id
   try {
-    let [result] = await conn.query(`select concat(fname," ",lname) as Name,email,rating,review,profile_picture from rating_and_reviews inner join users on rating_and_reviews.patient_id = users.id inner join profile_pictures on rating_and_reviews.patient_id = profile_pictures.user_id where doctor_id=?;`,[doctor_id])
+    let [result] = await conn.query(`select concat(fname," ",lname) as Name,email,rating,review,profile_picture from rating_and_reviews inner join users on rating_and_reviews.patient_id = users.id inner join profile_pictures on rating_and_reviews.patient_id = profile_pictures.user_id where doctor_id=? and profile_pictures.is_active = ?;`,[doctor_id,1])
     res.json(result)
   } catch (error) {
      return res.json({success: false,
     message: error.message
   })
 }
+}
+
+exports.dashBoardAppointments = async(req,res)=>{
+  let doctor_id = req.user.id
+  try {
+    let [result] = await conn.query(`select concat(fname," ",lname)as Name, concat(start_time," to ",end_time)as Appointment_time,slot_bookings.patient_id from slot_bookings inner join time_slots on slot_bookings.slot_id = time_slots.id inner join users on slot_bookings.patient_id = users.id where doctor_id = ? and time_slots.date = curdate() and time_slots.is_booked = ?;`,[doctor_id,1])
+    res.json(result)
+  } catch (error) {
+    return res.json({
+      success:false,
+      message:error.message
+    })
+  }
 }
