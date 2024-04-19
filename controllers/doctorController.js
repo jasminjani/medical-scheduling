@@ -421,7 +421,7 @@ exports.dashBoardReviews = async(req,res)=>{
 exports.dashBoardAppointments = async(req,res)=>{
   let doctor_id = req.user.id
   try {
-    let [result] = await conn.query(`select concat(fname," ",lname)as Name, concat(start_time," to ",end_time)as Appointment_time from slot_bookings inner join time_slots on slot_bookings.slot_id = time_slots.id inner join users on slot_bookings.patient_id = users.id where doctor_id = ? and time_slots.date = curdate() and time_slots.is_booked = ?;`,[doctor_id,1])
+    let [result] = await conn.query(`select concat(fname," ",lname)as Name, concat(start_time," to ",end_time)as Appointment_time,slot_bookings.patient_id from slot_bookings inner join time_slots on slot_bookings.slot_id = time_slots.id inner join users on slot_bookings.patient_id = users.id where doctor_id = ? and time_slots.date = curdate() and time_slots.is_booked = ?;`,[doctor_id,1])
     res.json(result)
   } catch (error) {
     return res.json({

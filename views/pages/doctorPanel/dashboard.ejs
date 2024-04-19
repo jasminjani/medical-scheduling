@@ -74,10 +74,6 @@
                 <div><span > Appointment Time</span></div>
                 <div><span > Describe Prescription</span></div>
               </div>
-
-             
-
-            
             </div>
             </div>
           </div>
@@ -126,7 +122,7 @@
       const data = await fetchData.json()
       let key = Object.keys(data)
       let feedbackCard = document.getElementById("feedbackCard")
-     for(let i=0; i<1000; i++){
+     
       key.forEach(element => {
        
             let dtkey = Object.keys(data[element])
@@ -206,17 +202,17 @@
 
           });
         }
-      }
+    
    
     fetchReviewData()
 
     const fetchAppointMents = async() =>{
-        let fetchData = await fetch('http://localhost:8000/dashBoarAppointments')
+        let fetchData = await fetch('http://localhost:8000/dashBoardAppointments')
         let data = await fetchData.json()
         let key = Object.keys(data)
         let count = 1;
         
-      for(let i=0; i<1000; i++){
+      
         key.forEach(element => {
             let dtkey = Object.keys(data[element])
             let table = document.getElementById("appointmentTable")
@@ -226,22 +222,30 @@
               div1.appendChild(countdiv)
             div1.setAttribute("class","a7-table-data")
             dtkey.forEach(item => {
+              if (item == 'patient_id') {
+                let btn = document.createElement("div")
+                btn.textContent = "Add Prescription"
+                btn.setAttribute("id", "hh")
+                btn.setAttribute("onclick", `location.href ='http://localhost:8000/prescription/${data[element][item]}'`)
+                btn.setAttribute("class", "a7-btn-style a5-btn")
+                div1.appendChild(btn)
+              }else{
+              
              let divspan = document.createElement("div")  
              let span =document.createElement('span')
              span.setAttribute("class","a7-table-border")
              span.textContent = data[element][item]
              divspan.appendChild(span)
              div1.appendChild(divspan)
+             
+             }
             });
-            let btn = document.createElement("div")
-            btn.textContent = "Add Prescription"
-            btn.setAttribute("onclick",`window.location.href ='http://localhost:8000/prescription'`)
-            btn.setAttribute("class","a7-btn-style a5-btn")
-            div1.appendChild(btn)
+           
+           
             table.appendChild(div1)
         });
         }
-    }
+  
 
      fetchAppointMents()
   </script>

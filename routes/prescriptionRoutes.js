@@ -28,9 +28,9 @@ router.route("/getprescriptionofdoctor").get(getPrescriptionOfDoctor);
 
 router.route("/generatePDFofprescripton/:id").get(generatePDF);
 
-router.route("/createprescription").get(showDetails);
+router.route("/createprescription/:patient_id").get(showDetails);
 
-router.route("/prescription").get(home);
+router.route("/prescription/:patient_id").get(home);
 
 router.route("/prescriptiondetails").get(allPatientPriscription);
 

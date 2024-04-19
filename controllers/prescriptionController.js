@@ -20,7 +20,8 @@ exports.allPatientPriscription = async (req, res) => {
 
 exports.showDetails = async (req, res) => {
   try {
-    const id = "5";
+    // A7 params patient_id
+    const id = req.params.patient_id;
     const query = `select users.id,fname,lname,email,phone,gender,dob,address,patient_details.blood_group from users join patient_details on users.id=patient_details.patient_id where patient_id=?`;
     const [result] = await conn.query(query, [id]);
     // console.log(result);

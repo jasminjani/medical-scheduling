@@ -66,7 +66,7 @@ router.route('/getDoctorReview')
 
 // Router show json format Data date:- 12-04-2024
 
-router.route("/dashBoarAppointments")
+router.route("/dashBoardAppointments")
   .get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),dashBoardAppointments)
 
 router.route("/dashBoardReviews")
