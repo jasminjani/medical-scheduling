@@ -1,42 +1,46 @@
+let result;
+let copyResult = [];
 
-async function fetchPaymentHistory() {
+async function fetchPatientPayment() {
   try {
-    let patient_id = 7;
-    const url = `http://localhost:8000/payments/${patient_id}`;
-    const response = await fetch(url)
-    const result = await response.json()
+    const url = `http://localhost:8000/payments`;
+    const response = await fetch(url);
+    result = await response.json();
+    copyResult = result;
 
-    await appendPaymentHistory(result)
+    await appendPatientPayment()
   } catch (error) {
     console.log(error);
   }
 }
 
 
-async function searchPaymentHistory() {
+async function searchPatientPayment() {
   try {
 
     let searchedData = document.getElementById('a5-searchPatient').value;
 
-    const url = `http://localhost:8000/searchedPaymentHistory/${searchedData}`;
-    const response = await fetch(url)
-    const result = await response.json()
-    console.log(result);
+    const url = `http://localhost:8000/searchedPatientPayment/${searchedData}`;
+    const response = await fetch(url);
 
+    // for display all data in null search
+    if (response.statusText == "Not Found") {
+      result = copyResult;
+    } else {
+      result = await response.json();
+    }
 
-
-    await appendPaymentHistory(result);
+    await appendPatientPayment();
   } catch (error) {
     console.log(error);
   }
 }
 
 
-async function appendPaymentHistory(result) {
+async function appendPatientPayment() {
   try {
-
     let html = `<tr>
-              <th>Index</th>
+              <th>Sr no.</th>
               <th>Name</th>
               <th>Email</th>
               <th>Date</th>
@@ -46,8 +50,6 @@ async function appendPaymentHistory(result) {
 
     document.getElementById('a5-tbody').innerHTML = html;
     let index = 1;
-
-    //
 
     let successArr = [];
     let refundArr = [];
@@ -59,11 +61,8 @@ async function appendPaymentHistory(result) {
         successArr.push(element);
       }
     });
-    console.log("success : ", successArr);
-    console.log("refund : ", refundArr);
 
     let status = document.getElementById('paymentStatus').value;
-    console.log(status);
     let data = [];
 
     if (status == 1) {
@@ -72,9 +71,6 @@ async function appendPaymentHistory(result) {
     else {
       data = successArr;
     }
-    //
-
-
 
     data.forEach(element => {
 
@@ -89,6 +85,18 @@ async function appendPaymentHistory(result) {
 
       document.getElementById('a5-tbody').innerHTML = document.getElementById('a5-tbody').innerHTML + html2;
     });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function changeStatus() {
+  try {
+
+    result = copyResult;
+    await appendPatientPayment();
+    document.getElementById('a5-searchPatient').value = "";
+
   } catch (error) {
     console.log(error);
   }
