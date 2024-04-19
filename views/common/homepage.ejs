@@ -115,10 +115,8 @@
             <div class="search-doctor">
               <div class="specialities">
                 <select name="speciality" id="speciality">
-                  <option value="" disabled selected>Select speciality</option>
-                  <option value="">MS</option>
-                  <option value="">MD</option>
-                  <option value="">MBBS</option>
+                  <option value="">Select speciality</option>
+                  <%- html %>
                 </select>
               </div>
               <p class="or">OR</p>
@@ -132,27 +130,29 @@
                 />
 
                 <datalist id="doctor-name">
-                  <option value="ms">MS</option>
+                  <!-- <option value="ms">MS</option>
                   <option value="md">MD</option>
-                  <option value="mbbs">MBBS</option>
+                  <option value="mbbs">MBBS</option> -->
                 </datalist>
 
                 <div class="search-btn">
-                  <input type="submit" class="btn" value="Search" />
+                  <input type="submit" class="btn" value="Search" id="search-doctor"/>
                 </div>
               </div>
             </div>
 
-
+            <div class="swipe-btns">
+            <!-- button pushed from js -->
+          </div>
             <div class="doctors">
               <div class="cards">
             
-                <div class="card">
+                <!-- <div class="card">
                   <div class="img">
                     <img src="/assets/doctor.png" alt="" >
                   </div>
                   <div class="details">
-                    <p class="name">doctor2</p>
+                    <p class="name">doctor1</p>
                     <p class="speciality">MS</p>
                   </div>
                   <p class="rating">
@@ -178,23 +178,7 @@
                     <img src="/assets/gstar.png" width="15px" alt="">
                     <img src="/assets/gstar.png" width="15px" alt="">
                   </p>
-                </div>
-                <div class="card">
-                  <div class="img">
-                    <img src="/assets/doctor.png" alt="" >
-                  </div>
-                  <div class="details">
-                    <p class="name">doctor2</p>
-                    <p class="speciality">MS</p>
-                  </div>
-                  <p class="rating">
-                    <img src="/assets/gstar.png" width="15px" alt="">
-                    <img src="/assets/gstar.png" width="15px" alt="">
-                    <img src="/assets/gstar.png" width="15px" alt="">
-                    <img src="/assets/gstar.png" width="15px" alt="">
-                    <img src="/assets/gstar.png" width="15px" alt="">
-                  </p>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -249,5 +233,8 @@
             </div>
         </div>
     </footer>
+
+    <script src="/javascript/homepage.js"></script>
+    <script src="/javascript/carousel.js"></script>
   </body>
 </html>
