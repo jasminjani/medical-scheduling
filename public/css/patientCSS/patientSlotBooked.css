@@ -5,24 +5,39 @@
 .container {
   margin: 0 auto;
   max-width: 1260px;
-  padding: 20px 37px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 .body {
-  width: 800px;
+  /* width: 800px; */
+  width: 1100px;
   display: flex;
   gap: 50px;
+  background-color: #f0f8fa;
 }
 
-.sideBar {
+.sideBar1 {
   max-width: 230px;
-  border: 1px solid black;
+  border: 1px solid rgb(201, 201, 201);
+  background-color: rgb(255, 255, 255);
+  border-left: none;
+  border-top: none;
+  border-bottom: none;
+  padding-bottom: 50px;
+}
+
+.sideBar2 {
+  height: 100%;
+  border: 1px solid rgb(201, 201, 201);
+  background-color: rgb(255, 255, 255);
+  border-left: none;
+  border-bottom: none;
 }
 
 .side {
   font-size: 30px;
   font-weight: 700;
+  /* margin-top: 30px; */
 }
 
 a {
@@ -30,25 +45,17 @@ a {
   font-weight: 901;
 }
 
-.full {
-  border: 1px solid black;
+.header {
+  margin-top: 30px;
 }
 
-.header {
-  display: flex;
-  gap: 670px;
-  /* border: 1px solid black;   */
+.headerLine {
+  margin-top: 30px;
 }
 
 .textHeader {
   width: 150px;
   margin-left: 20px;
-}
-
-.profilePic {
-  height: 50px;
-  margin-top: 10px;
-  margin-right: 20px;
 }
 
 hr {
@@ -60,15 +67,19 @@ hr {
 }
 
 .upcoming {
-  margin-left: 50px;
+  margin-left: 20px;
   padding: 10px;
   border: 1px solid black;
+  border-radius: 10px;
+  background-color: white;
 }
 
 .past {
-  margin-left: 50px;
+  margin-left: 20px;
   padding: 10px;
   border: 1px solid black;
+  border-radius: 10px;
+  background-color: white;
 }
 
 #content {
@@ -85,6 +96,22 @@ hr {
   background-color: rgb(139, 139, 139);
   color: white;
   border: 2px solid white;
+  cursor: pointer;
+}
+
+#content th {
+  border: 1px solid rgb(201, 201, 201);
+  border-bottom: 2px solid #0969da;
+}
+
+#content td {
+  border-left: none;
+  border-right: none;
+  padding: 15px;
+}
+
+#cancelPage:hover {
+  background-color: rgb(85, 85, 85);
 }
 
 .star {
@@ -98,8 +125,10 @@ td {
   border: 1px solid black;
   border-collapse: collapse;
   text-align: center;
-  width: 500px;
+  width: 650px;
   height: 30px;
+  border-left: none;
+  border-right: none;
 }
 
 #thanksText {
