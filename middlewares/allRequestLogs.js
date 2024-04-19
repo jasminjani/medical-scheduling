@@ -6,9 +6,7 @@ exports.allRequestLogs = (req, res, next) => {
   let fileName = 'uploads/requestLogs/requestURL.log';
   fs.appendFileSync(fileName, fullURL, (err) => {
     if (err) {
-      console.log("In File not write URL");
-    } else {
-      console.log("URL write in Demo file");
+      console.log("Error in write URL");
     }
   });
 
