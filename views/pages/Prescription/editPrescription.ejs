@@ -12,7 +12,8 @@
 <body onload="focus()">
   <div class="A4-section">
     <div class="A4-container">
-      <%- include('../../common/newSidebar/adminSidebar.ejs') %>
+      <%- include('../../common/newSidebar/doctorSidebar.ejs') %>
+
       <div class="A4-main">
         <p class="A4-back-btn A4-btn" onclick="back()"><img src="/assets/adminPanel/icons/back-iceblue.svg" alt="Back"> Back</p>
         
@@ -73,57 +74,63 @@
         <div class="A4-editPrescription-Button">
           <input type="button" value="Edit" id="A4-Edit-Button" onclick="editPrescription(`<%= id %>`)">
         </div>
+        <input type="hidden" value="<%= id %>" id="id">
         
       </div>
     </div>
   </div>
+  <script src="/javascript/prescription/editPrescription.js"></script>
   <script>
   
     // let id=`<%= id %>`;
     // console.log(id);
+    // let id=document.getElementById("id").value;
   
-    const fetchdata=async(id)=>{
-      let res=await fetch(window.location.origin + `/updatedetails/${id}`);
-      let resjson=await res.json();
+    // const fetchdata=async(id)=>{
+    //   let res=await fetch(window.location.origin + `/updatedetails/${id}`);
+    //   let resjson=await res.json();
   
-      const ele = document.getElementsByClassName("A4-table-content");
-      console.log(ele);
-      const keys = Object.keys(resjson.result[0]);
-      let i=0;
+    //   const ele = document.getElementsByClassName("A4-table-content");
+    //   console.log(ele);
+    //   const keys = Object.keys(resjson.result[0]);
+    //   let i=0;
   
-      keys.forEach((element) => {
-          ele[i].value = resjson.result[0][element];
-          i++;
-      });
-    }
+    //   keys.forEach((element) => {
+    //       ele[i].value = resjson.result[0][element];
+    //       i++;
+    //   });
+    // }
+    
+    
+    // fetchdata(id);
   
-    fetchdata(`<%= id %>`);
+    // const editPrescription=async(id)=>{
   
-    const editPrescription=async(id)=>{
+    //   try{
+    //   const form = document.getElementById('myForm');
+    //   const obj = new URLSearchParams(new FormData(form));
+    //   let res=await fetch(location.origin+`/updatePrescription/${id}`,
+    //           {
+    //               headers: {
+    //                   'Content-Type': 'application/x-www-form-urlencoded'
+    //               },
+    //               method: "POST",
+    //               body: obj
+    //           });
+    //   alert("Prescription Edited Successfully");
+    //   location.href=`/prescriptiondetails` ;       
+    // }
+    // catch(error){
+    //   console.log(error);
+    // }          
+    // }
   
-      try{
-      const form = document.getElementById('myForm');
-      const obj = new URLSearchParams(new FormData(form));
-      let res=await fetch(location.origin+`/updatePrescription/${id}`,
-              {
-                  headers: {
-                      'Content-Type': 'application/x-www-form-urlencoded'
-                  },
-                  method: "POST",
-                  body: obj
-              });
-    }
-    catch(error){
-      console.log(error);
-    }          
-    }
-  
-    const back=async()=>{
-      location.href=`/prescriptiondetails`;
-    }
-    const focus=async()=>{
-      document.getElementById("data3").focus();
-    }
+    // const back=async()=>{
+    //   location.href=`/prescriptiondetails`;
+    // }
+    // const focus=async()=>{
+    //   document.getElementById("data3").focus();
+    // }
   
   </script>
 </body>
