@@ -25,7 +25,7 @@ exports.patientProfile = async (req, res) => {
   try {
 
     res.render("pages/patientPanel/patientProfile");
-    
+
   } catch (error) {
     return res.status(500).json({
       success: false,
@@ -78,12 +78,39 @@ exports.patientPastBookings = async (req, res) => {
 
 exports.patientPayments = async (req, res) => {
   try {
-    const { patient_id } = req.params;
+    // here patient_id is as id
+    const { id } = req.user;
+    // let id = 7;
 
     try {
       const query = 'select time_slots.doctor_id,time_slots.date,time_slots.start_time,time_slots.end_time, concat(users.fname," ",users.lname) as doctor_name,users.phone,users.email,payments.payment_amount ,payments.is_refunded from payments inner join time_slots on time_slots.id = payments.slot_id inner join users on time_slots.doctor_id = users.id where patient_id = ?'
 
-      const [data] = await conn.query(query, [patient_id]);
+      const [data] = await conn.query(query, [id]);
+
+      return res.status(200).json({ success: true, message: data });
+
+    } catch (error) {
+      return res.status(500).json({ success: false, message: error.message })
+    }
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message })
+  }
+}
+
+exports.searchPatientPayment = async (req, res) => {
+  try {
+    const { paymentStatus, searchedData } = req.params;
+    const { id } = req.user;
+    // let id = 7;
+
+    try {
+      const query = `select time_slots.doctor_id,time_slots.date,time_slots.start_time,time_slots.end_time, concat(users.fname," ",users.lname) as doctor_name,users.phone,users.email,payments.payment_amount ,payments.is_refunded 
+      from payments 
+      inner join time_slots on time_slots.id = payments.slot_id 
+      inner join users on time_slots.doctor_id = users.id 
+      where patient_id = ? AND (users.fname LIKE '${searchedData}%' OR users.lname LIKE '${searchedData}%' OR users.email LIKE '${searchedData}%' OR users.email LIKE '${searchedData}%' OR  time_slots.start_time LIKE '${searchedData}%' OR time_slots.end_time LIKE '${searchedData}%' OR  payments.payment_amount LIKE '${searchedData}%')`;
+
+      const [data] = await conn.query(query, [id, paymentStatus]);
 
       return res.status(200).json({ success: true, message: data });
 

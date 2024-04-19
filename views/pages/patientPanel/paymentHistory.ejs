@@ -16,7 +16,7 @@
   <script src="/javascript/patientPanel/paymentHistory.js"></script>
 </head>
 
-<body onload="fetchPaymentHistory()">
+<body onload="fetchPatientPayment()">
 
   <div class="a5-container">
 
@@ -29,7 +29,7 @@
             <img src="/assets/adminPanel/icons/search.svg" alt="">
             <input type="text" name="searchUser" id="a5-searchPatient" placeholder="Search" tabindex="1">
           </div>
-          <p id="a5-btn-search" onclick="searchPaymentHistory()" tabindex="2">Search</p>
+          <p id="a5-btn-search" onclick="searchPatientPayment()" on tabindex="2">Search</p>
         </div>
 
         <div class="a5-all-user">
@@ -37,7 +37,7 @@
 
             <h2>Payment History</h2>
             <div class="combo-box">Status :
-              <select name="status" id="paymentStatus" onchange="appendPaymentHistory('result')">
+              <select name="status" id="paymentStatus" onchange="changeStatus()">
                 <option value="0" selected>success</option>
                 <option value="1">Refund</option>
               </select>
