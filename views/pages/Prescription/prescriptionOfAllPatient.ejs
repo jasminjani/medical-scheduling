@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
     <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
     <link rel="stylesheet" href="/css/prescription/prescriptionOfAllPatient.css"/>
+    <link rel="stylesheet" href="/css/Pagination/paginationComp.css" />
   </head>
   <body>
     <div class="A4-section">
@@ -27,13 +28,14 @@
               </div>
               <p id="a5-btn-search" onclick="searchPatient()" tabindex="2">Search</p>
           </div>
-          <div class="A4-Pagination-component">
+          <%- include('../../common/Pagination/paginationComp.ejs') %>
+          <!-- <div class="A4-Pagination-component">
                 <div class="home"><button onclick="home()" id="homebtn"><<</button></div>
                 <div class="previous"><button onclick="previous()" id="previousbtn"><</button></div>
                 <div class="pagenumber"><p id="pageno"></p></div>
                 <div class="next"><button onclick="next()" id="nextbtn">></button></div>
                 <div class="end"><button onclick="end()" id="endbtn">>></button></div>
-          </div> 
+          </div>  -->
 
           <div class="A4-content">
             <form action="">
