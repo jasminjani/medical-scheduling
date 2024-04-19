@@ -5,8 +5,10 @@
 }
 .A4-Pagination-component{
   display: flex;
+
   gap: 4px;
   justify-content: end;
+
 }
 #homebtn,#previousbtn,#nextbtn,#endbtn{
   height: 30px;
