@@ -1,6 +1,8 @@
   // let id=`<%= id %>`;
   // console.log(id);
 
+  let id=document.getElementById("id").value;
+
   const fetchdata=async(id)=>{
     let res=await fetch(window.location.origin + `/updatedetails/${id}`);
     let resjson=await res.json();
@@ -16,7 +18,7 @@
     });
   }
 
-  fetchdata(`<%= id %>`);
+  fetchdata(id);
 
   const editPrescription=async(id)=>{
 
@@ -31,6 +33,8 @@
                 method: "POST",
                 body: obj
             });
+            alert("Prescription updated successfully");
+            location.href=`/prescriptiondetails`;
   }
   catch(error){
     console.log(error);

@@ -99,6 +99,9 @@
   border: none;
   width: 400px;
 }
+#a5-searchPatient:focus{
+    outline: none;
+}
 #A4-content{
   border-collapse: collapse;
   border: 1px solid var(--brown);

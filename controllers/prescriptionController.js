@@ -142,25 +142,32 @@ exports.generatePDF = async (req, res) => {
     );
     res.setHeader("Content-type", "application/pdf");
 
-    let str = `
-    Appointment Date:${appointment_date}  
+    // let str = `
+    // Appointment Date:${appointment_date}  
 
-    Patient Name:${patient_name}
+    // Patient Name:${patient_name}
 
-    Doctor_name:${doctor_name}
+    // Doctor_name:${doctor_name}
 
-    Diagnosis:${diagnosis}
+    // Diagnosis:${diagnosis}
 
-    Prescription:
+    // Prescription:
 
-    ${result[0].prescription}
-    `;
-    doc.moveDown().text(str);
+    //   ${result[0].prescription}
+    // `;
+
+    doc.image('public/assets/logo.png',{fit: [100, 80],align: 'center',valign: 'center'});
+    doc.moveDown(8);
+    doc.moveDown().font('Times-Roman').fontSize(14).fillColor('#224763').text('Appointment Date:'+" "+`${appointment_date}`);
+    doc.moveDown().font('Times-Roman').fontSize(14).fillColor('#224763').text('Patient Name:'+" "+`${patient_name}`);
+    doc.moveDown().font('Times-Roman').fontSize(14).fillColor('#224763').text('Doctor Name:'+" "+`${doctor_name}`);
+    doc.moveDown().font('Times-Roman').fontSize(14).fillColor('#224763').text('Diagnosis:'+" "+`${diagnosis}`);
+    doc.moveDown().font('Times-Roman').fontSize(14).fillColor('#224763').text('Prescription:');
+    doc.moveDown().font('Times-Roman').fontSize(14).fillColor('#224763').text(`${result[0].prescription}`);
 
     doc.pipe(res);
     doc.end();
 
-    res.send();
   } catch (error) {
     return res.status(500).json({
       success: false,
@@ -180,13 +187,13 @@ exports.getPrescriptionOfDoctor = async (req, res) => {
     const count = result[0].count;
     const query = `select prescriptions.created_at,prescriptions.diagnoses,prescriptions.id,concat(users.fname," ",users.lname) as patient_name from prescriptions join users on prescriptions.patient_id= users.id where doctor_id=? order by prescriptions.created_at`;
     const result2 = await conn.query(query, [id]);
-    return res.status(200).json({ success: true, message: result2, count });
+    return res.status(200).json({ success: true, result:result2});
   } catch (error) {
     return res.status(500).json({
       success: false,
       message: error.message,
     });
-  }
+  }0
 };
 
 exports.editPrescriptionHome=async (req,res)=>{

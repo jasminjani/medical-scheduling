@@ -45,9 +45,9 @@ const submitPrescription = async () => {
       method: "POST",
       body: obj,
     });
+    alert("Prescription Inserted Successfully")
     const result = await res1.json();
     insert_id = result.insert_id;
-    // console.log("inserted successfully");
   }
 };
 
