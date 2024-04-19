@@ -10,6 +10,7 @@ const fileUpload = multer({ storage: fileStorage });
 const { createUser, login, getAllUser, logout, getUserById, deleteUser, generateToken, createUserForm, getCreateUserForm, getLoginForm, activationForm, activationAccount, getCurrentUser, homePage } = require("../controllers/userController");
 const passport = require('passport');
 const { patientPayments, patientProfile, patientUpcomingBookings, patientPastBookings } = require('../controllers/patientAllAppointController');
+const { paymentHistory } = require('../controllers/doctorPaymentHistory');
 
 router.route("/")
 .get(homePage)

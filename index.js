@@ -27,7 +27,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // use root router in index file
 const rootRouter = require("./routes/rootRouter");
-app.use("/", rootRouter);
+const { allRequestLogs } = require("./middlewares/allRequestLogs");
+
+app.use("/", allRequestLogs, rootRouter);
 
 // server is running on PORT
 app.listen(PORT, () => {

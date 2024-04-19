@@ -1,0 +1,36 @@
+:root {
+  --light-blue: #d2ebf9;
+  --brown: #e7e7e7;
+  --blue: #0969da;
+  --white: #ffffff;
+}
+
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.a2-container {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.a2-patient-dashboard {
+  margin-left: 350px;
+  border: 1px solid red;
+}
+
+.a2-patient-hero-section {
+  width: 900px;
+  /* height: 100px; */
+
+
+  background-image: url('/assets/patient-dashboard.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 0;
+  padding-top: calc(1080/1920*100%);
+}
