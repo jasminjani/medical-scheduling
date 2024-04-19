@@ -68,7 +68,7 @@ exports.createSlots = async (req, res) => {
   }
 }
 
-const specialitiesCombo = async () => {
+exports.specialitiesCombo = async () => {
 
   let sql = "select * from specialities where approved = 1 order by speciality";
   let [result] = await conn.query(sql);
@@ -102,7 +102,7 @@ exports.DoctorCobmo = async (req, res) => {
 
 
 exports.getBookingSlots = async (req, res) => {
-  let html = await specialitiesCombo();
+  let html = await this.specialitiesCombo();
   return res.render('pages/patientPanel/appointment', { html })
 }
 
@@ -373,9 +373,11 @@ exports.cancelSlot = async (req, res) => {
 
       const [refunded] = await conn.query(query, [1, slot_id]);
 
-      return res.status(200).json({ success: true, message: "slot canceled successfully" });
+      // return res.status(200).json({ success: true, message: "slot canceled successfully" });
+      return res.redirect("/patientUpcomingSlots");
 
     } catch (error) {
+      console.log(error);
       return res.status(500).json({ success: false, message: error.message });
     }
 
