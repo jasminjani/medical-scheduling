@@ -7,13 +7,14 @@ const multer = require("multer");
 const imgUpload = multer({ storage: imgStorage });
 const fileUpload = multer({ storage: fileStorage });
 
-const { createUser, login, getAllUser, logout, getUserById, deleteUser, generateToken, createUserForm, getCreateUserForm, getLoginForm, activationForm, activationAccount, getCurrentUser, homePage } = require("../controllers/userController");
+const { createUser, login, getAllUser, logout, getUserById, deleteUser, generateToken, createUserForm, getCreateUserForm, getLoginForm, activationForm, activationAccount, getCurrentUser, homePage, getDoctorDetailForHomePage, getDoctorDetails } = require("../controllers/userController");
 const passport = require('passport');
 const { paymentHistory,patientPayments, patientProfile, patientUpcomingBookings, patientPastBookings, patientPastProfile } = require('../controllers/patientAllAppointController');
 
 router.route("/")
 .get(homePage)
 
+router.route('/alldoctors').get(getDoctorDetails)
 router.route('/register')
 .get(getCreateUserForm)
 .post(imgUpload.single('profile'), createUser)
@@ -48,14 +49,13 @@ router.route('/activate')
 
 
 
-
 router.route("/:patient_id/review/:doctor_id").post(rating);
 
 // Slots controller(slotControllers)
 router.route("/addSlot").get(createSlotsPage);
 router.route("/slot/:doctor_id").post(createSlots)
 
-router.route("/slot").get(passport.authenticate('jwt',{session:false,failureRedirect:"/login"}),getBookingSlots);
+router.route("/bookslots/:id").get(passport.authenticate('jwt',{session:false,failureRedirect:"/login"}),getBookingSlots);
 
 router.route('/getDoctors').post(DoctorCobmo)
 router.route("/slots").post(passport.authenticate('jwt',{session:false,failureRedirect:"/login"}),getSingleSlots);
