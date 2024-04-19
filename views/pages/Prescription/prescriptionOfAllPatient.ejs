@@ -7,11 +7,12 @@
     <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
     <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
     <link rel="stylesheet" href="/css/prescription/prescriptionOfAllPatient.css"/>
+    <link rel="stylesheet" href="/css/Pagination/paginationComp.css" />
   </head>
   <body>
     <div class="A4-section">
       <div class="A4-container">
-        <%- include('../../common/newSidebar/adminSidebar.ejs') %>
+        <%- include('../../common/newSidebar/doctorSidebar.ejs') %>
 
         <div class="A4-main">
           <!-- <div class="A4-title">
@@ -27,13 +28,14 @@
               </div>
               <p id="a5-btn-search" onclick="searchPatient()" tabindex="2">Search</p>
           </div>
-          <div class="A4-Pagination-component">
+          <%- include('../../common/Pagination/paginationComp.ejs') %>
+          <!-- <div class="A4-Pagination-component">
                 <div class="home"><button onclick="home()" id="homebtn"><<</button></div>
                 <div class="previous"><button onclick="previous()" id="previousbtn"><</button></div>
                 <div class="pagenumber"><p id="pageno"></p></div>
                 <div class="next"><button onclick="next()" id="nextbtn">></button></div>
                 <div class="end"><button onclick="end()" id="endbtn">>></button></div>
-          </div> 
+          </div>  -->
 
           <div class="A4-content">
             <form action="">
@@ -56,126 +58,7 @@
         </div>
       </div>
     </div>
-    <script>
-        let data=[];
-        let currentpage=1;
-        const ItemsPerPage=20;
-        let length=0;
-        let pageno=document.getElementById("pageno");
-
-
-      // const fetchData = async () => {
-      //   res = await fetch(
-      //     window.location.origin + `/getprescriptionofdoctor`
-      //   );
-      //   resjson = await res.json();
-
-      //   console.log(resjson.message[0]);
-      //   resjson.message[0].forEach(function (element, index) {
-      //     let table = document.getElementById("myTable");
-      //     let str = `
-      //       <tr>
-      //         <td>${index + 1}</td>
-      //         <td>${element.created_at}</td>
-      //         <td>${element.patient_name}</td>
-      //         <td>${element.diagnoses}</td>
-      //         <td><input type="button" value="Get PDF" onclick="generatePDF(${element.id})"><input type="button" value="Edit Prescription"></td>
-      //       </tr>
-      //     `;
-      //     table.innerHTML += str;
-      //   });
-      // };
-
-      // fetchData();
-
-
-
-      const generatePDF = async (id) => {
-        location.href = `/generatePDFofprescripton/${id}`;
-      };
-
-      const fetchData = async()=>{
-
-        let res = await fetch(
-          window.location.origin + `/getprescriptionofdoctor`
-        );
-        let resjson=await res.json()
-        console.log(resjson);
-
-        data=resjson.message[0];
-
-        length=data.length;
-        pageno.innerHTML=currentpage;
-
-        const endIndex = currentpage* ItemsPerPage;
-        const startIndex = endIndex - ItemsPerPage;
-        const pageItems = data.slice(startIndex, endIndex);
-
-
-        let tabledata="";
-
-            pageItems.map((value,index)=>{
-              tabledata += `<tr>
-              <td>${value.created_at}</td>
-              <td>${value.patient_name}</td>
-              <td>${value.diagnoses}</td>
-              <td><input type="button" value="Get PDF" onclick="generatePDF(${value.id})" id="A4-getpdf-btn"><input type="button" value="Edit Prescription" onclick="editPrescription(${value.id})" id="A4-editprescription-btn"></td>
-            </tr>`
-            })
-
-            document.getElementById("tabledata").innerHTML = tabledata;
-
-    }
-
-      function home() {
-        document.getElementById("homebtn").disabled = true;
-        document.getElementById("previousbtn").disabled = true;
-        document.getElementById("nextbtn").disabled = false;
-        document.getElementById("endbtn").disabled = false;
-        currentpage = 1;
-        fetchData();
-      }
-
-      function previous() {
-        if (currentpage <= 1) {
-          document.getElementById("previousbtn").disabled = true;
-          document.getElementById("homebtn").disabled = true;
-        } else {
-          document.getElementById("nextbtn").disabled = false;
-          document.getElementById("endbtn").disabled = false;
-          currentpage--;
-          fetchData();
-        }
-      }
-
-      function next() {
-        if (currentpage == Math.ceil(length/ItemsPerPage)) {
-          document.getElementById("nextbtn").disabled = true;
-          document.getElementById("endbtn").disabled = true;
-        } else {
-          document.getElementById("previousbtn").disabled = false;
-          document.getElementById("homebtn").disabled = false;
-          currentpage++;
-          fetchData();
-        }
-      }
-
-      function end() {
-        document.getElementById("homebtn").disabled = false;
-        document.getElementById("previousbtn").disabled = false;
-        document.getElementById("nextbtn").disabled = true;
-        document.getElementById("endbtn").disabled = true;
-        currentpage = Math.ceil(length / ItemsPerPage);
-        fetchData();
-      }
-
-    fetchData();
-
-    const editPrescription= async (id) =>{
-      console.log(id+"editidd");
-      location.href = `/editprescription/${id}`;
-    }
-
-    </script>
+    <script src="/javascript/Pagination/pagination.js"></script>
+    <script src="/javascript/prescription/prescriptionOfAllPatient.js"></script>
   </body>
 </html>

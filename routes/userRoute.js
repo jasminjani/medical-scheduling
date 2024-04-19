@@ -72,6 +72,6 @@ router.route("/patientPastSlots").get(patientPastProfile);
 router.route("/bookings/:patient_id").get(patientUpcomingBookings);
 router.route("/pastbookings/:patient_id").get(patientPastBookings);
 router.route("/payments/:patient_id").get(patientPayments) 
-router.route("/patient-paymentHistory").get(paymentHistory)
+// router.route("/patient-paymentHistory").get(paymentHistory)
 
 module.exports = router;
