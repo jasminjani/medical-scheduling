@@ -123,6 +123,7 @@ table {
 }
 #prescription {
   font-size: 18px;
+  max-width: 620px;
 }
 #myForm {
   background-color: aliceblue;
