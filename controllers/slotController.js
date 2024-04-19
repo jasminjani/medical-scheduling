@@ -14,8 +14,9 @@ exports.createSlots = async (req, res) => {
 
     const { day1, day2, day3, day4, day5, day6, day7 } = req.body;
 
-    const { doctor_id } = req.params;
-
+    // const { doctor_id } = req.params;
+        const doctor_id = req.user.id
+        console.log(doctor_id);
     const dayArray = [day1, day2, day3, day4, day5, day6, day7]
 
     for (let i = 0; i < 7; i++) {
@@ -62,6 +63,7 @@ exports.createSlots = async (req, res) => {
     return res.status(200).json({ success: true, message: "slots created successfully" });
 
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ success: false, message: error.message });
   }
 }
@@ -211,7 +213,8 @@ exports.getSlotsPage = async (req, res) => {
 exports.getDates = async (req, res) => {
   try {
 
-    const { doctor_id } = req.params;
+    // const { doctor_id } = req.params;
+    const doctor_id = req.user.id;
 
     try {
 
@@ -235,8 +238,10 @@ exports.getDates = async (req, res) => {
 exports.getAllSlots = async (req, res) => {
   try {
 
-    const { doctor_id, date } = req.params;
-
+    // const { doctor_id, date } = req.params;
+    const {date}= req.params
+    const doctor_id = req.user.id
+    // console.log(doctor_id);
     try {
 
       // const query = 'SELECT time_slots.id,time_slots.date,time_slots.start_time,time_slots.end_time,users.fname as patient_name,users.phone FROM time_slots left join slot_bookings on time_slots.id = slot_bookings.slot_id left join users on slot_bookings.patient_id = users.id where time_slots.doctor_id = ? and time_slots.date >= CAST(NOW() as DATE) and time_slots.is_deleted = ? and date = ? and slot_bookings.is_canceled != ? order by time_slots.date';
@@ -261,8 +266,9 @@ exports.getAllSlots = async (req, res) => {
 exports.deleteSlot = async (req, res) => {
   try {
 
-    const { doctor_id, slot_id } = req.params;
-
+    // const { doctor_id, slot_id } = req.params;
+    const {slot_id} = req.params 
+    const doctor_id = req.user.id
     try {
 
       const query = "select * from time_slots where doctor_id = ? and id = ? and is_deleted = ?";
@@ -326,8 +332,9 @@ exports.cancelSlot = async (req, res) => {
 
   try {
 
-    const { patient_id, slot_id } = req.params;
-
+    // const { patient_id, slot_id } = req.params;
+    const { slot_id } = req.params;
+    const patient_id = req.user.id;
     try {
 
       const query = "select * from slot_bookings where patient_id = ? and slot_id = ? and is_deleted = ?";

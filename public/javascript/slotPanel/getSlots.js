@@ -2,7 +2,7 @@ window.location.href.split("/").pop() === "upcomingSlots" ? document.getElementB
 
 // Add Doctor id from cookie
 const getDates = async () => {
-  const response = await fetch("http://localhost:8000/dates/1", {
+  const response = await fetch("http://localhost:8000/dates", {
     method: "GET",
     headers: {
       "Content-type": "application/json"
@@ -18,17 +18,17 @@ const getDates = async () => {
       <tr>
         <td>${element.dates}</td>
         <td>${element.day}</td>
-        <td><input type="button" value="View Slots" onclick=getSlots("${element.dates}",1)></td>
+        <td><input type="button" value="View Slots" onclick=getSlots("${element.dates}")></td>
       </tr>
     `
   });
 }
 
-const getSlots = async (date, doctor_id) => {
+const getSlots = async (date ) => {
 
   document.getElementsByClassName("A3-modal")[0].style.visibility = "visible";
 
-  const response = await fetch(`http://localhost:8000/slots/${doctor_id}/${date}`, {
+  const response = await fetch(`http://localhost:8000/slots/${date}`, {
     method: "GET",
     headers: {
       "Content-type": "application/json"
@@ -37,7 +37,7 @@ const getSlots = async (date, doctor_id) => {
 
   const { message } = await response.json();
 
-  console.log(message);
+  // console.log(message);
 
   document.getElementById("A3-modal-date").innerHTML = date;
 
@@ -52,13 +52,13 @@ const getSlots = async (date, doctor_id) => {
         <td>${element.end_time}</td>
         <td>${element.patient_name ? element.patient_name : "-"}</td>
         <td>${element.phone ? element.phone : "-"}</td>
-        <td><input type="button" value="Delete" onclick=openDeleteModal(${doctor_id},${element.id}) /></td>
+        <td><input type="button" value="Delete" onclick=openDeleteModal(${element.id}) /></td>
       </tr>
     `
   });
 }
 
-const openDeleteModal = async (doctor_id, slot_id) => {
+const openDeleteModal = async ( slot_id) => {
   Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
@@ -75,7 +75,7 @@ const openDeleteModal = async (doctor_id, slot_id) => {
         icon: "success",
       }).then((result) => {
         if (result.isConfirmed) {
-          window.location.href = `/${doctor_id}/delete/${slot_id}`;
+          window.location.href = `/delete/${slot_id}`;
         }
       })
     }
@@ -85,6 +85,3 @@ const openDeleteModal = async (doctor_id, slot_id) => {
 const handleClose = () => {
   document.getElementsByClassName("A3-modal")[0].style.visibility = "hidden";
 }
-
-
-
