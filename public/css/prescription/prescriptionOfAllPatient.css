@@ -38,10 +38,7 @@
     width: 1088px;
   }
 } */
-.A4-Pagination-component{
-  display: flex;
-  gap: 2px;
-}
+
 #tabledata{
   text-align: center;
 }
@@ -98,6 +95,9 @@
 #a5-searchPatient{
   border: none;
   width: 400px;
+}
+#a5-searchPatient:focus{
+    outline: none;
 }
 #A4-content{
   border-collapse: collapse;
