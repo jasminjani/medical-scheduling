@@ -11,24 +11,7 @@
 </head>
 
 <body>
-<style>
-  .div-field{
-    display: flex;
-  }
 
-  .mediInfo{
-    display: flex;
-    flex-direction: column;
-  }
-
-  #medicineDetail {
-  display: flex;
-  align-items: center;
-  gap: 50px;
-  }
-
- 
-</style>
   <div class="a5-container">
 
     <%- include('../../common/newSidebar/doctorSidebar') %>
@@ -87,7 +70,7 @@
 
                     </div>
                   </div>
-                  <div class="a5-prescription" id="medicineDetail"  >
+                  <div class="a5-prescription" id="a7-medicineDetail"  >
 
                   </div>
                 </div>
@@ -110,6 +93,7 @@
 <script>
  
   const patientAppointmentDetail = async () => {
+
     let fetchdata = await fetch(`http://localhost:8000/getpatientHistoryData/${Id}`)
     let data = await fetchdata.json()
     let key = Object.keys(data)
@@ -176,21 +160,28 @@
     const fetchData = await fetch(`http://localhost:8000/patientPrescriptionData/${Id}/${date}`)
     const data = await fetchData.json()
     const key = Object.keys(data)
-    console.log(data);
+  
     document.getElementById("appointmentdt").innerHTML = "";
-    document.getElementById("medicineDetail").innerHTML = "";
+    document.getElementById("a7-medicineDetail").innerHTML = "";
 
-    
+    if(key == "")
+    {
+       let span = document.createElement("span")
+       span.textContent = "Data not Found!"
+       span.style.fontSize = "25px"
+        document.getElementById("a7-medicineDetail").appendChild(span)
+    }
     key.forEach(item => {
 
       const dtkey = Object.keys(data[item])
       let div = document.createElement('div')
-          div.setAttribute("class","mediInfo")
+          div.setAttribute("class","a7-mediInfo")
 
     dtkey.forEach(element => {
+
             let para = document.createElement("p")  
             let fieldDiv = document.createElement("div")
-            fieldDiv.setAttribute("class","div-field")
+            fieldDiv.setAttribute("class","a7-div-field")
             let span = document.createElement("span")
             span.setAttribute("class","a5-bold")
             span.innerText = element+':'
@@ -198,11 +189,9 @@
             fieldDiv.appendChild(span)
             fieldDiv.appendChild(para)
             div.append(fieldDiv)
-        // document.getElementById("mediInfo").innerHTML += `
-        //        <p><span class="a5-bold">${element}:</span>${data[item][element]}</p>`
        });
 
-        document.getElementById("medicineDetail").appendChild(div)
+        document.getElementById("a7-medicineDetail").appendChild(div)
     });
     funcId(id).style.display = 'block';
   }

@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css">
   <link rel="stylesheet" href="/css/doctorPanel/profile.css">
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
+  <script src="/javascript/doctorPanel/fetchSpeciality.js" defer></script>
   <title>Edit Profile</title>
 </head>
 
@@ -26,7 +27,7 @@
           <div class="a7-card-box">
             <div class="a7-card-color">
               <div class="a7-profile-info">
-                <form action="" id="myform" method="post">
+                <form action="" id="myform" method="post" enctype="multipart/form-data">
                   <div class="a7-field-inp">
                     <input type="text" name="id" id="" class="a7-form-input" value="" hidden/>
                   </div>
@@ -79,12 +80,7 @@
 
                   </div>
 
-                  <div class="a7-field-inp">
-                    <label for="">Doctor City:</label>
-                    <select name="dcity" id="dcity" >
-                      <option value="">--Select City--</option>
-                    </select>
-                  </div>
+                 
                   <div class="a7-field-inp">
                     <label for="">Qualification:</label>
                     <input type="text" name="qualification" id="" class="a7-form-input" value="" />
@@ -137,19 +133,39 @@
     </div>
   </div>
   </div>
-<script src="/javascript/doctorPanel/fetchSpeciality.js"></script>
+
   <script>
 
-    function profileFun(){
-        document.getElementById("file").style.display = "block"
-        document.getElementById("updateImage").style.display = "none"
-    }
+    const specialityFetch = async () => {
+        const fetchData = await fetch("http://localhost:8000/specialities")
+        const data = await fetchData.json()
+        let key = Object.keys(data)
+        key.forEach(element => {
+          let dtkey = Object.keys(data[element])
+          let option = document.createElement("option")
+          option.value = data[element][dtkey[0]]
+          option.textContent = data[element][dtkey[1]]
+          document.getElementById(dtkey[1]).appendChild(option)
+        });
+      }
+
+      const fetchCity = async () => {
+
+        const fetchdata = await fetch("http://localhost:8000/cityCombo")
+        const data = await fetchdata.json()
+        let key = Object.keys(data)
+        key.forEach(element => {
+          let dtkey = Object.keys(data[element])
+          let option = document.createElement("option")
+          option.value = data[element][dtkey[2]]
+          option.textContent = data[element][dtkey[2]]
+          document.getElementById("city").appendChild(option)
+        });
+      }
 
 
-
-
-
-
+      specialityFetch()
+      fetchCity()
 
 
 
@@ -162,28 +178,33 @@
 
       key.forEach(element => {
 
-        if (element == 'gender') {
+        if (element == 'gender' || element == 'profile_picture' ) {
           let radio = document.getElementsByName('gender')
           radio.forEach(ele => {
             if (ele.value == data[0][element]) {
               ele.checked = true;
             }
           });
-        }
-        if(element == 'profile_picture')
-        {
-          document.getElementById('updateImage').innerHTML = `<img src="/imgs/${data[0][element]}" alt="" height="200px" width="200px">
+
+           document.getElementById('updateImage').innerHTML = `<img src="/imgs/${data[0][element]}" alt="" height="200px" width="200px">
           <span onclick="profileFun()">cancel</span>` 
-          // console.log(a);
         }
-        else {
-         
-          let a = document.getElementsByName(element)[0].value = data[0][element]
-         
+        else{
+           document.getElementsByName(element)[0].value = data[0][element]
         }
+        
+         
+          
+         
+     
       });
     }
     fetchData()
+
+        function profileFun() {
+            document.getElementById("file").style.display = "block"
+            document.getElementById("updateImage").style.display = "none"
+          }
   </script>
   
 </body>

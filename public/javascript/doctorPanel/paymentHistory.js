@@ -34,7 +34,7 @@ async function appendPaymentHistory(result) {
   try {
 
     let html = `<tr>
-              <th>Index</th>
+              <th>Sr no.</th>
               <th>First Name</th>
               <th>Last Name</th>
               <th>Contact No.</th>

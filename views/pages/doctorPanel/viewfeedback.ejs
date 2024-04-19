@@ -7,50 +7,75 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css">
-  <link rel="stylesheet" href="/css/doctorPanel/viewfeedback.css">
-  <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
+    <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
+    <link rel="stylesheet" href="/css/adminPanel/allPatientDetails.css">
+    <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css">
   <title>view Feedback</title>
 </head>
 
 <body>
 
-<div class="a7-container">
-  <%- include('../../common/newSidebar/doctorSidebar.ejs') %>
-  <div class="a7-appointment-tbl a7-mr-300">
-
-    <div class="a7-feedback-table-row">
-      <div class="search-box"><input type="text" name="search" id="search"><i class="fa fa-search" aria-hidden="true"></i>
-</div>
-      <div class="a7-feedback-title">
-        <div>View Feedback</div>
-      </div>
-      <table>
-
-        <tr class="a7-feedback-table-header">
-          <td><span>Name</span> </td>
-          <td><span>Rating</span></td>
-          <td><span>Message</span></td>
-          <td><span>Date</span></td>
+  <div class="a5-container">
+    <%- include('../../common/newSidebar/doctorSidebar') %>
+      <div class="a5-section">
+        <div class="a5-search">
+          <div class="a5-searchbox">
+            <img src="/assets/adminPanel/icons/search.svg" alt="">
+            <input type="text" name="searchUser" id="a5-searchPatient" placeholder="Search Patient name" tabindex="1">
+          </div>
+          <p id="a5-btn-search" tabindex="2">Search</p>
+        </div>
+  
+        <div class="a5-all-user">
+        <h2>View Feedback</h2>
+    
+          <div class="a5-user-table"></div>
+      <table  id="a5-user-table">
+          <tbody id="a5-tbody">
+        <tr>
+          <th>Sr No.</th>
+          <th>Name </th>
+          <th>Rating</th>
+          <th>Message</th>
+          <th>Date</th>
         </tr>
         <!-- fetch data database -->
-        <tr class="a7-feedback-table-data" id="rowdata"></tr>
+       
+        </tbody>
       </table>
     </div>
+     <div class="a7-pagination">
+          <span class="a5-btn a7-pagination-btn"><<</span>
+          <span class="a5-btn a7-pagination-btn"><</span>
+          <span class="a5-btn a7-pagination-btn"> </span>
+          <span class="a5-btn a7-pagination-btn">></span>
+          <span class="a5-btn a7-pagination-btn">>></span>
+        </div>
   </div>
   </div>
-
+  </div>
   <script>
     const fetchDataFun = async () => {
-
+      let count = 1
       let fetchdata = await fetch(`http://localhost:8000/reviews`)
       let data = await fetchdata.json()
-      console.log(data);
-      let key = Object.keys(data[0])
-      key.forEach(element => {
+      let key = Object.keys(data)
+      key.forEach(item => {
+
+        let dtkey = Object.keys(data[item])
+        let table = document.getElementById("a5-tbody")
+        let tr = document.createElement('tr')
+        let indexCount = document.createElement('td')
+          indexCount.textContent = count++
+          tr.appendChild(indexCount)
+         
+        dtkey.forEach(element => {
+          
         let tddata = document.createElement("td")
-        tddata.innerHTML = data[0][element]
-        document.getElementById("rowdata").append(tddata)
+        tddata.textContent = data[item][element]
+          tr.appendChild(tddata)
+        });
+        table.appendChild(tr)
       });
     }
     fetchDataFun()
