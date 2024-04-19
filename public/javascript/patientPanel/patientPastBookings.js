@@ -1,7 +1,7 @@
-window.location.href.split("/").pop() === "patientUpcomingSlots" ? document.getElementById("A3-upcoming").style.backgroundColor = "#3984af" : "";
+window.location.href.split("/").pop() === "patientPastSlots" ? document.getElementById("A3-past").style.backgroundColor = "#3984af" : "";
 
 const getUpcomingSlots = async () => {
-  const response = await fetch("http://localhost:8000/bookings/2", {
+  const response = await fetch("http://localhost:8000/pastbookings/2", {
     method: "GET",
     headers: {
       "Content-type": "application/json"
@@ -9,6 +9,8 @@ const getUpcomingSlots = async () => {
   });
 
   const { message } = await response.json();
+
+  console.log(message);
 
   const table = document.getElementById("date-body");
 
@@ -20,33 +22,9 @@ const getUpcomingSlots = async () => {
         <td>${element.day}</td>
         <td>${element.start_time.slice(0, -3)}-${element.end_time.slice(0, -3)}</td>
         <td><input type="button" value="Details" onclick=getDetails(${JSON.stringify(element)})></td>
-        <td><input type="button" value="Cancel" onclick=cancelSlot(${element.id},${element.patient_id})></td>
+        <td><a href=/generatePDFofprescripton/${element.prescription_id}><input type="button" value="Get PDF"></a></td>
       </tr>
     `
-  });
-}
-
-const cancelSlot = async(slot_id,patient_id)=>{
-  Swal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to revert this!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, cancel it!"
-  }).then((result) => {
-    if (result.isConfirmed) {
-      Swal.fire({
-        title: "Canceled!",
-        text: "Fees refunded successfully!!",
-        icon: "success",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          window.location.href = `/${patient_id}/cancel/${slot_id}`;
-        }
-      })
-    }
   });
 }
 

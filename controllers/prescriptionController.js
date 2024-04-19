@@ -120,6 +120,7 @@ exports.getPrescriptionOfUser = async (req, res) => {
 exports.generatePDF = async (req, res) => {
   try {
     const id = req.params.id;
+
     let doc = new PDFDocument();
 
     const query = `select prescriptions.prescription,prescriptions.diagnoses,prescriptions.created_at,
@@ -133,6 +134,7 @@ exports.generatePDF = async (req, res) => {
     const [result] = await conn.query(query);
     const patient_name = result[0].patient_name;
     const doctor_name = result[0].doctor_name;
+    const prescription = result[0].prescription;
     const diagnosis = result[0].diagnoses;
     const appointment_date = result[0].created_at.toString().slice(0, 10);
 
@@ -151,7 +153,7 @@ exports.generatePDF = async (req, res) => {
 
     Diagnosis:${diagnosis}
 
-    Prescription:
+    Prescription:${prescription}
 
     ${result[0].prescription}
     `;
