@@ -9,18 +9,20 @@
   <script src="/javascript/patientPanel/patientProfile.js" defer></script>
   <link rel="stylesheet" href="fontawesome-free-6.5.2-web/css/all.min.css"> 
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
+  <link rel="stylesheet" href="/css/Pagination/paginationComp.css">
   <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css">
   <script src="/sweetalert2/sweetalert2.min.js"></script>
   </head>
 
-<body onload="getUpcomingSlots()">
-  <section id="A3-allslot">
-    <%-include("../../common/newSidebar/patientSidebar")%>
-  <div class="A3-container">
-    <div class="A3-row-1">
-      <a id="A3-upcoming" href="/patientUpcomingSlots"><i class="fa-solid fa-arrow-up"></i></a>
-      <a id="A3-past" href="/patientPastSlots"><i class="fa-solid fa-arrow-down"></i></a>
-    </div>
+  <body onload="getUpcomingSlots()">
+    <section id="A3-allslot">
+      <%-include("../../common/newSidebar/patientSidebar")%>
+      <div class="A3-container">
+        <div class="A3-row-1">
+          <a id="A3-upcoming" href="/patientUpcomingSlots"><i class="fa-solid fa-arrow-up"></i></a>
+          <a id="A3-past" href="/patientPastSlots"><i class="fa-solid fa-arrow-down"></i></a>
+        </div>
+        <%-include("../../common/Pagination/paginationComp")%>
     <div class="A3-row-2">
       <table>
         <thead>

@@ -12,8 +12,9 @@ const getUpcomingSlots = async () => {
 
   const table = document.getElementById("date-body");
 
+
   message.forEach(element => {
-    console.log(element);
+    // console.log(element);
     table.innerHTML += `
       <tr>
         <td>${element.date}</td>
@@ -81,3 +82,4 @@ const getDetails = async (data) => {
 const handleClose = () => {
   document.getElementsByClassName("A3-modal")[0].style.visibility = "hidden";
 }
+
