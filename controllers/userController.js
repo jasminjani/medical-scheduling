@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const conn = require("../config/dbConnection");
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
+const { specialitiesCombo } = require("./slotController");
 dotenv.config();
 
 // city combo
@@ -22,27 +23,38 @@ const generateCityCombo = async () => {
   return html;
 };
 
-exports.getDoctorDetailForHomePage = async (req,res)=>{
+exports.getDoctorDetails = async (req,res)=>{
   try {
     let result;
     try {
-      let sql = `select u.id,u.fname,u.lname,pp.profile_picture,
-      count(rr.id) as total_reviews, avg(rr.rating) as rating from doctor_details as dd
-      inner join 
-      users as u on u.id = dd.doctor_id
+      let sql = `select u.id,u.fname,u.lname,dd.qualification,dd.consultancy_fees,ch.name,ch.city,
+      ch.location, pp.profile_picture, s.speciality, count(rr.id) as total_reviews,
+      avg(rr.rating) as rating from doctor_details as dd
+      inner join users as u on u.id = dd.doctor_id
       inner join profile_pictures as pp on pp.user_id = u.id
-      inner join rating_and_reviews as rr on u.id = rr.doctor_id
-      where pp.is_active = 1 group by u.id,pp.created_at,pp.profile_picture ; `
+      inner join rating_and_reviews as rr on u.id = rr.doctor_id 
+      inner join doctor_has_specialities as ds 
+      inner join specialities as s on s.id = ds.speciality_id
+      inner join clinic_hospitals as ch on dd.hospital_id = ch.id
+      where pp.is_active = 1 and u.id=ds.doctor_id 
+      group by u.id,pp.created_at,pp.profile_picture,s.speciality,
+      dd.qualification,dd.consultancy_fees,ch.name,ch.city,ch.location order by rating desc; `;
       [result] = await conn.query(sql);
     } catch (error) {
       console.log(error)
     }
-    try {
-      let sql = `select ds.doctor_id,s.speciality from doctor_has_specialities as ds inner join specialities as s on s.id = ds.speciality_id; `
-      let [result] = await conn.query(sql);
-    } catch (error) {
-      console.log(error)
-    }
+    
+    result = Object.values(result.reduce((acc,{id,fname,lname,qualification,consultancy_fees,name,city,location, profile_picture,speciality,total_reviews,rating})=>{
+      acc[id] ??= {id,fname,lname,qualification,consultancy_fees,name,city,location,profile_picture,total_reviews,rating, specialities:[]};
+      acc[id].specialities.push(speciality)
+      return acc;
+    },{}))
+    
+    return res.json({
+      success:true,
+      data:result
+    })
+
   } catch (error) {
     return res.status(500).json({
       success: false,
@@ -54,7 +66,8 @@ exports.getDoctorDetailForHomePage = async (req,res)=>{
 
 exports.homePage = async(req,res)=>{
   try {
-    return res.render('./common/homepage')
+    let html = await specialitiesCombo();
+    return res.render('./common/homepage',{html})
   } catch (error) {
     console.log(error.message);
   }
