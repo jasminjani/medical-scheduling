@@ -19,7 +19,7 @@
 
 .a2-patient-dashboard {
   margin-left: 350px;
-  margin-top: 30px;
+  /* margin-top: 30px; */
 }
 
 .a2-patient-hero-section {
@@ -29,17 +29,17 @@
 
 .a2-patient-hero-section img {
   width: 1000px;
-  height: 400px;
+  height: 350px;
   border-radius: 5px;
 }
 
 .a2-patient-hero-text {
-  margin-top: 40px;
+  margin-top: 20px;
   padding-left: 20px;
   position: absolute;
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 20px;
 
   top: 0;
 }
@@ -67,16 +67,22 @@
   gap: 20px;
 }
 
+.a2-status-booking {
+  display: flex;
+}
 
 .a2-patient-status {
-  width: 1000px;
+  width: 500px;
   margin-top: 20px;
+
 }
 
 
 .a2-patient-status {
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-evenly;
 }
 
 .a2-card {
@@ -84,6 +90,7 @@
   display: flex;
   align-items: center;
 
+  width: 40%;
   padding: 5px;
   border-radius: 3px;
   border: 1px solid var(--brown);
@@ -102,8 +109,8 @@
 }
 
 .a2-upcoming-booking {
-  width: 1000px;
-  margin-top: 50px;
+  width: 500px;
+  margin-top: 20px;
 
   border: 1px solid var(--brown);
   height: 200px;
