@@ -4,6 +4,7 @@ let PDFDocument = require("pdfkit");
 
 exports.home = async (req, res) => {
   try {
+    
     return res.render("pages/Prescription/createPrescription.ejs");
   } catch (error) {
     console.log(error.message);

@@ -16,7 +16,7 @@ const { paymentHistory,patientPayments, patientProfile, patientUpcomingBookings,
 router.route("/")
   .get(homePage)
 
-router.route('/alldoctors').get(getDoctorDetails)
+// router.route('/alldoctors').get(getDoctorDetails)
 router.route('/register')
   .get(getCreateUserForm)
   .post(imgUpload.single('profile'), createUser)
@@ -68,7 +68,7 @@ router.route("/pastbookings/:patient_id").get(patientPastBookings);
 // Patient panel Payment history routes
 router.route("/payments").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), patientPayments)
 router.route("/patient-paymentHistory").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), paymentHistory)
-router.route("/searchedPatientPayment/:searchedData").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), searchPatientPayment);
+// router.route("/searchedPatientPayment/:searchedData").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), searchPatientPayment);
 
 
 module.exports = router;
