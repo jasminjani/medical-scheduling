@@ -5,8 +5,8 @@
         <a href="#"><img src="/assets/sideBar/profile-icon-png-898.png" alt="profile" class="a5-profileimage" /></a>
       </div>
       <div class="a5-accountname">
-        <p class="a5-username">Admin Name</p>
-        <p class="a5-useremail">admin123@gmail.com</p>
+        <p class="a5-username"></p>
+        <p class="a5-useremail"></p>
       </div>
     </div>
     <div class="a5-logout">
@@ -35,6 +35,28 @@
     </div>
   </div>
 </div>
+
+
+<script>
+  const doctorsCount = document.getElementById('doctors-count');
+  const patientsCount = document.getElementById('patients-count');
+  const appointmentsCount = document.getElementById('appointments-count');
+  const revenueCount = document.getElementById('revenue-count');
+
+  async function forProfilePhoto() {
+
+    let resp = await fetch('/profile-photo');
+    let data = await resp.json();
+
+
+    document.querySelector('.a5-username').innerHTML = data.name;
+    document.querySelector('.a5-useremail').innerHTML = data.email;
+
+
+  }
+
+  forProfilePhoto()
+</script>
 
 <!-- aa banne css side bar mate link kari lejo
 
