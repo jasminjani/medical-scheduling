@@ -64,6 +64,9 @@
   color: #1d4868;
 }
 
+#logout{
+  display: none;
+}
 
 .nav-items ul li .book-appointment {
   color: #1565D8;

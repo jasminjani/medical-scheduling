@@ -2,22 +2,22 @@
   <div class="a5-sidenavupperbox">
     <div class="a5-profile">
       <div class="a5-profilephoto">
-        <a href="#"><img src="/assets/sideBar/profile-icon-png-898.png" alt="profile" class="a5-profileimage" /></a>
+        <a href="/patient"><img src="/assets/sideBar/profile-icon-png-898.png" alt="profile" class="a5-profileimage" /></a>
       </div>
       <div class="a5-accountname">
-        <p class="a5-username">Patient Name</p>
-        <p class="a5-useremail">patient123@gmail.com</p>
+        <p class="a5-username"></p>
+        <p class="a5-useremail"></p>
       </div>
     </div>
     <div class="a5-logout">
-      <P class="a5-btn-logout">Log out</P>
+      <p class="a5-btn-logout" onclick="logout()"><a href="/logout">Log out</a></p>
     </div>
   </div>
 
   <div class="a5-lists">
     <div class="a5-list-item">
       <i class="fa-solid fa-house a5-list-item-img"></i>
-      <a href="#">Home</a>
+      <a href="/patient">Home</a>
     </div>
     <div class="a5-list-item">
       <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
@@ -25,11 +25,11 @@
     </div>
     <div class="a5-list-item">
       <i class="fa-solid fa-calendar-days a5-list-item-img"></i>
-      <a href="/patientUpcomingSlots">Sceduled Sessions</a>
+      <a href="/patientUpcomingSlots">Scheduled Sessions</a>
     </div>
     <div class="a5-list-item">
       <i class="fa-solid fa-calendar-check a5-list-item-img"></i>
-      <a href="#">My Bookings</a>
+      <a href="/patient-paymentHistory">My Payment History</a>
     </div>
     <div class="a5-list-item">
       <i class="fa-solid fa-gear a5-list-item-img"></i>
@@ -39,26 +39,22 @@
 </div>
 
 
-
+<script src="/javascript/auth/logout.js"></script>
 <script>
   const doctorsCount = document.getElementById('doctors-count');
   const patientsCount = document.getElementById('patients-count');
   const appointmentsCount = document.getElementById('appointments-count');
   const revenueCount = document.getElementById('revenue-count');
 
-  async function forProfilePhoto() {
+  let user = JSON.parse(localStorage.getItem('userinfo'));
 
-    let resp = await fetch('/profile-photo');
-    let data = await resp.json();
-
-
-    document.querySelector('.a5-username').innerHTML = data.name;
-    document.querySelector('.a5-useremail').innerHTML = data.email;
-
-
+  if(user.profile.trim()){
+    document.querySelector('.a5-profileimage').setAttribute('src',`/imgs/${user.profile}`)
   }
 
-  forProfilePhoto()
+  document.querySelector('.a5-username').innerHTML = `${user.fname+ " "+user.lname}`;
+  document.querySelector('.a5-useremail').innerHTML = user.email;
+
 </script>
 
 

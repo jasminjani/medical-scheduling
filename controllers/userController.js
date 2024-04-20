@@ -36,7 +36,7 @@ exports.getDoctorDetails = async (req,res)=>{
       inner join doctor_has_specialities as ds 
       inner join specialities as s on s.id = ds.speciality_id
       inner join clinic_hospitals as ch on dd.hospital_id = ch.id
-      where pp.is_active = 1 and u.id=ds.doctor_id 
+      where pp.is_active = 1 and u.id=ds.doctor_id and dd.approved=1
       group by u.id,pp.created_at,pp.profile_picture,s.speciality,
       dd.qualification,dd.consultancy_fees,ch.name,ch.city,ch.location order by rating desc; `;
       [result] = await conn.query(sql);
@@ -315,7 +315,7 @@ exports.login = async (req, res) => {
 
       let profile;
       try {
-        let sql = "select * from profile_pictures where user_id = ? order by created_at desc;";
+        let sql = "select * from profile_pictures where user_id = ? and is_active=1";
         let [data] = await conn.query(sql,[result[0].id]);
         profile = data[0].profile_picture;
       } catch (error) {
@@ -334,7 +334,7 @@ exports.login = async (req, res) => {
       };
 
       // remove password from the user obj
-      let { password: _, ...newObj } = result[0];
+      let { password:_,created_at,deleted_at,updated_at,is_active,token_created_at,is_deleted,activation_token, ...newObj } = result[0];
       // generate token
       let token = jwt.sign(payload, process.env.JWT_SECRET, {
         expiresIn: "1d",
@@ -666,13 +666,15 @@ exports.logout = async (req, res) => {
 
 exports.forgotPassword = async (req, res) => {
   try {
-    let html = `<div class="active-button">
+    let html = `<div class="email-input">
                         <h4>Please Enter your Registered Email!</h4>
-                        <input type="text" name="email" id="email" placeholder="Enter email">
-                        <input type="submit" value="Generate" id ="submit">
+                        <div class="fields">
+                          <input type="text" name="email" id="email" placeholder="Enter email">
+                          <input type="submit" value="Generate" id ="submit">
+                        </div>
                     </div>`;
 
-    return res.render("login-registration/forgotPass", { html });
+    return res.render("pages/auth/forgotPass", { html });
   } catch (error) {
     res.status(500).json({
       message: error.message,

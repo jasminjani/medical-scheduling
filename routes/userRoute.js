@@ -7,7 +7,7 @@ const multer = require("multer");
 const imgUpload = multer({ storage: imgStorage });
 const fileUpload = multer({ storage: fileStorage });
 const { getBookSlotPage, getBookingSlots } = require("../controllers/slotController")
-const { createUser, login, getAllUser, logout, getUserById, deleteUser, generateToken, createUserForm, getCreateUserForm, getLoginForm, activationForm, activationAccount, getCurrentUser, homePage, getDoctorDetails, allDoctors } = require("../controllers/userController");
+const { createUser, login, getAllUser, logout, getUserById, deleteUser, generateToken, createUserForm, getCreateUserForm, getLoginForm, activationForm, activationAccount, getCurrentUser, homePage, getDoctorDetails, allDoctors, forgotPassword } = require("../controllers/userController");
 const passport = require('passport');
 
 const { paymentHistory,patientPayments, patientProfile, patientUpcomingBookings, patientPastBookings, patientPastProfile, searchPatientPayment } = require('../controllers/patientAllAppointController');
@@ -50,10 +50,13 @@ router.route('/account-activation')
 router.route('/activate')
   .get(activationAccount)
 
+router.route('/forgot-password')
+  .get(forgotPassword)
+
 
 
 router.route("/:patient_id/review/:doctor_id").post(rating);
-router.route("/doctors/all").get(allDoctors)
+router.route("/doctors/all").get(passport.authenticate('jwt',{session:false,failureRedirect:"/login"}),allDoctors)
 
 
 // Slots controller(slotControllers)

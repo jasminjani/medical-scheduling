@@ -59,7 +59,7 @@ exports.patientUpcomingBookings = async (req, res) => {
 
       const [data] = await conn.query(query, [patient_id, 0, 0]);
 
-      return res.status(200).json({ success: true, message: data });
+      return res.status(200).json({ success: true, data: data });
 
     } catch (error) {
       return res.status(500).json({ success: false, message: error.message })
