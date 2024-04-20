@@ -73,6 +73,11 @@ exports.homePage = async(req,res)=>{
   }
 }
 
+exports.allDoctors = async(req,res)=>{
+  let html = await specialitiesCombo();
+  res.render('./pages/patientPanel/allDoctors',{html})
+}
+
 // get => /register
 exports.getCreateUserForm = async (req, res) => {
   try {

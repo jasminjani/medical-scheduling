@@ -73,7 +73,7 @@ const putDoctorOnScreen = async (data) => {
           .join("")}
       </div>
     <p class="rating">
-     ${stars}
+     ${stars} <span class="total-reviews">(${doctor.total_reviews})</span>
     </p>
   </div>`;
   });

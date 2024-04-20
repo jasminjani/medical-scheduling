@@ -6,17 +6,18 @@ const { imgStorage, fileStorage } = require("../utils/multer");
 const multer = require("multer");
 const imgUpload = multer({ storage: imgStorage });
 const fileUpload = multer({ storage: fileStorage });
-const { getBookSlotPage } = require("../controllers/slotController")
-const { createUser, login, getAllUser, logout, getUserById, deleteUser, generateToken, createUserForm, getCreateUserForm, getLoginForm, activationForm, activationAccount, getCurrentUser, homePage } = require("../controllers/userController");
+const { getBookSlotPage, getBookingSlots } = require("../controllers/slotController")
+const { createUser, login, getAllUser, logout, getUserById, deleteUser, generateToken, createUserForm, getCreateUserForm, getLoginForm, activationForm, activationAccount, getCurrentUser, homePage, getDoctorDetails, allDoctors } = require("../controllers/userController");
 const passport = require('passport');
 
-const { paymentHistory,patientPayments, patientProfile, patientUpcomingBookings, patientPastBookings, patientPastProfile } = require('../controllers/patientAllAppointController');
+const { paymentHistory,patientPayments, patientProfile, patientUpcomingBookings, patientPastBookings, patientPastProfile, searchPatientPayment } = require('../controllers/patientAllAppointController');
 
 
 router.route("/")
   .get(homePage)
 
 router.route('/alldoctors').get(getDoctorDetails)
+
 router.route('/register')
   .get(getCreateUserForm)
   .post(imgUpload.single('profile'), createUser)
@@ -52,7 +53,7 @@ router.route('/activate')
 
 
 router.route("/:patient_id/review/:doctor_id").post(rating);
-
+router.route("/doctors/all").get(allDoctors)
 
 
 // Slots controller(slotControllers)
@@ -63,12 +64,13 @@ router.route("/patientUpcomingSlots").get(patientProfile);
 router.route("/patientPastSlots").get(patientPastProfile);
 router.route("/bookings/:patient_id").get(patientUpcomingBookings);
 router.route("/pastbookings/:patient_id").get(patientPastBookings);
+router.route("/bookslots/:id").get(passport.authenticate('jwt',{session:false,failureRedirect:"/login"}),getBookingSlots);
 
 
 // Patient panel Payment history routes
 router.route("/payments").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), patientPayments)
 router.route("/patient-paymentHistory").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), paymentHistory)
-router.route("/searchedPatientPayment/:searchedData").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), searchPatientPayment);
+router.route("/searchedPatientPayment/:searchedData").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), searchPatientPayment );
 
 
 module.exports = router;
