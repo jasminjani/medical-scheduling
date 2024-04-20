@@ -1,10 +1,102 @@
 
 async function fetchPatientAllAppointment() {
-  
+  try {
+    let patient_id = window.location.href.split('/').pop();
+
+    const url = `http://localhost:8000/admin/get-patient-appointment/${patient_id}`;
+    const response = await fetch(url);
+    const result = await response.json();
+    console.log(result);
+
+    await appendPatientDetails(result);
+    await appendPatientAllAppointment(result);
+
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 
+async function appendPatientDetails(result) {
+  try {
 
+    let html = `<div class="a5-patient">
+    <div class="a5-patient-img">
+      <img src="/assets/adminPanel/patient.png" alt="image">
+    </div>
+    <div class="a5-patient-details">
+      <h1>${result.patientDetails[0].fname + " " + result.patientDetails[0].lname}
+      </h1>
+      <div class="a5-patient-more-detail">
+        <div class="a5-details">
+          <p><span class="a5-bold">Email :</span>
+            ${result.patientDetails[0].email}
+          </p>
+          <p><span class="a5-bold">Contact :</span>
+            ${result.patientDetails[0].phone}
+          </p>
+          <p><span class="a5-bold">DOB :</span>
+            ${result.patientDetails[0].dob}
+          </p>
+        </div>
+        <div class="a5-details">
+          <p><span class="a5-bold">Gender :</span>${result.patientDetails[0].gender}
+          </p>
+          <p><span class="a5-bold">City :</span>
+            ${result.patientDetails[0].city}
+          </p>
+          <p><span class="a5-bold">Blood group :</span>
+            ${result.patientDetails[0].blood_group}
+          </p>
+        </div>
+      </div>
+      <div class="a5-patient-address">
+        <p><span class="a5-bold">address : </span>${result.patientDetails[0].address}
+        </p>
+      </div>
+    </div>
+  </div>`;
+
+    document.getElementById('a5-patient-basic-details').innerHTML = html;
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+async function appendPatientAllAppointment(result) {
+  try {
+
+    let header = `<tr>
+                    <th></th>
+                    <th>Doctor Name</th>
+                    <th>Speciality</th>
+                    <th>Appointment Date</th>
+                    <th>Details</th>
+                  </tr>`;
+
+    document.getElementById('a5-tbody').innerHTML = header;
+    let index = 1;
+
+    result.allAppointment.forEach(element => {
+      let appointmentDetails = `<tr>
+            <td>${index++}</td>
+            <td>${element.fname + " " + element.lname}</td>
+            <td>${element.speciality}</td>
+            <td>${element.date}</td>
+            <td>
+              <p onclick="show('a5-popup', '${element.slot_id}')" class="a5-btn">Detail</p>
+            </td>
+          </tr>`;
+
+      document.getElementById('a5-tbody').innerHTML = document.getElementById('a5-tbody').innerHTML + appointmentDetails;
+    });
+
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 
 funcId = function (id) {

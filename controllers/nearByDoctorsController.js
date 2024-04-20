@@ -13,7 +13,7 @@ exports.nearByDoctores = async (req, res) => {
       })
     }
 
-    const sql = `SELECT * FROM clinic_hospitals JOIN doctor_details ON doctor_details.hospital_id = clinic_hospitals.id JOIN users ON users.id =doctor_details.doctor_id WHERE clinic_hospitals.city in (select city from users where id = ?)`;
+    const sql = `SELECT * FROM clinic_hospitals JOIN doctor_details ON doctor_details.hospital_id = clinic_hospitals.id JOIN users ON users.id =doctor_details.doctor_id WHERE users.is_deleted = 0 AND clinic_hospitals.city in (select city from users where id = ?)`;
     const [nearByDoctores] = await conn.query(sql, [patientId]);
     res.send(nearByDoctores)
 
@@ -38,7 +38,7 @@ exports.nearByDoctoresOnSearch = async (req, res) => {
       })
     }
 
-    const sql = `SELECT * FROM clinic_hospitals JOIN doctor_details ON doctor_details.hospital_id = clinic_hospitals.id JOIN users ON users.id =doctor_details.doctor_id WHERE clinic_hospitals.city LIKE "${city}%"`;
+    const sql = `SELECT * FROM clinic_hospitals JOIN doctor_details ON doctor_details.hospital_id = clinic_hospitals.id JOIN users ON users.id =doctor_details.doctor_id WHERE users.is_deleted = 0 AND clinic_hospitals.city LIKE "${city}%"`;
     const [nearByDoctoresOnSearch] = await conn.query(sql);
     res.send(nearByDoctoresOnSearch)
 

@@ -5,7 +5,7 @@ exports.patientAllAppointment = async (req, res) => {
 
     const { patient_id } = req.params;
 
-    const sql = `SELECT users.id, users.fname, users.lname, users.email, users.gender, users.phone, users.city, users.dob, users.address, patient_details.blood_group FROM users JOIN patient_details ON users.id = patient_details.patient_id WHERE users.id = ?`;
+    const sql = `SELECT users.id, users.fname, users.lname, users.email, users.gender, users.phone, users.city, users.dob, users.address, patient_details.blood_group FROM users JOIN patient_details ON users.id = patient_details.patient_id WHERE users.id = ? AND users.is_deleted = 0`;
     const [patientDetails] = await conn.query(sql, [patient_id])
     // await console.log(patientDetails);
 
@@ -124,7 +124,7 @@ exports.searchPatientPayment = async (req, res) => {
       from payments 
       inner join time_slots on time_slots.id = payments.slot_id 
       inner join users on time_slots.doctor_id = users.id 
-      where patient_id = ? AND (users.fname LIKE '${searchedData}%' OR users.lname LIKE '${searchedData}%' OR users.email LIKE '${searchedData}%' OR users.email LIKE '${searchedData}%' OR  time_slots.start_time LIKE '${searchedData}%' OR time_slots.end_time LIKE '${searchedData}%' OR  payments.payment_amount LIKE '${searchedData}%')`;
+      where patient_id = ? AND users.is_deleted = 0 AND (users.fname LIKE '${searchedData}%' OR users.lname LIKE '${searchedData}%' OR users.email LIKE '${searchedData}%' OR users.email LIKE '${searchedData}%' OR  time_slots.start_time LIKE '${searchedData}%' OR time_slots.end_time LIKE '${searchedData}%' OR  payments.payment_amount LIKE '${searchedData}%')`;
 
       const [data] = await conn.query(query, [id, paymentStatus]);
 
