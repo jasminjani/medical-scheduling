@@ -10,28 +10,26 @@
       </div>
     </div>
     <div class="a5-logout">
-      <P class="a5-btn-logout">
-        <a href="/logout">Logout</a>
-      </P>
+      <P class="a5-btn-logout" onclick="window.location.href=`/logout`">Logout</P>
     </div>
   </div>
 
   <div class="a5-lists">
-    <div class="a5-list-item">
+    <div onclick="window.location.href=`/admin`" class="a5-list-item">
       <i class="fa-solid fa-house a5-list-item-img"></i>
-      <a href="/admin">Dashboard</a>
+      <a>Dashboard</a>
     </div>
-    <div class="a5-list-item">
+    <div onclick="window.location.href=`/admin/all-doctors`" class="a5-list-item">
       <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
-      <a href="/admin/all-doctors">Doctors</a>
+      <a>Doctors</a>
     </div>
-    <div class="a5-list-item">
+    <div onclick="window.location.href=`/admin/all-patient`" class="a5-list-item">
       <i class="fa-solid fa-bed-pulse a5-list-item-img"></i>
-      <a href="/admin/all-patient">Patients</a>
+      <a>Patients</a>
     </div>
-    <div class="a5-list-item">
+    <div onclick="window.location.href=`/admin/add-specialites`" class="a5-list-item">
       <i class="fa-solid fa-award a5-list-item-img"></i>
-      <a href="/admin/add-specialites">Add Specialties</a>
+      <a>Add Specialties</a>
     </div>
   </div>
 </div>
@@ -49,7 +47,7 @@
     let data = await resp.json();
 
 
-    document.querySelector('.a5-username').innerHTML = data.name;
+    document.querySelector('.a5-username').innerHTML = data.name + ` <i class="fa-solid fa-pen-to-square"></i>`;
     document.querySelector('.a5-useremail').innerHTML = data.email;
 
 
