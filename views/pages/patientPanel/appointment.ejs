@@ -5,85 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Appointment Form</title>
     <link rel="stylesheet" href="/css/patientCSS/appointment.css" />
-    <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
+    <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
     <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css" />
-    <script src="/sweetalert2/sweetalert2.min.js"></script>
-
+    <script src="/sweetalert2/sweetalert2.min.js" defer></script>
   </head>
 
   <body>
-
     <%- include('../../common/newSidebar/patientSidebar') %>
 
-    <div class="main">
-      <section class="container">
-        <div class="full">
-          <div class="header">
-            <h3 class="textHeader">Appointment Form</h3>
+    <main class="main">
+      <div class="container">
+        <div class="booking-page">
+        <div class="doctor-profile">
+          <!-- <div class="doctor-img">
+            <img src="/assets/doctor4.jpg" alt="" />
           </div>
-
-          <section class="appointmentForm">
-            <div class="form">
-              <div class="specialities">
-                <label for="specialities"><b>Speciality:</b></label>
-                <select
-                  name="specialities"
-                  id="specialities"
-                  class="specialities dvalid"
-                >
-                  <option value="" data-unique="">--Select--</option>
-                  <%- html %>
-                </select>
-              </div>
-
-              <div class="doctor">
-                <label for="doctor"><b>Doctor:</b></label>
-                <select name="doctors" class="doctor dvalid" id="doctors">
-                  <option value="">--Select Doctor--</option>
-                </select>
-              </div>
+          <div class="doctor-details">
+            <p class="name"><span>Name: </span>Alpesh</p>
+            <p class="qualification"><span>qualification: </span>MBBS</p>
+            <p class="speciality"><span>speciality: </span>neurologist</p>
+            <p class="fees"><span>fees: </span>250 rs</p>
+            <p class="hospital-name"><span>clinic/hospital: </span>ALPHA</p>
+            <p class="address"><span>address: </span> ahmedabad</p>
+            <div class="rating">
+              <img src="/assets/gstar.png" width="15" alt="" />
+              <img src="/assets/gstar.png" width="15" alt="" />
+              <img src="/assets/gstar.png" width="15" alt="" />
+              <img src="/assets/gstar.png" width="15" alt="" />
+              <img src="/assets/gstar.png" width="15" alt="" />
+              <span id="review-count">(200)</span>
             </div>
+          </div> -->
+        </div>
 
-            <!-- <hr class="line"> -->
-
-            <div class="dateTime">
-              <div class="date">
-                <label for="selectDate" class="label"
-                  ><b>Select Date:</b></label
-                >
-                <input
-                  type="date"
-                  name="date"
-                  id="date"
-                  class="dvalid"
-                  placeholder="Select Appointment Date"
-                />
-                <!-- <input placeholder="Type Date" type="text" onfocus="(this.type = 'date')"  id="date"> -->
-              </div>
-
-              <div class="appointments">
-                <label for="appointments"><b>Available Slots:</b></label>
-                <select
-                  name="appointments"
-                  class="appointments dvalid"
-                  id="appointments"
-                >
-                  <option value="">--Select Slot--</option>
-                </select>
-              </div>
-
+        <div class="appointmentForm">
+          <div class="inputs">
+            <div class="date">
+              <label for="selectDate" class="label">Select Date:</label>
               <input
-                type="submit"
-                name="booked"
-                id="slotBook"
-                value="Book"
-                class="submit"
+                type="date"
+                name="date"
+                id="date"
+                class="dvalid"
+                placeholder="Select Appointment Date"
               />
             </div>
-          </section>
+  
+            <div class="appointments">
+              <label for="appointments" class="label">Available Slots:</label>
+              <select
+                name="appointments"
+                class="dvalid"
+                id="appointments"
+              >
+                <option value="">--Select Slot--</option>
+              </select>
+            </div>
+          </div>
+
+          <input
+            type="submit"
+            name="booked"
+            id="slotBook"
+            value="Book"
+            class="submit"
+          />
         </div>
-      </section>
-    </div>
+      </div>
+      </div>
+    </main>
 
     <script src="/javascript/patientPanel/appointment.js"></script>
   </body>

@@ -20,7 +20,8 @@ exports.allPatientPriscription = async (req, res) => {
 
 exports.showDetails = async (req, res) => {
   try {
-    const id = "5";
+    // A7 params patient_id
+    const id = req.params.patient_id;
     const query = `select users.id,fname,lname,email,phone,gender,dob,address,patient_details.blood_group from users join patient_details on users.id=patient_details.patient_id where patient_id=?`;
     const [result] = await conn.query(query, [id]);
     // console.log(result);
@@ -120,6 +121,7 @@ exports.getPrescriptionOfUser = async (req, res) => {
 exports.generatePDF = async (req, res) => {
   try {
     const id = req.params.id;
+
     let doc = new PDFDocument();
 
     const query = `select prescriptions.prescription,prescriptions.diagnoses,prescriptions.created_at,
@@ -128,11 +130,13 @@ exports.generatePDF = async (req, res) => {
         from prescriptions 
         join users as users_patient on prescriptions.patient_id=users_patient.id 
         join users as users_doctor on prescriptions.doctor_id = users_doctor.id  
-        where prescriptions.id=${id}`;
+        where prescriptions.id = ?`;
 
-    const [result] = await conn.query(query);
+    const [result] = await conn.query(query,[id]);
+    console.log(result);
     const patient_name = result[0].patient_name;
     const doctor_name = result[0].doctor_name;
+    const prescription = result[0].prescription;
     const diagnosis = result[0].diagnoses;
     const appointment_date = result[0].created_at.toString().slice(0, 10);
 
@@ -151,8 +155,6 @@ exports.generatePDF = async (req, res) => {
 
     // Diagnosis:${diagnosis}
 
-    // Prescription:
-
     //   ${result[0].prescription}
     // `;
 
@@ -162,13 +164,13 @@ exports.generatePDF = async (req, res) => {
     doc.moveDown().font('Times-Roman').fontSize(14).fillColor('#224763').text('Patient Name:'+" "+`${patient_name}`);
     doc.moveDown().font('Times-Roman').fontSize(14).fillColor('#224763').text('Doctor Name:'+" "+`${doctor_name}`);
     doc.moveDown().font('Times-Roman').fontSize(14).fillColor('#224763').text('Diagnosis:'+" "+`${diagnosis}`);
-    doc.moveDown().font('Times-Roman').fontSize(14).fillColor('#224763').text('Prescription:');
-    doc.moveDown().font('Times-Roman').fontSize(14).fillColor('#224763').text(`${result[0].prescription}`);
+    doc.moveDown().font('Times-Roman').fontSize(14).fillColor('#224763').text('Prescription:'+" "+`${prescription}`);
 
     doc.pipe(res);
     doc.end();
 
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       success: false,
       message: error.message,

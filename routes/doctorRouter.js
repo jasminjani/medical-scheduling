@@ -1,5 +1,9 @@
 const express = require("express");
 const router = express.Router();
+const { imgStorage, fileStorage } = require("../utils/multer");
+const multer = require("multer");
+const imgUpload = multer({ storage: imgStorage });
+const fileUpload = multer({ storage: fileStorage });
 // import Controller File
 const {
   becomeDoctorDetail,
@@ -25,11 +29,16 @@ const {
   logoutController,
   dashBoardCount,
   dashBoardReviews,
+  dashBoardAppointments,
 
 } = require("../controllers/doctorController");
 const passport = require("passport");
 const { paymentHistory, showpaymentHistory, searchPaymentHistory } = require("../controllers/doctorPaymentHistory");
 const { patientPaymentHistory, showPatientPayment, searchPatientPayment } = require("../controllers/doctorPatientPaymentHistory");
+
+
+// slot 
+const { createSlots, getSingleSlots, bookingSlot, getAllSlots, deleteSlot, cancelSlot, createSlotsPage, getSlotsPage, getDates,  getBookingSlots, DoctorCobmo } = require('../controllers/slotController');
 
 
 router.route("/allDoctorProfile")
@@ -48,7 +57,7 @@ router.route("/updatedoctorProfile")
 
 
 router.route("/updatedoctorProfile")
-  .post(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), updateDoctorDetails)
+  .post(imgUpload.single('profile_picture'),passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), updateDoctorDetails)
 
 
 router.route('/getDoctorReview')
@@ -56,6 +65,9 @@ router.route('/getDoctorReview')
 
 
 // Router show json format Data date:- 12-04-2024
+
+router.route("/dashBoardAppointments")
+  .get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),dashBoardAppointments)
 
 router.route("/dashBoardReviews")
   .get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),dashBoardReviews)
@@ -188,7 +200,21 @@ router.route('/showPatientHistoryData/:patient_id')
 
 
 
+// Darshan Slot Router
 
+router.route("/addSlot").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), createSlotsPage);
+router.route("/slot").post(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), createSlots)
+
+router.route("/slot").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getBookingSlots);
+router.route("/bookslot").post(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), bookingSlot); 
+router.route('/getDoctors').post(DoctorCobmo)
+
+router.route("/slots").post(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getSingleSlots);
+router.route("/upcomingSlots").get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }), getSlotsPage);
+router.route("/dates").get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }), getDates);
+router.route("/slots/:date").get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }), getAllSlots);
+router.route("/delete/:slot_id").get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }), deleteSlot);
+router.route("/cancel/:slot_id").put(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }), cancelSlot)
 
 
 

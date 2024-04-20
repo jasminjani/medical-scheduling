@@ -1,5 +1,5 @@
 const showDetails = async () => {
-  let res = await fetch(window.location.origin + `/createprescription`);
+  let res = await fetch(window.location.origin + `/createprescription/:patient_id`);
   const resjson = await res.json();
   const ele = document.getElementsByClassName("A4-table-content");
   const keys = Object.keys(resjson.result[0]);
@@ -79,5 +79,5 @@ const generatePDF = async () => {
 };
 
 const back = async () => {
-  location.href = `/prescription`;
+  location.href = `http://localhost:8000/doctorDashboard/`;
 };

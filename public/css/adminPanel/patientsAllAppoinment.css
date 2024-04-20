@@ -208,3 +208,18 @@ h2 {
 .a2-approve-h2 {
   margin: 30px 0;
 }
+
+ .a7-div-field {
+   display: flex;
+ }
+
+ .a7-mediInfo {
+   display: flex;
+   flex-direction: column;
+ }
+
+ #a7-medicineDetail {
+   display: flex;
+   align-items: center;
+   gap: 50px;
+ }
