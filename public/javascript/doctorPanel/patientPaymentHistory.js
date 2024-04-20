@@ -16,6 +16,8 @@ async function fetchPatientPaymentData() {
 }
 
 
+
+
 async function appendPatientDetails(result) {
   try {
 
