@@ -1,25 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
+    <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
+    <link rel="stylesheet" href="/css/adminPanel/allPatientDetails.css" />
+    <script src="/javascript/adminPanel/allPatientDetail.js" defer></script>
+    <title>All User Details</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
-  <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
-  <link rel="stylesheet" href="/css/adminPanel/allPatientDetails.css">
-  <script src="/javascript/adminPanel/allPatientDetail.js" defer></script>
-  <title>All User Details</title>
-</head>
+  <body>
+    <div class="main-container">
+      <%- include('../../common/newSidebar/adminSidebar') %>
 
-<body>
-
-
-
-  <%- include('../../common/newSidebar/adminSidebar') %>
-
-    <div class="a5-section">
-      <div class="a5-container">
-        <div class="a5-search">
+      <div class="a5-section">
+        <div class="a5-container">
+          <!-- <div class="a5-search">
           <div class="a5-searchbox">
             <img src="/assets/adminPanel/icons/search.svg" alt="">
             <input type="text" name="searchUser" id="a5-searchPatient" placeholder="Search Patient name" tabindex="1">
@@ -49,13 +46,8 @@
             </table>
 
           </div>
-
         </div>
       </div>
     </div>
-
-
-
-</body>
-
+  </body>
 </html>
