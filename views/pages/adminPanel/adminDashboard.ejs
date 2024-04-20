@@ -13,7 +13,7 @@
 
 </head>
 
-<body>
+<body onload="fetchStatus()">
 
   <%- include('../../common/newSidebar/adminSidebar.ejs') %>
     <div class="a2-amdin-dashboard">
@@ -23,25 +23,25 @@
           <h2>Status</h2>
           <div class="a2-dashboard-status-cards">
             <div class="a2-card">
-              <div class="card-itams"><span id="doctors-count">10+</span> Doctors</div>
+              <div class="card-itams"><span id="doctors-count" class="a5-center"></span> Doctors</div>
               <div class="card-itams">
                 <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
               </div>
             </div>
             <div class="a2-card">
-              <div class="card-itams"><span id="patients-count">100+</span> Patients</div>
+              <div class="card-itams"><span id="patients-count" class="a5-center"></span> Patients</div>
               <div class="card-itams">
                 <i class="fa-solid fa-bed-pulse a5-list-item-img"></i>
               </div>
             </div>
             <div class="a2-card">
-              <div class="card-itams"><span id="appointments-count">10+</span> Todays Appointments</div>
+              <div class="card-itams"><span id="appointments-count" class="a5-center"></span> Todays Appointments</div>
               <div class="card-itams">
                 <i class="fa-solid fa-bed-pulse a5-list-item-img"></i>
               </div>
             </div>
             <div class="a2-card">
-              <div class="card-itams"><span id="revenue-count">20 M</span> Total Revenue</div>
+              <div class="card-itams"><span id="revenue-count" class="a5-center"></span> Total Revenue</div>
               <div class="card-itams">
                 <i class="fa-solid fa-award a5-list-item-img"></i>
               </div>
@@ -68,6 +68,7 @@
                 <p class="a2-doctor-specialty">Neurology</p>
               </div>
             </div>
+            
             <div class="a2-doctor-profile">
               <div class="a2-doctor-img">
                 <img src="/assets/doctor2.png" alt="doctor photo">
@@ -106,5 +107,27 @@
 
 
 </body>
+
+<script>
+
+  async function fetchStatus() {
+    try {
+
+      const url = `http://localhost:8000/getDashboardStatus`;
+      const response = await fetch(url);
+      const result = await response.json();
+      console.log(result);
+
+      document.getElementById('doctors-count').innerHTML = result.totalDoctor[0].total_doctor + "+";
+      document.getElementById('patients-count').innerHTML = result.totalPatient[0].total_patient + "+";
+      document.getElementById('appointments-count').innerHTML = result.todayAppointment[0].today_appointment + "+";
+      document.getElementById('revenue-count').innerHTML = result.totalRevenue[0].total_revenue + "+";
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+</script>
 
 </html>

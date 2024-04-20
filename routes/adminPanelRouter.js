@@ -6,6 +6,7 @@ const { patientAllAppointment, appointmentDetails, getPatientAllAppointment } = 
 const { adminDeleteDoctors, adminApproveDoctors, adminAddSpecialites, adminDashboard } = require('../controllers/adminModule/adminPanelController');
 const passport = require('passport');
 const { profilePhoto } = require('../controllers/adminModule/profilePhotoController');
+const { dashboardStatus } = require('../controllers/adminModule/adminDashboardController');
 
 
 const adminRouter = express.Router()
@@ -55,7 +56,8 @@ adminRouter.route('/admin/all-patient').get(displayAllPatient);
 adminRouter.route('/admin/display-search-patient/:searchedName').get(searchPatientByName);
 adminRouter.route('/admin/patient-appointment/:patient_id').get(patientAllAppointment);
 
-
+// ADMIN dashboard api 
+adminRouter.route('/getDashboardStatus').get(dashboardStatus);
 
 
 module.exports = { adminRouter }
