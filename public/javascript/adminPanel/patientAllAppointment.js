@@ -1,3 +1,12 @@
+
+async function fetchPatientAllAppointment() {
+  
+}
+
+
+
+
+
 funcId = function (id) {
   return document.getElementById(id);
 }

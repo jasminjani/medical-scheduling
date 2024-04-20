@@ -2,7 +2,7 @@ const express = require('express');
 const { getSpecialties, deleteSpecialty, getNewSpecialties, addNewSpecialties } = require('../controllers/adminModule/adminGetSpecialtiesController');
 const { individualDoctor, approveDoctor, rejectDoctor, getAllDoctors, deleteDoctor } = require('../controllers/adminModule/adminApproveDocController');
 const { displayAllPatient, searchPatientByName, getAllPatients } = require('../controllers/adminModule/adminPanelPatientController');
-const { patientAllAppointment, appointmentDetails } = require('../controllers/adminModule/patientAllAppointController');
+const { patientAllAppointment, appointmentDetails, getPatientAllAppointment } = require('../controllers/adminModule/patientAllAppointController');
 const { adminDeleteDoctors, adminApproveDoctors, adminAddSpecialites, adminDashboard } = require('../controllers/adminModule/adminPanelController');
 const passport = require('passport');
 const { profilePhoto } = require('../controllers/adminModule/profilePhotoController');
@@ -42,6 +42,7 @@ adminRouter.route('/admin/display-search-patient/:searchedName').get(searchPatie
 
 // patient appointment details 
 adminRouter.route('/admin/patient-appointment/:patient_id').get(patientAllAppointment);
+adminRouter.route('/admin/get-patient-appointment/:patient_id').get(getPatientAllAppointment);
 adminRouter.route('/admin/patient-appointment/:patient_id/:slot_id').get(appointmentDetails);
 
 
