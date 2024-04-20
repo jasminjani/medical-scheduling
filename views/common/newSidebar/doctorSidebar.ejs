@@ -48,6 +48,7 @@
 
     let fetchData = await fetch(`http://localhost:8000/doctorSideBarDetail/`)
     let data = await fetchData.json()
+    console.log(data);
     let key = Object.keys(data[0])
     key.forEach(element => {
       if (element == 'profile_picture') {

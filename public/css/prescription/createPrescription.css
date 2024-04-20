@@ -53,6 +53,9 @@ table {
   width: 700px;
   background-color: white;
 }
+.A4-Content{
+    background-color: #f4f7f8;
+}
 .A4-prescription {
   padding: 25px 439px;
 }
@@ -76,7 +79,7 @@ table {
 }
 .A4-main {
   display: block;
-  padding-left: 350px;
+  padding-left: 300px;
 }
 /* //add prescrption */
 .A4-submitBtn {
@@ -115,6 +118,9 @@ table {
   font-size: 20px;
   /* padding: 75px 194px; */
   padding: 0px 134px;
+  h3{
+    padding: 30px 10px;
+  }
 }
 #diagnosis {
   width: 372px;
