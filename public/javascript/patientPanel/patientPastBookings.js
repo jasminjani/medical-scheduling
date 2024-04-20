@@ -1,20 +1,25 @@
 window.location.href.split("/").pop() === "patientPastSlots" ? document.getElementById("A3-past").style.backgroundColor = "#3984af" : "";
 
 const getUpcomingSlots = async () => {
-  const response = await fetch("http://localhost:8000/pastbookings/2", {
+  let user = JSON.parse(localStorage.getItem('userinfo'));
+  const response = await fetch(`/pastbookings/${user.id}`, {
     method: "GET",
     headers: {
       "Content-type": "application/json"
     }
   });
 
-  const { message } = await response.json();
+  const {success, data } = await response.json();
 
-  console.log(message);
+  console.log(success);
 
   const table = document.getElementById("date-body");
 
-  message.forEach(element => {
+  if(!success){
+   return table.innerHTML = "<tr><td colspan='5'>No Data Found !</td></tr>"
+  }
+
+  data?.forEach(element => {
     console.log(element);
     table.innerHTML += `
       <tr>

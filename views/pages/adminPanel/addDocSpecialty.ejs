@@ -1,62 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>admin Approve Doctors</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>admin Approve Doctors</title>
+    <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
+    <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
+    <link rel="stylesheet" href="/css/adminPanel/adminApproveDoc.css" />
+  </head>
 
-  <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
-  <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
-  <link rel="stylesheet" href="/css/adminPanel/adminApproveDoc.css">
+  <body>
+    <div class="main-container">
+      <%- include('../../common/newSidebar/adminSidebar.ejs') %>
 
-</head>
+      <div class="a2-approve-table-div">
+        <div class="a2-container">
+          <a href="/admin" style="text-decoration: none; color: black">
+            <p class="a2-back-btn a2-btn">
+              <img src="/assets/adminPanel/icons/back-iceblue.svg" alt="Back" />
+              Back
+            </p>
+          </a>
 
-<body>
+          <h2 class="a2-approve-h2">All Doctors Specialties</h2>
 
+          <table class="a2-approve-table">
+            <tr class="approve-tbl-head">
+              <th>No.</th>
+              <th>Specialty Name</th>
+              <th>Delete</th>
+            </tr>
+            <tbody id="a2-tbody"></tbody>
+          </table>
 
-  <%- include('../../common/newSidebar/adminSidebar.ejs') %>
+          <h2 class="a2-approve-h2">Pending Request</h2>
 
-    <div class="a2-approve-table-div">
-      <div class="a2-container">
-        <div class="a5-flex-btn">
-          <!-- <a href="/admin" style="text-decoration: none; color: black;"> -->
-          <p onclick="window.location.href=`/admin`" class="a2-back-btn a2-btn">
-            <img src="/assets/adminPanel/icons/back-iceblue.svg" alt="Back">
-            Back
-          </p>
-          <!-- </a> -->
+          <table class="a2-approve-table" id="pending-request-tbl">
+            <tr class="approve-tbl-head">
+              <th>No.</th>
+              <th>Specialty Name</th>
+              <th>Add Specialty</th>
+            </tr>
+            <tbody id="pending-speciality"></tbody>
+          </table>
         </div>
-
-        <h2 class="a2-approve-h2">All Doctors Specialties</h2>
-
-        <table class="a2-approve-table">
-          <tr class="approve-tbl-head">
-            <th>No.</th>
-            <th>Specialty Name</th>
-            <th>Delete</th>
-          </tr>
-          <tbody id="a2-tbody"></tbody>
-        </table>
-
-        <h2 class="a2-approve-h2">Pending Request</h2>
-
-        <table class="a2-approve-table" id="pending-request-tbl">
-          <tr class="approve-tbl-head">
-            <th>No.</th>
-            <th>Specialty Name</th>
-            <th>Add Specialty</th>
-          </tr>
-          <tbody id="pending-speciality"></tbody>
-        </table>
       </div>
-
-
     </div>
 
-
     <script>
-
       async function makeSpecialtiesTable() {
         let response = await fetch("/get-specialties");
 
@@ -68,31 +60,27 @@
           let strTD = `<tr>
             <td>${specialties.id}</td> 
             <td>${specialties.speciality}</td>
-            <td class="a2-btn" onclick=deleteSpecialty(${specialties.id})>Delete</tr>`
+            <td class="a2-btn" onclick=deleteSpecialty(${specialties.id})>Delete</tr>`;
           tbody.innerHTML += strTD;
         });
-
       }
 
       async function deleteSpecialty(id) {
         try {
-          let response = await fetch('/delete-specialty', {
-            method: 'post',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ "id": id })
+          let response = await fetch("/delete-specialty", {
+            method: "post",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id: id }),
           });
           if (response.ok) {
             alert("Delete Specialty successfully ");
-            location.reload()
+            location.reload();
           }
-
         } catch (error) {
           console.log(error);
         }
-
       }
       makeSpecialtiesTable();
-
 
       async function getNewSpecialty() {
         let response = await fetch("/get-new-specialties");
@@ -104,33 +92,25 @@
           let strTD = `<tr>
             <td>${specialties.id}</td> 
             <td>${specialties.speciality}</td>
-            <td class="a2-btn" onclick=addSpecialty(${specialties.id})>Add</tr>`
+            <td class="a2-btn" onclick=addSpecialty(${specialties.id})>Add</tr>`;
           tbody.innerHTML += strTD;
         });
-
-
-
       }
 
-      getNewSpecialty()
+      getNewSpecialty();
 
       async function addSpecialty(id) {
-
-        let response = await fetch('/add-specialty', {
-          method: 'post',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ 'id': id })
-
+        let response = await fetch("/add-specialty", {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id: id }),
         });
 
         if (response.ok) {
           alert("Add Specialty successfully ");
-          location.reload()
+          location.reload();
         }
-
-
       }
     </script>
-</body>
-
+  </body>
 </html>
