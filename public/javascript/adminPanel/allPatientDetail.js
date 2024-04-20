@@ -8,6 +8,7 @@ async function searchPatient() {
   const result = await response.json();
 
   let html = `<tr>
+                <th>Sr no.</th>
                 <th>First name</th>
                 <th>Last name</th>
                 <th>email</th>
@@ -15,9 +16,11 @@ async function searchPatient() {
               </tr>`;
 
   document.getElementById('a5-tbody').innerHTML = html;
+  let index = 1;
 
   result.allPatient.forEach(element => {
     let html2 = `<tr>
+                <td>${index++}</td>
                 <td>${element.fname}</td>
                 <td>${element.lname}</td>
                 <td>${element.email}</td>
@@ -47,10 +50,13 @@ async function getAllPatient() {
   let resp = await fetch('/admin/get-all-patient');
 
   let data = await resp.json();
+  let index = 1;
+
   // console.log(data);
   data.forEach(patient => {
 
     let str = `<tr>
+          <td>${index++}</td>
           <td>${patient.fname}</td>
           <td>${patient.lname}</td>
           <td>${patient.email}</td>
@@ -59,7 +65,7 @@ async function getAllPatient() {
               Detail</p>
           </td>
         </tr>`;
-    
+
     tbody.innerHTML += str;
 
   });

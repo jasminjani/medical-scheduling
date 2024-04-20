@@ -69,7 +69,7 @@ async function appendPatientAllAppointment(result) {
   try {
 
     let header = `<tr>
-                    <th></th>
+                    <th>Sr no.</th>
                     <th>Doctor Name</th>
                     <th>Speciality</th>
                     <th>Appointment Date</th>
