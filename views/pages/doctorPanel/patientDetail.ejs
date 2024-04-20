@@ -87,6 +87,38 @@
       </div>
 
   </div>
+  <style>
+
+.a7-div-field {
+  display: flex;
+  align-items: center;
+}
+    .a7-mediInfo-color {
+  padding: 10px;
+  background-color:  rgba(255, 255, 255, 0.307); 
+  border-radius: 5px;
+    }
+    .a7-medInfo
+    {display: flex;
+  justify-content: center;
+  padding: 10px;
+  background-color: rgb(100, 161, 232);
+  height: 275px;}
+
+  .a7-mediInfo-box {
+  height: 350px;
+  width: 250px;
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  background-color: #315e788d ;
+  color: rgb(245, 233, 220);
+  
+  border-radius: 30px;
+}
+
+
+  </style>
 </body>
 <script src="/javascript/doctorPanel/urlPath.js"></script>
 
@@ -94,7 +126,7 @@
  
   const patientAppointmentDetail = async () => {
 
-    let fetchdata = await fetch(`http://localhost:8000/getpatientHistoryData/${Id}`)
+    let fetchdata = await fetch(`/getpatientHistoryData/${Id}`)
     let data = await fetchdata.json()
     let key = Object.keys(data)
     key.forEach(element => {
@@ -115,7 +147,7 @@
     }
 
    const profileDetailData = async () =>{
-    let fetchData = await fetch(`http://localhost:8000/viewPatientDetailsData/${Id}`)
+    let fetchData = await fetch(`/viewPatientDetailsData/${Id}`)
     let data = await fetchData.json()
     let Key = Object.keys(data[0])
     Key.forEach(item => {
@@ -157,7 +189,7 @@
 
   let show =async function (id, date) {
    
-    const fetchData = await fetch(`http://localhost:8000/patientPrescriptionData/${Id}/${date}`)
+    const fetchData = await fetch(`/patientPrescriptionData/${Id}/${date}`)
     const data = await fetchData.json()
     const key = Object.keys(data)
   
@@ -174,7 +206,15 @@
     key.forEach(item => {
 
       const dtkey = Object.keys(data[item])
+      
+      
+      let div2 = document.createElement("div")
+      div2.setAttribute("class","a7-mediInfo-box")
+      let div3 = document.createElement("div")
+      div3.setAttribute("class","a7-mediInfo-color")
       let div = document.createElement('div')
+
+      
           div.setAttribute("class","a7-mediInfo")
 
     dtkey.forEach(element => {
@@ -190,8 +230,10 @@
             fieldDiv.appendChild(para)
             div.append(fieldDiv)
        });
-
-        document.getElementById("a7-medicineDetail").appendChild(div)
+       
+        div2.appendChild(div)
+        div3.appendChild(div2)
+        document.getElementById("a7-medicineDetail").appendChild(div3)
     });
     funcId(id).style.display = 'block';
   }

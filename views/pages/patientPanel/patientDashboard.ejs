@@ -1,25 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Patients Dashboard</title>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Patients Dashboard</title>
+    <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
+    <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
+    <link rel="stylesheet" href="/css/patientCSS/patientDashboard.css" />
+  </head>
 
-  <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
-  <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
-  <link rel="stylesheet" href="/css/patientCSS/patientDashboard.css">
-
-</head>
-
-<body>
-
-  <%- include('../../common/newSidebar/patientSidebar.ejs') %>
+  <body>
+    <%- include('../../common/newSidebar/patientSidebar.ejs') %>
     <div class="a2-patient-dashboard">
-      <div class="a2-container">
-        <h2>Home</h2>
+      <div class="a2-container a2-patient-home">
         <div class="a2-patient-hero-section">
-          <img src="/assets/patient-dashboard.jpg" alt="">
+          <img src="/assets/patient-dashboard.jpg" alt="" />
           <div class="a2-patient-hero-text">
             <h3>Welcome</h3>
             <h2 class="a2-patient-name">Ashish Zapadiya</h2>
@@ -27,59 +23,59 @@
               <p>Have't any idea about doctors? no problem !</p>
               <p>let's jumping to <b>"All Doctors"</b> section</p>
               <p>Track your past and future appointments history.</p>
-              <p>Also find out the expected arrival time of your doctor or medical consultant.</p>
-            </div>
-            <h3>Channel a Doctor Here</h3>
-            <div class="a2-search-doctors">
-              <input type="text" name="doctor_name" placeholder="Doctor Name">
+              <p>
+                Also find out the expected arrival time of your doctor or
+                medical consultant.
+              </p>
             </div>
           </div>
         </div>
 
         <div class="a2-status-booking">
-
           <div class="a2-patient-status">
             <div class="a2-card">
-              <div class="card-itams"><span id="doctors-count">10+</span> Doctors</div>
+              <div class="card-itams">
+                <span id="doctors-count">10+</span> Doctors
+              </div>
               <div class="card-itams">
                 <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
               </div>
             </div>
             <div class="a2-card">
-              <div class="card-itams"><span id="doctors-count">10+</span> Doctors</div>
+              <div class="card-itams">
+                <span id="doctors-count">10+</span> Doctors
+              </div>
               <div class="card-itams">
                 <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
               </div>
             </div>
             <div class="a2-card">
-              <div class="card-itams"><span id="doctors-count">10+</span> Doctors</div>
+              <div class="card-itams">
+                <span id="doctors-count">10+</span> Doctors
+              </div>
               <div class="card-itams">
                 <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
               </div>
             </div>
             <div class="a2-card">
-              <div class="card-itams"><span id="doctors-count">10+</span> Doctors</div>
+              <div class="card-itams">
+                <span id="doctors-count">10+</span> Doctors
+              </div>
               <div class="card-itams">
                 <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
               </div>
             </div>
-
-
           </div>
 
           <div class="a2-upcoming-booking">
             <h3>Your Upcoming Booking</h3>
+            <div class="upcomming"></div>
           </div>
-
         </div>
-
-
-
-
       </div>
     </div>
-
-
-</body>
-
+    <script>
+      document.querySelector('.a2-patient-name').innerHTML = `${user.fname + " "+user.lname}`
+    </script>
+  </body>
 </html>

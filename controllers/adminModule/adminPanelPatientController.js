@@ -16,7 +16,7 @@ exports.displayAllPatient = async (req, res) => {
 exports.getAllPatients = async (req, res) => {
 
   try {
-    const sql = `SELECT id, fname, lname, email FROM users WHERE role_id = 1`;
+    const sql = `SELECT id, fname, lname, email FROM users WHERE role_id = 1 AND is_deleted = 0`;
     const [allPatient] = await conn.query(sql);
 
     res.json(allPatient);
@@ -41,7 +41,7 @@ exports.searchPatientByName = async (req, res) => {
       })
     }
 
-    const sql = `SELECT id, fname, lname, email FROM users WHERE role_id = 1 AND (fname LIKE '${req.params.searchedName}%' OR lname LIKE '${req.params.searchedName}%')`;
+    const sql = `SELECT id, fname, lname, email FROM users WHERE role_id = 1 AND is_deleted = 0 AND (fname LIKE '${searchedName}%' OR lname LIKE '${searchedName}%')`;
     const [searchedPatient] = await conn.query(sql);
     res.send({ allPatient: searchedPatient })
 

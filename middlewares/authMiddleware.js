@@ -26,7 +26,7 @@ exports.passportConfig = (passport) => {
       let result;
       let id = payload.id;
       try {
-        [result] = await conn.query("select * from users where id = ?", [id]);
+        [result] = await conn.query("select u.*,pp.profile_picture from users as u inner join profile_pictures as pp on u.id = pp.user_id where pp.is_active=1 and u.id=?;", [id]);
       } catch (error) {
         // if any error during query execution
         return next(error, false);

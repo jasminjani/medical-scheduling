@@ -10,41 +10,42 @@
       </div>
     </div>
     <div class="a5-logout">
-      <P class="a5-btn-logout"><a href="" id="logout">Log out </a></P>
+      <P class="a5-btn-logout" onclick="logout()"><a href="" id="logout">Log out </a></P>
     </div>
   </div>
 
   <div class="a5-lists">
-    <div class="a5-list-item">
+    <div class="a5-list-item" onclick="window.location.href=``">
       <i class="fa-solid fa-house a5-list-item-img"></i>
-      <a href="" id="viewdashboard">Dashboard</a>
+      <a id="viewdashboard">Dashboard</a>
     </div>
-    <div class="a5-list-item">
+    <div class="a5-list-item" onclick="window.location.href=`/upcomingSlots`">
       <i class="fa-solid fa-calendar-days a5-list-item-img"></i>
-      <a href="/upcomingSlots">Schedule</a>
+      <a>Schedule</a>
     </div>
-    <div class="a5-list-item">
+    <div class="a5-list-item" onclick="window.location.href=``">
       <i class="fa-solid fa-bed-pulse a5-list-item-img"></i>
-      <a href="" id="viewpatient">My Patients</a>
+      <a id="viewpatient">My Patients</a>
     </div>
-    <div class="a5-list-item">
+    <div class="a5-list-item" onclick="window.location.href=``">
       <i class="fa-regular fa-credit-card a5-list-item-img"></i>
-      <a href="" id="paymenthistory">Payment History</a>
+      <a id="paymenthistory">Payment History</a>
     </div>
-    <div class="a5-list-item">
-      <i class="fa fa-comments a5-list-item-img" ></i>
-      <a href="" id="viewfeedback">Feedback</a>
+    <div class="a5-list-item" onclick="window.location.href=``">
+      <i class="fa fa-comments a5-list-item-img"></i>
+      <a id="viewfeedback">Feedback</a>
     </div>
   </div>
 </div>
 
+<script src="/javascript/auth/logout.js"></script>
 <script src="/javascript/doctorPanel/sidebar.js"></script>
 <script>
 
   document.getElementById("logout").href = "http://localhost:8000/logout"
 
   async function fetchSideBarDetails() {
-    
+
     let fetchData = await fetch(`http://localhost:8000/doctorSideBarDetail/`)
     let data = await fetchData.json()
     console.log(data);

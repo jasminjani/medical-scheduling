@@ -68,23 +68,23 @@ hr {
 
 .upcoming {
   margin-left: 20px;
-  padding: 10px;
+  padding: 20px;
   border: 1px solid black;
   border-radius: 10px;
+  width: 730px;
   background-color: white;
 }
 
 .past {
   margin-left: 20px;
-  padding: 10px;
+  padding: 20px;
   border: 1px solid black;
   border-radius: 10px;
   background-color: white;
 }
 
 #content {
-  margin-left: 100px;
-  /* border: 1px solid black; */
+  margin-left: 30px;
 }
 
 #cancelPage {
@@ -108,6 +108,7 @@ hr {
   border-left: none;
   border-right: none;
   padding: 15px;
+  border: 1px solid rgb(201, 201, 201);
 }
 
 #cancelPage:hover {
