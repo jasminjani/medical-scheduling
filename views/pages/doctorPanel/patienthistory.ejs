@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- <link rel="stylesheet" href="/public/fontawesome-free-6.5.2-web/css/all.min.css"> -->
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
   <link rel="stylesheet" href="/css/adminPanel/allPatientDetails.css">
   <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css">
@@ -34,7 +33,6 @@
 
               <tbody id="a5-tbody">
                 <tr>
-                  <th>Sr no.</th>
                   <th>Name</th>
                   <th>Contact</th>
                   <th>More Details</th>
@@ -44,11 +42,11 @@
           </div>
         </div>
         <div class="a7-pagination">
-          <span class="a5-btn a7-pagination-btn"><< </span>
-              <span class="a5-btn a7-pagination-btn"> < </span>
-                  <span class="a5-btn a7-pagination-btn"> </span>
-                  <span class="a5-btn a7-pagination-btn">></span>
-                  <span class="a5-btn a7-pagination-btn">>></span>
+          <span class="a5-btn a7-pagination-btn" id="firstpage"> << </span>
+              <span class="a5-btn a7-pagination-btn" id="prevButton"> < </span>
+                  <span class="a5-btn a7-pagination-btn" id="pageno"> </span>
+                  <span class="a5-btn a7-pagination-btn" id="nextButton"> > </span>
+                  <span class="a5-btn a7-pagination-btn" id="lastpage"> >> </span>
         </div>
       </div>
   </div>
@@ -60,45 +58,191 @@
   const fetchData = async () => {
     let fetchdata = await fetch(`/getPatientData`)
     let data = await fetchdata.json()
-    let patient_id = 1
-    let key = Object.keys(data)
-    let count = 1
-    let table = document.getElementById("a5-tbody")
+    return data
+    }
+  
 
-    for (let i = 0; i < 5; i++) {
-      key.forEach(item => {
-        const dtkey = Object.keys(data[item])
-        let tr = document.createElement("tr")
-        let tdindex = document.createElement("td")
-        tdindex.textContent = count++
-        tr.appendChild(tdindex)
-        dtkey.forEach(ele => {
-          let td = document.createElement("td")
+  let currentPage = 1;
+  const pagefield = 1;
+  let length = 0;
+  let pageno = document.getElementById("pageno");
 
-          if (ele == "patient_id") {
-            td.style.display = 'none'
-            patient_id = data[item][ele]
-            td.innerText = data[item][ele]
-          }
-          else {
-            td.innerText = data[item][ele]
-          }
+  const pagination = async () => {
+      let data = await fetchData()
+      length = data.length;
+      pageno.innerHTML = currentPage;
 
-          tr.appendChild(td)
-        })
+      const endIndex = currentPage * pagefield;
+      const startIndex = endIndex - pagefield;
+      const pageItems = data.slice(startIndex, endIndex);
 
-        let btntd = document.createElement("td")
-        let anchortag = document.createElement("p")
-        btntd.append(anchortag)
-        anchortag.setAttribute("class", "a5-btn")
-        anchortag.textContent = `View More`
-        anchortag.setAttribute("onclick", `window.location.href = '/viewPatientHistory/${patient_id}'`)
-        tr.appendChild(btntd)
-        table.appendChild(tr)
-      });
+      let tabledata = "";
+
+      pageItems.map((value, index) => {
+        let patient_id = value.patient_id
+        tabledata += `<tr>
+        <td hidden >${patient_id}</td>
+        <td>${value.name}</td>
+        <td>${value.phone}</td>
+        <td><p class="a5-btn" onclick='window.location.href ="/viewPatientHistory/${patient_id}"'>View More</a></td>
+      </tr>`
+      })
+
+      document.getElementById("a5-tbody").innerHTML += tabledata;
+
+    }
+
+    const removeFun = async() =>{
+      document.getElementById("a5-tbody").innerHTML = `<tr>
+                  <th>Name</th>
+                  <th>Contact</th>
+                  <th>More Details</th>
+                </tr>`}
+    
+  if (currentPage == 1) {
+    document.getElementById('firstpage').disabled = true
+    document.querySelector('#prevButton').disabled = true
+  }
+  
+
+  function firstpageFun() {
+    currentPage = 1;
+    pagination()
+    removeFun()
+    if (currentPage != length / pagefield) {
+      document.getElementById('lastpage').disabled = false;
+      document.getElementById('nextButton').disabled = false;
+    }
+    if (currentPage == 1) {
+      document.getElementById('firstpage').disabled = true
+      document.getElementById('prevButton').disabled = true
+    }
+  
+  }
+
+  function prevButtonFun() {
+    if (currentPage > 1) {
+      currentPage--;
+      pagination()
+      removeFun()
+      document.getElementById('lastpage')
+     
+    }
+    if (currentPage != length / pagefield) {
+      document.getElementById('lastpage').disabled = false;
+      document.getElementById('nextButton').disabled = false;
+    }
+    if (currentPage == 1) {
+      document.getElementById('firstpage').disabled = true
+      document.getElementById('prevButton').disabled = true
     }
   }
-  fetchData()
+
+  function nextButtonFun() {
+    if ((currentPage * pagefield) < length) {
+      currentPage++;
+    }
+    if (currentPage != 1) {
+      document.getElementById('firstpage').disabled = false;
+      document.getElementById('prevButton').disabled = false;
+    }
+    lastpage = Math.ceil(length / pagefield);
+    if (currentPage == lastpage) {
+      document.getElementById('lastpage').disabled = true
+      document.getElementById('nextButton').disabled = true
+    }
+   pagination()
+   removeFun()
+  }
+
+  function lastpageFun() {
+    lastpage = Math.ceil(length / pagefield);
+    currentPage = lastpage
+    pagination()
+     removeFun()
+    if (currentPage != 1) {
+      document.getElementById('firstpage').disabled = false;
+      document.getElementById('prevButton').disabled = false;
+
+
+      if (currentPage == lastpage) {
+        document.getElementById('lastpage').disabled = true
+        document.getElementById('nextButton').disabled = true
+      }
+
+     
+       
+    }
+
+    ;
+  }
+    document.querySelector('#firstpage').addEventListener("click", firstpageFun)
+    document.querySelector('#lastpage').addEventListener("click", lastpageFun)
+    document.querySelector('#prevButton').addEventListener("click", prevButtonFun)
+    document.querySelector('#nextButton').addEventListener("click", nextButtonFun)
+  pagination()
+ 
 </script>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+const pagination = async ()=>{
+
+// let data = await fetchData()
+// const lastindex = currentPage * pagefield;
+// const firstindex = lastindex - pagefield;
+// viewPageNo.innerHTML = currentPage;
+// let newData = data.slice(firstindex, lastindex);
+// for(let i=0; i<pagefield; i++) // { // console.log(newData); // newData.forEach(item=> {
+  // console.log(item);
+  // console.log(item.patient_id);
+
+  // let tr = document.createElement("tr")
+  // let tdindex = document.createElement("td")
+  // tdindex.textContent = count++
+  // tr.appendChild(tdindex)
+
+  // let td = document.createElement("td")
+
+  // if (item == "patient_id") {
+  // td.style.display = 'none'
+  // patient_id = item.patient_id
+  // console.log("pa"+patient_id);
+  // td.innerText = item.patient_id
+  // }
+  // else {
+  // td.innerText = item.name
+  // td.innerText = item.phone
+  // }
+
+  // tr.appendChild(td)
+  // })
+
+  // let btntd = document.createElement("td")
+  // let anchortag = document.createElement("p")
+  // btntd.append(anchortag)
+  // anchortag.setAttribute("class", "a5-btn")
+  // anchortag.textContent = `View More`
+  // anchortag.setAttribute("onclick", `window.location.href = '/viewPatientHistory/${patient_id}'`)
+  // tr.appendChild(btntd)
+  // table.appendChild(tr)
+  // ;
+  // }
+  // length = data.length;
+
+  // } -->
