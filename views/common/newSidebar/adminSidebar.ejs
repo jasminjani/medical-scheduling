@@ -5,36 +5,56 @@
         <a href="#"><img src="/assets/sideBar/profile-icon-png-898.png" alt="profile" class="a5-profileimage" /></a>
       </div>
       <div class="a5-accountname">
-        <p class="a5-username">Admin Name</p>
-        <p class="a5-useremail">admin123@gmail.com</p>
+        <p class="a5-username"></p>
+        <p class="a5-useremail"></p>
       </div>
     </div>
     <div class="a5-logout">
-      <P class="a5-btn-logout">
-        <a href="/logout">Logout</a>
-      </P>
+      <P class="a5-btn-logout" onclick="window.location.href=`/logout`">Logout</P>
     </div>
   </div>
 
   <div class="a5-lists">
-    <div class="a5-list-item">
+    <div onclick="window.location.href=`/admin`" class="a5-list-item">
       <i class="fa-solid fa-house a5-list-item-img"></i>
-      <a href="/admin">Dashboard</a>
+      <a>Dashboard</a>
     </div>
-    <div class="a5-list-item">
+    <div onclick="window.location.href=`/admin/all-doctors`" class="a5-list-item">
       <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
-      <a href="/admin/all-doctors">Doctors</a>
+      <a>Doctors</a>
     </div>
-    <div class="a5-list-item">
+    <div onclick="window.location.href=`/admin/all-patient`" class="a5-list-item">
       <i class="fa-solid fa-bed-pulse a5-list-item-img"></i>
-      <a href="/admin/all-patient">Patients</a>
+      <a>Patients</a>
     </div>
-    <div class="a5-list-item">
+    <div onclick="window.location.href=`/admin/add-specialites`" class="a5-list-item">
       <i class="fa-solid fa-award a5-list-item-img"></i>
-      <a href="/admin/add-specialites">Add Specialties</a>
+      <a>Add Specialties</a>
     </div>
   </div>
 </div>
+
+
+<script>
+  const doctorsCount = document.getElementById('doctors-count');
+  const patientsCount = document.getElementById('patients-count');
+  const appointmentsCount = document.getElementById('appointments-count');
+  const revenueCount = document.getElementById('revenue-count');
+
+  async function forProfilePhoto() {
+
+    let resp = await fetch('/profile-photo');
+    let data = await resp.json();
+
+
+    document.querySelector('.a5-username').innerHTML = data.name + ` <i class="fa-solid fa-pen-to-square"></i>`;
+    document.querySelector('.a5-useremail').innerHTML = data.email;
+
+
+  }
+
+  forProfilePhoto()
+</script>
 
 <!-- aa banne css side bar mate link kari lejo
 

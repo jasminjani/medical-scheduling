@@ -3,8 +3,21 @@ const conn = require("../../config/dbConnection");
 exports.patientAllAppointment = async (req, res) => {
   try {
 
+    res.render('pages/adminPanel/patientAllAppointment');
+
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message
+    })
+  }
+}
+
+exports.getPatientAllAppointment = async (req, res) => {
+  try {
+
     const { patient_id } = req.params;
-    
+
     if (!patient_id) {
       return res.status(500).json({
         success: false,
@@ -41,7 +54,7 @@ exports.patientAllAppointment = async (req, res) => {
     // }
     console.log(allAppointment);
     console.log(patientDetails);
-    res.render('pages/adminPanel/patientAllAppointment', { patientDetails: patientDetails, allAppointment: allAppointment });
+    res.send( { patientDetails: patientDetails, allAppointment: allAppointment } );
 
   } catch (error) {
     return res.status(500).json({

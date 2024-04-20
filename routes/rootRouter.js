@@ -8,6 +8,7 @@ const nearByDoctorsRouter = require('./nearByDoctorsRouter');
 const router = express.Router();
 const { demoHomeController } = require('../controllers/demoHomecontroller');
 const { adminRouter } = require('./adminPanelRouter');
+const patientRouter = require('./patientPanelRouter');
 
 router.use("/", userRouter);
 router.use("/", doctorRouter);
@@ -15,7 +16,8 @@ router.use("/", doctorSpecialitiesRouter);
 router.use("/", hospitalRouter);
 router.use("/", prescriptionRouter);
 router.use('/', nearByDoctorsRouter);
-router.use('/',adminRouter);
+router.use('/', adminRouter);
+router.use('/', patientRouter)
 
 
 router.get('/demo', demoHomeController);
