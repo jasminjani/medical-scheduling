@@ -39,8 +39,8 @@ exports.patientAllAppointment = async (req, res) => {
     //     message: error.message
     //   })
     // }
-    console.log(allAppointment);
-    console.log(patientDetails);
+    // console.log(allAppointment);
+    // console.log(patientDetails);
     res.render('pages/adminPanel/patientAllAppointment', { patientDetails: patientDetails, allAppointment: allAppointment });
 
   } catch (error) {
