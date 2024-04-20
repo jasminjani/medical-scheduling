@@ -39,16 +39,16 @@ const submitPrescription = async () => {
 
     const form = document.getElementById("myForm");
     const obj = new URLSearchParams(new FormData(form));
-    let res1 = await fetch(window.location.origin + `/createprescription`, {
+    let res = await fetch(window.location.origin + `/createprescription`, {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       method: "POST",
       body: obj,
     });
-    alert("Prescription Inserted Successfully")
-    const result = await res1.json();
-    insert_id = result.insert_id;
+    let resjson=await res.json();
+    alert(resjson.msg)
+    insert_id = resjson.insert_id;
   }
 };
 
@@ -57,10 +57,12 @@ const addprescreption = async () => {
   document.getElementsByClassName("A4-PrescriptionDetails")[0].style.display ="block";
 };
 
+
 const validate = async () => {
+  
   const diagnosisval = document.getElementById("diagnosis").value;
   const prescriptionval = document.getElementById("prescription").value;
-
+  
   if (diagnosisval.trim().length <= 0 || prescriptionval.trim().length <= 0) {
     document.getElementById("prescriptionerror").innerHTML ="both field must be filled out";
     return false;
@@ -74,5 +76,18 @@ const generatePDF = async () => {
 };
 
 const back = async () => {
-  location.href = `http://localhost:8000/doctorDashboard/`;
+
+  const diagnosisval = document.getElementById("diagnosis").value;
+  const prescriptionval = document.getElementById("prescription").value;
+  console.log(!diagnosisval || !prescriptionval);
+
+  // if(!diagnosisval || !prescriptionval){
+  //   alert("you've not added the prescription!are you sure you want to exit?")
+  // }
+  if(!diagnosisval || !prescriptionval){
+    if(confirm("you've not added the prescription!are you sure you want to exit?")){
+      location.href = location.origin+`/doctorDashboard/`;
+    }
+  }
+  
 };
