@@ -129,6 +129,7 @@ a {
   transform: translate(5px);
   border-radius: 5px;
   transition: 0.3s;
+  cursor: pointer;
 }
 
 .a5-list-item:hover a,
