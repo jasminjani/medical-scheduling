@@ -32,35 +32,35 @@
             <table>
               <tr>
                 <td id="A4-table-title">Firstname:</td>
-                <td id="A4-table-content"><%= data?.fname %></td>
+                <td class="A4-table-content"></td>
               </tr>
               <tr>
                 <td id="A4-table-title">Lastname:</td>
-                <td id="A4-table-content"><%= data?.lname %></td>
+                <td class="A4-table-content"></td>
               </tr>
               <tr>
                 <td id="A4-table-title">Email:</td>
-                <td id="A4-table-content"><%= data?.email %></td>
+                <td class="A4-table-content"></td>
               </tr>
               <tr>
                 <td id="A4-table-title">Contact Number:</td>
-                <td id="A4-table-content"><%= data?.phone %></td>
+                <td class="A4-table-content"></td>
               </tr>
               <tr>
                 <td id="A4-table-title">Gender:</td>
-                <td id="A4-table-content"><%= data?.gender %></td>
+                <td class="A4-table-content"></td>
               </tr>
               <tr>
                 <td id="A4-table-title">DOB:</td>
-                <td id="A4-table-content"><%= data?.dob %></td>
+                <td class="A4-table-content"></td>
               </tr>
               <tr>
                 <td id="A4-table-title">Qualification:</td>
-                <td id="A4-table-content"><%= data?.qualification %></td>
+                <td class="A4-table-content"></td>
               </tr>
               <tr>
                 <td id="A4-table-title">Address:</td>
-                <td id="A4-table-content"><%= data?.address %></td>
+                <td class="A4-table-content"></td>
               </tr>
             </table>
           </div>
@@ -75,19 +75,19 @@
             <table>
               <tr>
                 <td id="A4-table-title">Clinic Name:</td>
-                <td id="A4-table-content"><%= data?.name %></td>
-              </tr>
-              <tr>
-                <td id="A4-table-title">City:</td>
-                <td id="A4-table-content"><%= data?.city %></td>
+                <td class="A4-table-content"></td>
               </tr>
               <tr>
                 <td id="A4-table-title">Address:</td>
-                <td id="A4-table-content"><%= data?.location %></td>
+                <td class="A4-table-content"></td>
+              </tr>
+              <tr>
+                <td id="A4-table-title">City:</td>
+                <td class="A4-table-content"></td>
               </tr>
               <tr>
                 <td id="A4-table-title">GST no:</td>
-                <td id="A4-table-content"><%= data?.gst_no%></td>
+                <td class="A4-table-content"></td>
               </tr>
             </table>
           </div>
@@ -121,6 +121,24 @@
           ? (div.style.display = "none")
           : (div.style.display = "block");
       }
+
+      async function fetchData(id){
+        let res=await fetch(location.origin+`/individual-doctor-details/${id}`);
+        let resjson=await res.json();
+        console.log(resjson.result[0]);
+
+        let tabledata=document.getElementsByClassName("A4-table-content");
+        console.log(tabledata);
+        let keys=Object.keys(resjson.result[0]);
+        console.log(keys);
+        let i=0;
+        keys.forEach(element => {
+          tabledata[i].innerText=resjson.result[0][element];
+          i++
+        });
+      }
+
+      fetchData(`<%=docID %>`);
 
       async function approveDoctor(id) {
         console.log(id);

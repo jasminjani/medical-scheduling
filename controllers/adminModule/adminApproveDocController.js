@@ -49,13 +49,26 @@ exports.individualDoctor = async (req, res) => {
       res.send("not valid doctor")
     }
     else {
-      res.render('pages/adminPanel/adminApproveSpecificDoctor.ejs', { data: result[0], docID });
+      res.json({result});
     }
   } catch (error) {
     console.log(error);
   }
 
 }
+
+
+exports.individualDoctorRend=async(req,res)=>{
+  try{
+
+    const docID=req.params.id;
+    res.render('pages/adminPanel/adminApproveSpecificDoctor.ejs', {docID})
+
+  }catch (error) {
+    console.log(error);
+  }
+}
+
 
 
 
@@ -87,6 +100,7 @@ exports.showDoctorDetail = async (req, res) => {
   }
 
 }
+
 
 
 exports.approveDoctor = async (req, res) => {
