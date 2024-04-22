@@ -9,10 +9,12 @@
   <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
   <link rel="stylesheet" href="/css/patientCSS/patientDashboard.css" />
+
   <link rel="stylesheet" href="/css/patientCSS/patientProfile.css" />
 </head>
 
 <body onload="getUpcomingSlots()">
+
   <%- include('../../common/newSidebar/patientSidebar.ejs') %>
     <div class="a2-patient-dashboard">
       <div class="a2-container a2-patient-home">
@@ -20,7 +22,7 @@
           <img src="/assets/patient-dashboard.jpg" alt="" />
           <div class="a2-patient-hero-text">
             <h3>Welcome</h3>
-            <h2 class="a2-patient-name">Ashish Zapadiya</h2>
+            <h2 class="a2-patient-name"></h2>
             <div>
               <p>Have't any idea about doctors? no problem !</p>
               <p>let's jumping to <b>"All Doctors"</b> section</p>
@@ -37,7 +39,7 @@
           <div class="a2-patient-status">
             <div class="a2-card">
               <div class="card-itams">
-                <span id="doctors-count">10+</span> Doctors
+                <span id="doctors-count"></span> All Doctors
               </div>
               <div class="card-itams">
                 <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
@@ -45,7 +47,7 @@
             </div>
             <div class="a2-card">
               <div class="card-itams">
-                <span id="doctors-count">10+</span> Doctors
+                <span id="patients-count"></span> All Patients
               </div>
               <div class="card-itams">
                 <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
@@ -53,7 +55,7 @@
             </div>
             <div class="a2-card">
               <div class="card-itams">
-                <span id="doctors-count">10+</span> Doctors
+                <span id="today-booking-count"></span> Today's Booking
               </div>
               <div class="card-itams">
                 <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
@@ -61,7 +63,7 @@
             </div>
             <div class="a2-card">
               <div class="card-itams">
-                <span id="doctors-count">10+</span> Doctors
+                <span id="total-booking-count"></span> My Total Booking
               </div>
               <div class="card-itams">
                 <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
@@ -111,9 +113,28 @@
         </div>
       </div>
     </div>
+
     <script>
-      document.querySelector('.a2-patient-name').innerHTML = `${user.fname + " " + user.lname}`
+
+      document.querySelector('.a2-patient-name').innerHTML = `${user.fname + " " + user.lname}`;
+
+
+
+      async function getPatientData() {
+        let resp = await fetch(`/patient-status/${user.id}`);
+        let data = await resp.json();
+
+        document.getElementById('doctors-count').innerHTML = data[0]?.doctorCount;
+        document.getElementById('patients-count').innerHTML = data[1]?.patientCount;
+        document.getElementById('today-booking-count').innerHTML = data[3]?.TodaysBooking;
+        document.getElementById('total-booking-count').innerHTML = data[2]?.patientTotalBooking;
+
+      }
+
+      getPatientData();
     </script>
+
+
     <!-- Upcoming slots script -->
     <script>
       const getUpcomingSlots = async () => {
@@ -181,6 +202,7 @@
         document.getElementsByClassName("A3-modal")[0].style.visibility = "hidden";
       }
     </script>
+
 </body>
 
 </html>
