@@ -317,7 +317,7 @@ exports.login = async (req, res) => {
       try {
         let sql = "select * from profile_pictures where user_id = ? and is_active=1";
         let [data] = await conn.query(sql,[result[0].id]);
-        profile = data[0].profile_picture;
+        profile = data[0]?.profile_picture;
       } catch (error) {
         return res.status(500).json({
           success: false,
