@@ -2,7 +2,7 @@
   <div class="a5-sidenavupperbox">
     <div class="a5-profile">
       <div class="a5-profilephoto">
-        <a href="" id="viewprofile"><img src="" alt="profile" class="a5-profileimage" id="profile" /></a>
+        <a href="/doctorProfile" id="viewprofile"><img src="" alt="profile" class="a5-profileimage" id="profile" /></a>
       </div>
       <div class="a5-accountname">
         <p class="a5-username" id="name"></p>
@@ -15,24 +15,24 @@
   </div>
 
   <div class="a5-lists">
-    <div class="a5-list-item" onclick="window.location.href=``">
-      <i class="fa-solid fa-house a5-list-item-img"></i>
+    <div class="a5-list-item" onclick="window.location.href=`/doctorDashboard`" id="a5-doctor-dashboard-active">
+      <i class=" fa-solid fa-house a5-list-item-img"></i>
       <a id="viewdashboard">Dashboard</a>
     </div>
-    <div class="a5-list-item" onclick="window.location.href=`/upcomingSlots`">
-      <i class="fa-solid fa-calendar-days a5-list-item-img"></i>
+    <div class="a5-list-item" onclick="window.location.href=`/upcomingSlots`" id="a5-doctor-schedule-active">
+      <i class=" fa-solid fa-calendar-days a5-list-item-img"></i>
       <a>Schedule</a>
     </div>
-    <div class="a5-list-item" onclick="window.location.href=``">
-      <i class="fa-solid fa-bed-pulse a5-list-item-img"></i>
+    <div class="a5-list-item" onclick="window.location.href=`/getPatientDetails`" id="a5-doctor-patient-active">
+      <i class=" fa-solid fa-bed-pulse a5-list-item-img"></i>
       <a id="viewpatient">My Patients</a>
     </div>
-    <div class="a5-list-item" onclick="window.location.href=``">
-      <i class="fa-regular fa-credit-card a5-list-item-img"></i>
+    <div class="a5-list-item" onclick="window.location.href=`/doctorPaymentHistory`" id="a5-doctor-payment-active">
+      <i class=" fa-regular fa-credit-card a5-list-item-img"></i>
       <a id="paymenthistory">Payment History</a>
     </div>
-    <div class="a5-list-item" onclick="window.location.href=``">
-      <i class="fa fa-comments a5-list-item-img"></i>
+    <div class="a5-list-item" onclick="window.location.href=`/getDoctorReview`" id="a5-doctor-feedback-active">
+      <i class=" fa fa-comments a5-list-item-img"></i>
       <a id="viewfeedback">Feedback</a>
     </div>
   </div>
