@@ -10,14 +10,15 @@
   <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css">
   <link rel="stylesheet" href="/css/doctorPanel/profile.css">
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
-
-  <title>Document</title>
+  <!-- <script src="/javascript/doctorPanel/doctorProfile.js" defer></script> -->
+  <script src="/javascript/patientPanel/patientProfileview.js" defer></script>
+  <title>Doctor Profile</title>
 </head>
 
 <body>
 
   <div class="a7-container">
-  <%- include('../../common/newSidebar/doctorSidebar.ejs') %>
+  <%- include('../../common/newSidebar/patientSidebar.ejs') %>
    
     <div class="a7-main-profile a7-mr-300">
 
@@ -38,48 +39,9 @@
             </div>
           </div>
         </div>
-      
       </div>
     </div>
     </div>
-
+   
 </body>
-
-
-<script>
- 
-
-    document.getElementById('edtbtn').href = `http://localhost:8000/updatedoctorProfile/`
-    document.getElementById('viewprofile').href = `http://localhost:8000/doctorProfile/`
- const profileDetailData = async() =>{
-
-  
-    let fetchdata = await fetch(`http://localhost:8000/doctorData`)
-    let data = await fetchdata.json()
-    let key = Object.keys(data[0])
-    key.forEach(item => {
-
-      if(item == 'id' || item == 'hospital_id')
-      {
-           let drinfo = document.createElement("span")
-          drinfo.innerHTML = data[0][item]
-          document.getElementById("divprofile").appendChild(drinfo)
-          drinfo.style.display= 'none'
-      }
-      else{
-        let divinfo = document.createElement("div")
-        divinfo.setAttribute("class", "a7-field")
-        let dlabel = document.createElement("label")
-        dlabel.innerHTML = item
-        let drinfo = document.createElement("span")
-        drinfo.innerHTML = data[0][item]
-        divinfo.append(dlabel)
-        divinfo.append(drinfo)
-        document.getElementById("divprofile").appendChild(divinfo)
-      } 
-    });
-  }
-  profileDetailData()
-</script>
-
 </html>
