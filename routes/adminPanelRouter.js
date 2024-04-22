@@ -1,6 +1,8 @@
 const express = require('express');
 const { getSpecialties, deleteSpecialty, getNewSpecialties, addNewSpecialties } = require('../controllers/adminModule/adminGetSpecialtiesController');
-const { individualDoctor, approveDoctor, rejectDoctor, getAllDoctors, deleteDoctor, showDoctorDetail } = require('../controllers/adminModule/adminApproveDocController');
+
+const { individualDoctor, approveDoctor, rejectDoctor, getAllDoctors, deleteDoctor, showDoctorDetail,individualDoctorRend } = require('../controllers/adminModule/adminApproveDocController');
+
 const { displayAllPatient, searchPatientByName, getAllPatients } = require('../controllers/adminModule/adminPanelPatientController');
 const { patientAllAppointment, appointmentDetails, getPatientAllAppointment } = require('../controllers/adminModule/patientAllAppointController');
 const { adminDeleteDoctors, adminApproveDoctors, adminAddSpecialites, adminDashboard } = require('../controllers/adminModule/adminPanelController');
@@ -32,10 +34,13 @@ adminRouter.route('/add-specialty').post(isAdmin,addNewSpecialties);
 
 // approve doctor panel in admin panel
 
-adminRouter.route('/show-doctor-deatil/:id').get(isAdmin,showDoctorDetail);
+
 adminRouter.route('/individual-doctor/:id').get(isAdmin,individualDoctor);
+adminRouter.route('/individual-doctor-details/:id').get(isAdmin,individualDoctor);
+adminRouter.route('/show-doctor-deatil/:id').get(isAdmin,showDoctorDetail);
 adminRouter.route('/approve-doctor/:id').get(isAdmin,approveDoctor);
 adminRouter.route('/reject-doctor/:id').get(isAdmin,rejectDoctor);
+
 
 
 
