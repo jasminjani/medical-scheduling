@@ -43,7 +43,7 @@ const {
   dashBoardAppointments,
   dashBoardReviews,
   dashBoardCount,
- 
+
 } = require("../controllers/doctorModule/doctorDashboard");
 const { doctorData } = require("../controllers/doctorModule/doctorProfile");
 const {
@@ -70,11 +70,13 @@ const {
   doctorPanelPaymentHistory,
 } = require("../controllers/doctorModule/doctorPaymentHistoryController");
 
+const { isDoctor, isPatient } = require("../middlewares/authMiddleware");
+
 const {
   getCityCombo,
 } = require("../controllers/doctorModule/doctorCityComboController");
+const { allDoctors } = require("../controllers/userController");
 
-const { isDoctor, isPatient } = require("../middlewares/authMiddleware");
 
 
 router
@@ -82,7 +84,7 @@ router
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
     isDoctor,
-    allDoctor
+    allDoctors
   );
 
 router
@@ -106,18 +108,6 @@ router
     updateGetDoctorDisplay
   );
 
-const {
-  showPatientPayment,
-  patientPaymentHistory,
-  searchPaymentHistory,
-  showpaymentHistory,
-} = require("../controllers/doctorModule/doctorPaymentHistoryController");
-const {
-  paymentHistory,
-} = require("../controllers/patientAllAppointController");
-const {
-  getCityCombo,
-} = require("../controllers/doctorModule/doctorCityComboController");
 
 router
   .route("/doctorCreateProfile")
