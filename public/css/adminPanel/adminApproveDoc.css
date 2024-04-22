@@ -45,6 +45,11 @@ body {
   background-color: var(--blue);
 }
 
+.a2-btn>i {
+  margin-right: 6px;
+  margin-top: 1px
+}
+
 .a2-back-btn {
   margin: 20px 0;
 }
