@@ -79,39 +79,19 @@
       </div>
 
       <div class="a5-section">
-        <div class="a5-container">
-          <div class="a5-all-doctor">
-            <h2>Patient Appointment</h2>
+        <div class="a5-all-doctor">
 
-            <div class="a5-doctor-table">
-              <table id="a5-doctor-table">
-                <tr>
-                  <th>ID</th>
-                  <th>Doctor Name</th>
-                  <th>Speciality</th>
-                  <th>Appointment Date</th>
-                  <th>Details</th>
-                </tr>
-                <% let index=0 %> <% allAppointment.forEach(element=> { %>
+          <h2>Patient Appointment</h2>
 
-                <tr>
-                  <td><%= ++index %></td>
-                  <td><%= element.fname + " " + element.lname %></td>
-                  <td><%= element.speciality %></td>
-                  <td><%= element.date %></td>
-                  <td>
-                    <p
-                      onclick="show('a5-popup', `<%= element.slot_id %>`)"
-                      class="a5-btn"
-                    >
-                      Detail
-                    </p>
-                  </td>
-                </tr>
-                <% }); %>
-              </table>
+          <div class="a5-doctor-table">
 
-              <div class="a5-popup" id="a5-popup"></div>
+            <table id="a5-doctor-table">
+              <tbody id="a5-tbody"></tbody>
+
+            </table>
+
+            <div class="a5-popup" id="a5-popup">
+
             </div>
           </div>
         </div>
