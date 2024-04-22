@@ -22,7 +22,16 @@ const {
   getBookingSlots,
   DoctorCobmo,
 } = require("../controllers/slotController");
-
+const {
+  becomeDoctorDetail,
+  updateGetDoctorDisplay,
+  getDoctorReview,
+  doctorDisplay,
+  getPatientDetail,
+  getPatientHistoryDetail,
+  logoutController,
+  doctorDashBoard,
+} = require("../controllers/doctorModule/doctorController");
 const {
   createDoctor,
 } = require("../controllers/doctorModule/docotorProfileCreateController");
@@ -34,7 +43,7 @@ const {
   dashBoardAppointments,
   dashBoardReviews,
   dashBoardCount,
-  doctorDashBoard,
+ 
 } = require("../controllers/doctorModule/doctorDashboard");
 const { doctorData } = require("../controllers/doctorModule/doctorProfile");
 const {

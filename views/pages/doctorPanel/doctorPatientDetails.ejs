@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
+  <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
+  <link rel="stylesheet" href="/css/adminPanel/patientsAllAppoinment.css">
+  <link rel="stylesheet" href="/css/doctorPanel/doctorPatientDetails.css">
+  <script src="/javascript/doctorPanel/urlPath.js" defer></script>
+  <script src="/javascript/doctorPanel/doctorPatientDetails.js" defer></script>
+  <title>Patient Details</title>
+</head>
+
+<body>
+
+  <div class="a5-container">
+    <%- include('../../common/newSidebar/doctorSidebar') %>
+      <div class="a5-section">
+        <div class="a5-patient">
+          <div class="a5-patient-img" id="patientProfile" class="A7-profile" >       
+          </div>
+          <div class="a5-patient-details">
+            <h1 id="patientname">
+              <!-- fetch patient Name -->
+            </h1>
+            <!-- fetch patient basic Detail -->
+            <div class="a5-patient-more-detail">
+              <div class="a5-details" id="patientbasicdetail">
+              </div>
+              <div class="a5-details" id="patientaddressdetail">
+              </div>
+            </div>
+            <!-- fetch patient address -->
+            <div class="a5-patient-address" id="patientaddress">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="a5-section">
+        <div class="a5-all-doctor">
+          <h2>Patient Appointment</h2>
+          <div class="a5-doctor-table">
+            <table id="trdetail">
+              <tr>
+                <th>Appointment Date</th>
+                <th>Details</th>
+              </tr>
+            </table>
+            <div class="a5-popup" id="a5-popup">
+              <div class="a5-doctor-section">
+                <div class="a5-doctor-card">
+                  <div class="a5-doctor-detail">
+                    <div class="a5-doctor-more-detail" id="appointmentdt">
+                    </div>
+                  </div>
+                  <div class="a5-prescription" id="a7-medicineDetail"  >
+                  </div>
+                </div>
+              </div>
+              <p class="a5-btn" onclick="hide('a5-popup')"> Close </p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</body>
+</html>

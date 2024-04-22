@@ -1,8 +1,6 @@
 const conn = require('../../config/dbConnection')
 
-exports.doctorDashBoard = (req, res) => {
-  res.render("pages/doctorPanel/dashboard");
-};
+
 
 exports.dashBoardCount = async(req,res)=>{
   let doctor_id = req.user.id

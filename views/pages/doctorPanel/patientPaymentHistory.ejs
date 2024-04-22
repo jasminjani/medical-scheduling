@@ -10,46 +10,26 @@
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
   <!-- CSS for container -->
   <link rel="stylesheet" href="/css/adminPanel/patientsAllAppoinment.css">
+  <script src="/javascript/doctorPanel/sidebar.js" defer></script>
+<script src="/javascript/doctorPanel/patientPaymentHistory.js" defer></script>
 </head>
 
 <body onload="fetchPatientPaymentData()">
-
   <div class="a5-container">
-
     <%- include('../../common/newSidebar/doctorSidebar') %>
-
-
       <div class="a5-section" id="a5-patient-basic-details">
-
       </div>
-
       <div class="a5-section">
-
         <div class="a5-all-doctor">
-
           <h2>Patient Appointment</h2>
-
           <div class="a5-doctor-table">
-
             <table id="a5-doctor-table">
               <tbody id="a5-tbody">
-
-
               </tbody>
             </table>
-
-
           </div>
-
         </div>
-
       </div>
-
   </div>
-
 </body>
-
-<script src="/javascript/doctorPanel/sidebar.js"></script>
-<script src="/javascript/doctorPanel/patientPaymentHistory.js"></script>
-
 </html>
