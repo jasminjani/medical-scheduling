@@ -45,6 +45,7 @@ exports.passportConfig = (passport) => {
 
 exports.isAdmin = async (req, res, next) => {
   try {
+    let id = req.user.id;
     let result;
     try {
       [result] = await conn.query(
@@ -59,10 +60,7 @@ exports.isAdmin = async (req, res, next) => {
     }
 
     if (result[0].role !== "admin") {
-      return res.status(401).json({
-        success: false,
-        message: "This is a Protected Route for Admin",
-      });
+      return res.render('./common/404')
     }
 
     next();
@@ -76,6 +74,7 @@ exports.isAdmin = async (req, res, next) => {
 
 exports.isPatient = async (req, res, next) => {
   try {
+    let id = req.user.id;
     let result;
     try {
       [result] = await conn.query(
@@ -90,10 +89,7 @@ exports.isPatient = async (req, res, next) => {
     }
 
     if (result[0].role !== "patient") {
-      return res.status(401).json({
-        success: false,
-        message: "This is a Protected Route for Patient",
-      });
+      return res.render('./common/404')
     }
 
     next();
@@ -107,6 +103,7 @@ exports.isPatient = async (req, res, next) => {
 
 exports.isDoctor = async (req, res, next) => {
   try {
+    let id = req.user.id;
     let result;
     try {
       [result] = await conn.query(
@@ -121,10 +118,7 @@ exports.isDoctor = async (req, res, next) => {
     }
 
     if (result[0].role !== "doctor") {
-      return res.status(401).json({
-        success: false,
-        message: "This is a Protected Route for Doctor",
-      });
+      return res.render('./common/404')
     }
 
     next();
