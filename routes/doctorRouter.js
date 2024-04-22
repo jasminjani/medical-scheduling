@@ -22,15 +22,7 @@ const {
   getBookingSlots,
   DoctorCobmo,
 } = require("../controllers/slotController");
-const {
-  becomeDoctorDetail,
-  updateGetDoctorDisplay,
-  getDoctorReview,
-  doctorDisplay,
-  getPatientDetail,
-  getPatientHistoryDetail,
-  logoutController,
-} = require("../controllers/doctorModule/doctorController");
+
 const {
   createDoctor,
 } = require("../controllers/doctorModule/docotorProfileCreateController");
@@ -48,6 +40,7 @@ const { doctorData } = require("../controllers/doctorModule/doctorProfile");
 const {
   doctorReviewData,
 } = require("../controllers/doctorModule/doctorReviewController");
+
 const {
   getPatientData,
   patientHistoryData,
@@ -72,6 +65,51 @@ const {
   getCityCombo,
 } = require("../controllers/doctorModule/doctorCityComboController");
 
+const { isDoctor, isPatient } = require("../middlewares/authMiddleware");
+
+
+router
+  .route("/allDoctorProfile")
+  .get(
+    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    isDoctor,
+    allDoctor
+  );
+
+router
+  .route("/doctorCreateProfile")
+  .get(
+    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    isPatient,
+    becomeDoctorDetail
+  )
+  .post(
+    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    isPatient,
+    createDoctor
+  );
+
+router
+  .route("/updatedoctorProfile")
+  .get(
+    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    isDoctor,
+    updateGetDoctorDisplay
+  );
+
+const {
+  showPatientPayment,
+  patientPaymentHistory,
+  searchPaymentHistory,
+  showpaymentHistory,
+} = require("../controllers/doctorModule/doctorPaymentHistoryController");
+const {
+  paymentHistory,
+} = require("../controllers/patientAllAppointController");
+const {
+  getCityCombo,
+} = require("../controllers/doctorModule/doctorCityComboController");
+
 router
   .route("/doctorCreateProfile")
   .get(
@@ -80,24 +118,11 @@ router
   );
 
 router
-  .route("/doctorCreateProfile")
-  .post(
-    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    createDoctor
-  );
-
-router
-  .route("/updatedoctorProfile")
-  .get(
-    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    updateGetDoctorDisplay
-  );
-
-router
   .route("/updatedoctorProfile")
   .post(
+    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    isDoctor,
     imgUpload.single("profile_picture"),
-    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
     updateDoctorDetails
   );
 
@@ -105,6 +130,7 @@ router
   .route("/getDoctorReview")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    isDoctor,
     getDoctorReview
   );
 
@@ -114,6 +140,7 @@ router
   .route("/dashBoardAppointments")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    isDoctor,
     dashBoardAppointments
   );
 
@@ -121,12 +148,14 @@ router
   .route("/dashBoardReviews")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    isDoctor,
     dashBoardReviews
   );
 router
   .route("/dashBoardCount")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    isDoctor,
     dashBoardCount
   );
 
@@ -148,6 +177,7 @@ router
   .route("/updateDoctorData")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    isDoctor,
     updateGetDoctorData
   );
 
@@ -155,6 +185,7 @@ router
   .route("/reviews")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    isDoctor,
     doctorReviewData
   );
 
@@ -162,6 +193,7 @@ router
   .route("/getPatientData")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    isDoctor,
     getPatientData
   );
 
@@ -169,16 +201,18 @@ router
   .route("/getpatientHistoryData/:patient_id")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    isDoctor,
     patientHistoryData
   );
 
-router.route("/reviews/:id").get(doctorReviewData);
+router.route("/reviews/:id").get(isDoctor, doctorReviewData);
 
 // Router show doctor details date:- 12-04-2024
 router
   .route("/doctorProfile")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    isDoctor,
     doctorDisplay
   );
 
@@ -186,6 +220,7 @@ router
   .route("/getPatientDetails")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    isDoctor,
     getPatientDetail
   );
 
@@ -193,6 +228,7 @@ router
   .route("/doctorDashBoard")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    isDoctor,
     doctorDashBoard
   );
 
@@ -214,9 +250,18 @@ router
   );
 
 router
+  .route("/viewPatientHistory/:patient_id")
+  .get(
+    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    isDoctor,
+    getPatientHistoryDetail
+  );
+
+router
   .route("/viewPatientDetailsData/:patient_id")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    isDoctor,
     patientDetailsData
   );
 
@@ -228,6 +273,13 @@ router
   );
 
 router.route("/logout").get(logoutController);
+
+router
+  .route("/patientPrescriptionData/:patient_id/:date")
+  .get(
+    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    patientPrescriptionData
+  );
 
 router.route("/specialities").get(allSpecialities);
 
@@ -267,10 +319,12 @@ router
   .route("/showPatientHistoryData/:patient_id")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    isDoctor,
     showPatientPayment
   );
 
-
+// router.route('/searchedPaymentHistory/:patient_id/:search')
+//   .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), searchPatientPayment);
 
 // Darshan Slot Router
 
@@ -278,21 +332,22 @@ router
   .route("/addSlot")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    isDoctor,
     createSlotsPage
   );
 router
   .route("/slot")
   .post(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    isDoctor,
     createSlots
-  );
-
-router
-  .route("/slot")
+  )
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    isDoctor,
     getBookingSlots
   );
+
 router
   .route("/bookslot")
   .post(
@@ -311,30 +366,35 @@ router
   .route("/upcomingSlots")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    isDoctor,
     getSlotsPage
   );
 router
   .route("/dates")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    isDoctor,
     getDates
   );
 router
   .route("/slots/:date")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    isDoctor,
     getAllSlots
   );
 router
   .route("/delete/:slot_id")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    isDoctor,
     deleteSlot
   );
 router
   .route("/cancel/:slot_id")
-  .put(
+  .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    isPatient,
     cancelSlot
   );
 

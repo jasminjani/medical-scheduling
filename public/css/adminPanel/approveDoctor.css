@@ -28,13 +28,15 @@
 .A4-Content {
   padding: 0px 211px;
   font-size: 20px;
-
   table,
   tr,
   th,
   td {
     border-radius: 5px;
     padding: 5px;
+  }
+  table{
+    width: 665px;
   }
 
   td {
@@ -53,7 +55,8 @@ table {
 }
 
 .A4-clinic-deatils-button {
-  padding: 65px 439px;
+  padding: 50px 0px;
+  text-align: center;
 }
 
 .A4-clinic-deatils-btn {
@@ -92,25 +95,34 @@ table {
   display: flex;
   gap: 20px;
   justify-content: center;
-  margin-top: 70px;
-  margin-left: -350px;
-  margin-bottom: 70px;
+  padding: 43px 0px;
 }
 
-.A4-approve-doctor-btn {
+.A4-approve-doctor-btn,.A4-reject-doctor-btn {
   height: 45px;
   width: 163px;
-  background-color: rgb(2, 104, 2);
   font-size: 16px;
   color: var(--white);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.A4-approve-doctor-btn{
+  background-color: rgb(2, 119, 2);
+  border: 1px solid rgb(2, 119, 2);
 }
 
 .A4-reject-doctor-btn {
-  height: 45px;
-  width: 163px;
   background-color: rgb(212, 7, 7);
-  font-size: 16px;
-  color: var(--white);
+  border: 1px solid rgb(212, 7, 7);
+}
+
+.A4-approve-doctor-btn:hover{
+  background-color: rgb(3, 83, 3);
+}
+
+.A4-reject-doctor-btn:hover{
+  background-color: rgb(146, 2, 2);
 }
 
 .a2-btn {
@@ -150,4 +162,5 @@ table {
 
 .a2-approve-h2 {
   margin: 30px 0;
+  text-align: center;
 }

@@ -1,6 +1,12 @@
 window.location.href.split("/").pop() === "patientPastSlots" ? document.getElementById("A3-past").style.backgroundColor = "#3984af" : "";
 
-const getUpcomingSlots = async () => {
+let page = 1;
+
+let limit = 6;
+
+let totalPage;
+
+const getPastSlots = async () => {
   let user = JSON.parse(localStorage.getItem('userinfo'));
   const response = await fetch(`/pastbookings/${user.id}`, {
     method: "GET",
@@ -9,17 +15,21 @@ const getUpcomingSlots = async () => {
     }
   });
 
-  const {success, data } = await response.json();
+  const {success, message } = await response.json();
 
-  console.log(success);
+  totalPage = Math.ceil(message.length / limit);
+
+  if (totalPage <= 1) document.getElementsByClassName("A4-Pagination-component")[0].style.visibility = "hidden";
 
   const table = document.getElementById("date-body");
 
-  if(!success){
-   return table.innerHTML = "<tr><td colspan='5'>No Data Found !</td></tr>"
-  }
+  table.innerHTML = "";
 
-  data?.forEach(element => {
+  if(message.length == 0 || !success){
+    return table.innerHTML = "<tr><td colspan='5'>No Data Found !</td></tr>"
+   }
+
+  message.slice((page - 1) * limit, page * limit).forEach(element => {
     console.log(element);
     table.innerHTML += `
       <tr>
@@ -31,6 +41,38 @@ const getUpcomingSlots = async () => {
       </tr>
     `
   });
+}
+
+const home = () => {
+  if (page > 1) {
+    page = 1;
+    document.getElementById("pageno").innerHTML = page;
+    getPastSlots();
+  }
+}
+
+const previous = () => {
+  if (page > 1) {
+    page--;
+    document.getElementById("pageno").innerHTML = page;
+    getPastSlots();
+  }
+}
+
+const next = () => {
+  if (page < totalPage) {
+    page++;
+    document.getElementById("pageno").innerHTML = page;
+    getPastSlots();
+  }
+}
+
+const end = () => {
+  if (page < totalPage) {
+    page = totalPage;
+    document.getElementById("pageno").innerHTML = page;
+    getPastSlots();
+  }
 }
 
 const getDetails = async (data) => {

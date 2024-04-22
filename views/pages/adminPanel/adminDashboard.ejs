@@ -67,7 +67,7 @@
           </div>
 
           <div>
-            
+
             <!-- search bar of doctor -->
             <div class="container">
               <div class="all-doctors">
@@ -179,7 +179,7 @@
               </div>
             </div>
 
-       
+
           </div>
 
           <!-- revies panel -->
@@ -188,33 +188,33 @@
           </div>
         </div>
       </div>
-    </div>
+  </div>
 
-    <script src="/javascript/carousel.js"></script>
-    <script src="/javascript/adminPanel/dashboard.js"></script>
- 
+  <script src="/javascript/carousel.js"></script>
+  <script src="/javascript/adminPanel/dashboard.js"></script>
 
-<script>
 
-  async function fetchStatus() {
-    try {
+  <script>
 
-      const url = `http://localhost:8000/getDashboardStatus`;
-      const response = await fetch(url);
-      const result = await response.json();
-      console.log(result);
+    async function fetchStatus() {
+      try {
 
-      document.getElementById('doctors-count').innerHTML = result.totalDoctor[0].total_doctor + "+";
-      document.getElementById('patients-count').innerHTML = result.totalPatient[0].total_patient + "+";
-      document.getElementById('appointments-count').innerHTML = result.todayAppointment[0].today_appointment + "+";
-      document.getElementById('revenue-count').innerHTML = result.totalRevenue[0].total_revenue + "+";
+        const url = `http://localhost:8000/getDashboardStatus`;
+        const response = await fetch(url);
+        const result = await response.json();
+        console.log(result);
 
-    } catch (error) {
-      console.log(error);
+        document.getElementById('doctors-count').innerHTML = result.totalDoctor[0].total_doctor + "+";
+        document.getElementById('patients-count').innerHTML = result.totalPatient[0].total_patient + "+";
+        document.getElementById('appointments-count').innerHTML = result.todayAppointment[0].today_appointment + "+";
+        document.getElementById('revenue-count').innerHTML = result.totalRevenue[0].total_revenue + "+";
+
+      } catch (error) {
+        console.log(error);
+      }
     }
-  }
-
-</script>
+    fetchStatus();
+  </script>
 </body>
-</html>
 
+</html>
