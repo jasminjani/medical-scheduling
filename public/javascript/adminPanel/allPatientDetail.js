@@ -62,10 +62,14 @@ async function getAllPatient() {
     let data = await resp.json();
     let index = 1;
 
-    // console.log(data);
-    data.forEach(patient => {
+    if (data.length < 1) {
+      tbody.innerHTML = `<tr><td colspan="5">No data found!!</td></tr>`;
+    } else {
 
-      let str = `<tr>
+      // console.log(data);
+      data.forEach(patient => {
+
+        let str = `<tr>
           <td>${index++}</td>
           <td>${patient.fname}</td>
           <td>${patient.lname}</td>
@@ -76,9 +80,10 @@ async function getAllPatient() {
           </td>
         </tr>`;
 
-      tbody.innerHTML += str;
+        tbody.innerHTML += str;
 
-    });
+      });
+    }
 
   } catch (error) {
     console.log(error);
