@@ -122,6 +122,7 @@
 
         const data = await resp.json();
 
+        console.log(data);
         let allPendingDoctors = data.filter((e) => {
           return e.approved === 0 ? e : false;
         });
@@ -149,22 +150,22 @@
         const rejectedTbody = document.getElementById(
           "a2-rejected-doctors-tbody"
         );
-
-        allPendingDoctors.forEach((doc) => {
+        console.log(allPendingDoctors);
+        allPendingDoctors.forEach((doc, i) => {
           let str = `<tr>
-            <td>${doc.id}</td>
+            <td>${++i}</td>
             <td>${doc.fname} ${doc.lname}</td>
             <td>${doc.email}</td>
             <td>${doc.qualification}</td>
-            <td class="a2-btn" onclick="approveDoc(${doc.id})">Approve</td>
+            <td class="a2-btn" onclick="approveDoc(${doc.doctor_id})">Approve</td>
           </tr>`;
 
           approveTbody.innerHTML += str;
         });
 
-        allDoctors.forEach((doc) => {
+        allDoctors.forEach((doc, i) => {
           let tds = `<tr>
-          <td>${doc.doctor_id}</td>
+          <td>${++i}</td>
           <td>${doc.fname} ${doc.lname}</td>
           <td>${doc.email}</td>
           <td>${doc.qualification}</td>
@@ -173,9 +174,9 @@
           allDoctorsTbody.innerHTML += tds;
         });
 
-        rejectedDoctors.forEach((doc) => {
+        rejectedDoctors.forEach((doc,i) => {
           let tds = `<tr>
-          <td>${doc.doctor_id}</td>
+          <td>${++i}</td>
           <td>${doc.fname} ${doc.lname}</td>
           <td>${doc.email}</td>
           <td>${doc.qualification}</td>
@@ -195,5 +196,6 @@
         location.href = `/individual-doctor/${id}`;
       }
     </script>
-  </body>
+</body>
+
 </html>
