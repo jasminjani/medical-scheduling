@@ -61,6 +61,7 @@ create table profile_pictures(
 	id int primary key auto_increment,
     profile_picture varchar(255),
     user_id int not null,
+    is_active bool not null default 1,
     created_at timestamp default current_timestamp not null,
 	updated_at timestamp default current_timestamp on update current_timestamp not null,
     foreign key (user_id) references users(id)
