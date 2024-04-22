@@ -30,6 +30,7 @@ const {
   getPatientDetail,
   getPatientHistoryDetail,
   logoutController,
+  doctorDashBoard,
 } = require("../controllers/doctorModule/doctorController");
 const {
   createDoctor,
@@ -42,7 +43,7 @@ const {
   dashBoardAppointments,
   dashBoardReviews,
   dashBoardCount,
-  doctorDashBoard,
+ 
 } = require("../controllers/doctorModule/doctorDashboard");
 const { doctorData } = require("../controllers/doctorModule/doctorProfile");
 const {

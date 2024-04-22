@@ -1,0 +1,30 @@
+.a7-div-field {
+  display: flex;
+  align-items: center;
+}
+
+.a7-mediInfo-color {
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.307);
+  border-radius: 5px;
+}
+
+.a7-medInfo {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  background-color: rgb(100, 161, 232);
+  height: 275px;
+}
+
+.a7-mediInfo-box {
+  height: 350px;
+  width: 250px;
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  background-color: #315e788d;
+  color: rgb(245, 233, 220);
+
+  border-radius: 30px;
+}
