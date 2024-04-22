@@ -68,19 +68,23 @@ async function appendPatientDetails(result) {
 async function appendPatientAllAppointment(result) {
   try {
 
-    let header = `<tr>
-                    <th>Sr no.</th>
+    if (result.allAppointment.length < 1) {
+      document.getElementById('a5-tbody').innerHTML = `<tr><td colspan="5">No data found!!</td></tr>`;
+    } else {
+
+      let header = `<tr>
+                    <th></th>
                     <th>Doctor Name</th>
                     <th>Speciality</th>
                     <th>Appointment Date</th>
                     <th>Details</th>
                   </tr>`;
 
-    document.getElementById('a5-tbody').innerHTML = header;
-    let index = 1;
+      document.getElementById('a5-tbody').innerHTML = header;
+      let index = 1;
 
-    result.allAppointment.forEach(element => {
-      let appointmentDetails = `<tr>
+      result.allAppointment.forEach(element => {
+        let appointmentDetails = `<tr>
             <td>${index++}</td>
             <td>${element.fname + " " + element.lname}</td>
             <td>${element.speciality}</td>
@@ -90,9 +94,9 @@ async function appendPatientAllAppointment(result) {
             </td>
           </tr>`;
 
-      document.getElementById('a5-tbody').innerHTML = document.getElementById('a5-tbody').innerHTML + appointmentDetails;
-    });
-
+        document.getElementById('a5-tbody').innerHTML = document.getElementById('a5-tbody').innerHTML + appointmentDetails;
+      });
+    }
   } catch (error) {
     console.log(error);
   }
@@ -100,16 +104,21 @@ async function appendPatientAllAppointment(result) {
 
 
 funcId = function (id) {
-  return document.getElementById(id);
+  try {
+    return document.getElementById(id);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 let show = async function (id, slot_id) {
+  try {
 
-  const url = `http://localhost:8000/admin/patient-appointment/:patient_id/${slot_id}`;
-  const response = await fetch(url);
-  const result = await response.json();
+    const url = `http://localhost:8000/admin/patient-appointment/:patient_id/${slot_id}`;
+    const response = await fetch(url);
+    const result = await response.json();
 
-  let html = `<div class="a5-doctor-section">
+    let html = `<div class="a5-doctor-section">
               <div class="a5-doctor-card">
                 <h3>Dr. ${result.appointmentData[0].fname + " " + result.appointmentData[0].lname}
                 </h3>
@@ -144,10 +153,18 @@ let show = async function (id, slot_id) {
 
             <p class="a5-btn" onclick="hide('a5-popup')"> Close </p>`;
 
-  funcId(id).innerHTML = html;
-  funcId(id).style.display = 'block';
+    funcId(id).innerHTML = html;
+    funcId(id).style.display = 'block';
+
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 let hide = function (id) {
-  funcId(id).style.display = 'none';
+  try {
+    funcId(id).style.display = 'none';
+  } catch (error) {
+    console.log(error);
+  }
 }

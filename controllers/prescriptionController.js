@@ -115,64 +115,64 @@ exports.getPrescriptionOfUser = async (req, res) => {
   }
 };
 
-exports.generatePDF = async (req, res) => {
-  try {
-    const id = req.params.id;
+// exports.generatePDF = async (req, res) => {
+//   try {
+//     const id = req.params.id;
 
-    let doc = new PDFDocument();
+//     let doc = new PDFDocument();
 
-    const query = `select prescriptions.prescription,prescriptions.diagnoses,prescriptions.created_at,
-        concat(users_patient.fname," ",users_patient.lname) as patient_name,
-        concat(users_doctor.fname," ",users_doctor.lname) as doctor_name
-        from prescriptions 
-        join users as users_patient on prescriptions.patient_id=users_patient.id 
-        join users as users_doctor on prescriptions.doctor_id = users_doctor.id  
-        where prescriptions.id = ?`;
+//     const query = `select prescriptions.prescription,prescriptions.diagnoses,prescriptions.created_at,
+//         concat(users_patient.fname," ",users_patient.lname) as patient_name,
+//         concat(users_doctor.fname," ",users_doctor.lname) as doctor_name
+//         from prescriptions 
+//         join users as users_patient on prescriptions.patient_id=users_patient.id 
+//         join users as users_doctor on prescriptions.doctor_id = users_doctor.id  
+//         where prescriptions.id = ?`;
 
-    const [result] = await conn.query(query,[id]);
-    const patient_name = result[0].patient_name;
-    const doctor_name = result[0].doctor_name;
-    const prescription = result[0].prescription;
-    const diagnosis = result[0].diagnoses;
-    const appointment_date = result[0].created_at.toString().slice(0, 10);
+//     const [result] = await conn.query(query,[id]);
+//     const patient_name = result[0].patient_name;
+//     const doctor_name = result[0].doctor_name;
+//     const prescription = result[0].prescription;
+//     const diagnosis = result[0].diagnoses;
+//     const appointment_date = result[0].created_at.toString().slice(0, 10);
 
-    // res.setHeader(
-    //   "Content-disposition",
-    //   `attachment; filename=prescription-${patient_name}.pdf`
-    // );
-    // res.setHeader("Content-type", "application/pdf");
+//     // res.setHeader(
+//     //   "Content-disposition",
+//     //   `attachment; filename=prescription-${patient_name}.pdf`
+//     // );
+//     // res.setHeader("Content-type", "application/pdf");
 
-    let str = `
-    Appointment Date:${appointment_date}  
+//     let str = `
+//     Appointment Date:${appointment_date}  
 
-    Patient Name:${patient_name}
+//     Patient Name:${patient_name}
 
-    Doctor_name:${doctor_name}
+//     Doctor_name:${doctor_name}
 
-    Diagnosis:${diagnosis}
+//     Diagnosis:${diagnosis}
 
-      ${result[0].prescription}
-    `;
+//       ${result[0].prescription}
+//     `;
 
-    // doc.image('public/assets/logo.png',{fit: [100, 80],align: 'center',valign: 'center'});
-    // doc.moveDown(8);
-    // doc.moveDown().font('Times-Roman').fontSize(14).fillColor('#224763').text('Appointment Date:'+" "+`${appointment_date}`);
-    // doc.moveDown().font('Times-Roman').fontSize(14).fillColor('#224763').text('Patient Name:'+" "+`${patient_name}`);
-    // doc.moveDown().font('Times-Roman').fontSize(14).fillColor('#224763').text('Doctor Name:'+" "+`${doctor_name}`);
-    // doc.moveDown().font('Times-Roman').fontSize(14).fillColor('#224763').text('Diagnosis:'+" "+`${diagnosis}`);
-    // doc.moveDown().font('Times-Roman').fontSize(14).fillColor('#224763').text('Prescription:'+" "+`${prescription}`);
+//     // doc.image('public/assets/logo.png',{fit: [100, 80],align: 'center',valign: 'center'});
+//     // doc.moveDown(8);
+//     // doc.moveDown().font('Times-Roman').fontSize(14).fillColor('#224763').text('Appointment Date:'+" "+`${appointment_date}`);
+//     // doc.moveDown().font('Times-Roman').fontSize(14).fillColor('#224763').text('Patient Name:'+" "+`${patient_name}`);
+//     // doc.moveDown().font('Times-Roman').fontSize(14).fillColor('#224763').text('Doctor Name:'+" "+`${doctor_name}`);
+//     // doc.moveDown().font('Times-Roman').fontSize(14).fillColor('#224763').text('Diagnosis:'+" "+`${diagnosis}`);
+//     // doc.moveDown().font('Times-Roman').fontSize(14).fillColor('#224763').text('Prescription:'+" "+`${prescription}`);
 
-    doc.pipe(res);
-    doc.end();
+//     doc.pipe(res);
+//     doc.end();
 
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({
-      success: false,
-      message: error.message,
-    });
-  }
-};
+//   } catch (error) {
+//     console.log(error);
+//     return res.status(500).json({
+//       success: false,
+//       message: error.message,
+//     });
+//   }
+// };
 
 exports.getPrescriptionOfDoctor = async (req, res) => {
   try {

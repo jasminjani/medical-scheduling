@@ -1,81 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>admin Approve Doctors</title>
 
-    <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
-    <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
-    <link rel="stylesheet" href="/css/adminPanel/adminApproveDoc.css" />
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>admin Approve Doctors</title>
 
-  <body>
-    <div class="main-container">
-      <%- include('../../common/newSidebar/adminSidebar.ejs') %>
+  <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
+  <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
+  <link rel="stylesheet" href="/css/adminPanel/adminApproveDoc.css">
+  <style>
+    #a5-admin-doctor-active {
+      background-color: #0969da;
+      transform: translate(5px);
+      border-radius: 5px;
+    }
 
-      <div class="a2-approve-table-div">
-        <div class="a2-container">
-          <a href="/admin" style="text-decoration: none; color: black">
-            <p class="a2-back-btn a2-btn">
-              <img src="/assets/adminPanel/icons/back-iceblue.svg" alt="Back" />
-              Back
-            </p>
-          </a>
+    #a5-admin-doctor-active a,
+    #a5-admin-doctor-active i {
+      color: #ffffff;
+    }
+  </style>
+</head>
 
-          <div class="doctor-panel">
-            <h3 class="a2-approve-h2">
-              Pending Request <span id="total-pending-doc"></span>
-            </h3>
-            <h3 class="a2-all-doctors-panel">
-              All Doctors <span id="all-doctors-count"></span>
-            </h3>
-            <h3 class="a2-reject-doc-panel">
-              Rejected Doctors <span id="total-rejected-doc"></span>
-            </h3>
-          </div>
+<body>
 
-          <div class="pending-doctors">
-            <table class="a2-approve-table">
-              <tr class="approve-tbl-head">
-                <th>ID</th>
-                <th>Doctor Name</th>
-                <th>Email</th>
-                <th>Qualification</th>
-                <th>Status</th>
-              </tr>
+  <%- include('../../common/newSidebar/adminSidebar.ejs') %>
 
-              <tbody id="approve-tbl-body"></tbody>
-            </table>
-          </div>
+    <div class="a2-approve-table-div">
+      <div class="a2-container">
+        <!-- <a href="/admin" style="text-decoration: none; color: black;"> -->
+        <p onclick="window.location.href=`/admin`" class="a2-back-btn a2-btn">
+          <i class="fa-solid fa-arrow-left"></i> Back
+        </p>
+        <!-- </a> -->
 
-          <div class="all-doctors">
-            <table class="a2-approve-table">
-              <tr class="approve-tbl-head">
-                <th>ID</th>
-                <th>Doctor Name</th>
-                <th>Email</th>
-                <th>Qualification</th>
-                <th>Status</th>
-              </tr>
+        <div class="doctor-panel">
+          <h3 class="a2-approve-h2">Pending Request <span id="total-pending-doc"></span></h3>
+          <h3 class="a2-all-doctors-panel">All Doctors <span id="all-doctors-count"></span></h3>
+          <h3 class="a2-reject-doc-panel">Rejected Doctors <span id="total-rejected-doc"></span></h3>
+        </div>
 
-              <tbody id="get-all-doctors"></tbody>
-            </table>
-          </div>
+        <div class="pending-doctors">
 
-          <div class="a2-rejected-doctors">
-            <table class="a2-approve-table">
-              <tr class="approve-tbl-head">
-                <th>ID</th>
-                <th>Doctor Name</th>
-                <th>Email</th>
-                <th>Qualification</th>
-                <th>Status</th>
-              </tr>
+          <table class="a2-approve-table">
+            <tr class="approve-tbl-head">
 
-              <tbody id="a2-rejected-doctors-tbody"></tbody>
-            </table>
-          </div>
+              <th>ID</th>
+              <th>Doctor Name</th>
+              <th>Email</th>
+              <th>Qualification</th>
+              <th>Status</th>
+
+            </tr>
+
+            <tbody id="approve-tbl-body"></tbody>
+
+          </table>
+        </div>
+
+        <div class="all-doctors">
+
+          <table class="a2-approve-table">
+            <tr class="approve-tbl-head">
+
+              <th>ID</th>
+              <th>Doctor Name</th>
+              <th>Email</th>
+              <th>Qualification</th>
+              <th>View/Delete</th>
+
+            </tr>
+
+            <tbody id="get-all-doctors"></tbody>
+
+          </table>
+        </div>
+
+        <div class="a2-rejected-doctors">
+          <table class="a2-approve-table">
+            <tr class="approve-tbl-head">
+
+              <th>ID</th>
+              <th>Doctor Name</th>
+              <th>Email</th>
+              <th>Qualification</th>
+              <th>Status</th>
+
+            </tr>
+
+            <tbody id="a2-rejected-doctors-tbody"></tbody>
+
+          </table>
         </div>
       </div>
     </div>
@@ -117,6 +133,7 @@
 
         const data = await resp.json();
 
+        console.log(data);
         let allPendingDoctors = data.filter((e) => {
           return e.approved === 0 ? e : false;
         });
@@ -144,33 +161,33 @@
         const rejectedTbody = document.getElementById(
           "a2-rejected-doctors-tbody"
         );
-
-        allPendingDoctors.forEach((doc) => {
+        console.log(allPendingDoctors);
+        allPendingDoctors.forEach((doc, i) => {
           let str = `<tr>
-            <td>${doc.id}</td>
+            <td>${++i}</td>
             <td>${doc.fname} ${doc.lname}</td>
             <td>${doc.email}</td>
             <td>${doc.qualification}</td>
-            <td class="a2-btn" onclick="approveDoc(${doc.id})">Approve</td>
+            <td class="a2-btn" onclick="approveDoc(${doc.doctor_id})">Approve</td>
           </tr>`;
 
           approveTbody.innerHTML += str;
         });
 
-        allDoctors.forEach((doc) => {
+        allDoctors.forEach((doc, i) => {
           let tds = `<tr>
-          <td>${doc.doctor_id}</td>
+          <td>${++i}</td>
           <td>${doc.fname} ${doc.lname}</td>
           <td>${doc.email}</td>
           <td>${doc.qualification}</td>
-          <td><p class="a2-btn" onclick="deleteDoctor(${doc.doctor_id})">Delete</p></td>
+          <td><p class="a2-btn" onclick="showDoctorDeatil(${doc.doctor_id})">View</p> <p class="a2-btn" onclick="deleteDoctor(${doc.doctor_id})">Delete</p></td>
           </tr>`;
           allDoctorsTbody.innerHTML += tds;
         });
 
-        rejectedDoctors.forEach((doc) => {
+        rejectedDoctors.forEach((doc, i) => {
           let tds = `<tr>
-          <td>${doc.doctor_id}</td>
+          <td>${++i}</td>
           <td>${doc.fname} ${doc.lname}</td>
           <td>${doc.email}</td>
           <td>${doc.qualification}</td>
@@ -189,6 +206,11 @@
       async function approveDoc(id) {
         location.href = `/individual-doctor/${id}`;
       }
+
+      async function showDoctorDeatil(id) {
+        location.href = `/show-doctor-deatil/${id}`
+      }
     </script>
-  </body>
+</body>
+
 </html>

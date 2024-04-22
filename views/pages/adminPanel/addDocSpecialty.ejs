@@ -1,50 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>admin Approve Doctors</title>
 
-    <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
-    <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
-    <link rel="stylesheet" href="/css/adminPanel/adminApproveDoc.css" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>admin Approve Doctors</title>
 
-  <body>
-    <div class="main-container">
-      <%- include('../../common/newSidebar/adminSidebar.ejs') %>
+  <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
+  <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
+  <link rel="stylesheet" href="/css/adminPanel/adminApproveDoc.css">
+  <style>
+    #a5-admin-speciality-active {
+      background-color: #0969da;
+      transform: translate(5px);
+      border-radius: 5px;
+    }
 
-      <div class="a2-approve-table-div">
-        <div class="a2-container">
-          <a href="/admin" style="text-decoration: none; color: black">
-            <p class="a2-back-btn a2-btn">
-              <img src="/assets/adminPanel/icons/back-iceblue.svg" alt="Back" />
-              Back
-            </p>
-          </a>
+    #a5-admin-speciality-active a,
+    #a5-admin-speciality-active i {
+      color: #ffffff;
+    }
+  </style>
 
-          <h2 class="a2-approve-h2">All Doctors Specialties</h2>
+</head>
 
-          <table class="a2-approve-table">
-            <tr class="approve-tbl-head">
-              <th>No.</th>
-              <th>Specialty Name</th>
-              <th>Delete</th>
-            </tr>
-            <tbody id="a2-tbody"></tbody>
-          </table>
+<body>
 
-          <h2 class="a2-approve-h2">Pending Request</h2>
 
-          <table class="a2-approve-table" id="pending-request-tbl">
-            <tr class="approve-tbl-head">
-              <th>No.</th>
-              <th>Specialty Name</th>
-              <th>Add Specialty</th>
-            </tr>
-            <tbody id="pending-speciality"></tbody>
-          </table>
+  <%- include('../../common/newSidebar/adminSidebar.ejs') %>
+
+    <div class="a2-approve-table-div">
+      <div class="a2-container">
+        <div class="a5-flex-btn">
+          <!-- <a href="/admin" style="text-decoration: none; color: black;"> -->
+          <p onclick="window.location.href=`/admin`" class="a2-back-btn a2-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back
+          </p>
+          <!-- </a> -->
         </div>
+
+        <h2 class="a2-approve-h2">All Doctors Specialties</h2>
+
+        <table class="a2-approve-table">
+          <tr class="approve-tbl-head">
+            <th>No.</th>
+            <th>Specialty Name</th>
+          </tr>
+          <tbody id="a2-tbody"></tbody>
+        </table>
+
+        <h2 class="a2-approve-h2">Pending Request</h2>
+
+        <table class="a2-approve-table" id="pending-request-tbl">
+          <tr class="approve-tbl-head">
+            <th>No.</th>
+            <th>Specialty Name</th>
+            <th>Add Specialty</th>
+          </tr>
+          <tbody id="pending-speciality"></tbody>
+        </table>
+
+
       </div>
     </div>
 
@@ -60,26 +77,12 @@
           let strTD = `<tr>
             <td>${specialties.id}</td> 
             <td>${specialties.speciality}</td>
-            <td class="a2-btn" onclick=deleteSpecialty(${specialties.id})>Delete</tr>`;
+            </tr>`;
           tbody.innerHTML += strTD;
         });
       }
 
-      async function deleteSpecialty(id) {
-        try {
-          let response = await fetch("/delete-specialty", {
-            method: "post",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id: id }),
-          });
-          if (response.ok) {
-            alert("Delete Specialty successfully ");
-            location.reload();
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      }
+
       makeSpecialtiesTable();
 
       async function getNewSpecialty() {
@@ -92,7 +95,8 @@
           let strTD = `<tr>
             <td>${specialties.id}</td> 
             <td>${specialties.speciality}</td>
-            <td class="a2-btn" onclick=addSpecialty(${specialties.id})>Add</tr>`;
+            <td class="a2-btn" onclick=addSpecialty(${specialties.id})>Add</td>
+            </tr>`;
           tbody.innerHTML += strTD;
         });
       }
@@ -112,5 +116,6 @@
         }
       }
     </script>
-  </body>
+</body>
+
 </html>

@@ -49,13 +49,59 @@ exports.individualDoctor = async (req, res) => {
       res.send("not valid doctor")
     }
     else {
-      res.render('pages/adminPanel/adminApproveSpecificDoctor.ejs', { data: result[0], docID });
+      res.json({result});
     }
   } catch (error) {
     console.log(error);
   }
 
 }
+
+
+exports.individualDoctorRend=async(req,res)=>{
+  try{
+
+    const docID=req.params.id;
+    res.render('pages/adminPanel/adminApproveSpecificDoctor.ejs', {docID})
+
+  }catch (error) {
+    console.log(error);
+  }
+}
+
+
+
+
+exports.showDoctorDetail = async (req, res) => {
+
+  try {
+
+    const docID = req.params.id;
+
+    let sql = `select a.fname,a.lname,a.email,a.phone,a.gender,a.dob,b.qualification,a.address,
+    c.name,c.location,c.city,c.gst_no from users a 
+    inner join doctor_details b on a.id = b.doctor_id 
+    inner join clinic_hospitals c on b.hospital_id = c.id
+    where b.approved = 1 and a.id = ?`
+
+    let [result] = await conn.query(sql, [docID]);
+    // console.log(result);
+
+    if (result.length === 0) {
+      res.send("not valid doctor")
+    }
+    else {
+      // res.json(result);
+      res.render('pages/adminPanel/adminShowOneDoc.ejs', { data: result[0], docID });
+
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+}
+
+
 
 exports.approveDoctor = async (req, res) => {
   try {

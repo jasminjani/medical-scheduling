@@ -3,9 +3,6 @@ const passport = require('passport')
 const { patientDashboard, patientViewProfile, patientViewProfileData, patientProfileUpdateData, getpatientProfileUpdate, postPatientProfileUpdate } = require('../controllers/patientModule/patientDashboardControllers');
 const patientRouter = express.Router();
 patientRouter.use(passport.authenticate('jwt', { session: false, failureRedirect: '/login' }))
-const { imgStorage, fileStorage } = require("../utils/multer");
-const multer = require("multer");
-const imgUpload = multer({ storage: imgStorage });
 
 
 patientRouter.route('/patient').get(passport.authenticate('jwt',{session:false,failureRedirect:"/login"}),patientDashboard)
