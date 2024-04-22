@@ -10,7 +10,7 @@ const { getBookSlotPage, getBookingSlots } = require("../controllers/slotControl
 const { createUser, login, getAllUser, logout, getUserById, deleteUser, generateToken, createUserForm, getCreateUserForm, getLoginForm, activationForm, activationAccount, getCurrentUser, homePage, getDoctorDetails, allDoctors, forgotPassword } = require("../controllers/userController");
 const passport = require('passport');
 
-const { paymentHistory,patientPayments, patientProfile, patientUpcomingBookings, patientPastBookings, patientPastProfile, searchPatientPayment } = require('../controllers/patientAllAppointController');
+const { patientPayments, patientProfile, patientUpcomingBookings, patientPastBookings, patientPastProfile, searchPatientPayment, patientPanelPaymentHistory } = require('../controllers/patientAllAppointController');
 
 
 router.route("/")
@@ -72,7 +72,7 @@ router.route("/bookslots/:id").get(passport.authenticate('jwt',{session:false,fa
 
 // Patient panel Payment history routes
 router.route("/payments").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), patientPayments)
-router.route("/patient-paymentHistory").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), paymentHistory)
+router.route("/patient-paymentHistory").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), patientPanelPaymentHistory)
 router.route("/searchedPatientPayment/:searchedData").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), searchPatientPayment );
 
 

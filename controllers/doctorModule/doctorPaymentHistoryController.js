@@ -1,6 +1,6 @@
 const conn = require('../../config/dbConnection')
 
-exports.paymentHistory = async (req, res) => {
+exports.doctorPanelPaymentHistory = async (req, res) => {
   await res.render('pages/doctorPanel/viewpayment')
 }
 

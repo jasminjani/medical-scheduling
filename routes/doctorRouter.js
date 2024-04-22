@@ -65,10 +65,9 @@ const {
   patientPaymentHistory,
   searchPaymentHistory,
   showpaymentHistory,
+  doctorPanelPaymentHistory,
 } = require("../controllers/doctorModule/doctorPaymentHistoryController");
-const {
-  paymentHistory,
-} = require("../controllers/patientAllAppointController");
+
 const {
   getCityCombo,
 } = require("../controllers/doctorModule/doctorCityComboController");
@@ -239,7 +238,7 @@ router
   .route("/doctorPaymentHistory")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    paymentHistory
+    doctorPanelPaymentHistory
   );
 
 router
