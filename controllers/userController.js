@@ -666,11 +666,11 @@ exports.logout = async (req, res) => {
 
 exports.forgotPassword = async (req, res) => {
   try {
-    let html = `<div class="email-input">
+    let html = `<div class="email-input content">
                         <h4>Please Enter your Registered Email!</h4>
                         <div class="fields">
-                          <input type="text" name="email" id="email" placeholder="Enter email">
-                          <input type="submit" value="Generate" id ="submit">
+                          <input type="text" name="email" id="email" placeholder="Enter email" class="dvalid">
+                          <input type="submit" value="Generate" class="submit" id ="submit">
                         </div>
                     </div>`;
 
@@ -703,7 +703,7 @@ exports.forgotPassLink = async (req, res) => {
       });
     }
 
-    let verification_token = result[0].verification_token;
+    let verification_token = result[0].activation_token;
     try {
       await conn.query("update users set token_created_at=? where email=?", [
         new Date(Date.now()),
@@ -768,7 +768,7 @@ exports.createPasswordForm = async (req, res) => {
       return res.render("createPassword", { html });
     }
 
-    let html = `<div class="active-button">
+    let html = `<div class="resetPass">
                     <div class="password">
                         <label for="lname">Create Password: </label>
                         <input type="password" name="password" id="password" placeholder="Enter a password" class="dvalid" >
@@ -778,10 +778,10 @@ exports.createPasswordForm = async (req, res) => {
                         <input type="password" name="confirmPassword" id="confirmPassword"
                             placeholder="Re-enter the same password" class="dvalid" >
                     </div>
-                      <input type="submit" value="Create" id ="submit">
+                      <input type="submit" value="Create" id ="submit" class="submit">
                 </div>`;
 
-    return res.render("login-registration/createPassword", { html });
+    return res.render("./pages/auth/resetPass", { html });
   } catch (error) {
     res.status(500).json({
       message: error.message,
@@ -793,6 +793,13 @@ exports.updatePassword = async (req, res) => {
   try {
     let token = req.query.token;
     let email = req.query.email;
+
+    if(!token || !email){
+      return res.json({
+        success:false,
+        message:"invalid route access"
+      })
+    }
 
     let password = req.body.password;
     let confirmPassword = req.body.confirmPassword;
@@ -826,8 +833,6 @@ exports.updatePassword = async (req, res) => {
 
     // generate hashpassword
     let hashPassword;
-    let random_salt = Math.random().toString(36).substring(2, 6);
-    password += random_salt;
     try {
       let bcryptsalt = await bcrypt.genSaltSync(10);
       hashPassword = await bcrypt.hash(password, bcryptsalt);
@@ -840,8 +845,8 @@ exports.updatePassword = async (req, res) => {
 
     try {
       [result] = await conn.query(
-        "update users set password = ?, salt=? where email=?",
-        [hashPassword, random_salt, email]
+        "update users set password = ? where email=?",
+        [hashPassword, email]
       );
     } catch (error) {
       return res.status(500).json({

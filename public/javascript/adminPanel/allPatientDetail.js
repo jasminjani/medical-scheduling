@@ -33,15 +33,15 @@ async function searchPatient() {
 
 }
 
-let searchBtn = document.getElementById('a5-btn-search');
+// let searchBtn = document.getElementById('a5-btn-search');
 
-searchBtn.addEventListener('keyup', function (event) {
-  try {
-    if (event.key === 'Enter') {
-      searchPatient();
-    }
-  } catch (e) { console.log(e); }
-});
+// searchBtn.addEventListener('keyup', function (event) {
+//   try {
+//     if (event.key === 'Enter') {
+//       searchPatient();
+//     }
+//   } catch (e) { console.log(e); }
+// });
 
 
 let tbody = document.getElementById('a5-tbody');
@@ -52,7 +52,7 @@ async function getAllPatient() {
   let data = await resp.json();
   let index = 1;
 
-  // console.log(data);
+  console.log(data);
   data.forEach(patient => {
 
     let str = `<tr>

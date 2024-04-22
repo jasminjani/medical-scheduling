@@ -39,46 +39,43 @@ const { patientPaymentHistory, showPatientPayment, searchPatientPayment } = requ
 
 // slot 
 const { createSlots, getSingleSlots, bookingSlot, getAllSlots, deleteSlot, cancelSlot, createSlotsPage, getSlotsPage, getDates,  getBookingSlots, DoctorCobmo } = require('../controllers/slotController');
-
+const {isDoctor, isPatient} = require('../middlewares/authMiddleware')
 
 router.route("/allDoctorProfile")
-  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), allDoctor)
+  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }),isDoctor, allDoctor)
 
 
 router.route("/doctorCreateProfile")
-  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), becomeDoctorDetail)
+  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }),isPatient, becomeDoctorDetail)
+  .post(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }),isPatient, createDoctor)
 
-router.route("/doctorCreateProfile")
-  .post(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), createDoctor)
+router.route("/updatedoctorProfile")
+  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), isDoctor,updateGetDoctorDisplay)
 
 
 router.route("/updatedoctorProfile")
-  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), updateGetDoctorDisplay)
-
-
-router.route("/updatedoctorProfile")
-  .post(imgUpload.single('profile_picture'),passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), updateDoctorDetails)
+  .post(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }),isDoctor,imgUpload.single('profile_picture'), updateDoctorDetails)
 
 
 router.route('/getDoctorReview')
-  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getDoctorReview)
+  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), isDoctor,getDoctorReview)
 
 
 // Router show json format Data date:- 12-04-2024
 
 router.route("/dashBoardAppointments")
-  .get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),dashBoardAppointments)
+  .get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),isDoctor,dashBoardAppointments)
 
 router.route("/dashBoardReviews")
-  .get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),dashBoardReviews)
+  .get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),isDoctor,dashBoardReviews)
 router.route("/dashBoardCount")
-  .get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }), dashBoardCount)
+  .get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }), isDoctor,dashBoardCount)
 
 router
   .route("/doctorData")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    doctorData
+    isDoctor,doctorData
   );
 
 router
@@ -92,53 +89,53 @@ router
   .route("/doctorPaymentData")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    doctorPaymentData
+    isDoctor,doctorPaymentData
   );
 
 router
   .route("/updateDoctorData")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    updateGetDoctorData
+    isDoctor,updateGetDoctorData
   );
 
 router
   .route("/reviews")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    doctorReviewData
+    isDoctor, doctorReviewData
   );
 
 router
   .route("/getPatientData")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    getPatientData
+    isDoctor, getPatientData
   );
 
 router
   .route("/getpatientHistoryData/:patient_id")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    patientHistoryData
+    isDoctor,patientHistoryData
   );
 
-router.route("/reviews/:id").get(doctorReviewData);
+router.route("/reviews/:id").get(isDoctor,doctorReviewData);
 
 // Router show doctor details date:- 12-04-2024
 router.route("/doctorProfile")
-  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), doctorDisplay)
+  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), isDoctor,doctorDisplay)
 
 
 router.route("/getPatientDetails")
-  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getPatientDetail)
+  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), isDoctor,getPatientDetail)
 
 
 
 
 
 router.route("/doctorDashBoard")
-  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), doctorDashBoard)
+  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }),isDoctor, doctorDashBoard)
 
 router.route('/doctorSideBarDetail')
   .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getDoctorSideBarDetail)
@@ -148,10 +145,10 @@ router.route('/doctorSideBarDetail')
 
 
 router.route('/viewPatientHistory/:patient_id')
-  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getPatientHistoryDetail)
+  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), isDoctor,getPatientHistoryDetail)
 
 router.route("/viewPatientDetailsData/:patient_id")
-  .get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }), patientDetailsData)
+  .get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }), isDoctor,patientDetailsData)
 
 
 router.route("/patientPrescriptionData/:patient_id/:date")
@@ -192,7 +189,7 @@ router.route('/doctorPaymentHistory/:patient_id')
   .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), patientPaymentHistory);
 
 router.route('/showPatientHistoryData/:patient_id')
-  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), showPatientPayment);
+  .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), isDoctor,showPatientPayment);
 
 // router.route('/searchedPaymentHistory/:patient_id/:search')
 //   .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), searchPatientPayment);
@@ -202,19 +199,19 @@ router.route('/showPatientHistoryData/:patient_id')
 
 // Darshan Slot Router
 
-router.route("/addSlot").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), createSlotsPage);
-router.route("/slot").post(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), createSlots)
+router.route("/addSlot").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }),isDoctor, createSlotsPage);
+router.route("/slot").post(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }),isDoctor, createSlots).get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }),isDoctor, getBookingSlots);
 
-router.route("/slot").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getBookingSlots);
+
 router.route("/bookslot").post(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), bookingSlot); 
 router.route('/getDoctors').post(DoctorCobmo)
 
 router.route("/slots").post(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getSingleSlots);
-router.route("/upcomingSlots").get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }), getSlotsPage);
-router.route("/dates").get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }), getDates);
-router.route("/slots/:date").get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }), getAllSlots);
-router.route("/delete/:slot_id").get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }), deleteSlot);
-router.route("/cancel/:slot_id").put(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }), cancelSlot)
+router.route("/upcomingSlots").get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }), isDoctor,getSlotsPage);
+router.route("/dates").get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),isDoctor, getDates);
+router.route("/slots/:date").get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }), isDoctor,getAllSlots);
+router.route("/delete/:slot_id").get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),isDoctor, deleteSlot);
+router.route("/cancel/:slot_id").get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),isPatient, cancelSlot)
 
 
 
