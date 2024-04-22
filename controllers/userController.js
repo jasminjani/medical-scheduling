@@ -40,6 +40,7 @@ exports.getDoctorDetails = async (req,res)=>{
       group by u.id,pp.created_at,pp.profile_picture,s.speciality,
       dd.qualification,dd.consultancy_fees,ch.name,ch.city,ch.location order by rating desc; `;
       [result] = await conn.query(sql);
+      // console.log(result);
     } catch (error) {
       console.log(error)
     }
@@ -252,6 +253,7 @@ exports.createUser = async (req, res) => {
       user: result[0],
     });
   } catch (error) {
+    console.log(error);
     // any error occur during the registration
     res.status(500).json({
       success: false,
@@ -317,7 +319,7 @@ exports.login = async (req, res) => {
       try {
         let sql = "select * from profile_pictures where user_id = ? and is_active=1";
         let [data] = await conn.query(sql,[result[0].id]);
-        profile = data[0].profile_picture;
+        profile = data[0]?.profile_picture;
       } catch (error) {
         return res.status(500).json({
           success: false,

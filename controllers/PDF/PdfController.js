@@ -5,6 +5,7 @@ let PDFDocument = require("pdfkit");
 exports.generatePDF = async (req, res) => {
   try {
     const id = req.params.id;
+    console.log(id);
 
     const query = `select prescriptions.prescription,prescriptions.diagnoses,prescriptions.created_at,
         concat(users_patient.fname," ",users_patient.lname) as patient_name,
