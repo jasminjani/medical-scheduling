@@ -141,6 +141,6 @@ exports.searchPatientPayment = async (req, res) => {
   }
 }
 
-exports.paymentHistory = async (req, res) => {
+exports.patientPanelPaymentHistory = async (req, res) => {
   await res.render('pages/patientPanel/paymentHistory');
 }

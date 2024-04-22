@@ -40,7 +40,33 @@ const { doctorData } = require("../controllers/doctorModule/doctorProfile");
 const {
   doctorReviewData,
 } = require("../controllers/doctorModule/doctorReviewController");
+
+const {
+  getPatientData,
+  patientHistoryData,
+  patientDetailsData,
+  patientPrescriptionData,
+} = require("../controllers/doctorModule/doctorPanelPatientController");
+const {
+  getDoctorSideBarDetail,
+} = require("../controllers/doctorModule/doctorSidebarController");
+const {
+  allSpecialities,
+} = require("../controllers/doctorModule/doctorSpecialitiesController");
+const {
+  showPatientPayment,
+  patientPaymentHistory,
+  searchPaymentHistory,
+  showpaymentHistory,
+  doctorPanelPaymentHistory,
+} = require("../controllers/doctorModule/doctorPaymentHistoryController");
+
+const {
+  getCityCombo,
+} = require("../controllers/doctorModule/doctorCityComboController");
+
 const { isDoctor, isPatient } = require("../middlewares/authMiddleware");
+
 
 router
   .route("/allDoctorProfile")
@@ -264,7 +290,7 @@ router
   .route("/doctorPaymentHistory")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    paymentHistory
+    doctorPanelPaymentHistory
   );
 
 router
