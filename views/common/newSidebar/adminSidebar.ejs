@@ -10,7 +10,9 @@
       </div>
     </div>
     <div class="a5-logout">
-      <P class="a5-btn-logout" onclick="window.location.href=`/logout`">Logout</P>
+      <P class="a5-btn-logout" onclick="logout()">
+        <a href="/logout">Logout</a>
+      </P>
     </div>
   </div>
 
@@ -34,7 +36,7 @@
   </div>
 </div>
 
-
+<script src="/javascript/auth/logout.js"></script>
 <script>
   const doctorsCount = document.getElementById('doctors-count');
   const patientsCount = document.getElementById('patients-count');
@@ -43,13 +45,14 @@
 
   async function forProfilePhoto() {
 
-    let resp = await fetch('/profile-photo');
-    let data = await resp.json();
+  let user = JSON.parse(localStorage.getItem('userinfo'));
 
+  if(user.profile.trim()){
+    document.querySelector('.a5-profileimage').setAttribute('src',`/imgs/${user.profile}`)
+  }
 
-    document.querySelector('.a5-username').innerHTML = data.name + ` <i class="fa-solid fa-pen-to-square"></i>`;
-    document.querySelector('.a5-useremail').innerHTML = data.email;
-
+  document.querySelector('.a5-username').innerHTML = `${user.fname+ " "+user.lname}`;
+  document.querySelector('.a5-useremail').innerHTML = user.email;
 
   }
 

@@ -1,19 +1,23 @@
 window.location.href.split("/").pop() === "patientUpcomingSlots" ? document.getElementById("A3-upcoming").style.backgroundColor = "#3984af" : "";
 
 const getUpcomingSlots = async () => {
-  const response = await fetch("http://localhost:8000/bookings/2", {
+  let user = JSON.parse(localStorage.getItem('userinfo'));
+  const response = await fetch(`/bookings/${user.id}`, {
     method: "GET",
     headers: {
       "Content-type": "application/json"
     }
   });
 
-  const { message } = await response.json();
+  const { success,data } = await response.json();
 
   const table = document.getElementById("date-body");
+  console.log(data)
+  if(data.length == 0){
+    return table.innerHTML = "<tr><td colspan='5'>No Data Found !</td></tr>"
+   }
 
-
-  message.forEach(element => {
+  data.forEach(element => {
     // console.log(element);
     table.innerHTML += `
       <tr>

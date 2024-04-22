@@ -98,7 +98,7 @@
 
   <script>
     const fetchCountData = async () => {
-      const fetchData = await fetch(`http://localhost:8000/dashBoardCount`)
+      const fetchData = await fetch(`/dashBoardCount`)
       const data = await fetchData.json()
       let key = Object.keys(data[0])
       key.forEach(element => {
@@ -118,7 +118,7 @@
     
     const fetchReviewData = async ()=>{
 
-      const fetchData = await fetch(`http://localhost:8000/dashBoardReviews`)
+      const fetchData = await fetch(`/dashBoardReviews`)
       const data = await fetchData.json()
       let key = Object.keys(data)
       let feedbackCard = document.getElementById("feedbackCard")
@@ -207,7 +207,7 @@
     fetchReviewData()
 
     const fetchAppointMents = async() =>{
-        let fetchData = await fetch('http://localhost:8000/dashBoardAppointments')
+        let fetchData = await fetch('/dashBoardAppointments')
         let data = await fetchData.json()
         let key = Object.keys(data)
         let count = 1;
@@ -226,7 +226,7 @@
                 let btn = document.createElement("div")
                 btn.textContent = "Add Prescription"
                 btn.setAttribute("id", "hh")
-                btn.setAttribute("onclick", `location.href ='http://localhost:8000/prescription/${data[element][item]}'`)
+                btn.setAttribute("onclick", `location.href ='/prescription/${data[element][item]}'`)
                 btn.setAttribute("class", "a7-btn-style a5-btn")
                 div1.appendChild(btn)
               }else{
@@ -240,8 +240,7 @@
              
              }
             });
-           
-           
+ 
             table.appendChild(div1)
         });
         }

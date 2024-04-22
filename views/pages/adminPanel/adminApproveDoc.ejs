@@ -82,83 +82,75 @@
 
           </table>
         </div>
-
-
       </div>
     </div>
 
-
-
     <script>
-      const requestH2 = document.querySelector('.a2-approve-h2');
-      const allDoctorsH2 = document.querySelector('.a2-all-doctors-panel');
-      const rejectedDoctorsH2 = document.querySelector('.a2-reject-doc-panel');
+      const requestH2 = document.querySelector(".a2-approve-h2");
+      const allDoctorsH2 = document.querySelector(".a2-all-doctors-panel");
+      const rejectedDoctorsH2 = document.querySelector(".a2-reject-doc-panel");
 
-      const requestDiv = document.querySelector('.pending-doctors');
-      const allDoctorsDiv = document.querySelector('.all-doctors');
-      const rejectedDoctorsDiv = document.querySelector('.a2-rejected-doctors');
+      const requestDiv = document.querySelector(".pending-doctors");
+      const allDoctorsDiv = document.querySelector(".all-doctors");
+      const rejectedDoctorsDiv = document.querySelector(".a2-rejected-doctors");
 
-      allDoctorsDiv.style.display = 'none';
-      rejectedDoctorsDiv.style.display = 'none';
+      allDoctorsDiv.style.display = "none";
+      rejectedDoctorsDiv.style.display = "none";
 
-      requestH2.addEventListener('click', () => {
-
-        allDoctorsDiv.style.display = 'none';
-        rejectedDoctorsDiv.style.display = 'none';
-        requestDiv.style.display = 'block';
+      requestH2.addEventListener("click", () => {
+        allDoctorsDiv.style.display = "none";
+        rejectedDoctorsDiv.style.display = "none";
+        requestDiv.style.display = "block";
       });
 
-      allDoctorsH2.addEventListener('click', () => {
-
-        requestDiv.style.display = 'none';
-        rejectedDoctorsDiv.style.display = 'none';
-        allDoctorsDiv.style.display = 'block';
-
+      allDoctorsH2.addEventListener("click", () => {
+        requestDiv.style.display = "none";
+        rejectedDoctorsDiv.style.display = "none";
+        allDoctorsDiv.style.display = "block";
       });
 
-      rejectedDoctorsH2.addEventListener('click', () => {
-
-        requestDiv.style.display = 'none';
-        allDoctorsDiv.style.display = 'none';
-        rejectedDoctorsDiv.style.display = 'block';
-
+      rejectedDoctorsH2.addEventListener("click", () => {
+        requestDiv.style.display = "none";
+        allDoctorsDiv.style.display = "none";
+        rejectedDoctorsDiv.style.display = "block";
       });
-
     </script>
 
-
     <script>
-
       async function getAllDoctors() {
-
-        const resp = await fetch('/get-all-doctors');
+        const resp = await fetch("/get-all-doctors");
 
         const data = await resp.json();
 
-
         let allPendingDoctors = data.filter((e) => {
-          return (e.approved === 0) ? e : false;
-        })
+          return e.approved === 0 ? e : false;
+        });
 
         let allDoctors = data.filter((e) => {
-          return (e.approved === 1) ? e : false;
-        })
+          return e.approved === 1 ? e : false;
+        });
 
         let rejectedDoctors = data.filter((e) => {
-          return (e.approved === -1) ? e : false;
-        })
+          return e.approved === -1 ? e : false;
+        });
 
-        document.getElementById('total-pending-doc').innerHTML = `(${allPendingDoctors.length})`
-        document.getElementById('all-doctors-count').innerHTML = ` (${allDoctors.length})`
-        document.getElementById('total-rejected-doc').innerHTML = ` (${rejectedDoctors.length})`
+        document.getElementById(
+          "total-pending-doc"
+        ).innerHTML = `(${allPendingDoctors.length})`;
+        document.getElementById(
+          "all-doctors-count"
+        ).innerHTML = ` (${allDoctors.length})`;
+        document.getElementById(
+          "total-rejected-doc"
+        ).innerHTML = ` (${rejectedDoctors.length})`;
 
-        const approveTbody = document.getElementById('approve-tbl-body');
-        const allDoctorsTbody = document.getElementById('get-all-doctors');
-        const rejectedTbody = document.getElementById('a2-rejected-doctors-tbody');
+        const approveTbody = document.getElementById("approve-tbl-body");
+        const allDoctorsTbody = document.getElementById("get-all-doctors");
+        const rejectedTbody = document.getElementById(
+          "a2-rejected-doctors-tbody"
+        );
 
-
-        allPendingDoctors.forEach(doc => {
-
+        allPendingDoctors.forEach((doc) => {
           let str = `<tr>
             <td>${doc.id}</td>
             <td>${doc.fname} ${doc.lname}</td>
@@ -167,11 +159,10 @@
             <td class="a2-btn" onclick="approveDoc(${doc.id})">Approve</td>
           </tr>`;
 
-          approveTbody.innerHTML += str
+          approveTbody.innerHTML += str;
         });
 
-
-        allDoctors.forEach(doc => {
+        allDoctors.forEach((doc) => {
           let tds = `<tr>
           <td>${doc.doctor_id}</td>
           <td>${doc.fname} ${doc.lname}</td>
@@ -182,7 +173,7 @@
           allDoctorsTbody.innerHTML += tds;
         });
 
-        rejectedDoctors.forEach(doc => {
+        rejectedDoctors.forEach((doc) => {
           let tds = `<tr>
           <td>${doc.doctor_id}</td>
           <td>${doc.fname} ${doc.lname}</td>
@@ -192,22 +183,17 @@
           </tr>`;
           rejectedTbody.innerHTML += tds;
         });
-
       }
-      getAllDoctors()
-
+      getAllDoctors();
 
       async function deleteDoctor(id) {
         let resp = await fetch(`/delete-doctor/${id}`);
-        location.reload()
+        location.reload();
       }
 
       async function approveDoc(id) {
         location.href = `/individual-doctor/${id}`;
       }
-
     </script>
-
-</body>
-
+  </body>
 </html>

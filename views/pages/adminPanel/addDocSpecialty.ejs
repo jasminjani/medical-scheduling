@@ -27,36 +27,10 @@
           </p>
           <!-- </a> -->
         </div>
-
-        <h2 class="a2-approve-h2">All Doctors Specialties</h2>
-
-        <table class="a2-approve-table">
-          <tr class="approve-tbl-head">
-            <th>No.</th>
-            <th>Specialty Name</th>
-            <th>Delete</th>
-          </tr>
-          <tbody id="a2-tbody"></tbody>
-        </table>
-
-        <h2 class="a2-approve-h2">Pending Request</h2>
-
-        <table class="a2-approve-table" id="pending-request-tbl">
-          <tr class="approve-tbl-head">
-            <th>No.</th>
-            <th>Specialty Name</th>
-            <th>Add Specialty</th>
-          </tr>
-          <tbody id="pending-speciality"></tbody>
-        </table>
       </div>
-
-
     </div>
 
-
     <script>
-
       async function makeSpecialtiesTable() {
         let response = await fetch("/get-specialties");
 
@@ -68,31 +42,27 @@
           let strTD = `<tr>
             <td>${specialties.id}</td> 
             <td>${specialties.speciality}</td>
-            <td class="a2-btn" onclick=deleteSpecialty(${specialties.id})>Delete</tr>`
+            <td class="a2-btn" onclick=deleteSpecialty(${specialties.id})>Delete</tr>`;
           tbody.innerHTML += strTD;
         });
-
       }
 
       async function deleteSpecialty(id) {
         try {
-          let response = await fetch('/delete-specialty', {
-            method: 'post',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ "id": id })
+          let response = await fetch("/delete-specialty", {
+            method: "post",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id: id }),
           });
           if (response.ok) {
             alert("Delete Specialty successfully ");
-            location.reload()
+            location.reload();
           }
-
         } catch (error) {
           console.log(error);
         }
-
       }
       makeSpecialtiesTable();
-
 
       async function getNewSpecialty() {
         let response = await fetch("/get-new-specialties");
@@ -104,33 +74,25 @@
           let strTD = `<tr>
             <td>${specialties.id}</td> 
             <td>${specialties.speciality}</td>
-            <td class="a2-btn" onclick=addSpecialty(${specialties.id})>Add</tr>`
+            <td class="a2-btn" onclick=addSpecialty(${specialties.id})>Add</tr>`;
           tbody.innerHTML += strTD;
         });
-
-
-
       }
 
-      getNewSpecialty()
+      getNewSpecialty();
 
       async function addSpecialty(id) {
-
-        let response = await fetch('/add-specialty', {
-          method: 'post',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ 'id': id })
-
+        let response = await fetch("/add-specialty", {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id: id }),
         });
 
         if (response.ok) {
           alert("Add Specialty successfully ");
-          location.reload()
+          location.reload();
         }
-
-
       }
     </script>
-</body>
-
+  </body>
 </html>
