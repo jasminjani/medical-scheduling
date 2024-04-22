@@ -18,9 +18,11 @@
 
     <div class="a2-approve-table-div">
       <div class="a2-container">
-        <a href="/admin" style="text-decoration: none; color: black;">
-          <p class="a2-back-btn a2-btn"><img src="/assets/adminPanel/icons/back-iceblue.svg" alt="Back"> Back</p>
-        </a>
+        <!-- <a href="/admin" style="text-decoration: none; color: black;"> -->
+        <p onclick="window.location.href=`/admin`" class="a2-back-btn a2-btn">
+          <i class="fa-solid fa-arrow-left"></i> Back
+        </p>
+        <!-- </a> -->
 
         <div class="doctor-panel">
           <h3 class="a2-approve-h2">Pending Request <span id="total-pending-doc"></span></h3>
