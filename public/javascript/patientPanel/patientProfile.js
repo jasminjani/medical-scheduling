@@ -48,7 +48,7 @@ const cancelSlot = async(slot_id,patient_id)=>{
         icon: "success",
       }).then((result) => {
         if (result.isConfirmed) {
-          window.location.href = `/${patient_id}/cancel/${slot_id}`;
+          window.location = `/cancel/${slot_id}`;
         }
       })
     }

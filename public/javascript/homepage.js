@@ -9,7 +9,7 @@ const getDoctors = async () => {
     data = await data.json();
     data = data.data;
     console.log(data);
-    localStorage.setItem('doctors',JSON.stringify(data))
+    localStorage.setItem("doctors", JSON.stringify(data));
     putDoctorOnScreen(data);
     setDatalist(data);
   } catch (error) {
@@ -22,12 +22,12 @@ const setDatalist = (data) => {
 
   let datalistOptions = "";
 
-  data.forEach((doctor)=>{
+  data.forEach((doctor) => {
     // push doctor Name into datalist for searching
     datalistOptions += `<option value="${
       doctor.fname + " " + doctor.lname
     }" data-did="${doctor.id}">${doctor.fname + " " + doctor.lname}</option>`;
-  })
+  });
 
   nameOptions.innerHTML = datalistOptions;
 };
@@ -108,20 +108,56 @@ search.addEventListener("click", async (e) => {
   }
 });
 
-const toggleLoginLogout = async()=>{
-  if(JSON.parse(localStorage.getItem('userinfo'))){
-    document.getElementById('login').style.display="none"
-    document.getElementById('register').style.display="none"
-    document.getElementById('logout').style.display="block"
+async function isLoggedIn() {
+  let user = await fetch("/current-user", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  user = await user.json();
+  console.log(user);
+  if (user.success) {
+    return true;
   }
-  else{
-    document.getElementById('login').style.display="block"
-    document.getElementById('register').style.display="block"
-    document.getElementById('logout').style.display="none"
-  }
+  return false;
 }
 
-if(window.location.pathname == "/"){
+const toggleLoginLogout = async () => {
+  let userInfo = JSON.parse(localStorage.getItem("userinfo"));
+  if (isLoggedIn() && userInfo) {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("register").style.display = "none";
+    document.getElementById("logout").style.display = "block";
+
+    document.getElementById("logged-user").style.display = "flex";
+    document.querySelector("#logged-user .name").innerHTML = userInfo.fname;
+    document.querySelector("#logged-user .logo a img").setAttribute('src',`${userInfo.profile.trim() ? `/imgs/${userInfo.profile}` : `/assets/profile.png`}`)
+
+    let userRedirect = document.querySelector("#logged-user .logo a");
+
+    if(userInfo.role_id == 1){
+      userRedirect.setAttribute('href',"/patient")
+    }
+    else if(userInfo.role_id == 2){
+      document.getElementById('become-doctor')?.remove()
+      userRedirect.setAttribute('href',"/doctorDashboard")
+    }
+    else if(userInfo.role_id==3){
+      document.getElementById('book-appointment').remove();
+      document.getElementById('become-doctor')?.remove()
+      userRedirect.setAttribute('href',"/admin")
+    }
+
+  } else {
+    document.getElementById("login").style.display = "block";
+    document.getElementById("register").style.display = "block";
+    document.getElementById("logout").style.display = "none";
+  }
+};
+
+if (window.location.pathname == "/") {
   toggleLoginLogout();
 }
 

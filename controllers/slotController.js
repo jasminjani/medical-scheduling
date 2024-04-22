@@ -147,6 +147,7 @@ exports.bookingSlot = async (req, res) => {
   try {
 
     const { paymentAmount, slotId, doctorId } = req.body;
+    console.log(req.body)
     const patientId = req.user.id;
     try {
 
