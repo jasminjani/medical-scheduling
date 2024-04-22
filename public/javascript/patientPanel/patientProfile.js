@@ -1,5 +1,12 @@
 window.location.href.split("/").pop() === "patientUpcomingSlots" ? document.getElementById("A3-upcoming").style.backgroundColor = "#3984af" : "";
 
+let page = 1;
+
+let limit = 6;
+
+let totalPage;
+
+
 const getUpcomingSlots = async () => {
   let user = JSON.parse(localStorage.getItem('userinfo'));
   const response = await fetch(`/bookings/${user.id}`, {
@@ -9,16 +16,23 @@ const getUpcomingSlots = async () => {
     }
   });
 
-  const { success,data } = await response.json();
+  const { success, data } = await response.json();
+
+  console.log(data);
+
+  totalPage = Math.ceil(data.length / limit);
+
+  if (totalPage <= 1) document.getElementsByClassName("A4-Pagination-component")[0].style.visibility = "hidden";
 
   const table = document.getElementById("date-body");
-  console.log(data)
-  if(data.length == 0){
-    return table.innerHTML = "<tr><td colspan='5'>No Data Found !</td></tr>"
-   }
 
-  data.forEach(element => {
-    // console.log(element);
+  table.innerHTML = "";
+
+  if (data.length == 0) {
+    return table.innerHTML = "<tr><td colspan='5'>No Data Found !</td></tr>"
+  }
+
+  data.slice((page - 1) * limit, page * limit).forEach(element => {
     table.innerHTML += `
       <tr>
         <td>${element.date}</td>
@@ -31,7 +45,39 @@ const getUpcomingSlots = async () => {
   });
 }
 
-const cancelSlot = async(slot_id,patient_id)=>{
+const home = () => {
+  if (page > 1) {
+    page = 1;
+    document.getElementById("pageno").innerHTML = page;
+    getUpcomingSlots();
+  }
+}
+
+const previous = () => {
+  if (page > 1) {
+    page--;
+    document.getElementById("pageno").innerHTML = page;
+    getUpcomingSlots();
+  }
+}
+
+const next = () => {
+  if (page < totalPage) {
+    page++;
+    document.getElementById("pageno").innerHTML = page;
+    getUpcomingSlots();
+  }
+}
+
+const end = () => {
+  if (page < totalPage) {
+    page = totalPage;
+    document.getElementById("pageno").innerHTML = page;
+    getUpcomingSlots();
+  }
+}
+
+const cancelSlot = async (slot_id, patient_id) => {
   Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
