@@ -57,7 +57,7 @@
               <th>Doctor Name</th>
               <th>Email</th>
               <th>Qualification</th>
-              <th>Status</th>
+              <th>View/Delete</th>
 
             </tr>
 
@@ -169,12 +169,12 @@
           <td>${doc.fname} ${doc.lname}</td>
           <td>${doc.email}</td>
           <td>${doc.qualification}</td>
-          <td><p class="a2-btn" onclick="deleteDoctor(${doc.doctor_id})">Delete</p></td>
+          <td><p class="a2-btn" onclick="showDoctorDeatil(${doc.doctor_id})">View</p> <p class="a2-btn" onclick="deleteDoctor(${doc.doctor_id})">Delete</p></td>
           </tr>`;
           allDoctorsTbody.innerHTML += tds;
         });
 
-        rejectedDoctors.forEach((doc,i) => {
+        rejectedDoctors.forEach((doc, i) => {
           let tds = `<tr>
           <td>${++i}</td>
           <td>${doc.fname} ${doc.lname}</td>
@@ -194,6 +194,10 @@
 
       async function approveDoc(id) {
         location.href = `/individual-doctor/${id}`;
+      }
+
+      async function showDoctorDeatil(id) {
+        location.href = `/show-doctor-deatil/${id}`
       }
     </script>
 </body>
