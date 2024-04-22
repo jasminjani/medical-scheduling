@@ -35,6 +35,11 @@ function validate() {
 slotBook.addEventListener("click", async (e) => {
   e.preventDefault();
   if (validate() && date.value.trim()) {
+    let doctors = JSON.parse(localStorage.getItem('doctors'))
+    let doctorId = document.getElementById('did').value;
+    console.log(doctorId)
+    let fees = doctors.filter((doctor)=>doctor.id = doctorId)[0].consultancy_fees;
+    console.log(fees)
     let selectedSlotId = appointments.options.selectedIndex;
     let slotId = appointments.children[selectedSlotId].dataset.sid;
     Swal.fire({
@@ -78,12 +83,14 @@ let minDate = today.toISOString().substring(0, 10);
 date.setAttribute("min", minDate);
 
 // when date is changed then fetch slots using doctorId and date
-date.addEventListener("change", async (e) => {
+const getSlots = async (e) => {
   if (date.value.trim()) {
     date?.nextElementSibling?.remove();
   }
 
   if (date.value.trim()) {
+    let doctor_id = window.location.pathname.split("/");
+    doctor_id = doctor_id[doctor_id.length - 1]
     let data = await fetch("/slots", {
       method: "POST",
       body: JSON.stringify({ doctor_id, date: date.value }),
@@ -95,7 +102,11 @@ date.addEventListener("change", async (e) => {
     data = await data.json();
     appointments.innerHTML = data.html;
   }
-});
+}
+
+window.onload = getSlots;
+
+date.addEventListener("change",getSlots);
 
 appointments.addEventListener("change", async (e) => {
   if (appointments.value.trim()) {
@@ -125,6 +136,7 @@ const getDoctorData = async () => {
     <img src="/imgs/${doctor.profile_picture}" alt="" />
   </div>
   <div class="doctor-details">
+    <input type="hidden" value="${doctor.id}" id="did">
     <p class="name"><span>Name: </span>${doctor.fname+" "+doctor.lname}</p>
     <p class="qualification"><span>qualification: </span>${doctor.qualification}</p>
     <p class="speciality"><span>speciality: </span>${doctor.specialities.map((speciality)=> `${speciality.toUpperCase()}`)}</p>

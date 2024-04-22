@@ -47,12 +47,77 @@ function validate() {
   }
   
 
+  let email = document.getElementById('email');
+  let password = document.getElementById('password')
 
+
+  email.addEventListener('keyup',()=>{
+    let validated = document.querySelectorAll(".validated");
+  
+    // remove if any error message is in frontend
+    if (validated?.length) {
+      validated.forEach((item) => {
+        item.remove();
+      });
+    }
+  
+    const emailRegex = /^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+    if (!email.value.match(emailRegex)) {
+      let p = document.createElement("p");
+      email.insertAdjacentElement("afterend", p);
+      p.innerHTML = "Invalid Email syntax ";
+      p.classList.add("validated");
+      p.style.color = "red";
+      p.style.margin = "0";
+      p.style.fontSize = "12px";
+  }})
+
+  function passwordValidation (){
+    let validated = document.querySelectorAll(".validated");
+  
+    // remove if any error message is in frontend
+    if (validated?.length) {
+      validated.forEach((item) => {
+        item.remove();
+      });
+    }
+    let p = document.createElement("p");
+    password.insertAdjacentElement("afterend", p);
+    p.classList.add("validated");
+    p.style.color = "red";
+    p.style.margin = "0";
+    p.style.fontSize = "12px";
+    let isvalid = true;
+    if(password.value.length<8){
+      p.innerHTML = "password must be at least 8 characters";
+      isvalid = false;
+    }
+    else if(password.value.search(/[a-zA-Z]/i)<0){
+      p.innerHTML = "password must contain at least one letter";
+      isvalid = false;
+    }
+    else if(password.value.search(/[0-9]/)<0){
+      p.innerHTML = "password must contain at least one digit";
+      isvalid = false;
+    }
+    else if(password.value.search(/[*?[#@$?]/)<0){
+      p.innerHTML = "password must contain at least one special character";
+      isvalid = false;
+    }
+    else{
+      isvalid = true;
+    }
+    return isvalid;
+  }
+
+  password.addEventListener('keyup',()=>{
+    passwordValidation();
+  })
 
 
 submit.addEventListener('click', async (e) => {
     e.preventDefault();
-    if (validate()) {
+    if (validate()&&passwordValidation()) {
         let email = document.getElementById('email').value;
         let password = document.getElementById('password').value;
 
@@ -70,7 +135,15 @@ submit.addEventListener('click', async (e) => {
             
             if (data.success) {
                 localStorage.setItem('userinfo',JSON.stringify(data.user))
-                window.location = "/"
+                if(data.user.role_id==1){
+                  window.location = "/"
+                }
+                else if(data.user.role_id==2){
+                  window.location = "/doctorDashboard"
+                }
+                else if(data.user.role_id==3){
+                  window.location = "/admin"
+                }
             }
             else{
                 document.querySelector('.link').innerHTML = `<p>${data.message}</p>`;
