@@ -73,7 +73,7 @@ async function appendPatientAllAppointment(result) {
     } else {
 
       let header = `<tr>
-                    <th>Sr no.</th>
+                    <th></th>
                     <th>Doctor Name</th>
                     <th>Speciality</th>
                     <th>Appointment Date</th>
@@ -82,8 +82,6 @@ async function appendPatientAllAppointment(result) {
 
       document.getElementById('a5-tbody').innerHTML = header;
       let index = 1;
-      console.log(result.allAppointment.length);
-
 
       result.allAppointment.forEach(element => {
         let appointmentDetails = `<tr>
@@ -99,7 +97,6 @@ async function appendPatientAllAppointment(result) {
         document.getElementById('a5-tbody').innerHTML = document.getElementById('a5-tbody').innerHTML + appointmentDetails;
       });
     }
-
   } catch (error) {
     console.log(error);
   }
