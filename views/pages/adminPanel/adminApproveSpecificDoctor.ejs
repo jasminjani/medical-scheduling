@@ -1,155 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Approve Doctor</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Approve Doctor</title>
+    <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
+    <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
+    <link rel="stylesheet" href="/css/adminPanel/approveDoctor.css" />
+  </head>
 
-  <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
-  <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
-  <link rel="stylesheet" href="/css/adminPanel/approveDoctor.css" />
+  <body>
+    <div class="main-container">
+      <%- include('../../common/newSidebar/adminSidebar.ejs') %>
 
-</head>
+      <div class="A4-main">
+        <div class="A4-container">
+          <a
+            href="/admin/all-doctors"
+            style="text-decoration: none; color: black"
+          >
+            <p class="a2-back-btn a2-btn">
+              <img src="/assets/adminPanel/icons/back-iceblue.svg" alt="Back" />
+              Back
+            </p>
+          </a>
 
-<body>
+          <h2 class="a2-approve-h2">Doctor Details</h2>
 
-  <%- include('../../common/newSidebar/adminSidebar.ejs') %>
-
-    <div class="A4-main">
-      <div class="A4-container">
-
-        <a href="/admin/all-doctors" style="text-decoration: none; color: black;">
-          <p class="a2-back-btn a2-btn"><img src="/assets/adminPanel/icons/back-iceblue.svg" alt="Back"> Back</p>
-        </a>
-
-        <h2 class="a2-approve-h2">Doctor Details</h2>
-
-        <div class="A4-Content">
-          <table>
-            <tr>
-              <td id="A4-table-title">Firstname:</td>
-              <td id="A4-table-content">
-                <%= data?.fname %>
-              </td>
-            </tr>
-            <tr>
-              <td id="A4-table-title">Lastname:</td>
-              <td id="A4-table-content">
-                <%= data?.lname %>
-              </td>
-            </tr>
-            <tr>
-              <td id="A4-table-title">Email:</td>
-              <td id="A4-table-content">
-                <%= data?.email %>
-              </td>
-            </tr>
-            <tr>
-              <td id="A4-table-title">Contact Number:</td>
-              <td id="A4-table-content">
-                <%= data?.phone %>
-              </td>
-            </tr>
-            <tr>
-              <td id="A4-table-title">Gender:</td>
-              <td id="A4-table-content">
-                <%= data?.gender %>
-              </td>
-            </tr>
-            <tr>
-              <td id="A4-table-title">DOB:</td>
-              <td id="A4-table-content">
-                <%= data?.dob %>
-              </td>
-            </tr>
-            <tr>
-              <td id="A4-table-title">Qualification:</td>
-              <td id="A4-table-content">
-                <%= data?.qualification %>
-              </td>
-            </tr>
-            <tr>
-              <td id="A4-table-title">Address:</td>
-              <td id="A4-table-content">
-                <%= data?.address %>
-              </td>
-            </tr>
-          </table>
-        </div>
-
-        <div class="A4-clinic-deatils-button">
-          <button class="A4-clinic-deatils-btn" onclick="showClinicDetails()">Clinic details</button>
-        </div>
-
-        <div class="A4-clinic-details-content">
-          <table>
-            <tr>
-              <td id="A4-table-title">Clinic Name:</td>
-              <td id="A4-table-content">
-                <%= data?.name %>
-              </td>
-            </tr>
-            <tr>
-              <td id="A4-table-title">City:</td>
-              <td id="A4-table-content">
-                <%= data?.city %>
-              </td>
-            </tr>
-            <tr>
-              <td id="A4-table-title">Address:</td>
-              <td id="A4-table-content">
-                <%= data?.location %>
-              </td>
-            </tr>
-            <tr>
-              <td id="A4-table-title">GST no:</td>
-              <td id="A4-table-content">
-                <%= data?.gst_no%>
-              </td>
-            </tr>
-          </table>
-        </div>
-
-        <div class="A4-approve-reject-btns">
-
-          <div class="A4-approve-Button">
-            <button class="A4-approve-doctor-btn" onclick="approveDoctor(`<%=docID %>`)">Approve Doctor</button>
+          <div class="A4-Content">
+            <table>
+              <tr>
+                <td id="A4-table-title">Firstname:</td>
+                <td id="A4-table-content"><%= data?.fname %></td>
+              </tr>
+              <tr>
+                <td id="A4-table-title">Lastname:</td>
+                <td id="A4-table-content"><%= data?.lname %></td>
+              </tr>
+              <tr>
+                <td id="A4-table-title">Email:</td>
+                <td id="A4-table-content"><%= data?.email %></td>
+              </tr>
+              <tr>
+                <td id="A4-table-title">Contact Number:</td>
+                <td id="A4-table-content"><%= data?.phone %></td>
+              </tr>
+              <tr>
+                <td id="A4-table-title">Gender:</td>
+                <td id="A4-table-content"><%= data?.gender %></td>
+              </tr>
+              <tr>
+                <td id="A4-table-title">DOB:</td>
+                <td id="A4-table-content"><%= data?.dob %></td>
+              </tr>
+              <tr>
+                <td id="A4-table-title">Qualification:</td>
+                <td id="A4-table-content"><%= data?.qualification %></td>
+              </tr>
+              <tr>
+                <td id="A4-table-title">Address:</td>
+                <td id="A4-table-content"><%= data?.address %></td>
+              </tr>
+            </table>
           </div>
-          <div class="A4-reject-Button">
-            <button class="A4-reject-doctor-btn" onclick="rejectDoctor(`<%=docID %>`)">Reject Doctor</button>
+
+          <div class="A4-clinic-deatils-button">
+            <button class="A4-clinic-deatils-btn" onclick="showClinicDetails()">
+              Clinic details
+            </button>
+          </div>
+
+          <div class="A4-clinic-details-content">
+            <table>
+              <tr>
+                <td id="A4-table-title">Clinic Name:</td>
+                <td id="A4-table-content"><%= data?.name %></td>
+              </tr>
+              <tr>
+                <td id="A4-table-title">City:</td>
+                <td id="A4-table-content"><%= data?.city %></td>
+              </tr>
+              <tr>
+                <td id="A4-table-title">Address:</td>
+                <td id="A4-table-content"><%= data?.location %></td>
+              </tr>
+              <tr>
+                <td id="A4-table-title">GST no:</td>
+                <td id="A4-table-content"><%= data?.gst_no%></td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="A4-approve-reject-btns">
+            <div class="A4-approve-Button">
+              <button
+                class="A4-approve-doctor-btn"
+                onclick="approveDoctor(`<%=docID %>`)"
+              >
+                Approve Doctor
+              </button>
+            </div>
+            <div class="A4-reject-Button">
+              <button
+                class="A4-reject-doctor-btn"
+                onclick="rejectDoctor(`<%=docID %>`)"
+              >
+                Reject Doctor
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-
-
     <script>
-
       function showClinicDetails() {
-        let div = document.querySelector('.A4-clinic-details-content');
-        (div.style.display === 'block') ? div.style.display = 'none' : div.style.display = 'block';
+        let div = document.querySelector(".A4-clinic-details-content");
+        div.style.display === "block"
+          ? (div.style.display = "none")
+          : (div.style.display = "block");
       }
-
 
       async function approveDoctor(id) {
         console.log(id);
 
         const resp = await fetch(`/approve-doctor/${id}`);
         alert("Doctor Approved....!");
-        (resp.ok) ? location.href = '/admin/all-doctors' : '';
-
+        resp.ok ? (location.href = "/admin/all-doctors") : "";
       }
 
       async function rejectDoctor(id) {
         console.log(id);
         const resp = await fetch(`/reject-doctor/${id}`);
         alert("Doctor Rejected....!");
-        (resp.ok) ? location.href = '/admin' : '';
-
+        resp.ok ? (location.href = "/admin") : "";
       }
     </script>
-</body>
-
+  </body>
 </html>

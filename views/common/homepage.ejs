@@ -19,12 +19,14 @@
           </div>
           <nav class="nav-items">
             <ul>
-              <li><a href="#">Home</a></li>
+              <li><a href="/">Home</a></li>
               <li><a href="#about-us">About Us</a></li>
               <li id="login"><a href="/login">Login</a></li>
+              <li id="logout"><a href="/logout" onclick="logout()">Logout</a></li>
               <li id="register"><a href="/register">Register</a></li>
+              <li id="become-doctor"><a href="/become-doctor">Become A Doctor</a></li>
               <li>
-                <a href="/slot" class="book-appointment"
+                <a href="/doctors/all" class="book-appointment"
                   >Book Your Appointment</a
                 >
               </li>
@@ -46,7 +48,7 @@
                 A Healthier Tomorrow Starts Today: Schedule Your Appointment!
                 Your Wellness, Our Expertise: Set Up Your Appointment Today.
               </p>
-              <a class="btn" href="/slot">Book Your Appointment</a>
+              <a class="btn" href="/doctors/all">Book Your Appointment</a>
             </div>
 
             <div class="hero-right">
@@ -235,6 +237,7 @@
     </footer>
 
     <script src="/javascript/homepage.js"></script>
+    <script src="/javascript/auth/logout.js"></script>
     <script src="/javascript/carousel.js"></script>
   </body>
 </html>

@@ -69,6 +69,7 @@ submit.addEventListener('click', async (e) => {
             console.log(data);
             
             if (data.success) {
+                localStorage.setItem('userinfo',JSON.stringify(data.user))
                 window.location = "/"
             }
             else{

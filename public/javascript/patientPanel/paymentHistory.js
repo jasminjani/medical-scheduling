@@ -7,7 +7,6 @@ async function fetchPatientPayment() {
     const response = await fetch(url);
     result = await response.json();
     copyResult = result;
-
     await appendPatientPayment()
   } catch (error) {
     console.log(error);
@@ -70,6 +69,10 @@ async function appendPatientPayment() {
     }
     else {
       data = successArr;
+    }
+
+    if(data.length==0){
+      return document.getElementById('a5-tbody').innerHTML += `<tr><td colspan='6'>No Data Found !</td></tr>`
     }
 
     data.forEach(element => {

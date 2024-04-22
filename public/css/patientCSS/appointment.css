@@ -20,7 +20,8 @@
 .booking-page{
   display: flex;
   align-items: center;
-  gap: 50px;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 .doctor-profile{
@@ -30,10 +31,11 @@
 }
 
 .doctor-img{
-  width: 130px;
-  height: 180px;
+  width: 160px;
+  height: 200px;
   overflow: hidden;
-  border:1px solid wheat;
+  border:1px solid rgb(202, 182, 144);
+  padding: 3px;
 }
 
 .doctor-img img{
