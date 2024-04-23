@@ -58,13 +58,14 @@
           <div class="A4-prescription">
             <input type="button" value="Add Prescription" class="A4-addPrescription" id="A4-addprescription" onclick="addprescreption()"/><br /><br />
             <!-- <input type="button" value="Home" class="A4-addPrescription" id="A4-home" onclick="goToHome()"/><br /><br /> -->
-            <input type="button" value="Get PDF" class="A4-addPrescription" id="A4-generatePdf" onclick="generatePDF()"/>
+            <!-- <input type="button" value="Get PDF" class="A4-addPrescription" id="A4-generatePdf" onclick="generatePDF()"/> -->
           </div>
 
           <div class="A4-PrescriptionDetails">
             <h3>Enter Details here:</h3>
             <form action="" id="myForm">
-              <input type="hidden" value="" name="patient_id" id="id" />
+              <input type="hidden" value="<%= patient_id %>" name="patient_id" id="id" />
+              <input type="hidden" value="<%= booking_id %>" name="booking_id" id="booking_id" />
               <label for="diagnosis">Diagnosis:</label>
               <input type="text" name="diagnosis" id="diagnosis" onkeypress="removeError('prescriptionerror')"/>
               <p id="diagnosiserror"></p><br /><br />
