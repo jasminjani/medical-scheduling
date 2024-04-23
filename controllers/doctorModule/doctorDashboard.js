@@ -5,7 +5,7 @@ const conn = require('../../config/dbConnection')
 exports.dashBoardCount = async(req,res)=>{
   let doctor_id = req.user.id
   try {
-    let [result] = await conn.query(`select sum(payment_amount) as revenue, count(patient_id) as patient, count(slot_id) as slot from payments where doctor_id = 3 and is_refunded = 0;`,[doctor_id]);
+    let [result] = await conn.query(`select sum(payment_amount) as revenue, count(patient_id) as patient, count(slot_id) as slot from payments where doctor_id = ? and is_refunded = 0;`,[doctor_id]);
     res.json(result)
   } catch (error) {
     return res.json({
@@ -38,4 +38,24 @@ exports.dashBoardAppointments = async(req,res)=>{
       message:error.message
     })
   }
+}
+
+exports.dashBoardTodayAppointments=async(req,res)=>{
+
+  let doctor_id=req.user.id;
+  try{
+    let [result]=await conn.query(`select concat(users_patient.fname," ",users_patient.lname) as patient_name,slot_bookings.patient_id,
+    concat(time_slots.start_time," ",time_slots.end_time) as appointment_time,slot_bookings.id as booking_id from slot_bookings
+    join time_slots on time_slots.id=slot_bookings.slot_id
+    join users as users_patient on slot_bookings.patient_id=users_patient.id
+    left join prescriptions on prescriptions.booking_id=slot_bookings.id
+    where time_slots.doctor_id=? && time_slots.date=curdate() && prescriptions.id is null`,[doctor_id])
+    res.json(result);
+  }catch (error) {
+    return res.json({
+      success:false,
+      message:error.message
+    })
+  }
+
 }

@@ -3,8 +3,9 @@ const jwt = require("jsonwebtoken");
 let PDFDocument = require("pdfkit");
 
 exports.home = async (req, res) => {
-  try { 
-    return res.render("pages/Prescription/createPrescription.ejs");
+  try {
+    let {patient_id,booking_id}=req.params;
+    return res.render("pages/Prescription/createPrescription.ejs",{patient_id,booking_id});
   } catch (error) {
     console.log(error.message);
   }
@@ -53,9 +54,9 @@ WHERE
 exports.createPrescription = async (req, res) => {
   try {
     const doctor_id = req.user.id;
-    const { patient_id, prescription, diagnosis } = req.body;
+    const { patient_id, prescription, diagnosis,booking_id } = req.body;
 
-    const query = `INSERT INTO prescriptions(doctor_id,patient_id,prescription,diagnoses) values (?,?,?,?)`;
+    const query = `INSERT INTO prescriptions(doctor_id,patient_id,prescription,diagnoses,booking_id) values (?,?,?,?,?)`;
 
     if(prescription && diagnosis){
       let result = await conn.query(query, [
@@ -63,6 +64,7 @@ exports.createPrescription = async (req, res) => {
         patient_id,
         prescription,
         diagnosis,
+        booking_id
       ]);
       const insert_id = JSON.stringify(result[0].insertId);
       res.json({

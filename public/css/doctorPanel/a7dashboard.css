@@ -7,7 +7,8 @@
 .a7-container {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 15px;
+  /* padding: 0 15px; */
+  width: 100%;
 }
 
 .a7-table-title{
@@ -19,8 +20,11 @@
 
 
 .a7-doctor-pannel{
-  width: 70%;
-  margin-left: 300px;
+  /* width: 70%;
+  margin-left: 300px; */
+  max-width: 1080px;
+  width: 100%;
+  margin-left: 350px;
 }
 
 .a7-main {
@@ -69,7 +73,7 @@
   overflow: scroll;
 }
 
-.a7-table-header {
+/* .a7-table-header {
 display: flex;
 position: sticky;
 top: 0px;
@@ -81,6 +85,10 @@ background-color: #ffffff;
   justify-content: center;
   gap: 45px;
   margin-left: 22px;
+} */
+#addprescription-btn{
+  padding: 10px;
+  width: fit-content;
 }
 
 .a7-table-data {

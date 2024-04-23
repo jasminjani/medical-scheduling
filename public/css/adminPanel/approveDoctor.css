@@ -84,6 +84,9 @@ table {
     border-radius: 5px;
     padding: 5px;
   }
+  table{
+    width: 666px;
+  }
 
   td {
     height: 40px;

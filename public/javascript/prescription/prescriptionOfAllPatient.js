@@ -1,9 +1,14 @@
 let data=[];
 
 const fetchData=async()=>{
-  let res = await fetch(window.location.origin + `/getprescriptionofdoctor`);
-  let resjson=await res.json()
-  data=resjson.result[0];
+  try{
+    let res = await fetch(window.location.origin + `/getprescriptionofdoctor`);
+    let resjson=await res.json()
+    data=resjson.result[0];
+  }
+  catch(error){
+    logger.error(error);
+  }
 }
 
 const main=async()=>{

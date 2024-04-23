@@ -21,7 +21,7 @@ router.route("/generatePDFofprescripton/:id").get(generatePDF);
 
 router.route("/createprescription/:patient_id").get(showDetails);
 
-router.route("/prescription/:patient_id").get(home);
+router.route("/prescription/:patient_id/:booking_id").get(home);
 
 router.route("/prescriptiondetails").get(allPatientPriscription);
 
