@@ -7,7 +7,8 @@
 .a7-container {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 15px;
+  /* padding: 0 15px; */
+  width: 100%;
 }
 
 .a7-table-title{
@@ -19,8 +20,11 @@
 
 
 .a7-doctor-pannel{
-  width: 70%;
-  margin-left: 300px;
+  /* width: 70%;
+  margin-left: 300px; */
+  max-width: 1080px;
+  width: 100%;
+  margin-left: 350px;
 }
 
 .a7-main {

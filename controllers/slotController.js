@@ -13,10 +13,7 @@ exports.createSlots = async (req, res) => {
   try {
 
     const { day1, day2, day3, day4, day5, day6, day7 } = req.body;
-
-    // const { doctor_id } = req.params;
-        const doctor_id = req.user.id
-        console.log(doctor_id);
+    const doctor_id = req.user.id
     const dayArray = [day1, day2, day3, day4, day5, day6, day7]
 
     for (let i = 0; i < 7; i++) {
@@ -29,18 +26,11 @@ exports.createSlots = async (req, res) => {
             const start_time = slot[0].trim();
             const end_time = slot[1].trim();
 
-            // const s_t = await handleMiliseconds(start_time);
-            // const e_t = await handleMiliseconds(end_time);
-
-            // console.log(s_t + " " + e_t);
-
             try {
 
               const query = "select * from time_slots where doctor_id = ? and date = ? and end_time <= ?";
 
               const [isValid] = await conn.query(query, [doctor_id, dayArray[i][0], start_time]);
-
-              // console.log(isValid);
 
             } catch (error) {
               return res.status(500).json({ success: false, message: error.message });
@@ -125,7 +115,9 @@ exports.getSingleSlots = async (req, res) => {
 
     let result;
     try {
-      const query = "select * from time_slots where doctor_id = ? and date = ? and is_booked = 0 and is_deleted = 0";
+      const query = `select * from time_slots 
+      where timestampdiff(second,current_timestamp(),concat(time_slots.date," ",time_slots.start_time))>0
+      and doctor_id = ? and date = ? and is_booked = 0 and is_deleted = 0;`;
 
       [result] = await conn.query(query, [doctor_id, date]);
     } catch (error) {
@@ -240,7 +232,7 @@ exports.getAllSlots = async (req, res) => {
   try {
 
     // const { doctor_id, date } = req.params;
-    const {date}= req.params
+    const { date } = req.params
     const doctor_id = req.user.id
     // console.log(doctor_id);
     try {
@@ -268,7 +260,7 @@ exports.deleteSlot = async (req, res) => {
   try {
 
     // const { doctor_id, slot_id } = req.params;
-    const {slot_id} = req.params 
+    const { slot_id } = req.params
     const doctor_id = req.user.id
     try {
 
@@ -388,15 +380,3 @@ exports.cancelSlot = async (req, res) => {
 
   }
 }
-
-// const handleMiliseconds = async (time) => {
-//   try {
-//     time = time.split(":");
-//     const hours = parseInt(time[0], 10);
-//     const minutes = parseInt(time[1], 10);
-//     const miliseconds = (hours * 60 * 60 * 1000) + (minutes * 60 * 1000);
-//     return miliseconds;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }

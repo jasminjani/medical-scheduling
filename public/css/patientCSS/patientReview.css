@@ -24,8 +24,8 @@
   border-radius: 0.5rem;
   display: none;
 
-  position: fixed;
-  z-index: 1;
+  position: absolute;
+  /* z-index: 1; */
   left: 373px;
   top: 33px;
   overflow: auto;
@@ -46,6 +46,7 @@
   
   .star {
   font-size: 10vh;
+  position: relative;
   cursor: pointer;
   }
   

@@ -8,7 +8,7 @@ async function isLoggedIn(){
   })
 
   user = await user.json();
-console.log(user)
+console.log(user) 
   if(user.success){
     window.location = "/"
   }
