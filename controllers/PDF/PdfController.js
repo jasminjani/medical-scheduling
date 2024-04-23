@@ -12,7 +12,7 @@ exports.generatePDF = async (req, res) => {
         users_patient.gender as patient_gender,
         users_patient.dob as patient_dob,
         users_patient.phone as patient_phone,
-        users_patient.phone as patient_phone,
+        users_patient.address as patient_address,
         dd.qualification as doctor_qualification,
         ch.name as clinic_name,
         ch.location as clinic_address
