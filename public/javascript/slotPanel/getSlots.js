@@ -24,7 +24,7 @@ const getDates = async () => {
   });
 }
 
-const getSlots = async (date ) => {
+const getSlots = async (date) => {
 
   document.getElementsByClassName("A3-modal")[0].style.visibility = "visible";
 
@@ -52,13 +52,13 @@ const getSlots = async (date ) => {
         <td>${element.end_time}</td>
         <td>${element.patient_name ? element.patient_name : "-"}</td>
         <td>${element.phone ? element.phone : "-"}</td>
-        <td><input type="button" value="Delete" onclick=openDeleteModal(${element.id}) /></td>
+        <td>${!element.is_canceled ? `<input type="button" value="Delete" onclick=openDeleteModal(${element.id}) />` : `<i class="fa-solid fa-xmark"></i>`}</td>
       </tr>
     `
   });
 }
 
-const openDeleteModal = async ( slot_id) => {
+const openDeleteModal = async (slot_id) => {
   Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
