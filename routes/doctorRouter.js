@@ -76,6 +76,7 @@ const {
   getCityCombo,
 } = require("../controllers/doctorModule/doctorCityComboController");
 const { allDoctors } = require("../controllers/userController");
+const { searchReview } = require("../controllers/doctorModule/doctorSearchPatient");
 
 
 
@@ -264,12 +265,12 @@ router
     patientDetailsData
   );
 
-router
-  .route("/patientPrescriptionData/:patient_id/:date")
-  .get(
-    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    patientPrescriptionData
-  );
+// router
+//   .route("/patientPrescriptionData/:patient_id/:date")
+//   .get(
+//     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+//     patientPrescriptionData
+//   );
 
 router.route("/logout").get(logoutController);
 
@@ -396,5 +397,7 @@ router
     isPatient,
     cancelSlot
   );
+
+router.route('/searchReview/:search').get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }), searchReview)
 
 module.exports = router;

@@ -9,6 +9,7 @@
     <!-- CSS for container -->
     <link rel="stylesheet" href="/css/adminPanel/allPatientDetails.css" />
     <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css" />
+     <link rel="stylesheet" href="/css/Pagination/paginationComp.css" />
     <script src="/javascript/doctorPanel/sidebar.js" defer></script>
     <script src="/javascript/doctorPanel/paymentHistory.js" defer></script>
     <title>View Payment</title>
@@ -32,6 +33,13 @@
             Search
           </p>
         </div>
+         <div class="A4-Pagination-component">
+          <div class="home"><button  id="homebtn"><<</button></div>
+          <div class="previous"><button id="previousbtn"><</button></div>
+          <div class="pagenumber"><p id="pageno">1</p></div>
+          <div class="next"><button  id="nextbtn">></button></div>
+          <div class="end"><button id="endbtn">>></button></div>
+        </div> 
         <div class="a5-all-user">
           <h2>View Payment History</h2>
           <div class="a5-user-table">
@@ -39,13 +47,7 @@
               <tbody id="a5-tbody"></tbody>
             </table>
           </div>
-          <div class="a7-pagination">
-            <span class="a5-btn a7-pagination-btn" id="firstpage"> << </span>
-            <span class="a5-btn a7-pagination-btn" id="prevButton"> < </span>
-            <span class="a5-btn a7-pagination-btn" id="pageno"> </span>
-            <span class="a5-btn a7-pagination-btn" id="nextButton"> > </span>
-            <span class="a5-btn a7-pagination-btn" id="lastpage"> >> </span>
-          </div>
+         
         </div>
       </div>
     </div>
