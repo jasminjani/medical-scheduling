@@ -30,6 +30,7 @@ app.use(express.urlencoded({ extended: true }));
 const rootRouter = require("./routes/rootRouter");
 const { allRequestLogs } = require("./middlewares/allRequestLogs");
 
+
 app.use("/", allRequestLogs, rootRouter);
 
 // server is running on PORT

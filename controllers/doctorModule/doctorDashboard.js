@@ -5,7 +5,7 @@ const conn = require('../../config/dbConnection')
 exports.dashBoardCount = async(req,res)=>{
   let doctor_id = req.user.id
   try {
-    let [result] = await conn.query(`select sum(payment_amount) as revenue, count(patient_id) as patient, count(slot_id) as slot from payments where doctor_id = ? and is_refunded = 0;`,[doctor_id]);
+    let [result] = await conn.query(`select sum(payment_amount) as revenue, count(patient_id) as patient, count(slot_id) as slot from payments where doctor_id = ? and is_refunded = ?;`,[doctor_id,0]);
     res.json(result)
   } catch (error) {
     return res.json({

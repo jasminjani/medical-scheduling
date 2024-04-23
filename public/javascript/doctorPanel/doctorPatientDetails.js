@@ -62,7 +62,7 @@ funcId = function (id) {
 
 let show = async function (id, date) {
 
-  const fetchData = await fetch(`/patientPrescriptionData/${Id}/${date}`)
+  const fetchData = await fetch(`/patientPrescriptionData/${date}/${Id}`)
   const data = await fetchData.json()
   const key = Object.keys(data)
 

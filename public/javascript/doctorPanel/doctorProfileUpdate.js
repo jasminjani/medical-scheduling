@@ -1,3 +1,5 @@
+
+
 const fetchData = async () => {
   let fetchdata = await fetch(`/updateDoctorData/`)
   let data = await fetchdata.json()

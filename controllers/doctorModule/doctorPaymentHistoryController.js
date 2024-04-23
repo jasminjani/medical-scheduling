@@ -81,7 +81,7 @@ exports.showPatientPayment = async (req, res) => {
 
     let doctor_id = req.user.id;
     // let doctor_id = 2;
-    let { patient_id } = req.params;
+    let { patient_id } = req.params;  
 
     if (!doctor_id || !patient_id) {
       return res.status(500).json({
@@ -90,13 +90,14 @@ exports.showPatientPayment = async (req, res) => {
       })
     }
 
-    const sql = `SELECT  time_slots.doctor_id, time_slots.date AS slote_date, time_slots.start_time, time_slots.end_time, slot_bookings.slot_id, slot_bookings.patient_id, slot_bookings.booking_date AS payment_date, payments.payment_amount, users.fname, users.lname, users.email, users.gender, users.phone, users.city, users.dob, users.address, patient_details.blood_group
+    const sql = `SELECT  profile_pictures.profile_picture,time_slots.doctor_id, time_slots.date AS slote_date, time_slots.start_time, time_slots.end_time, slot_bookings.slot_id, slot_bookings.patient_id, slot_bookings.booking_date AS payment_date, payments.payment_amount, users.fname, users.lname, users.email, users.gender, users.phone, users.city, users.dob, users.address, patient_details.blood_group
     FROM time_slots 
     JOIN slot_bookings ON time_slots.id = slot_bookings.slot_id  
     JOIN payments ON time_slots.id = payments.slot_id
     JOIN users ON slot_bookings.patient_id = users.id
+    JOIN profile_pictures ON profile_pictures.user_id = users.id
     JOIN patient_details ON slot_bookings.patient_id = patient_details.patient_id
-    WHERE time_slots.doctor_id = ? AND slot_bookings.patient_id = ? AND time_slots.is_booked = 1 AND time_slots.is_deleted = 0`;
+    WHERE time_slots.doctor_id = ? AND slot_bookings.patient_id = ? AND time_slots.is_booked = 1 AND time_slots.is_deleted = 0 AND profile_pictures.is_active = 1`;
 
     const [paymentDetails] = await conn.query(sql, [doctor_id, patient_id]);
 

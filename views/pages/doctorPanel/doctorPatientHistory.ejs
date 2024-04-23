@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
   <link rel="stylesheet" href="/css/adminPanel/allPatientDetails.css">
   <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css">
+  <link rel="stylesheet" href="/css/Pagination/paginationComp.css" />
   <style>
     #a5-doctor-patient-active {
       background-color: #0969da;
@@ -31,10 +32,18 @@
         <div class="a5-search">
           <div class="a5-searchbox">
             <img src="/assets/adminPanel/icons/search.svg" alt="">
-            <input type="text" name="searchUser" id="a5-searchPatient" placeholder="Search Patient name" tabindex="1">
+            <input type="text" name="searchUser" id="search" placeholder="Search Patient name" tabindex="1">
           </div>
-          <p id="a5-btn-search" tabindex="2">Search</p>
+          <p id="a5-btn-search" tabindex="2"  onclick="location.reload()">Search</p>
         </div>
+        <div class="A4-Pagination-component">
+          <div class="home"><button  id="homebtn"><<</button></div>
+          <div class="previous"><button id="previousbtn"><</button></div>
+          <div class="pagenumber"><p id="pageno">1</p></div>
+          <div class="next"><button  id="nextbtn">></button></div>
+          <div class="end"><button id="endbtn">>></button></div>
+        </div> 
+        
         <div class="a5-all-user">
           <h2>View Patient History</h2>
           <div class="a5-user-table">
@@ -49,13 +58,7 @@
             </table>
           </div>
         </div>
-        <div class="a7-pagination">
-          <span class="a5-btn a7-pagination-btn" id="firstpage"> << </span>
-          <span class="a5-btn a7-pagination-btn" id="prevButton"> < </span>
-          <span class="a5-btn a7-pagination-btn" id="pageno"> </span>
-          <span class="a5-btn a7-pagination-btn" id="nextButton"> > </span>
-          <span class="a5-btn a7-pagination-btn" id="lastpage"> >> </span>
-        </div>
+       
       </div>
   </div>
 </body>
