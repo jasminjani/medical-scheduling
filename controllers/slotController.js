@@ -115,7 +115,9 @@ exports.getSingleSlots = async (req, res) => {
 
     let result;
     try {
-      const query = "select * from time_slots where doctor_id = ? and date = ? and is_booked = 0 and is_deleted = 0";
+      const query = `select * from time_slots 
+      where timestampdiff(second,current_timestamp(),concat(time_slots.date," ",time_slots.start_time))>0
+      and doctor_id = ? and date = ? and is_booked = 0 and is_deleted = 0;`;
 
       [result] = await conn.query(query, [doctor_id, date]);
     } catch (error) {

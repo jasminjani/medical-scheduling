@@ -36,7 +36,7 @@ const getPastSlots = async () => {
         <td>${element.date}</td>
         <td>${element.day}</td>
         <td>${element.start_time.slice(0, -3)}-${element.end_time.slice(0, -3)}</td>
-        <td><input type="button" value="Details" onclick=getDetails(${JSON.stringify(element)})></td>
+        <td><input type="button" value="Details" onclick="getDetails(${JSON.stringify(element)})"></td>
         <td><a href=/generatePDFofprescripton/${element.prescription_id}><input type="button" value="Get PDF"></a></td>
       </tr>
     `

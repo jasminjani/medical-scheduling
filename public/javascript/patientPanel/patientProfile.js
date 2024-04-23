@@ -38,8 +38,8 @@ const getUpcomingSlots = async () => {
         <td>${element.date}</td>
         <td>${element.day}</td>
         <td>${element.start_time.slice(0, -3)}-${element.end_time.slice(0, -3)}</td>
-        <td><input type="button" value="Details" onclick=getDetails(${JSON.stringify(element)})></td>
-        <td><input type="button" value="Cancel" onclick=cancelSlot(${element.id},${element.patient_id})></td>
+        <td><input type="button" value="Details" onclick="getDetails(${JSON.stringify(element)})"></td>
+        <td><input type="button" value="Cancel" onclick="cancelSlot(${element.id},${element.patient_id})"></td>
       </tr>
     `
   });
@@ -103,7 +103,7 @@ const cancelSlot = async (slot_id, patient_id) => {
 
 const getDetails = async (data) => {
   const modal = document.getElementsByClassName("A3-modal")[0];
-
+  console.log(modal)
   modal.style.visibility = "visible";
 
   modal.innerHTML = `
