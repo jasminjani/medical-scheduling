@@ -19,14 +19,14 @@ for (let i = 0; i < rows.length; i++) {
   addButton[0].addEventListener("click", (e) => {
     const d = date.getElementsByTagName("input")[0].value;
     if (!d) return Swal.fire("Please select a date!!");
-    if(new Date(d) > sunday) return Swal.fire("Please select date of this week only");
+    if (new Date(d) > sunday) return Swal.fire("Please select date of this week only");
     if (times.children.length > 1 && !times.children[times.children.length - 2].value) return Swal.fire("Please fill previous slot!!");
     const newNode = document.createElement("input");
     newNode.setAttribute("type", "text");
     newNode.setAttribute("name", `day${i + 1}`);
     newNode.setAttribute("class", "A3-time");
     newNode.style.position = "relative";
-    newNode.addEventListener("mouseover",handleFocus(newNode));
+    newNode.addEventListener("mouseover", handleFocus(newNode));
     times.insertBefore(newNode, times.children[times.children.length - 1])
       .addEventListener("change", (e) => {
         let startTime = e.target.value;
@@ -41,7 +41,8 @@ for (let i = 0; i < rows.length; i++) {
   })
 }
 
-const handleGenerate = async () => {
+const handleGenerate = async (e) => {
+  e.preventDefault();
   let formdata = document.getElementById('myform')
   const details = new FormData(formdata);
   const params = new URLSearchParams(details);
@@ -67,6 +68,6 @@ const handleGenerate = async () => {
 
 const handleFocus = (input) => {
   const popUp = document.createElement("input");
-  popUp.setAttribute("type","time");
-  popUp.setAttribute("id","popup");
+  popUp.setAttribute("type", "time");
+  popUp.setAttribute("id", "popup");
 }
