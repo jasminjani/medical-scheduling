@@ -2,6 +2,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const app = express();
 const path = require("path");
+const logger = require('./utils/pino'); 
 require("dotenv").config();
 
 const PORT = process.env.PORT;
@@ -28,11 +29,12 @@ app.use(express.urlencoded({ extended: true }));
 // use root router in index file
 const rootRouter = require("./routes/rootRouter");
 const { allRequestLogs } = require("./middlewares/allRequestLogs");
+const logger = require("./utils/pino");
 
 app.use("/", allRequestLogs, rootRouter);
 
 // server is running on PORT
 app.listen(PORT, () => {
+  logger.info(`server is running on port: http://localhost:${PORT}`);
   console.log(`server is running on port: http://localhost:${PORT}`);
-  // console.log("use this command : npm run tailwind");
 });

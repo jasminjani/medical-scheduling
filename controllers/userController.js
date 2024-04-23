@@ -50,8 +50,8 @@ exports.getDoctorDetails = async (req, res) => {
       console.log(error)
     }
 
-    result = Object.values(result.reduce((acc, { id, fname, lname, qualification, consultancy_fees, name, city, location, profile_picture, speciality, total_reviews, rating }) => {
-      acc[id] ??= { id, fname, lname, qualification, consultancy_fees, name, city, location, profile_picture, total_reviews, rating, specialities: [] };
+    result = Object.values(result.reduce((acc, { id, fname, lname, qualification, consultancy_fees, hospital_name, city, location, profile_picture, speciality, total_reviews, rating }) => {
+      acc[id] ??= { id, fname, lname, qualification, consultancy_fees, hospital_name, city, location, profile_picture, total_reviews, rating, specialities: [] };
       acc[id].specialities.push(speciality)
       return acc;
     }, {}))
