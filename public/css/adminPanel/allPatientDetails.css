@@ -16,13 +16,15 @@
 .a5-container {
   max-width: 1440px;
   margin: 0 auto;
+  width: 100%;
   /* padding: 0 15px; */
 }
 
 .a5-section {
-  width: 94%;
-  margin: 0 auto;
-  padding-left: 300px;
+  max-width: 1080px;
+  width: 100%;
+  /* margin: 0 auto; */
+  margin-left: 300px;
 }
 
 .a5-search {
