@@ -114,44 +114,80 @@ const fetchReviewData = async () => {
 
 fetchReviewData()
 
-const fetchAppointMents = async () => {
-  let fetchData = await fetch('/dashBoardAppointments')
-  let data = await fetchData.json()
-  let key = Object.keys(data)
-  let count = 1;
+// const fetchAppointMents = async () => {
+//   let fetchData = await fetch('/dashBoardAppointments')
+//   let data = await fetchData.json()
+//   let key = Object.keys(data)
+//   console.log(data);
+//   console.log(key);
+//   let count = 1;
 
 
-  key.forEach(element => {
-    let dtkey = Object.keys(data[element])
-    let table = document.getElementById("appointmentTable")
-    let div1 = document.createElement('div')
-    let countdiv = document.createElement("div")
-    countdiv.textContent = count++
-    div1.appendChild(countdiv)
-    div1.setAttribute("class", "a7-table-data")
-    dtkey.forEach(item => {
-      if (item == 'patient_id') {
-        let btn = document.createElement("div")
-        btn.textContent = "Add Prescription"
-        btn.setAttribute("id", "hh")
-        btn.setAttribute("onclick", `location.href ='/prescription/${data[element][item]}'`)
-        btn.setAttribute("class", "a7-btn-style a5-btn")
-        div1.appendChild(btn)
-      } else {
+//   key.forEach(element => {
+//     let dtkey = Object.keys(data[element])
+//     let table = document.getElementById("appointmentTable")
+//     let div1 = document.createElement('div')
+//     let countdiv = document.createElement("div")
+//     countdiv.textContent = count++
+//     div1.appendChild(countdiv)
+//     div1.setAttribute("class", "a7-table-data")
+//     dtkey.forEach(item => {
+//       if (item == 'patient_id') {
+//         let btn = document.createElement("div")
+//         btn.textContent = "Add Prescription"
+//         btn.setAttribute("id", "hh")
+//         btn.setAttribute("onclick", `location.href ='/prescription/${data[element][item]}'`)
+//         btn.setAttribute("class", "a7-btn-style a5-btn")
+//         div1.appendChild(btn)
+//       } else {
 
-        let divspan = document.createElement("div")
-        let span = document.createElement('span')
-        span.setAttribute("class", "a7-table-border")
-        span.textContent = data[element][item]
-        divspan.appendChild(span)
-        div1.appendChild(divspan)
+//         let divspan = document.createElement("div")
+//         let span = document.createElement('span')
+//         span.setAttribute("class", "a7-table-border")
+//         span.textContent = data[element][item]
+//         divspan.appendChild(span)
+//         div1.appendChild(divspan)
 
-      }
-    });
+//       }
+//     });
 
-    table.appendChild(div1)
-  });
+//     table.appendChild(div1)
+//   });
+// }
+
+// fetchAppointMents()
+
+
+const fetchAppointmentData=async()=>{
+  try{
+    let fetchData = await fetch('/dashBoardAppointments')
+    let data = await fetchData.json()
+    let key = Object.keys(data[0])
+    console.log("in fetchAppointmentData");
+    console.log(data);
+    console.log(key);
+
+    data.forEach(function (element, index) {
+          let table = document.getElementById("appointmentTable");
+          let str = `
+            <tr>
+                <td>${index+1}</td>
+                <td>${element.patient_name}</td>
+                <td>${element.appointment_time}</td>
+                <td><input type="button" value="Add Prescription" onclick="addPrescription(${element.patient_id},${element.booking_id})" id="addprescription-btn"></td>
+                <td><input type="hidden" value="${element.booking_id}" id="booking_id"></td>
+            </tr>`;
+              table.innerHTML += str;
+            });
+  }
+  catch(error){
+    console.log(error);
+  }
+
 }
 
+const addPrescription=async(patient_id,booking_id)=>{
+  location.href =`/prescription/${patient_id}/${booking_id}`;
+}
 
-fetchAppointMents()
+fetchAppointmentData();

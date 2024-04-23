@@ -11,9 +11,23 @@
   <link rel="stylesheet" href="/css/patientCSS/patientDashboard.css" />
 
   <link rel="stylesheet" href="/css/patientCSS/patientProfile.css" />
+  <style>
+    #a5-patient-dashboard-active {
+      background-color: #0969da;
+      transform: translate(5px);
+      border-radius: 5px;
+    }
+
+    #a5-patient-dashboard-active a,
+    #a5-patient-dashboard-active i {
+      color: #ffffff;
+    }
+  </style>
 </head>
 
 <body onload="getUpcomingSlots()">
+
+  <div class="a5-main-container">
 
   <%- include('../../common/newSidebar/patientSidebar.ejs') %>
     <div class="a2-patient-dashboard">
@@ -113,6 +127,7 @@
         </div>
       </div>
     </div>
+  </div>
 
     <script>
 
@@ -137,6 +152,7 @@
 
     <!-- Upcoming slots script -->
     <script>
+      console.log("inside patient");
       const getUpcomingSlots = async () => {
         let user = JSON.parse(localStorage.getItem('userinfo'));
         const response = await fetch(`/bookings/${user.id}`, {
@@ -164,7 +180,7 @@
               <td>${element.date}</td>
               <td>${element.day}</td>
               <td>${element.start_time.slice(0, -3)}-${element.end_time.slice(0, -3)}</td>
-              <td><input type="button" value="Details" onclick=getDetails(${JSON.stringify(element)})></td>
+              <td><input type="button" class="view-btn" value="Details" onclick='getDetails(${JSON.stringify(element)})'></td>
             </tr>
             `
         });
@@ -178,7 +194,7 @@
         modal.innerHTML = `
       <div class="A3-row-3">
         <h3 id="A3-modal-date">Booking : ${data.booking_date}</h3>
-        <input type="button" value="Close" onclick="handleClose()">
+        <input type="button" class="view-btn" value="Close" onclick="handleClose()">
       </div>
       <h4>Doctor Details</h4>
       <div class="card">
@@ -197,6 +213,7 @@
       </div>
   `
       }
+
 
       const handleClose = () => {
         document.getElementsByClassName("A3-modal")[0].style.visibility = "hidden";

@@ -1,10 +1,11 @@
 const conn = require("../../config/dbConnection");
 let PDFDocument = require("pdfkit");
+const logger = require("../../utils/pino");
 
 exports.generatePDF = async (req, res) => {
   try {
     const id = req.params.id;
-    console.log(id);
+    logger.info(id);
 
     const query = `select prescriptions.prescription,prescriptions.diagnoses,prescriptions.created_at,
         concat(users_patient.fname," ",users_patient.lname) as patient_name,
@@ -121,7 +122,7 @@ exports.generatePDF = async (req, res) => {
 
 
   } catch (error) {
-    console.log(error);
+    logger.error(error);
     return res.status(500).json({
       success: false,
       message: error.message,

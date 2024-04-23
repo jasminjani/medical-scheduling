@@ -43,6 +43,7 @@ const {
   dashBoardAppointments,
   dashBoardReviews,
   dashBoardCount,
+  dashBoardTodayAppointments
 
 } = require("../controllers/doctorModule/doctorDashboard");
 const { doctorData } = require("../controllers/doctorModule/doctorProfile");
@@ -139,13 +140,21 @@ router
 
 // Router show json format Data date:- 12-04-2024
 
+// router
+//   .route("/dashBoardAppointments")
+//   .get(
+//     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+//     isDoctor,
+//     dashBoardAppointments
+//   );
+
 router
   .route("/dashBoardAppointments")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
     isDoctor,
-    dashBoardAppointments
-  );
+    dashBoardTodayAppointments
+  );  
 
 router
   .route("/dashBoardReviews")
