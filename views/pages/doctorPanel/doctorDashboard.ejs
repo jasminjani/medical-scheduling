@@ -4,12 +4,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
   <link rel="stylesheet" href="/css/adminPanel/allPatientDetails.css">
   <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css">
+  <style>
+    #a5-doctor-dashboard-active {
+      background-color: #0969da;
+      transform: translate(5px);
+      border-radius: 5px;
+    }
+
+    #a5-doctor-dashboard-active a,
+    #a5-doctor-dashboard-active i {
+      color: #ffffff;
+    }
+  </style>
   <script src="/javascript/doctorPanel/doctorDashboard.js" defer></script>
   <title>Dashboard</title>
 </head>
@@ -42,7 +52,7 @@
               <div class="a7-counter">
                 <div class="a7-counter-2"><img src="/assets/doctorPanel/dtotal_patients.png" alt=""></div>
                 <div class="a7-label-count" id="patient">
-                 </div>
+                </div>
               </div>
             </div>
             <div class="a7-counter-card">
@@ -52,7 +62,7 @@
               <div class="a7-counter">
                 <div class="a7-counter-3"><img src="/assets/doctorPanel/drevenue.png" alt=""></div>
                 <div class="a7-label-count" id="revenue">
-                 </div>
+                </div>
               </div>
             </div>
           </div>
@@ -66,13 +76,13 @@
                 <span>Today Appointments</span>
               </div>
               <div class="a7-tbl" id="appointmentTable">
-              <div class="a7-table-header">
-                <div><span >Sr No.</span></div>
-                <div><span > Patient Name </span></div>
-                <div><span > Appointment Time</span></div>
-                <div><span > Describe Prescription</span></div>
+                <div class="a7-table-header">
+                  <div><span>Sr No.</span></div>
+                  <div><span> Patient Name </span></div>
+                  <div><span> Appointment Time</span></div>
+                  <div><span> Describe Prescription</span></div>
+                </div>
               </div>
-            </div>
             </div>
           </div>
 
@@ -91,4 +101,5 @@
       </div>
   </div>
 </body>
+
 </html>
