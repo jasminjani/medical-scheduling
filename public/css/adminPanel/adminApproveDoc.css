@@ -12,10 +12,20 @@
   margin: 0;
 }
 
-.a2-container {
+.a5-main-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.a2-approve-table-div {
+  max-width: 1080px;
+}
+
+/* .a2-container {
   max-width: 1080px;
   margin: 0 auto;
-}
+} */
 
 body {
   display: flex;
