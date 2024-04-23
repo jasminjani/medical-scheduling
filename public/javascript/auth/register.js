@@ -289,5 +289,10 @@ submit.addEventListener("click", async (e) => {
         document.querySelector(".link").style.color = "red";
       }
     }
+    else{
+      let msg = document.querySelector('.link');
+      msg.innerHTML = "Password and confirmPassword doesn't match"
+      msg.style.color = "red";
+    }
   }
 });

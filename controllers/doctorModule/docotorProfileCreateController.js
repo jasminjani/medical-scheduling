@@ -100,3 +100,29 @@ exports.createDoctor = async (req, res) => {
     });
   }
 };
+
+exports.getPendingDoctorById = async(req,res)=>{
+  try {
+    let {id} = req.body;
+
+    let [result] = await conn.query('select * from doctor_details where doctor_id=?',[id]);
+
+    if(result.length > 0){
+      return res.json({
+        success:false,
+        message:"User already requested"
+      })
+
+    }
+    
+    return res.json({
+      success:true,
+      message:"User not requested"
+    })
+  } catch (error) {
+    return res.json({
+      success:false,
+      message:error.message
+    })
+  }
+}
