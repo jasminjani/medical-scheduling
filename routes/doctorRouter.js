@@ -33,7 +33,7 @@ const {
   doctorDashBoard,
 } = require("../controllers/doctorModule/doctorController");
 const {
-  createDoctor,
+  createDoctor, getPendingDoctorById,
 } = require("../controllers/doctorModule/docotorProfileCreateController");
 const {
   updateDoctorDetails,
@@ -86,6 +86,9 @@ router
     isDoctor,
     allDoctors
   );
+
+router.route('/getPendingDoctor').post(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+getPendingDoctorById)
 
 router
   .route("/doctorCreateProfile")
