@@ -164,7 +164,7 @@
               <td>${element.date}</td>
               <td>${element.day}</td>
               <td>${element.start_time.slice(0, -3)}-${element.end_time.slice(0, -3)}</td>
-              <td><input type="button" value="Details" onclick=getDetails(${JSON.stringify(element)})></td>
+              <td><input type="button" class="view-btn" value="Details" onclick='getDetails(${JSON.stringify(element)})'></td>
             </tr>
             `
         });
@@ -178,7 +178,7 @@
         modal.innerHTML = `
       <div class="A3-row-3">
         <h3 id="A3-modal-date">Booking : ${data.booking_date}</h3>
-        <input type="button" value="Close" onclick="handleClose()">
+        <input type="button" class="view-btn" value="Close" onclick="handleClose()">
       </div>
       <h4>Doctor Details</h4>
       <div class="card">
