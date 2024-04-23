@@ -137,6 +137,7 @@
 
     <!-- Upcoming slots script -->
     <script>
+      console.log("inside patient");
       const getUpcomingSlots = async () => {
         let user = JSON.parse(localStorage.getItem('userinfo'));
         const response = await fetch(`/bookings/${user.id}`, {
@@ -197,6 +198,7 @@
       </div>
   `
       }
+
 
       const handleClose = () => {
         document.getElementsByClassName("A3-modal")[0].style.visibility = "hidden";
