@@ -35,7 +35,7 @@ adminRouter.route('/add-specialty').post(isAdmin,addNewSpecialties);
 // approve doctor panel in admin panel
 
 
-adminRouter.route('/individual-doctor/:id').get(isAdmin,individualDoctor);
+adminRouter.route('/individual-doctor/:id').get(isAdmin,individualDoctorRend);
 adminRouter.route('/individual-doctor-details/:id').get(isAdmin,individualDoctor);
 adminRouter.route('/show-doctor-deatil/:id').get(isAdmin,showDoctorDetail);
 adminRouter.route('/approve-doctor/:id').get(isAdmin,approveDoctor);
