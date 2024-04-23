@@ -69,9 +69,6 @@ exports.individualDoctorRend=async(req,res)=>{
   }
 }
 
-
-
-
 exports.showDoctorDetail = async (req, res) => {
 
   try {
@@ -91,10 +88,22 @@ exports.showDoctorDetail = async (req, res) => {
       res.send("not valid doctor")
     }
     else {
-      // res.json(result);
-      res.render('pages/adminPanel/adminShowOneDoc.ejs', { data: result[0], docID });
+      res.json({result});
 
     }
+  } catch (error) {
+    console.log(error);
+  }
+
+}
+
+
+exports.showDoctorDetailRend = async (req, res) => {
+
+  try {
+    const docID = req.params.id;
+    res.render('pages/adminPanel/adminShowOneDoc.ejs', { docID });
+
   } catch (error) {
     console.log(error);
   }
