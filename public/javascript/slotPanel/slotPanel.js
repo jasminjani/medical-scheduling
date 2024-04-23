@@ -25,7 +25,7 @@ for (let i = 0; i < rows.length; i++) {
     newNode.setAttribute("type", "text");
     newNode.setAttribute("name", `day${i + 1}`);
     newNode.setAttribute("class", "A3-time");
-    newNode.style.position = "relative";
+    newNode.setAttribute("placeholder","hh:mm");
     newNode.addEventListener("mouseover", handleFocus(newNode));
     times.insertBefore(newNode, times.children[times.children.length - 1])
       .addEventListener("change", (e) => {

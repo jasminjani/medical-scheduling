@@ -29,7 +29,6 @@ app.use(express.urlencoded({ extended: true }));
 // use root router in index file
 const rootRouter = require("./routes/rootRouter");
 const { allRequestLogs } = require("./middlewares/allRequestLogs");
-const logger = require("./utils/pino");
 
 app.use("/", allRequestLogs, rootRouter);
 
