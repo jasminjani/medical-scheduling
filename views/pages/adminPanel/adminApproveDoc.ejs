@@ -9,7 +9,18 @@
   <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
   <link rel="stylesheet" href="/css/adminPanel/adminApproveDoc.css">
+  <style>
+    #a5-admin-doctor-active {
+      background-color: #0969da;
+      transform: translate(5px);
+      border-radius: 5px;
+    }
 
+    #a5-admin-doctor-active a,
+    #a5-admin-doctor-active i {
+      color: #ffffff;
+    }
+  </style>
 </head>
 
 <body>
@@ -57,7 +68,7 @@
               <th>Doctor Name</th>
               <th>Email</th>
               <th>Qualification</th>
-              <th>Status</th>
+              <th>View/Delete</th>
 
             </tr>
 
@@ -122,6 +133,7 @@
 
         const data = await resp.json();
 
+        console.log(data);
         let allPendingDoctors = data.filter((e) => {
           return e.approved === 0 ? e : false;
         });
@@ -149,33 +161,33 @@
         const rejectedTbody = document.getElementById(
           "a2-rejected-doctors-tbody"
         );
-
-        allPendingDoctors.forEach((doc) => {
+        console.log(allPendingDoctors);
+        allPendingDoctors.forEach((doc, i) => {
           let str = `<tr>
-            <td>${doc.id}</td>
+            <td>${++i}</td>
             <td>${doc.fname} ${doc.lname}</td>
             <td>${doc.email}</td>
             <td>${doc.qualification}</td>
-            <td class="a2-btn" onclick="approveDoc(${doc.id})">Approve</td>
+            <td class="a2-btn" onclick="approveDoc(${doc.doctor_id})">Approve</td>
           </tr>`;
 
           approveTbody.innerHTML += str;
         });
 
-        allDoctors.forEach((doc) => {
+        allDoctors.forEach((doc, i) => {
           let tds = `<tr>
-          <td>${doc.doctor_id}</td>
+          <td>${++i}</td>
           <td>${doc.fname} ${doc.lname}</td>
           <td>${doc.email}</td>
           <td>${doc.qualification}</td>
-          <td><p class="a2-btn" onclick="deleteDoctor(${doc.doctor_id})">Delete</p></td>
+          <td><p class="a2-btn" onclick="showDoctorDeatil(${doc.doctor_id})">View</p> <p class="a2-btn" onclick="deleteDoctor(${doc.doctor_id})">Delete</p></td>
           </tr>`;
           allDoctorsTbody.innerHTML += tds;
         });
 
-        rejectedDoctors.forEach((doc) => {
+        rejectedDoctors.forEach((doc, i) => {
           let tds = `<tr>
-          <td>${doc.doctor_id}</td>
+          <td>${++i}</td>
           <td>${doc.fname} ${doc.lname}</td>
           <td>${doc.email}</td>
           <td>${doc.qualification}</td>
@@ -194,6 +206,11 @@
       async function approveDoc(id) {
         location.href = `/individual-doctor/${id}`;
       }
+
+      async function showDoctorDeatil(id) {
+        location.href = `/show-doctor-deatil/${id}`
+      }
     </script>
-  </body>
+</body>
+
 </html>

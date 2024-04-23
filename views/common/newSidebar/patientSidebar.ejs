@@ -2,7 +2,7 @@
   <div class="a5-sidenavupperbox">
     <div class="a5-profile">
       <div class="a5-profilephoto">
-        <a href="/patient"><img src="/assets/sideBar/profile-icon-png-898.png" alt="profile" class="a5-profileimage" /></a>
+        <a href="/viewPatientProfile"><img src="/assets/sideBar/profile-icon-png-898.png" alt="profile" class="a5-profileimage" /></a>
       </div>
       <div class="a5-accountname">
         <p class="a5-username"></p>
@@ -15,25 +15,25 @@
   </div>
 
   <div class="a5-lists">
-    <div class="a5-list-item" onclick="window.location.href=`#`">
+    <div class="a5-list-item" onclick="window.location.href=`/patient`">
       <i class="fa-solid fa-house a5-list-item-img"></i>
-      <a href="/patient">Home</a>
+      <a>Home</a>
     </div>
-    <div class="a5-list-item" onclick="window.location.href=`#`">
+    <div class="a5-list-item" onclick="window.location.href=`/doctors/all`">
       <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
-      <a href="/doctors/all">All Doctors</a>
+      <a>All Doctors</a>
     </div>
     <div class="a5-list-item" onclick="window.location.href=`/patientUpcomingSlots`">
       <i class="fa-solid fa-calendar-days a5-list-item-img"></i>
       <a href="/patientUpcomingSlots">Scheduled Sessions</a>
     </div>
-    <div class="a5-list-item" onclick="window.location.href=`#`">
+    <div class="a5-list-item" onclick="window.location.href=`/patient-paymentHistory`">
       <i class="fa-solid fa-calendar-check a5-list-item-img"></i>
-      <a href="/patient-paymentHistory">My Payment History</a>
+      <a>My Payment History</a>
     </div>
     <div class="a5-list-item" onclick="window.location.href=`#`">
-      <i class="fa-solid fa-gear a5-list-item-img"></i>
-      <a>Settings</a>
+      <i class="fa-solid fa-user-doctor a5-list-item-img"></i>
+      <a>Become a Doctor</a>
     </div>
   </div>
 </div>
@@ -50,6 +50,7 @@
 
   if(user.profile.trim()){
     document.querySelector('.a5-profileimage').setAttribute('src',`/imgs/${user.profile}`)
+   
   }
 
   document.querySelector('.a5-username').innerHTML = `${user.fname+ " "+user.lname}`;

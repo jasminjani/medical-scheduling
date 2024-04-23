@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css">
+  <link rel="stylesheet" href="/css/doctorPanel/profile.css">
+  <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
+  <script src="/javascript/doctorPanel/fetchSpeciality.js" defer></script>
+  <script src="/javascript/doctorPanel/fetchCity.js" defer></script>
+  <script src="/javascript/doctorPanel/validation.js" defer></script>
+    <script src="/javascript/doctorPanel/doctorProfileUpdate.js" defer></script>
+  <title>Edit Profile</title>
+</head>
+
+<body >
+
+  <div class="a7-container">
+  <%- include('../../common/newSidebar/doctorSidebar.ejs') %>
+    <div class="a7-main-profile a7-mr-300">
+      <div class="a7-profile-section">
+        <div class="a7-profile-title">
+          <h1>Edit Profile Details</h1>
+        </div>
+        <div class="a7-card">
+          <div class="a7-card-box">
+            <div class="a7-card-color">
+              <div class="a7-profile-info">
+                <form action="" id="myform" method="post" enctype="multipart/form-data" onsubmit="return validate()">
+                  <div class="a7-field-inp">
+                    <input type="text" name="id" id="" class="a7-form-input" value="" hidden/>
+                  </div>
+                  <div class="a7-field-inp">
+                    <input type="text" name="doctor_id" id="" class="a7-form-input" value="" hidden/>
+                  </div>
+                  <div class="a7-field-inp">
+                    <input type="text" name="hospital_id" id="" class="a7-form-input" value="" hidden/>
+                  </div>
+                  <div class="a7-field-inp"><label for="">Firstname:</label>
+                    <input type="text" name="fname" id="firstname" class="a7-form-input dvalid" value="" />
+                  </div>
+                  <div class="a7-field-inp">
+                    <label for="">Lastname:</label>
+                    <input type="text" name="lname" id="lastname" class="a7-form-input dvalid" value="" />
+                  </div>
+                  
+                  <div>
+                    <label for="">Gender:</label>
+                    <input type="radio" name="gender" id="male" class="a7-form-input" value="male" />Male
+                    <input type="radio" name="gender" id="female" class="a7-form-input" value="female" />Female
+                  </div>
+
+                  <div class="a7-field-inp">
+                    <label for="">Date of Birth:</label>
+                    <input type="text" name="dob" id="dob" class="a7-form-input dvalid" value="" />
+                  </div>
+                  <div class="a7-field-inp">
+                    <label for="">Contact:</label>
+                    <input type="text" name="phone" id="" class="a7-form-input dvalid" value="" />
+                  </div>
+                  <div class="a7-field-inp">
+                    <label for="">Address:</label>
+                    <input type="text" name="address" id="address" class="a7-form-input dvalid" value="" />
+                  </div>
+                  <div class="a7-field-inp" >
+                    <label for="">Profile:</label>
+                    <div id="file" style="display: none;">
+                    <input type="file" name="profile_picture" class="a7-form-input " id="" style="height: 45px;" >
+                      </div>
+                      <div id="updateImage">                        
+                      </div>
+                  </div>
+   
+                  <div class="a7-field-inp">
+                    <label for="">Qualification:</label>
+                    <input type="text" name="qualification" id="qualification" class="a7-form-input dvalid" value="" />
+                  </div>
+                  <div class="a7-field-inp">
+                    <label for="">Speciality:</label>
+                    <select name="speciality" id="speciality" class="dvalid">
+                      <option value="" >--Select Speciality--</option>   
+                    </select>
+                  </div>
+                  <div class="a7-field-inp">
+                    <label for="">Consultancy Fees:</label>
+                    <input type="text" name="consultancy_fees" id="consultancyfee" class="a7-form-input dvalid" value="" />
+                  </div>
+                  <div class="a7-field-inp">
+                    <label for="">Hospital Name:</label>
+                    <input type="text" name="name" id="hospitalname" class="a7-form-input dvalid" value="" />
+                  </div>
+                  <div class="a7-field-inp">
+                    <label for="">GST_no:</label>
+                    <input type="text" name="gst_no" id="gstno" class="a7-form-input dvalid" value="" />
+                  </div>
+
+                  <div class="a7-field-inp">
+                    <label for="">Location:</label>
+                    <input type="text" name="location" id="location" class="a7-form-input dvalid" value="" />
+                  </div>
+                  <div class="a7-field-inp">
+                    <label for="">City:</label>
+                    <select name="city" id="city" class="dvalid">
+                      <option value="">--Select City--</option>
+                    </select>
+                  </div>
+                  
+                  <div class="a7-field-inp">
+                    <label for="">Pincode:</label>
+                    <input type="text" name="pincode" id="pincode" class="a7-form-input dvalid" value="" />
+                  </div>
+
+                  <div class="a7-field-inp">
+                    <input type="submit" name="" id="" class="a7-update-btn" value="Update" />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</body>
+</html>

@@ -108,7 +108,7 @@ exports.updateDoctorDetails = async (req, res) => {
       })
     }
    }
-
+    
     res.json({ success: true, message: "Update Successfully" });
   } catch (error) {
     return res.json({

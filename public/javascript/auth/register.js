@@ -184,10 +184,56 @@ function validate() {
   return isvalid;
 }
 
+let password = document.getElementById('password')
+
+
+function passwordValidation (){
+  let validated = document.querySelectorAll(".validated");
+
+  // remove if any error message is in frontend
+  if (validated?.length) {
+    validated.forEach((item) => {
+      item.remove();
+    });
+  }
+  let p = document.createElement("p");
+  password.insertAdjacentElement("afterend", p);
+  p.classList.add("validated");
+  p.style.color = "red";
+  p.style.margin = "0";
+  p.style.fontSize = "12px";
+  let isvalid = true;
+  if(password.value.length<8){
+    p.innerHTML = "password must be at least 8 characters";
+    isvalid = false;
+  }
+  else if(password.value.search(/[a-zA-Z]/i)<0){
+    p.innerHTML = "password must contain at least one letter";
+    isvalid = false;
+  }
+  else if(password.value.search(/[0-9]/)<0){
+    p.innerHTML = "password must contain at least one digit";
+    isvalid = false;
+  }
+  else if(password.value.search(/[*?[#@$?]/)<0){
+    p.innerHTML = "password must contain at least one special character";
+    isvalid = false;
+  }
+  else{
+    isvalid = true;
+  }
+  return isvalid;
+}
+
+password.addEventListener('keyup',()=>{
+  passwordValidation();
+})
+
+
 submit.addEventListener("click", async (e) => {
   e.preventDefault();
 
-  if (validate()) {
+  if (validate() && passwordValidation()) {
     // get data and
     let fname = document.getElementById("fname").value;
     let lname = document.getElementById("lname").value;

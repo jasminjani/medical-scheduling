@@ -1,68 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- CSS for Sidebar -->
-  <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
-  <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
-  <!-- CSS for container -->
-  <link rel="stylesheet" href="/css/adminPanel/allPatientDetails.css">
-  <!-- <link rel="stylesheet" href="/css/doctorPanel/viewfeedback.css"> -->
-  <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css">
-  <!-- <link rel="stylesheet" href="/css/doctorPanel/viewfeedback.css">
-  <link rel="stylesheet" href="/css/doctorPanel/dashboard.css"> -->
-  <title>View Payment</title>
-</head>
-
-<body onload="fetchPaymentHistory()">
-
-  <div class="a5-container">
-
-    <%- include('../../common/newSidebar/doctorSidebar') %>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS for Sidebar -->
+    <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
+    <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
+    <!-- CSS for container -->
+    <link rel="stylesheet" href="/css/adminPanel/allPatientDetails.css" />
+    <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css" />
+    <script src="/javascript/doctorPanel/sidebar.js" defer></script>
+    <script src="/javascript/doctorPanel/paymentHistory.js" defer></script>
+    <title>View Payment</title>
+  </head>
+  <body onload="fetchPaymentHistory()">
+    <div class="a5-container">
+      <%- include('../../common/newSidebar/doctorSidebar') %>
       <div class="a5-section">
-
         <div class="a5-search">
           <div class="a5-searchbox">
-            <img src="/assets/adminPanel/icons/search.svg" alt="">
-            <input type="text" name="searchUser" id="a5-searchPatient" placeholder="Search Patient name" tabindex="1">
+            <img src="/assets/adminPanel/icons/search.svg" alt="" />
+            <input
+              type="text"
+              name="searchUser"
+              id="a5-searchPatient"
+              placeholder="Search Patient name"
+              tabindex="1"
+            />
           </div>
-          <p id="a5-btn-search" onclick="searchPaymentHistory()" tabindex="2">Search</p>
+          <p id="a5-btn-search" onclick="searchPaymentHistory()" tabindex="2">
+            Search
+          </p>
         </div>
-
         <div class="a5-all-user">
-
           <h2>View Payment History</h2>
-
           <div class="a5-user-table">
-
             <table id="a5-user-table">
-              <tbody id="a5-tbody">
-
-              </tbody>
+              <tbody id="a5-tbody"></tbody>
             </table>
-
           </div>
-       <div class="a7-pagination">
-          <span class="a5-btn a7-pagination-btn" id="firstpage">  << </span>
-              <span class="a5-btn a7-pagination-btn" id="prevButton"> < </span>
-                  <span class="a5-btn a7-pagination-btn" id="pageno"> </span>
-                  <span class="a5-btn a7-pagination-btn" id="nextButton"> > </span>
-                  <span class="a5-btn a7-pagination-btn" id="lastpage"> >> </span>
+          <div class="a7-pagination">
+            <span class="a5-btn a7-pagination-btn" id="firstpage"> << </span>
+            <span class="a5-btn a7-pagination-btn" id="prevButton"> < </span>
+            <span class="a5-btn a7-pagination-btn" id="pageno"> </span>
+            <span class="a5-btn a7-pagination-btn" id="nextButton"> > </span>
+            <span class="a5-btn a7-pagination-btn" id="lastpage"> >> </span>
+          </div>
         </div>
-        </div>
-
       </div>
-
-  </div>
-
-
-</body>
-
-<!-- <script src="/javascript/doctorPanel/urlPath.js"></script> -->
-<script src="/javascript/doctorPanel/sidebar.js"></script>
-<script src="/javascript/doctorPanel/paymentHistory.js"></script>
-
+    </div>
+  </body>
 </html>

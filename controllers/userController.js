@@ -23,36 +23,42 @@ const generateCityCombo = async () => {
   return html;
 };
 
-exports.getDoctorDetails = async (req,res)=>{
+exports.getDoctorDetails = async (req, res) => {
   try {
     let result;
     try {
-      let sql = `select u.id,u.fname,u.lname,dd.qualification,dd.consultancy_fees,ch.name,ch.city,
-      ch.location, pp.profile_picture, s.speciality, count(rr.id) as total_reviews,
-      avg(rr.rating) as rating from doctor_details as dd
-      inner join users as u on u.id = dd.doctor_id
-      inner join profile_pictures as pp on pp.user_id = u.id
-      inner join rating_and_reviews as rr on u.id = rr.doctor_id 
-      inner join doctor_has_specialities as ds 
-      inner join specialities as s on s.id = ds.speciality_id
-      inner join clinic_hospitals as ch on dd.hospital_id = ch.id
-      where pp.is_active = 1 and u.id=ds.doctor_id and dd.approved=1
-      group by u.id,pp.created_at,pp.profile_picture,s.speciality,
-      dd.qualification,dd.consultancy_fees,ch.name,ch.city,ch.location order by rating desc; `;
+      let sql = `SELECT u.id, u.fname, u.lname, dd.qualification, dd.consultancy_fees, ch.name AS hospital_name, ch.city,
+      ch.location,pp.profile_picture,s.speciality,COUNT(rr.id) AS total_reviews,AVG(rr.rating) AS rating
+    FROM users AS u
+    INNER JOIN
+      doctor_details AS dd ON u.id = dd.doctor_id AND dd.approved = 1
+    INNER JOIN
+      profile_pictures AS pp ON u.id = pp.user_id AND pp.is_active = 1
+    INNER JOIN
+      doctor_has_specialities AS ds ON u.id = ds.doctor_id
+    INNER JOIN
+      specialities AS s ON ds.speciality_id = s.id
+    INNER JOIN
+      clinic_hospitals AS ch ON dd.hospital_id = ch.id
+    LEFT JOIN
+      rating_and_reviews AS rr ON u.id = rr.doctor_id
+    GROUP BY u.id,pp.created_at,pp.profile_picture,s.speciality,dd.qualification,dd.consultancy_fees,ch.name,
+      ch.city,ch.location ORDER BY rating DESC; `;
       [result] = await conn.query(sql);
+      // console.log(result);
     } catch (error) {
       console.log(error)
     }
-    
-    result = Object.values(result.reduce((acc,{id,fname,lname,qualification,consultancy_fees,name,city,location, profile_picture,speciality,total_reviews,rating})=>{
-      acc[id] ??= {id,fname,lname,qualification,consultancy_fees,name,city,location,profile_picture,total_reviews,rating, specialities:[]};
+
+    result = Object.values(result.reduce((acc, { id, fname, lname, qualification, consultancy_fees, name, city, location, profile_picture, speciality, total_reviews, rating }) => {
+      acc[id] ??= { id, fname, lname, qualification, consultancy_fees, name, city, location, profile_picture, total_reviews, rating, specialities: [] };
       acc[id].specialities.push(speciality)
       return acc;
-    },{}))
-    
+    }, {}))
+
     return res.json({
-      success:true,
-      data:result
+      success: true,
+      data: result
     })
 
   } catch (error) {
@@ -62,20 +68,21 @@ exports.getDoctorDetails = async (req,res)=>{
       message: "Internal server Error",
     });
   }
+
 }
 
-exports.homePage = async(req,res)=>{
+exports.homePage = async (req, res) => {
   try {
     let html = await specialitiesCombo();
-    return res.render('./common/homepage',{html})
+    return res.render('./common/homepage', { html })
   } catch (error) {
     console.log(error.message);
   }
-}
+};
 
-exports.allDoctors = async(req,res)=>{
+exports.allDoctors = async (req, res) => {
   let html = await specialitiesCombo();
-  res.render('./pages/patientPanel/allDoctors',{html})
+  res.render('./pages/patientPanel/allDoctors', { html })
 }
 
 // get => /register
@@ -214,7 +221,7 @@ exports.createUser = async (req, res) => {
 
     try {
       let sql = "insert into profile_pictures (profile_picture,user_id) values (?)";
-      await conn.query(sql,[[profile,result.insertId]])
+      await conn.query(sql, [[profile, result.insertId]])
     } catch (error) {
       return res.status(500).json({
         success: false,
@@ -252,6 +259,7 @@ exports.createUser = async (req, res) => {
       user: result[0],
     });
   } catch (error) {
+    console.log(error);
     // any error occur during the registration
     res.status(500).json({
       success: false,
@@ -316,8 +324,8 @@ exports.login = async (req, res) => {
       let profile;
       try {
         let sql = "select * from profile_pictures where user_id = ? and is_active=1";
-        let [data] = await conn.query(sql,[result[0].id]);
-        profile = data[0].profile_picture;
+        let [data] = await conn.query(sql, [result[0].id]);
+        profile = data[0]?.profile_picture;
       } catch (error) {
         return res.status(500).json({
           success: false,
@@ -334,7 +342,7 @@ exports.login = async (req, res) => {
       };
 
       // remove password from the user obj
-      let { password:_,created_at,deleted_at,updated_at,is_active,token_created_at,is_deleted,activation_token, ...newObj } = result[0];
+      let { password: _, created_at, deleted_at, updated_at, is_active, token_created_at, is_deleted, activation_token, ...newObj } = result[0];
       // generate token
       let token = jwt.sign(payload, process.env.JWT_SECRET, {
         expiresIn: "1d",
@@ -666,11 +674,11 @@ exports.logout = async (req, res) => {
 
 exports.forgotPassword = async (req, res) => {
   try {
-    let html = `<div class="email-input">
+    let html = `<div class="email-input content">
                         <h4>Please Enter your Registered Email!</h4>
                         <div class="fields">
-                          <input type="text" name="email" id="email" placeholder="Enter email">
-                          <input type="submit" value="Generate" id ="submit">
+                          <input type="text" name="email" id="email" placeholder="Enter email" class="dvalid">
+                          <input type="submit" value="Generate" class="submit" id ="submit">
                         </div>
                     </div>`;
 
@@ -703,7 +711,7 @@ exports.forgotPassLink = async (req, res) => {
       });
     }
 
-    let verification_token = result[0].verification_token;
+    let verification_token = result[0].activation_token;
     try {
       await conn.query("update users set token_created_at=? where email=?", [
         new Date(Date.now()),
@@ -768,7 +776,7 @@ exports.createPasswordForm = async (req, res) => {
       return res.render("createPassword", { html });
     }
 
-    let html = `<div class="active-button">
+    let html = `<div class="resetPass">
                     <div class="password">
                         <label for="lname">Create Password: </label>
                         <input type="password" name="password" id="password" placeholder="Enter a password" class="dvalid" >
@@ -778,10 +786,10 @@ exports.createPasswordForm = async (req, res) => {
                         <input type="password" name="confirmPassword" id="confirmPassword"
                             placeholder="Re-enter the same password" class="dvalid" >
                     </div>
-                      <input type="submit" value="Create" id ="submit">
+                      <input type="submit" value="Create" id ="submit" class="submit">
                 </div>`;
 
-    return res.render("login-registration/createPassword", { html });
+    return res.render("./pages/auth/resetPass", { html });
   } catch (error) {
     res.status(500).json({
       message: error.message,
@@ -793,6 +801,13 @@ exports.updatePassword = async (req, res) => {
   try {
     let token = req.query.token;
     let email = req.query.email;
+
+    if (!token || !email) {
+      return res.json({
+        success: false,
+        message: "invalid route access"
+      })
+    }
 
     let password = req.body.password;
     let confirmPassword = req.body.confirmPassword;
@@ -826,8 +841,6 @@ exports.updatePassword = async (req, res) => {
 
     // generate hashpassword
     let hashPassword;
-    let random_salt = Math.random().toString(36).substring(2, 6);
-    password += random_salt;
     try {
       let bcryptsalt = await bcrypt.genSaltSync(10);
       hashPassword = await bcrypt.hash(password, bcryptsalt);
@@ -840,8 +853,8 @@ exports.updatePassword = async (req, res) => {
 
     try {
       [result] = await conn.query(
-        "update users set password = ?, salt=? where email=?",
-        [hashPassword, random_salt, email]
+        "update users set password = ? where email=?",
+        [hashPassword, email]
       );
     } catch (error) {
       return res.status(500).json({

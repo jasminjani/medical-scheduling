@@ -1,8 +1,10 @@
 :root {
   --light-blue: #d2ebf9;
+  --light-blue-border: #3984af;
   --brown: #e7e7e7;
   --blue: #0969da;
   --white: #ffffff;
+  --black: #07090c;
 }
 
 
@@ -123,6 +125,14 @@
   max-width: 500px;
   width: 100%;
   border: 1px solid var(--brown);
-  height: 200px;
+  max-height: 250px;
+  overflow: scroll;
   padding: 10px;
+}
+
+.a2-upcoming-booking .row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px;
 }
