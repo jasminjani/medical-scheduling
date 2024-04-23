@@ -7,6 +7,63 @@ exports.patientDashboard = (req, res) => {
 }
 
 
+exports.addPatientDetails = async(req,res)=>{
+  try {
+    const {patientId,bloodGroup} = req.body;
+    const medicalHistory = req.file.filename || "";
+
+    if(!patientId){
+      return res.json({
+        success:false,
+        message:"Invalid User"
+      })
+    }
+
+    let result;
+    try {
+      [result] = await conn.query('insert into patient_details (patient_id,blood_group,medical_history) values (?)',[[patientId,bloodGroup,medicalHistory]])
+    } catch (error) {
+      return res.json({
+        success:false,
+        message:"Internal Server Error"
+      })
+    }
+
+    return res.json({
+      success:true,
+      message:"data inserted successfully"
+    })
+
+  } catch (error) {
+    return res.json({
+      success:false,
+      message:"Internal Server Error"
+    })
+  }
+}
+
+exports.patientDetails = async(req,res)=>{
+  try {
+    const {id} = req.body;
+
+    let[result] = await conn.query('select * from patient_details where patient_id=?',[id]);
+
+    if(result.length > 0){
+      return res.json({
+        success:false,
+        message:"patient present"
+      })
+    }
+
+    return res.json({
+      success:true,
+      message:"patient details empty"
+    })
+  } catch (error) {
+    
+  }
+}
+
 exports.patientViewProfile = async(req,res) =>{
   res.render('pages/patientPanel/patientProfileView')
 }

@@ -1,4 +1,5 @@
 const search = document.getElementById("search-doctor");
+const becomeDoctor = document.getElementById('become-doctor');
 let data;
 
 const getDoctors = async () => {
@@ -107,6 +108,23 @@ search.addEventListener("click", async (e) => {
     putDoctorOnScreen(data);
   }
 });
+
+becomeDoctor?.addEventListener('click',async(e)=>{
+  e.preventDefault();
+  let userInfo = JSON.parse(localStorage.getItem('userinfo'))
+  let data = await fetch('/getPendingDoctor',{
+    method:"post",
+    body:JSON.stringify({id:userInfo.id})
+  })
+  data = await data.json()
+  console.log(data)
+  if(data.success){
+   window.location.href = "/doctorCreateProfile"
+  }
+  else{
+    alert("Already Requested ")
+  }
+})
 
 async function isLoggedIn() {
   let user = await fetch("/current-user", {

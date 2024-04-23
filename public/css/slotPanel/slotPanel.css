@@ -127,3 +127,9 @@ form .row .times {
   text-align: center;
   padding: 5px;
 }
+
+#popup{
+  position: absolute;
+  top: 0;
+  left: 0;
+}

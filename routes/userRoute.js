@@ -64,7 +64,7 @@ router.route('/forgot/change-password')
 
 
 router.route("/:patient_id/review/:doctor_id").post(rating);
-router.route("/doctors/all").get(passport.authenticate('jwt',{session:false,failureRedirect:"/login"}),isPatient,allDoctors)
+router.route("/doctors/all").get(passport.authenticate('jwt',{session:false,failureRedirect:"/login"}),allDoctors)
 
 
 // Slots controller(slotControllers)
