@@ -80,6 +80,9 @@ const fetchReviewData = async () => {
       }
       else if (item == "review") {
         let para = document.createElement("p")
+        para.style.height = '100px'
+        para.style.width = '200px'
+        para.style.overflow = 'scroll'
         para.textContent = data[element][item]
         div6TextContent.appendChild(para)
       }

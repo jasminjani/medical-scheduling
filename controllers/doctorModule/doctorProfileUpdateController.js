@@ -109,7 +109,7 @@ exports.updateDoctorDetails = async (req, res) => {
     }
    }
     
-    res.json({ success: true, message: "Update Successfully" });
+    res.render('pages/doctorPanel/doctorProfileUpdate',{ alert:"success"})
   } catch (error) {
     return res.json({
       success: false,

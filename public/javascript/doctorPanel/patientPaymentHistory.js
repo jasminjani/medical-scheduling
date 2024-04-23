@@ -23,7 +23,7 @@ async function appendPatientDetails(result) {
 
     let html = `<div class="a5-patient">
         <div class="a5-patient-img">
-          <img src="/assets/adminPanel/patient.png" alt="image">
+          <img src="/imgs/${result.paymentDetails[0].profile_picture}" alt="image">
         </div>
         <div class="a5-patient-details">
           <h1>

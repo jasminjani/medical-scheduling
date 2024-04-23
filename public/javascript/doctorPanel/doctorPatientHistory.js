@@ -1,6 +1,13 @@
+let search = document.getElementById("search").value
 const fetchData = async () => {
   let fetchdata = await fetch(`/getPatientData`)
   let data = await fetchdata.json()
+  return data
+}
+
+const searchFetchDataFun = async()=>{
+  let fetchData = await fetch(`/searchPatientData/${search}`)
+  let data = await fetchData.json()
   return data
 }
 
@@ -8,9 +15,16 @@ let currentPage = 1;
 const pagefield = 1;
 let length = 0;
 let pageno = document.getElementById("pageno");
-
 const pagination = async () => {
-  let data = await fetchData()
+  let data 
+  if (search) {
+    data = await searchFetchDataFun()
+  }
+  else {
+    data = await fetchData()
+  }
+
+
   length = data.length;
   pageno.innerHTML = currentPage;
 
@@ -20,7 +34,7 @@ const pagination = async () => {
 
   let tabledata = "";
 
-  pageItems.map((value, index) => {
+  pageItems.map((value) => {
     let patient_id = value.patient_id
     tabledata += `<tr>
     <td hidden >${patient_id}</td>
@@ -40,8 +54,8 @@ const removeFun = async () => {
                 </tr>`}
 
 if (currentPage == 1) {
-  document.getElementById('firstpage').disabled = true
-  document.querySelector('#prevButton').disabled = true
+  document.getElementById('homebtn').disabled = true
+  document.querySelector('#previousbtn').disabled = true
 }
 
 
@@ -50,12 +64,12 @@ function firstpageFun() {
   pagination()
   removeFun()
   if (currentPage != length / pagefield) {
-    document.getElementById('lastpage').disabled = false;
-    document.getElementById('nextButton').disabled = false;
+    document.getElementById('endbtn').disabled = false;
+    document.getElementById('nextbtn').disabled = false;
   }
   if (currentPage == 1) {
-    document.getElementById('firstpage').disabled = true
-    document.getElementById('prevButton').disabled = true
+    document.getElementById('homebtn').disabled = true
+    document.getElementById('previousbtn').disabled = true
   }
 }
 
@@ -64,16 +78,16 @@ function prevButtonFun() {
     currentPage--;
     pagination()
     removeFun()
-    document.getElementById('lastpage')
+    document.getElementById('endbtn')
 
   }
   if (currentPage != length / pagefield) {
-    document.getElementById('lastpage').disabled = false;
-    document.getElementById('nextButton').disabled = false;
+    document.getElementById('endbtn').disabled = false;
+    document.getElementById('nextbtn').disabled = false;
   }
   if (currentPage == 1) {
-    document.getElementById('firstpage').disabled = true
-    document.getElementById('prevButton').disabled = true
+    document.getElementById('homebtn').disabled = true
+    document.getElementById('previousbtn').disabled = true
   }
 }
 
@@ -82,13 +96,13 @@ function nextButtonFun() {
     currentPage++;
   }
   if (currentPage != 1) {
-    document.getElementById('firstpage').disabled = false;
-    document.getElementById('prevButton').disabled = false;
+    document.getElementById('homebtn').disabled = false;
+    document.getElementById('previousbtn').disabled = false;
   }
   lastpage = Math.ceil(length / pagefield);
   if (currentPage == lastpage) {
-    document.getElementById('lastpage').disabled = true
-    document.getElementById('nextButton').disabled = true
+    document.getElementById('endbtn').disabled = true
+    document.getElementById('nextbtn').disabled = true
   }
   pagination()
   removeFun()
@@ -100,18 +114,18 @@ function lastpageFun() {
   pagination()
   removeFun()
   if (currentPage != 1) {
-    document.getElementById('firstpage').disabled = false;
-    document.getElementById('prevButton').disabled = false;
+    document.getElementById('homebtn').disabled = false;
+    document.getElementById('previousbtn').disabled = false;
 
     if (currentPage == lastpage) {
-      document.getElementById('lastpage').disabled = true
-      document.getElementById('nextButton').disabled = true
+      document.getElementById('endbtn').disabled = true
+      document.getElementById('nextbtn').disabled = true
     }
   }
 }
-document.querySelector('#firstpage').addEventListener("click", firstpageFun)
-document.querySelector('#lastpage').addEventListener("click", lastpageFun)
-document.querySelector('#prevButton').addEventListener("click", prevButtonFun)
-document.querySelector('#nextButton').addEventListener("click", nextButtonFun)
+document.querySelector('#homebtn').addEventListener("click", firstpageFun)
+document.querySelector('#endbtn').addEventListener("click", lastpageFun)
+document.querySelector('#previousbtn').addEventListener("click", prevButtonFun)
+document.querySelector('#nextbtn').addEventListener("click", nextButtonFun)
 pagination()
 
