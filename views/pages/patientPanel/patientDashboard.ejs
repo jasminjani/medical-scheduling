@@ -11,9 +11,23 @@
   <link rel="stylesheet" href="/css/patientCSS/patientDashboard.css" />
 
   <link rel="stylesheet" href="/css/patientCSS/patientProfile.css" />
+  <style>
+    #a5-patient-dashboard-active {
+      background-color: #0969da;
+      transform: translate(5px);
+      border-radius: 5px;
+    }
+
+    #a5-patient-dashboard-active a,
+    #a5-patient-dashboard-active i {
+      color: #ffffff;
+    }
+  </style>
 </head>
 
 <body onload="getUpcomingSlots()">
+
+  <div class="a5-main-container">
 
   <%- include('../../common/newSidebar/patientSidebar.ejs') %>
     <div class="a2-patient-dashboard">
@@ -113,6 +127,7 @@
         </div>
       </div>
     </div>
+  </div>
 
     <script>
 
@@ -137,6 +152,7 @@
 
     <!-- Upcoming slots script -->
     <script>
+      console.log("inside patient");
       const getUpcomingSlots = async () => {
         let user = JSON.parse(localStorage.getItem('userinfo'));
         const response = await fetch(`/bookings/${user.id}`, {
@@ -197,6 +213,7 @@
       </div>
   `
       }
+
 
       const handleClose = () => {
         document.getElementsByClassName("A3-modal")[0].style.visibility = "hidden";

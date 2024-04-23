@@ -95,7 +95,7 @@ exports.getCreateUserForm = async (req, res) => {
   }
 };
 
-// get => /register
+// get => /login
 exports.getLoginForm = async (req, res) => {
   try {
     return res.render("./pages/auth/login");
