@@ -187,7 +187,7 @@ function validate() {
 let password = document.getElementById('password')
 
 
-password.addEventListener('keyup',()=>{
+function passwordValidation (){
   let validated = document.querySelectorAll(".validated");
 
   // remove if any error message is in frontend
@@ -202,7 +202,7 @@ password.addEventListener('keyup',()=>{
   p.style.color = "red";
   p.style.margin = "0";
   p.style.fontSize = "12px";
-  isvalid = false;
+  let isvalid = true;
   if(password.value.length<8){
     p.innerHTML = "password must be at least 8 characters";
     isvalid = false;
@@ -223,6 +223,10 @@ password.addEventListener('keyup',()=>{
     isvalid = true;
   }
   return isvalid;
+}
+
+password.addEventListener('keyup',()=>{
+  passwordValidation();
 })
 
 

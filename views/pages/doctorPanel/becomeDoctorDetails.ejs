@@ -13,7 +13,7 @@
     />
     <link rel="stylesheet" type="text/css" href="/css/auth/register.css" />
     <script src="/javascript/doctorPanel/fetchSpeciality.js" defer></script>
-     <script src="/javascript/doctorPanel/fetchCity.js" defer></script>
+    <script src="/javascript/doctorPanel/fetchCity.js" defer></script>
   </head>
   <body>
     <div class="container">
@@ -26,7 +26,7 @@
               <input
                 type="text"
                 name="qualification"
-                id="fname"
+                id="qualification"
                 placeholder="Enter Qualification"
                 class="dvalid"
               />
@@ -60,21 +60,22 @@
               </select>
             </div>
             <div class="phone">
-              <label for="phone">Hospital Name: </label>
+              <label for="hname">Hospital Name: </label>
               <input
                 type="text"
-                id="name"
-                name="name"
+                id="hname"
+                name="hname"
                 class="dvalid"
                 placeholder="Enter Hospital Name"
               />
             </div>
 
             <div class="address">
-              <label for="">Address: </label>
+              <label for="">Hospital Address: </label>
               <textarea
                 name="location"
                 id="address"
+                class="dvalid"
                 cols="30"
                 rows="3"
                 placeholder="Enter Address"
@@ -85,7 +86,7 @@
               <label for="phone">GST No:</label>
               <input
                 type="text"
-                id="name"
+                id="gst"
                 name="gst_no"
                 class="dvalid"
                 placeholder="Enter GST Number"
@@ -94,14 +95,14 @@
             <div class="city">
               <label for="city">City:</label>
               <select name="city" id="city" class="dvalid">
-                <option value="">--Select Speciality--</option>
+                <option value="">--Select City--</option>
               </select>
             </div>
             <div class="phone">
-              <label for="phone">Pincode:</label>
+              <label for="pincode">Pincode:</label>
               <input
                 type="text"
-                id="name"
+                id="pincode"
                 name="pincode"
                 class="dvalid"
                 placeholder="Enter Pincode"
@@ -115,5 +116,7 @@
         </div>
       </div>
     </div>
+
+    <script src="/javascript/doctorPanel/becomeDoctor.js"></script>
   </body>
 </html>

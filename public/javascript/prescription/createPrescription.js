@@ -2,8 +2,9 @@ const showDetails = async () => {
 
   let patient_id = window.location.href.split('/').pop();
 
-  let res = await fetch(window.location.origin + `/createprescription/${patient_id}`);
+  let res = await fetch(`/createprescription/${patient_id}`);
   const resjson = await res.json();
+  console.log(resjson)
   const ele = document.getElementsByClassName("A4-table-content");
   const keys = Object.keys(resjson.result[0]);
   let i = 0;

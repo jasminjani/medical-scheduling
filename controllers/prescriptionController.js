@@ -22,7 +22,22 @@ exports.showDetails = async (req, res) => {
   try {
     // A7 params patient_id
     const id = req.params.patient_id;
-    const query = `select users.id,fname,lname,email,phone,gender,dob,address,patient_details.blood_group from users join patient_details on users.id=patient_details.patient_id where patient_id=?`;
+    const query = `SELECT
+    users.id,
+    users.fname,
+    users.lname,
+    users.email,
+    users.phone,
+    users.gender,
+    users.dob,
+    users.address,
+    COALESCE(patient_details.blood_group, 'Not Specified') AS blood_group
+FROM
+    users
+LEFT JOIN
+    patient_details ON users.id = patient_details.patient_id
+WHERE
+    users.id = ?;`;
     const [result] = await conn.query(query, [id]);
     // console.log(result);
     res.json({ result });
