@@ -9,9 +9,24 @@
     <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
     <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css" />
     <script src="/sweetalert2/sweetalert2.min.js" defer></script>
+    <style>
+      #a5-patient-doctor-active {
+        background-color: #0969da;
+        transform: translate(5px);
+        border-radius: 5px;
+      }
+  
+      #a5-patient-doctor-active a,
+      #a5-patient-doctor-active i {
+        color: #ffffff;
+      }
+    </style>
   </head>
 
   <body>
+
+    <div class="a5-main-container">
+
     <%- include('../../common/newSidebar/patientSidebar') %>
 
     <main class="main">
@@ -75,6 +90,7 @@
       </div>
       </div>
     </main>
+  </div>
 
     <script src="/javascript/patientPanel/appointment.js"></script>
   </body>
