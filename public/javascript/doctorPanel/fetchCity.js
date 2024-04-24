@@ -1,6 +1,6 @@
 const fetchCity = async () => {
 
-  const fetchdata = await fetch("http://localhost:8000/cityCombo")
+  const fetchdata = await fetch("/cityCombo")
   const data = await fetchdata.json()
   let key = Object.keys(data)
   key.forEach(element => {

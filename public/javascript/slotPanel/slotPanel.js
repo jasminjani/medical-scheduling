@@ -88,6 +88,16 @@ const handleGenerate = async (e) => {
   const params = new URLSearchParams(details);
   const jobdata = await new Response(params).text();
 
+  const response = await fetch("/slot", {
+    method: "POST",
+    headers: {
+      "Content-type": "application/x-www-form-urlencoded"
+    },
+    body: jobdata
+  });
+  const { success } = await response.json();
+
+
   let rows = document.querySelectorAll("#myform .row");
 
   const dates = document.querySelectorAll('input[type="date"]')

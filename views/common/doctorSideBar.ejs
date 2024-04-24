@@ -36,7 +36,7 @@
     const fetchSideBarDetails = async()=>{
        let baseUrl = (window.location).href;
       let Id = baseUrl.substring(baseUrl.lastIndexOf('/') + 1);
-      let fetchData = await fetch(`http://localhost:8000/doctorSideBarDetail/${Id}`)
+      let fetchData = await fetch(`/doctorSideBarDetail/${Id}`)
       let data = await fetchData.json()
       // console.log(data);
       let key = Object.keys(data[0])

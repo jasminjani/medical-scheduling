@@ -3,7 +3,7 @@ async function fetchPatientAllAppointment() {
   try {
     let patient_id = window.location.href.split('/').pop();
 
-    const url = `http://localhost:8000/admin/get-patient-appointment/${patient_id}`;
+    const url = `/admin/get-patient-appointment/${patient_id}`;
     const response = await fetch(url);
     const result = await response.json();
 
@@ -113,7 +113,7 @@ funcId = function (id) {
 let show = async function (id, slot_id) {
   try {
 
-    const url = `http://localhost:8000/admin/patient-appointment/:patient_id/${slot_id}`;
+    const url = `/admin/patient-appointment/:patient_id/${slot_id}`;
     const response = await fetch(url);
     const result = await response.json();
     let html;
