@@ -21,17 +21,13 @@ body {
   overflow: hidden;
 }
 
-#A3-allslot {
-  max-width: 1440px;
+.A3-main-container{
+  max-width: 1280px;
   margin: 0 auto;
-  width: 100%;
 }
 
 .A3-container {
-  /* max-width: 1280px; */
-  /* padding: 10px; */
-  max-width: 1080px;
-  width: 100%;
+  padding: 10px;
   margin-left: 350px;
 }
 
