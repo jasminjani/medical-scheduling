@@ -27,69 +27,74 @@
 
     <div class="a5-main-container">
 
-    <%- include('../../common/newSidebar/patientSidebar') %>
+      <div class="a5-container">
 
-    <main class="main">
-      <div class="container">
-        <div class="booking-page">
-        <div class="doctor-profile">
-          <!-- <div class="doctor-img">
-            <img src="/assets/doctor4.jpg" alt="" />
-          </div>
-          <div class="doctor-details">
-            <p class="name"><span>Name: </span>Alpesh</p>
-            <p class="qualification"><span>qualification: </span>MBBS</p>
-            <p class="speciality"><span>speciality: </span>neurologist</p>
-            <p class="fees"><span>fees: </span>250 rs</p>
-            <p class="hospital-name"><span>clinic/hospital: </span>ALPHA</p>
-            <p class="address"><span>address: </span> ahmedabad</p>
-            <div class="rating">
-              <img src="/assets/gstar.png" width="15" alt="" />
-              <img src="/assets/gstar.png" width="15" alt="" />
-              <img src="/assets/gstar.png" width="15" alt="" />
-              <img src="/assets/gstar.png" width="15" alt="" />
-              <img src="/assets/gstar.png" width="15" alt="" />
-              <span id="review-count">(200)</span>
+        <%- include('../../common/newSidebar/patientSidebar') %>
+
+        <main class="main">
+          <div class="container">
+            <div class="booking-page">
+            <div class="doctor-profile">
+              <!-- <div class="doctor-img">
+                <img src="/assets/doctor4.jpg" alt="" />
+              </div>
+              <div class="doctor-details">
+                <p class="name"><span>Name: </span>Alpesh</p>
+                <p class="qualification"><span>qualification: </span>MBBS</p>
+                <p class="speciality"><span>speciality: </span>neurologist</p>
+                <p class="fees"><span>fees: </span>250 rs</p>
+                <p class="hospital-name"><span>clinic/hospital: </span>ALPHA</p>
+                <p class="address"><span>address: </span> ahmedabad</p>
+                <div class="rating">
+                  <img src="/assets/gstar.png" width="15" alt="" />
+                  <img src="/assets/gstar.png" width="15" alt="" />
+                  <img src="/assets/gstar.png" width="15" alt="" />
+                  <img src="/assets/gstar.png" width="15" alt="" />
+                  <img src="/assets/gstar.png" width="15" alt="" />
+                  <span id="review-count">(200)</span>
+                </div>
+              </div> -->
             </div>
-          </div> -->
-        </div>
 
-        <div class="appointmentForm">
-          <div class="inputs">
-            <div class="date">
-              <label for="selectDate" class="label">Select Date:</label>
+            <div class="appointmentForm">
+              <div class="inputs">
+                <div class="date">
+                  <label for="selectDate" class="label">Select Date:</label>
+                  <input
+                    type="date"
+                    name="date"
+                    id="date"
+                    class="dvalid"
+                    placeholder="Select Appointment Date"
+                  />
+                </div>
+      
+                <div class="appointments">
+                  <label for="appointments" class="label">Available Slots:</label>
+                  <select
+                    name="appointments"
+                    class="dvalid"
+                    id="appointments"
+                  >
+                    <option value="">--Select Slot--</option>
+                  </select>
+                </div>
+              </div>
+
               <input
-                type="date"
-                name="date"
-                id="date"
-                class="dvalid"
-                placeholder="Select Appointment Date"
+                type="submit"
+                name="booked"
+                id="slotBook"
+                value="Book"
+                class="submit"
               />
             </div>
-  
-            <div class="appointments">
-              <label for="appointments" class="label">Available Slots:</label>
-              <select
-                name="appointments"
-                class="dvalid"
-                id="appointments"
-              >
-                <option value="">--Select Slot--</option>
-              </select>
-            </div>
           </div>
+          </div>
+        </main>
 
-          <input
-            type="submit"
-            name="booked"
-            id="slotBook"
-            value="Book"
-            class="submit"
-          />
-        </div>
-      </div>
-      </div>
-    </main>
+    </div>
+
   </div>
 
     <script src="/javascript/patientPanel/appointment.js"></script>

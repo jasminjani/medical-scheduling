@@ -33,43 +33,52 @@ const sundayOffset = 7 - currentDay;
 const sunday = new Date(today);
 sunday.setDate(today.getDate() + sundayOffset);
 
+const handleChange = (e) => {
+  if (new Date(e.target.value) > sunday) {
+    return Swal.fire("Please select date of this week only");
+  }
+}
+
+const handleInput = (times, i) => {
+  const newNode = document.createElement("input");
+  newNode.setAttribute("type", "text");
+  newNode.setAttribute("name", `day${i + 1}`);
+  newNode.setAttribute("class", "A3-time");
+  newNode.setAttribute("placeholder", "hh:mm");
+  newNode.addEventListener("mouseover", handleFocus(newNode));
+  times.insertBefore(newNode, times.children[times.children.length - 1])
+    .addEventListener("change", (e) => {
+      let startTime = e.target.value;
+      const slotGap = document.getElementById("slot_gap").value;
+      let [hours, minutes] = startTime.split(":").map(Number);
+      minutes += Number(slotGap);
+      hours += Math.floor(minutes / 60);
+      minutes = minutes % 60;
+      const endTime = hours.toString().padStart(2, "0") + ":" + minutes.toString().padStart(2, "0");
+      e.target.value += "-" + endTime;
+    })
+}
+
+const handleButton = (addButton, date, times, i) => {
+  addButton[0].addEventListener("click", (e) => {
+    const d = date.getElementsByTagName("input")[0].value;
+    if (!d) {
+      return Swal.fire("Please select a date!!")
+    }
+    if (times.children.length > 1 && !times.children[times.children.length - 2].value) {
+      return Swal.fire("Please fill previous slot!!");
+    }
+    handleInput(times, i);
+  })
+}
+
+
 for (let i = 0; i < rows.length; i++) {
   const addButton = rows[i].getElementsByClassName("A3-buttons");
   const times = rows[i].getElementsByClassName("times")[0];
   const date = rows[i].getElementsByClassName("date")[0];
   date.getElementsByTagName("input")[0].setAttribute("min", minDate);
-  addButton[0].addEventListener("click", (e) => {
-    const d = date.getElementsByTagName("input")[0].value;
-    if (!d) return Swal.fire("Please select a date!!");
-    if (new Date(d) > sunday)
-      return Swal.fire("Please select date of this week only");
-    if (
-      times.children.length > 1 &&
-      !times.children[times.children.length - 2].value
-    )
-      return Swal.fire("Please fill previous slot!!");
-    const newNode = document.createElement("input");
-    newNode.setAttribute("type", "text");
-    newNode.setAttribute("name", `day${i + 1}`);
-    newNode.setAttribute("class", "A3-time");
-    newNode.setAttribute("placeholder", "hh:mm");
-    newNode.addEventListener("mouseover", handleFocus(newNode));
-    times
-      .insertBefore(newNode, times.children[times.children.length - 1])
-      .addEventListener("change", (e) => {
-        let startTime = e.target.value;
-        const slotGap = document.getElementById("slot_gap").value;
-        let [hours, minutes] = startTime.split(":").map(Number);
-        minutes += Number(slotGap);
-        hours += Math.floor(minutes / 60);
-        minutes = minutes % 60;
-        const endTime =
-          hours.toString().padStart(2, "0") +
-          ":" +
-          minutes.toString().padStart(2, "0");
-        e.target.value += "-" + endTime;
-      });
-  });
+  handleButton(addButton, date, times, i);
 }
 
 const handleGenerate = async (e) => {
