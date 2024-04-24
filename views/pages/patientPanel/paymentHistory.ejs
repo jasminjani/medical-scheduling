@@ -13,7 +13,7 @@
   <!-- CSS for status drop-down -->
   <link rel="stylesheet" href="/css/patientCSS/paymentHistory.css">
   <!-- JS  -->
-  <script src="/javascript/patientPanel/paymentHistory.js"></script>
+  <script src="/javascript/patientPanel/paymentHistory.js" defer></script>
   <style>
     #a5-patient-payment-active {
       background-color: #0969da;
@@ -45,6 +45,8 @@
             </div>
             <p id="a5-btn-search" onclick="searchPatientPayment()" on tabindex="2">Search</p>
           </div>
+          <p id="a5-btn-search" onclick="searchPatientPayment()" tabindex="2">Search</p>
+        </div>
 
           <div class="a5-all-user">
             <div class="table-heading">
