@@ -120,6 +120,9 @@ exports.getSingleSlots = async (req, res) => {
       and doctor_id = ? and date = ? and is_booked = 0 and is_deleted = 0;`;
 
       [result] = await conn.query(query, [doctor_id, date]);
+
+      console.log(result);
+
     } catch (error) {
       return res.status(500).json({ success: false, message: error.message });
     }

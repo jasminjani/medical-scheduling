@@ -37,8 +37,6 @@ const getSlots = async (date) => {
 
   const { message } = await response.json();
 
-  // console.log(message);
-
   document.getElementById("A3-modal-date").innerHTML = date;
 
   const table = document.getElementById("slot-body");
@@ -52,7 +50,7 @@ const getSlots = async (date) => {
         <td>${element.end_time}</td>
         <td>${element.patient_name ? element.patient_name : "-"}</td>
         <td>${element.phone ? element.phone : "-"}</td>
-        <td>${!element.is_canceled ? `<input type="button" value="Delete" onclick=openDeleteModal(${element.id}) />` : `<i class="fa-solid fa-xmark"></i>`}</td>
+        <td>${!element.is_canceled ? `<input type="button" value="Delete" onclick=openDeleteModal(${element.id}) />` : `Canceled`}</td>
       </tr>
     `
   });
