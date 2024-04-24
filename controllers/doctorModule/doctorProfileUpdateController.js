@@ -19,6 +19,7 @@ exports.updateGetDoctorData = async (req, res) => {
 
 exports.updateDoctorDetails = async (req, res) => {
   //doctor_id get token
+  console.log(req.body);
   let doctor_id = req.user.id
   const { fname, lname, dob, gender, phone, address, name, location, gst_no, city, pincode, qualification, consultancy_fees, id, hospital_id, speciality } = req.body;
   let profile_picture = req.file?.filename || ""
@@ -109,9 +110,11 @@ exports.updateDoctorDetails = async (req, res) => {
     }
    }
     
-    res.render('pages/doctorPanel/doctorProfileUpdate',{ alert:"success"})
+    return res.status(200).json({ success: true, message: "Updated successfully" });
   } catch (error) {
+    console.log(error);
     return res.json({
+     
       success: false,
       message: error.message,
     });

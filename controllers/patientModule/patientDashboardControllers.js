@@ -125,7 +125,7 @@ exports.patientProfileUpdateData = async (req, res) => {
 exports.postPatientProfileUpdate = async (req, res) => {
   try {
     const patient_id = req.user.id
-    const { fname, lname, dob, phone, address, city } = req.body
+    const { fname, lname, dob, phone, address, city, gender } = req.body
     const profile_picture = req.file?.filename || ""
 
 
@@ -144,7 +144,7 @@ exports.postPatientProfileUpdate = async (req, res) => {
     }
 
     try {
-      await conn.query(`update users set fname = ?,lname = ?, dob = ?, phone = ?, address = ?, city = ? where users.id = ? and role_id = ?`, [fname, lname, dob, phone, address, city, patient_id, 1])
+      await conn.query(`update users set fname = ?,lname = ?, dob = ?, phone = ?, address = ?, city = ?, gender =? where users.id = ? and role_id = ?`, [fname, lname, dob, phone, address, city,gender, patient_id, 1])
 
     } catch (error) {
       return res.json({
@@ -175,12 +175,8 @@ exports.postPatientProfileUpdate = async (req, res) => {
         })
       }
     }
+    return res.status(200).json({success:true,message:"Updated Successfully"})
 
-
-    res.json({
-      success: true,
-      message: "Update Successfully"
-    })
   } catch (error) {
     return res.json({
       success: false,
