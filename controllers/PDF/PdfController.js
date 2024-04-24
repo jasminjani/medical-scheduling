@@ -26,22 +26,18 @@ exports.generatePDF = async (req, res) => {
         where prescriptions.id = ?`;
 
     const [result] = await conn.query(query,[id]);
-    const patient_name = result[0].patient_name;
-    const doctor_name = result[0].doctor_name;
-    const prescription = result[0].prescription;
-    const diagnosis = result[0].diagnoses;
     const appointment_date = result[0].created_at.toString().slice(0, 10);
 
     res.setHeader(
       "Content-disposition",
-      `attachment; filename=prescription-${patient_name}.pdf`
+      `attachment; filename=prescription-${result[0].patient_nametient_name}.pdf`
     );
     res.setHeader("Content-type", "application/pdf");
 
     let doc = new PDFDocument({ margin: 50 });
 
     //header
-	  doc.image('public/assets/final-logo.png', 50, 42, { width: 100 })
+	  doc.image('public/assets/final-logo.png', 50, 42, { width: 70 })
 		.fillColor('#444444')
     .moveDown()
 		.fontSize(22)
