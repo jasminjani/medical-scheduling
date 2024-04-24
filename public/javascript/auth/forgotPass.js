@@ -69,7 +69,7 @@ submit.addEventListener("click", async (e) => {
         let html = `
                     <div>
                       <p>Create New Password Link</p>
-                      <a href="/forgot?token=${data.token}&email=${email}">http://localhost:8000/forgot?token=${data.token}&email=${email}</a>
+                      <a href="/forgot?token=${data.token}&email=${email}">/forgot?token=${data.token}&email=${email}</a>
                       </div>
               `;
 

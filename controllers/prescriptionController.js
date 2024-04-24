@@ -90,7 +90,7 @@ exports.createPrescription = async (req, res) => {
 exports.updateDetails = async (req, res) => {
   try {
     const id = req.params.id;
-    let query = `select concat(users.fname," ",users.lname) as patient_name,convert(prescriptions.created_at,date),diagnoses,prescription from prescriptions join users on prescriptions.patient_id= users.id where prescriptions.id=?`;
+    let query = `select concat(users.fname," ",users.lname) as patient_name,convert(prescriptions.created_at,date) as appointment_date,diagnoses,prescription from prescriptions join users on prescriptions.patient_id= users.id where prescriptions.id=?`;
     let [result] = await conn.query(query, [id]);
     res.status(200).json({success:true,result});
   } catch (error) {

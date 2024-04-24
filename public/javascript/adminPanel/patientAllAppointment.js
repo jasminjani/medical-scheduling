@@ -3,10 +3,9 @@ async function fetchPatientAllAppointment() {
   try {
     let patient_id = window.location.href.split('/').pop();
 
-    const url = `http://localhost:8000/admin/get-patient-appointment/${patient_id}`;
+    const url = `/admin/get-patient-appointment/${patient_id}`;
     const response = await fetch(url);
     const result = await response.json();
-    console.log(result);
 
     await appendPatientDetails(result);
     await appendPatientAllAppointment(result);
@@ -22,7 +21,7 @@ async function appendPatientDetails(result) {
 
     let html = `<div class="a5-patient">
     <div class="a5-patient-img">
-      <img src="/assets/adminPanel/patient.png" alt="image">
+      <img src="/imgs/${result.patientDetails[0].profile_picture}" alt="image">
     </div>
     <div class="a5-patient-details">
       <h1>${result.patientDetails[0].fname + " " + result.patientDetails[0].lname}
@@ -68,20 +67,20 @@ async function appendPatientDetails(result) {
 async function appendPatientAllAppointment(result) {
   try {
 
-    if (result.allAppointment.length < 1) {
-      document.getElementById('a5-tbody').innerHTML = `<tr><td colspan="5">No data found!!</td></tr>`;
-    } else {
-
-      let header = `<tr>
-                    <th></th>
+    let header = `<tr>
+                    <th>Sr no.</th>
                     <th>Doctor Name</th>
                     <th>Speciality</th>
                     <th>Appointment Date</th>
                     <th>Details</th>
                   </tr>`;
 
-      document.getElementById('a5-tbody').innerHTML = header;
-      let index = 1;
+    document.getElementById('a5-tbody').innerHTML = header;
+    let index = 1;
+
+    if (!result.allAppointment) {
+      document.getElementById('a5-tbody').innerHTML = header + `<tr><td colspan="5">No data found!!</td></tr>`;
+    } else {
 
       result.allAppointment.forEach(element => {
         let appointmentDetails = `<tr>
@@ -114,11 +113,25 @@ funcId = function (id) {
 let show = async function (id, slot_id) {
   try {
 
-    const url = `http://localhost:8000/admin/patient-appointment/:patient_id/${slot_id}`;
+    const url = `/admin/patient-appointment/:patient_id/${slot_id}`;
     const response = await fetch(url);
     const result = await response.json();
+    let html;
+    if (!result.appointmentData) {
+      html = `<div class="a5-doctor-section">
+                <div class="a5-doctor-card">
+                  <h3> Data Not Found !! </h3>
+                </div>
+              </div>
+              <p class="a5-btn" onclick="hide('a5-popup')"> Close </p>`;
 
-    let html = `<div class="a5-doctor-section">
+    } else {
+
+      let appointmentStatus;
+      if (result.appointmentData[0].is_refunded == 1) { appointmentStatus = "Refund" }
+      if (result.appointmentData[0].is_refunded == 0) { appointmentStatus = "Success" }
+
+      html = `<div class="a5-doctor-section">
               <div class="a5-doctor-card">
                 <h3>Dr. ${result.appointmentData[0].fname + " " + result.appointmentData[0].lname}
                 </h3>
@@ -130,6 +143,9 @@ let show = async function (id, slot_id) {
                     <p><span class="a5-bold">Hospital :</span>
                       ${result.appointmentData[0].name}
                     </p>
+                    <p><span class="a5-bold">Amount :</span>
+                      ${result.appointmentData[0].payment_amount}
+                    </p>
                   </div>
                   <div class="a5-doctor-more-detail">
                     <p><span class="a5-bold">Appointment Date :</span>
@@ -137,6 +153,9 @@ let show = async function (id, slot_id) {
                     </p>
                     <p><span class="a5-bold">Time :</span>
                       ${result.appointmentData[0].start_time + " - " + result.appointmentData[0].end_time}
+                    </p>
+                    <p><span class="a5-bold">Status :</span>
+                      ${appointmentStatus}
                     </p>
                   </div>
                 </div>
@@ -152,6 +171,7 @@ let show = async function (id, slot_id) {
             </div>
 
             <p class="a5-btn" onclick="hide('a5-popup')"> Close </p>`;
+    }
 
     funcId(id).innerHTML = html;
     funcId(id).style.display = 'block';

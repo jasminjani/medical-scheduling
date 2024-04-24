@@ -18,3 +18,7 @@
 // 1 --> aproved speciality
 
 
+// --------------------------
+// in admin panel patient section popup 
+// 0 ----> Payment Success
+// 1 ----> Payment Refund
