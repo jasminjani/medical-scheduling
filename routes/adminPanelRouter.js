@@ -57,8 +57,8 @@ adminRouter.route('/admin/patient-appointment/:patient_id/:slot_id').get(isAdmin
 
 
 // all doctor list in admin panel
-adminRouter.route('/get-all-doctors').get(isAdmin,getAllDoctors);
-adminRouter.route('/delete-doctor/:id').get(isAdmin,deleteDoctor);
+adminRouter.route('/admin/get-all-doctors').get(isAdmin,getAllDoctors);
+adminRouter.route('/admin/delete-doctor/:id').get(isAdmin,deleteDoctor);
 
 
 adminRouter.route('/admin/all-patient').get(isAdmin,displayAllPatient);

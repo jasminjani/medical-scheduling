@@ -1,4 +1,5 @@
 const conn = require("../../config/dbConnection");
+const logger = require("../../utils/pino");
 
 exports.displayAllPatient = async (req, res) => {
   try {
