@@ -9,7 +9,7 @@ async function searchPatient() {
       result = copyData;
     }else {
 
-    const url = `http://localhost:8000/admin/display-search-patient/${searchedName}`;
+    const url = `/admin/display-search-patient/${searchedName}`;
     const response = await fetch(url);
     result = await response.json();
     result = result.allPatient;

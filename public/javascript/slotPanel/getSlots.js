@@ -2,7 +2,7 @@ window.location.href.split("/").pop() === "upcomingSlots" ? document.getElementB
 
 // Add Doctor id from cookie
 const getDates = async () => {
-  const response = await fetch("http://localhost:8000/dates", {
+  const response = await fetch("/dates", {
     method: "GET",
     headers: {
       "Content-type": "application/json"
@@ -28,7 +28,7 @@ const getSlots = async (date) => {
 
   document.getElementsByClassName("A3-modal")[0].style.visibility = "visible";
 
-  const response = await fetch(`http://localhost:8000/slots/${date}`, {
+  const response = await fetch(`/slots/${date}`, {
     method: "GET",
     headers: {
       "Content-type": "application/json"
@@ -36,8 +36,6 @@ const getSlots = async (date) => {
   });
 
   const { message } = await response.json();
-
-  // console.log(message);
 
   document.getElementById("A3-modal-date").innerHTML = date;
 
@@ -52,7 +50,7 @@ const getSlots = async (date) => {
         <td>${element.end_time}</td>
         <td>${element.patient_name ? element.patient_name : "-"}</td>
         <td>${element.phone ? element.phone : "-"}</td>
-        <td>${!element.is_canceled ? `<input type="button" value="Delete" onclick=openDeleteModal(${element.id}) />` : `<i class="fa-solid fa-xmark"></i>`}</td>
+        <td>${!element.is_canceled ? `<input type="button" value="Delete" onclick=openDeleteModal(${element.id}) />` : `Canceled`}</td>
       </tr>
     `
   });

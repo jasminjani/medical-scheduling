@@ -26,10 +26,10 @@ adminRouter.route('/admin/approve-doctors').get(isAdmin,adminApproveDoctors)
 adminRouter.route('/admin/add-specialites').get(isAdmin,adminAddSpecialites)
 
 // add specialties in admin panel
-adminRouter.route('/get-specialties').get(isAdmin,getSpecialties);
-adminRouter.route('/delete-specialty').post(isAdmin,deleteSpecialty);
-adminRouter.route('/get-new-specialties').get(isAdmin,getNewSpecialties);
-adminRouter.route('/add-specialty').post(isAdmin,addNewSpecialties);
+adminRouter.route('/admin/get-specialties').get(isAdmin,getSpecialties);
+adminRouter.route('/admin/delete-specialty').post(isAdmin,deleteSpecialty);
+adminRouter.route('/admin/get-new-specialties').get(isAdmin,getNewSpecialties);
+adminRouter.route('/admin/add-specialty').post(isAdmin,addNewSpecialties);
 
 
 // approve doctor panel in admin panel

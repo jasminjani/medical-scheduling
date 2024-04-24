@@ -8,9 +8,11 @@
   <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css">
   <link rel="stylesheet" href="/css/doctorPanel/profile.css">
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
+   <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css">
+  <script src="/sweetalert2/sweetalert2.min.js"></script>
   <!-- <script src="/javascript/doctorPanel/fetchSpeciality.js" defer></script> -->
   <script src="/javascript/doctorPanel/fetchCity.js" defer></script>
-  <!-- <script src="/javascript/doctorPanel/validation.js" defer></script> -->
+ <script src="/javascript/patientPanel/patientProfileUpdate.js" defer></script>
   <script src=" /javascript/doctorPanel/doctorValidation.js"></script>
   <title>Edit Profile</title>
 </head>
@@ -27,7 +29,7 @@
           <div class="a7-card-box">
             <div class="a7-card-color">
               <div class="a7-profile-info">
-                <form action="" id="myform" method="post" enctype="multipart/form-data" onsubmit="return validate()">
+                <form action="" id="myform" >
                 
                   <div class="a7-field-inp"><label for="">Firstname:</label>
                     <input type="text" name="fname" id="firstname" class="a7-form-input dvalid" value="" />
@@ -49,7 +51,7 @@
                   </div>
                   <div class="a7-field-inp">
                     <label for="">Contact:</label>
-                    <input type="text" name="phone" id="" class="a7-form-input dvalid" value="" />
+                    <input type="text" name="phone" id="phone" class="a7-form-input dvalid" value="" />
                   </div>
                   <div class="a7-field-inp">
                     <label for="">Address:</label>
@@ -58,7 +60,7 @@
                   <div class="a7-field-inp" >
                     <label for="">Profile:</label>
                     <div id="file" style="display: none;">
-                    <input type="file" name="profile_picture" class="a7-form-input " id="" style="height: 45px;" >
+                    <input type="file" name="profile_picture" class="a7-form-input " id="profile_picture" style="height: 45px;" >
                       </div>
                       <div id="updateImage">                        
                       </div>
@@ -70,7 +72,7 @@
                     </select>
                   </div>
                   <div class="a7-field-inp">
-                    <input type="submit" name="" id="" class="a7-update-btn" value="Update" />
+                    <input type="button" name="" id="" class="a7-update-btn" value="Update" onclick="postPatientData()"/>
                   </div>
                 </form>
               </div>
@@ -81,41 +83,6 @@
     </div>
   </div>
   </div>
- <script>
-
-  const patientProfileFetchData = async ()=>{
-      const fetchData = await fetch('/patientProfileUpdateData')
-      const data = await fetchData.json()
-      const key = Object.keys(data[0])
-      key.forEach(element => {
-        if(element == "gender" || element == "profile_picture")
-        {
-          let radio = document.getElementsByName('gender')
-          radio.forEach(item => {
-              if(item.value == data[0][element]){
-               
-                  item.checked = true
-              }
-          });
-            let profile = document.createElement("img")
-            profile.src = `/imgs/${data[0][element]}`
-          document.getElementById("updateImage").innerHTML = `<img src = "/imgs/${data[0][element]}"  alt="" height="200px" width="200px" /> <span onclick= 'profileFun()'>Cancel</span>`
-        }
-        else{
-          console.log(element);
-          let a=  document.getElementsByName(element)[0].value = data[0][element]
-        
-        }
-      });
-  }
-
-
-patientProfileFetchData()
-
-  const profileFun = () => { 
-  document.getElementById("file").style.display = "block"
-  document.getElementById("updateImage").style.display = "none"
-}
- </script>
+ 
 </body>
 </html>

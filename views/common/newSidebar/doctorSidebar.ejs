@@ -46,11 +46,11 @@
 <script src="/javascript/doctorPanel/sidebar.js"></script>
 <script>
 
-  document.getElementById("logout").href = "http://localhost:8000/logout"
+  document.getElementById("logout").href = "/logout"
 
   async function fetchSideBarDetails() {
 
-    let fetchData = await fetch(`http://localhost:8000/doctorSideBarDetail/`)
+    let fetchData = await fetch(`/doctorSideBarDetail/`)
     let data = await fetchData.json()
     console.log(data);
     let key = Object.keys(data[0])

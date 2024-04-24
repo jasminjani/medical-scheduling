@@ -532,7 +532,7 @@ exports.activationForm = async (req, res) => {
       <p><img src="/assets/done.png" class="done" alt=""></p>
       <p class="thanks-msg">Thank You for Your Registration!</p>
       <p class="activate-msg">Click on Below Link to Activate Your Account</p>
-      <p class="activate-link"><a href="http://localhost:8000/activate/?activationKey=${token}&email=${email}" target="_blank">http://localhost:8000/activate/?activationKey=${token}&email=${email}</a></p>
+      <p class="activate-link"><a href="/activate/?activationKey=${token}&email=${email}" target="_blank">http://localhost:8000/activate/?activationKey=${token}&email=${email}</a></p>
     </div>
   </div>`;
 

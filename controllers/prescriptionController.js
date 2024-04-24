@@ -31,17 +31,19 @@ exports.showDetails = async (req, res) => {
     users.phone,
     users.gender,
     users.dob,
+    users.city,
     users.address,
+    profile_pictures.profile_picture,
     COALESCE(patient_details.blood_group, 'Not Specified') AS blood_group
-FROM
-    users
-LEFT JOIN
+    FROM users
+    LEFT JOIN
     patient_details ON users.id = patient_details.patient_id
-WHERE
-    users.id = ?;`;
+    join profile_pictures on profile_pictures.user_id=users.id
+    WHERE
+    users.id = ?`;
     const [result] = await conn.query(query, [id]);
     // console.log(result);
-    res.json({ result });
+    res.json(result);
     // res.render("pages/createPrescription.ejs", { result });
   } catch (error) {
     return res.status(500).json({
@@ -88,9 +90,9 @@ exports.createPrescription = async (req, res) => {
 exports.updateDetails = async (req, res) => {
   try {
     const id = req.params.id;
-    let query = `select concat(users.fname," ",users.lname) as patient_name,convert(prescriptions.created_at,date),diagnoses,prescription from prescriptions join users on prescriptions.patient_id= users.id where prescriptions.id=?`;
+    let query = `select concat(users.fname," ",users.lname) as patient_name,convert(prescriptions.created_at,date) as appointment_date,diagnoses,prescription from prescriptions join users on prescriptions.patient_id= users.id where prescriptions.id=?`;
     let [result] = await conn.query(query, [id]);
-    res.status(200).json({success:true,result: result});
+    res.status(200).json({success:true,result});
   } catch (error) {
     return res.status(500).json({
       success: false,
