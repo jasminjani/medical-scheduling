@@ -50,7 +50,7 @@ exports.patientPrescriptionData = async (req, res) => {
   const date = req.params.date
 
   try {
-    const [result] = await conn.query(`select time_slots.start_time,time_slots.end_time,prescriptions.prescription,prescriptions.diagnoses from prescriptions inner join time_slots on prescriptions.booking_id = time_slots.id where prescriptions.patient_id = ? and prescriptions.doctor_id = ? and time_slots.date = ? and time_slots.is_booked = 1;`, [patient_id, doctor_id, date])
+    const [result] = await conn.query(`select time_slots.start_time,time_slots.end_time,prescriptions.prescription,prescriptions.diagnoses from prescriptions inner join slot_bookings on prescriptions.booking_id = slot_bookings.id inner join time_slots on slot_bookings.slot_id =time_slots.id where prescriptions.patient_id = ? and prescriptions.doctor_id = ? and time_slots.date = ? and time_slots.is_booked = 1;`, [patient_id, doctor_id, date])
     res.json(result)
   } catch (error) {
     return res.json({
