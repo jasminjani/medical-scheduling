@@ -120,7 +120,12 @@ async function showDetails() {
 showDetails();
 
 // let date=new Date();
+// console.log(date.getTimezoneOffset());
+// console.log(date.toISOString());
+// let utcdate=new Date(date.toISOString());
+// console.log(date.toLocaleString());
 // alert(utcformat(date));
+// alert(utcToLocal(utcdate));
 
 // function utcformat(d){
 //     d= new Date(d);
@@ -128,9 +133,12 @@ showDetails();
 //     T= [d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds()];
 //     if(+T[0]> 12){
 //         T[0]-= 12;
-//         tail= ' pm '+tail;
+//         tail= ' PM '+tail;
 //     }
-//     else tail= ' am '+tail;
+//     else if(T[0]=12){
+//       tail= ' PM '+tail;
+//     }
+//     else tail= ' AM '+tail;
 //     var i= 3;
 //     while(i){
 //         --i;
@@ -140,6 +148,12 @@ showDetails();
 //     return D.join('/')+' '+T.join(':')+ tail;
 // }
 
+// function utcToLocal(utcdate){
+//   const offset=utcdate.getTimezoneOffset();
+//   const localtime=new Date(utcdate.getTime()- offset * 60 * 1000);
+//   const localTimeString = localtime.toLocaleString();
+//   return localTimeString;
+// }
 
 async function appendPatientDetails(result) {
   try {
