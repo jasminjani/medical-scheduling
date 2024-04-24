@@ -1,3 +1,9 @@
+:root {
+  --light-blue: #b3d3ea;
+  --brown: #e7e7e7;
+  --blue: #0969da;
+  --white: #ffffff;
+}
 * {
   box-sizing: border-box;
   margin: 0px;
@@ -16,6 +22,10 @@
   font-size: 25px;
   font-weight: 700;
   line-height: 2;
+  position: sticky;
+  top: 0px;
+  background-color: white;
+  padding: 11px 17px;
 }
 
 
@@ -52,7 +62,7 @@
 
 .a7-appointment-tbl {
   background-color: #f4f7f8;
-  padding: 35px 0;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,35 +70,39 @@
 
 .a7-table-row {
   width: 90%;
+  overflow: scroll;
+  height: 400px;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
-  padding: 25px;
+  /* padding: 25px; */
   border-radius: 15px;
   /* align-items: center; */
 }
 
 .a7-tbl{
-  height: 300px;
+  /* height: 300px; */
   overflow: scroll;
 }
 
-/* .a7-table-header {
-display: flex;
+.a7-table-header {
 position: sticky;
-top: 0px;
-background-color: #ffffff;
-  font-size: 20px;
-  color: #2c5777;
-  line-height: 3;
-  font-weight: 600;
-  justify-content: center;
-  gap: 45px;
-  margin-left: 22px;
-} */
+height: 20px;
+  top: 73px;
+  background-color: white;
+} 
 #addprescription-btn{
   padding: 10px;
   width: fit-content;
+  background-color: var(--light-blue);
+  border-radius: 4px;
+  font-size: 15px;
+}
+#addprescription-btn:hover{
+  background-color: var(--blue);
+  color: var(--white);
+  cursor: pointer;
+  font-size: 15px;
 }
 
 .a7-table-data {

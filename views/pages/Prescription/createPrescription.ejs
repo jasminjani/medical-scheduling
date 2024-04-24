@@ -16,10 +16,10 @@
 
         <div class="A4-main">
           <div class="A4-backbtn"><p class="A4-back-btn A4-btn" onclick="back()"><img src="/assets/adminPanel/icons/back-iceblue.svg" id="A4-arrow-img" alt="Back"> Back</p></div>
-          <div class="A4-title">
+          <!-- <div class="A4-title">
             <h1>Patient Details</h1>
-          </div>
-          <div class="A4-Content">
+          </div> -->
+          <!-- <div class="A4-Content">
             <table>
               <tr>
                 <td class="A4-table-title">Firstname:</td>
@@ -54,16 +54,18 @@
                 <td class="A4-table-content"></td>
               </tr>
             </table>
+          </div> -->
+          <div class="a5-section" id="a5-patient-basic-details">
           </div>
-          <div class="A4-prescription">
-            <input type="button" value="Add Prescription" class="A4-addPrescription" id="A4-addprescription" onclick="addprescreption()"/><br /><br />
+          <!-- <div class="A4-prescription">
+            <input type="button" value="Add Prescription" class="A4-addPrescription" id="A4-addprescription" onclick="addprescreption()"/><br /><br /> -->
             <!-- <input type="button" value="Home" class="A4-addPrescription" id="A4-home" onclick="goToHome()"/><br /><br /> -->
             <!-- <input type="button" value="Get PDF" class="A4-addPrescription" id="A4-generatePdf" onclick="generatePDF()"/> -->
-          </div>
+          <!-- </div> -->
 
-          <div class="A4-PrescriptionDetails">
-            <h3>Enter Details here:</h3>
-            <form action="" id="myForm">
+          <form action="" id="myForm">
+              <div class="A4-PrescriptionDetails">
+              <h2>Enter Prescription here</h2>
               <input type="hidden" value="<%= patient_id %>" name="patient_id" id="id" />
               <input type="hidden" value="<%= booking_id %>" name="booking_id" id="booking_id" />
               <label for="diagnosis">Diagnosis:</label>
@@ -74,11 +76,11 @@
               <textarea id="prescription" name="prescription" rows="6" cols="50" onkeypress="removeError('prescriptionerror')"></textarea>
               <p id="prescriptionerror"></p><br />
 
-              <div class="A4-submitBtn">
-                <input type="button" value="Submit" class="A4-submitbtn" onclick=" return submitPrescription()"/>
-              </div>
+            </div>
+            <div class="A4-submitBtn">
+              <input type="button" value="Submit" class="A4-submitbtn" onclick=" return submitPrescription()"/>
+            </div>
             </form>
-          </div>
         </div>
       </div>
     </div>
