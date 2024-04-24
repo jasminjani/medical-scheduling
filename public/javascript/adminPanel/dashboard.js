@@ -43,9 +43,9 @@ const putDoctorOnScreen = async (data) => {
     }
 
     card += `<div class="card">
-    <a href="/bookslots/${doctor.id}" class="img">
+    <p class="img">
       <img src="/imgs/${doctor.profile_picture}" alt="" >
-    </a>
+    </p>
     <div class="details">
       <p class="name">${doctor.fname + " " + doctor.lname}</p>
       </div>
