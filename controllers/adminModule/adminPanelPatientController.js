@@ -6,6 +6,7 @@ exports.displayAllPatient = async (req, res) => {
     res.render('pages/adminPanel/allPatientDetail')
 
   } catch (error) {
+    logger.error(error.message);
     return res.status(500).json({
       success: false,
       message: error.message
@@ -22,6 +23,7 @@ exports.getAllPatients = async (req, res) => {
     res.json(allPatient);
 
   } catch (error) {
+    logger.error(error.message);
     return res.status(500).json({
       success: false,
       message: error.message
@@ -46,6 +48,7 @@ exports.searchPatientByName = async (req, res) => {
     res.send({ allPatient: searchedPatient })
 
   } catch (error) {
+    logger.error(error.message);
     return res.status(500).json({
       success: false,
       message: error.message

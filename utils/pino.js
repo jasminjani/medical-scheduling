@@ -12,10 +12,12 @@ const transport = pino.transport({
   ],
 });
 
-module.exports = pino(
+const logger = pino(
   {
     level: process.env.PINO_LOG_LEVEL || 'info',
     timestamp: pino.stdTimeFunctions.isoTime,
   },
   transport
 );
+
+module.exports = logger

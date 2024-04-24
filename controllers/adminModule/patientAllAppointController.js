@@ -6,6 +6,8 @@ exports.patientAllAppointment = async (req, res) => {
     res.render('pages/adminPanel/patientAllAppointment');
 
   } catch (error) {
+    logger.error(error.message);
+    logger.error(error.message);
     return res.status(500).json({
       success: false,
       message: error.message
@@ -30,6 +32,7 @@ exports.getPatientAllAppointment = async (req, res) => {
       FROM users JOIN patient_details ON users.id = patient_details.patient_id WHERE users.id = ?`;
     const [patientDetails] = await conn.query(sql, [patient_id]);
     // } catch (error) {
+    //   logger.error(error.message);
     //   return res.status(500).json({
     //     success: false,
     //     message: error.message
@@ -47,16 +50,18 @@ exports.getPatientAllAppointment = async (req, res) => {
     const [allAppointment] = await conn.query(sql2, [patient_id]);
 
     // } catch (error) {
+    // logger.error(error.message);
     //   return res.status(500).json({
     //     success: false,
     //     message: error.message
     //   })
     // }
-    console.log(allAppointment);
-    console.log(patientDetails);
-    res.send( { patientDetails: patientDetails, allAppointment: allAppointment } );
+    // console.log(allAppointment);
+    // console.log(patientDetails);
+    res.send({ patientDetails: patientDetails, allAppointment: allAppointment });
 
   } catch (error) {
+    logger.error(error.message);
     return res.status(500).json({
       success: false,
       message: error.message
@@ -93,6 +98,7 @@ exports.appointmentDetails = async (req, res) => {
     res.send({ appointmentData: appointmentData })
 
   } catch (error) {
+    logger.error(error.message);
     return res.status(500).json({
       success: false,
       message: error.message

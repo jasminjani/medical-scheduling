@@ -21,6 +21,7 @@ exports.dashboardStatus = async (req, res) => {
     res.send({ totalDoctor: totalDoctor, totalPatient: totalPatient, todayAppointment: todayAppointment, totalRevenue: totalRevenue });
 
   } catch (error) {
+    logger.error(error.message);
     res.status(500).json({
       success: false,
       message: error.message

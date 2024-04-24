@@ -6,7 +6,8 @@ exports.getSpecialties = async (req, res) => {
     const [result] = await conn.query('select id,speciality from specialities where approved = 1');
     res.json(result);
   } catch (error) {
-    console.log(error);
+    logger.error(error.message);
+    
   }
 }
 
@@ -16,7 +17,8 @@ exports.deleteSpecialty = async (req, res) => {
     await conn.query('update specialities set approved = 0 where id = ?', [req.body.id]);
     res.status(200).send();
   } catch (error) {
-    console.log(error);
+    logger.error(error.message);
+    
   }
 }
 
@@ -27,7 +29,8 @@ exports.getNewSpecialties = async (req, res) => {
     res.json(result);
 
   } catch (error) {
-    console.log(error);
+    logger.error(error.message);
+    
   }
 }
 
@@ -38,7 +41,8 @@ exports.addNewSpecialties = async (req, res) => {
     res.status(200).send();
 
   } catch (error) {
-    console.log(error);
+    logger.error(error.message);
+    
   }
 
 }
