@@ -1,13 +1,15 @@
-const conn = require("../../config/dbConnection")
+const conn = require("../../config/dbConnection");
+const logger = require("../../utils/pino");
 
 exports.getSpecialties = async (req, res) => {
 
   try {
     const [result] = await conn.query('select id,speciality from specialities where approved = 1');
+
     res.json(result);
   } catch (error) {
     logger.error(error.message);
-    
+
   }
 }
 
@@ -18,7 +20,7 @@ exports.deleteSpecialty = async (req, res) => {
     res.status(200).send();
   } catch (error) {
     logger.error(error.message);
-    
+
   }
 }
 
@@ -30,7 +32,7 @@ exports.getNewSpecialties = async (req, res) => {
 
   } catch (error) {
     logger.error(error.message);
-    
+
   }
 }
 
@@ -42,7 +44,7 @@ exports.addNewSpecialties = async (req, res) => {
 
   } catch (error) {
     logger.error(error.message);
-    
+
   }
 
 }
