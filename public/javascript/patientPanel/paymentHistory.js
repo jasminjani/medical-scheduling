@@ -33,6 +33,16 @@ async function searchPatientPayment() {
   }
 }
 
+let searchBtn = document.getElementById('a5-btn-search');
+
+searchBtn.addEventListener('keyup', function (event) {
+  try {
+    if (event.key === 'Enter') {
+      searchPatientPayment();
+    }
+  } catch (e) { console.log(e); }
+});
+
 
 async function appendPatientPayment() {
   try {
