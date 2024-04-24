@@ -1,16 +1,19 @@
+let copyData = [];
 
 async function searchPatient() {
   try {
 
+    let result;
     const searchedName = document.getElementById('a5-searchPatient').value;
+    if (!searchedName) {
+      result = copyData;
+    }else {
 
     const url = `/admin/display-search-patient/${searchedName}`;
     const response = await fetch(url);
-    const result = await response.json();
-
-    if (result.allPatient.length < 1) {
-      document.getElementById('a5-tbody').innerHTML = `<tr><td colspan="5">No data found!!</td></tr>`;
-    } else {
+    result = await response.json();
+    result = result.allPatient;
+    }
 
       let html = `<tr>
                 <th>Sr no.</th>
@@ -23,7 +26,11 @@ async function searchPatient() {
       document.getElementById('a5-tbody').innerHTML = html;
       let index = 1;
 
-      result.allPatient.forEach(element => {
+    if (!result) {
+      document.getElementById('a5-tbody').innerHTML = html + `<tr><td colspan="5">No data found!!</td></tr>`;
+    } else {
+
+      result.forEach(element => {
         let html2 = `<tr>
                 <td>${index++}</td>
                 <td>${element.fname}</td>
@@ -41,15 +48,15 @@ async function searchPatient() {
   }
 }
 
-// let searchBtn = document.getElementById('a5-btn-search');
+let searchBtn = document.getElementById('a5-btn-search');
 
-// searchBtn.addEventListener('keyup', function (event) {
-//   try {
-//     if (event.key === 'Enter') {
-//       searchPatient();
-//     }
-//   } catch (e) { console.log(e); }
-// });
+searchBtn.addEventListener('keyup', function (event) {
+  try {
+    if (event.key === 'Enter') {
+      searchPatient();
+    }
+  } catch (e) { console.log(e); }
+});
 
 
 let tbody = document.getElementById('a5-tbody');
@@ -60,6 +67,7 @@ async function getAllPatient() {
     let resp = await fetch('/admin/get-all-patient');
 
     let data = await resp.json();
+    copyData = data;
     let index = 1;
 
     if (data.length < 1) {
