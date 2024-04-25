@@ -88,16 +88,6 @@ const handleGenerate = async (e) => {
   const params = new URLSearchParams(details);
   const jobdata = await new Response(params).text();
 
-  const response = await fetch("/slot", {
-    method: "POST",
-    headers: {
-      "Content-type": "application/x-www-form-urlencoded"
-    },
-    body: jobdata
-  });
-  const { success } = await response.json();
-
-
   let rows = document.querySelectorAll("#myform .row");
 
   const dates = document.querySelectorAll('input[type="date"]')
@@ -135,7 +125,7 @@ const handleGenerate = async (e) => {
   const isValid = slotData.every((daySlot) => checkSlotOverlap(daySlot));
   console.log(isValid)
   if (isValid) {
-    const response = await fetch("http://localhost:8000/slot", {
+    const response = await fetch("/slot", {
       method: "POST",
       headers: {
         "Content-type": "application/x-www-form-urlencoded",
