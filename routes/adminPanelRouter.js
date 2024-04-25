@@ -60,11 +60,6 @@ adminRouter.route('/admin/patient-appointment/:patient_id/:slot_id').get(isAdmin
 adminRouter.route('/get-all-doctors').get(isAdmin,getAllDoctors);
 adminRouter.route('/delete-doctor/:id').get(isAdmin,deleteDoctor);
 
-
-adminRouter.route('/admin/all-patient').get(isAdmin,displayAllPatient);
-adminRouter.route('/admin/display-search-patient/:searchedName').get(isAdmin,searchPatientByName);
-adminRouter.route('/admin/patient-appointment/:patient_id').get(isAdmin,patientAllAppointment);
-
 // ADMIN dashboard api 
 adminRouter.route('/getDashboardStatus').get(isAdmin,dashboardStatus);
 
