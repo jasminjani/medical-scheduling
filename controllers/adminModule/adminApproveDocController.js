@@ -13,7 +13,8 @@ exports.getAllDoctors = async (req, res) => {
 
     res.json(result);
   } catch (error) {
-    console.log(error);
+    logger.error(error.message);
+
   }
 }
 
@@ -49,23 +50,25 @@ exports.individualDoctor = async (req, res) => {
       res.send("not valid doctor")
     }
     else {
-      res.json({result});
+      res.json({ result });
     }
   } catch (error) {
-    console.log(error);
+    logger.error(error.message);
+
   }
 
 }
 
 
-exports.individualDoctorRend=async(req,res)=>{
-  try{
+exports.individualDoctorRend = async (req, res) => {
+  try {
 
-    const docID=req.params.id;
-    res.render('pages/adminPanel/adminApproveSpecificDoctor.ejs', {docID})
+    const docID = req.params.id;
+    res.render('pages/adminPanel/adminApproveSpecificDoctor.ejs', { docID })
 
-  }catch (error) {
-    console.log(error);
+  } catch (error) {
+    logger.error(error.message);
+
   }
 }
 
@@ -88,11 +91,12 @@ exports.showDoctorDetail = async (req, res) => {
       res.send("not valid doctor")
     }
     else {
-      res.json({result});
+      res.json({ result });
 
     }
   } catch (error) {
-    console.log(error);
+    logger.error(error.message);
+
   }
 
 }
@@ -105,7 +109,8 @@ exports.showDoctorDetailRend = async (req, res) => {
     res.render('pages/adminPanel/adminShowOneDoc.ejs', { docID });
 
   } catch (error) {
-    console.log(error);
+    logger.error(error.message);
+
   }
 
 }
@@ -126,7 +131,8 @@ exports.approveDoctor = async (req, res) => {
     res.status(200).send()
 
   } catch (error) {
-    console.log(error);
+    logger.error(error.message);
+
   }
 }
 
@@ -142,6 +148,7 @@ exports.rejectDoctor = async (req, res) => {
     res.status(200).send()
 
   } catch (error) {
-    console.log(error);
+    logger.error(error.message);
+
   }
 }

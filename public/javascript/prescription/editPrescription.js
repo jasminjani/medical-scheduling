@@ -19,7 +19,7 @@
       });
     }
     catch(error){
-      logger.error(error);
+      console.error(error);
     }
   }
 
