@@ -1,4 +1,5 @@
 const conn = require("../../config/dbConnection");
+const logger = require("../../utils/pino");
 
 
 exports.getAllDoctors = async (req, res) => {
@@ -10,9 +11,10 @@ exports.getAllDoctors = async (req, res) => {
     inner join clinic_hospitals c on b.hospital_id = c.id  order by a.id`;
 
     const [result] = await conn.query(sql2);
-
+    console.log(result);
     res.json(result);
   } catch (error) {
+
     logger.error(error.message);
 
   }
