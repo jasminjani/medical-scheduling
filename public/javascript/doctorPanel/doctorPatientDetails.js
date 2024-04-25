@@ -24,8 +24,7 @@ const patientAppointmentDetail = async () => {
 const profileDetailData = async () => {
   let fetchData = await fetch(`/viewPatientDetailsData/${Id}`)
   let data = await fetchData.json()
-  
-
+ 
   if (data.length == 0) {
     return document.getElementById("patientname").innerHTML += "Not Found!"
   }
@@ -47,7 +46,6 @@ const profileDetailData = async () => {
          ${element['Address']}
       </p>`
   });
-
 }
 
 
@@ -62,23 +60,28 @@ let show = async function (id, date) {
   const key = Object.keys(data)
   console.log(data);
   document.getElementById("appointmentdt").innerHTML = "";
-  document.getElementById("mediInfo").innerHTML = "";
+  document.getElementById("mediBox").innerHTML = "";
 
 
   if (data.length == 0) {
-    return document.getElementById("mediInfo").innerHTML += `<p><span class="a5-bold">No Data Found!</span></p>`
+    return document.getElementById("mediBox").innerHTML += `<p><span class="a5-bold">No Data Found!</span></p>`
   }
 
   data.forEach(element => {
 
-    document.getElementById("mediInfo").innerHTML += 
-    `<div>
+    document.getElementById("mediBox").innerHTML += 
+    `
+    <div class="a7-mediInfo-box">
+                        <div class="a7-FieldData" id="mediInfo">  
+    <div>
           <p><span class="a5-bold">Start Time:</span>${element['Start Time']}</p>
           <p><span class="a5-bold">End Time:</span>${element["End Time"]}</p>
     </div>
-    <div>
-      <div><span class='a5-bold'>Diagnoses:</span></div><div><p>${element["Diagnoses"]}</p></div></div>
-      <div><div><span class="a5-bold">Presctiptions:</span></div><div>${element['Prescriptions']}</div></div>`
+    <div >
+      <div><span class='a5-bold'>Diagnoses:</span></div><div><div ><p>${element["Diagnoses"]}</p></div></div>
+      <div class="a7-presc-scroll"><div class="a7-sticky"><span class="a5-bold ">Presctiptions:</span></div><div>${element['Prescriptions']}</div></div>
+        </div>   </div>`
+
   });
 
   funcId(id).style.display = 'block';
@@ -90,3 +93,5 @@ let hide = function (id) {
 
 patientAppointmentDetail()
 profileDetailData()
+
+

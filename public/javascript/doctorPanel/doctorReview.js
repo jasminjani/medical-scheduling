@@ -11,28 +11,17 @@ const fetchDataFun = async () => {
   return data
 }
 
-const searchFetchDataFun = async ()=>{
-  let fetchdata
-  let data
-  fetchdata = await fetch(`/searchReview/${search}`)
-  data = await fetchdata.json()
-  return data
-}
+const pagination = async () => {
 
+  let data = await fetchDataFun()
 
+  if (search) {
 
-const pagination = async (result) => {
- 
-  let data
-  if(search)
-  {
-    data = await searchFetchDataFun()
+    data = data.filter((obj) => {
+      return obj.name.includes(search) || obj.review.includes(search) || obj.date.includes(search)
+    })
   }
-  else
-  {
-    data = await fetchDataFun()
-  }
-  
+
 
   length = data.length;
   pageno.innerHTML = currentPage;
@@ -55,7 +44,7 @@ const pagination = async (result) => {
   })
 
   document.getElementById("a5-tbody").innerHTML += tabledata;
-
+  
 }
 
 const removeFun = async () => {
@@ -138,14 +127,19 @@ document.querySelector('#endbtn').addEventListener("click", lastpageFun)
 document.querySelector('#previousbtn').addEventListener("click", prevButtonFun)
 document.querySelector('#nextbtn').addEventListener("click", nextButtonFun)
 
-
+let a = document.getElementById("a5-btn-search").addEventListener("click",pagination)
+console.log(a);
 
 pagination()
 
+// const searchStrategy = async (data) => {
+//       let search = "doctor & politi"
+//     let newData = data.filter((obj)=>{
+//       return obj.name.includes(search) || obj.review.includes(search) || obj.date.includes(search)
+    
+//     })
+//  console.log(newData);
+  
+  
+// }
 
-const searchStrategy = async () => {
-  let tbl = document.getElementsByClassName("csearch")
-  console.log(tbl);
-}
-
-searchStrategy()

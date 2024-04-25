@@ -1,21 +1,13 @@
 
+
 let search = document.getElementById("search").value
+
+
 const fetchData = async () => {
   let fetchdata = await fetch(`/getPatientData`)
   let data = await fetchdata.json()
   return data
 }
-
-const searchFetchDataFun = async()=>{
-  let fetchData = await fetch(`/searchPatientData/${search}`)
-  let data = await fetchData.json()
-  return data
-}
-
-let a = document.getElementById("a5-tbody").offsetParent
-
-console.log(a);
-
 
 
 let currentPage = 1;
@@ -23,14 +15,12 @@ const pagefield = 1;
 let length = 0;
 let pageno = document.getElementById("pageno");
 const pagination = async () => {
-  let data 
+   data = await fetchData()
   if (search) {
-    data = await searchFetchDataFun()
+    data = data.filter((obj) => {
+      return obj.name.includes(search) 
+    })
   }
-  else {
-    data = await fetchData()
-  }
-
 
   length = data.length;
   pageno.innerHTML = currentPage;
