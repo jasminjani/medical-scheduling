@@ -14,10 +14,9 @@
 }
 
 .main{
-  margin-left: 350px;
+  margin-left: 330px;
   padding: 10px;
   background-color: rgb(229, 248, 255);
-  /* background-color: blue; */
 }
 
 .booking-page{
@@ -141,7 +140,7 @@
 
 .A6-rating-review {
   display: flex;
-  gap: 30px;
+  gap: 60px;
 }
 
 .A6-showReview {
@@ -158,6 +157,8 @@
   padding: 20px;
   background-color: white;
   border-radius: 10px;
+  overflow-y: scroll;
+  max-height: 295px;
 }
 
 #A6-heading {
