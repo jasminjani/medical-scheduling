@@ -1,0 +1,67 @@
+<div class="a5-sidenav">
+  <div class="a5-sidenavupperbox">
+    <div class="a5-profile">
+      <div class="a5-profilephoto">
+        <a href="/doctorProfile" id="viewprofile"><img src="" alt="profile" class="a5-profileimage" id="profile" /></a>
+      </div>
+      <div class="a5-accountname">
+        <p class="a5-username" id="name"></p>
+        <p class="a5-useremail" id="email"></p>
+      </div>
+    </div>
+    <div class="a5-logout">
+      <P class="a5-btn-logout" onclick="logout()"><a href="" id="logout">Log out </a></P>
+    </div>
+  </div>
+
+  <div class="a5-lists">
+    <div class="a5-list-item" onclick="window.location.href=`/doctorDashboard`" id="a5-doctor-dashboard-active">
+      <i class=" fa-solid fa-house a5-list-item-img"></i>
+      <a id="viewdashboard">Dashboard</a>
+    </div>
+    <div class="a5-list-item" onclick="window.location.href=`/upcomingSlots`" id="a5-doctor-schedule-active">
+      <i class="fa-solid fa-calendar-days a5-list-item-img"></i>
+      <a>Schedule</a>
+    </div>
+    <div class="a5-list-item" onclick="window.location.href=`/getPatientDetails`" id="a5-doctor-patient-active">
+      <i class="fa-solid fa-bed-pulse a5-list-item-img"></i>
+      <a id="viewpatient">My Patients</a>
+    </div>
+    <div class="a5-list-item" onclick="window.location.href=`/prescriptiondetails`" id="a5-doctor-prescription-active">
+      <i class=" fa-solid fa-bed-pulse a5-list-item-img"></i>
+      <a id="prescriptionDetails">Prescription Details </a>
+    </div>
+    <div class="a5-list-item" onclick="window.location.href=`/doctorPaymentHistory`" id="a5-doctor-payment-active">
+      <i class=" fa-regular fa-credit-card a5-list-item-img"></i>
+      <a id="paymenthistory">Payment History</a>
+    </div>
+    <div class="a5-list-item" onclick="window.location.href=`/getDoctorReview`" id="a5-doctor-feedback-active">
+      <i class="fa fa-comments a5-list-item-img"></i>
+      <a id="viewfeedback">Feedback</a>
+    </div>
+  </div>
+</div>
+
+<script src="/javascript/auth/logout.js"></script>
+<script src="/javascript/doctorPanel/sidebar.js"></script>
+<script>
+
+  document.getElementById("logout").href = "/logout"
+
+  async function fetchSideBarDetails() {
+
+    let fetchData = await fetch(`/doctorSideBarDetail/`)
+    let data = await fetchData.json()
+    console.log(data);
+    let key = Object.keys(data[0])
+    key.forEach(element => {
+      if (element == 'profile_picture') {
+        document.getElementById("profile").src = `/imgs/${data[0][element]}`
+      }
+      else {
+        document.getElementById(element).innerHTML = data[0][element]
+      }
+    });
+  }
+  fetchSideBarDetails()
+</script>

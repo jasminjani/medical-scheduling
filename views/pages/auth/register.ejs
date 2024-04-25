@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UserData</title>
+    <link rel="stylesheet" type="text/css" href="/css/auth/register.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="form">
+            <div class="content">
+                <h2>Registration</h2>
+                <form action="/register" class="user" method="post">
+                    <div class="fname">
+                        <label for="fname">First Name: </label>
+                        <input type="text" name="fname" id="fname" tabindex="1" placeholder="Enter First Name" class="dvalid">
+                    </div>
+                    <div class="lname">
+                        <label for="lname">Last Name: </label>
+                        <input type="text" name="lname" id="lname" tabindex="2" placeholder="Enter Last Name" class="dvalid">
+                    </div>
+                    <div class="email">
+                        <label for="email">Email: </label>
+                        <input type="text" name="email" id="email" tabindex="3" placeholder="Enter Email" class="dvalid">
+                    </div>
+                    <div class="dob">
+                        <label for="dob">Date Of Birth: </label>
+                        <div class="date-format">
+                            <input type="text" name="year" tabindex="4" id="year" class="dvalid" placeholder="Year">
+                            <input type="text" name="month" tabindex="5" id="month" class="dvalid" placeholder="Month">
+                            <input type="text" name="day" tabindex="6" id="day" class="dvalid" placeholder="Day">
+                        </div>
+    
+                    </div>
+                    <div class="gender">
+                        <label for="gender">Gender:
+                            <input type="radio" name="gender" tabindex="7" value="male" id="male"><label for="male">Male</label>
+                            <input type="radio" name="gender" tabindex="8" value="female" id="female"><label
+                            for="female">Female</label></label>
+                    </div>
+                    <div class="phone">
+                        <label for="phone">Phone Number: </label>
+                        <input type="text" id="phone" name="phone" tabindex="9" class="dvalid" placeholder="Enter Phone Number">
+                    </div>
+                    <div class="city">
+                        <label for="city">City:</label>
+                            <select name="city" id="city" tabindex="10" class="dvalid">
+                               <%- html %>
+
+                            </select>
+                    </div>
+                    <div class="address">
+                        <label for="">Address: </label>
+                        <textarea name="address" id="address" tabindex="11" cols="30" rows="3" placeholder="Enter Address" class="dvalid"></textarea>
+                    </div>
+
+                    <div class="profile">
+                        <label for="profile">Profile: </label>
+                        <input type="file" name="profile" tabindex="12" accept="image/*" id="profile" class="dvalid">
+                    </div>
+
+                    <div class="password">
+                        <label for="lname">Password: </label>
+                        <input type="password" name="password" id="password" tabindex="13" placeholder="Enter a password"
+                            class="dvalid">
+                    </div>
+                    <div class="confirmPassword">
+                        <label for="confirmPassword">Confirm Password: </label>
+                        <input type="password" name="confirmPassword" id="confirmPassword"
+                           tabindex="14" placeholder="Re-enter the same password" class="dvalid">
+                    </div>
+
+                    <div class="submit">
+                        <input type="submit" id="submit" value="Register" tabindex="15">
+                    </div>
+                    <div class="or">
+                        <div class="left"></div>
+                        <p>OR</p>
+                        <div class="right"></div>
+                    </div>
+                    <div class="mv-btn">
+                        <p>Already have an Account? <a href="/login" tabindex="16">login</a></p>
+                    </div>
+                </form>
+                <div class="link"></div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="/javascript/auth/script.js"></script>
+    <script src="/javascript/auth/register.js"></script>
+</body>
+
+</html>

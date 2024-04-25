@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Patients Dashboard</title>
+
+  <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
+  <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
+  <link rel="stylesheet" href="/css/patientCSS/patientDashboard.css" />
+
+  <link rel="stylesheet" href="/css/patientCSS/patientProfile.css" />
+  <style>
+    #a5-patient-dashboard-active {
+      background-color: #0969da;
+      transform: translate(5px);
+      border-radius: 5px;
+    }
+
+    #a5-patient-dashboard-active a,
+    #a5-patient-dashboard-active i {
+      color: #ffffff;
+    }
+  </style>
+</head>
+
+<body onload="getUpcomingSlots()">
+
+  <div class="a5-main-container">
+    <div class="a5-container">
+      <%- include('../../common/newSidebar/patientSidebar.ejs') %>
+      <div class="a2-patient-dashboard">
+        <div class="a2-container a2-patient-home">
+          <div class="a2-patient-hero-section">
+            <img src="/assets/patient-dashboard.jpg" alt="" />
+            <div class="a2-patient-hero-text">
+              <h3>Welcome</h3>
+              <h2 class="a2-patient-name"></h2>
+              <div>
+                <p>Have't any idea about doctors? no problem !</p>
+                <p>let's jumping to <b>"All Doctors"</b> section</p>
+                <p>Track your past and future appointments history.</p>
+                <p>
+                  Also find out the expected arrival time of your doctor or
+                  medical consultant.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="a2-status-booking">
+            <div class="a2-patient-status">
+              <div class="a2-card">
+                <div class="card-itams">
+                  <span id="doctors-count"></span> All Doctors
+                </div>
+                <div class="card-itams">
+                  <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
+                </div>
+              </div>
+              <div class="a2-card">
+                <div class="card-itams">
+                  <span id="patients-count"></span> All Patients
+                </div>
+                <div class="card-itams">
+                  <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
+                </div>
+              </div>
+              <div class="a2-card">
+                <div class="card-itams">
+                  <span id="today-booking-count"></span> Today's Booking
+                </div>
+                <div class="card-itams">
+                  <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
+                </div>
+              </div>
+              <div class="a2-card">
+                <div class="card-itams">
+                  <span id="total-booking-count"></span> My Total Booking
+                </div>
+                <div class="card-itams">
+                  <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="a2-upcoming-booking">
+              <div class="row">
+                <h3>Today's Appointments</h3>
+                <a href="/patientUpcomingSlots">View all</a>
+              </div>
+              <div class="A3-row-2">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Day</th>
+                      <th>Slot</th>
+                      <th>Details</th>
+                    </tr>
+                  </thead>
+                  <tbody id="date-body"></tbody>
+                </table>
+              </div>
+              <div class="A3-modal">
+                <div class="A3-row-3">
+                  <h3 id="A3-modal-date">Date</h3>
+                  <input type="button" value="Close" onclick="handleClose()" />
+                </div>
+                <div class="card">
+                  <div class="col">
+                    <p>Doctor name</p>
+                    <p>Doctor email</p>
+                    <p>Doctor phone</p>
+                    <p>Doctor qualification</p>
+                  </div>
+                  <div class="col">
+                    <p>Consultancy fee</p>
+                    <p>hosp name</p>
+                    <p>hosp loc</p>
+                    <p>hosp pincode</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <script>
+
+      document.querySelector('.a2-patient-name').innerHTML = `${user.fname + " " + user.lname}`;
+
+
+
+      async function getPatientData() {
+        let resp = await fetch(`/patient-status/${user.id}`);
+        let data = await resp.json();
+
+        document.getElementById('doctors-count').innerHTML = data[0]?.doctorCount;
+        document.getElementById('patients-count').innerHTML = data[1]?.patientCount;
+        document.getElementById('today-booking-count').innerHTML = data[3]?.TodaysBooking;
+        document.getElementById('total-booking-count').innerHTML = data[2]?.patientTotalBooking;
+
+      }
+
+      getPatientData();
+    </script>
+
+
+    <!-- Upcoming slots script -->
+    <script>
+      console.log("inside patient");
+      const getUpcomingSlots = async () => {
+        let user = JSON.parse(localStorage.getItem('userinfo'));
+        const response = await fetch(`/bookings/${user.id}`, {
+          method: "GET",
+          headers: {
+            "Content-type": "application/json"
+          }
+        });
+
+        let { success, data } = await response.json();
+
+        const todaysAppointment = data.filter((e) => { return new Date(e.date) < new Date() });
+
+        const table = document.getElementById("date-body");
+
+        table.innerHTML = "";
+
+        if (todaysAppointment.length == 0) {
+          return table.innerHTML = "<tr><td colspan='5'>No Data Found !</td></tr>"
+        }
+
+        todaysAppointment.forEach(element => {
+          table.innerHTML += `
+            <tr>
+              <td>${element.date}</td>
+              <td>${element.day}</td>
+              <td>${element.start_time.slice(0, -3)}-${element.end_time.slice(0, -3)}</td>
+              <td><input type="button" class="view-btn" value="Details" onclick='getDetails(${JSON.stringify(element)})'></td>
+            </tr>
+            `
+        });
+      }
+
+      const getDetails = async (data) => {
+        const modal = document.getElementsByClassName("A3-modal")[0];
+
+        modal.style.visibility = "visible";
+
+        modal.innerHTML = `
+      <div class="A3-row-3">
+        <h3 id="A3-modal-date">Booking : ${data.booking_date}</h3>
+        <input type="button" class="view-btn" value="Close" onclick="handleClose()">
+      </div>
+      <h4>Doctor Details</h4>
+      <div class="card">
+          <div class="col">
+    <p><i class="fa-solid fa-user-doctor"></i>${data.fname} ${data.lname}<img src="/assets/tick.png" alt="tick"/></p>
+            <p><i class="fa-regular fa-envelope"></i>${data.email}</p>
+            <p><i class="fa-solid fa-phone"></i>${data.phone}</p>
+            <p><i class="fa-solid fa-book"></i>${data.qualification}</p>
+          </div>
+          <div class="col">
+            <p><i class="fa-solid fa-indian-rupee-sign"></i>${data.consultancy_fees}</p>
+            <p><i class="fa-regular fa-hospital"></i>${data.name}</p>
+            <p><i class="fa-solid fa-location-dot"></i>${data.location}</p>
+            <p><i class="fa-solid fa-pen"></i>${data.pincode}</p>
+        </div>
+      </div>
+  `
+      }
+
+
+      const handleClose = () => {
+        document.getElementsByClassName("A3-modal")[0].style.visibility = "hidden";
+      }
+    </script>
+
+</body>
+
+</html>

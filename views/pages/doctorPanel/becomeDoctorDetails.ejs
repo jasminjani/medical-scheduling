@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctor Details</title>
+    <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/auth/register.css" />
+    <script src="/javascript/doctorPanel/fetchSpeciality.js" defer></script>
+    <script src="/javascript/doctorPanel/fetchCity.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form">
+        <div class="content">
+          <h2>Register Doctor Details</h2>
+          <form action="" class="user" method="post">
+            <div class="fname">
+              <label for="fname">Qualification: </label>
+              <input
+                type="text"
+                name="qualification"
+                id="qualification"
+                placeholder="Enter Qualification"
+                class="dvalid"
+              />
+            </div>
+
+            <div class="email">
+              <label for="consultancy_fees">consultancy_fees: </label>
+              <input
+                type="text"
+                name="consultancy_fees"
+                id="consultancy_fees"
+                placeholder="Enter consultancy_fees"
+                class="dvalid"
+              />
+            </div>
+
+              <div class="phone">
+                <label for="phone">Phone Number: </label>
+                <input
+                  type="text"
+                  id="phone"
+                  name="phone"
+                  class="dvalid"
+                  placeholder="Enter Phone Number"
+                />
+              </div>
+            <div class="city">
+              <label for="city">Speciality:</label>
+              <select name="speciality" id="speciality" class="dvalid">
+                <option value="">--Select Speciality--</option>
+              </select>
+            </div>
+            <div class="phone">
+              <label for="hname">Hospital Name: </label>
+              <input
+                type="text"
+                id="hname"
+                name="hname"
+                class="dvalid"
+                placeholder="Enter Hospital Name"
+              />
+            </div>
+
+            <div class="address">
+              <label for="">Hospital Address: </label>
+              <textarea
+                name="location"
+                id="address"
+                class="dvalid"
+                cols="30"
+                rows="3"
+                placeholder="Enter Address"
+              ></textarea>
+            </div>
+
+            <div class="phone">
+              <label for="phone">GST No:</label>
+              <input
+                type="text"
+                id="gst"
+                name="gst_no"
+                class="dvalid"
+                placeholder="Enter GST Number"
+              />
+            </div>
+            <div class="city">
+              <label for="city">City:</label>
+              <select name="city" id="city" class="dvalid">
+                <option value="">--Select City--</option>
+              </select>
+            </div>
+            <div class="phone">
+              <label for="pincode">Pincode:</label>
+              <input
+                type="text"
+                id="pincode"
+                name="pincode"
+                class="dvalid"
+                placeholder="Enter Pincode"
+              />
+            </div>
+            <div class="submit">
+              <input type="submit" id="submit" value="Become A Doctor" />
+            </div>
+          </form>
+          <div class="link"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/javascript/doctorPanel/becomeDoctor.js"></script>
+  </body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Payment History</title>
+  <!-- CSS for Sidebar -->
+  <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
+  <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
+  <!-- CSS for container -->
+  <link rel="stylesheet" href="/css/adminPanel/allPatientDetails.css">
+  <!-- CSS for status drop-down -->
+  <link rel="stylesheet" href="/css/patientCSS/paymentHistory.css">
+  <!-- JS  -->
+  <script src="/javascript/patientPanel/paymentHistory.js" defer></script>
+  <style>
+    #a5-patient-payment-active {
+      background-color: #0969da;
+      transform: translate(5px);
+      border-radius: 5px;
+    }
+
+    #a5-patient-payment-active a,
+    #a5-patient-payment-active i {
+      color: #ffffff;
+    }
+  </style>
+</head>
+
+<body onload="fetchPatientPayment()">
+
+  <div class="a5-container">
+
+    <div class="a5-main-container">
+
+      <%- include('../../common/newSidebar/patientSidebar') %>
+
+        <div class="a5-section">
+
+          <div class="a5-search">
+            <div class="a5-searchbox">
+              <img src="/assets/adminPanel/icons/search.svg" alt="">
+              <input type="text" name="searchUser" id="a5-searchPatient" placeholder="Search" tabindex="1">
+            </div>
+            <p id="a5-btn-search" onclick="searchPatientPayment()" on tabindex="2">Search</p>
+          </div>
+          <p id="a5-btn-search" onclick="searchPatientPayment()" tabindex="2">Search</p>
+        </div>
+
+          <div class="a5-all-user">
+            <div class="table-heading">
+
+              <h2>Payment History</h2>
+              <div class="combo-box">Status :
+                <select name="status" id="paymentStatus" onchange="changeStatus()">
+                  <option value="0" selected>success</option>
+                  <option value="1">Refund</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="a5-user-table">
+
+              <table id="a5-user-table">
+                <tbody id="a5-tbody">
+
+                </tbody>
+              </table>
+
+            </div>
+
+          </div>
+
+        </div>
+
+    </div>
+
+  </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,552 @@
+:root {
+  --primarycolor: #0A76D8;
+  --primarycolorhover: #006dd3;
+  --btnice: #D8EBFA;
+  --btnnicetext: #1b62b3;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
+}
+
+/* container css */
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.doctors-container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.our-doctors-section{
+  padding: 10px;
+  margin-left: 350px;
+}
+
+/* header section */
+
+.header {
+  padding: 10px 0;
+  box-shadow: 0 0 10px black;
+}
+
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  border: 1px solid rgb(187, 187, 187);
+  border-radius: 50%;
+}
+
+.user {
+  display: none;
+  align-items: center;
+  gap: 4px;
+}
+
+
+.user .logo {
+  width: 35px;
+  height: 35px;
+  border: 1px solid rgb(187, 187, 187);
+  border-radius: 50%;
+}
+
+.user .logo a img {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+}
+
+
+.logo a img {
+  border-radius: 50%;
+  width: 100%;
+  /* height: 100%; */
+}
+
+.nav-items ul {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-items ul li {
+  list-style-type: none;
+}
+
+.nav-items ul li a {
+  text-decoration: none;
+  color: #1d4868;
+}
+
+#logout {
+  display: none;
+}
+
+.nav-items ul li .book-appointment {
+  color: #1565D8;
+  background-color: #ffffff;
+  padding: 8px 10px;
+  border-radius: 5px;
+  border: 1px solid #1565D8;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.nav-items ul li .book-appointment:hover {
+  color: #ffffff;
+  background-color: #1565D8;
+}
+
+/* main content */
+
+#main {
+  padding-top: 50px;
+}
+
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 -15px;
+  flex-wrap: wrap;
+}
+
+.hero-right {
+  max-width: 500px;
+  margin: 0 auto;
+  width: 100%;
+  object-fit: cover;
+}
+
+.hero-right img {
+  max-width: 500px;
+  transform: scaleX(-1);
+  width: 100%;
+}
+
+
+.hero-left {
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
+}
+
+.hero-title {
+  font-size: 40px;
+  color: #183B56;
+  line-height: 3rem;
+}
+
+.hero-subtitle {
+  font-size: 16px;
+  line-height: 1.7rem;
+  color: #183B56;
+}
+
+
+.hero-left .btn {
+  background-color: #1565D8;
+  text-decoration: none;
+  border: none;
+  color: #ffffff;
+  padding: 17px 27px;
+  font-weight: bold;
+  font-size: 17px;
+  border-radius: 5px;
+}
+
+/* booking-steps-section */
+
+.booking-steps-section {
+  background-color: #efefef;
+}
+
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  max-width: 500px;
+  gap: 10px;
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 50px;
+  flex-wrap: wrap;
+}
+
+.steps-title {
+  font-size: 40px;
+  color: #183B56;
+  line-height: 3rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.steps-subtitle {
+  font-size: 16px;
+  line-height: 1.7rem;
+  color: #183B56;
+  text-align: center;
+}
+
+.booking-steps {
+  display: flex;
+  padding: 35px 0;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin: 0 -15px;
+  flex-wrap: wrap;
+}
+
+.step-data {
+  width: calc(100% / 3);
+  padding: 20px 30px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+.step-data .img {
+  width: 60px;
+  height: 60px;
+  padding: 10px;
+  box-shadow: 0 0 3px black;
+  border-radius: 10px;
+  position: relative;
+}
+
+.step-data .img span {
+  position: absolute;
+  top: -10px;
+  font-size: 20px;
+  background-color: #1565D8;
+  width: 25px;
+  height: 25px;
+  color: white;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.step-data .img img {
+  width: 100%;
+}
+
+
+.step-data .step {
+  font-weight: bold;
+  font-size: 19px;
+}
+
+.step-data .desc {
+  text-align: center;
+  font-size: 14px;
+}
+
+
+/* out doctor section */
+.all-doctors {
+  width: 100%;
+  position: relative;
+  margin: 0 auto;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.all-doctors .search-doctor {
+  /* border: 1px solid blue; */
+  box-shadow: 0 0 5px gray;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  /* border: 1px solid tomato; */
+}
+
+#speciality {
+  background-color: #e8f2fd;
+  border: none;
+  min-width: 200px;
+  border-radius: 5px;
+  padding: 10px 10px;
+}
+
+.search-doctor .or {
+  color: gray;
+}
+
+.doctor-names {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.doctor-names #dname {
+  padding: 8px 10px;
+  min-width: 250px;
+  border: none;
+  box-shadow: 0 0 1px black;
+  border-radius: 4px;
+}
+
+
+.search-btn .btn {
+  padding: 9px 20px;
+  cursor: pointer;
+  border: none;
+  background-color: var(--primarycolor);
+  font-weight: bold;
+  color: white;
+  border-radius: 5px;
+}
+
+.search-btn .btn:hover {
+  background-color: var(--primarycolorhover);
+}
+
+
+
+
+.all-doctors .doctors {
+  /* max-width: 600px; */
+  width: 100%;
+  /* border:  1px solid black; */
+  padding: 10px 20px;
+}
+
+
+.swipe-btns {
+  position: absolute;
+  top: 100px;
+  right: 35px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.swipe-btns button {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: none;
+  background-color: #a4bddb80;
+  cursor: pointer;
+}
+
+.cards {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  gap: 40px;
+}
+
+
+.all-doctors .card {
+  /* border: 1px solid red; */
+  box-shadow: 0 0 5px black;
+  padding: 10px;
+  display: flex;
+  /* min-width: 200px; */
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 200px;
+}
+
+.card .img {
+  /* object-fit: contain; */
+  width: 200px;
+  height: 250px;
+  overflow: hidden;
+}
+
+.card .img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card .details {
+  padding: 4px 2px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.details .name {
+  font-weight: bold;
+}
+
+.specialities {
+  padding: 4px 2px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.speciality {
+  background-color: var(--btnice);
+  padding: 2px 10px;
+  border-radius: 10px;
+  font-size: 10px;
+  box-shadow: 0 0 2px black;
+}
+
+.card .rating {
+  padding-top: 4px;
+  padding-left: 4px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.rating .total-reviews {
+  color: gray;
+  font-size: 14px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* about us section */
+
+.about-section {
+  background-color: #efefef;
+}
+
+.about-content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin: 0 -15px;
+  flex-wrap: wrap;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+
+.about-left {
+  max-width: 500px;
+  margin: 0 auto;
+  width: 100%;
+  object-fit: cover;
+  /* border: 1px solid black; */
+  border-radius: 10px;
+  box-shadow: 0 0 3px black;
+}
+
+.about-left img {
+  max-width: 500px;
+  /* transform: scaleX(-1); */
+  width: 100%;
+}
+
+
+.about-right {
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0 10px;
+}
+
+.about-right-title {
+  font-size: 29px;
+  font-weight: bold;
+  color: #183B56;
+  line-height: 3rem;
+}
+
+.about-right .desc {
+  /* font-size: 16px; */
+  line-height: 1.6rem;
+  color: #183B56;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#footer {
+  background-color: black;
+  color: white;
+}
+
+.footer-content {
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-content .social-icons {
+  display: flex;
+  align-items: center;
+}
+
+.footer-content .social-icons img {
+  width: 50px;
+}
+
+.footer-content .social-icons img:hover {
+  cursor: pointer;
+}
+
+.footer-content .logo img {
+  border-radius: 50%;
+  width: 100%;
+  /* height: 100%; */
+}
+
+.a2-contact-us{
+  margin-top: 20px;
+  background-color: #006dd3;
+}
+

@@ -1,0 +1,99 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+  
+  /* body {
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  } */
+  
+  #rate {
+  max-width: 33rem;
+  background: #cac6c6;
+  text-align: center  ;
+  margin: 20px 20px;
+  padding: 1rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  border-radius: 0.5rem;
+  display: none;
+
+  position: absolute;
+  /* z-index: 1; */
+  left: 373px;
+  top: 33px;
+  overflow: auto;
+  background-color: rgb(139, 139, 139);
+  color: white;
+  }
+
+  .heading {
+    padding-top: 10px;
+  }
+  
+  .textHead {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .star {
+  font-size: 10vh;
+  position: relative;
+  cursor: pointer;
+  }
+  
+  .one {
+  color: gold;
+  }
+  
+  .two {
+  color: gold;
+  }
+  
+  .three {
+  color: gold;
+  }
+  
+  .four {
+  color: gold;
+  }
+  
+  .five {
+  color: gold;
+  }
+
+  #output {
+    height: 30px;
+    width: 30px;
+    font-size: 20px;
+    text-align: center;
+  }
+  
+  .reviewPatient {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  #rev {
+    line-height: 1.5;
+    letter-spacing: 1px;
+  }
+
+  #rateGo {
+    height: 30px;
+    width: 70px;
+    border-radius: 20px;
+  }
+
+  #rateGo:hover {
+    background-color: #aee3ff;
+  }

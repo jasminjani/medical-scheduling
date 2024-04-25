@@ -1,0 +1,68 @@
+<div class="a5-sidenav">
+  <div class="a5-sidenavupperbox">
+    <div class="a5-profile">
+      <div class="a5-profilephoto">
+        <a href="#"><img src="/assets/sideBar/profile-icon-png-898.png" alt="profile" class="a5-profileimage" /></a>
+      </div>
+      <div class="a5-accountname">
+        <p class="a5-username"></p>
+        <p class="a5-useremail"></p>
+      </div>
+    </div>
+    <div class="a5-logout">
+      <P class="a5-btn-logout" onclick="logout()">
+        <a href="/logout">Logout</a>
+      </P>
+    </div>
+  </div>
+
+  <div class="a5-lists">
+    <div onclick="window.location.href=`/admin`" class="a5-list-item" id="a5-admin-dashboard-active">
+      <i class="fa-solid fa-house a5-list-item-img"></i>
+      <a>Dashboard</a>
+    </div>
+    <div onclick="window.location.href=`/admin/all-doctors`" class="a5-list-item" id="a5-admin-doctor-active">
+      <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
+      <a>Doctors</a>
+    </div>
+    <div onclick="window.location.href=`/admin/all-patient`" class="a5-list-item" id="a5-admin-patient-active">
+      <i class="fa-solid fa-bed-pulse a5-list-item-img"></i>
+      <a>Patients</a>
+    </div>
+    <div onclick="window.location.href=`/admin/add-specialites`" class="a5-list-item" id="a5-admin-speciality-active">
+      <i class="fa-solid fa-award a5-list-item-img"></i>
+      <a>Add Specialties</a>
+    </div>
+  </div>
+</div>
+
+<script src="/javascript/auth/logout.js"></script>
+<script>
+  const doctorsCount = document.getElementById('doctors-count');
+  const patientsCount = document.getElementById('patients-count');
+  const appointmentsCount = document.getElementById('appointments-count');
+  const revenueCount = document.getElementById('revenue-count');
+
+  async function forProfilePhoto() {
+
+  let user = JSON.parse(localStorage.getItem('userinfo'));
+
+  if(user.profile.trim()){
+    document.querySelector('.a5-profileimage').setAttribute('src',`/imgs/${user.profile}`)
+  }
+
+  document.querySelector('.a5-username').innerHTML = `${user.fname+ " "+user.lname}`;
+  document.querySelector('.a5-useremail').innerHTML = user.email;
+
+  }
+
+  forProfilePhoto()
+</script>
+
+<!-- aa banne css side bar mate link kari lejo
+
+  for icons :-
+  <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
+
+  for sidebar css :-
+  <link rel="stylesheet" href="/public/css/sideBar/newSidebar.css"> -->
