@@ -1,3 +1,4 @@
+
 const patientAppointmentDetail = async () => {
 
   let fetchdata = await fetch(`/getpatientHistoryData/${Id}`)
@@ -23,36 +24,30 @@ const patientAppointmentDetail = async () => {
 const profileDetailData = async () => {
   let fetchData = await fetch(`/viewPatientDetailsData/${Id}`)
   let data = await fetchData.json()
-  let Key = Object.keys(data[0])
-  Key.forEach(item => {
-    if (item == "profile_picture") {
-      document.getElementById("patientProfile").innerHTML = `  <img src='/imgs/${data[0][item]}' alt="image" >`
-    }
-    if (item == "Name") {
-      document.getElementById("patientname").innerHTML = data[0][item]
-    }
-    if (item == 'Date of Birth' || item == 'Email' || item == 'Contact') {
-      document.getElementById("patientbasicdetail").innerHTML += `
+  
 
-              <p><span class="a5-bold">${item}:</span>
-                  ${data[0][item]}
-              </p>`
-    }
-    if (item == 'Gender' || item == 'Blood Group' || item == 'City') {
-      document.getElementById("patientaddressdetail").innerHTML += `
-              <p><span class="a5-bold">${item}:</span>
-                  ${data[0][item]}
-              </p>`
-    }
-    if (item == "Address") {
-      document.getElementById("patientaddress").innerHTML +=
-        `<p><span class="a5-bold">${item}: </span>
-         ${data[0][item]}
+  if (data.length == 0) {
+    return document.getElementById("patientname").innerHTML += "Not Found!"
+  }
+  data.forEach(element => {
+    document.getElementById("patientProfile").innerHTML = `  <img src='/imgs/${element["profile_picture"]}' alt="image" >`
+    document.getElementById("patientname").innerHTML = element["Name"]
+    document.getElementById("patientbasicdetail").innerHTML += 
+    `<div class="a5-details">
+    <p><span class="a5-bold">Date of Birth:</span>${element['Date of Birth']} </p>
+    <p><span class="a5-bold">Email:</span>${element['Email']} </p>
+    <p><span class="a5-bold">Contact:</span>${element['Contact']} </p></div>
+    <div class="a5-details">
+    <p><span class="a5-bold">Gender:</span>${element['Gender']} </p>
+      <p><span class="a5-bold">Blood Group:</span>${element['Blood Group']}</p>
+      <p><span class="a5-bold">City:</span>${element['City']}</p>
+    </div>`
+    document.getElementById("patientaddress").innerHTML +=
+      `<p><span class="a5-bold">Address: </span>
+         ${element['Address']}
       </p>`
-    }
-
-
   });
+
 }
 
 
@@ -65,45 +60,27 @@ let show = async function (id, date) {
   const fetchData = await fetch(`/patientPrescriptionData/${date}/${Id}`)
   const data = await fetchData.json()
   const key = Object.keys(data)
-
+  console.log(data);
   document.getElementById("appointmentdt").innerHTML = "";
-  document.getElementById("a7-medicineDetail").innerHTML = "";
+  document.getElementById("mediInfo").innerHTML = "";
 
-  if (key == "") {
-    let span = document.createElement("span")
-    span.textContent = "Data not Found!"
-    span.style.fontSize = "25px"
-    document.getElementById("a7-medicineDetail").appendChild(span)
+
+  if (data.length == 0) {
+    return document.getElementById("mediInfo").innerHTML += `<p><span class="a5-bold">No Data Found!</span></p>`
   }
-  key.forEach(item => {
 
-    const dtkey = Object.keys(data[item])
+  data.forEach(element => {
 
-    let div2 = document.createElement("div")
-    div2.setAttribute("class", "a7-mediInfo-box")
-    let div3 = document.createElement("div")
-    div3.setAttribute("class", "a7-mediInfo-color")
-    let div = document.createElement('div')
-    div.setAttribute("class", "a7-mediInfo")
-
-    dtkey.forEach(element => {
-
-      let para = document.createElement("p")
-      let fieldDiv = document.createElement("div")
-      fieldDiv.setAttribute("class", "a7-div-field")
-      let span = document.createElement("span")
-      span.setAttribute("class", "a5-bold")
-      span.innerText = element + ':'
-      para.textContent = data[item][element]
-      fieldDiv.appendChild(span)
-      fieldDiv.appendChild(para)
-      div.append(fieldDiv)
-    });
-
-    div2.appendChild(div)
-    div3.appendChild(div2)
-    document.getElementById("a7-medicineDetail").appendChild(div3)
+    document.getElementById("mediInfo").innerHTML += 
+    `<div>
+          <p><span class="a5-bold">Start Time:</span>${element['Start Time']}</p>
+          <p><span class="a5-bold">End Time:</span>${element["End Time"]}</p>
+    </div>
+    <div>
+      <div><span class='a5-bold'>Diagnoses:</span></div><div><p>${element["Diagnoses"]}</p></div></div>
+      <div><div><span class="a5-bold">Presctiptions:</span></div><div>${element['Prescriptions']}</div></div>`
   });
+
   funcId(id).style.display = 'block';
 }
 let hide = function (id) {
