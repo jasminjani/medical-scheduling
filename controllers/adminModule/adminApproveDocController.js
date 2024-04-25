@@ -1,4 +1,5 @@
 const conn = require("../../config/dbConnection");
+const logger = require("../../utils/pino");
 
 
 exports.getAllDoctors = async (req, res) => {
@@ -10,9 +11,10 @@ exports.getAllDoctors = async (req, res) => {
     inner join clinic_hospitals c on b.hospital_id = c.id  order by a.id`;
 
     const [result] = await conn.query(sql2);
-
+    console.log(result);
     res.json(result);
   } catch (error) {
+
     logger.error(error.message);
 
   }
@@ -23,7 +25,7 @@ exports.deleteDoctor = async (req, res) => {
   const docID = req.params.id;
   console.log(docID);
 
-  const sql = `update doctor_details set approved = -1 where doctor_id =?`
+  const sql = `update doctor_details JOIN users ON doctor_details.doctor_id = users.id set doctor_details.approved = -1, users.role_id = 1 where doctor_details.doctor_id = ?`
   let [result] = await conn.query(sql, [docID]);
 
   res.status(200).send();

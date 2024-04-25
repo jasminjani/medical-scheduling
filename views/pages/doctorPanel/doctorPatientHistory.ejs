@@ -49,15 +49,14 @@
 </head>
 <body>
   <div class="a5-container">
+    <div class="main-container">
     <%- include('../../common/newSidebar/doctorSidebar') %>
-      <div class="a5-section">
-        
-        <div class="a5-search">
-          <div class="a5-searchbox">
-            <img src="/assets/adminPanel/icons/search.svg" alt="">
-            <input type="text" name="searchUser" id="search" placeholder="Search Patient name" tabindex="1">
-          </div>
-          <p id="a5-btn-search" tabindex="2"  onclick="location.reload()">Search</p>
+    <div class="a5-section">
+      
+      <div class="a5-search">
+        <div class="a5-searchbox">
+          <img src="/assets/adminPanel/icons/search.svg" alt="">
+          <input type="text" name="searchUser" id="search" placeholder="Search Patient name" tabindex="1">
         </div>
         <!-- <div class="A7-Sorting-header">
           <div class="sorting-filter">
@@ -95,6 +94,23 @@
         </div> 
            
       </div>
+      <div class="a5-all-user">
+        <h2>View Patient History</h2>
+        <div class="a5-user-table">
+          <table id="a5-user-table">
+            <tbody id="a5-tbody">
+              <tr>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>More Details</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div> 
+          
+    </div>
+    </div>
   </div>
  
 </body>

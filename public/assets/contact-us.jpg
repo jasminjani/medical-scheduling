@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="utf-8" />
+	<base href="https://dpuhospital.com/contact-us/" />
+	<meta name="author" content="Super User" />
+	<meta name="description" content="Want to connect to top notch healthcare facilities? Have queries? Call us or connect with us. Fill the form below, and we promise to get back to you as soon as possible. We have a group of skilled doctors and specialists. Connect with us in +91 20 27805100 / 27805101 / 67116499." />
+	<meta name="generator" content="Joomla! - Open Source Content Management" />
+	<title>Contact Us | DPU Hospital, Pimpri-Chinchwad, Pune</title>
+	<link href="https://dpuhospital.com/search/?format=opensearch" rel="search" title="Search DPU" type="application/opensearchdescription+xml" />
+	<link href="https://dpuhospital.com/plugins/system/shadowbox/shadowbox/examples/build/shadowbox.css" rel="stylesheet" />
+	<script src="/media/jui/js/jquery.min.js?bcf12ba2d5f861bc6b5c2117c2d8fbfc"></script>
+	<script src="/media/jui/js/jquery-noconflict.js?bcf12ba2d5f861bc6b5c2117c2d8fbfc"></script>
+	<script src="/media/jui/js/jquery-migrate.min.js?bcf12ba2d5f861bc6b5c2117c2d8fbfc"></script>
+	<script src="https://dpuhospital.com/plugins/system/shadowbox/shadowbox/min/index.php?g=sb&ad=base&lan=en&play=img"></script>
+	<!--[if lt IE 9]><script src="/media/system/js/html5fallback.js?bcf12ba2d5f861bc6b5c2117c2d8fbfc"></script><![endif]-->
+	<script>
+jQuery(window).on('load',  function() {
+				new JCaption('img.caption');
+			});
+	</script>
+	<script type="text/javascript">Shadowbox.init();</script>
+
+<link rel="shortcut icon" href="/templates/dypatil-home/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css'>
+
+
+
+  <link href="https://dpuhospital.com/templates/dypatil/css/fluid_grid-16.css" rel="stylesheet" type="text/css" />
+  <link href="https://dpuhospital.com/templates/dypatil/css/style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="/templates/dypatil/css/reset.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="/templates/dypatil/css/media.css" rel="stylesheet" type="text/css" />
+  <link href="/templates/dypatil/css/animate.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/templates/dypatil-home/css/coe.css" rel="stylesheet" type="text/css" />
+
+<script src="/templates/dypatil/js/libs/modernizr-2.5.3.min.js"></script>
+<script src="/templates/dypatil/js/jquery.min.js"></script>
+
+  
+ <script src="/media/com_rsform/js/script.js"></script>
+<link rel="stylesheet" href="/media/com_rsform/css/front.css" />
+  
+<link href="/templates/dypatil-home/css/style.css" rel="stylesheet" type="text/css" />
+  
+
+
+  
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TP8MNGNYVY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TP8MNGNYVY');
+</script>
+
+<script src="/media/com_rsform/js/jquerycalendar/jquery.datetimepicker.js"></script>
+<script src="/media/com_rsform/js/jquerycalendar/moment.js"></script>
+<script src="/media/com_rsform/js/jquerycalendar/script.js"></script>
+<link rel="stylesheet" href="/media/com_rsform/css/jquerycalendar/jquery.datetimepicker.css" />
+<script>
+
+RSFormPro.jQueryCalendar.settings.MONTHS_SHORT 	 = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+RSFormPro.jQueryCalendar.settings.MONTHS_LONG 	 = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+RSFormPro.jQueryCalendar.settings.WEEKDAYS_SHORT  = ["Su","Mo","Tu","We","Th","Fr","Sa"];
+RSFormPro.jQueryCalendar.settings.WEEKDAYS_MEDIUM = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+RSFormPro.jQueryCalendar.settings.WEEKDAYS_LONG 	 = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+RSFormPro.jQueryCalendar.settings.START_WEEKDAY 	 = 0;
+jQuery(document).ready(function(){ RSFormPro.jQueryCalendar.renderCalendars(); });
+RSFormPro.jQueryCalendar.setCalendar(3, '3_0', {"inline":false, "format":"DD-MM-YYYY", "value":"", "timepicker":true, "theme":"default", "timepickerformat":"HH:mm", extra: {"maxDate": "04\/25\/2024","step": "30"}});
+RSFormPro.callbacks.addCallback(3, 'changePage', [RSFormPro.jQueryCalendar.hideAllPopupCalendars, 3]);RSFormProUtils.addEvent(window, 'load', function(){
+    RSFormPro.Ajax.overrideSubmit(3, {"parent":"","field":"rsform-error"}, false);
+});
+</script>
+</head>
+<body>
+<header class="site-header">
+        <div class="top-scroller">
+           
+        </div>
+    <div class="container">
+      <div class="main-header">
+        <div class="site-logo">
+         <a href="/index.php"> 
+
+	<a href="https://dpuhospital.com/"><img class="new-logo" src="/images/dpu-pimpri-pune-logo-2024.png" alt="" /></a>
+<img class="nabh-header-logo" src="/images/nabh-logo-1.png" alt="" />
+ </a>
+        </div>
+        <div class="site-menu">
+          <div class="hdr-social">
+            
+
+	<ul class="list-top-button">
+  <li>
+    <a href="tel:020-67116469">Emergency : 020-67116469</a>
+  </li>
+<li>
+    <a href="tel:8880802020">Ambulance: 888 080 2020</a>
+  </li>
+  <li>
+   <a href="tel:020 6711 6401">Enquiry: 020 6711 6401 <span class="divider"> | </span><a class="new-anchor" href="tel:7065995999">706 599 5999</a></a>
+  </li>
+<!-- <li>
+<a href="tel:706 599 5999">706 599 5999</a>
+</li> -->
+  <li>
+    <a href="https://dpuhospital.com/request-an-appointment/">Book an Appointment</a>
+  </li>
+</ul>
+
+<div class="top-mob">
+<span class="emergency-no"><a href="tel:020-67116469"><img class="foot-call1" src="https://dpuhospital.com/images/call-icon-footer.png">Emergency</a></span><span class="ambulance-no"><a href="tel:+91-888-080-2020"><img class="foot-call" src="https://dpuhospital.com/images/ambulance-icon-footer.png">Ambulance</a></span>
+</div>
+ 
+          
+          </div>
+               
+
+	<ul class="social-icons">
+              <li class="searchBtn"><a href="#."><img src="/images/search-icon.png"></a></li>
+              <li><a href="#."><img src="/images/equal-icon.png"></a></li>
+              <li><a href="tel:9226007506"><img src="/images/call-icon.png"></a></li>
+            </ul> 
+             <div class="searchInputs">
+    <div class="searchClose"><img src="/images/close-search.png"></div>
+    <div class="search">
+	<form action="/contact-us/" method="post" class="form-inline" role="search">
+		<label for="mod-search-searchword168" class="element-invisible"> </label> <input name="searchword" required id="mod-search-searchword168" maxlength="200"  class="inputbox search-query input-medium" type="search" placeholder="Search ..." /> <input type="image" alt="Search" class="button" src="/images/search-icon.svg" onclick="this.form.searchword.focus();"/>		<input type="hidden" name="task" value="search" />
+		<input type="hidden" name="option" value="com_search" />
+		<input type="hidden" name="Itemid" value="170" />
+	</form>
+</div>
+
+          
+         
+  </div>
+  <div class="searchOverlay"></div>
+      
+
+	<div class="hrd-menu">
+	<ul class="main-menu">
+	  <li><a href="https://dpuhospital.com/about/">About Us</a></li>
+	  <li><a data-href="mega-menu" href="https://dpuhospital.com/treatments-services/"
+		  class="megamenu megamenu-1">Services <img src="/images/down-arrow-new.png" width="10px" class="menuarrow"></a></li>
+	  <li><a href="#." class="megamenu megamenu-2" data-href="mega-menu2">Centre of Excellence <img src="/images/down-arrow-new.png" width="10px" class="menuarrow"></a></li>
+	  <li><a href="https://dpuhospital.com/opd-timings/">OPD Timings</a></li>
+	  <li><a href="https://dpuhospital.com/tpas-insurance-partner/#insurance-partners">Insurance Partners</a></li>
+	  <li><a href="https://dpuhospital.com/wellness-clinic-and-health-check/">Health Check</a></li>
+	  <li><a href="https://dpuhospital.com/international-patients/">International Patient</a></li>
+	</ul>
+  
+  </div>
+  <section id="mega-menu" class="megamenu-contain">
+	<div class="mega-menu-inner">
+	  <div class="row">
+		<div class="col col-md-6">
+		  <a href="https://dpuhospital.com/treatments-services/">
+			<h3>Super specialties</h3>
+		  </a>
+		  <ul class="menu-links">
+			<li><a href="https://dpuhospital.com/cardiology/">Cardiology</a></li>
+			<li><a href="https://dpuhospital.com/multi-organ-transplant/">Multi Organ Transplant</a></li>
+			<li><a href="https://dpuhospital.com/cardiothoracic-surgery-cvts/">Cardiothoracic Surgery (CVTS)</a></li>
+			<li><a href="https://dpuhospital.com/nephrology/">Nephrology</a></li>
+			<li><a href="https://dpuhospital.com/diabetology-endocrinology/">Diabetology & Endocrinology</a></li>
+			<li><a href="https://dpuhospital.com/neurology/">Neurology</a></li>
+			<li><a href="https://dpuhospital.com/hematology/">Haematology</a></li>
+			<li><a href="https://dpuhospital.com/neuro-surgery/">Neuro Surgery</a></li>
+			<li><a href="https://dpuhospital.com/mother-care-ivf-endoscopy/">IVF & Endoscopy</a></li>
+			<li><a href="https://dpuhospital.com/pediatric-endocrinology/">Paediatric Endocrinology</a></li>
+			<li><a href="https://dpuhospital.com/medical-oncology/">Medical Oncology</a></li>
+			<li><a href="https://dpuhospital.com/paediatric-surgery/">Paediatric Surgery</a></li>
+			<li><a href="https://dpuhospital.com/surgical-oncology/">Surgical Oncology</a></li>
+			<li><a href="https://dpuhospital.com/plastic-surgery/">Plastic Surgery</a></li>
+			<li><a href="https://dpuhospital.com/radiation-oncology/">Radiation Oncology</a></li>
+			<li><a href="https://dpuhospital.com/robotic-surgery/">Robotic Surgery</a></li>
+			<li><a href="https://dpuhospital.com/medical-gastroenterology/">Medical Gastroenterology</a></li>
+			<li><a href="https://dpuhospital.com/urology/">Urology</a></li>
+			<li><a href="https://dpuhospital.com/surgical-gastroenterology/">Surgical Gastroenterology</a></li>
+			<li><a href="https://dpuhospital.com/vascular-surgery/">Vascular Surgery</a></li>
+
+		  </ul>
+		  <!-- <a href="https://dpuhospital.com/treatments-services/" class="rm-arrowbtn">Click here to view all</a> -->
+		</div>
+		<div class="col col-md-6">
+		  <a href="https://dpuhospital.com/treatments-services/">
+			<h3>Broad specialties</h3>
+		  </a>
+		  <ul class="menu-links">
+			<li><a href="https://dpuhospital.com/anaesthesiology/">Anaesthesiology</a></li>
+			<li><a href="https://dpuhospital.com/obstetrics-gynaecology/">Obstetrics & Gynaecology</a></li>
+			<li><a href="https://dpuhospital.com/dentistry/">Dentistry</a></li>
+			<li><a href="https://dpuhospital.com/ophthalmology/">Ophthalmology</a></li>
+			<li><a href="https://dpuhospital.com/dermatology/">Dermatology</a></li>
+			<li><a href="https://dpuhospital.com/orthopaedics/">Orthopaedics</a></li>
+			<li><a href="https://dpuhospital.com/ear-nose-throat-ent/">Ear Nose Throat (ENT)</a></li>
+			<li><a href="https://dpuhospital.com/paediatric/">Paediatrics</a></li>
+			<li><a href="https://dpuhospital.com/emergency-medicine/">Emergency Medicine</a></li>
+			<li><a href="https://dpuhospital.com/pain-management-palliative-care/">Pain Management & Palliative Care</a></li>
+			<li><a href="https://dpuhospital.com/general-medicine/">General Medicine</a></li>
+			<li><a href="https://dpuhospital.com/psychiatry/">Psychiatry</a></li>
+			<li><a href="https://dpuhospital.com/general-surgery/">General Surgery</a></li>
+			<li><a href="https://dpuhospital.com/pulmonary-medicine/">Respiratory Medicine</a></li>
+		  </ul>
+		  <!-- <a href="https://dpuhospital.com/treatments-services/" class="rm-arrowbtn">Click here to view all</a> -->
+		</div>
+	  </div>
+	  <div class="row">
+		<div class="col col-md-6">
+		  <a href="https://dpuhospital.com/treatments-services/">
+			<h3>Auxiliary services</h3>
+		  </a>
+		  <ul class="menu-links">
+			<li><a href="https://dpuhospital.com/blood-centre-transfusion-services/">Blood Centre & Transfusion Services</a></li>
+			<li><a href="https://dpuhospital.com/medical-social-work-department/">Medical Social Work Department</a></li>
+			<li><a href="https://dpuhospital.com/physiotherapy-occupational-therapy/">Physiotherapy & Occupational Therapy</a></li>
+			<li><a href="https://dpuhospital.com/nutrition-and-dietetics/">Food & Dietary Services</a></li> 
+		  </ul>
+		</div>
+		<div class="col col-md-6">
+		  <a href="https://dpuhospital.com/treatments-services/">
+			<h3>Diagnostics</h3>
+		  </a>
+		  <ul class="menu-links">
+			<li><a href="https://dpuhospital.com/interventional-radiology/">Interventional Radiology</a></li>
+			<li><a href="https://dpuhospital.com/radiology/">Radiology</a></li>
+			<li><a href="https://dpuhospital.com/laboratory/">Laboratory</a></li>
+		  </ul>
+		</div>
+	  </div>
+	</div>
+  </section>
+  <section id="mega-menu2" class="megamenu-contain">
+	<div class="mega-menu-inner">
+	  <a href="#">
+		<h3>Centres Of Excellence</h3>
+	  </a>
+	  <ul class="menu-links">
+		<li><a href="https://dpuhospital.com/cardiac-science/">Cardiac Sciences</a></li>
+		<li><a href="https://dpuhospital.com/critical-care/">Critical Care</a></li>
+		<li><a href="https://dpuhospital.com/joint-replacement-trauma-bone-diseases/">Joint Replacement, Trauma & Bone Diseases</a></li>
+		<li><a href="https://dpuhospital.com/paediatric-and-neonatology/">Paediatric & Neonatology</a></li>
+		<li><a href="https://dpuhospital.com/mother-care-ivf-endoscopy/">IVF & Endoscopy</a></li>
+		<li><a href="https://dpuhospital.com/multi-organ-transplant/">Multi Organ Transplant</a></li>
+		<li><a href="https://dpuhospital.com/neurosciences/">Neurosciences</a></li>
+		<li><a href="https://dpuhospital.com/plastic-surgery/">Plastic & Reconstructive Surgery</a></li>
+		<li><a href="https://dpuhospital.com/radio-imaging-high-end-diagnostics/">Radio Imaging & High-End Diagnostics</a></li>
+		<li><a href="https://dpuhospital.com/robotic-surgery/">Robotic Surgery</a></li>
+	  </ul>
+	</div>
+  </section> 
+        </div>
+        <div class="mobile-menu">
+          <nav role="navigation">
+            <div id="menuToggle">
+              <input type="checkbox" />
+              <span></span>
+              <span></span>
+              <span></span>
+                
+
+	<style>
+  .dropbtn {
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: relative;
+    background-color: #f1f1f1;
+    min-width: 100%;
+    z-index: 1;
+    overflow: scroll;
+    height: 400px;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 5px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    line-height: 24px;
+  }
+  .dropdownicon{
+    width: 20px;
+    margin-left: 10px;
+  }
+  
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  .dropdown:hover .dropdown-content {display: block;}
+
+  </style>
+<ul id="menu">
+  <li><a href="#">Home</a></li>
+  <li><a href="https://dpuhospital.com/about/">About us</a></li>
+  <div class="dropdown">
+  <li class="dropbtn"><a href="#">Services <img class="dropdownicon" src="/images/dropdown-icon.png"></a></li>
+  <div class="dropdown-content">
+    <li class="dropbtn"><a href="#"><b>Super Specialties</b></a></li>
+    <hr>
+    <li><a href="https://dpuhospital.com/cardiology/">Cardiology</a></li>
+    <li><a href="https://dpuhospital.com/cardiothoracic-surgery-cvts/">Cardiothoracic Surgery (CVTS)</a></li>
+    <li><a href="https://dpuhospital.com/diabetology-endocrinology/">Diabetology & Endocrinology</a></li>
+    <li><a href="https://dpuhospital.com/hematology/">Haematology</a></li>
+    <li><a href="https://dpuhospital.com/mother-care-ivf-endoscopy/">IVF & Endoscopy</a></li>
+    <li><a href="https://dpuhospital.com/medical-gastroenterology/">Medical Gastroenterology</a></li>
+    <li><a href="https://dpuhospital.com/medical-oncology/">Medical Oncology</a></li>
+    <li><a href="https://dpuhospital.com/multi-organ-transplant/">Multi Organ Transplant</a></li>
+    <li><a href="https://dpuhospital.com/robotic-surgery/">Robotic Surgery</a></li>
+    <li><a href="https://dpuhospital.com/nephrology/">Nephrology</a></li>
+    <li><a href="https://dpuhospital.com/neurology/">Neurology</a></li>
+    <li><a href="https://dpuhospital.com/neuro-surgery/">Neuro Surgery</a></li>
+    <li><a href="https://dpuhospital.com/paediatric-surgery/">Paediatric Surgery</a></li>
+    <li><a href="https://dpuhospital.com/pediatric-endocrinology/">Pediatric Endocrinology</a></li>
+    <li><a href="https://dpuhospital.com/plastic-surgery/">Plastic Surgery</a></li>
+    <li><a href="https://dpuhospital.com/radiation-oncology/">Radiation Oncology</a></li>
+    <li><a href="https://dpuhospital.com/surgical-gastroenterology/">Surgical Gastroenterology</a></li>
+    <li><a href="https://dpuhospital.com/surgical-oncology/">Surgical Oncology</a></li>
+    <li><a href="https://dpuhospital.com/urology/">Urology</a></li>
+    <li><a href="https://dpuhospital.com/vascular-surgery/">Vascular Surgery</a></li>
+    <li class="dropbtn"></li><a href="#"><b>Broad Specialties</b></a></li>
+    <hr>
+    <li><a href="https://dpuhospital.com/anaesthesiology/">Anaesthesiology</a></li>
+    <li><a href="https://dpuhospital.com/dentistry/">Dentistry</a></li>
+    <li><a href="https://dpuhospital.com/dermatology/">Dermatology</a></li>
+    <li><a href="https://dpuhospital.com/ear-nose-throat-ent/">Ear Nose Throat (ENT)</a></li>
+    <li><a href="https://dpuhospital.com/emergency-medicine/">Emergency Medicine</a></li>
+    <li><a href="https://dpuhospital.com/general-medicine/">General Medicine</a></li>
+    <li><a href="https://dpuhospital.com/general-surgery/">General Surgery</a></li>
+    <li><a href="https://dpuhospital.com/obstetrics-gynaecology/">Obstetrics & Gynaecology</a></li>
+    <li><a href="https://dpuhospital.com/ophthalmology/">Ophthalmology</a></li>
+    <li><a href="https://dpuhospital.com/orthopaedics/">Orthopaedics</a></li>
+    <li><a href="https://dpuhospital.com/paediatric/">Paediatric</a></li>
+    <li><a href="https://dpuhospital.com/pain-management-palliative-care/">Pain Management & Palliative Care</a></li>
+    <li><a href="https://dpuhospital.com/psychiatry/">Psychiatry</a></li>
+    <li><a href="https://dpuhospital.com/pulmonary-medicine/">Respiratory Medicine</a></li>
+    <li class="dropbtn"></li><a href="#"><b>Auxiliary Services</b></a></li>
+    <hr>
+    <li><a href="https://dpuhospital.com/blood-centre-transfusion-services/">Blood Centre & Transfusion services</a></li>
+    <li><a href="https://dpuhospital.com/nutrition-and-dietetics/">Food & Dietary services</a></li>
+    <li><a href="https://dpuhospital.com/medical-social-work-department/">Medical Social Work Department</a></li>
+    <li><a href="https://dpuhospital.com/physiotherapy-occupational-therapy/">Physiotherapy & Occupational therapy</a></li>
+    <li class="dropbtn"></li><a href="#"><b>Diagnostics</b></a></li>
+    <hr>
+    <li><a href="https://dpuhospital.com/interventional-radiology/">Interventional Radiology</a></li>
+    <li><a href="https://dpuhospital.com/laboratory/">Laboratory</a></li>
+    <li><a href="https://dpuhospital.com/radiology/">Radiology</a></li>
+  </div>
+  </div>
+  <div class="dropdown">
+    <li class="dropbtn"><a href="#">Centre of Excellence <img class="dropdownicon" src="/images/dropdown-icon.png"></a></li>
+    <div class="dropdown-content">
+      <li><a href="https://dpuhospital.com/cardiac-science/">Cardiac Sciences</a></li>
+      <li><a href="https://dpuhospital.com/critical-care/">Critical Care</a></li>
+      <li><a href="https://dpuhospital.com/joint-replacement-trauma-bone-diseases/">Joint Replacement, Trauma & Bone Diseases</a></li>
+      <li><a href="https://dpuhospital.com/mother-care-ivf-endoscopy/">IVF & Endoscopy</a></li>
+      <li><a href="https://dpuhospital.com/multi-organ-transplant/">Multi Organ Transplant</a></li>
+      <li><a href="https://dpuhospital.com/neurosciences/">Neurosciences</a></li>
+      <li><a href="https://dpuhospital.com/paediatric-and-neonatology/">Paediatric & Neonatology</a></li>
+      <li><a href="https://dpuhospital.com/plastic-surgery/">Plastic & Reconstructive Surgery</a></li>
+      <li><a href="https://dpuhospital.com/radio-imaging-high-end-diagnostics/">Radio Imaging & High-End Diagnostics</a></li>
+      <li><a href="https://dpuhospital.com/robotic-surgery/">Robotic Surgery</a></li>
+    </div>
+  </div>
+  <li><a href="https://dpuhospital.com/opd-timings/">OPD Timings</a></li>
+  <li><a href="https://dpuhospital.com/tpas-insurance-partner/#insurance-partners">Insurance Partners</a></li>
+  <li><a href="https://dpuhospital.com/wellness-clinic-and-health-check/">Health Check</a></li>
+  <li><a href="https://dpuhospital.com/international-patients/">International Patient</a></li>
+  <li><a href="https://dpuhospital.com/request-an-appointment/">Book Appointment</a></li>
+  </ul> 
+
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+ 
+                <div class="BannerWrap">
+  <div class="innerBanner">
+       
+
+	<style>
+   .desktopBanner {
+    display: block;
+}
+.mobileBanner {
+    display: none;
+}
+@media only screen and (max-width: 767px) {
+    .desktopBanner {
+    display: none;
+}
+.mobileBanner {
+    display: block;
+}
+.BannerWrap .innerBanner .bannertag h2 {
+    font-size: 30px !important;
+    line-height: 40px !important;
+    color: #fff !important;
+    font-weight: 600;
+    margin-left: 0px;
+    margin-bottom: -20px !important;
+}
+}
+</style>
+<link rel="canonical" href="https://dpuhospital.com/contact-us/" />
+<div class="desktopBanner">
+<img src="/images/contact_us.jpg" class="innerbannerBg">
+    <div class="bannertag">
+      <h1 class="animated anim_fadein">Contact Us</h1>
+</div>
+</div>
+<div class="mobileBanner">
+  <img src="/images/contact-us-mobile.jpg" class="innerbannerBg">
+      <div class="bannertag">
+        <h2 class="animated anim_fadein">Contact Us</h2>
+  </div>
+  </div>
+ 
+         </div></div>
+             <section id="start" class="quality-care-section">
+              <div class="articleWrap">
+         	             <!-- <h1></h1>-->       <div id="system-message-container">
+	</div>
+
+		<div class="item-page" itemscope itemtype="https://schema.org/Article">
+	<meta itemprop="inLanguage" content="en-GB" />
+	
+		
+						
+		
+	
+	
+		
+								<div itemprop="articleBody">
+		<style>
+	.contactusWrap .contactusInfo ul.contactDetails li h4 {
+		font-size: 20px;
+		line-height: 24px;
+		color: #d1ab4c !important;
+		font-family: poppinsbold;
+		margin-bottom: 5px;
+		font-weight: bold;
+	}
+	.contactusInner {
+		padding: 0px 24px;
+	}
+	.contactusWrap .contactusInfo h3 {
+		color: #fff !important;
+		position: relative;
+		padding-bottom: 15px;
+	}
+	ul.contactDetails {
+		padding-left: 0rem;
+	}
+	.contactusWrap .contactusInfo ul.contactDetails li a {
+		color: #fff !important;
+	}
+	</style>
+	<div class="contactusWrap">
+		<div class="container_16">
+		  <div class="grid_16">
+			<div class="contactusInner">
+			  <div class="contactusInfo">
+				<h3 class="subheading">Reach Us</h3>
+				<ul class="contactDetails">
+				  <li>
+					<h4>Address</h4>
+					Dr. D. Y. Patil Hospital & Research Centre<br/>
+					Sant Tukaram Nagar, Pimpri,<br/>
+					Pune - 411018, Maharashtra, India.</li>
+				  <li>
+					<h4>Contact</h4>
+					<a href="tel:+91 20 27805100">+91 20 27805100</a> / <a href="tel:27805101">27805101</a> / <a href="tel:67116499">67116499</a></br>
+					<a href="tel:+91 20 27805100">For Media Enquiries: <br/>Mr. Ajay Berde (Marketing Manager) <br/>+91 20 27805100 (Ext. : 6281)</a></li>
+				  <li>
+					<h4>Email ID</h4>
+					<span id="cloakc128926b6e3407248177f7cd079b1d37">This email address is being protected from spambots. You need JavaScript enabled to view it.</span><script type='text/javascript'>
+				document.getElementById('cloakc128926b6e3407248177f7cd079b1d37').innerHTML = '';
+				var prefix = '&#109;a' + 'i&#108;' + '&#116;o';
+				var path = 'hr' + 'ef' + '=';
+				var addyc128926b6e3407248177f7cd079b1d37 = '&#105;nf&#111;.m&#101;d&#105;c&#97;l' + '&#64;';
+				addyc128926b6e3407248177f7cd079b1d37 = addyc128926b6e3407248177f7cd079b1d37 + 'dp&#117;' + '&#46;' + '&#101;d&#117;' + '&#46;' + '&#105;n';
+				var addy_textc128926b6e3407248177f7cd079b1d37 = '&#105;nf&#111;' + '&#64;' + 'dp&#117;h&#111;sp&#105;t&#97;l' + '&#46;' + 'c&#111;m';document.getElementById('cloakc128926b6e3407248177f7cd079b1d37').innerHTML += '<a ' + path + '\'' + prefix + ':' + addyc128926b6e3407248177f7cd079b1d37 + '\'>'+addy_textc128926b6e3407248177f7cd079b1d37+'<\/a>';
+		</script></br>
+					<span id="cloak2f32caad50950f481d6a1935f8d1ed04">This email address is being protected from spambots. You need JavaScript enabled to view it.</span><script type='text/javascript'>
+				document.getElementById('cloak2f32caad50950f481d6a1935f8d1ed04').innerHTML = '';
+				var prefix = '&#109;a' + 'i&#108;' + '&#116;o';
+				var path = 'hr' + 'ef' + '=';
+				var addy2f32caad50950f481d6a1935f8d1ed04 = 'm&#97;n&#97;l&#105;.kh&#97;t&#97;vk&#97;r' + '&#64;';
+				addy2f32caad50950f481d6a1935f8d1ed04 = addy2f32caad50950f481d6a1935f8d1ed04 + 'dp&#117;' + '&#46;' + '&#101;d&#117;' + '&#46;' + '&#105;n';
+				var addy_text2f32caad50950f481d6a1935f8d1ed04 = 'F&#111;r M&#101;d&#105;&#97; Enq&#117;&#105;r&#105;&#101;s: &#97;j&#97;y.b&#101;rd&#101;@dp&#117;.&#101;d&#117;.&#105;n';document.getElementById('cloak2f32caad50950f481d6a1935f8d1ed04').innerHTML += '<a ' + path + '\'' + prefix + ':' + addy2f32caad50950f481d6a1935f8d1ed04 + '\'>'+addy_text2f32caad50950f481d6a1935f8d1ed04+'<\/a>';
+		</script></li>
+				</ul>
+				<div class="clear"></div>
+				<ul class="sociallink">
+				  <li class="animated anim_fadein fadeInUp" style=""><a href="https://www.facebook.com/DYPHospital/"><img src="/images/icon-fb-f.svg"></a></li>
+				  <li class="animated anim_fadein fadeInUp" style=""><a href="https://instagram.com/dpu_hospital?utm_medium=copy_link"><img src="/images/icon-twitter-f.svg"></a></li>
+				  <li class="animated anim_fadein fadeInUp" style=""><a href="https://www.linkedin.com/company/dpu-hospital-pune"><img src="/images/icon-in-f.svg"></a></li>
+				  <li class="animated anim_fadein fadeInUp" style=""><a href="https://www.youtube.com/channel/UCneEJvCQWu0_x_twmX1bhkA"><img src="/images/icon-youtube-f.svg"></a></li>
+				</ul>
+				<div class="clear"></div>
+			  </div>
+			  <div class="contactusForm">
+				<h3 class="subheading">Get In Touch</h3>
+				<p>Have queries? Just send them to us using the form below and we promise to get back to you as soon as possible.</p>
+				<form method="post"  id="userForm" class="formResponsive" action="https://dpuhospital.com/contact-us/"><div class="inputBox">
+  <input type="text" value="" size="40" maxlength="40" placeholder="Name*" name="form[enq_name]" id="enq_name" class="rsform-input-box" aria-required="true" /><br/>
+<span id="component23" class="formNoError">Please Enter Valid Name</span>
+</div>
+<div class="inputBox">
+  <input type="tel" value="" size="13" maxlength="13" placeholder="Contact No.*" name="form[enq_tele]" id="enq_tele" class="rsform-input-box" aria-required="true" /><br/>
+<span id="component24" class="formNoError">Please Enter a Valid Mobile Number</span>
+</div>
+<div class="inputBox">
+  <input type="email" value="" size="20" maxlength="30" placeholder="Email Id*" name="form[enq_email]" id="enq_email" class="rsform-input-box" aria-required="true" /><br/>
+<span id="component25" class="formNoError">Please Enter a Valid Email Address</span>
+</div>
+<div class="inputBox">
+  <input type="text" value="" size="20" maxlength="20" placeholder="City*" name="form[enq_city]" id="enq_city" class="rsform-input-box" aria-required="true" /><br/>
+<span id="component41" class="formNoError">Please Enter a Valid City Name</span>
+</div>
+<div class="inputBox">
+  <input type="text" value="" size="20" maxlength="50" placeholder="State*" name="form[enq_state]" id="enq_state" class="rsform-input-box" aria-required="true" /><br/>
+<span id="component42" class="formNoError">Please Enter State</span>
+</div>
+<div class="inputBox">
+  <input id="txtjQcal3_0" name="form[enq_dob]" type="text" value="" placeholder="Date of Birth*" class="rsform-calendar-box" aria-required="true" /><input id="btnjQ3_0" type="button" value="Date of Birth"  placeholder="Date of Birth*" class="btnCal rsform-calendar-button" onclick="RSFormPro.jQueryCalendar.showCalendar('3_0');"/><div id="caljQ3_0Container" style="clear:both;display:none;position:absolute;z-index:9994"></div><input id="hiddenjQcal3_0" type="hidden" name="hidden[3_enq_dob]" value="" /><br/>
+<span id="component43" class="formNoError">Please Select a Valid Date of Birth</span>
+</div>
+<div class="inputBox">
+ <img src="/component/rsform/?task=captcha&amp;componentId=62&amp;format=image&amp;sid=1952202671" id="captcha62" alt="Captcha" /><input type="text" value="" name="form[enq_captcha]" id="captchaTxt62" placeholder="Please Enter Captcha" class="rsform-captcha-box" aria-required="true" /> <a href="javascript:void(0)" class="rsform-captcha-refresh-button" onclick="RSFormPro.refreshCaptcha('62', '/component/rsform/?task=captcha&amp;componentId=62&amp;format=image'); return false;">Refresh</a><br/>
+<span id="component62" class="formNoError">Please Enter Valid Captcha</span>
+</div>
+<div class="inputSubmit">
+ <input type="submit" name="form[enq_submit]" id="enq_submit" class="rsform-submit-button" value="Submit" />
+</div>
+<input type="hidden" name="form[formId]" value="3"/></form><script type="text/javascript">RSFormPro.Ajax.URL = "\/component\/rsform\/?task=ajaxValidate";</script>
+<script type="text/javascript">
+ajaxExtraValidationScript[3] = function(task, formId, data){ 
+var formComponents = {};
+formComponents[23]='enq_name';formComponents[24]='enq_tele';formComponents[25]='enq_email';formComponents[41]='enq_city';formComponents[42]='enq_state';formComponents[43]='enq_dob';formComponents[62]='enq_captcha';
+RSFormPro.Ajax.displayValidationErrors(formComponents, task, formId, data);
+};
+</script>
+			  </div>
+			</div>
+			<div class="clear"></div>
+		  </div>
+		  <div class="clear"></div>
+		</div>
+		<div class="clear"></div>
+	  </div>
+	  <div class="clear"></div>
+	  <div class="contactGoogleMap">
+		  <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15123.504524235444!2d73.8220861!3d18.6246404!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf080ec8435d265c6!2sDr.%20D.%20Y.%20Patil%20Vidyapeeth%2C%20Pune!5e0!3m2!1sen!2sin!4v1637151542702!5m2!1sen!2sin" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+	  </div>
+	  <div class="clear"></div>	</div>
+
+	
+							</div>
+
+           	          
+       </section>
+    <footer class="site-footer">
+    <div class="container">
+      
+
+	<div class="ftr-top">
+    <div class="row">
+      <div class="col-md-4 col-sm-12">
+        <div class="ftr-cta">
+          <div class="ftr-cta-icon"><img src="/images/ftrcallicon.png" alt="callicon"></div>
+          <div class="cta-txt">
+            <span>Have a question? Call us now</span>
+            <a href="tel:+919226007506">+91 922 600 7506</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-12">
+        <div class="ftr-cta">
+          <div class="ftr-cta-icon"><img src="/images/ftremail-icon.png" alt="ftremail-icon"></div>
+          <div class="cta-txt">
+            <span>Need support? Drop us an email</span>
+            <a href="mailto:info@dpuhospital.com">info@dpuhospital.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-12">
+        <div class="ftr-cta">
+          <div class="ftr-cta-icon"><img src="/images/service-icon.png" alt="serviceicon"></div>
+          <div class="cta-txt">
+            <span>For your wellbeing</span>
+            <a href="tel:020-67116469">24/7 Service</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="ftr-links">
+    <div class="row">
+      <div class="col-md-3 col-sm-4">
+        <h4>About Us</h4>
+        <ul>
+          <li><a href="https://dpuhospital.com/about/">Overview</a></li>
+          <li><a href="https://dpuhospital.com/about/">Vision, Mission</a></li>
+          <li><a href="https://dpuhospital.com/about/">Our Leaders</a></li>
+          <li><a href="https://dpuhospital.com/about/">Management Team</a></li>
+          <li><a href="https://dpuhospital.com/about/">Milestones</a></li>
+          <li><a href="https://dpuhospital.com/about/">Accreditations</a></li>
+          <li><a href="https://dpuhospital.com/news-events/">News & Events</a></li>
+          <li><a href="https://dpuhospital.com/infrastructure/">Infrastructure</a></li>
+          <li><a href="https://dpuhospital.com/our-doctors/">Our Doctors</a></li>
+        </ul>
+      </div>
+      <div class="col-md-6 col-sm-8">
+        <h4>Services</h4>
+        <div class="row">
+          <div class="col-md-6 col-sm-6">
+            <h5>Super Specialties</h5>
+            <ul class="ftrsubmenu">
+              <li><a href="https://dpuhospital.com/cardiology/">Cardiology</a></li>
+              <li><a href="https://dpuhospital.com/cardiothoracic-surgery-cvts/">Cardiothoracic Surgery (CVTS)</a></li>
+              <li><a href="https://dpuhospital.com/medical-gastroenterology/">Medical Gastroenterology</a></li>
+              <li><a href="https://dpuhospital.com/surgical-gastroenterology/">Surgical Gastroenterology</a></li>
+              <li><a href="https://dpuhospital.com/nephrology/">Nephrology</a></li>
+              <li><a href="https://dpuhospital.com/neurology/">Neurology</a></li>
+              <li><a href="https://dpuhospital.com/neuro-surgery/">Neuro Surgery</a></li>
+              <li><a href="https://dpuhospital.com/medical-oncology/">Medical Oncology</a></li>
+            </ul>
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <h5>Broad Specialties</h5>
+            <ul class="ftrsubmenu">
+              <li><a href="https://dpuhospital.com/anaesthesiology/">Anaesthesiology</a></li>
+              <li><a href="https://dpuhospital.com/general-medicine/">General Medicine</a></li>
+              <li><a href="https://dpuhospital.com/general-surgery/">General Surgery</a></li>
+              <li><a href="https://dpuhospital.com/obstetrics-gynaecology/">Obstetrics & Gynaecology</a></li>
+              <li><a href="https://dpuhospital.com/ear-nose-throat-ent/">Ear Nose Throat (ENT)</a></li>
+              <li><a href="https://dpuhospital.com/dermatology/">Dermatology</a></li>
+              <li><a href="https://dpuhospital.com/emergency-medicine/">Emergency Medicine</a></li>
+              <li><a href="https://dpuhospital.com/ophthalmology/">Ophthalmology</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <h4>Other</h4>
+        <ul>
+          <li><a href="https://dpuhospital.com/corporate-tie-ups/">Corporate Tie Ups</a></li>
+          <li><a href="https://dpuhospital.com/careers/">Careers</a></li>
+          <li><a href="https://dpuhospital.com/blog/">Blog</a></li>
+          <li><a href="https://dpuhospital.com/contact-us/">Contact Us</a></li>
+          <li><a href="https://dpuhospital.com/wellness-clinic-and-health-check/">Health Check</a></li>
+          <li><a href="https://dpuhospital.com/tpas-insurance-partner/">TPAs & Insurance Partner</a></li>
+          <li><a href="https://dpuhospital.com/government-schemes/">Government Schemes</a></li>
+          <li><a href="https://medical.dpu.edu.in/">Dr. D. Y. Patil Medical College</a></li>
+  
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="ftr-copyright">
+    <div class="row">
+      <div class="col-md-7 col-sm-12">
+        <p>© 2024 DPU Super Specialty Hospital, Pimpri, Pune. All rights reserved.</p>
+        <ul class="copymenu">
+          <li><a href="https://dpuhospital.com/privacy-policy/">Privacy Policy</a></li>
+          <li><a href="https://dpuhospital.com/disclaimer/">Disclaimer</a></li>
+          <li><a href="https://dpuhospital.com/images/pdf/patient-charter-nabh.pdf" target="_blank">Patient Charter</a></li>
+          <li><a href="https://dpuhospital.com/sitemap/">Sitemap</a></li>
+        </ul>
+      </div>
+      <div class="col-md-5 col-sm-12">
+        <ul class="ftr-social">
+          <li><a href="https://www.facebook.com/DYPHospital/" target="_blank"><img src="/images/fb-icon.png" alt="fb"></a></li>
+          <li><a href="https://instagram.com/dpu_hospital?utm_medium=copy_link" target="_blank"><img src="/images/instaicon.png" alt="insta"></a></li>
+          <li><a href="https://www.linkedin.com/company/dpu-hospital-pune" target="_blank"><img src="/images/linkedinicon.png" alt="linkedin"></a></li>
+          <li><a href="https://www.youtube.com/channel/UCneEJvCQWu0_x_twmX1bhkA" target="_blank"><img src="/images/youtubeicon.png" alt="youtube"></a></li>
+        </ul>
+      </div>
+    </div>
+  </div> 
+      
+    </div>
+  </footer>
+  
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js'></script>
+<script type="text/javascript">
+  Fancybox.bind("[data-fancybox]", {
+    // Your custom options
+  });
+
+
+  jQuery('.testi-slider').slick({
+    dots: false,
+    infinite: true,
+    arrows: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+  });
+
+  jQuery('.partner-slider').slick({
+    dots: false,
+    infinite: true,
+    arrows: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: false,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 575,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        }
+      }
+    ]
+  });
+
+  jQuery(document).ready(function () {
+    jQuery(".megamenu-1, #mega-menu").hover(function () {
+      jQuery("#mega-menu").addClass("menuactive");  //Add the active class to the area is hovered
+    }, function () {
+      jQuery("#mega-menu").removeClass("menuactive");
+    });
+
+    jQuery(".megamenu-2, #mega-menu2").hover(function () {
+      jQuery("#mega-menu2").addClass("menuactive");  //Add the active class to the area is hovered
+    }, function () {
+      jQuery("#mega-menu2").removeClass("menuactive");
+    });
+    
+    SlickServicesInit();
+
+    // Seciality Tabs
+    jQuery('.sepci-tabs li a').click(function () {
+      jQuery('.sepci-tabs li a').removeClass('activetab');
+      jQuery(this).addClass('activetab');
+      var tagid = jQuery(this).data('tag');
+      jQuery('.tab-list').removeClass('activelist').addClass('hide');
+      jQuery('#' + tagid).addClass('activelist').removeClass('hide');
+      SlickServicesInit();
+    });
+
+    // Service Tabs
+    jQuery('.service-tabs a').click(function () {
+      jQuery('.service-tabs a').removeClass('activetab1');
+      jQuery(this).addClass('activetab1');
+      var tagid = jQuery(this).data('tag');
+      jQuery('.tab-list1').removeClass('activelist1').addClass('hide');
+      jQuery('#' + tagid).addClass('activelist1').removeClass('hide');
+    });
+
+
+  });
+
+</script>
+
+<script>
+  jQuery(document).ready(function () {
+
+    jQuery('.stats-item h3').each(function () {
+      jQuery(this).prop('Counter', 0).animate({
+        Counter: Number(jQuery(this).text().replaceAll(',', ''))
+      }, {
+        duration: 4000,
+        easing: 'swing',
+        step: function (now) {
+          jQuery(this).text(Math.ceil(now).toLocaleString('en'));
+        }
+      });
+    });
+
+
+    jQuery(".searchBtn").click(function () {
+      jQuery(".searchInputs").toggleClass("active");
+      jQuery(".searchOverlay").addClass("active");
+    });
+    jQuery(".searchOverlay").click(function () {
+      jQuery(".searchInputs").removeClass("active");
+      jQuery(".searchOverlay").removeClass("active");
+    });
+  });
+
+  function SlickServicesInit(){
+    
+  jQuery('.speciality-slider').slick({
+    dots: false,
+    infinite: true,
+    arrows: true,
+    speed: 500,
+    autoplaySpeed: 2000,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        }
+      }
+    ]
+  });
+
+jQuery('.award-slider').slick('slickSetOption', {
+   slidesToShow: 4,
+   slidesToScroll: 1
+}, true);
+
+
+  }
+</script>
+
+
+<script>
+$(function() {
+    $(window).on("scroll", function() {
+        if($(window).scrollTop() > 80) {
+            $(".site-header").addClass("active");
+        } else {
+           $(".site-header").removeClass("active");
+        }
+    });
+});
+</script> 
+  
+  
+
+
+	<div class="stickyIcon">
+  <ul>
+    <li><a href="mailto:info@dpuhospital.com" target="_blank"><img src="/images/email-icon.svg"></a></li>
+<li>&nbsp;</li>
+<li><a href="https://api.whatsapp.com/send?phone=919226007506" target="_blank"><img src="/images/whatsapp1.png" alt="WhatsApp Icon"></a></li>
+  </ul>
+</div> 
+</body>
+
+</html>

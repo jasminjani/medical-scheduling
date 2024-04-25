@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const conn = require("../config/dbConnection");
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
+const logger = require('../utils/pino')
 const { specialitiesCombo } = require("./slotController");
 dotenv.config();
 
@@ -45,9 +46,13 @@ exports.getDoctorDetails = async (req, res) => {
     GROUP BY u.id,pp.created_at,pp.profile_picture,s.speciality,dd.qualification,dd.consultancy_fees,ch.name,
       ch.city,ch.location ORDER BY rating DESC; `;
       [result] = await conn.query(sql);
-      // console.log(result);
+      // logger.info(result);
     } catch (error) {
-      console.log(error)
+      logger.error(error.message)
+      return res.status(500).json({
+        success:false,
+        message:"DB error Occur"
+      })
     }
 
     result = Object.values(result.reduce((acc, { id, fname, lname, qualification, consultancy_fees, hospital_name, city, location, profile_picture, speciality, total_reviews, rating }) => {
@@ -56,12 +61,14 @@ exports.getDoctorDetails = async (req, res) => {
       return acc;
     }, {}))
 
+    // logger.info(result)
     return res.json({
       success: true,
       data: result
     })
 
   } catch (error) {
+    logger.error(error.message)
     return res.status(500).json({
       success: false,
       error: error.message,
@@ -76,13 +83,17 @@ exports.homePage = async (req, res) => {
     let html = await specialitiesCombo();
     return res.render('./common/homepage', { html })
   } catch (error) {
-    console.log(error.message);
+    logger.error(error.message);
   }
 };
 
 exports.allDoctors = async (req, res) => {
-  let html = await specialitiesCombo();
-  res.render('./pages/patientPanel/allDoctors', { html })
+  try {
+    let html = await specialitiesCombo();
+    res.render('./pages/patientPanel/allDoctors', { html })
+  } catch (error) {
+    logger.error(error.message)
+  }
 }
 
 // get => /register
@@ -91,7 +102,7 @@ exports.getCreateUserForm = async (req, res) => {
     let html = await generateCityCombo();
     return res.render("./pages/auth/register", { html });
   } catch (error) {
-    console.log(error.message);
+    logger.error(error.message);
   }
 };
 
@@ -100,7 +111,7 @@ exports.getLoginForm = async (req, res) => {
   try {
     return res.render("./pages/auth/login");
   } catch (error) {
-    console.log(error.message);
+    logger.error(error.message)
   }
 };
 
@@ -158,6 +169,7 @@ exports.createUser = async (req, res) => {
       let sql = "select * from users where email=?";
       [result] = await conn.query(sql, [email]);
     } catch (error) {
+      logger.error(error.message)
       return res.status(500).json({
         success: false,
         message: error.message,
@@ -180,6 +192,7 @@ exports.createUser = async (req, res) => {
       let bcryptsalt = await bcrypt.genSaltSync(10);
       hashPassword = await bcrypt.hash(password, bcryptsalt);
     } catch (error) {
+      logger.error(error.message)
       return res.status(500).json({
         success: false,
         message: error.message,
@@ -211,6 +224,7 @@ exports.createUser = async (req, res) => {
         ],
       ]);
     } catch (error) {
+      logger.error(error.message)
       return res.status(500).json({
         success: false,
         error: error.message,
@@ -223,6 +237,7 @@ exports.createUser = async (req, res) => {
       let sql = "insert into profile_pictures (profile_picture,user_id) values (?)";
       await conn.query(sql, [[profile, result.insertId]])
     } catch (error) {
+      logger.error(error.message)
       return res.status(500).json({
         success: false,
         error: error.message,
@@ -245,6 +260,7 @@ exports.createUser = async (req, res) => {
       let sql = "select * from users where email=?;";
       [result] = await conn.query(sql, [email]);
     } catch (error) {
+      logger.error(error.message)
       return res.status(500).json({
         success: false,
         error: error.message,
@@ -259,7 +275,7 @@ exports.createUser = async (req, res) => {
       user: result[0],
     });
   } catch (error) {
-    console.log(error);
+    logger.error(error.message);
     // any error occur during the registration
     res.status(500).json({
       success: false,
