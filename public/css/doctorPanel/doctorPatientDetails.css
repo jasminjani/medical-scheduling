@@ -28,3 +28,10 @@
 
   border-radius: 30px;
 }
+
+.a7-FieldData{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 10px;
+}

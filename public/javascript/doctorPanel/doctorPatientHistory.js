@@ -1,3 +1,4 @@
+
 let search = document.getElementById("search").value
 const fetchData = async () => {
   let fetchdata = await fetch(`/getPatientData`)
@@ -10,6 +11,12 @@ const searchFetchDataFun = async()=>{
   let data = await fetchData.json()
   return data
 }
+
+let a = document.getElementById("a5-tbody").offsetParent
+
+console.log(a);
+
+
 
 let currentPage = 1;
 const pagefield = 1;
