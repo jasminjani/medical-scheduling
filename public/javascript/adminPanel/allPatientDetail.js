@@ -4,7 +4,7 @@ async function searchPatient() {
 
     const searchedName = document.getElementById('a5-searchPatient').value;
 
-    const url = `http://localhost:8000/admin/display-search-patient/${searchedName}`;
+    const url = `/admin/display-search-patient/${searchedName}`;
     const response = await fetch(url);
     const result = await response.json();
 

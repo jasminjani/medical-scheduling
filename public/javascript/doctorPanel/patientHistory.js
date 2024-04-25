@@ -6,7 +6,7 @@ async function fetchPaymentData() {
 
     let patient_id = window.location.href.split('/').pop();
 
-    const url = `http://localhost:8000/getpatientHistoryData/${patient_id}`;
+    const url = `/getpatientHistoryData/${patient_id}`;
     const response = await fetch(url)
     const result = await response.json();
 

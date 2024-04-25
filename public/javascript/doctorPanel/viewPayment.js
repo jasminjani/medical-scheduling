@@ -2,7 +2,7 @@
 async function fetchPatients() {
   try {
 
-    const url = `http://localhost:8000/doctorPaymentHistorys`;
+    const url = `/doctorPaymentHistorys`;
     const response = await fetch(url)
     const result = await response.json()
 
@@ -18,7 +18,7 @@ async function searchPatient() {
 
     let searchedData = document.getElementById('a5-searchPatient').value;
 
-    const url = `http://localhost:8000/searchPaymentHistory/${searchedData}`;
+    const url = `/searchPaymentHistory/${searchedData}`;
     const response = await fetch(url)
     const result = await response.json()
     console.log(result);

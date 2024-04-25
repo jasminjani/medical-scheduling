@@ -2,7 +2,7 @@
 async function fetchPaymentHistory() {
   try {
 
-    const url = `http://localhost:8000/showpaymentHistory`;
+    const url = `/showpaymentHistory`;
     const response = await fetch(url)
     const result = await response.json()
 
@@ -18,7 +18,7 @@ async function searchPaymentHistory() {
 
     let searchedData = document.getElementById('a5-searchPatient').value;
 
-    const url = `http://localhost:8000/searchedPaymentHistory/${searchedData}`;
+    const url = `/searchedPaymentHistory/${searchedData}`;
     const response = await fetch(url)
     const result = await response.json()
     console.log(result);

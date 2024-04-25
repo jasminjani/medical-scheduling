@@ -47,7 +47,7 @@ const handleGenerate = async (e) => {
   const details = new FormData(formdata);
   const params = new URLSearchParams(details);
   const jobdata = await new Response(params).text();
-  const response = await fetch("http://localhost:8000/slot", {
+  const response = await fetch("/slot", {
     method: "POST",
     headers: {
       "Content-type": "application/x-www-form-urlencoded"

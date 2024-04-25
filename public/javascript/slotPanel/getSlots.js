@@ -2,7 +2,7 @@ window.location.href.split("/").pop() === "upcomingSlots" ? document.getElementB
 
 // Add Doctor id from cookie
 const getDates = async () => {
-  const response = await fetch("http://localhost:8000/dates", {
+  const response = await fetch("/dates", {
     method: "GET",
     headers: {
       "Content-type": "application/json"
@@ -28,7 +28,7 @@ const getSlots = async (date) => {
 
   document.getElementsByClassName("A3-modal")[0].style.visibility = "visible";
 
-  const response = await fetch(`http://localhost:8000/slots/${date}`, {
+  const response = await fetch(`/slots/${date}`, {
     method: "GET",
     headers: {
       "Content-type": "application/json"
