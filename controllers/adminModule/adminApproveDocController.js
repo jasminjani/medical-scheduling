@@ -25,7 +25,7 @@ exports.deleteDoctor = async (req, res) => {
   const docID = req.params.id;
   console.log(docID);
 
-  const sql = `update doctor_details set approved = -1 where doctor_id =?`
+  const sql = `update doctor_details JOIN users ON doctor_details.doctor_id = users.id set doctor_details.approved = -1, users.role_id = 1 where doctor_details.doctor_id = ?`
   let [result] = await conn.query(sql, [docID]);
 
   res.status(200).send();
