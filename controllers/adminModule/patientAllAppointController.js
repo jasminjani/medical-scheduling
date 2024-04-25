@@ -1,4 +1,5 @@
 const conn = require("../../config/dbConnection");
+const logger = require("../../utils/pino");
 
 exports.patientAllAppointment = async (req, res) => {
   try {
@@ -6,7 +7,6 @@ exports.patientAllAppointment = async (req, res) => {
     res.render('pages/adminPanel/patientAllAppointment');
 
   } catch (error) {
-    logger.error(error.message);
     logger.error(error.message);
     return res.status(500).json({
       success: false,
