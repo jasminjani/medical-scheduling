@@ -49,7 +49,8 @@ exports.dashBoardTodayAppointments=async(req,res)=>{
     join time_slots on time_slots.id=slot_bookings.slot_id
     join users as users_patient on slot_bookings.patient_id=users_patient.id
     left join prescriptions on prescriptions.booking_id=slot_bookings.id
-    where time_slots.doctor_id=? && time_slots.date=curdate() && prescriptions.id is null`,[doctor_id])
+    where time_slots.doctor_id=? && time_slots.date=curdate() && prescriptions.id is null && slot_bookings.is_canceled = 0`,[doctor_id]);
+
     res.json(result);
   }catch (error) {
     return res.json({

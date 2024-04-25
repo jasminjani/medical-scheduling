@@ -132,7 +132,7 @@
 
     <script>
       async function getAllDoctors() {
-        const resp = await fetch("/get-all-doctors");
+        const resp = await fetch("/admin/get-all-doctors");
 
         const data = await resp.json();
 
@@ -202,7 +202,7 @@
       getAllDoctors();
 
       async function deleteDoctor(id) {
-        let resp = await fetch(`/delete-doctor/${id}`);
+        let resp = await fetch(`/admin/delete-doctor/${id}`);
         location.reload();
       }
 
