@@ -2,7 +2,14 @@ const form = document.getElementById("myform");
 const rows = form.getElementsByClassName("row");
 const today = new Date();
 const currentDay = today.getDay();
+
+// Date validation
+const sundayOffset = 7 - currentDay;
+const sunday = new Date(today);
+sunday.setDate(today.getDate() + sundayOffset);
+
 const minDate = today.toISOString().substring(0, 10);
+const maxDate = sunday.toISOString().substring(0, 10);
 
 window.location.href.split("/").pop() === "addSlot"
   ? (document.getElementById("A3-add").style.backgroundColor = "#3984af")
@@ -14,10 +21,10 @@ function checkSlotOverlap(slots) {
     let timeB = b.split("-")[0].trim();
 
     return timeA.localeCompare(timeB, undefined, { numeric: true });
-  });
+});
 
-  // console.log(slots);
-  for (let i = 1; i < sortedSlots.length; i++) {
+// console.log(slots);
+for (let i = 1; i < sortedSlots.length; i++) {
     let prevSlotEndTime = sortedSlots[i - 1].split("-")[1].trim();
     let currSlotStartTime = sortedSlots[i].split("-")[0].trim();
 
@@ -28,13 +35,11 @@ function checkSlotOverlap(slots) {
   return true;
 }
 
-// Date validation
-const sundayOffset = 7 - currentDay;
-const sunday = new Date(today);
-sunday.setDate(today.getDate() + sundayOffset);
+
 
 const handleChange = (e) => {
-  if (new Date(e.target.value) > sunday) {
+  if (new Date(e.target.value) > sunday || new Date(e.target.value) < today) {
+    e.target.value = "";
     return Swal.fire("Please select date of this week only");
   }
 }
@@ -45,9 +50,12 @@ const handleInput = (times, i) => {
   newNode.setAttribute("name", `day${i + 1}`);
   newNode.setAttribute("class", "A3-time");
   newNode.setAttribute("placeholder", "hh:mm");
-  newNode.addEventListener("mouseover", handleFocus(newNode));
   times.insertBefore(newNode, times.children[times.children.length - 1])
     .addEventListener("change", (e) => {
+      if (!/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/.test(e.target.value)) {
+        e.target.value = "";
+        return Swal.fire("Please enter date in hh:mm format in 24 hour format");
+      }
       let startTime = e.target.value;
       const slotGap = document.getElementById("slot_gap").value;
       let [hours, minutes] = startTime.split(":").map(Number);
@@ -78,6 +86,7 @@ for (let i = 0; i < rows.length; i++) {
   const times = rows[i].getElementsByClassName("times")[0];
   const date = rows[i].getElementsByClassName("date")[0];
   date.getElementsByTagName("input")[0].setAttribute("min", minDate);
+  date.getElementsByTagName("input")[0].setAttribute("max", maxDate);
   handleButton(addButton, date, times, i);
 }
 
@@ -149,8 +158,3 @@ const handleGenerate = async (e) => {
   }
 };
 
-const handleFocus = (input) => {
-  const popUp = document.createElement("input");
-  popUp.setAttribute("type", "time");
-  popUp.setAttribute("id", "popup");
-};
