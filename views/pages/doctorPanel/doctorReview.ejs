@@ -25,44 +25,53 @@
   <title>view Feedback</title>
 </head>
 
-<body >
+<body>
 
   <div class="a5-container">
-    <%- include('../../common/newSidebar/doctorSidebar') %>
-      <div class="a5-section">
-        <div class="a5-search">
-          <div class="a5-searchbox">
-            <img src="/assets/adminPanel/icons/search.svg" alt="">
-            <input type="text" name="searchUser" id="search" placeholder="Search Patient name" tabindex="1" >
+    <div class="main-container">
+      <%- include('../../common/newSidebar/doctorSidebar') %>
+        <div class="a5-section">
+          <div class="a5-search">
+            <div class="a5-searchbox">
+              <img src="/assets/adminPanel/icons/search.svg" alt="">
+              <input type="text" name="searchUser" id="search" placeholder="Search Patient name" tabindex="1">
+            </div>
+            <p id="a5-btn-search" tabindex="2" onclick="location.reload()">Search</p>
           </div>
-          <p id="a5-btn-search" tabindex="2" onclick="location.reload()" >Search</p>
-        </div>
           <div class="A4-Pagination-component">
-          <div class="home"><button  id="homebtn"><<</button></div>
-          <div class="previous"><button id="previousbtn"><</button></div>
-          <div class="pagenumber"><p id="pageno">1</p></div>
-          <div class="next"><button  id="nextbtn">></button></div>
-          <div class="end"><button id="endbtn">>></button></div>
-        </div> 
+            <div class="home"><button id="homebtn">
+                <<< /button>
+            </div>
+            <div class="previous"><button id="previousbtn">
+                << /button>
+            </div>
+            <div class="pagenumber">
+              <p id="pageno">1</p>
+            </div>
+            <div class="next"><button id="nextbtn">></button></div>
+            <div class="end"><button id="endbtn">>></button></div>
+          </div>
 
-        <div class="a5-all-user">
-          <h2>View Feedback</h2>
+          <div class="a5-all-user">
+            <h2>View Feedback</h2>
 
-          <div class="a5-user-table"></div>
-          <table id="a5-user-table">
-            <tbody id="a5-tbody">
-              <tr>
-                <th>Name </th>
-                <th>Rating</th>
-                <th>Message</th>
-                <th>Date</th>
-              </tr>
-              <!-- fetch data database -->
+            <div class="a5-user-table"></div>
+            <table id="a5-user-table">
+              <tbody id="a5-tbody">
+                <tr>
+                  <th>Name </th>
+                  <th>Rating</th>
+                  <th>Message</th>
+                  <th>Date</th>
+                </tr>
+                <!-- fetch data database -->
 
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          </div>
         </div>
-       </div>
+    </div>
   </div>
 </body>
+
 </html>
