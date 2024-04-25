@@ -129,3 +129,41 @@ exports.isDoctor = async (req, res, next) => {
     });
   }
 };
+
+
+exports.roleHasPermissions = async(req,res,next)=>{
+  try {
+    let url = req.baseUrl + req.path;
+    url = url.split("/");
+    url.shift();
+
+    let id = url.pop();
+
+    url = url.join("/");
+    if(isNaN(id)){
+      url += `/${id}`
+    }
+
+    let roleId = req.user.role_id;
+
+    let sql = `select * from role_has_permissions as rp inner join permissions p on rp.permission_id = p.id where rp.role_id = ? and p.permission=?`;
+    let result;
+    try {
+      [result] = await conn.query(sql,[roleId,url])
+    } catch (error) {
+      
+    }
+
+    if(result.length == 0){
+      return res.render('./common/404')
+    }
+
+    next()
+
+  } catch (error) {
+    return res.json({
+      success:false,
+      message:error.message
+    })
+  }
+}
