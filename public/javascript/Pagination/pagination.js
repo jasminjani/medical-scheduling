@@ -1,6 +1,5 @@
-
 let currentpage=1;
-const ItemsPerPage=2;
+const ItemsPerPage=3;
 let length=0;
 let pageno=document.getElementById("pageno");
 
@@ -17,7 +16,6 @@ const pagination = async()=>{
   const pageItems = data.slice(startIndex, endIndex);
 
   let tabledata="";
-
   pageItems.map((value,index)=>{
     tabledata += `<tr>
         <td>${value.created_at}</td>
@@ -27,9 +25,15 @@ const pagination = async()=>{
       </tr>`
   })
 
+
   document.getElementById("tabledata").innerHTML = tabledata;
+  if(Math.ceil(length/ItemsPerPage)==1){
+    document.getElementById("nextbtn").disabled = true;
+  document.getElementById("endbtn").disabled = true;
+  }
 
 }
+
 
 const home=()=>{
   document.getElementById("homebtn").disabled = true;
@@ -45,7 +49,9 @@ const previous=()=>{
   if (currentpage <= 1) {
     document.getElementById("previousbtn").disabled = true;
     document.getElementById("homebtn").disabled = true;
-    pagination()
+    document.getElementById("nextbtn").disabled = false;
+    document.getElementById("endbtn").disabled = false;
+    pagination()  
   } else{
     document.getElementById("nextbtn").disabled = false;
     document.getElementById("endbtn").disabled = false;
@@ -61,7 +67,9 @@ const next=()=>{
     document.getElementById("previousbtn").disabled = false;
     document.getElementById("homebtn").disabled = false;
     pagination();
-  } else {
+  }
+ 
+  else {
     document.getElementById("previousbtn").disabled = false;
     document.getElementById("homebtn").disabled = false;
     pagination();

@@ -1,7 +1,7 @@
 const express = require("express");
 const passport = require('passport');
 const router = express.Router();
-const {createPrescription,getPrescriptionOfUser,getPrescriptionOfDoctor,updatePrescription,updateDetails,showDetails,home,allPatientPriscription,editPrescriptionHome} = require("../controllers/prescriptionController");
+const {createPrescription,getPrescriptionOfUser,getPrescriptionOfDoctor,updatePrescription,updateDetails,showDetails,home,allPatientPriscription,editPrescriptionHome,search} = require("../controllers/prescriptionController");
 
 const {generatePDF}=require("../controllers/PDF/PdfController")
 
@@ -26,5 +26,7 @@ router.route("/prescription/:patient_id/:booking_id").get(home);
 router.route("/prescriptiondetails").get(allPatientPriscription);
 
 router.route("/editprescription/:id").get(editPrescriptionHome);
+
+router.route("/search/:input").get(search)
 
 module.exports = router;
