@@ -195,6 +195,25 @@ getDoctors();
 
 
 // contcat us 
+
+// router.route('/contact-message').post(async (req, res) => {
+//   const { name, mobile_no, email, city, role, message } = req.body;
+
+//   try {
+//     await conn.query('insert into contact_us(name,mobile_no,email,city,role,message) values (?)'
+//       , [[name, mobile_no, email, city, role, message]]);
+//     res.json({
+//       success: true,
+//       message: "Data inserted .."
+//     });
+//   } catch (error) {
+//     res.status(500).json({
+//       success: false,
+//       error: error.message
+//     })
+//   }
+// })
+
 async function sendMessage() {
 
   let isValid = isValidMessage();
@@ -205,7 +224,13 @@ async function sendMessage() {
     const formData = new FormData(form);
     const data = new URLSearchParams(formData);
 
+    let resp = await fetch('/contact-message',{
+      method:'post',
+      headers: { "Content-Type": "application/x-www-form-urlencoded"},
+      body:data,
+    })
     console.log(data);
+    console.log(resp);
   }
   // console.log(data.name);
 }
@@ -242,7 +267,7 @@ function isValidMessage() {
     isValid = false;
 
   }
-  if (mobile_no.length !== 10) {
+  if (!mobile_no.match(/[0-9]{10}/)) {
     error.innerHTML = "Write Currect Mobile Number";
     isValid = false;
 
