@@ -3,7 +3,8 @@ const conn = require("../config/dbConnection");
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 const logger = require('../utils/pino')
-const { specialitiesCombo } = require("./slotController");
+
+const {specialitiesCombo} = require('./patientController')
 dotenv.config();
 
 // city combo

@@ -1,128 +1,39 @@
 const express = require("express");
 const router = express.Router();
-const { imgStorage, fileStorage } = require("../utils/multer");
+const { imgStorage } = require("../utils/multer");
 const multer = require("multer");
 const imgUpload = multer({ storage: imgStorage });
 const passport = require("passport");
-
-// const { paymentHistory, showpaymentHistory, searchPaymentHistory } = require("../controllers/D");
-// const { patientPaymentHistory, showPatientPayment, searchPatientPayment } = require("../controllers/doctorPatientPaymentHistory");
-
-// slot
-const {
-  createSlots,
-  getSingleSlots,
-  bookingSlot,
-  getAllSlots,
-  deleteSlot,
-  cancelSlot,
-  createSlotsPage,
-  getSlotsPage,
-  getDates,
-  getBookingSlots,
-  DoctorCobmo,
-} = require("../controllers/slotController");
-const {
-  becomeDoctorDetail,
-  updateGetDoctorDisplay,
-  getDoctorReview,
-  doctorDisplay,
-  getPatientDetail,
-  getPatientHistoryDetail,
-  logoutController,
-  doctorDashBoard,
-} = require("../controllers/doctorModule/doctorController");
-const {
-  createDoctor, getPendingDoctorById,
-} = require("../controllers/doctorModule/docotorProfileCreateController");
-const {
-  updateDoctorDetails,
-  updateGetDoctorData,
-} = require("../controllers/doctorModule/doctorProfileUpdateController");
-const {
-  dashBoardAppointments,
-  dashBoardReviews,
-  dashBoardCount,
-  dashBoardTodayAppointments
-
-} = require("../controllers/doctorModule/doctorDashboard");
-const { doctorData } = require("../controllers/doctorModule/doctorProfile");
-const {
-  doctorReviewData,
-} = require("../controllers/doctorModule/doctorReviewController");
-
-const {
-  getPatientData,
-  patientHistoryData,
-  patientDetailsData,
-  patientPrescriptionData,
-} = require("../controllers/doctorModule/doctorPanelPatientController");
-const {
-  getDoctorSideBarDetail,
-} = require("../controllers/doctorModule/doctorSidebarController");
-const {
-  allSpecialities,
-} = require("../controllers/doctorModule/doctorSpecialitiesController");
-const {
-  showPatientPayment,
-  patientPaymentHistory,
-  searchPaymentHistory,
-  showpaymentHistory,
-  doctorPanelPaymentHistory,
-} = require("../controllers/doctorModule/doctorPaymentHistoryController");
-
-const { isDoctor, isPatient } = require("../middlewares/authMiddleware");
-
-const {
-  getCityCombo,
-} = require("../controllers/doctorModule/doctorCityComboController");
-const { allDoctors } = require("../controllers/userController");
-const { searchReview, getPatientSearchData } = require("../controllers/doctorModule/doctorSearchPatient");
-
-
-
+const { getPendingDoctorById, updateGetDoctorDisplay, updateDoctorDetails, createHospital, getDoctorReview, dashBoardTodayAppointments, dashBoardReviews, dashBoardCount, doctorData, getCityCombo, updateGetDoctorData, doctorReviewData, getPatientData, getPatientHistoryDetail, patientHistoryData, doctorDisplay, getPatientDetail, doctorDashBoard, patientDetailsData, patientPrescriptionData, doctorPanelPaymentHistory, showpaymentHistory, searchPaymentHistory, patientPaymentHistory, showPatientPayment, createSlotsPage, createSlots, getUpcomingSlotPage, getDates, getAllSlots, deleteSlot, searchReview, getPatientSearchData, updateDetailsData, updatePrescription, createPrescription, getPrescriptionOfDoctor, showDetails, home, allPatientPriscription, editPrescriptionHome, allSpecialities } = require('../controllers/doctorController');
+const { isDoctor } = require('../middlewares/authMiddleware');
+const { allDoctors } = require("../controllers/authController");
+const { generatePDF } = require('../controllers/pdfController')
+// /allDoctorProfile
 router
-  .route("/allDoctorProfile")
+  .route("doctors/all")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
     isDoctor,
     allDoctors
   );
 
-router.route('/getPendingDoctor').post(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-getPendingDoctorById)
-
+// for the home page
+// /getPendingDoctor
 router
-  .route("/doctorCreateProfile")
-  .get(
-    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    isPatient,
-    becomeDoctorDetail
-  )
+  .route("/doctor/pending")
   .post(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    isPatient,
-    createDoctor
+    getPendingDoctorById
   );
 
+  // /updatedoctorProfile
 router
-  .route("/updatedoctorProfile")
+  .route("/profile/update")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
     isDoctor,
     updateGetDoctorDisplay
-  );
-
-
-router
-  .route("/doctorCreateProfile")
-  .get(
-    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    becomeDoctorDetail
-  );
-
-router
-  .route("/updatedoctorProfile")
+  )
   .post(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
     isDoctor,
@@ -130,49 +41,47 @@ router
     updateDoctorDetails
   );
 
+router.route("/createHospital").post(createHospital);
+
+// /getDoctorReview
 router
-  .route("/getDoctorReview")
+  .route("/reviews")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
     isDoctor,
     getDoctorReview
   );
 
-// Router show json format Data date:- 12-04-2024
-
-// router
-//   .route("/dashBoardAppointments")
-//   .get(
-//     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-//     isDoctor,
-//     dashBoardAppointments
-//   );
-
+// /dashBoardAppointments
 router
-  .route("/dashBoardAppointments")
+  .route("/appointments/today")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
     isDoctor,
     dashBoardTodayAppointments
-  );  
+  );
 
+  // /dashBoardReviews
 router
-  .route("/dashBoardReviews")
+  .route("/reviews/all")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
     isDoctor,
     dashBoardReviews
   );
+
+  // /dashBoardCount
 router
-  .route("/dashBoardCount")
+  .route("/analytics")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
     isDoctor,
     dashBoardCount
   );
 
+  // /doctorData
 router
-  .route("/doctorData")
+  .route("/data")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
     doctorData
@@ -185,6 +94,7 @@ router
     getCityCombo
   );
 
+  // /updateDoctorData
 router
   .route("/updateDoctorData")
   .get(
@@ -193,6 +103,8 @@ router
     updateGetDoctorData
   );
 
+
+  // TODO : remove with /reviews/all
 router
   .route("/reviews")
   .get(
@@ -201,18 +113,25 @@ router
     doctorReviewData
   );
 
+  // /getPatientData
 router
-  .route("/getPatientData")
+  .route("/patients")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
     isDoctor,
     getPatientData
   );
-  
 
+  // /getpatientHistoryData/:patient_id
+    // /viewPatientHistory/:patient_id
 router
-  .route("/getpatientHistoryData/:patient_id")
+  .route("/patients/history/:patient_id")
   .get(
+    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    isDoctor,
+    getPatientHistoryDetail
+  )
+  .post(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
     isDoctor,
     patientHistoryData
@@ -221,72 +140,47 @@ router
 router.route("/reviews/:id").get(isDoctor, doctorReviewData);
 
 // Router show doctor details date:- 12-04-2024
+
+// /doctorProfile
 router
-  .route("/doctorProfile")
+  .route("/profile")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
     isDoctor,
     doctorDisplay
   );
 
+  // /getPatientDetails
 router
-  .route("/getPatientDetails")
+  .route("/patient/detail")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
     isDoctor,
     getPatientDetail
   );
 
+// /doctorDashBoard
 router
-  .route("/doctorDashBoard")
+  .route("/dashboard")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
     isDoctor,
     doctorDashBoard
   );
 
-router
-  .route("/doctorSideBarDetail")
-  .get(
-    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    getDoctorSideBarDetail
-  );
 
-// router.route('/doctorPaymentHistory')
-//   .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getPaymentHistory)
 
+ 
+// /viewPatientDetailsData/:patient_id
 router
-  .route("/viewPatientHistory/:patient_id")
-  .get(
-    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    getPatientHistoryDetail
-  );
-
-router
-  .route("/viewPatientHistory/:patient_id")
-  .get(
-    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    isDoctor,
-    getPatientHistoryDetail
-  );
-
-router
-  .route("/viewPatientDetailsData/:patient_id")
+  .route("/patient/view/:patient_id")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
     isDoctor,
     patientDetailsData
   );
 
-// router
-//   .route("/patientPrescriptionData/:patient_id/:date")
-//   .get(
-//     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-//     patientPrescriptionData
-//   );
-
-router.route("/logout").get(logoutController);
-
+  // TODO : Change get -> post and route also
 router
   .route("/patientPrescriptionData/:date/:patient_id")
   .get(
@@ -299,19 +193,19 @@ router.route("/specialities").get(allSpecialities);
 //jasmin jani dt:- 18/04/2024
 
 // for doctor panel payment history
+// /doctorPaymentHistory
+//showpaymentHistory
 router
-  .route("/doctorPaymentHistory")
+  .route("/payment/history")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
     doctorPanelPaymentHistory
-  );
-
-router
-  .route("/showpaymentHistory")
-  .get(
+  )
+  .post(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
     showpaymentHistory
   );
+
 
 router
   .route("/searchedPaymentHistory/:search")
@@ -321,23 +215,18 @@ router
   );
 
 // for patient payment history in payment history
+// /doctorPaymentHistory/:patient_id
+// /showPatientHistoryData/:patient_id
 router
-  .route("/doctorPaymentHistory/:patient_id")
+  .route("/payment/history/:patient_id")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
     patientPaymentHistory
-  );
-
-router
-  .route("/showPatientHistoryData/:patient_id")
-  .get(
+  ).post(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
     isDoctor,
     showPatientPayment
   );
-
-// router.route('/searchedPaymentHistory/:patient_id/:search')
-//   .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), searchPatientPayment);
 
 // Darshan Slot Router
 
@@ -355,33 +244,28 @@ router
     isDoctor,
     createSlots
   )
-  .get(
-    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    isDoctor,
-    getBookingSlots
-  );
+  // .get(
+  //   passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+  //   isDoctor,
+  //   getBookingSlots
+  // );
 
-router
-  .route("/bookslot")
-  .post(
-    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    bookingSlot
-  );
-router.route("/getDoctors").post(DoctorCobmo);
-
+// render upcoming slot page to doctor
 router
   .route("/slots")
-  .post(
-    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    getSingleSlots
-  );
-router
-  .route("/upcomingSlots")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    isDoctor,
-    getSlotsPage
+    getUpcomingSlotPage
   );
+
+// router
+//   .route("/upcomingSlots")
+//   .get(
+//     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+//     isDoctor,
+//     getSlotsPage
+//   );
+
 router
   .route("/dates")
   .get(
@@ -403,15 +287,42 @@ router
     isDoctor,
     deleteSlot
   );
+
 router
-  .route("/cancel/:slot_id")
+  .route("/searchReview/:search")
   .get(
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    isPatient,
-    cancelSlot
+    searchReview
+  );
+router
+  .route("/searchPatientData/:search")
+  .get(
+    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+    getPatientSearchData
   );
 
-router.route('/searchReview/:search').get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }), searchReview)
-router.route('/searchPatientData/:search').get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }), getPatientSearchData)
+  // /generatePDFofprescripton/:id
+router.route("/generate/:id").get(generatePDF);
+
+// /updatedetails/:id
+// /updatePrescription/:id
+router.route("/prescription/update/:id").get(updateDetailsData).post(updatePrescription)
+
+// /createprescription
+router.route("/prescription/create").post(createPrescription);
+
+// /getprescriptionofdoctor
+router.route("/prescriptions").get(getPrescriptionOfDoctor);
+
+// /createprescription/:patient_id
+router.route("/patient/prescription/:patient_id").get(showDetails);
+
+// TODO : change route
+router.route("/prescription/:patient_id/:booking_id").get(home);
+
+router.route("/prescriptiondetails").get(allPatientPriscription);
+
+// /editprescription/:id
+router.route("/prescription/edit/:id").get(editPrescriptionHome);
 
 module.exports = router;
