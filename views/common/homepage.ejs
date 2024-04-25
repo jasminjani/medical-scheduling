@@ -1,165 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Medical Scheduling</title>
-    <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css">
-    <script src="/sweetalert2/sweetalert2.min.js"></script>
-    <link rel="stylesheet" href="/css/homepage.css" />
-    
-  </head>
 
-  <body>
-    <!-- Header section -->
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Medical Scheduling</title>
+  <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css">
+  <script src="/sweetalert2/sweetalert2.min.js"></script>
+  <link rel="stylesheet" href="/css/homepage.css" />
 
-    <header class="header">
-      <div class="container">
-        <div class="navbar">
+</head>
+
+<body>
+  <!-- Header section -->
+
+  <header class="header">
+    <div class="container">
+      <div class="navbar">
+        <div class="logo">
+          <a href=""><img src="/assets/final-logo.png" alt="logo" /></a>
+        </div>
+        <nav class="nav-items">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="#about-us">About Us</a></li>
+            <li><a href="#contact-us">Contact</a></li>
+            <li id="login"><a href="/login">Login</a></li>
+            <li id="logout"><a href="/logout" onclick="logout()">Logout</a></li>
+            <li id="register"><a href="/register">Register</a></li>
+            <li id="become-doctor"><a href="/doctorCreateProfile">Become A Doctor</a></li>
+            <li id="book-appointment">
+              <a href="/doctors/all" class="book-appointment">Book Your Appointment</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="user" id="logged-user">
+          <p class="name">Alpesh</p>
           <div class="logo">
-            <a href=""><img src="/assets/final-logo.png" alt="logo" /></a>
-          </div>
-          <nav class="nav-items">
-            <ul>
-              <li><a href="/">Home</a></li>
-              <li><a href="#about-us">About Us</a></li>
-              <li><a href="#contact-us">Contact</a></li>
-              <li id="login"><a href="/login">Login</a></li>
-              <li id="logout"><a href="/logout" onclick="logout()">Logout</a></li>
-              <li id="register"><a href="/register">Register</a></li>
-              <li id="become-doctor"><a href="/doctorCreateProfile">Become A Doctor</a></li>
-              <li id="book-appointment">
-                <a href="/doctors/all" class="book-appointment"
-                  >Book Your Appointment</a
-                >
-              </li>
-            </ul>
-          </nav>
-          <div class="user" id="logged-user">
-            <p class="name">Alpesh</p>
-            <div class="logo">
-              <a href=""><img src="/assets/logo.png" alt="logo" /></a>
-            </div>
+            <a href=""><img src="/assets/logo.png" alt="logo" /></a>
           </div>
         </div>
       </div>
-    </header>
+    </div>
+  </header>
 
-    <!-- main content -->
-    <main id="main">
-      <!-- hero section -->
-      <section class="hero-section">
-        <div class="container">
-          <div class="hero">
-            <div class="hero-left">
-              <h1 class="hero-title">Book Your Doctor Appointment</h1>
-              <p class="hero-subtitle">
-                A Healthier Tomorrow Starts Today: Schedule Your Appointment!
-                Your Wellness, Our Expertise: Set Up Your Appointment Today.
-              </p>
-              <a class="btn" href="/doctors/all">Book Your Appointment</a>
-            </div>
+  <!-- main content -->
+  <main id="main">
+    <!-- hero section -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero">
+          <div class="hero-left">
+            <h1 class="hero-title">Book Your Doctor Appointment</h1>
+            <p class="hero-subtitle">
+              A Healthier Tomorrow Starts Today: Schedule Your Appointment!
+              Your Wellness, Our Expertise: Set Up Your Appointment Today.
+            </p>
+            <a class="btn" href="/doctors/all">Book Your Appointment</a>
+          </div>
 
-            <div class="hero-right">
-              <img src="/assets/doctor.png" alt="" />
-            </div>
+          <div class="hero-right">
+            <img src="/assets/doctor.png" alt="" />
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- booking-step-section -->
-      <section class="booking-steps-section">
-        <div class="container">
-          <div class="section-heading">
-            <p class="steps-title">How It Works!</p>
-            <p class="steps-subtitle">
-              Discover, book, and experience personalized healthcare
-              effortlessly with our user-friendly Doctor Appointment Website.
+    <!-- booking-step-section -->
+    <section class="booking-steps-section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="steps-title">How It Works!</p>
+          <p class="steps-subtitle">
+            Discover, book, and experience personalized healthcare
+            effortlessly with our user-friendly Doctor Appointment Website.
+          </p>
+        </div>
+        <div class="booking-steps">
+          <div class="step-data">
+            <div class="img">
+              <img src="/assets/users-icon.png" alt="" />
+              <span>1</span>
+            </div>
+            <p class="step">Find A Doctor</p>
+            <p class="desc">
+              Discover skilled doctors based on specialization and location.
             </p>
           </div>
-          <div class="booking-steps">
-            <div class="step-data">
-              <div class="img">
-                <img src="/assets/users-icon.png" alt="" />
-                <span>1</span>
-              </div>
-              <p class="step">Find A Doctor</p>
-              <p class="desc">
-                Discover skilled doctors based on specialization and location.
-              </p>
+          <div class="step-data">
+            <div class="img">
+              <img src="/assets/calendar.png" alt="" /> <span>2</span>
             </div>
-            <div class="step-data">
-              <div class="img">
-                <img src="/assets/calendar.png" alt="" /> <span>2</span>
-              </div>
-              <p class="step">Book Appointment</p>
-              <p class="desc">
-                Effortlessly book appointment at your convenience.
-              </p>
+            <p class="step">Book Appointment</p>
+            <p class="desc">
+              Effortlessly book appointment at your convenience.
+            </p>
+          </div>
+          <div class="step-data">
+            <div class="img">
+              <img src="/assets/solution.png" alt="" /> <span>3</span>
             </div>
-            <div class="step-data">
-              <div class="img">
-                <img src="/assets/solution.png" alt="" /> <span>3</span>
-              </div>
-              <p class="step">Get Services</p>
-              <p class="desc">
-                Receive personalized healthcare services tailored to your needs.
-              </p>
-            </div>
+            <p class="step">Get Services</p>
+            <p class="desc">
+              Receive personalized healthcare services tailored to your needs.
+            </p>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- our doctor section -->
-      <section class="our-doctors-section">
-        <div class="container">
-          <div class="section-heading">
-            <p class="steps-title">Our Doctors</p>
-            <p class="steps-subtitle">
-              We provide a wide range of creative services for clients. But the
-              most important thing is that of pleasure.
-            </p>
-          </div>
+    <!-- our doctor section -->
+    <section class="our-doctors-section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="steps-title">Our Doctors</p>
+          <p class="steps-subtitle">
+            We provide a wide range of creative services for clients. But the
+            most important thing is that of pleasure.
+          </p>
+        </div>
 
-          <!-- search bar of doctor -->
-          <div class="all-doctors">
-            <div class="search-doctor">
-              <div class="specialities">
-                <select name="speciality" id="speciality">
-                  <option value="">Select speciality</option>
-                  <%- html %>
-                </select>
-              </div>
-              <p class="or">OR</p>
-              <div class="doctor-names">
-                <input
-                  type="text"
-                  name="dname"
-                  id="dname"
-                  list="doctor-name"
-                  placeholder="Search Doctor by name"
-                />
+        <!-- search bar of doctor -->
+        <div class="all-doctors">
+          <div class="search-doctor">
+            <div class="specialities">
+              <select name="speciality" id="speciality">
+                <option value="">Select speciality</option>
+                <%- html %>
+              </select>
+            </div>
+            <p class="or">OR</p>
+            <div class="doctor-names">
+              <input type="text" name="dname" id="dname" list="doctor-name" placeholder="Search Doctor by name" />
 
-                <datalist id="doctor-name">
-                  <!-- <option value="ms">MS</option>
+              <datalist id="doctor-name">
+                <!-- <option value="ms">MS</option>
                   <option value="md">MD</option>
                   <option value="mbbs">MBBS</option> -->
-                </datalist>
+              </datalist>
 
-                <div class="search-btn">
-                  <input type="submit" class="btn" value="Search" id="search-doctor"/>
-                </div>
+              <div class="search-btn">
+                <input type="submit" class="btn" value="Search" id="search-doctor" />
               </div>
             </div>
+          </div>
 
-            <div class="swipe-btns">
+          <div class="swipe-btns">
             <!-- button pushed from js -->
           </div>
-            <div class="doctors">
-              <div class="cards">
-            
-                <!-- <div class="card">
+          <div class="doctors">
+            <div class="cards">
+
+              <!-- <div class="card">
                   <div class="img">
                     <img src="/assets/doctor.png" alt="" >
                   </div>
@@ -191,76 +184,112 @@
                     <img src="/assets/gstar.png" width="15px" alt="">
                   </p>
                 </div> -->
-              </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- about us section -->
-      <section class="about-section" id="about-us">
-        <div class="container">
+    <!-- about us section -->
+    <section class="about-section" id="about-us">
+      <div class="container">
+        <div class="section-heading">
+          <p class="steps-title">About Us</p>
+        </div>
+        <div class="about-content">
+          <div class="about-left">
+            <img src="/assets/doctor-about.png" alt="" />
+          </div>
+          <div class="about-right">
+            <p class="about-right-title">We Take Care Of Your Healthy Life</p>
+            <p class="desc">
+              <span>ALPHA Is An Online Doctor Appointment Booking Application
+                Where The Patients Can Book Appointments To Consult Doctors.
+                The Patients Can Book Appointment Anytime, Anywhere With Thier
+                Desired Doctors According To Thier Problem.</span>
+              <span>After Creating An Account, The User Can Book A Slot Or They
+                Can Even Cancel Tha Appointment. Once The Patient Consulted
+                The Doctor, The Reports Are Also Provided in The Application
+                itself. Also The Medical Prescription By The Doctor is
+                Provided in The User Account.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- contact us section -->
+    <section id="contact-us">
+      <div class="container">
+        <div class="a2-contact-us">
           <div class="section-heading">
-            <p class="steps-title">About Us</p>
+            <p class="steps-title">Contact Us</p>
           </div>
-          <div class="about-content">
-            <div class="about-left">
-              <img src="/assets/doctor-about.png" alt="" />
-            </div>
-            <div class="about-right">
-              <p class="about-right-title">We Take Care Of Your Healthy Life</p>
-              <p class="desc">
-                <span
-                  >ALPHA Is An Online Doctor Appointment Booking Application
-                  Where The Patients Can Book Appointments To Consult Doctors.
-                  The Patients Can Book Appointment Anytime, Anywhere With Thier
-                  Desired Doctors According To Thier Problem.</span
-                >
-                <span
-                  >After Creating An Account, The User Can Book A Slot Or They
-                  Can Even Cancel Tha Appointment. Once The Patient Consulted
-                  The Doctor, The Reports Are Also Provided in The Application
-                  itself. Also The Medical Prescription By The Doctor is
-                  Provided in The User Account.</span
-                >
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      <!-- contact us section -->
-      <section id="contact-us">
-        <div class="container">
-          <div class="a2-contact-us">
-            <div class="section-heading">
-              <p class="steps-title">Contact Us</p>
+          <div class="a2-contact-page">
+            <div class="a2-contact-info">
+              <h2>Contact info</h2>
+              <img src="/assets/Doctor-Apponitment.png" alt="">
+              <p>Mobile No. : 9313086007</p>
+              <p>E-mail : vcarehospital@gmail.com</p>
+              <p>Website : info@vcarehospital.com</p>
+              <p>Address : B-50, Jawahar Nagar Extention, Gurudham Colony, Rajkot, Gujarat - 360005.</p>
             </div>
-
-            
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- footer section -->
-    <footer id="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="logo"><a href=""><img src="/assets/final-logo.png" alt="logo" /></a></div>
-                <p class="copyright">&#169; Copyright 2024 Alpha Inc. All rights reserved</p>
-                <div class="social-icons">
-                    <img src="/assets/instagram.png" alt="">
-                    <img src="/assets/facebook.png" alt="">
-                    <img src="/assets/twitter.png" alt="">
-                    <img src="/assets/youtube.png" alt="">
+            <div class="a2-contact-form">
+              <h2>Get in Touch</h2>
+              <form id="a2-contact-form-id">
+                <p>Please fill your details below. We will get back shortly.</p>
+                <div>
+                  <input type="text" id="a2-name" name="name" placeholder="Name">
                 </div>
+                <div>
+                  <input type="text" id="a2-mobile-no" name="mobile_no" placeholder="Mobile Number">
+                </div>
+                <div>
+                  <input type="text" id="a2-email" name="email" placeholder="Email">
+                </div>
+                <div>
+                  <input type="text" id="a2-city" name="city" placeholder="City">
+                </div>
+                <div>
+                  <select name="role" id="a2-role">
+                    <option value="" selected>I am a</option>
+                    <option value="patient">Patient</option>
+                    <option value="doctor">Doctor</option>
+                  </select>
+                </div>
+                <div>
+                  <textarea name="message" id="a2-message" placeholder="Message" cols="30" rows="5"></textarea>
+                </div>
+                <p id="a2-error-msg"></p>
+                <p class="a2-send-btn" onclick="sendMessage()">SEND</p>
+              </form>
             </div>
+          </div>
         </div>
-    </footer>
+      </div>
+    </section>
+  </main>
 
-    <script src="/javascript/homepage.js"></script>
-    <script src="/javascript/auth/logout.js"></script>
-    <script src="/javascript/carousel.js"></script>
-  </body>
+  <!-- footer section -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="logo"><a href=""><img src="/assets/final-logo.png" alt="logo" /></a></div>
+        <p class="copyright">&#169; Copyright 2024 Alpha Inc. All rights reserved</p>
+        <div class="social-icons">
+          <img src="/assets/instagram.png" alt="">
+          <img src="/assets/facebook.png" alt="">
+          <img src="/assets/twitter.png" alt="">
+          <img src="/assets/youtube.png" alt="">
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/javascript/homepage.js"></script>
+  <script src="/javascript/auth/logout.js"></script>
+  <script src="/javascript/carousel.js"></script>
+</body>
+
 </html>

@@ -9,6 +9,8 @@ const { demoHomeController } = require('../controllers/demoHomecontroller');
 const { adminRouter } = require('./adminPanelRouter');
 const patientRouter = require('./patientPanelRouter');
 
+
+
 router.use("/", userRouter);
 router.use("/", doctorRouter);
 router.use("/", hospitalRouter);
