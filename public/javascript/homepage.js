@@ -1,5 +1,5 @@
 const search = document.getElementById("search-doctor");
-const becomeDoctor = document.getElementById('become-doctor');
+const becomeDoctor = document.getElementById("become-doctor");
 let data;
 
 const getDoctors = async () => {
@@ -109,22 +109,27 @@ search.addEventListener("click", async (e) => {
   }
 });
 
-becomeDoctor?.addEventListener('click',async(e)=>{
+becomeDoctor?.addEventListener("click", async (e) => {
   e.preventDefault();
-  let userInfo = JSON.parse(localStorage.getItem('userinfo'))
-  let data = await fetch('/getPendingDoctor',{
-    method:"post",
-    body:JSON.stringify({id:userInfo.id})
-  })
-  data = await data.json()
-  console.log(data)
-  if(data.success){
-   window.location.href = "/doctorCreateProfile"
+  let userInfo = JSON.parse(localStorage.getItem("userinfo"));
+  let data = await fetch("/getPendingDoctor", {
+    method: "post",
+    body: JSON.stringify({ id: userInfo.id }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  data = await data.json();
+  console.log(data);
+  if (data.success) {
+    window.location.href = "/doctorCreateProfile";
+  } else {
+    Swal.fire({
+      title: "Already Requested",
+      icon: "success",
+    });
   }
-  else{
-    alert("Already Requested ")
-  }
-})
+});
 
 async function isLoggedIn() {
   let user = await fetch("/current-user", {
@@ -144,6 +149,7 @@ async function isLoggedIn() {
 
 const toggleLoginLogout = async () => {
   let userInfo = JSON.parse(localStorage.getItem("userinfo"));
+  
   if (isLoggedIn() && userInfo) {
     document.getElementById("login").style.display = "none";
     document.getElementById("register").style.display = "none";
@@ -151,23 +157,30 @@ const toggleLoginLogout = async () => {
 
     document.getElementById("logged-user").style.display = "flex";
     document.querySelector("#logged-user .name").innerHTML = userInfo.fname;
-    document.querySelector("#logged-user .logo a img").setAttribute('src',`${userInfo.profile.trim() ? `/imgs/${userInfo.profile}` : `/assets/profile.png`}`)
+    document
+      .querySelector("#logged-user .logo a img")
+      .setAttribute(
+        "src",
+        `${
+          userInfo.profile.trim()
+            ? `/imgs/${userInfo.profile}`
+            : `/assets/profile.png`
+        }`
+      );
 
     let userRedirect = document.querySelector("#logged-user .logo a");
 
-    if(userInfo.role_id == 1){
-      userRedirect.setAttribute('href',"/patient")
+    if (userInfo.role_id == 1) {
+      userRedirect.setAttribute("href", "/patient");
+    } else if (userInfo.role_id == 2) {
+      document.getElementById("become-doctor")?.remove();
+      document.getElementById("book-appointment").remove();
+      userRedirect.setAttribute("href", "/doctorDashboard");
+    } else if (userInfo.role_id == 3) {
+      document.getElementById("book-appointment").remove();
+      document.getElementById("become-doctor")?.remove();
+      userRedirect.setAttribute("href", "/admin");
     }
-    else if(userInfo.role_id == 2){
-      document.getElementById('become-doctor')?.remove()
-      userRedirect.setAttribute('href',"/doctorDashboard")
-    }
-    else if(userInfo.role_id==3){
-      document.getElementById('book-appointment').remove();
-      document.getElementById('become-doctor')?.remove()
-      userRedirect.setAttribute('href',"/admin")
-    }
-
   } else {
     document.getElementById("login").style.display = "block";
     document.getElementById("register").style.display = "block";
@@ -176,7 +189,7 @@ const toggleLoginLogout = async () => {
 };
 
 if (window.location.pathname == "/") {
-  toggleLoginLogout();
+  window.onload = toggleLoginLogout;
 }
 
 getDoctors();

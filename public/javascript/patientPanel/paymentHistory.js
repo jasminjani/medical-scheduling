@@ -18,14 +18,12 @@ async function searchPatientPayment() {
   try {
 
     let searchedData = document.getElementById('a5-searchPatient').value;
-
-    const url = `http://localhost:8000/searchedPatientPayment/${searchedData}`;
-    const response = await fetch(url);
-
-    // for display all data in null search
-    if (response.statusText == "Not Found") {
+    if (!searchedData) {
       result = copyResult;
     } else {
+
+      const url = `http://localhost:8000/searchedPatientPayment/${searchedData}`;
+      const response = await fetch(url);
       result = await response.json();
     }
 
@@ -34,6 +32,16 @@ async function searchPatientPayment() {
     console.log(error);
   }
 }
+
+let searchBtn = document.getElementById('a5-btn-search');
+
+searchBtn.addEventListener('keyup', function (event) {
+  try {
+    if (event.key === 'Enter') {
+      searchPatientPayment();
+    }
+  } catch (e) { console.log(e); }
+});
 
 
 async function appendPatientPayment() {
@@ -71,7 +79,7 @@ async function appendPatientPayment() {
       data = successArr;
     }
 
-    if(data.length==0){
+    if (data.length == 0) {
       return document.getElementById('a5-tbody').innerHTML += `<tr><td colspan='6'>No Data Found !</td></tr>`
     }
 

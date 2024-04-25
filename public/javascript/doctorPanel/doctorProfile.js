@@ -1,8 +1,8 @@
- document.getElementById('edtbtn').href = `http://localhost:8000/updatedoctorProfile/`
-  document.getElementById('viewprofile').href = `http://localhost:8000/doctorProfile/`
+ document.getElementById('edtbtn').href = `/updatedoctorProfile/`
+  document.getElementById('viewprofile').href = `/doctorProfile/`
  const profileDetailData = async() =>{
 
-    let fetchdata = await fetch(`http://localhost:8000/doctorData`)
+    let fetchdata = await fetch(`/doctorData`)
   let data = await fetchdata.json()
   let key = Object.keys(data[0])
     key.forEach(item => {

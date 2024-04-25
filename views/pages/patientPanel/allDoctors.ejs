@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Our Doctors</title>
     <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
     <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
     <link rel="stylesheet" href="/css/homepage.css" />
@@ -27,95 +27,97 @@
   <body>
     <div class="main-container">
       <!-- our doctor section -->
-      <%- include('../../common/newSidebar/patientSidebar.ejs') %>
-      <section class="our-doctors-section">
-        <div class="container">
-          <div class="section-heading">
-            <p class="steps-title">Our Doctors</p>
-            <p class="steps-subtitle">
-              We provide a wide range of creative services for clients. But the
-              most important thing is that of pleasure.
-            </p>
-          </div>
+      <div class="doctors-container">
+        <%- include('../../common/newSidebar/patientSidebar.ejs') %>
+        <div class="our-doctors-section">
+          <div class="a5-container">
+            <div class="section-heading">
+              <p class="steps-title">Our Doctors</p>
+              <p class="steps-subtitle">
+                We provide a wide range of creative services for clients. But the
+                most important thing is that of pleasure.
+              </p>
+            </div>
 
-          <!-- search bar of doctor -->
-          <div class="all-doctors">
-            <div class="search-doctor">
-              <div class="specialities">
-                <select name="speciality" id="speciality">
-                  <option value="">Select speciality</option>
-                  <%- html %>
-                </select>
-              </div>
-              <p class="or">OR</p>
-              <div class="doctor-names">
-                <input
-                  type="text"
-                  name="dname"
-                  id="dname"
-                  list="doctor-name"
-                  placeholder="Search Doctor by name"
-                />
-
-                <datalist id="doctor-name">
-                  <!-- <option value="ms">MS</option>
-                    <option value="md">MD</option>
-                    <option value="mbbs">MBBS</option> -->
-                </datalist>
-
-                <div class="search-btn">
+            <!-- search bar of doctor -->
+            <div class="all-doctors">
+              <div class="search-doctor">
+                <div class="specialities">
+                  <select name="speciality" id="speciality">
+                    <option value="">Select speciality</option>
+                    <%- html %>
+                  </select>
+                </div>
+                <p class="or">OR</p>
+                <div class="doctor-names">
                   <input
-                    type="submit"
-                    class="btn"
-                    value="Search"
-                    id="search-doctor"
+                    type="text"
+                    name="dname"
+                    id="dname"
+                    list="doctor-name"
+                    placeholder="Search Doctor by name"
                   />
-                </div>
-              </div>
-            </div>
 
-            <div class="swipe-btns">
-              <!-- button pushed from js -->
-            </div>
-            <div class="doctors">
-              <div class="cards">
-                <!-- <div class="card">
-                <div class="img">
-                  <img src="/assets/doctor.png" alt="" />
+                  <datalist id="doctor-name">
+                    <!-- <option value="ms">MS</option>
+                      <option value="md">MD</option>
+                      <option value="mbbs">MBBS</option> -->
+                  </datalist>
+
+                  <div class="search-btn">
+                    <input
+                      type="submit"
+                      class="btn"
+                      value="Search"
+                      id="search-doctor"
+                    />
+                  </div>
                 </div>
-                <div class="details">
-                  <p class="name">doctor1</p>
-                  <p class="speciality">MS</p>
-                </div>
-                <p class="rating">
-                  <img src="/assets/gstar.png" width="15px" alt="" />
-                  <img src="/assets/gstar.png" width="15px" alt="" />
-                  <img src="/assets/gstar.png" width="15px" alt="" />
-                  <img src="/assets/gstar.png" width="15px" alt="" />
-                  <img src="/assets/gstar.png" width="15px" alt="" />
-                </p>
               </div>
-              <div class="card">
-                <div class="img">
-                  <img src="/assets/doctor.png" alt="" />
+
+              <div class="swipe-btns">
+                <!-- button pushed from js -->
+              </div>
+              <div class="doctors">
+                <div class="cards">
+                  <!-- <div class="card">
+                  <div class="img">
+                    <img src="/assets/doctor.png" alt="" />
+                  </div>
+                  <div class="details">
+                    <p class="name">doctor1</p>
+                    <p class="speciality">MS</p>
+                  </div>
+                  <p class="rating">
+                    <img src="/assets/gstar.png" width="15px" alt="" />
+                    <img src="/assets/gstar.png" width="15px" alt="" />
+                    <img src="/assets/gstar.png" width="15px" alt="" />
+                    <img src="/assets/gstar.png" width="15px" alt="" />
+                    <img src="/assets/gstar.png" width="15px" alt="" />
+                  </p>
                 </div>
-                <div class="details">
-                  <p class="name">doctor2</p>
-                  <p class="speciality">MS</p>
+                <div class="card">
+                  <div class="img">
+                    <img src="/assets/doctor.png" alt="" />
+                  </div>
+                  <div class="details">
+                    <p class="name">doctor2</p>
+                    <p class="speciality">MS</p>
+                  </div>
+                  <p class="rating">
+                    <img src="/assets/gstar.png" width="15px" alt="" />
+                    <img src="/assets/gstar.png" width="15px" alt="" />
+                    <img src="/assets/gstar.png" width="15px" alt="" />
+                    <img src="/assets/gstar.png" width="15px" alt="" />
+                    <img src="/assets/gstar.png" width="15px" alt="" />
+                  </p>
+                </div> -->
                 </div>
-                <p class="rating">
-                  <img src="/assets/gstar.png" width="15px" alt="" />
-                  <img src="/assets/gstar.png" width="15px" alt="" />
-                  <img src="/assets/gstar.png" width="15px" alt="" />
-                  <img src="/assets/gstar.png" width="15px" alt="" />
-                  <img src="/assets/gstar.png" width="15px" alt="" />
-                </p>
-              </div> -->
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </div>
 
     <script src="/javascript/homepage.js" defer></script>

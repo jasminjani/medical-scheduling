@@ -1,5 +1,5 @@
    const specialityFetch = async () => {
-        const fetchData = await fetch("http://localhost:8000/specialities")
+        const fetchData = await fetch("/specialities")
         const data = await fetchData.json()
         let key = Object.keys(data)
         key.forEach(element => {
