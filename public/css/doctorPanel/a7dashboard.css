@@ -29,7 +29,10 @@
 
 
 .a7-doctor-pannel{
-  padding: 10px;
+  /* width: 70%;
+  margin-left: 300px; */
+  max-width: 1080px;
+  width: 73%;
   margin-left: 350px;
 }
 
