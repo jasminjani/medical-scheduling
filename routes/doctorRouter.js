@@ -208,6 +208,7 @@ router
     isDoctor,
     getPatientData
   );
+  
 
 router
   .route("/getpatientHistoryData/:patient_id")
