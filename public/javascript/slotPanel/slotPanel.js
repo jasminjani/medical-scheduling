@@ -13,6 +13,7 @@ sunday.setDate(today.getDate() + sundayOffset);
 
 const handleChange = (e) => {
   if (new Date(e.target.value) > sunday) {
+    e.target.value = "";
     return Swal.fire("Please select date of this week only");
   }
 }
@@ -23,9 +24,12 @@ const handleInput = (times, i) => {
   newNode.setAttribute("name", `day${i + 1}`);
   newNode.setAttribute("class", "A3-time");
   newNode.setAttribute("placeholder", "hh:mm");
-  newNode.addEventListener("mouseover", handleFocus(newNode));
   times.insertBefore(newNode, times.children[times.children.length - 1])
     .addEventListener("change", (e) => {
+      if (!/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/.test(e.target.value)) {
+        e.target.value = "";
+        return Swal.fire("Please enter date in hh:mm format in 24 hour format");
+      }
       let startTime = e.target.value;
       const slotGap = document.getElementById("slot_gap").value;
       let [hours, minutes] = startTime.split(":").map(Number);
@@ -84,8 +88,3 @@ const handleGenerate = async (e) => {
 
 }
 
-const handleFocus = (input) => {
-  const popUp = document.createElement("input");
-  popUp.setAttribute("type", "time");
-  popUp.setAttribute("id", "popup");
-}
