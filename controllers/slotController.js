@@ -142,7 +142,6 @@ exports.bookingSlot = async (req, res) => {
   try {
 
     const { paymentAmount, slotId, doctorId } = req.body;
-    console.log(req.body)
     const patientId = req.user.id;
     try {
 
@@ -245,8 +244,6 @@ exports.getAllSlots = async (req, res) => {
       const query = 'select slot_bookings.is_canceled,time_slots.is_booked, time_slots.id, time_slots.start_time,time_slots.end_time, concat(users.fname," ",users.lname) as patient_name,users.phone from time_slots  left join slot_bookings on time_slots.id =  slot_bookings.slot_id left join users on slot_bookings.patient_id = users.id where time_slots.date = ? and time_slots.is_deleted = ? and time_slots.doctor_id = ?';
 
       const [data] = await conn.query(query, [date, 0, doctor_id]);
-
-      console.log(data);
 
       return res.status(200).json({ success: true, message: data });
 

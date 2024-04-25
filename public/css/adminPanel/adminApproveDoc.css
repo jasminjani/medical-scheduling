@@ -12,14 +12,14 @@
   margin: 0;
 }
 
-.a5-main-container {
-  max-width: 1440px;
-  margin: 0 auto;
-  width: 100%;
+.a2-container {
+  padding: 10px;
+  margin-left: 350px;
 }
 
 .a2-approve-table-div {
-  max-width: 1080px;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
 /* .a2-container {
@@ -85,13 +85,8 @@ body {
   margin: 20px 0;
 }
 
-.a2-approve-table-div {
-  width: 100%;
-  margin-left: 350px;
-}
-
 .a2-approve-table {
-  width: 95%;
+  width: 100%;
   height: 100%;
   padding: 10px;
   border: 1px solid var(--brown);
