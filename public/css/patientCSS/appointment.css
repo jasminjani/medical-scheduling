@@ -16,6 +16,8 @@
 .main{
   margin-left: 350px;
   padding: 10px;
+  background-color: rgb(229, 248, 255);
+  /* background-color: blue; */
 }
 
 .booking-page{
@@ -73,6 +75,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin-bottom: 50px;
   gap: 60px;
 }
 
@@ -122,8 +125,6 @@
   border-radius: 5px;
 }
 
-
-
 .submit {
   background-color: #aee3ff;
   border: none;
@@ -136,4 +137,154 @@
   background-color: rgb(41, 205, 255);
   color: white;
   cursor: pointer;
+}
+
+.A6-rating-review {
+  display: flex;
+  gap: 30px;
+}
+
+.A6-showReview {
+  max-width: 480px;
+  padding-left: 50px;
+
+  p{
+    margin-top: 10px;
+  }
+}
+
+.A6-caption {
+  /* margin-top: 30px; */
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+#A6-heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.A6-reviewContent {
+  text-align: center;
+  background-color: rgb(229, 248, 255);
+  /* position: relative; */
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.reviewName {
+  margin-bottom: 10px;
+}
+
+
+
+.ratingStar {
+  display: flex;
+  gap: 20px;
+  margin-left: 40px;
+}
+
+.A6-patientRating {
+  max-width: 400px;
+  padding-right: 50px;
+}
+
+#rate {
+  background-color: white;
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.textHead {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.star {
+font-size: 5vh;
+/* position: absolute; */
+/* cursor: pointer; */
+}
+
+.one {
+color: gold;
+}
+
+.two {
+color: gold;
+}
+
+.three {
+color: gold;
+}
+
+.four {
+color: gold;
+}
+
+.five {
+color: gold;
+}
+
+#output {
+  height: 30px;
+  width: 30px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.reviewPatient {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+#rev {
+  line-height: 1.5;
+  letter-spacing: 1px;
+}
+
+#rateGo {
+  background-color: #aee3ff;
+  border: none;
+  padding: 8px 26px;
+  border-radius: 3px;
+  font-size: 17px;
+}
+
+#rateGo:hover {
+  background-color: rgb(41, 205, 255);
+  color: white;
+  cursor: pointer;
+}
+
+#thanksText {
+  margin: 30px 30px;
+  padding: 1rem;
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 530px;
+  top: 153px;
+  overflow: auto;
+  color: white;
+  background-color: rgb(0, 0, 0);
+  max-width: 200px;
+  height: 140px;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+#thanksGo {
+  height: 30px;
+  width: 100px;
+  border-radius: 20px;
+}
+
+#thanksGo:hover {
+  background-color: #aee3ff;
 }
