@@ -1,0 +1,82 @@
+:root {
+  --light-blue: #b3d3ea;
+  --blue: #0969da;
+  --white: #ffffff;
+}
+
+.A4-Pagination-component {
+  display: flex;
+  gap: 4px;
+  justify-content: end;
+  margin: 10px;
+}
+
+#homebtn,
+#previousbtn,
+#nextbtn,
+#endbtn {
+  height: 30px;
+  width: 40px;
+  background-color: var(--light-blue);
+  border: 1px solid var(--light-blue);
+  border-radius: 20px;
+  color: #2c5777;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+#pageno {
+  padding: 7px 13px;
+}
+
+.pagenumber {
+  background-color: #2c5777;
+  color: var(--white);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+#homebtn:hover,
+#previousbtn:hover,
+#nextbtn:hover,
+#endbtn:hover {
+  background-color: #2c5777;
+  color: var(--white);
+}
+
+/* #homebtn:active,#previousbtn:active,#nextbtn:active,#endbtn:active{
+ background-color:#2c5777;
+ color: var(--white)
+} */
+/* .A4-Pagination-component{
+  button[disabled]{
+    background-color:#64839b;
+    color: var(--white)
+  }
+} */
+
+#homebtn:disabled,
+#previousbtn:disabled,
+#nextbtn:disabled,
+#endbtn:disabled {
+  opacity: 0.5;
+}
+
+/* #homebtn:active pseudo-class{
+  background-color:#2c5777;
+ color: var(--white)
+} */
+#homebtn:disabled:hover,
+#previousbtn:disabled:hover,
+#nextbtn:disabled:hover,
+#endbtn:disabled:hover {
+  background-color: var(--light-blue);
+  color: #2c5777;
+  opacity: 0.5;
+}
+
+/* #nextbtn:focus,#homebtn:focus,#endbtn:focus,#previousbtn:focus{
+  background-color:#2c5777;
+  color: var(--white);
+} */

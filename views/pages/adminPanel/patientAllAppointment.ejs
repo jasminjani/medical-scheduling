@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- CSS for Sidebar -->
+  <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
+  <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
+  <!-- CSS for container -->
+  <link rel="stylesheet" href="/css/adminPanel/patientsAllAppoinment.css">
+  <style>
+    #a5-admin-patient-active {
+      background-color: #0969da;
+      transform: translate(5px);
+      border-radius: 5px;
+    }
+  
+    #a5-admin-patient-active a,
+    #a5-admin-patient-active i {
+      color: #ffffff;
+    }
+    </style>
+  <title>User Details</title>
+</head>
+
+<body onload="fetchPatientAllAppointment()">
+
+  <div class="a5-container">
+
+
+    <%- include('../../common/newSidebar/adminSidebar') %>
+
+      <div class="a5-section" id="a5-patient-basic-details">
+
+      </div>
+
+
+
+      <div class="a5-section">
+        <div class="a5-all-doctor">
+
+          <h2>Patient Appointment</h2>
+
+          <div class="a5-doctor-table">
+
+            <table id="a5-doctor-table">
+              <tbody id="a5-tbody">
+
+
+              </tbody>
+
+            </table>
+
+            <div class="a5-popup" id="a5-popup">
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+  </div>
+
+
+</body>
+
+<script src="/javascript/adminPanel/patientAllAppointment.js" defer></script>
+
+</html>

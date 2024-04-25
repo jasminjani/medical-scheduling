@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
+    <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
+    <link rel="stylesheet" href="/css/prescription/prescriptionOfAllPatient.css"/>
+    <link rel="stylesheet" href="/css/Pagination/paginationComp.css" />
+    <style>
+      #a5-doctor-prescription-active {
+        background-color: #0969da;
+        transform: translate(5px);
+        border-radius: 5px;
+      }
+  
+      #a5-doctor-prescription-active a,
+      #a5-doctor-prescription-active i {
+        color: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="A4-section">
+      <div class="A4-container">
+        <%- include('../../common/newSidebar/doctorSidebar.ejs') %>
+
+        <div class="A4-main">
+          <!-- <div class="A4-title">
+            <h2>Prescription Details</h2>
+          </div> -->
+          <p class="A4-back-btn A4-btn" onclick="back()"><img src="/assets/adminPanel/icons/back-iceblue.svg" alt="Back"> Back</p>
+
+          <div class="a5-search">
+  
+              <div class="a5-searchbox">
+                <img src="/assets/adminPanel/icons/search.svg" alt="">
+                <input type="text" name="searchUser" id="a5-searchPatient" placeholder="Search Patient name" tabindex="1">
+              </div>
+              <p id="a5-btn-search" onclick="searchPatient()" tabindex="2">Search</p>
+          </div>
+          <%- include('../../common/Pagination/paginationComp.ejs') %>
+          <!-- <div class="A4-Pagination-component">
+                <div class="home"><button onclick="home()" id="homebtn"><<</button></div>
+                <div class="previous"><button onclick="previous()" id="previousbtn"><</button></div>
+                <div class="pagenumber"><p id="pageno"></p></div>
+                <div class="next"><button onclick="next()" id="nextbtn">></button></div>
+                <div class="end"><button onclick="end()" id="endbtn">>></button></div>
+          </div>  -->
+
+          <div class="A4-content">
+            <form action="">
+              <table id="A4-content">
+                <thead>
+                  <tr>
+                    <th>Appointment Date</th>
+                    <th>Patient Name</th>
+                    <th>Diagnosis</th>
+                    <th>Prescription</th>
+                  </tr>
+                </thead>
+                <tbody id="tabledata">
+
+                </tbody>
+              </table>
+            </form>
+          </div>
+               
+        </div>
+      </div>
+    </div>
+    <script src="/javascript/Pagination/pagination.js"></script>
+    <script src="/javascript/prescription/prescriptionOfAllPatient.js"></script>
+  </body>
+</html>

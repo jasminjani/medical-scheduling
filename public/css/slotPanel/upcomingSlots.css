@@ -1,0 +1,163 @@
+:root {
+  --light-blue: #d2ebf9;
+  --light-blue-border: #3984af;
+  --brown: #e7e7e7;
+  --blue: #0969da;
+  --white: #ffffff;
+  --black: #07090c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.A3-main-container{
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.A3-container {
+  padding: 10px;
+  margin-left: 350px;
+}
+
+
+.A3-row-2 table {
+  border: 1px solid var(--brown);
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.A3-row-2 table td,
+th {
+  padding: 12px;
+  text-align: center;
+}
+
+.A3-row-2 table thead th {
+  border-bottom: 2px solid var(--blue);
+}
+
+.A3-row-1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+}
+
+.A3-row-2 table input[type="button"] {
+  background-color: #b3d3ea;
+  border-radius: 3px;
+  box-shadow: rgba(255, 255, 255, 0.7) 0 1px 0 0 inset;
+  box-sizing: border-box;
+  color: #2c5777;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", "Liberation Sans",
+    sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.15385;
+  margin: 0;
+  outline: none;
+  padding: 8px 0.8em;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.A3-row-2 table input[type="button"]:hover {
+  background-color: var(--light-blue-border);
+  color: var(--black);
+}
+
+.A3-modal {
+  visibility: hidden;
+  position:fixed;
+  top: 25%;
+  left: 35%;
+  padding: 20px;
+  border: 1px solid var(--brown);
+  background-color: var(--light-blue);
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px var(--light-blue);
+  max-height: 410px;
+  overflow-y: scroll;
+}
+
+.A3-modal table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.A3-modal table td,
+th {
+  padding: 12px;
+  text-align: center;
+}
+
+.A3-modal table thead th {
+  border-bottom: 2px solid var(--blue);
+}
+
+.A3-modal .A3-row-3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.A3-modal input[type="button"],.A3-delete-main input[type="button"]{
+  background-color: var(--white);
+  border-radius: 3px;
+  box-shadow: rgba(255, 255, 255, 0.7) 0 1px 0 0 inset;
+  box-sizing: border-box;
+  color: #2c5777;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", "Liberation Sans",
+    sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.15385;
+  margin: 0;
+  outline: none;
+  padding: 8px 0.8em;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.A3-modal input[type="button"]:hover,.A3-delete-main input[type="button"]:hover {
+  background-color: var(--light-blue-border);
+  color: var(--black);
+}
+
+.A3-row-1 a{
+  background-color: var(--light-blue);
+  padding: 20px;
+  color: var(--black);
+  cursor: pointer;
+}

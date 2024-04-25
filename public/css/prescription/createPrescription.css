@@ -1,0 +1,233 @@
+:root {
+  --light-blu: #b3d3ea;
+  --light-blue: #d2ebf9;
+  --brown: #e7e7e7;
+  --blue: #0969da;
+  --white: #ffffff;
+}
+.A4-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  font-family: sans-serif;
+}
+
+.A4-title {
+  padding: 0px 418px;
+  h1 {
+    /* text-align: center; */
+    font-size: 30px;
+  }
+}
+/* .A4-Content {
+  padding: 1px 292px;
+  font-size: 22px;
+  td {
+    height: 60px;
+    width: 418px;
+    word-wrap: anywhere;
+  }
+} */
+.A4-Content {
+  padding: 27px 211px;
+  font-size: 20px;
+  table,
+  tr,
+  th,
+  td {
+    border-radius: 5px;
+    padding: 5px;
+  }
+  td {
+    height: 40px;
+    word-wrap: anywhere;
+  }
+}
+.A4-table-title {
+  width: 300px;
+  background-color: rgb(219, 236, 250);
+}
+table {
+  background-color: aliceblue;
+}
+
+.A4-table-content {
+  width: 700px;
+  background-color: white;
+}
+.A4-Content{
+    background-color: #f4f7f8;
+}
+.A4-prescription {
+  padding: 25px 439px;
+}
+.A4-addPrescription {
+  height: 50px;
+  width: 211px;
+  font-size: 16px;
+  background-color: var(--light-blue);
+  color: #2c5777;
+  border-radius: 7px;
+}
+.A4-addPrescription:hover {
+  background-color: var(--blue);
+  color: var(--white);
+  cursor: pointer;
+}
+.A4-addPrescription:active {
+  background-color: #a0c7e4;
+  box-shadow: none;
+  color: #2c5777;
+}
+.A4-main {
+  display: block;
+  padding-left: 300px;
+}
+/* //add prescrption */
+.A4-submitBtn {
+  text-align: center;
+  padding: 40px 0px;
+}
+.A4-submitbtn {
+  height: 50px;
+  width: 211px;
+  font-size: 16px;
+  background-color: var(--light-blue);
+  color: #2c5777;
+  border-radius: 7px;
+  font-weight: bold;
+}
+.A4-submitbtn:hover {
+  background-color: var(--blue);
+  color: var(--white);
+  cursor: pointer;
+}
+.A4-GetPdf {
+  padding: 0px 274px;
+}
+.A4-Getpdf {
+  height: 50px;
+  width: 211px;
+  font-size: 18px;
+  background-color: var(--light-blue);
+  color: #2c5777;
+  border-radius: 7px;
+}
+.A4-Getpdf:hover {
+  background-color: var(--blue);
+  color: var(--white);
+  cursor: pointer;
+}
+.A4-PrescriptionDetails {
+  font-size: 20px;
+  /* padding: 75px 194px; */
+  background-color: var(--light-blue);
+  padding: 22px;
+  border-radius: 22px;
+  h2{
+    text-align: center;
+    padding: 15px 0px;
+    color: #2c5777;
+    /* padding: 35px 22px; */
+  }
+}
+label{
+  padding-left: 21px;
+  font-weight: bold;
+  color: #2c5777;
+}
+#diagnosis {
+  width: 372px;
+  height: 34px;
+  font-size: 18px;
+  margin-top: 25px;
+}
+#prescription {
+  font-size: 18px;
+  max-width: 800px;
+}
+#myForm {
+  padding: 0px 5px;
+  margin-left: 50px;
+}
+#prescriptionerror {
+  font-size: 14px;
+  color: red;
+}
+.A4-btn {
+  width: 120px;
+  height: 30px;
+  padding: 5px;
+  text-align: center;
+  margin: 5px auto;
+  display: flex;
+  justify-content: center;
+  border-radius: 3px;
+  background-color: var(--light-blue);
+  color: #2c5777;
+}
+
+.A4-btn:hover {
+
+  cursor: pointer;
+  color: var(--white);
+  background-color: var(--blue);
+}
+
+.A4-back-btn {
+  margin: 20px 0;
+  padding-top: 10px;
+}
+.A4-backbtn{
+  padding: 15px 78px;
+}
+#A4-arrow-img{
+  margin-bottom: 10px;
+}
+
+/* new css */
+
+.a5-section {
+  max-width: 1080px;
+  width: 100%;
+  margin-left: 55px;
+}
+
+.a5-patient {
+  margin: 20px auto;
+  display: flex;
+  padding: 35px;
+  border-radius: 25px;
+  background-color: var(--light-blue);
+}
+.a5-patient-img>img {
+  height: 250px;
+  width: 250px;
+  border-radius: 100%;
+}
+
+.a5-patient-details {
+  width: 100%;
+}
+
+.a5-patient-more-detail {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 11px;
+}
+.a5-patient-address {
+  width: 70%;
+  margin: 0px 100px;
+}
+.a5-details>p {
+  margin: 15px 0;
+}
+.a5-bold {
+  font-weight: bold;
+}
+h1 {
+  text-align: center;
+  box-shadow: 0 3px var(--blue);
+  padding-bottom: 10px;
+  color: #2c5777;
+}
+

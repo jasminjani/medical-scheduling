@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
+    <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
+    <link rel="stylesheet" href="/css/adminPanel/adminDashboard.css" />
+    <style>
+      #a5-admin-dashboard-active {
+        background-color: #0969da;
+        transform: translate(5px);
+        border-radius: 5px;
+      }
+    
+      #a5-admin-dashboard-active a,
+      #a5-admin-dashboard-active i {
+        color: #ffffff;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main-container">
+      <%- include('../../common/newSidebar/adminSidebar.ejs') %>
+      <div class="a2-amdin-dashboard">
+        <div class="a2-container">
+          <div class="a2-dashboard-status">
+            <h2>Status</h2>
+            <div class="a2-dashboard-status-cards">
+              <div class="a2-card">
+                <div class="card-itams">
+                  <span id="doctors-count">10+</span> Doctors
+                </div>
+                <div class="card-itams">
+                  <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
+                </div>
+              </div>
+              <div class="a2-card">
+                <div class="card-itams">
+                  <span id="patients-count">100+</span> Patients
+                </div>
+                <div class="card-itams">
+                  <i class="fa-solid fa-bed-pulse a5-list-item-img"></i>
+                </div>
+              </div>
+              <div class="a2-card">
+                <div class="card-itams">
+                  <span id="appointments-count">10+</span> Todays Appointments
+                </div>
+                <div class="card-itams">
+                  <i class="fa-solid fa-bed-pulse a5-list-item-img"></i>
+                </div>
+              </div>
+              <div class="a2-card">
+                <div class="card-itams">
+                  <span id="revenue-count">20 M</span> Total Revenue
+                </div>
+                <div class="card-itams">
+                  <i class="fa-solid fa-award a5-list-item-img"></i>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div>
+
+            <!-- search bar of doctor -->
+            <div class="container">
+              <div class="all-doctors">
+                <h3>Best Performance Doctors</h3>
+                <div class="swipe-btns">
+                  <!-- <button class="left-swipe"><<</button>
+                  <button class="right-swipe">>></button> -->
+                </div>
+                <div class="doctors">
+                  <div class="cards">
+                    <div class="card">
+                      <div class="img">
+                        <img src="/assets/doctor.png" alt="" />
+                      </div>
+                      <div class="details">
+                        <p class="name">doctor1</p>
+                        <p class="speciality">MS</p>
+                      </div>
+                      <p class="rating">
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                      </p>
+                    </div>
+                    <div class="card">
+                      <div class="img">
+                        <img src="/assets/doctor.png" alt="" />
+                      </div>
+                      <div class="details">
+                        <p class="name">doctor2</p>
+                        <p class="speciality">MS</p>
+                      </div>
+                      <p class="rating">
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                      </p>
+                    </div>
+                    <div class="card">
+                      <div class="img">
+                        <img src="/assets/doctor.png" alt="" />
+                      </div>
+                      <div class="details">
+                        <p class="name">doctor1</p>
+                        <p class="speciality">MS</p>
+                      </div>
+                      <p class="rating">
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                      </p>
+                    </div>
+                    <div class="card">
+                      <div class="img">
+                        <img src="/assets/doctor.png" alt="" />
+                      </div>
+                      <div class="details">
+                        <p class="name">doctor2</p>
+                        <p class="speciality">MS</p>
+                      </div>
+                      <p class="rating">
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                      </p>
+                    </div>
+                    <div class="card">
+                      <div class="img">
+                        <img src="/assets/doctor.png" alt="" />
+                      </div>
+                      <div class="details">
+                        <p class="name">doctor1</p>
+                        <p class="speciality">MS</p>
+                      </div>
+                      <p class="rating">
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                      </p>
+                    </div>
+                    <div class="card">
+                      <div class="img">
+                        <img src="/assets/doctor.png" alt="" />
+                      </div>
+                      <div class="details">
+                        <p class="name">doctor2</p>
+                        <p class="speciality">MS</p>
+                      </div>
+                      <p class="rating">
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                        <img src="/assets/gstar.png" width="15px" alt="" />
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+          <!-- revies panel -->
+          <div class="a2-admin-reviews">
+            <!-- from main home page -->
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <script src="/javascript/carousel.js"></script>
+  <script src="/javascript/adminPanel/dashboard.js"></script>
+
+
+  <script>
+
+    async function fetchStatus() {
+      try {
+
+        const url = `/getDashboardStatus`;
+        const response = await fetch(url);
+        const result = await response.json();
+        console.log(result);
+
+        document.getElementById('doctors-count').innerHTML = result.totalDoctor[0].total_doctor + "+";
+        document.getElementById('patients-count').innerHTML = result.totalPatient[0].total_patient + "+";
+        document.getElementById('appointments-count').innerHTML = result.todayAppointment[0].today_appointment + "+";
+        document.getElementById('revenue-count').innerHTML = result.totalRevenue[0].total_revenue + "+";
+
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchStatus();
+  </script>
+</body>
+
+</html>

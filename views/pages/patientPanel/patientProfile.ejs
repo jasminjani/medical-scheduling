@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Patient Profile</title>
+  <link rel="stylesheet" href="/css/patientCSS/patientProfile.css" />
+  <link rel="stylesheet" href="fontawesome-free-6.5.2-web/css/all.min.css" />
+  <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
+  <link rel="stylesheet" href="/css/Pagination/paginationComp.css" />
+  <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css" />
+  <script src="/sweetalert2/sweetalert2.min.js"></script>
+  <style>
+    #a5-patient-session-active {
+      background-color: #0969da;
+      transform: translate(5px);
+      border-radius: 5px;
+    }
+
+    #a5-patient-session-active a,
+    #a5-patient-session-active i {
+      color: #ffffff;
+    }
+  </style>
+</head>
+
+<body onload="getUpcomingSlots()">
+  <section id="A3-allslot">
+    <div class="A3-main-container">
+      <%-include("../../common/newSidebar/patientSidebar")%>
+        <div class="A3-container">
+          <div class="A3-row-1">
+            <a id="A3-upcoming" href="/patientUpcomingSlots"><i class="fa-solid fa-arrow-up"></i></a>
+            <a id="A3-past" href="/patientPastSlots"><i class="fa-solid fa-arrow-down"></i></a>
+          </div>
+          <div class="A3-heading">
+            <h3>Upcoming Slots</h3>
+            <%-include("../../common/Pagination/paginationComp")%>
+          </div>
+          <div class="A3-row-2">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Day</th>
+                  <th>Slot</th>
+                  <th>Details</th>
+                  <th>Cancel</th>
+                </tr>
+              </thead>
+              <tbody id="date-body"></tbody>
+            </table>
+          </div>
+          <div class="A3-modal">
+            <div class="A3-row-3">
+              <h3 id="A3-modal-date">Date</h3>
+              <input type="button" value="Close" onclick="handleClose()" />
+            </div>
+            <div class="card">
+              <div class="col">
+                <p>Doctor name</p>
+                <p>Doctor email</p>
+                <p>Doctor phone</p>
+                <p>Doctor qualification</p>
+              </div>
+              <div class="col">
+                <p>Consultancy fee</p>
+                <p>hosp name</p>
+                <p>hosp loc</p>
+                <p>hosp pincode</p>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </section>
+  <script src="/javascript/patientPanel/patientProfile.js" defer></script>
+</body>
+
+</html>

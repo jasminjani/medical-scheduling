@@ -1,0 +1,80 @@
+<div class="A4-sidenav">
+  <div class="A4-sidenavupperbox">
+    <div class="A4-profile">
+      <div class="A4-profilephoto">
+        <a href="" id="viewprofile"><img src="" alt="profile" class="A4-profileimage" id="profile"/></a>
+      </div>
+      <div class="A4-logout">
+        <button class="A4-logoutBtn">Log Out</button>
+      </div>
+    </div>
+    <div class="A4-logout">
+      <button class="A4-logoutBtn">Log Out</button>
+    </div>
+  </div>
+
+  <div class="A4-lists">
+    <div class="A4-list-item">
+      <a href="" id="viewdashboard">Dashboard</a>
+    </div>
+    <div class="A4-list-item">
+      <a href="#">Schedule</a>
+    </div>
+    <div class="A4-list-item">
+      <a href="#" id="viewpatient">My Patients</a>
+    </div>
+    <div class="A4-list-item">
+      <a href="" id="paymenthistory">Paymets History</a>
+    </div>
+    <div class="A4-list-item">
+      <a href="#" id="paymenthistory">Feedback</a>
+    </div>
+  </div>
+</body>
+</html>
+<!-- <script>
+    const fetchSideBarDetails = async()=>{
+       let baseUrl = (window.location).href;
+      let Id = baseUrl.substring(baseUrl.lastIndexOf('/') + 1);
+      let fetchData = await fetch(`/doctorSideBarDetail/${Id}`)
+      let data = await fetchData.json()
+      // console.log(data);
+      let key = Object.keys(data[0])
+      key.forEach(element => {
+        if(element == 'profile')
+        {
+            document.getElementById("profile").src = `/uploads/imgs/${data[0][element]}`
+        }
+        else{
+              document.getElementById(element).innerHTML = data[0][element]
+          }
+      });
+    }
+    fetchSideBarDetails()
+</script> -->
+
+<!-- ============ -->
+
+<!-- 
+html
+-body
+-sidebar-div
+-your-div
+-/body
+/html
+-->
+
+<!-- 
+Sidebar width 
+width: 350px;
+
+body {
+display: flex;
+gap: 20px;
+} 
+
+.your-div {
+width: 100%;
+margin-left: 400px;
+} 
+-->

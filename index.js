@@ -2,38 +2,39 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const app = express();
 const path = require("path");
+const logger = require('./utils/pino'); 
 require("dotenv").config();
 
+const PORT = process.env.PORT;
 
-// database connection
-const conn = require("./config/dbConnection");
-
-const PORT = process.env.PORT
-
-// middleware
-app.use(express.json());
-app.use(cookieParser());
-app.use(express.urlencoded({ extended: true }));
+// passport configuration
+const passport = require("passport");
+const { passportConfig } = require("./middlewares/authMiddleware");
+passportConfig(passport);
 
 // set view engine
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
 // setup static file path for css,imgs,js or other files
-app.use("/public", express.static(path.join(__dirname, "/public")));
-
-// import routes file
-const userRouter = require("./routes/userRoute");
-const router = require("./routes/rootRouter");
-const prescriptionRouter = require("./routes/prescriptionRoutes");
-const hospitalRoute = require("./routes/hospitalRoute");
-const doctorRoute = require("./routes/doctorRouter");
-const specialitiesRoute = require("./routes/doctorSpecialitiesRouter");
+app.use(express.static(path.join(__dirname, "/public")));
+app.use(express.static(path.join(__dirname, "/uploads")))
+app.use("/sweetalert2", express.static(path.join(__dirname, '/node_modules/sweetalert2/dist')))
+// middleware
+app.use(passport.initialize());
+app.use(express.json());
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
 
 // use root router in index file
-app.use('/', router);
+const rootRouter = require("./routes/rootRouter");
+const { allRequestLogs } = require("./middlewares/allRequestLogs");
+
+
+app.use("/", allRequestLogs, rootRouter);
 
 // server is running on PORT
 app.listen(PORT, () => {
-  console.log(`server is running on port: ${PORT}`);
+  logger.info(`server is running on port: http://localhost:${PORT}`);
+  // console.log(`server is running on port: http://localhost:${PORT}`);
 });

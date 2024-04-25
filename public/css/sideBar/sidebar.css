@@ -1,0 +1,133 @@
+:root {
+  --light-blue: #b3d3ea;
+  --brown: #e7e7e7;
+  --blue: #0969da;
+  --white: #ffffff;
+}
+.A4-sidenav {
+  height: 100%;
+  width: 350px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  background-color: var(--white);
+  overflow-x: hidden;
+  border-right: 1px solid #8080803d;
+  font-family: -apple-system, system-ui, "Segoe UI", "Liberation Sans",
+    sans-serif;
+}
+
+.A4-profile {
+  display: flex;
+  gap: 15px;
+  padding-top: 57px;
+  padding-left: 13px;
+}
+
+.A4-profileimage {
+  height: 80px;
+  width: 76px;
+  border-radius: 50px;
+  background-color: #c8c6c6;
+}
+
+.A4-profilephoto {
+  padding: 20px 0px;
+}
+
+.A4-accountname {
+  word-wrap: break-word;
+  width: 70%;
+  padding: 14px 0px;
+}
+
+.A4-username {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.A4-useremail {
+  margin-top: 10px;
+}
+
+/* CSS */
+.A4-logoutBtn {
+  background-color: var(--light-blue);
+  border-radius: 3px;
+  box-shadow: rgba(255, 255, 255, 0.7) 0 1px 0 0 inset;
+  box-sizing: border-box;
+  color: #2c5777;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", "Liberation Sans",
+    sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.15385;
+  margin: 0;
+  outline: none;
+  padding: 8px 0.8em;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+  width: 248px;
+  height: 39px;
+}
+
+.A4-logoutBtn:hover,
+.A4-logoutBtn:focus {
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+.A4-logoutBtn:focus {
+  box-shadow: 0 0 0 4px rgba(0, 149, 255, 0.15);
+}
+
+.A4-logoutBtn:active {
+  background-color: #a0c7e4;
+  box-shadow: none;
+  color: #2c5777;
+}
+
+.A4-logout {
+  padding: 26px 40px;
+  text-decoration: none;
+  color: #39739d;
+}
+
+.A4-lists {
+  a {
+    padding: 33px 83px;
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+    display: block;
+  }
+
+  .A4-list-item:hover {
+    border-right: 5px solid #1b66d6;
+
+    a {
+      color: #1b66d6;
+    }
+  }
+}
+
+.A4-sidenavupperbox {
+  border-bottom: 1px solid #8080803d;
+}
+
+@media screen and (max-height: 450px) {
+  .A4-sidenav {
+    padding-top: 15px;
+  }
+
+  .A4-sidenav a {
+    font-size: 18px;
+  }
+}

@@ -1,0 +1,69 @@
+<div class="a5-sidenav">
+  <div class="a5-sidenavupperbox">
+    <div class="a5-profile">
+      <div class="a5-profilephoto">
+        <a href="/viewPatientProfile"><img src="/assets/sideBar/profile-icon-png-898.png" alt="profile" class="a5-profileimage" /></a>
+      </div>
+      <div class="a5-accountname">
+        <p class="a5-username"></p>
+        <p class="a5-useremail"></p>
+      </div>
+    </div>
+    <div class="a5-logout">
+      <p class="a5-btn-logout" onclick="logout()"><a href="/logout">Log out</a></p>
+    </div>
+  </div>
+
+  <div class="a5-lists">
+    <div class="a5-list-item" onclick="window.location.href=`/patient`" id="a5-patient-dashboard-active">
+      <i class="fa-solid fa-house a5-list-item-img"></i>
+      <a>Home</a>
+    </div>
+    <div class="a5-list-item" onclick="window.location.href=`/doctors/all`" id="a5-patient-doctor-active">
+      <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
+      <a>All Doctors</a>
+    </div>
+    <div class="a5-list-item" onclick="window.location.href=`/patientUpcomingSlots`" id="a5-patient-session-active">
+      <i class="fa-solid fa-calendar-days a5-list-item-img"></i>
+      <a href="/patientUpcomingSlots">Scheduled Sessions</a>
+    </div>
+    <div class="a5-list-item" onclick="window.location.href=`/patient-paymentHistory`" id="a5-patient-payment-active">
+      <i class="fa-solid fa-calendar-check a5-list-item-img"></i>
+      <a>My Payment History</a>
+    </div>
+    <div class="a5-list-item" onclick="window.location.href=`/doctorCreateProfile`">
+      <i class="fa-solid fa-user-doctor a5-list-item-img"></i>
+      <a>Become a Doctor</a>
+    </div>
+  </div>
+</div>
+
+
+<script src="/javascript/auth/logout.js"></script>
+<script>
+  const doctorsCount = document.getElementById('doctors-count');
+  const patientsCount = document.getElementById('patients-count');
+  const appointmentsCount = document.getElementById('appointments-count');
+  const revenueCount = document.getElementById('revenue-count');
+
+  let user = JSON.parse(localStorage.getItem('userinfo'));
+
+  if(user.profile.trim()){
+    document.querySelector('.a5-profileimage').setAttribute('src',`/imgs/${user.profile}`)
+   
+  }
+
+  document.querySelector('.a5-username').innerHTML = `${user.fname+ " "+user.lname}`;
+  document.querySelector('.a5-useremail').innerHTML = user.email;
+
+</script>
+
+
+
+<!-- aa banne css side bar mate link kari lejo
+
+  for icons :-
+  <link rel="stylesheet" href="/public/fontawesome-free-6.5.2-web/css/all.min.css">
+
+  for sidebar css :-
+  <link rel="stylesheet" href="/public/css/sideBar/newSidebar.css"> -->

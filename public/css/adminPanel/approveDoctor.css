@@ -1,0 +1,169 @@
+:root {
+  --light-blue: #d2ebf9;
+  --brown: #e7e7e7;
+  --blue: #0969da;
+  --white: #ffffff;
+}
+
+.A4-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  font-family: sans-serif;
+}
+
+.A4-main {
+  display: block;
+  padding-left: 350px;
+}
+
+.A4-title {
+  padding: 55px 418px;
+
+  h1 {
+    /* text-align: center; */
+    font-size: 30px;
+  }
+}
+
+.A4-Content {
+  padding: 0px 211px;
+  font-size: 20px;
+  table,
+  tr,
+  th,
+  td {
+    border-radius: 5px;
+    padding: 5px;
+  }
+  table{
+    width: 665px;
+  }
+
+  td {
+    height: 40px;
+    word-wrap: anywhere;
+  }
+}
+
+#A4-table-title {
+  width: 200px;
+  background-color: rgb(219, 236, 250);
+}
+
+table {
+  background-color: aliceblue;
+}
+
+.A4-clinic-deatils-button {
+  padding: 50px 0px;
+  text-align: center;
+}
+
+.A4-clinic-deatils-btn {
+  height: 50px;
+  width: 211px;
+  font-size: 16px;
+  background-color: var(--blue);
+  color: var(--white);
+  border-radius: 7px;
+}
+
+.A4-clinic-deatils-btn:hover {
+  background-color: #085097;
+}
+
+.A4-clinic-details-content {
+  display: none;
+  padding: 0px 211px;
+  font-size: 20px;
+
+  table,
+  tr,
+  th,
+  td {
+    border-radius: 5px;
+    padding: 5px;
+  }
+  table{
+    width: 666px;
+  }
+
+  td {
+    height: 40px;
+    word-wrap: anywhere;
+  }
+}
+
+.A4-approve-reject-btns {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  padding: 43px 0px;
+}
+
+.A4-approve-doctor-btn,.A4-reject-doctor-btn {
+  height: 45px;
+  width: 163px;
+  font-size: 16px;
+  color: var(--white);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.A4-approve-doctor-btn{
+  background-color: rgb(2, 119, 2);
+  border: 1px solid rgb(2, 119, 2);
+}
+
+.A4-reject-doctor-btn {
+  background-color: rgb(212, 7, 7);
+  border: 1px solid rgb(212, 7, 7);
+}
+
+.A4-approve-doctor-btn:hover{
+  background-color: rgb(3, 83, 3);
+}
+
+.A4-reject-doctor-btn:hover{
+  background-color: rgb(146, 2, 2);
+}
+
+.a2-btn {
+  width: 80px;
+  height: 30px;
+  padding: 5px;
+  text-align: center;
+  margin: 5px auto;
+
+  display: flex;
+  justify-content: center;
+
+  border-radius: 3px;
+
+  background-color: var(--light-blue);
+}
+
+.a2-btn:hover {
+
+  cursor: pointer;
+  color: var(--white);
+  background-color: var(--blue);
+}
+
+.a2-btn>i {
+  margin-right: 6px;
+  margin-top: 1px
+}
+
+.a2-back-btn {
+  margin: 20px 0;
+}
+
+.a5-flex-btn {
+  display: flex;
+}
+
+.a2-approve-h2 {
+  margin: 30px 0;
+  text-align: center;
+}

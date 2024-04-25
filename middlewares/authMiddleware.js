@@ -1,43 +1,131 @@
-const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
+const conn = require("../config/dbConnection");
+const jwtStrategy = require("passport-jwt").Strategy;
 dotenv.config();
 
-// This function is used as middleware to authenticate user requests
-exports.auth = async (req, res, next) => {
+// getToken function for passport
+const getToken = (req) => {
+  return (
+    req.cookies.token ||
+    req.body.token ||
+    req.header("Authorization")?.replace("Bearer ", "") ||
+    null
+  );
+};
+
+// opts for passport-jwt
+let opts = {
+  jwtFromRequest: getToken,
+  secretOrKey: process.env.JWT_SECRET,
+};
+
+// passport-jwt configuration logic
+exports.passportConfig = (passport) => {
+  passport.use(
+    new jwtStrategy(opts, async (payload, next) => {
+      let result;
+      let id = payload.id;
+      try {
+        [result] = await conn.query("select u.*,pp.profile_picture from users as u inner join profile_pictures as pp on u.id = pp.user_id where pp.is_active=1 and u.id=?;", [id]);
+      } catch (error) {
+        // if any error during query execution
+        return next(error, false);
+      }
+
+      // if user present then call next with payload
+      if (result.length > 0) {
+        return next(null, result[0]);
+      } else {
+        // if user not present then call next with empty data
+        return next(null, false);
+      }
+    })
+  );
+};
+
+exports.isAdmin = async (req, res, next) => {
   try {
-    // Extracting JWT from request cookies, body or header
-    const token =
-      req.cookies.token ||
-      req.header("Authorization")?.replace("Bearer ", "") ||
-      req.body.token;
-
-    // If JWT is missing, return 401 Unauthorized response
-    if (!token) {
-      return res.redirect("login");
-    }
-
+    let id = req.user.id;
+    let result;
     try {
-      // Verifying the JWT using the secret key stored in environment variables
-      const decode = await jwt.verify(token, process.env.JWT_SECRET);
-
-      // Storing the decoded JWT payload in the request object for further use
-      req.user = decode;
+      [result] = await conn.query(
+        "select roles.role as role,users.id,users.fname  from users left join roles on users.role_id=roles.id where users.id=?",
+        [id]
+      );
     } catch (error) {
-      // If JWT verification fails, return 401 Unauthorized response
-      return res.status(401).json({
+      return res.status(500).json({
         success: false,
-        message: "token is invalid",
+        error: error.message,
       });
     }
 
-    // If JWT is valid, move on to the next middleware or request handler
+    if (result[0].role !== "admin") {
+      return res.render('./common/404')
+    }
+
     next();
   } catch (error) {
-    // If there is an error during the authentication process, return 401 Unauthorized response
     return res.status(401).json({
       success: false,
       error: error.message,
-      message: `Something Went Wrong While Validating the Token`,
+    });
+  }
+};
+
+exports.isPatient = async (req, res, next) => {
+  try {
+    let id = req.user.id;
+    let result;
+    try {
+      [result] = await conn.query(
+        "select roles.role as role,users.id,users.fname  from users left join roles on users.role_id=roles.id where users.id=?",
+        [id]
+      );
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error: error.message,
+      });
+    }
+
+    if (result[0].role !== "patient") {
+      return res.render('./common/404')
+    }
+
+    next();
+  } catch (error) {
+    return res.status(401).json({
+      success: false,
+      error: error.message,
+    });
+  }
+};
+
+exports.isDoctor = async (req, res, next) => {
+  try {
+    let id = req.user.id;
+    let result;
+    try {
+      [result] = await conn.query(
+        "select roles.role as role,users.id,users.fname  from users left join roles on users.role_id=roles.id where users.id=?",
+        [id]
+      );
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error: error.message,
+      });
+    }
+
+    if (result[0].role !== "doctor") {
+      return res.render('./common/404')
+    }
+
+    next();
+  } catch (error) {
+    return res.status(401).json({
+      success: false,
+      error: error.message,
     });
   }
 };

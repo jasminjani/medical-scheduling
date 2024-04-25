@@ -1,0 +1,128 @@
+.a7-profile-section{
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color:#f4f7f8;
+  padding: 25px 0 0 0;
+ }
+
+.a7-profile-title h1{
+  text-align: center;
+  color: #4d4d4d;
+}
+
+/* .a7-main-profile{
+  width: 70%;
+ } */
+
+
+
+
+
+.a7-field{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.a7-field label{
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  width: 50%;
+  font-size: 18px;
+  color: #4d4d4d;
+  line-height: 2;
+}
+
+.a7-field span{
+  
+  text-align: start;
+  width: 50%;
+  word-wrap: break-word;
+  font-size: 14px;
+  color: #2c5777;
+  line-height: 2;
+}
+
+.a7-field-inp{
+  display: flex;
+  flex-direction: column;
+}
+
+.a7-field-inp label{
+
+      font-size: 18px;
+      color: #4d4d4d;
+      line-height: 2;
+}
+
+.a7-field-inp .a7-form-input{
+  height: 30px;
+  width: 100%;
+  background-color: #f4f7f8;
+  border: none;
+  padding: 10px 25px 12px 8px;
+  font-size: 14px;
+  color:#2c5777;
+
+}
+
+
+
+.a7-edit-btn a{
+  text-decoration: none;
+  color: #2c5777;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.a7-edit-btn{
+  width: fit-content;
+  display: flex;
+  height: 50px;
+  /* text-align: center; */
+  align-items: center;
+  justify-content: flex-end ;
+  padding: 0 20px;
+  background-color:#b3d3ea;
+  border-radius: 20px;
+}
+
+.a7-update-btn{
+  margin: 15px auto;
+  padding: 10px 20px;
+  border-radius: 15px;
+  border: none;
+  background-color: #b3d3ea;
+  color:#2c5777;
+  font-size: 18px;
+}
+
+.a7-btn-flex-end{
+  margin-left: 80%;
+}
+
+
+.a7-card {
+  /* height: 50px; */
+  width: 50%;
+  padding: 25px 25px;
+}
+
+.a7-card-box {
+  /* height: 450px; */
+  background-color: #F3F7FD;
+  padding: 10px;
+  width: 100%;
+  
+}
+
+.a7-card-color {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  padding: 25px;
+
+}

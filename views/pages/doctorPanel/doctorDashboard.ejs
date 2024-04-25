@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
+  <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
+  <link rel="stylesheet" href="/css/adminPanel/allPatientDetails.css">
+  <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css">
+  <style>
+    #a5-doctor-dashboard-active {
+      background-color: #0969da;
+      transform: translate(5px);
+      border-radius: 5px;
+    }
+
+    #a5-doctor-dashboard-active a,
+    #a5-doctor-dashboard-active i {
+      color: #ffffff;
+    }
+  </style>
+  <script src="/javascript/doctorPanel/doctorDashboard.js" defer></script>
+  <title>Dashboard</title>
+</head>
+
+<body>
+
+  <!-- Main -->
+
+  <div class="a7-container">
+
+    <%- include(`../../common/newSidebar/doctorSidebar.ejs`) %>
+
+      <div class="a7-doctor-pannel ">
+        <div class="a7-right-bar ">
+          <div class="a7-counter-section">
+            <div class="a7-counter-card">
+              <div class="a7-label">
+                <h4>Total Appointments</h4>
+              </div>
+              <div class="a7-counter">
+                <div class="a7-counter-1"><img src="/assets/doctorPanel/dtotal_appointment.png" alt=""></div>
+                <div class="a7-label-count" id="appointment">
+                </div>
+              </div>
+            </div>
+            <div class="a7-counter-card">
+              <div class="a7-label">
+                <h4>Total Patients</h4>
+              </div>
+              <div class="a7-counter">
+                <div class="a7-counter-2"><img src="/assets/doctorPanel/dtotal_patients.png" alt=""></div>
+                <div class="a7-label-count" id="patient">
+                </div>
+              </div>
+            </div>
+            <div class="a7-counter-card">
+              <div class="a7-label">
+                <h4>Total Revenue</h4>
+              </div>
+              <div class="a7-counter">
+                <div class="a7-counter-3"><img src="/assets/doctorPanel/drevenue.png" alt=""></div>
+                <div class="a7-label-count" id="revenue">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Appointment -->
+
+          <div class="a7-appointment-tbl">
+
+            <div class="a7-table-row">
+              <div class="a7-table-title">
+                <span>Today Appointments</span>
+              </div>
+              <table class="a7-tbl" id="appointmentTable">
+                <thead class="a7-table-header">
+                  <tr>
+                    <th>Sr No</th>
+                    <th>Patient Name</th>
+                    <th>Appointment Time</th>
+                    <th>Prescription</th>
+                  </tr>
+                </thead>
+            </table>
+            </div>
+          </div>
+
+          <!-- feedback -->
+          <div class="a7-feedback">
+
+            <div class="a7-feedback-section">
+              <div class="a7-table-title">
+                <span>Feedback</span>
+              </div>
+              <div class="a7-card" id="feedbackCard">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</body>
+
+</html>
