@@ -50,7 +50,7 @@ async function appendData(result) {
           <td>${element.fname}</td>
           <td>${element.lname}</td>
           <td>${element.phone}</td>
-          <td><p class="a5-btn" onclick="window.location.href='/viewPatientHistory/${element.patient_id}'">Detail</p></td>
+          <td><p class="a5-btn" onclick="window.location.href='/doctor/patients/history/${element.patient_id}'">Detail</p></td>
         </tr>`
 
       document.getElementById('a5-tbody').innerHTML = document.getElementById('a5-tbody').innerHTML + html2;

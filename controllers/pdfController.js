@@ -1,6 +1,6 @@
-const conn = require("../../config/dbConnection");
+const conn = require("../config/dbConnection");
 let PDFDocument = require("pdfkit");
-const logger = require("../../utils/pino");
+const logger = require("../utils/pino");
 
 exports.generatePDF = async (req, res) => {
   try {

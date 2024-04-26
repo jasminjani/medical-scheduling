@@ -1,5 +1,5 @@
 const patientProfileFetchData = async () => {
-  const fetchData = await fetch('/patientProfileUpdateData')
+  const fetchData = await fetch('/patient/update/profileData')
   const data = await fetchData.json()
   const key = Object.keys(data[0])
   key.forEach(element => {
@@ -53,7 +53,7 @@ const profileFun = () => {
   formData.append("city",city)
   formData.append("gender",gender)
 
-  let fetchData = await fetch('/patientProfileUpdate',{
+  let fetchData = await fetch('/patient/profile/update',{
     method:"POST",
   body:formData
       })

@@ -1,6 +1,6 @@
 
 const fetchCountData = async () => {
-  const fetchData = await fetch(`/dashBoardCount`)
+  const fetchData = await fetch(`/doctor/analytics`)
   const data = await fetchData.json()
   let key = Object.keys(data[0])
   key.forEach(element => {
@@ -26,7 +26,7 @@ fetchCountData()
 
 const fetchReviewData = async () => {
 
-  const fetchData = await fetch(`/dashBoardReviews`)
+  const fetchData = await fetch(`/doctor/reviews/all`)
   const data = await fetchData.json()
   let key = Object.keys(data)
   let feedbackCard = document.getElementById("feedbackCard")
@@ -161,12 +161,9 @@ fetchReviewData()
 
 const fetchAppointmentData=async()=>{
   try{
-    let fetchData = await fetch('/dashBoardAppointments')
+    let fetchData = await fetch('/doctor/appointments/today')
     let data = await fetchData.json()
-    let key = Object.keys(data[0])
-    console.log("in fetchAppointmentData");
-    console.log(data);
-    console.log(key);
+    
 
     data.forEach(function (element, index) {
           let table = document.getElementById("appointmentTable");
@@ -188,7 +185,7 @@ const fetchAppointmentData=async()=>{
 }
 
 const addPrescription=async(patient_id,booking_id)=>{
-  location.href =`/prescription/${patient_id}/${booking_id}`;
+  location.href =`/doctor/prescription/${patient_id}/${booking_id}`;
 }
 
 fetchAppointmentData();

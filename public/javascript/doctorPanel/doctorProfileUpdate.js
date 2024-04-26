@@ -1,7 +1,7 @@
 
 
 const fetchData = async () => {
-  let fetchdata = await fetch(`/updateDoctorData/`)
+  let fetchdata = await fetch(`/doctor/updateDoctorData/`)
   let data = await fetchdata.json()
 
   let key = Object.keys(data[0])
