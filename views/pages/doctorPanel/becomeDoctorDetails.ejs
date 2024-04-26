@@ -8,8 +8,8 @@
     <link rel="stylesheet" type="text/css" href="/css/auth/register.css" />
     <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css" />
     <script src="/sweetalert2/sweetalert2.min.js"></script>
-    <script src="/javascript/doctorPanel/fetchSpeciality.js"></script>
-    <script src="/javascript/doctorPanel/fetchCity.js"></script>
+    <script src="/javascript/doctorPanel/fetchSpeciality.js" defer></script>
+    <script src="/javascript/doctorPanel/fetchCity.js" defer></script>
   </head>
   <body>
     <div class="container">
@@ -61,9 +61,10 @@
 
             <div class="city">
               <label for="city">Speciality:</label>
-              <select name="speciality" id="speciality" class="dvalid">
+              <select name="speciality" id="speciality" class="dvalid" onchange="specialityChange()">
                 <option value="">--Select Speciality--</option>
               </select>
+              <input type="text" name="otherSpeciality" id="otherSpeciality" placeholder="Enetr New Speciality" style="display: none;">
             </div>
             <div class="phone">
               <label for="hname">Hospital Name: </label>
@@ -130,5 +131,16 @@
     </div>
 
     <script src="/javascript/doctorPanel/becomeDoctor.js"></script>
+    <script>
+      function specialityChange() {
+
+        if (document.getElementById('speciality').value == 24) {
+          document.getElementById('otherSpeciality').style.display = 'block'; 
+        } else {
+          document.getElementById('otherSpeciality').style.display = 'none'; 
+        }
+      }
+
+    </script>
   </body>
 </html>

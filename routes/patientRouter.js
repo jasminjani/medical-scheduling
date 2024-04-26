@@ -30,6 +30,7 @@ const {
   updatePostBecomeDoctor,
   updateBecomeDoctorData,
   knowStatus,
+  nearByDoctores,
 } = require("../controllers/patientController");
 const {
   becomeDoctorDetail,
@@ -116,8 +117,13 @@ router.route("/getprescriptionofuser").get(getPrescriptionOfUser);
 // d p
 router.route("/generate/:id").get(generatePDF);
 
+
 router.route("/updateBecomeDoctorDetails").get(updateBecomeDoctorDetails).post(updatePostBecomeDoctor);
 router.route("/updateBecomeDoctorData").get(updateBecomeDoctorData)
 router.route("/knowStatus").get(knowStatus)
+
+// patient dashboard nearby doctor
+router.route("/getNearByDoctor").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), nearByDoctores);
+
 
 module.exports = router;
