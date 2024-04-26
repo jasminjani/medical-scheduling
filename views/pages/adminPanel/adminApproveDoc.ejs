@@ -128,43 +128,43 @@
     });
   </script>
 
-  <script>
-    async function getAllDoctors() {
-      const resp = await fetch("/get-all-doctors");
+    <script>
+      async function getAllDoctors() {
+        const resp = await fetch("/admin/get-all-doctors");
 
-      const data = await resp.json();
+        const data = await resp.json();
 
-      console.log(data);
-      let allPendingDoctors = data.filter((e) => {
-        return e.approved === 0 ? e : false;
-      });
+        console.log(data);
+        let allPendingDoctors = data.filter((e) => {
+          return e.approved === 0 ? e : false;
+        });
 
-      let allDoctors = data.filter((e) => {
-        return e.approved === 1 ? e : false;
-      });
+        let allDoctors = data.filter((e) => {
+          return e.approved === 1 ? e : false;
+        });
 
-      let rejectedDoctors = data.filter((e) => {
-        return e.approved === -1 ? e : false;
-      });
+        let rejectedDoctors = data.filter((e) => {
+          return e.approved === -1 ? e : false;
+        });
 
-      document.getElementById(
-        "total-pending-doc"
-      ).innerHTML = `(${allPendingDoctors.length})`;
-      document.getElementById(
-        "all-doctors-count"
-      ).innerHTML = ` (${allDoctors.length})`;
-      document.getElementById(
-        "total-rejected-doc"
-      ).innerHTML = ` (${rejectedDoctors.length})`;
+        document.getElementById(
+          "total-pending-doc"
+        ).innerHTML = `(${allPendingDoctors.length})`;
+        document.getElementById(
+          "all-doctors-count"
+        ).innerHTML = ` (${allDoctors.length})`;
+        document.getElementById(
+          "total-rejected-doc"
+        ).innerHTML = ` (${rejectedDoctors.length})`;
 
-      const approveTbody = document.getElementById("approve-tbl-body");
-      const allDoctorsTbody = document.getElementById("get-all-doctors");
-      const rejectedTbody = document.getElementById(
-        "a2-rejected-doctors-tbody"
-      );
-      console.log(allPendingDoctors);
-      allPendingDoctors.forEach((doc, i) => {
-        let str = `<tr>
+        const approveTbody = document.getElementById("approve-tbl-body");
+        const allDoctorsTbody = document.getElementById("get-all-doctors");
+        const rejectedTbody = document.getElementById(
+          "a2-rejected-doctors-tbody"
+        );
+        console.log(allPendingDoctors);
+        allPendingDoctors.forEach((doc, i) => {
+          let str = `<tr>
             <td>${++i}</td>
             <td>${doc.fname} ${doc.lname}</td>
             <td>${doc.email}</td>
@@ -172,46 +172,46 @@
             <td class="a2-btn" onclick="approveDoc(${doc.doctor_id})">Approve</td>
           </tr>`;
 
-        approveTbody.innerHTML += str;
-      });
+          approveTbody.innerHTML += str;
+        });
 
-      allDoctors.forEach((doc, i) => {
-        let tds = `<tr>
+        allDoctors.forEach((doc, i) => {
+          let tds = `<tr>
           <td>${++i}</td>
           <td>${doc.fname} ${doc.lname}</td>
           <td>${doc.email}</td>
           <td>${doc.qualification}</td>
           <td><p class="a2-btn" onclick="showDoctorDeatil(${doc.doctor_id})">View</p> <p class="a2-btn" onclick="deleteDoctor(${doc.doctor_id})">Delete</p></td>
           </tr>`;
-        allDoctorsTbody.innerHTML += tds;
-      });
+          allDoctorsTbody.innerHTML += tds;
+        });
 
-      rejectedDoctors.forEach((doc, i) => {
-        let tds = `<tr>
+        rejectedDoctors.forEach((doc, i) => {
+          let tds = `<tr>
           <td>${++i}</td>
           <td>${doc.fname} ${doc.lname}</td>
           <td>${doc.email}</td>
           <td>${doc.qualification}</td>
           <td><p class="a2-btn" onclick="approveDoc(${doc.doctor_id})">Approve</p></td>
           </tr>`;
-        rejectedTbody.innerHTML += tds;
-      });
-    }
-    getAllDoctors();
+          rejectedTbody.innerHTML += tds;
+        });
+      }
+      getAllDoctors();
 
-    async function deleteDoctor(id) {
-      let resp = await fetch(`/delete-doctor/${id}`);
-      location.reload();
-    }
+      async function deleteDoctor(id) {
+        let resp = await fetch(`/admin/delete-doctor/${id}`);
+        location.reload();
+      }
 
-    async function approveDoc(id) {
-      location.href = `/individual-doctor/${id}`;
-    }
+      async function approveDoc(id) {
+        location.href = `/individual-doctor/${id}`;
+      }
 
-    async function showDoctorDeatil(id) {
-      location.href = `/show-doctor-deatil/${id}`
-    }
-  </script>
+      async function showDoctorDeatil(id) {
+        location.href = `/show-doctor-deatil/${id}`
+      }
+    </script>
 </body>
 
 </html>

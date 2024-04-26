@@ -3,6 +3,9 @@
   --primarycolorhover: #006dd3;
   --btnice: #D8EBFA;
   --btnnicetext: #1b62b3;
+  --light-blue-border: #3984af;
+  --light-blue: #d2ebf9;
+  --brown: #e7e7e7;
 }
 
 * {
@@ -26,9 +29,9 @@
   margin: 0 auto;
 }
 
-.our-doctors-section{
+.our-doctors-section {
   padding: 10px;
-  margin-left: 350px;
+  /* margin-left: 350px; */
 }
 
 /* header section */
@@ -545,8 +548,99 @@
   /* height: 100%; */
 }
 
-.a2-contact-us{
-  margin-top: 20px;
-  background-color: #006dd3;
+
+/* contact us  */
+.a2-contact-page {
+  margin: 20px 0;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+
+  box-shadow: 0 0 2px black;
+
+  width: 95%;
 }
 
+
+.a2-contact-info {
+  width: 40%;
+  height: 500px;
+  box-shadow: 0 0 8px black;
+  position: relative;
+  left: -5%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: start;
+  font-weight: bold;
+  padding: 30px;
+  background-color: var(--light-blue);
+}
+
+.a2-contact-info h2 {
+  text-align: center;
+}
+
+.a2-contact-info img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.a2-contact-form {
+  width: 60%;
+  height: 600px;
+
+  text-align: center;
+  padding: 20px;
+}
+
+#a2-contact-form-id {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+
+#a2-contact-form-id p {
+  margin: 10px 0;
+}
+
+#a2-contact-form-id input,
+textarea,
+#a2-contact-form-id select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+#a2-error-msg {
+  padding: 10px 20px;
+  position: absolute;
+  bottom: 30px;
+  left: 35%;
+  color: red;
+  font-weight: bold;
+  /* background-color: var(--light-blue); */
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: black;
+  font-weight: bold;
+  text-align: left;
+}
+
+.a2-send-btn {
+  padding: 9px 20px;
+  cursor: pointer;
+  border: none;
+  background-color: var(--primarycolor);
+  font-weight: bold;
+  color: white;
+  border-radius: 5px;
+}
+
+.a2-send-btn:hover {
+  background-color: var(--primarycolorhover);
+}

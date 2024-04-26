@@ -161,4 +161,19 @@ exports.editPrescriptionHome=async (req,res)=>{
   }
 }
 
+exports.search=async (req,res)=>{
+  try{
+    const input=req.params.input;
+    const query=`select * from(select prescriptions.created_at,prescriptions.diagnoses,prescriptions.id,concat(users.fname," ",users.lname) as patient_name from prescriptions 
+          join users on prescriptions.patient_id= users.id where doctor_id=20 order by prescriptions.created_at desc) as newtable where diagnoses like '%${input}%' or patient_name like '%${input}%';`
+    const [result]=await conn.query(query,[input]);
+    return res.status(200).json(result);      
+  }catch(error){
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+}
+
 // id, doctor_id, patient_id, prescription, diagnoses, created_at, updated_at;

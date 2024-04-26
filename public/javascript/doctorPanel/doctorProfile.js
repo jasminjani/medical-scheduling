@@ -4,6 +4,7 @@
 
     let fetchdata = await fetch(`/doctorData`)
   let data = await fetchdata.json()
+
   let key = Object.keys(data[0])
     key.forEach(item => {
 

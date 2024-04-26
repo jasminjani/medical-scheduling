@@ -5,8 +5,7 @@ const multer = require("multer");
 const imgUpload = multer({ storage: imgStorage });
 const passport = require("passport");
 
-// const { paymentHistory, showpaymentHistory, searchPaymentHistory } = require("../controllers/D");
-// const { patientPaymentHistory, showPatientPayment, searchPatientPayment } = require("../controllers/doctorPatientPaymentHistory");
+
 
 // slot
 const {
@@ -77,7 +76,7 @@ const {
   getCityCombo,
 } = require("../controllers/doctorModule/doctorCityComboController");
 const { allDoctors } = require("../controllers/userController");
-const { searchReview, getPatientSearchData } = require("../controllers/doctorModule/doctorSearchPatient");
+
 
 
 
@@ -410,8 +409,5 @@ router
     isPatient,
     cancelSlot
   );
-
-router.route('/searchReview/:search').get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }), searchReview)
-router.route('/searchPatientData/:search').get(passport.authenticate("jwt", { session: false, failureRedirect: "/login" }), getPatientSearchData)
 
 module.exports = router;
