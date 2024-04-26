@@ -4,9 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Doctor Details</title>
-    <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
+    <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/auth/register.css" />
-    <script src="/public/javascript/doctorPanel/fetchSpeciality.js" defer></script>
+    <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css" />
+    <script src="/sweetalert2/sweetalert2.min.js"></script>
+    <script src="/javascript/doctorPanel/fetchSpeciality.js" defer></script>
     <script src="/javascript/doctorPanel/fetchCity.js" defer></script>
   </head>
   <body>
@@ -14,7 +16,27 @@
       <div class="form">
         <div class="content">
           <h2>Register Doctor Details</h2>
-          <form action="" class="user" method="post">
+          <form class="fname">
+            <div class="a7-field-inp">
+              <input
+                type="text"
+                name="doctor_details_id"
+                id="doctor_details_id"
+                class="a7-form-input"
+                value=""
+                hidden
+              />
+            </div>
+            <div class="fname">
+              <input
+                type="text"
+                name="hospital_id"
+                id="hospital_id"
+                class="a7-form-input"
+                value=""
+                hidden
+              />
+            </div>
             <div class="fname">
               <label for="fname">Qualification: </label>
               <input
@@ -37,16 +59,6 @@
               />
             </div>
 
-              <div class="phone">
-                <label for="phone">Phone Number: </label>
-                <input
-                  type="text"
-                  id="phone"
-                  name="phone"
-                  class="dvalid"
-                  placeholder="Enter Phone Number"
-                />
-              </div>
             <div class="city">
               <label for="city">Speciality:</label>
               <select name="speciality" id="speciality" class="dvalid" onchange="specialityChange()">
@@ -105,6 +117,12 @@
             </div>
             <div class="submit">
               <input type="submit" id="submit" value="Become A Doctor" />
+              <input
+                type="button"
+                id="update"
+                value="Update"
+                style="display: none"
+              />
             </div>
           </form>
           <div class="link"></div>
