@@ -23,16 +23,6 @@
     <script src="/javascript/doctorPanel/doctorReview.js" defer></script>
     <title>view Feedback</title>
   </head>
-
-    #a5-doctor-feedback-active a,
-    #a5-doctor-feedback-active i {
-      color: #ffffff;
-    }
-  </style>
-  <script src="/javascript/doctorPanel/doctorReview.js" defer></script>
-  <title>view Feedback</title>
-</head>
-
 <body>
 
   <div class="a5-container">
@@ -46,23 +36,25 @@
             </div>
             <p id="a5-btn-search" tabindex="2" onclick="location.reload()">Search</p>
           </div>
-          <div class="A4-Pagination-component">
-            <div class="home"><button id="homebtn">
-                <<< /button>
-            </div>
-            <div class="previous"><button id="previousbtn">
-                << /button>
-            </div>
-            <div class="pagenumber">
-              <p id="pageno">1</p>
-            </div>
-            <div class="next"><button id="nextbtn">></button></div>
-            <div class="end"><button id="endbtn">>></button></div>
-          </div>
+          
 
           <div class="a5-all-user">
+            <div class="a5-heading">
             <h2>View Feedback</h2>
-
+            <div class="A4-Pagination-component">
+              <div class="home"><button id="homebtn">
+                  << </button>
+              </div>
+              <div class="previous"><button id="previousbtn">
+                  < </button>
+              </div>
+              <div class="pagenumber">
+                <p id="pageno">1</p>
+              </div>
+              <div class="next"><button id="nextbtn">></button></div>
+              <div class="end"><button id="endbtn">>></button></div>
+            </div>
+          </div>
           <div class="a5-user-table"></div>
           <table id="a5-user-table">
             <tbody id="a5-tbody">

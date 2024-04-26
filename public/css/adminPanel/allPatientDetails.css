@@ -36,6 +36,12 @@ input {
   width: 400px;
 }
 
+.a5-heading{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 #a5-btn-search {
   height: 40px;
   width: 100px;
