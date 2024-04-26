@@ -5,16 +5,10 @@
   --white: #ffffff;
 }
 
-
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-}
-
-.a2-container {
-  padding: 10px;
-  margin-left: 350px;
 }
 
 .a2-approve-table-div {
@@ -22,16 +16,10 @@
   margin: 0 auto;
 }
 
-/* .a2-container {
-  max-width: 1080px;
-  margin: 0 auto;
-} */
-
-body {
-  display: flex;
-  gap: 20px;
+.a2-container {
+  padding: 10px;
+  margin-left: 350px;
 }
-
 
 .a2-btn {
   width: 80px;
@@ -73,7 +61,6 @@ body {
 .doctor-panel h3 {
   background-color: var(--light-blue);
   padding: 10px 50px;
-
   cursor: pointer;
   border-radius: 3px;
 }
