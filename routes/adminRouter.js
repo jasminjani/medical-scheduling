@@ -25,6 +25,7 @@ const {
   adminApproveDoctors,
   adminDeleteDoctors,
   adminDashboard,
+  contactToAdmin,
 } = require("../controllers/adminController");
 const passport = require("passport");
 
@@ -111,5 +112,7 @@ router.route("/doctors/delete/:id").get(deleteDoctor);
 // ADMIN dashboard api
 // /getDashboardStatus
 router.route("/analytics").get(dashboardStatus);
+
+router.route("/contact-us").get(contactToAdmin);
 
 module.exports = router;

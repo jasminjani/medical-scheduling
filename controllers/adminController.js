@@ -35,6 +35,13 @@ exports.dashboardStatus = async (req, res) => {
   }
 };
 
+exports.contactToAdmin = async (req,res)=>{
+  try {
+    res.render('pages/adminPanel/adminContact')
+  } catch (error) {
+    logger.error(error.message);
+  }
+}
 exports.getAllDoctors = async (req, res) => {
   try {
     const sql2 = `select * from users a 
@@ -50,13 +57,18 @@ exports.getAllDoctors = async (req, res) => {
 };
 
 exports.deleteDoctor = async (req, res) => {
-  const docID = req.params.id;
-  console.log(docID);
-
-  const sql = `update doctor_details JOIN users ON doctor_details.doctor_id = users.id set doctor_details.approved = -1, users.role_id = 1 where doctor_details.doctor_id = ?`;
-  let [result] = await conn.query(sql, [docID]);
-
-  res.status(200).send();
+  try {
+    
+    const docID = req.params.id;
+    console.log(docID);
+  
+    const sql = `update doctor_details JOIN users ON doctor_details.doctor_id = users.id set doctor_details.approved = -1, users.role_id = 1 where doctor_details.doctor_id = ?`;
+    let [result] = await conn.query(sql, [docID]);
+  
+    res.status(200).json();
+  } catch (error) {
+    logger.error(error.message);
+  }
 };
 
 exports.individualDoctor = async (req, res) => {

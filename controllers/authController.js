@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 const logger = require('../utils/pino')
 
-const {specialitiesCombo} = require('./patientController')
+const { specialitiesCombo } = require('./patientController')
 dotenv.config();
 
 // city combo
@@ -51,8 +51,8 @@ exports.getDoctorDetails = async (req, res) => {
     } catch (error) {
       logger.error(error.message)
       return res.status(500).json({
-        success:false,
-        message:"DB error Occur"
+        success: false,
+        message: "DB error Occur"
       })
     }
 
@@ -87,6 +87,25 @@ exports.homePage = async (req, res) => {
     logger.error(error.message);
   }
 };
+
+exports.contactUsHomePage = async (req, res) => {
+
+  const { name, mobile_no, email, city, role, message } = req.body;
+
+  try {
+    await conn.query('insert into contact_us(name,mobile_no,email,city,role,message) values (?)'
+      , [[name, mobile_no, email, city, role, message]]);
+    res.json({
+      success: true,
+      message: "Data inserted .."
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    })
+  }
+}
 
 exports.allDoctors = async (req, res) => {
   try {

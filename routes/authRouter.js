@@ -23,10 +23,11 @@ const {
   createPasswordForm,
   updatePassword,
   allDoctors,
+  contactUsHomePage,
 } = require("../controllers/authController");
 
 router.route("/").get(homePage);
-
+router.route('/contact-message').post(contactUsHomePage)
 router.route("/alldoctors").get(getDoctorDetails);
 
 router
