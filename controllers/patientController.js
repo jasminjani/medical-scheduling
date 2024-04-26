@@ -523,7 +523,7 @@ exports.cancelSlot = async (req, res) => {
       const [refunded] = await conn.query(query, [1, slot_id]);
 
       // return res.status(200).json({ success: true, message: "slot canceled successfully" });
-      return res.redirect("/patientUpcomingSlots");
+      return res.redirect("/patient/upcomingSlots");
     } catch (error) {
       console.log(error);
       return res.status(500).json({ success: false, message: error.message });

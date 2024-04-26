@@ -139,7 +139,7 @@ submit.addEventListener('click', async (e) => {
                   window.location = "/"
                 }
                 else if(data.user.role_id==2){
-                  window.location = "/doctorDashboard"
+                  window.location = "/doctor/dashboard"
                 }
                 else if(data.user.role_id==3){
                   window.location = "/admin"

@@ -45,7 +45,7 @@ slotBook.addEventListener("click", async (e) => {
 
     let userInfo = JSON.parse(localStorage.getItem('userinfo'))
 
-    let patientDetails = await fetch("/patient-details",{
+    let patientDetails = await fetch("/patient/details",{
       method:"POST",
       body:JSON.stringify({id:userInfo.id}),
       headers:{
@@ -71,7 +71,7 @@ slotBook.addEventListener("click", async (e) => {
           formData.append('bloodgroup',bloodGroup)
           formData.append('medicalHistory',medicalHistory)
 
-          let patient = await fetch("/add-patient-details",{
+          let patient = await fetch("/patient/otherDetails",{
             method:"POST",
             body:formData
           })
@@ -89,7 +89,7 @@ slotBook.addEventListener("click", async (e) => {
       confirmButtonText: "Pay Now",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        let d = await fetch("/bookslot", {
+        let d = await fetch("/patient/bookslot", {
           method: "POST",
           body: JSON.stringify({
             paymentAmount: fees,
@@ -129,7 +129,7 @@ const getSlots = async (e) => {
   if (date.value.trim()) {
     let doctor_id = window.location.pathname.split("/");
     doctor_id = doctor_id[doctor_id.length - 1]
-    let data = await fetch("/slots", {
+    let data = await fetch("/patient/slots", {
       method: "POST",
       body: JSON.stringify({ doctor_id, date: date.value }),
       headers: {

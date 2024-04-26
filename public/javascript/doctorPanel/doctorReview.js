@@ -6,7 +6,7 @@ let pageno = document.getElementById("pageno")
 
 const fetchDataFun = async () => {
  
-  let fetchdata = await fetch(`/reviews`)
+  let fetchdata = await fetch(`/doctor/reviews`)
   let data = await fetchdata.json()
   return data
 }
@@ -14,7 +14,7 @@ const fetchDataFun = async () => {
 const searchFetchDataFun = async ()=>{
   let fetchdata
   let data
-  fetchdata = await fetch(`/searchReview/${search}`)
+  fetchdata = await fetch(`/doctor/searchReview/${search}`)
   data = await fetchdata.json()
   return data
 }

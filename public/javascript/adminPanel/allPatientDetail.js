@@ -36,7 +36,7 @@ async function searchPatient() {
                 <td>${element.fname}</td>
                 <td>${element.lname}</td>
                 <td>${element.email}</td>
-                <td><p class="a5-btn" onclick="window.location.href='/admin/patient-appointment/${element.id}'">Detail</p></td>
+                <td><p class="a5-btn" onclick="window.location.href='/admin/patient/appointment/${element.id}'">Detail</p></td>
               </tr>`
 
         document.getElementById('a5-tbody').innerHTML = document.getElementById('a5-tbody').innerHTML + html2;
@@ -64,7 +64,7 @@ let tbody = document.getElementById('a5-tbody');
 async function getAllPatient() {
   try {
 
-    let resp = await fetch('/admin/get-all-patient');
+    let resp = await fetch('/admin/patient/getAll');
 
     let data = await resp.json();
     copyData = data;
@@ -83,7 +83,7 @@ async function getAllPatient() {
           <td>${patient.lname}</td>
           <td>${patient.email}</td>
           <td>
-            <p class="a5-btn" onclick="window.location.href='/admin/patient-appointment/${patient.id}'">
+            <p class="a5-btn" onclick="window.location.href='/admin/patient/appointment/${patient.id}'">
               Detail</p>
           </td>
         </tr>`;

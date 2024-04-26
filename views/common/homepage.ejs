@@ -26,11 +26,11 @@
               <li><a href="#about-us">About Us</a></li>
               <li><a href="#contact-us">Contact</a></li>
               <li id="login"><a href="/login">Login</a></li>
-              <li id="logout"><a href="/logout" onclick="logout()">Logout</a></li>
+              <li id="logout"><a href="/logout" onclick="logout(event)">Logout</a></li>
               <li id="register"><a href="/register">Register</a></li>
-              <li id="become-doctor"><a href="/doctorCreateProfile">Become A Doctor</a></li>
+              <li id="become-doctor"><a href="/patient/create">Become A Doctor</a></li>
               <li id="book-appointment">
-                <a href="/doctors/all" class="book-appointment"
+                <a href="/patient/doctors/all" class="book-appointment"
                   >Book Your Appointment</a
                 >
               </li>
@@ -58,7 +58,7 @@
                 A Healthier Tomorrow Starts Today: Schedule Your Appointment!
                 Your Wellness, Our Expertise: Set Up Your Appointment Today.
               </p>
-              <a class="btn" href="/doctors/all">Book Your Appointment</a>
+              <a class="btn" href="/patient/doctors/all">Book Your Appointment</a>
             </div>
 
             <div class="hero-right">

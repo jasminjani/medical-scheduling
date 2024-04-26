@@ -66,7 +66,4 @@ router.route("/forgot").get(createPasswordForm);
 
 router.route("/forgot/change-password").post(updatePassword);
 
-
-
-
 module.exports = router;

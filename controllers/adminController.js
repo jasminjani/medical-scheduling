@@ -343,7 +343,7 @@ exports.getPatientAllAppointment = async (req, res) => {
 
 exports.appointmentDetails = async (req, res) => {
   try {
-    let { slot_id } = req.params;
+    let { slot_id } = req.body;
 
     if (!slot_id) {
       return res.status(500).json({

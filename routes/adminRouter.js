@@ -2,97 +2,114 @@ const express = require("express");
 const router = express.Router();
 
 const { isAdmin } = require("../middlewares/authMiddleware");
-const { dashboardStatus, deleteDoctor, getAllDoctors, appointmentDetails, getPatientAllAppointment, patientAllAppointment, searchPatientByName, displayAllPatient, getAllPatients, rejectDoctor, approveDoctor, showDoctorDetail, showDoctorDetailRend, individualDoctor, individualDoctorRend, getNewSpecialties, getSpecialties, adminAddSpecialites, addNewSpecialties, adminApproveDoctors, adminDeleteDoctors, adminDashboard } = require("../controllers/adminController");
+const {
+  dashboardStatus,
+  deleteDoctor,
+  getAllDoctors,
+  appointmentDetails,
+  getPatientAllAppointment,
+  patientAllAppointment,
+  searchPatientByName,
+  displayAllPatient,
+  getAllPatients,
+  rejectDoctor,
+  approveDoctor,
+  showDoctorDetail,
+  showDoctorDetailRend,
+  individualDoctor,
+  individualDoctorRend,
+  getNewSpecialties,
+  getSpecialties,
+  adminAddSpecialites,
+  addNewSpecialties,
+  adminApproveDoctors,
+  adminDeleteDoctors,
+  adminDashboard,
+} = require("../controllers/adminController");
 const passport = require("passport");
 
-
 router.use(
-  passport.authenticate("jwt", { session: false, failureRedirect: "/login" })
+  passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+  isAdmin
 );
-
 
 // admin sidebar routes
 // /admin
-router.route("/").get(isAdmin, adminDashboard);
+router.route("/").get(adminDashboard);
 
 // /admin/all-doctors
-router.route("/doctors/all").get(isAdmin, adminDeleteDoctors);
+router.route("/doctors/all").get(adminDeleteDoctors);
 
 // /admin/approve-doctors
-router.route("/doctors/approve").get(isAdmin, adminApproveDoctors);
+router.route("/doctors/approve").get(adminApproveDoctors);
 
 // /admin/add-specialites
-router.route("/specialities/add").get(isAdmin, adminAddSpecialites)
-.post(isAdmin, addNewSpecialties);
+router
+  .route("/specialities/add")
+  .get(adminAddSpecialites)
+  .post(addNewSpecialties);
 
 // add specialties in admin panel
 // /admin/get-specialties
-router.route("/specialties").get(isAdmin, getSpecialties);
+router.route("/specialties").get(getSpecialties);
 
 // /admin/get-new-specialties
-router.route("/specialities/new").get(isAdmin, getNewSpecialties);
-
+router.route("/specialities/new").get(getNewSpecialties);
 
 // approve doctor panel in admin panel
 
 // /individual-doctor/:id
-router.route("/doctor/:id").get(isAdmin, individualDoctorRend);
+router.route("/doctor/:id").get(individualDoctorRend);
 
 // /individual-doctor-details/:id
-router
-  .route("/doctorDetails/:id")
-  .get(isAdmin, individualDoctor);
+router.route("/doctorDetails/:id").get(individualDoctor);
 
-  // /show-doctor-deatil/:id
-router.route("/show/doctorDetail/:id").get(isAdmin, showDoctorDetailRend);
+// /show-doctor-deatil/:id
+router.route("/show/doctorDetail/:id").get(showDoctorDetailRend);
 
 // /show-doctor-details/:id
-router.route("/show/doctorDetails/:id").get(isAdmin, showDoctorDetail);
+router.route("/show/doctorDetails/:id").get(showDoctorDetail);
 
 // /approve-doctor/:id
-router.route("/doctor/approve/:id").get(isAdmin, approveDoctor);
+router.route("/doctor/approve/:id").get(approveDoctor);
 
 // /reject-doctor/:id
-router.route("/doctor/reject/:id").get(isAdmin, rejectDoctor);
+router.route("/doctor/reject/:id").get(rejectDoctor);
 
 // Display all patient and search patient
 // /admin/get-all-patient
-router.route("/patient/getAll").get(isAdmin, getAllPatients);
+router.route("/patient/getAll").get(getAllPatients);
 
 // /admin/all-patient
-router.route("/patient/all").get(isAdmin, displayAllPatient);
+router.route("/patient/all").get(displayAllPatient);
 
 // TODO : delete route
 router
   .route("/admin/display-search-patient/:searchedName")
-  .get(isAdmin, searchPatientByName);
+  .get(searchPatientByName);
 
 // patient appointment details
 // /admin/patient-appointment/:patient_id
-router
-  .route("/patient/appointment/:patient_id")
-  .get(isAdmin, patientAllAppointment);
+router.route("/patient/appointment/:patient_id").get(patientAllAppointment);
 
-  // /admin/get-patient-appointment/:patient_id
+// /admin/get-patient-appointment/:patient_id
 router
   .route("/patient/getAppointment/:patient_id")
-  .get(isAdmin, getPatientAllAppointment);
+  .get(getPatientAllAppointment);
 
-  // /admin/patient-appointment/:patient_id/:slot_id
-  // slot_id req.body
-router
-  .route("/patient/appointment/slot/:patient_id")
-  .get(isAdmin, appointmentDetails);
+// /admin/patient-appointment/:patient_id/:slot_id
+// slot_id req.body
+router.route("/patient/appointment/slot/:patient_id").post(appointmentDetails);
 
 // all doctor list in admin panel
 // /admin/get-all-doctors
-router.route("/doctors/all").get(isAdmin, getAllDoctors);
+router.route("/allDoctor").get(getAllDoctors);
 
 // /admin/delete-doctor/:id
-router.route("/doctors/delete/:id").get(isAdmin, deleteDoctor);
+router.route("/doctors/delete/:id").get(deleteDoctor);
 
 // ADMIN dashboard api
 // /getDashboardStatus
-router.route("/dashboard").get(isAdmin, dashboardStatus);
+router.route("/analytics").get(dashboardStatus);
 
 module.exports = router;

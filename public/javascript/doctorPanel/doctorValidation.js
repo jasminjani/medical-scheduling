@@ -126,7 +126,7 @@ if (validate()){
   formData.append("gst_no", gstno);
   formData.append("location", location);
   formData.append("pincode", pincode);
-  let fetchData = await fetch('/updatedoctorProfile', {
+  let fetchData = await fetch('/doctor/profile/update', {
     method: "POST",
   body: formData
           })

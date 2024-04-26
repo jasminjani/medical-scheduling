@@ -811,7 +811,7 @@ exports.getPrescriptionOfDoctor = async (req, res) => {
     const id = req.user.id;
 
     const query = `select prescriptions.created_at,prescriptions.diagnoses,prescriptions.id,concat(users.fname," ",users.lname) as patient_name from prescriptions join users on prescriptions.patient_id= users.id where doctor_id=? order by prescriptions.created_at desc`;
-    const result2 = await conn.query(query, [id]);
+    const [result2] = await conn.query(query, [id]);
     return res.status(200).json({ success: true, result: result2 });
   } catch (error) {
     return res.status(500).json({
@@ -965,6 +965,15 @@ exports.getUpcomingSlotPage = async (req, res) => {
     return res.status(500).json({ success: false, message: error.message });
   }
 };
+
+// Slot Page Render
+exports.getSlotsPage = async (req, res) => {
+  try {
+    res.render("pages/slotPanel/upcomingSlots");
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+}
 
 // Get All Dates
 exports.getDates = async (req, res) => {

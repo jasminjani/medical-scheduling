@@ -69,7 +69,7 @@
 
   <script>
     async function makeSpecialtiesTable() {
-      let response = await fetch("/admin/get-specialties");
+      let response = await fetch("/admin/specialties");
 
       let allSpecialties = await response.json();
       console.log(allSpecialties);
@@ -89,7 +89,7 @@
 
 
     async function getNewSpecialty() {
-      let response = await fetch("/admin/get-new-specialties");
+      let response = await fetch("/admin/specialities/new");
 
       let newSpecialty = await response.json();
       console.log(newSpecialty);

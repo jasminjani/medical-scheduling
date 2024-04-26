@@ -134,7 +134,7 @@ const handleGenerate = async (e) => {
   const isValid = slotData.every((daySlot) => checkSlotOverlap(daySlot));
   console.log(isValid)
   if (isValid) {
-    const response = await fetch("/slot", {
+    const response = await fetch("/doctor/slot", {
       method: "POST",
       headers: {
         "Content-type": "application/x-www-form-urlencoded",
@@ -147,7 +147,7 @@ const handleGenerate = async (e) => {
       Swal.fire({
         icon: "success",
         text: "Slots generated!",
-        footer: '<a href="/upcomingSlots">See all slots</a>',
+        footer: '<a href="/patient/upcomingSlots">See all slots</a>',
       });
     }
   } else {

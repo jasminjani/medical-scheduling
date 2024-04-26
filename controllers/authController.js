@@ -680,7 +680,7 @@ exports.logout = async (req, res) => {
   try {
     return res.clearCookie("token").json({
       success: true,
-      message: "user Logged out successfully   ",
+      message: "user Logged out successfully",
     });
   } catch (error) {
     res.status(500).json({

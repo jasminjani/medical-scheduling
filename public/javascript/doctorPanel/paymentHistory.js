@@ -2,7 +2,7 @@
 async function fetchPaymentHistory() {
   try {
 
-    const url = `/showpaymentHistory`;
+    const url = `/doctor/payment/history`;
     const response = await fetch(url)
     const result = await response.json()
 
@@ -18,7 +18,7 @@ async function searchPaymentHistory() {
 
     let searchedData = document.getElementById('a5-searchPatient').value;
 
-    const url = `/searchedPaymentHistory/${searchedData}`;
+    const url = `/doctor/searchedPaymentHistory/${searchedData}`;
     const response = await fetch(url)
     const result = await response.json()
     console.log(result);
@@ -50,7 +50,7 @@ async function appendPaymentHistory(result) {
           <td>${element.fname}</td>
           <td>${element.lname}</td>
           <td>${element.phone}</td>
-          <td><p class="a5-btn" onclick="window.location.href='/doctorPaymentHistory/${element.patient_id}'">Detail</p></td>
+          <td><p class="a5-btn" onclick="window.location.href='/doctor/payment/history/${element.patient_id}'">Detail</p></td>
         </tr>`
 
       document.getElementById('a5-tbody').innerHTML = document.getElementById('a5-tbody').innerHTML + html2;

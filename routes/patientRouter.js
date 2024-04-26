@@ -1,117 +1,81 @@
 const express = require("express");
 const router = express.Router();
-const { imgStorage,fileStorage } = require("../utils/multer");
+const { imgStorage, fileStorage } = require("../utils/multer");
 const multer = require("multer");
 const fileUpload = multer({ storage: fileStorage });
 const imgUpload = multer({ storage: imgStorage });
 const { isPatient } = require("../middlewares/authMiddleware");
 const passport = require("passport");
-const { patientProfile, patientPastProfile, patientUpcomingBookings, patientPastBookings, getDoctorSlotsById, getSingleSlots, cancelSlot, patientPayments, patientPanelPaymentHistory, patientDashboard, patientStatus, patientDetails, addPatientDetails, patientViewProfile, patientViewProfileData, getpatientProfileUpdate, postPatientProfileUpdate, patientProfileUpdateData } = require("../controllers/patientController");
-const { becomeDoctorDetail, createDoctor, searchPatientPayment, getPrescriptionOfUser } = require("../controllers/doctorController");
+const {
+  patientProfile,
+  patientPastProfile,
+  patientUpcomingBookings,
+  patientPastBookings,
+  getDoctorSlotsById,
+  getSingleSlots,
+  cancelSlot,
+  patientPayments,
+  patientPanelPaymentHistory,
+  patientDashboard,
+  patientStatus,
+  patientDetails,
+  addPatientDetails,
+  patientViewProfile,
+  patientViewProfileData,
+  getpatientProfileUpdate,
+  postPatientProfileUpdate,
+  patientProfileUpdateData,
+  bookingSlot,
+} = require("../controllers/patientController");
+const {
+  becomeDoctorDetail,
+  createDoctor,
+  searchPatientPayment,
+  getPrescriptionOfUser,
+  getPendingDoctorById,
+} = require("../controllers/doctorController");
 const { allDoctors } = require("../controllers/authController");
 const { generatePDF } = require("../controllers/pdfController");
 // Patients panel details(patientAllControllers)
-
+router.use(
+  passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
+  isPatient
+);
 // /patientUpcomingSlots
-router
-  .route("/upcomingSlots")
-  .get(
-    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    isPatient,
-    patientProfile
-  );
+router.route("/upcomingSlots").get(patientProfile);
 
 // /patientPastSlots
-router
-  .route("/pastSlots")
-  .get(
-    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    isPatient,
-    patientPastProfile
-  );
+router.route("/pastSlots").get(patientPastProfile);
 
-router
-  .route("/bookings/:patient_id")
-  .get(
-    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    isPatient,
-    patientUpcomingBookings
-  );
+router.route('/bookslot').post(bookingSlot)
 
-router
-  .route("/pastbookings/:patient_id")
-  .get(
-    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    isPatient,
-    patientPastBookings
-  );
+router.route("/bookings/:patient_id").get(patientUpcomingBookings);
 
-router
-  .route("/bookslots/:id")
-  .get(
-    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    getDoctorSlotsById
-  );
+router.route("/pastbookings/:patient_id").get(patientPastBookings);
 
-router
-  .route("/slots")
-  .post(
-    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    getSingleSlots
-  );
+router.route("/bookslots/:id").get(getDoctorSlotsById);
 
-router
-  .route("/cancel/:slot_id")
-  .get(
-    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    isPatient,
-    cancelSlot
-  );
+router.route("/slots").post(getSingleSlots);
+
+router.route("/cancel/:slot_id").get(cancelSlot);
 
 // /doctorCreateProfile
-router
-  .route("/create")
-  .get(
-    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    isPatient,
-    becomeDoctorDetail
-  )
-  .post(
-    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    isPatient,
-    createDoctor
-  );
+router.route("/create").get(becomeDoctorDetail).post(createDoctor);
 
 // Patient panel Payment history routes
-router
-  .route("/payments")
-  .get(
-    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    patientPayments
-  );
+router.route("/payments").get(patientPayments);
 
 // /patient-paymentHistory
-router
-  .route("/payments/history")
-  .get(
-    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    patientPanelPaymentHistory
-  );
+router.route("/payments/history").get(patientPanelPaymentHistory);
 
 // TODO : remove route
-router
-  .route("/searchedPatientPayment/:searchedData")
-  .get(
-    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    searchPatientPayment
-  );
+router.route("/searchedPatientPayment/:searchedData").get(searchPatientPayment);
 
-router
-  .route("/doctors/all")
-  .get(
-    passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
-    allDoctors
-  );
+router.route("/doctors/all").get(allDoctors);
+
+// for the home page -> patient route homepage
+// /getPendingDoctor
+router.route("/doctor/pending").post(getPendingDoctorById);
 
 // /patient route
 router.route("/").get(patientDashboard);
@@ -127,18 +91,19 @@ router
   .route("/otherDetails")
   .post(fileUpload.single("medicalHistory"), addPatientDetails);
 
-
-  // /viewPatientProfile
+// /viewPatientProfile
 router.route("/view/profile").get(patientViewProfile);
 
 // /viewPatientProfileData
 router.route("/view/profileData").get(patientViewProfileData);
 
 // /patientProfileUpdate
-router.route("/profile/update").get(getpatientProfileUpdate)
+router
+  .route("/profile/update")
+  .get(getpatientProfileUpdate)
   .post(imgUpload.single("profile_picture"), postPatientProfileUpdate);
 
-  // /patientProfileUpdateData  
+// /patientProfileUpdateData
 router.route("/update/profileData").get(patientProfileUpdateData);
 
 // p
