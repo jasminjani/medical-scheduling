@@ -42,6 +42,17 @@ exports.contactToAdmin = async (req,res)=>{
     logger.error(error.message);
   }
 }
+
+exports.getAllMessage = async (req,res)=>{
+  try {
+    let [result] = await conn.query('select * from contact_us');
+    res.json(result);
+  } catch (error) {
+    logger.error(error.message);
+  }
+}
+
+
 exports.getAllDoctors = async (req, res) => {
   try {
     const sql2 = `select * from users a 
