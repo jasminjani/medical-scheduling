@@ -1,8 +1,15 @@
 
 const patientAppointmentDetail = async () => {
-
-  let fetchdata = await fetch(`/doctor/patients/history/${Id}`)
+  let Id = window.location.pathname.split("/").pop()
+  console.log(Id)
+  let fetchdata = await fetch(`/doctor/patients/history/${Id}`,{
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json"
+    }
+  })
   let data = await fetchdata.json()
+  console.log(data)
   let key = Object.keys(data)
   key.forEach(element => {
     let dtkey = Object.keys(data[element])
@@ -54,17 +61,25 @@ funcId = function (id) {
 }
 
 let show = async function (id, date) {
-
-  const fetchData = await fetch(`/doctor/patientPrescriptionData/${date}/${id}`)
-  const data = await fetchData.json()
+  let patient_id = window.location.pathname.split("/").pop();
+  const fetchData = await fetch(`/doctor/patientPrescriptionData/${patient_id}`,{
+    method:"POST",
+    body:JSON.stringify({date:date}),
+    headers:{
+      "Content-Type":"application/json"
+    }
+  })
+  let data = await fetchData.json();
+  data = data.data
   const key = Object.keys(data)
-  console.log(data);
+  console.log(data.length);
   document.getElementById("appointmentdt").innerHTML = "";
   document.getElementById("mediBox").innerHTML = "";
 
 
   if (data.length == 0) {
-    return document.getElementById("mediBox").innerHTML += `<p><span class="a5-bold">No Data Found!</span></p>`
+     document.getElementById("mediBox").innerHTML += `<p><span class="a5-bold">No Data Found!</span></p>`
+     return funcId(id).style.display = 'block';
   }
 
   data.forEach(element => {
@@ -86,6 +101,7 @@ let show = async function (id, date) {
 
   funcId(id).style.display = 'block';
 }
+
 let hide = function (id) {
   funcId(id).style.display = 'none';
 

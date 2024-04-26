@@ -307,14 +307,18 @@ exports.patientDetailsData = async (req, res) => {
 exports.patientPrescriptionData = async (req, res) => {
   const patient_id = req.params.patient_id;
   const doctor_id = req.user.id;
-  const date = req.params.date;
+  const date = req.body.date;
 
+  console.log(patient_id,doctor_id,date)
   try {
     const [result] = await conn.query(
       `select time_slots.start_time as "Start Time",time_slots.end_time as "End Time",prescriptions.diagnoses as "Diagnoses",prescriptions.prescription as "Prescriptions" from prescriptions inner join slot_bookings on prescriptions.booking_id = slot_bookings.id inner join time_slots on slot_bookings.slot_id =time_slots.id where prescriptions.patient_id = ? and prescriptions.doctor_id = ? and time_slots.date = ? and time_slots.is_booked = 1;`,
       [patient_id, doctor_id, date]
     );
-    res.json(result);
+    res.json({
+      success:true,
+      data:result
+    });
   } catch (error) {
     return res.json({
       success: false,
@@ -746,6 +750,7 @@ exports.updateDetailsData = async (req, res) => {
     const id = req.params.id;
     let query = `select concat(users.fname," ",users.lname) as patient_name,convert(prescriptions.created_at,date) as appointment_date,diagnoses,prescription from prescriptions join users on prescriptions.patient_id= users.id where prescriptions.id=?`;
     let [result] = await conn.query(query, [id]);
+    console.log(result)
     res.status(200).json({ success: true, result });
   } catch (error) {
     return res.status(500).json({

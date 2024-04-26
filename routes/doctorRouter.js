@@ -119,8 +119,8 @@ router.route("/patient/view/:patient_id").get(patientDetailsData);
 
 // TODO : Change get -> post and route also
 router
-  .route("/patientPrescriptionData/:date/:patient_id")
-  .get(patientPrescriptionData);
+  .route("/patientPrescriptionData/:patient_id")
+  .post(patientPrescriptionData);
 
 router.route("/specialities").get(allSpecialities);
 
