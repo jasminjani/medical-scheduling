@@ -1,5 +1,24 @@
 const conn = require("../config/dbConnection");
 
+exports.getRating = async (req, res) => {
+  try {
+
+    const { doctor_id } = req.params;
+
+    console.log(doctor_id);
+
+    const query = "select * from rating_and_reviews where doctor_id = ?";
+
+    const [data] = await conn.query(query, [doctor_id]);
+
+    return res.status(200).json({ success: true, message: data })
+
+  }
+  catch (error) {
+    return res.status(500).json({ success: false, message: error.message })
+  }
+}
+
 
 exports.rating = async (req, res) => {
   try {
@@ -21,6 +40,18 @@ exports.rating = async (req, res) => {
 
     try {
 
+      const query = "select * from prescriptions where patient_id = ? and doctor_id = ?";
+
+      const [isPatientExist] = await conn.query(query, [patient_id, doctor_id]);
+
+      if (isPatientExist.length === 0) return res.status(500).json({ success: false, message: "You can not rate the doctor" })
+
+    } catch (error) {
+      return res.status(500).json({ success: false, message: error.message })
+    }
+
+    try {
+
       const query = "insert into rating_and_reviews (`patient_id`,`doctor_id`,`rating`,`review`) values (?,?,?,?)";
 
       const [addReview] = await conn.query(query, [patient_id, doctor_id, rating, patientReview.trim()]);
@@ -35,10 +66,7 @@ exports.rating = async (req, res) => {
 
   }
   catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: error.message
-    })
+    return res.status(500).json({ success: false, message: error.message })
   }
 }
 
