@@ -26,6 +26,7 @@ const {
   patientProfileUpdateData,
   bookingSlot,
   getBookingSlots,
+  nearByDoctores,
 } = require("../controllers/patientController");
 const {
   becomeDoctorDetail,
@@ -111,5 +112,9 @@ router.route("/getprescriptionofuser").get(getPrescriptionOfUser);
 
 // d p
 router.route("/generate/:id").get(generatePDF);
+
+// patient dashboard nearby doctor
+router.route("/getNearByDoctor").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), nearByDoctores);
+
 
 module.exports = router;

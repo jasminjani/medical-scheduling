@@ -22,6 +22,18 @@
     #a5-patient-doctor-active i {
       color: #ffffff;
     }
+
+    .all-doctors .search-doctor {
+      gap: 8px;
+    }
+
+    .doctor-names #dname {
+      min-width: 200px;
+    }
+
+    .search-btn .btn {
+      margin-left: 4px;
+    }
     </style>
   </head>
   <body>
@@ -43,8 +55,14 @@
             <div class="all-doctors">
               <div class="search-doctor">
                 <div class="specialities">
+                  <select name="speciality" id="a5-doctorCity">
+                    <%- city %>
+                  </select>
+                </div>
+                <p class="or">OR</p>
+                <div class="specialities">
                   <select name="speciality" id="speciality">
-                    <option value="">Select speciality</option>
+                    <option value="">--Select Speciality--</option>
                     <%- html %>
                   </select>
                 </div>

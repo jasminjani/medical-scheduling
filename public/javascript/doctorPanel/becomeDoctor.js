@@ -1,5 +1,26 @@
 let submit = document.getElementById('submit');
 
+async function specialitiesValidation(){
+  let newSpeciality = document.getElementById('otherSpeciality');
+  let isValid = true;
+  const fetchData = await fetch("/specialities");
+  const specialities = await fetchData.json();
+
+  await specialities.forEach(Element => {
+    // console.log("specialitie : ",Element.speciality.toLowerCase());
+    if (Element.speciality.toLowerCase() == newSpeciality.value.toLowerCase()) { 
+      let p = document.createElement("p");
+      newSpeciality.insertAdjacentElement("afterend", p);
+      p.innerHTML = "speciality already exist";
+      p.classList.add("validated");
+      p.style.color = "red";
+      p.style.margin = "0";
+      p.style.fontSize = "12px";
+      isValid = false;
+    }
+  })
+  return isValid;
+}
 
 function validate() {
     let isvalid = true;
@@ -16,7 +37,7 @@ function validate() {
     }
   
     // empty fields and email and phone number validation
-    dvalid.forEach((field) => {
+    dvalid.forEach( async (field) => {
       if (field.value.trim() === "") {
         let p = document.createElement("p");
         field.insertAdjacentElement("afterend", p);
@@ -27,6 +48,33 @@ function validate() {
         p.style.fontSize = "12px";
         isvalid = false;
       }
+
+      if (field.name == "speciality" && field.value == 24) {
+
+        let newSpeciality = document.getElementById('otherSpeciality');
+        // document.getElementById('otherSpeciality').classList.add("dvalid");
+
+        if(newSpeciality.value.trim() === "") {             
+          let p = document.createElement("p");
+          newSpeciality.insertAdjacentElement("afterend", p);
+          p.innerHTML = "*required";
+          p.classList.add("validated");
+          p.style.color = "red";
+          p.style.margin = "0";
+          p.style.fontSize = "12px";
+          isvalid = false;
+        }
+      }
+
+      // let newSpeciality = document.getElementById('otherSpeciality').value;
+      // const fetchData = await fetch("/specialities");
+      // const specialities = await fetchData.json();
+      // if (speciality == 24 ) {
+      //   specialities.forEach(Element => {
+      //     console.log("specialitie : ",Element.speciality);
+      //     if (Element.speciality == newSpeciality) { console.log("speciality already exist"); }
+      //   })
+      // }
   
       if (
         field.name == "phone" &&
@@ -97,7 +145,7 @@ function validate() {
 submit.addEventListener('click',async(e)=>{
     e.preventDefault();
 
-    if(validate()){
+    if(validate() && await specialitiesValidation()){
     
     let qualification = document.getElementById('qualification').value
     let consultancyFees = document.getElementById('consultancy_fees').value
