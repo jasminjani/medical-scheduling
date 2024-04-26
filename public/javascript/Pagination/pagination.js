@@ -6,9 +6,10 @@ let pageno=document.getElementById("pageno");
 document.getElementById("homebtn").disabled = true;
 document.getElementById("previousbtn").disabled = true;
 
-const pagination = async()=>{
+const pagination = async(data)=>{
 
   length=data.length;
+  console.log(data)
   pageno.innerHTML=currentpage;
 
   const endIndex = currentpage* ItemsPerPage;
