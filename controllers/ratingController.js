@@ -4,17 +4,34 @@ const conn = require("../config/dbConnection");
 exports.rating = async (req, res) => {
   try {
 
-    // console.log(req.params);
-    console.log(req.body);
+    const patient_id = req.user.id;
+    const { doctor_id, rating, patientReview } = req.body;
 
-    const { patient_id, doctor_id } = req.params;
-    const { rating, review } = req.body;
+    try {
 
-    let query = `insert into rating_and_reviews (patient_id, doctor_id, rating, review) values(?,?,?,?)`;
-    console.log("Data added to DB");
-    // console.log(query);
+      const query = "select * from rating_and_reviews where patient_id = ? and doctor_id = ?";
 
-    let [data] = await conn.query(query, [patient_id, doctor_id, rating, review]);
+      const [isReviewExist] = await conn.query(query, [patient_id, doctor_id]);
+
+      if (isReviewExist.length !== 0) return res.status(500).json({ success: false, message: "Review already added" })
+
+    } catch (error) {
+      return res.status(500).json({ success: false, message: error.message })
+    }
+
+    try {
+
+      const query = "insert into rating_and_reviews (`patient_id`,`doctor_id`,`rating`,`review`) values (?,?,?,?)";
+
+      const [addReview] = await conn.query(query, [patient_id, doctor_id, rating, patientReview.trim()]);
+
+      return res.status(500).json({ success: true, message: "Review added successfully" })
+
+    } catch (error) {
+      return res.status(500).json({ success: false, message: error.message })
+    }
+
+
 
   }
   catch (error) {
@@ -28,7 +45,7 @@ exports.rating = async (req, res) => {
 exports.updateRating = async (req, res) => {
   try {
 
-    const { patient_id} = req.params;
+    const { patient_id } = req.params;
     let query = `delete from rating_and_reviews where patient_id=?`;
 
     console.log("Data deleted!!");

@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
   <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css" />
   <script src="/sweetalert2/sweetalert2.min.js" defer></script>
-  <script src="/javascript/patientPanel/patientReview.js"></script>
+  
   <style>
     #a5-patient-doctor-active {
       background-color: #0969da;
@@ -150,11 +150,8 @@
                     <div onclick="gfg(5)" class="star" id="null"><i class='fa fa-star' style='font-size:24px'></i>
                     </div>
                   </div>
-              
-                  <form action="" method="post">
-                    <!-- <h3 id="output">
-                      Rating is: 0/5
-                    </h3> -->
+                  <form id="reviewForm" method="post">
+                    <input type="hidden" name="doctor_id" id="doctor_id" value=<%=doctor_id%>>
                     <b style="display: none;">Rating :</b> <input type="text" name="rating" id="output" readonly style="display: none;">
                     <br><br>
                     <div class="reviewPatient">
@@ -183,6 +180,7 @@
     </div>
   </div>
 
+  <script src="/javascript/patientPanel/patientReview.js"></script>
   <script src="/javascript/patientPanel/appointment.js"></script>
 </body>
 

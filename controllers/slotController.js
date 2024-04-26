@@ -92,8 +92,9 @@ exports.DoctorCobmo = async (req, res) => {
 
 
 exports.getBookingSlots = async (req, res) => {
+  const doctor_id = req.params.id;
   let html = await this.specialitiesCombo();
-  return res.render('pages/patientPanel/appointment', { html })
+  return res.render('pages/patientPanel/appointment', { html, doctor_id })
 }
 
 const generateSlotCombo = async (result) => {

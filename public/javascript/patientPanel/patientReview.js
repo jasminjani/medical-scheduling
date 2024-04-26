@@ -3,28 +3,36 @@
 //   // document.getElementById('starBlack1').style.display = "block"
 // }
 
-
 // script.js
 
 // To access the stars
-let stars = 
+let stars =
 	document.getElementsByClassName("star");
-let output = 
+let output =
 	document.getElementById("output");
 
 // Funtion to update rating
 
 
 
-function submitRate() {
-	// document.getElementById('rate').style.display = "none"
-	// document.getElementById('bodyContent').style.opacity = "100%"
-	document.getElementById('thanksText').style.display = "block"
-	document.getElementById('A6-body').style.opacity = "40%"
-	document.getElementById('cancelPage').style.display = "none"
-	// document.getElementById('output').value = ""
-	// document.getElementById('rev').value = ""
-	// document.querySelectorAll('.star').value = ""
+//review add
+const submitRate = async () => {
+	const form = document.getElementById("reviewForm");
+	const formData = new FormData(form);
+	const params = new URLSearchParams(formData);
+	const data = await new Response(params).text();
+
+	const response = await fetch("http://localhost:8000/review", {
+		method: "POST",
+		headers: {
+			"Content-type": "application/x-www-form-urlencoded"
+		},
+		body: data
+	});
+
+	const result = await response.json();
+
+	Swal.fire(result.message);
 }
 
 function closeThanks() {
@@ -45,12 +53,12 @@ function gfg(n) {
 		else if (n == 5) cls = "five";
 		stars[i].className = "star " + cls;
 
-    console.log(n);
-    
+		console.log(n);
+
 	}
 	// output.innerText = "Rating is: " + n + "/5";
-  n
-  document.getElementById("output").value = n
+	n
+	document.getElementById("output").value = n
 }
 
 // To remove the pre-applied styling

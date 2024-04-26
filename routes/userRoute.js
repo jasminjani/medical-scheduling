@@ -35,7 +35,7 @@ router.route('/current-user')
   .get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getCurrentUser)
 
 router.route('/logout')
-  .post(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }),logout)
+  .post(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), logout)
 
 router.route('/user/:id')
   .post(getUserById)
@@ -57,32 +57,32 @@ router.route('/forgot-password')
   .post(forgotPassLink)
 
 router.route('/forgot')
-.get(createPasswordForm)
+  .get(createPasswordForm)
 
 router.route('/forgot/change-password')
-.post(updatePassword)
+  .post(updatePassword)
 
-
-router.route("/:patient_id/review/:doctor_id").post(rating);
-router.route("/doctors/all").get(passport.authenticate('jwt',{session:false,failureRedirect:"/login"}),allDoctors)
+//patient review doctor
+router.route("/review").post(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), rating);
+router.route("/doctors/all").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), allDoctors)
 
 
 // Slots controller(slotControllers)
 // doctorroute.js
 
 // Patients panel details(patientAllControllers)
-router.route("/patientUpcomingSlots").get(passport.authenticate('jwt',{session:false,failureRedirect:"/login"}),isPatient,patientProfile);
-router.route("/patientPastSlots").get(passport.authenticate('jwt',{session:false,failureRedirect:"/login"}),isPatient,patientPastProfile);
-router.route("/bookings/:patient_id").get(passport.authenticate('jwt',{session:false,failureRedirect:"/login"}),isPatient,patientUpcomingBookings);
-router.route("/pastbookings/:patient_id").get(passport.authenticate('jwt',{session:false,failureRedirect:"/login"}),isPatient,patientPastBookings);
-router.route("/bookslots/:id").get(passport.authenticate('jwt',{session:false,failureRedirect:"/login"}),getBookingSlots);
-router.route('/slots',passport.authenticate('jwt',{session:false,failureRedirect:"/login"}),getSlotsPage)
+router.route("/patientUpcomingSlots").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), isPatient, patientProfile);
+router.route("/patientPastSlots").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), isPatient, patientPastProfile);
+router.route("/bookings/:patient_id").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), isPatient, patientUpcomingBookings);
+router.route("/pastbookings/:patient_id").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), isPatient, patientPastBookings);
+router.route("/bookslots/:id").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getBookingSlots);
+router.route('/slots', passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), getSlotsPage)
 
 
 // Patient panel Payment history routes
 router.route("/payments").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), patientPayments)
 router.route("/patient-paymentHistory").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), patientPanelPaymentHistory)
-router.route("/searchedPatientPayment/:searchedData").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), searchPatientPayment );
+router.route("/searchedPatientPayment/:searchedData").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), searchPatientPayment);
 
 
 module.exports = router;
