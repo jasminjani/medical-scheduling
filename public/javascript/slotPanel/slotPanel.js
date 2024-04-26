@@ -38,7 +38,7 @@ for (let i = 1; i < sortedSlots.length; i++) {
 
 
 const handleChange = (e) => {
-  if (new Date(e.target.value) > sunday || new Date(e.target.value) < today) {
+  if (new Date(e.target.value) > sunday || new Date(e.target.value) < today + 1) {
     e.target.value = "";
     return Swal.fire("Please select date of this week only");
   }

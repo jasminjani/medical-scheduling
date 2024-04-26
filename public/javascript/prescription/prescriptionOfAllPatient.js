@@ -26,6 +26,16 @@ const generatePDF = async (id) => {
   location.href = `/doctor/generate/${id}`;
 };
 
+const searchPatient=async()=>{
+    const input=document.getElementById("a5-searchPatient").value;
+    let res=await fetch(`/search/${input}`);
+    let resjson=await res.json();
+    data=resjson;
+    pagination();
+    home();
+
+}
+
 
 
 

@@ -1,30 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
+    <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
+    <link rel="stylesheet" href="/css/adminPanel/allPatientDetails.css" />
+    <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css" />
+    <link rel="stylesheet" href="/css/Pagination/paginationComp.css" />
+    <style>
+      #a5-doctor-feedback-active {
+        background-color: #0969da;
+        transform: translate(5px);
+        border-radius: 5px;
+      }
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
-  <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
-  <link rel="stylesheet" href="/css/adminPanel/allPatientDetails.css">
-  <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css">
-  <link rel="stylesheet" href="/css/Pagination/paginationComp.css" />
-  <style>
-    #a5-doctor-feedback-active {
-      background-color: #0969da;
-      transform: translate(5px);
-      border-radius: 5px;
-    }
-
-    #a5-doctor-feedback-active a,
-    #a5-doctor-feedback-active i {
-      color: #ffffff;
-    }
-  </style>
-  <script src="/javascript/doctorPanel/doctorReview.js" defer></script>
-  <title>view Feedback</title>
-</head>
-
+      #a5-doctor-feedback-active a,
+      #a5-doctor-feedback-active i {
+        color: #ffffff;
+      }
+    </style>
+    <script src="/javascript/doctorPanel/doctorReview.js" defer></script>
+    <title>view Feedback</title>
+  </head>
 <body>
 
   <div class="a5-container">
@@ -38,40 +36,39 @@
             </div>
             <p id="a5-btn-search" tabindex="2" onclick="location.reload()">Search</p>
           </div>
-          <div class="A4-Pagination-component">
-            <div class="home"><button id="homebtn">
-                <<< /button>
-            </div>
-            <div class="previous"><button id="previousbtn">
-                << /button>
-            </div>
-            <div class="pagenumber">
-              <p id="pageno">1</p>
-            </div>
-            <div class="next"><button id="nextbtn">></button></div>
-            <div class="end"><button id="endbtn">>></button></div>
-          </div>
+          
 
           <div class="a5-all-user">
+            <div class="a5-heading">
             <h2>View Feedback</h2>
-
-            <div class="a5-user-table"></div>
-            <table id="a5-user-table">
-              <tbody id="a5-tbody">
-                <tr>
-                  <th>Name </th>
-                  <th>Rating</th>
-                  <th>Message</th>
-                  <th>Date</th>
-                </tr>
-                <!-- fetch data database -->
-
-              </tbody>
-            </table>
+            <div class="A4-Pagination-component">
+              <div class="home"><button id="homebtn">
+                  << </button>
+              </div>
+              <div class="previous"><button id="previousbtn">
+                  < </button>
+              </div>
+              <div class="pagenumber">
+                <p id="pageno">1</p>
+              </div>
+              <div class="next"><button id="nextbtn">></button></div>
+              <div class="end"><button id="endbtn">>></button></div>
+            </div>
           </div>
+          <div class="a5-user-table"></div>
+          <table id="a5-user-table">
+            <tbody id="a5-tbody">
+              <tr>
+                <th>Name</th>
+                <th>Rating</th>
+                <th>Message</th>
+                <th>Date</th>
+              </tr>
+              <!-- fetch data database -->
+            </tbody>
+          </table>
         </div>
+      </div>
     </div>
-  </div>
-</body>
-
+  </body>
 </html>

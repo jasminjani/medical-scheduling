@@ -14,10 +14,9 @@
 }
 
 .main{
-  margin-left: 350px;
+  margin-left: 330px;
   padding: 10px;
   background-color: rgb(229, 248, 255);
-  /* background-color: blue; */
 }
 
 .booking-page{
@@ -141,7 +140,7 @@
 
 .A6-rating-review {
   display: flex;
-  gap: 30px;
+  gap: 60px;
 }
 
 .A6-showReview {
@@ -155,14 +154,21 @@
 
 .A6-caption {
   /* margin-top: 30px; */
-  padding: 20px;
+  /* padding: 20px; */
   background-color: white;
   border-radius: 10px;
+  overflow-y: scroll;
+  max-height: 295px;
 }
 
 #A6-heading {
   text-align: center;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: white;
+  padding: 10px;
 }
 
 .A6-reviewContent {

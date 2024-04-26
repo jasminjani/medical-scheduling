@@ -25,9 +25,8 @@ const setDatalist = (data) => {
 
   data.forEach((doctor) => {
     // push doctor Name into datalist for searching
-    datalistOptions += `<option value="${
-      doctor.fname + " " + doctor.lname
-    }" data-did="${doctor.id}">${doctor.fname + " " + doctor.lname}</option>`;
+    datalistOptions += `<option value="${doctor.fname + " " + doctor.lname
+      }" data-did="${doctor.id}">${doctor.fname + " " + doctor.lname}</option>`;
   });
 
   nameOptions.innerHTML = datalistOptions;
@@ -68,10 +67,10 @@ const putDoctorOnScreen = async (data) => {
       </div>
       <div class="specialities">
         ${doctor.specialities
-          .map((speciality) => {
-            return `<p class="speciality">${speciality}</p>`;
-          })
-          .join("")}
+        .map((speciality) => {
+          return `<p class="speciality">${speciality}</p>`;
+        })
+        .join("")}
       </div>
     <p class="rating">
      ${stars} <span class="total-reviews">(${doctor.total_reviews})</span>
@@ -149,7 +148,7 @@ async function isLoggedIn() {
 
 const toggleLoginLogout = async () => {
   let userInfo = JSON.parse(localStorage.getItem("userinfo"));
-  
+
   if (isLoggedIn() && userInfo) {
     document.getElementById("login").style.display = "none";
     document.getElementById("register").style.display = "none";
@@ -161,10 +160,9 @@ const toggleLoginLogout = async () => {
       .querySelector("#logged-user .logo a img")
       .setAttribute(
         "src",
-        `${
-          userInfo.profile.trim()
-            ? `/imgs/${userInfo.profile}`
-            : `/assets/profile.png`
+        `${userInfo.profile.trim()
+          ? `/imgs/${userInfo.profile}`
+          : `/assets/profile.png`
         }`
       );
 
@@ -193,3 +191,95 @@ if (window.location.pathname == "/") {
 }
 
 getDoctors();
+
+
+
+// contcat us 
+
+// router.route('/contact-message').post(async (req, res) => {
+//   const { name, mobile_no, email, city, role, message } = req.body;
+
+//   try {
+//     await conn.query('insert into contact_us(name,mobile_no,email,city,role,message) values (?)'
+//       , [[name, mobile_no, email, city, role, message]]);
+//     res.json({
+//       success: true,
+//       message: "Data inserted .."
+//     });
+//   } catch (error) {
+//     res.status(500).json({
+//       success: false,
+//       error: error.message
+//     })
+//   }
+// })
+
+async function sendMessage() {
+
+  let isValid = isValidMessage();
+
+  if (isValid) {
+
+    const form = document.getElementById('a2-contact-form-id');
+    const formData = new FormData(form);
+    const data = new URLSearchParams(formData);
+
+    let resp = await fetch('/contact-message',{
+      method:'post',
+      headers: { "Content-Type": "application/x-www-form-urlencoded"},
+      body:data,
+    })
+    console.log(data);
+    console.log(resp);
+  }
+  // console.log(data.name);
+}
+
+function isValidMessage() {
+  const name = document.getElementById('a2-name').value.trim();
+  const mobile_no = document.getElementById('a2-mobile-no').value.trim();
+  const email = document.getElementById('a2-email').value.trim();
+  const city = document.getElementById('a2-city').value.trim();
+  const role = document.getElementById('a2-role').value;
+  const message = document.getElementById('a2-message').value.trim();
+  const error = document.getElementById('a2-error-msg');
+
+  let isValid = true;
+  const emailRegex = /^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+
+
+  if (!message) {
+    error.innerHTML = "Write message";
+    isValid = false;
+  }
+  if (!role) {
+    error.innerHTML = "Write Choice Role";
+    isValid = false;
+
+  }
+  if (!city) {
+    error.innerHTML = "Write City";
+    isValid = false;
+
+  }
+  if (!email.match(emailRegex)) {
+    error.innerHTML = "Write Currect Email";
+    isValid = false;
+
+  }
+  if (!mobile_no.match(/[0-9]{10}/)) {
+    error.innerHTML = "Write Currect Mobile Number";
+    isValid = false;
+
+  }
+  if (!name) {
+    error.innerHTML = "Write full name";
+    isValid = false;
+  }
+
+  if (isValid) {
+    error.style.display = 'none'
+  }
+  return isValid;
+
+}

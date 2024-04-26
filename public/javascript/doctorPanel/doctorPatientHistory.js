@@ -1,5 +1,8 @@
 
+
 let search = document.getElementById("search").value
+
+
 const fetchData = async () => {
   let fetchdata = await fetch(`/doctor/patients`)
   let data = await fetchdata.json()
@@ -23,14 +26,12 @@ const pagefield = 1;
 let length = 0;
 let pageno = document.getElementById("pageno");
 const pagination = async () => {
-  let data 
+   data = await fetchData()
   if (search) {
-    data = await searchFetchDataFun()
+    data = data.filter((obj) => {
+      return obj.name.includes(search) 
+    })
   }
-  else {
-    data = await fetchData()
-  }
-
 
   length = data.length;
   pageno.innerHTML = currentPage;
