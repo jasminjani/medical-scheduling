@@ -14,8 +14,13 @@
 }
 
 .a2-container {
-  max-width: 1080px;
+  max-width: 1280px;
   margin: 0 auto;
+}
+
+.a2-amdin-dashboard{
+   padding: 10px;
+   margin-left: 350px;
 }
 
 

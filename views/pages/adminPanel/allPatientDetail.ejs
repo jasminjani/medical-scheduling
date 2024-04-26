@@ -26,40 +26,39 @@
 <body>
   <div class="a5-container">
     <div class="main-container">
-    <%- include('../../common/newSidebar/adminSidebar') %>
-        <div class="a5-section">
-          <div class="a5-search">
-            <div class="a5-searchbox">
-              <img src="/assets/adminPanel/icons/search.svg" alt="">
-              <input type="text" name="searchUser" id="a5-searchPatient" placeholder="Search Patient name" tabindex="1">
-            </div>
-            <p id="a5-btn-search" onclick="searchPatient()" tabindex="2">Search</p>
+      <%- include('../../common/newSidebar/adminSidebar') %>
+      <div class="a5-section">
+        <div class="a5-search">
+          <div class="a5-searchbox">
+            <img src="/assets/adminPanel/icons/search.svg" alt="">
+            <input type="text" name="searchUser" id="a5-searchPatient" placeholder="Search Patient name" tabindex="1">
           </div>
+          <p id="a5-btn-search" onclick="searchPatient()" tabindex="2">Search</p>
+        </div>
+        <div class="a5-all-user">
+          <p class="a2-back-btn a2-btn" onclick="window.location.href=`/admin`">
+            <i class="fa-solid fa-arrow-left"></i> Back
+          </p>
 
-          <div class="a5-all-user">
-            <p class="a2-back-btn a2-btn" onclick="window.location.href=`/admin`">
-              <i class="fa-solid fa-arrow-left"></i> Back
-            </p>
+          <h2>All Patients</h2>
 
-            <h2>All Patients</h2>
+          <div class="a5-user-table">
 
-            <div class="a5-user-table">
+            <table id="a5-user-table">
+              <tbody id="a5-tbody">
+                <tr>
+                  <th>Sr no.</th>
+                  <th>First name</th>
+                  <th>Last name</th>
+                  <th>email</th>
+                  <th>Details</th>
+                </tr>
+              </tbody>
+            </table>
 
-              <table id="a5-user-table">
-                <tbody id="a5-tbody">
-                  <tr>
-                    <th>Sr no.</th>
-                    <th>First name</th>
-                    <th>Last name</th>
-                    <th>email</th>
-                    <th>Details</th>
-                  </tr>
-                </tbody>
-              </table>
-
-            </div>
           </div>
         </div>
+      </div>
     </div>
 </body>
 
