@@ -152,11 +152,24 @@ becomeDoctor?.addEventListener("click", async (e) => {
     window.location.href = "/patient/create";
   } else {
     Swal.fire({
-      title: "Already Requested",
       icon: "success",
+      title: "Already Requested",
+      // text: "Something went wrong!",
+      footer: '<p style="color: #7066e0; cursor: pointer;" onclick="statusKnown()">Know Status!</p>'
     });
   }
 });
+
+async function statusKnown() {
+  const userStatus = await fetch("/patient/knowStatus")
+  const data = await userStatus.json()
+  if (data[0]["approved"] == -1) Swal.fire({
+    icon: "error",
+    title: "Request Rejected!",
+    footer: '<a href="/patient/updateBecomeDoctorDetails" style="color: #7066e0; cursor: pointer;" onclick="statusKnown()">Update Details</a>'
+  });
+  if (data[0]["approved"] == 0) Swal.fire("Request Pending!", "", "info")
+}
 
 async function isLoggedIn() {
   let user = await fetch("/current-user", {

@@ -686,3 +686,91 @@ exports.getBookingSlots = async (req, res) => {
   let html = await this.specialitiesCombo();
   return res.render('pages/patientPanel/appointment', { html, doctor_id })
 }
+
+
+// update become a doctor form
+
+exports.knowStatus = async (req, res) => {
+  const doctor_id = req.user.id
+  try {
+    const [status] = await conn.query(`select approved from doctor_details where doctor_id = ?;`, [doctor_id])
+    return res.status(200).json(status)
+  } catch (error) {
+    return res.json({
+      success: false,
+      message: error.message
+    })
+  }
+}
+
+exports.updateBecomeDoctorDetails = async (req, res) => {
+  res.render("pages/doctorPanel/becomeDoctorDetails")
+}
+
+exports.updateBecomeDoctorData = async (req, res) => {
+  const doctor_id = req.user.id
+  try {
+    const [result] = await conn.query(` select doctor_details.id as doctor_details_id,doctor_details.hospital_id,specialities.id as speciality_id, qualification, consultancy_fees,name as hospital_name,location,gst_no,city,pincode from doctor_details inner join clinic_hospitals on doctor_details.hospital_id = clinic_hospitals.id inner join doctor_has_specialities on doctor_details.doctor_id = doctor_has_specialities.doctor_id inner join specialities on doctor_has_specialities.speciality_id = specialities.id where doctor_details.doctor_id = ?;`, [doctor_id])
+    res.status(200).json(result)
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message
+    })
+  }
+}
+
+
+exports.updatePostBecomeDoctor = async (req, res) => {
+
+  const { doctor_details_id, hospital_id, qualification, consultancy_fees, speciality_id, hospital_name, address, gst_no, city, pincode } = req.body
+  const doctor_id = req.user.id
+
+  if (!hospital_id || !speciality_id || !doctor_id) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error!"
+    })
+  }
+
+  try {
+    try {
+      await conn.query(`update clinic_hospitals set name = ?, location = ?, gst_no =?, city = ?, pincode = ? where clinic_hospitals.id = ? `, [hospital_name, address, gst_no, city, pincode, hospital_id])
+
+    } catch (error) {
+      console.log(error);
+      return res.status(403).json({
+        success: false,
+        message: error.message
+      })
+    }
+
+    try {
+      const [result] = await conn.query(`update doctor_has_specialities set speciality_id = ? where doctor_id = ?`, [speciality_id, doctor_id])
+      console.log(result);
+    } catch (error) {
+      return res.status(403).json({
+        success: false,
+        message: error.message
+      })
+    }
+
+    try {
+      await conn.query(`update doctor_details set qualification = ?, consultancy_fees = ?, approved = ? where doctor_id =? and doctor_details.id = ?`, [qualification, consultancy_fees, 0, doctor_id, doctor_details_id])
+
+    } catch (error) {
+
+      return res.status(403).json({
+        success: false,
+        message: error.message
+      })
+    }
+    return res.status(200).json({ success: true })
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: error.message
+    })
+  }
+}
