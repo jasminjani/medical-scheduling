@@ -26,6 +26,10 @@ const {
   patientProfileUpdateData,
   bookingSlot,
   getBookingSlots,
+  updateBecomeDoctorDetails,
+  updatePostBecomeDoctor,
+  updateBecomeDoctorData,
+  knowStatus,
 } = require("../controllers/patientController");
 const {
   becomeDoctorDetail,
@@ -111,5 +115,9 @@ router.route("/getprescriptionofuser").get(getPrescriptionOfUser);
 
 // d p
 router.route("/generate/:id").get(generatePDF);
+
+router.route("/updateBecomeDoctorDetails").get(updateBecomeDoctorDetails).post(updatePostBecomeDoctor);
+router.route("/updateBecomeDoctorData").get(updateBecomeDoctorData)
+router.route("/knowStatus").get(knowStatus)
 
 module.exports = router;

@@ -1,5 +1,5 @@
 let submit = document.getElementById('submit');
-
+let update = document.getElementById('update');
 
 function validate() {
     let isvalid = true;
@@ -129,3 +129,72 @@ submit.addEventListener('click',async(e)=>{
 
     }
 })
+
+
+
+const fetchUpdateData = async () => {
+  const fetchData = await fetch("/patient/updateBecomeDoctorData")
+  const data = await fetchData.json()
+  data.forEach(element => {
+    document.getElementById("qualification").value = element["qualification"]
+    document.getElementById("consultancy_fees").value = element["consultancy_fees"]
+    document.getElementById("speciality").value = element["speciality_id"]
+    document.getElementById("hname").value = element["hospital_name"]
+    document.getElementById("address").value = element["location"]
+    document.getElementById("gst").value = element["gst_no"]
+    document.getElementById("city").value = element["city"]
+    document.getElementById("pincode").value = element["pincode"]
+    document.getElementById("hospital_id").value = element["hospital_id"]
+    document.getElementById("doctor_details_id").value = element["doctor_details_id"]
+  });
+}
+
+fetchUpdateData()
+
+
+const postUpdateData = async () => {
+
+  if (validate()) {
+    let doctor_details_id = document.getElementById("doctor_details_id").value
+    let hospital_id = document.getElementById("hospital_id").value
+    let qualification = document.getElementById("qualification").value
+    let consultancy_fees = document.getElementById("consultancy_fees").value
+    let speciality_id = document.getElementById("speciality").value
+    let hospital_name = document.getElementById("hname").value
+    let address = document.getElementById("address").value
+    let gst_no = document.getElementById("gst").value
+    let city = document.getElementById("city").value
+    let pincode = document.getElementById("pincode").value
+
+
+    let fetchData = await fetch("/patient/updateBecomeDoctorDetails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ "doctor_details_id": doctor_details_id, "hospital_id": hospital_id, "qualification": qualification, "consultancy_fees": consultancy_fees, "speciality_id": speciality_id, "hospital_name": hospital_name, "address": address, "gst_no": gst_no, "city": city, "pincode": pincode })
+    })
+
+    const { success } = await fetchData.json()
+    if (success) {
+      Swal.fire({
+        title: "Update Successfully!",
+        icon: "success"
+      });
+      window.location = "/"
+
+    
+    }
+
+  }
+}
+
+
+
+
+update.addEventListener("click", postUpdateData)
+
+if (window.location.href == "http://localhost:8000/patient/updateBecomeDoctorDetails") {
+  submit.style.display = "none"
+  update.style.display = "block"
+}
