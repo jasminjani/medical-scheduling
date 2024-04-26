@@ -46,7 +46,7 @@ const submitPrescription = async () => {
 
       const form = document.getElementById("myForm");
       const obj = new URLSearchParams(new FormData(form));
-      let res = await fetch(window.location.origin + `/createprescription`, {
+      let res = await fetch(`/doctor/prescription/create`, {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
@@ -84,7 +84,7 @@ const validate = async () => {
 };
 
 const generatePDF = async () => {
-  location.href = `/generatePDFofprescripton/${insert_id}`;
+  location.href = `/generate/${insert_id}`;
 };
 
 const back = async () => {
@@ -107,7 +107,7 @@ async function showDetails() {
 
     let patient_id = document.getElementById("id").value;
 
-    const url = `/createprescription/${patient_id}`;
+    const url = `/doctor/patient/prescription/${patient_id}`;
     let  response = await fetch(url)
     let result = await response.json();
 

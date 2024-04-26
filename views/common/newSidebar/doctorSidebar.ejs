@@ -2,7 +2,7 @@
   <div class="a5-sidenavupperbox">
     <div class="a5-profile">
       <div class="a5-profilephoto">
-        <a href="/doctorProfile" id="viewprofile"><img src="" alt="profile" class="a5-profileimage" id="profile" /></a>
+        <a href="/doctor/profile" id="viewprofile"><img src="" alt="profile" class="a5-profileimage" id="profile" /></a>
       </div>
       <div class="a5-accountname">
         <p class="a5-username" id="name"></p>
@@ -10,32 +10,32 @@
       </div>
     </div>
     <div class="a5-logout">
-      <P class="a5-btn-logout" onclick="logout()"><a href="" id="logout">Log out </a></P>
+      <P class="a5-btn-logout" onclick="logout(event)"><a href="/logout" id="logout">Log out </a></P>
     </div>
   </div>
 
   <div class="a5-lists">
-    <div class="a5-list-item" onclick="window.location.href=`/doctorDashboard`" id="a5-doctor-dashboard-active">
+    <div class="a5-list-item" onclick="window.location.href=`/doctor/dashboard`" id="a5-doctor-dashboard-active">
       <i class=" fa-solid fa-house a5-list-item-img"></i>
       <a id="viewdashboard">Dashboard</a>
     </div>
-    <div class="a5-list-item" onclick="window.location.href=`/upcomingSlots`" id="a5-doctor-schedule-active">
+    <div class="a5-list-item" onclick="window.location.href=`/doctor/upcomingSlots`" id="a5-doctor-schedule-active">
       <i class="fa-solid fa-calendar-days a5-list-item-img"></i>
       <a>Schedule</a>
     </div>
-    <div class="a5-list-item" onclick="window.location.href=`/getPatientDetails`" id="a5-doctor-patient-active">
+    <div class="a5-list-item" onclick="window.location.href=`/doctor/patient/detail`" id="a5-doctor-patient-active">
       <i class="fa-solid fa-bed-pulse a5-list-item-img"></i>
       <a id="viewpatient">My Patients</a>
     </div>
-    <div class="a5-list-item" onclick="window.location.href=`/prescriptiondetails`" id="a5-doctor-prescription-active">
+    <div class="a5-list-item" onclick="window.location.href=`/doctor/prescriptiondetails`" id="a5-doctor-prescription-active">
       <i class=" fa-solid fa-bed-pulse a5-list-item-img"></i>
       <a id="prescriptionDetails">Prescription Details </a>
     </div>
-    <div class="a5-list-item" onclick="window.location.href=`/doctorPaymentHistory`" id="a5-doctor-payment-active">
+    <div class="a5-list-item" onclick="window.location.href=`/doctor/payment/history`" id="a5-doctor-payment-active">
       <i class=" fa-regular fa-credit-card a5-list-item-img"></i>
       <a id="paymenthistory">Payment History</a>
     </div>
-    <div class="a5-list-item" onclick="window.location.href=`/getDoctorReview`" id="a5-doctor-feedback-active">
+    <div class="a5-list-item" onclick="window.location.href=`/doctor/reviews`" id="a5-doctor-feedback-active">
       <i class="fa fa-comments a5-list-item-img"></i>
       <a id="viewfeedback">Feedback</a>
     </div>
@@ -45,23 +45,9 @@
 <script src="/javascript/auth/logout.js"></script>
 <script src="/javascript/doctorPanel/sidebar.js"></script>
 <script>
+  const userData = JSON.parse(localStorage.getItem('userinfo'));
 
-  document.getElementById("logout").href = "/logout"
-
-  async function fetchSideBarDetails() {
-
-    let fetchData = await fetch(`/doctorSideBarDetail/`)
-    let data = await fetchData.json()
-    console.log(data);
-    let key = Object.keys(data[0])
-    key.forEach(element => {
-      if (element == 'profile_picture') {
-        document.getElementById("profile").src = `/imgs/${data[0][element]}`
-      }
-      else {
-        document.getElementById(element).innerHTML = data[0][element]
-      }
-    });
-  }
-  fetchSideBarDetails()
+document.getElementById('profile').setAttribute('src',`/imgs/${userData.profile}`);
+document.getElementById('name').innerHTML = `${userData.fname + " " + userData.lname}`;
+document.getElementById('email').innerHTML = userData.email;
 </script>

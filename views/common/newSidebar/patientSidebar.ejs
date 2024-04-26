@@ -2,7 +2,7 @@
   <div class="a5-sidenavupperbox">
     <div class="a5-profile">
       <div class="a5-profilephoto">
-        <a href="/viewPatientProfile"><img src="/assets/sideBar/profile-icon-png-898.png" alt="profile" class="a5-profileimage" /></a>
+        <a href="/patient/view/profile"><img src="/assets/sideBar/profile-icon-png-898.png" alt="profile" class="a5-profileimage" /></a>
       </div>
       <div class="a5-accountname">
         <p class="a5-username"></p>
@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="a5-logout">
-      <p class="a5-btn-logout" onclick="logout()"><a href="/logout">Log out</a></p>
+      <p class="a5-btn-logout" onclick="logout(event)"><a href="/logout" id="logout">Log out</a></p>
     </div>
   </div>
 
@@ -19,19 +19,19 @@
       <i class="fa-solid fa-house a5-list-item-img"></i>
       <a>Home</a>
     </div>
-    <div class="a5-list-item" onclick="window.location.href=`/doctors/all`" id="a5-patient-doctor-active">
+    <div class="a5-list-item" onclick="window.location.href=`/patient/doctors/all`" id="a5-patient-doctor-active">
       <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
       <a>All Doctors</a>
     </div>
-    <div class="a5-list-item" onclick="window.location.href=`/patientUpcomingSlots`" id="a5-patient-session-active">
+    <div class="a5-list-item" onclick="window.location.href=`/patient/upcomingSlots`" id="a5-patient-session-active">
       <i class="fa-solid fa-calendar-days a5-list-item-img"></i>
-      <a href="/patientUpcomingSlots">Scheduled Sessions</a>
+      <a href="/patient/upcomingSlots">Scheduled Sessions</a>
     </div>
-    <div class="a5-list-item" onclick="window.location.href=`/patient-paymentHistory`" id="a5-patient-payment-active">
+    <div class="a5-list-item" onclick="window.location.href=`/patient/payments/history`" id="a5-patient-payment-active">
       <i class="fa-solid fa-calendar-check a5-list-item-img"></i>
       <a>My Payment History</a>
     </div>
-    <div class="a5-list-item" onclick="window.location.href=`/doctorCreateProfile`">
+    <div class="a5-list-item" onclick="window.location.href=`/patient/create`">
       <i class="fa-solid fa-user-doctor a5-list-item-img"></i>
       <a>Become a Doctor</a>
     </div>

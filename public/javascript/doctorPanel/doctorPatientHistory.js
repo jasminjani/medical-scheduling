@@ -4,10 +4,21 @@ let search = document.getElementById("search").value
 
 
 const fetchData = async () => {
-  let fetchdata = await fetch(`/getPatientData`)
+  let fetchdata = await fetch(`/doctor/patients`)
   let data = await fetchdata.json()
   return data
 }
+
+const searchFetchDataFun = async()=>{
+  let fetchData = await fetch(`/doctor/searchPatientData/${search}`)
+  let data = await fetchData.json()
+  return data
+}
+
+let a = document.getElementById("a5-tbody").offsetParent
+
+console.log(a);
+
 
 
 let currentPage = 1;
@@ -37,7 +48,7 @@ const pagination = async () => {
     <td hidden >${patient_id}</td>
     <td>${value.name}</td>
     <td>${value.phone}</td>
-    <td><p class="a5-btn" onclick='window.location.href ="/viewPatientHistory/${patient_id}"'>View More</a></td>
+    <td><p class="a5-btn" onclick='window.location.href ="/doctor/patients/history/${patient_id}"'>View More</a></td>
   </tr>`
   })
   document.getElementById("a5-tbody").innerHTML += tabledata;

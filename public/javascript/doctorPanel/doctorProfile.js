@@ -1,8 +1,8 @@
- document.getElementById('edtbtn').href = `/updatedoctorProfile/`
-  document.getElementById('viewprofile').href = `/doctorProfile/`
+ document.getElementById('edtbtn').href = `/doctor/profile/update`
+  document.getElementById('viewprofile').href = `/doctor/profile`
  const profileDetailData = async() =>{
 
-    let fetchdata = await fetch(`/doctorData`)
+    let fetchdata = await fetch(`/doctor/data`)
   let data = await fetchdata.json()
 
   let key = Object.keys(data[0])

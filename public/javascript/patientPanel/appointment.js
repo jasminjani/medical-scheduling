@@ -46,11 +46,11 @@ slotBook.addEventListener("click", async (e) => {
 
     let userInfo = JSON.parse(localStorage.getItem('userinfo'))
 
-    let patientDetails = await fetch("/patient-details", {
-      method: "POST",
-      body: JSON.stringify({ id: userInfo.id }),
-      headers: {
-        "Content-Type": "application/json"
+    let patientDetails = await fetch("/patient/details",{
+      method:"POST",
+      body:JSON.stringify({id:userInfo.id}),
+      headers:{
+        "Content-Type":"application/json"
       }
     })
 
@@ -64,19 +64,19 @@ slotBook.addEventListener("click", async (e) => {
           '<lable>Blood Group : <input type="text" id="bloodGroup" class="bloodGroup" placeholder="Enter Blood Group"></label> <br> <br> <br>' +
           '<lable>Medical History : <input type="file" accept="application/pdf" id="medicalHistory" class="medicalHistory"></label>',
         showCancelButton: true,
-      }).then(async (result) => {
-        bloodGroup = document.getElementById('bloodGroup').value;
-        medicalHistory = document.getElementById('medicalHistory').files[0];
-        let formData = new FormData();
-        formData.append('patientId', userInfo.id)
-        formData.append('bloodgroup', bloodGroup)
-        formData.append('medicalHistory', medicalHistory)
+      }).then(async(result)=>{
+          bloodGroup = document.getElementById('bloodGroup').value;
+          medicalHistory = document.getElementById('medicalHistory').files[0];
+          let formData = new FormData();
+          formData.append('patientId',userInfo.id)
+          formData.append('bloodgroup',bloodGroup)
+          formData.append('medicalHistory',medicalHistory)
 
-        let patient = await fetch("/add-patient-details", {
-          method: "POST",
-          body: formData
-        })
-        console.log(await patient.json())
+          let patient = await fetch("/patient/otherDetails",{
+            method:"POST",
+            body:formData
+          })
+          console.log(await patient.json())
       });
     }
 
@@ -90,7 +90,7 @@ slotBook.addEventListener("click", async (e) => {
       confirmButtonText: "Pay Now",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        let d = await fetch("/bookslot", {
+        let d = await fetch("/patient/bookslot", {
           method: "POST",
           body: JSON.stringify({
             paymentAmount: fees,
@@ -130,7 +130,7 @@ const getSlots = async (e) => {
   if (date.value.trim()) {
     let doctor_id = window.location.pathname.split("/");
     doctor_id = doctor_id[doctor_id.length - 1]
-    let data = await fetch("/slots", {
+    let data = await fetch("/patient/slots", {
       method: "POST",
       body: JSON.stringify({ doctor_id, date: date.value }),
       headers: {
