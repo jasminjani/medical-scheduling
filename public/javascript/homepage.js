@@ -196,41 +196,32 @@ getDoctors();
 
 // contcat us 
 
-// router.route('/contact-message').post(async (req, res) => {
-//   const { name, mobile_no, email, city, role, message } = req.body;
 
-//   try {
-//     await conn.query('insert into contact_us(name,mobile_no,email,city,role,message) values (?)'
-//       , [[name, mobile_no, email, city, role, message]]);
-//     res.json({
-//       success: true,
-//       message: "Data inserted .."
-//     });
-//   } catch (error) {
-//     res.status(500).json({
-//       success: false,
-//       error: error.message
-//     })
-//   }
-// })
 
 async function sendMessage() {
 
   let isValid = isValidMessage();
 
   if (isValid) {
-
     const form = document.getElementById('a2-contact-form-id');
     const formData = new FormData(form);
     const data = new URLSearchParams(formData);
 
-    let resp = await fetch('/contact-message',{
-      method:'post',
-      headers: { "Content-Type": "application/x-www-form-urlencoded"},
-      body:data,
+    let resp = await fetch('/contact-message', {
+      method: 'post',
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: data,
     })
-    console.log(data);
-    console.log(resp);
+
+    let { success } = await resp.json();
+    if (success) {
+      form.reset();
+      Swal.fire({
+        title: "Thank You !",
+        text: "We will get back shortly.",
+        icon: "success"
+      });
+    }
   }
   // console.log(data.name);
 }
@@ -278,7 +269,7 @@ function isValidMessage() {
   }
 
   if (isValid) {
-    error.style.display = 'none'
+    error.innerHTML = ''
   }
   return isValid;
 
