@@ -6,9 +6,14 @@
   --white: #ffffff;
 }
 .A4-container {
-  max-width: 1440px;
+  max-width: 1280px;
   margin: 0 auto;
   font-family: sans-serif;
+}
+
+.A4-main{
+  padding: 10px;
+  margin-left: 350px;
 }
 
 .A4-title {
@@ -60,6 +65,7 @@ table {
 .A4-prescription {
   padding: 25px 439px;
 }
+
 .A4-addPrescription {
   height: 50px;
   width: 211px;
@@ -78,10 +84,7 @@ table {
   box-shadow: none;
   color: #2c5777;
 }
-.A4-main {
-  display: block;
-  padding-left: 300px;
-}
+
 /* //add prescrption */
 .A4-submitBtn {
   text-align: center;
@@ -154,20 +157,16 @@ label{
   color: red;
 }
 .A4-btn {
-  width: 120px;
-  height: 30px;
-  padding: 5px;
+  padding: 0px 2px 0px 2px;
   text-align: center;
   margin: 5px auto;
-  display: flex;
-  justify-content: center;
   border-radius: 3px;
   background-color: var(--light-blue);
   color: #2c5777;
 }
 
-.A4-btn:hover {
 
+.A4-btn:hover {
   cursor: pointer;
   color: var(--white);
   background-color: var(--blue);
@@ -177,20 +176,17 @@ label{
   margin: 20px 0;
   padding-top: 10px;
 }
+
 .A4-backbtn{
-  padding: 15px 78px;
+  display: flex;
+  align-items: center;
 }
+
 #A4-arrow-img{
   margin-bottom: 10px;
 }
 
 /* new css */
-
-.a5-section {
-  max-width: 1080px;
-  width: 100%;
-  margin-left: 55px;
-}
 
 .a5-patient {
   margin: 20px auto;
@@ -199,6 +195,7 @@ label{
   border-radius: 25px;
   background-color: var(--light-blue);
 }
+
 .a5-patient-img>img {
   height: 250px;
   width: 250px;
