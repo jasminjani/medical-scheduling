@@ -1,9 +1,3 @@
-// function rating() {
-//   document.getElementById('starWhite1').style.display = "none"
-//   // document.getElementById('starBlack1').style.display = "block"
-// }
-
-// script.js
 
 // To access the stars
 let stars =
@@ -11,9 +5,20 @@ let stars =
 let output =
 	document.getElementById("output");
 
-// Funtion to update rating
+const getReviews = async () => {
+	const id = window.location.href.split("/").pop();
 
+	const response = await fetch(`http://localhost:8000/review/${id}`, {
+		method: "GET",
+		headers: {
+			"Content-type": "application/x-www-form-urlencoded"
+		},
+	});
 
+	const {message} = await response.json();
+
+	console.log(message);
+}
 
 //review add
 const submitRate = async () => {
@@ -33,10 +38,13 @@ const submitRate = async () => {
 	const result = await response.json();
 
 	Swal.fire(result.message);
+
+	gfg(0);
+	console.log(document.getElementById("rev"));
+	document.getElementById("rev").value = ""
 }
 
 function closeThanks() {
-	// document.getElementById('rate').style.display = "none"
 	document.getElementById('thanksText').style.display = "none"
 	document.getElementById('A6-body').style.opacity = "100%"
 }
@@ -52,12 +60,8 @@ function gfg(n) {
 		else if (n == 4) cls = "four";
 		else if (n == 5) cls = "five";
 		stars[i].className = "star " + cls;
-
-		console.log(n);
-
 	}
-	// output.innerText = "Rating is: " + n + "/5";
-	n
+
 	document.getElementById("output").value = n
 }
 
@@ -69,3 +73,5 @@ function remove() {
 		i++;
 	}
 }
+
+getReviews();

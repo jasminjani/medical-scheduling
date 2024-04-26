@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { rating } = require('../controllers/ratingController');
+const { rating, getRating } = require('../controllers/ratingController');
 const router = express.Router();
 const { imgStorage, fileStorage } = require("../utils/multer");
 const multer = require("multer");
@@ -64,6 +64,7 @@ router.route('/forgot/change-password')
 
 //patient review doctor
 router.route("/review").post(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), rating);
+router.route("/review/:doctor_id").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }),getRating);
 router.route("/doctors/all").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), allDoctors)
 
 
