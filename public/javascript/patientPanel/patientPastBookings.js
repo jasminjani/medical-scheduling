@@ -1,4 +1,4 @@
-window.location.href.split("/").pop() === "patientPastSlots" ? document.getElementById("A3-past").style.backgroundColor = "#3984af" : "";
+window.location.href.split("/").pop() === "pastSlots" ? document.getElementById("A3-past").style.backgroundColor = "#3984af" : "";
 
 let page = 1;
 

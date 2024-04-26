@@ -32,7 +32,7 @@
       <%-include("../../common/newSidebar/doctorSidebar")%>
         <div class="A3-container">
           <div class="A3-row-1">
-            <a id="A3-view" href="/upcomingSlots"><i class="fa-regular fa-eye"></i></a>
+            <a id="A3-view" href="/doctor/upcomingSlots"><i class="fa-regular fa-eye"></i></a>
             <a id="A3-add" href="/doctor/addSlot"><i class="fa-solid fa-plus"></i></a>
           </div>
           <div class="A3-main">
@@ -54,7 +54,7 @@
             <form id="myform" method="post">
               <div class="row">
                 <div class="date">
-                  <input type="date" name="day1[]" id="date_1" onchange="handleChange(event)">
+                  <input type="date" name="day1[]" id="date_1" onkeydown="event.preventDefault()" onchange="handleChange(event)">
                 </div>
                 <div class="times">
                   <!-- <input type="text" name="day1" class="A3-time" id="abcd"> -->

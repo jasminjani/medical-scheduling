@@ -377,10 +377,6 @@ exports.DoctorCobmo = async (req, res) => {
   return res.json({ html: html });
 };
 
-exports.getDoctorSlotsById = async (req, res) => {
-  return res.render("pages/patientPanel/appointment");
-};
-
 const generateSlotCombo = async (result) => {
   let html = `<option value="">--Select slot--</option>`;
 

@@ -147,7 +147,7 @@ const handleGenerate = async (e) => {
       Swal.fire({
         icon: "success",
         text: "Slots generated!",
-        footer: '<a href="/patient/upcomingSlots">See all slots</a>',
+        footer: '<a href="/doctor/upcomingSlots">See all slots</a>',
       });
     }
   } else {

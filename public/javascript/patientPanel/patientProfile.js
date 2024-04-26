@@ -1,4 +1,4 @@
-window.location.href.split("/").pop() === "patientUpcomingSlots"
+window.location.href.split("/").pop() === "upcomingSlots"
   ? (document.getElementById("A3-upcoming").style.backgroundColor = "#3984af")
   : "";
 

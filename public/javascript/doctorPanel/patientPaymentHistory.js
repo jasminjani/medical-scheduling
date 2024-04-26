@@ -5,7 +5,12 @@ async function fetchPatientPaymentData() {
     let patient_id = window.location.href.split('/').pop();
 
     const url = `/doctor/payment/history/${patient_id}`;
-    const response = await fetch(url)
+    const response = await fetch(url,{
+      method:"POST",
+      headers:{
+        'Content-Type':"application/json"
+      }
+    })
     const result = await response.json();
 
     await appendPatientDetails(result);

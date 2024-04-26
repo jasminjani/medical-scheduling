@@ -11,7 +11,6 @@ const {
   patientPastProfile,
   patientUpcomingBookings,
   patientPastBookings,
-  getDoctorSlotsById,
   getSingleSlots,
   cancelSlot,
   patientPayments,
@@ -26,6 +25,7 @@ const {
   postPatientProfileUpdate,
   patientProfileUpdateData,
   bookingSlot,
+  getBookingSlots,
 } = require("../controllers/patientController");
 const {
   becomeDoctorDetail,
@@ -53,7 +53,7 @@ router.route("/bookings/:patient_id").get(patientUpcomingBookings);
 
 router.route("/pastbookings/:patient_id").get(patientPastBookings);
 
-router.route("/bookslots/:id").get(getDoctorSlotsById);
+router.route("/bookslots/:id").get(getBookingSlots);
 
 router.route("/slots").post(getSingleSlots);
 

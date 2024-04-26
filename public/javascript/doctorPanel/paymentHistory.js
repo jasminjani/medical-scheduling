@@ -3,7 +3,12 @@ async function fetchPaymentHistory() {
   try {
 
     const url = `/doctor/payment/history`;
-    const response = await fetch(url)
+    const response = await fetch(url,{
+      method:"POST",
+      headers:{
+        'Content-Type':"application/json"
+      }
+    })
     const result = await response.json()
 
     await appendPaymentHistory(result)

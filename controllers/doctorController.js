@@ -1071,7 +1071,7 @@ exports.deleteSlot = async (req, res) => {
       const [refunded] = await conn.query(query, [1, slot_id]);
 
       // return res.status(200).json({ success: true, message: "slot deleted successfully" });
-      res.redirect("/upcomingSlots");
+      res.redirect("/doctor/upcomingSlots");
     } catch (error) {
       console.log(error);
 
