@@ -56,7 +56,7 @@ const submitPrescription = async () => {
       let resjson=await res.json();
       alert(resjson.msg);
       insert_id = resjson.insert_id;
-      location.href = location.origin+`/doctorDashboard/`;
+      location.href = location.origin+`/doctor/dashboard/`;
     }
   }
   catch(error){
