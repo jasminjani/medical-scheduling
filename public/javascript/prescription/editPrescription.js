@@ -5,7 +5,7 @@
 
   const fetchdata=async(id)=>{
     try{
-      let res=await fetch(window.location.origin + `/updatedetails/${id}`);
+      let res=await fetch(`/doctor/prescription/update/${id}`);
       let resjson=await res.json();
 
       const ele = document.getElementsByClassName("A4-table-content");
@@ -29,7 +29,7 @@
     try{
       const form = document.getElementById('myForm');
       const obj = new URLSearchParams(new FormData(form));
-      let res=await fetch(location.origin+`/updatePrescription/${id}`,
+      let res=await fetch(`/doctor/prescription/update/${id}`,
               {
                   headers: {
                       'Content-Type': 'application/x-www-form-urlencoded'
@@ -38,7 +38,7 @@
                   body: obj
               });
               alert("Prescription updated successfully");
-              location.href=`/prescriptiondetails`;
+              location.href=`/doctor/prescriptiondetails`;
     }
     catch(error){
     logger.error(error);
@@ -46,7 +46,7 @@
   }
 
   const back=async()=>{
-    location.href=`/prescriptiondetails`;
+    location.href=`/doctor/prescriptiondetails`;
   }
   const focus=async()=>{
     document.getElementById("data3").focus();

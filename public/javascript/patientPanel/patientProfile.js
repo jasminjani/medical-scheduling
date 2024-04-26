@@ -1,4 +1,4 @@
-window.location.href.split("/").pop() === "patientUpcomingSlots"
+window.location.href.split("/").pop() === "upcomingSlots"
   ? (document.getElementById("A3-upcoming").style.backgroundColor = "#3984af")
   : "";
 
@@ -10,14 +10,14 @@ let totalPage;
 
 const getUpcomingSlots = async () => {
   let user = JSON.parse(localStorage.getItem("userinfo"));
-  const response = await fetch(`/bookings/${user.id}`, {
+  const response = await fetch(`/patient/bookings/${user.id}`, {
     method: "GET",
     headers: {
       "Content-type": "application/json",
     },
   });
-
   const { success, data } = await response.json();
+  console.log(data)
 
   totalPage = Math.ceil(data.length / limit);
 
@@ -97,7 +97,7 @@ const cancelSlot = async (slot_id, patient_id) => {
         icon: "success",
       }).then((result) => {
         if (result.isConfirmed) {
-          window.location = `/cancel/${slot_id}`;
+          window.location = `/patient/cancel/${slot_id}`;
         }
       });
     }

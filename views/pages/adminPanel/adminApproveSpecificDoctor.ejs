@@ -29,7 +29,7 @@
       <div class="A4-main">
         <div class="A4-container">
           <a
-            href="/admin/all-doctors"
+            href="/admin/doctors/all"
             style="text-decoration: none; color: black"
           >
             <p class="a2-back-btn a2-btn">
@@ -135,7 +135,7 @@
       }
 
       async function fetchData(id){
-        let res=await fetch(location.origin+`/individual-doctor-details/${id}`);
+        let res=await fetch(`/admin/doctorDetails/${id}`);
         let resjson=await res.json();
         console.log(resjson.result[0]);
 
@@ -155,14 +155,14 @@
       async function approveDoctor(id) {
         console.log(id);
 
-        const resp = await fetch(`/approve-doctor/${id}`);
+        const resp = await fetch(`/admin/doctor/approve/${id}`);
         alert("Doctor Approved....!");
-        resp.ok ? (location.href = "/admin/all-doctors") : "";
+        resp.ok ? (location.href = "/admin/doctors/all") : "";
       }
 
       async function rejectDoctor(id) {
         console.log(id);
-        const resp = await fetch(`/reject-doctor/${id}`);
+        const resp = await fetch(`/admin/doctor/reject/${id}`);
         alert("Doctor Rejected....!");
         resp.ok ? (location.href = "/admin") : "";
       }

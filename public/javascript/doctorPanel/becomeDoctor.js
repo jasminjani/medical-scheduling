@@ -109,7 +109,7 @@ submit.addEventListener('click',async(e)=>{
     let hcity = document.getElementById('city').value
     let pincode = document.getElementById('pincode').value
     
-    let data = await fetch('/doctorCreateProfile',{
+    let data = await fetch('/patient/create',{
         method:"post",
         body:JSON.stringify({speciality:speciality,name:hname,location:hlocation,gst_no:gstno,city:hcity,pincode:pincode,qualification:qualification,consultancy_fees:consultancyFees}),
         headers:{

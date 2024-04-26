@@ -16,6 +16,7 @@ function validate() {
     });
   }
 
+
   // empty fields and email and phone number validation
   dvalid.forEach((field) => {
     if (field.value.trim() === "") {
@@ -38,14 +39,14 @@ slotBook.addEventListener("click", async (e) => {
     let doctors = JSON.parse(localStorage.getItem('doctors'))
     let doctorId = document.getElementById('did').value;
     console.log(doctorId)
-    let fees = doctors.filter((doctor)=>doctor.id = doctorId)[0].consultancy_fees;
+    let fees = doctors.filter((doctor) => doctor.id = doctorId)[0].consultancy_fees;
     console.log(fees)
     let selectedSlotId = appointments.options.selectedIndex;
     let slotId = appointments.children[selectedSlotId].dataset.sid;
 
     let userInfo = JSON.parse(localStorage.getItem('userinfo'))
 
-    let patientDetails = await fetch("/patient-details",{
+    let patientDetails = await fetch("/patient/details",{
       method:"POST",
       body:JSON.stringify({id:userInfo.id}),
       headers:{
@@ -55,13 +56,13 @@ slotBook.addEventListener("click", async (e) => {
 
     patientDetails = await patientDetails.json();
 
-    let bloodGroup="";
+    let bloodGroup = "";
     let medicalHistory;
-    if(patientDetails.success){
+    if (patientDetails.success) {
       await Swal.fire({
         html:
-        '<lable>Blood Group : <input type="text" id="bloodGroup" class="bloodGroup" placeholder="Enter Blood Group"></label> <br> <br> <br>' +
-        '<lable>Medical History : <input type="file" accept="application/pdf" id="medicalHistory" class="medicalHistory"></label>',
+          '<lable>Blood Group : <input type="text" id="bloodGroup" class="bloodGroup" placeholder="Enter Blood Group"></label> <br> <br> <br>' +
+          '<lable>Medical History : <input type="file" accept="application/pdf" id="medicalHistory" class="medicalHistory"></label>',
         showCancelButton: true,
       }).then(async(result)=>{
           bloodGroup = document.getElementById('bloodGroup').value;
@@ -71,14 +72,14 @@ slotBook.addEventListener("click", async (e) => {
           formData.append('bloodgroup',bloodGroup)
           formData.append('medicalHistory',medicalHistory)
 
-          let patient = await fetch("/add-patient-details",{
+          let patient = await fetch("/patient/otherDetails",{
             method:"POST",
             body:formData
           })
           console.log(await patient.json())
       });
     }
-  
+
 
     Swal.fire({
       title: `Pay rs. ${fees} for Book An Appointment`,
@@ -89,7 +90,7 @@ slotBook.addEventListener("click", async (e) => {
       confirmButtonText: "Pay Now",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        let d = await fetch("/bookslot", {
+        let d = await fetch("/patient/bookslot", {
           method: "POST",
           body: JSON.stringify({
             paymentAmount: fees,
@@ -129,7 +130,7 @@ const getSlots = async (e) => {
   if (date.value.trim()) {
     let doctor_id = window.location.pathname.split("/");
     doctor_id = doctor_id[doctor_id.length - 1]
-    let data = await fetch("/slots", {
+    let data = await fetch("/patient/slots", {
       method: "POST",
       body: JSON.stringify({ doctor_id, date: date.value }),
       headers: {
@@ -144,7 +145,7 @@ const getSlots = async (e) => {
 
 window.onload = getSlots;
 
-date.addEventListener("change",getSlots);
+date.addEventListener("change", getSlots);
 
 appointments.addEventListener("change", async (e) => {
   if (appointments.value.trim()) {
@@ -175,9 +176,9 @@ const getDoctorData = async () => {
   </div>
   <div class="doctor-details">
     <input type="hidden" value="${doctor.id}" id="did">
-    <p class="name"><span>Name: </span>${doctor.fname+" "+doctor.lname}</p>
+    <p class="name"><span>Name: </span>${doctor.fname + " " + doctor.lname}</p>
     <p class="qualification"><span>qualification: </span>${doctor.qualification}</p>
-    <p class="speciality"><span>speciality: </span>${doctor.specialities.map((speciality)=> `${speciality.toUpperCase()}`)}</p>
+    <p class="speciality"><span>speciality: </span>${doctor.specialities.map((speciality) => `${speciality.toUpperCase()}`)}</p>
     <p class="fees"><span>fees: </span>Rs. ${doctor.consultancy_fees}</p>
     <p class="hospital-name"><span>clinic/hospital: </span>${doctor.hospital_name}</p>
     <p class="address"><span>city: </span> ${doctor.city}</p>
@@ -188,8 +189,10 @@ const getDoctorData = async () => {
     </div>
   </div>`;
 
-  document.querySelector('.doctor-profile').innerHTML = html
+    document.querySelector('.doctor-profile').innerHTML = html
   }
 };
 
 getDoctorData();
+
+

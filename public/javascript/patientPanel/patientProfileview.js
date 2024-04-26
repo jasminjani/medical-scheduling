@@ -1,8 +1,8 @@
 
-document.getElementById('edtbtn').href = `/patientProfileUpdate`
+document.getElementById('edtbtn').href = `/patient/profile/update`
    const fetchPatientViewData = async()=>{
 
-        const fetchData = await fetch('/viewPatientProfileData')
+        const fetchData = await fetch('/patient/view/profileData')
   const data = await fetchData.json()
   const key = Object.keys(data[0])
         key.forEach(element => {

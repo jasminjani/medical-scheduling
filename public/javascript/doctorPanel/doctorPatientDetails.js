@@ -1,7 +1,7 @@
 
 const patientAppointmentDetail = async () => {
 
-  let fetchdata = await fetch(`/getpatientHistoryData/${Id}`)
+  let fetchdata = await fetch(`/doctor/patients/history/${Id}`)
   let data = await fetchdata.json()
   let key = Object.keys(data)
   key.forEach(element => {
@@ -22,7 +22,7 @@ const patientAppointmentDetail = async () => {
 }
 
 const profileDetailData = async () => {
-  let fetchData = await fetch(`/viewPatientDetailsData/${Id}`)
+  let fetchData = await fetch(`/doctor/patient/view/${Id}`)
   let data = await fetchData.json()
  
   if (data.length == 0) {
@@ -55,7 +55,7 @@ funcId = function (id) {
 
 let show = async function (id, date) {
 
-  const fetchData = await fetch(`/patientPrescriptionData/${date}/${Id}`)
+  const fetchData = await fetch(`/doctor/patientPrescriptionData/${date}/${id}`)
   const data = await fetchData.json()
   const key = Object.keys(data)
   console.log(data);

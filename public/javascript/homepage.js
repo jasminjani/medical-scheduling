@@ -59,7 +59,7 @@ const putDoctorOnScreen = async (data) => {
     }
 
     card += `<div class="card">
-    <a href="/bookslots/${doctor.id}" class="img">
+    <a href="/patient/bookslots/${doctor.id}" class="img">
       <img src="/imgs/${doctor.profile_picture}" alt="" >
     </a>
     <div class="details">
@@ -111,7 +111,7 @@ search.addEventListener("click", async (e) => {
 becomeDoctor?.addEventListener("click", async (e) => {
   e.preventDefault();
   let userInfo = JSON.parse(localStorage.getItem("userinfo"));
-  let data = await fetch("/getPendingDoctor", {
+  let data = await fetch("/patient/doctor/pending", {
     method: "post",
     body: JSON.stringify({ id: userInfo.id }),
     headers: {
@@ -121,7 +121,7 @@ becomeDoctor?.addEventListener("click", async (e) => {
   data = await data.json();
   console.log(data);
   if (data.success) {
-    window.location.href = "/doctorCreateProfile";
+    window.location.href = "/patient/create";
   } else {
     Swal.fire({
       title: "Already Requested",
@@ -173,7 +173,7 @@ const toggleLoginLogout = async () => {
     } else if (userInfo.role_id == 2) {
       document.getElementById("become-doctor")?.remove();
       document.getElementById("book-appointment").remove();
-      userRedirect.setAttribute("href", "/doctorDashboard");
+      userRedirect.setAttribute("href", "/doctor/dashboard");
     } else if (userInfo.role_id == 3) {
       document.getElementById("book-appointment").remove();
       document.getElementById("become-doctor")?.remove();
