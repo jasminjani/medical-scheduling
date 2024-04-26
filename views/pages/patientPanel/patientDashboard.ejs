@@ -88,7 +88,7 @@
             <div class="a2-upcoming-booking">
               <div class="row">
                 <h3>Today's Appointments</h3>
-                <a href="/patientUpcomingSlots">View all</a>
+                <a href="/patient/upcomingSlots">View all</a>
               </div>
               <div class="A3-row-2">
                 <table>
@@ -137,7 +137,7 @@
 
 
       async function getPatientData() {
-        let resp = await fetch(`/patient-status/${user.id}`);
+        let resp = await fetch(`/patient/analytics`);
         let data = await resp.json();
 
         document.getElementById('doctors-count').innerHTML = data[0]?.doctorCount;
@@ -156,7 +156,7 @@
       console.log("inside patient");
       const getUpcomingSlots = async () => {
         let user = JSON.parse(localStorage.getItem('userinfo'));
-        const response = await fetch(`/bookings/${user.id}`, {
+        const response = await fetch(`/patient/bookings/${user.id}`, {
           method: "GET",
           headers: {
             "Content-type": "application/json"

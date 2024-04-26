@@ -3,7 +3,7 @@ let copyResult = [];
 
 async function fetchPatientPayment() {
   try {
-    const url = `/payments`;
+    const url = `/patient/payments`;
     const response = await fetch(url);
     result = await response.json();
     copyResult = result;

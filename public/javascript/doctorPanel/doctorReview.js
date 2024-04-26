@@ -6,12 +6,18 @@ let pageno = document.getElementById("pageno")
 
 const fetchDataFun = async () => {
  
-  let fetchdata = await fetch(`/reviews`)
+  let fetchdata = await fetch(`/doctor/reviews`)
   let data = await fetchdata.json()
   return data
 }
 
-const pagination = async () => {
+const searchFetchDataFun = async ()=>{
+  let fetchdata
+  let data
+  fetchdata = await fetch(`/doctor/searchReview/${search}`)
+  data = await fetchdata.json()
+  return data
+}
 
   let data = await fetchDataFun()
 
@@ -45,7 +51,6 @@ const pagination = async () => {
 
   document.getElementById("a5-tbody").innerHTML += tabledata;
   
-}
 
 const removeFun = async () => {
   document.getElementById("a5-tbody").innerHTML = `<tr>

@@ -17,7 +17,7 @@
 
       <div class="A4-main">
         <div class="A4-container">
-          <a href="/admin/all-doctors" style="text-decoration: none; color: black">
+          <a href="/admin/doctors/all" style="text-decoration: none; color: black">
             <p class="a2-back-btn a2-btn">
               <img src="/assets/adminPanel/icons/back-iceblue.svg" alt="Back" />
               Back
@@ -104,7 +104,7 @@
     }
 
     async function fetchData(id){
-        let res=await fetch(location.origin+`/show-doctor-details/${id}`);
+        let res=await fetch(`/admin/show/doctorDetails/${id}`);
         let resjson=await res.json();
         let tabledata=document.getElementsByClassName("A4-table-content");
         let keys=Object.keys(resjson.result[0]);

@@ -130,7 +130,7 @@
 
     <script>
       async function getAllDoctors() {
-        const resp = await fetch("/admin/get-all-doctors");
+        const resp = await fetch("/admin/allDoctor");
 
         const data = await resp.json();
 
@@ -200,16 +200,16 @@
       getAllDoctors();
 
       async function deleteDoctor(id) {
-        let resp = await fetch(`/admin/delete-doctor/${id}`);
+        let resp = await fetch(`/admin/doctors/delete/${id}`);
         location.reload();
       }
 
       async function approveDoc(id) {
-        location.href = `/individual-doctor/${id}`;
+        location.href = `/admin/doctor/${id}`;
       }
 
       async function showDoctorDeatil(id) {
-        location.href = `/show-doctor-deatil/${id}`
+        location.href = `/admin/show/doctorDetail/${id}`
       }
     </script>
 </body>
