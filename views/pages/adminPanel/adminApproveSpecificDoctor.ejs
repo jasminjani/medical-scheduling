@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
     <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
     <link rel="stylesheet" href="/css/adminPanel/approveDoctor.css" />
+    <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css">
+    <script src="/sweetalert2/sweetalert2.min.js"></script>
     <style>
       #a5-admin-doctor-active {
         background-color: #0969da;
@@ -153,18 +155,49 @@
       fetchData(`<%=docID %>`);
 
       async function approveDoctor(id) {
-        console.log(id);
 
-        const resp = await fetch(`/admin/doctor/approve/${id}`);
-        alert("Doctor Approved....!");
-        resp.ok ? (location.href = "/admin/doctors/all") : "";
+        await Swal.fire({
+        title: "Are you sure?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#0969da",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Approve!"
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            console.log(id);
+            const resp = await fetch(`/admin/doctor/approve/${id}`);
+            await Swal.fire({
+              title: "Approved!",
+              text: "Doctor has been aprroved.",
+              icon: "success"
+            });   
+            resp.ok ? (location.href = "/admin/doctors/all") : "";
+          }
+        });
       }
 
       async function rejectDoctor(id) {
-        console.log(id);
-        const resp = await fetch(`/admin/doctor/reject/${id}`);
-        alert("Doctor Rejected....!");
-        resp.ok ? (location.href = "/admin") : "";
+
+        await Swal.fire({
+        title: "Are you sure?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#0969da",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Reject!"
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            console.log(id);
+            const resp = await fetch(`/admin/doctor/reject/${id}`);
+            await Swal.fire({
+              title: "Rejected!",
+              text: "Doctor has been rejected.",
+              icon: "success"
+            });   
+            resp.ok ? (location.href = "/admin") : "";
+          }
+        });
       }
     </script>
   </body>
