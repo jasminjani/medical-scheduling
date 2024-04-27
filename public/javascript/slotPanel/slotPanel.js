@@ -23,7 +23,7 @@ function checkSlotOverlap(slots) {
     return timeA.localeCompare(timeB, undefined, { numeric: true });
 });
 
-// console.log(slots);
+
 for (let i = 1; i < sortedSlots.length; i++) {
     let prevSlotEndTime = sortedSlots[i - 1].split("-")[1].trim();
     let currSlotStartTime = sortedSlots[i].split("-")[0].trim();
@@ -132,7 +132,7 @@ const handleGenerate = async (e) => {
     })
   }
   const isValid = slotData.every((daySlot) => checkSlotOverlap(daySlot));
-  console.log(isValid)
+
   if (isValid) {
     const response = await fetch("/doctor/slot", {
       method: "POST",

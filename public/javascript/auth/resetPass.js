@@ -102,7 +102,7 @@ submit.addEventListener("click", async (e) => {
       );
 
       data = await data.json();
-      console.log(data);
+    
 
       if (data.success) {
         Swal.fire({
@@ -129,7 +129,7 @@ submit.addEventListener("click", async (e) => {
       }
     } else {
       let errors = document.querySelectorAll(".error");
-      console.log(errors);
+     
       if (errors.length > 0) {
         errors.forEach((error) => error.remove());
       }

@@ -26,6 +26,7 @@ const {
   adminDeleteDoctors,
   adminDashboard,
   contactToAdmin,
+  getAllMessage,
 } = require("../controllers/adminController");
 const passport = require("passport");
 
@@ -114,5 +115,6 @@ router.route("/doctors/delete/:id").get(deleteDoctor);
 router.route("/analytics").get(dashboardStatus);
 
 router.route("/contact-us").get(contactToAdmin);
+router.route("/get-message").get(getAllMessage);
 
 module.exports = router;

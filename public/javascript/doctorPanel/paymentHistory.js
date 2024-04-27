@@ -26,7 +26,7 @@ async function searchPaymentHistory() {
     const url = `/doctor/searchedPaymentHistory/${searchedData}`;
     const response = await fetch(url)
     const result = await response.json()
-    console.log(result);
+  
 
     await appendPaymentHistory(result);
   } catch (error) {

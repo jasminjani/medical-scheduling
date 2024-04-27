@@ -1,16 +1,16 @@
   // let id=`<%= id %>`;
-  // console.log(id);
+
 
   let id=document.getElementById("id").value;
   console.log(id)
   const fetchdata=async(id)=>{
     try{
-      console.log(id)
+   
       let res=await fetch(`/doctor/prescription/update/${id}`);
       let resjson=await res.json();
 
       const ele = document.getElementsByClassName("A4-table-content");
-      console.log(ele);
+
       const keys = Object.keys(resjson.result[0]);
       let i=0;
 

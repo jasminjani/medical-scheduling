@@ -131,7 +131,7 @@ submit.addEventListener('click', async (e) => {
             })
     
             data = await data.json();
-            console.log(data);
+            
             
             if (data.success) {
                 localStorage.setItem('userinfo',JSON.stringify(data.user))

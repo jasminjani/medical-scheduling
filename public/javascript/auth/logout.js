@@ -9,7 +9,7 @@ async function logout(e){
       })
 
       data = await data.json();
-      console.log(data)
+     
       if (data.success) {
           window.location = "/login"
       }

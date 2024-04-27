@@ -28,15 +28,17 @@
 <body onload="getUpcomingSlots()">
   <section id="A3-allslot">
     <div class="A3-main-container">
-      <%-include("../../common/newSidebar/patientSidebar")%>
+      <%- include("../../common/newSidebar/patientSidebar") %>
         <div class="A3-container">
           <div class="A3-row-1">
-            <a id="A3-upcoming" href="/patient/upcomingSlots"><i class="fa-solid fa-arrow-up"></i></a>
-            <a id="A3-past" href="/patient/pastSlots"><i class="fa-solid fa-arrow-down"></i></a>
+            <a id="A3-upcoming" href="/patient/upcomingSlots" style="color: white; font-weight: bold;"><i
+                class="fa-solid fa-arrow-up"></i> Upcoming Slots</a>
+            <a id="A3-past" href="/patient/pastSlots" style="color: black; font-weight: bold;"><i
+                class="fa-solid fa-arrow-down"></i> Past Slots</a>
           </div>
           <div class="A3-heading">
             <h3>Upcoming Slots</h3>
-            <%-include("../../common/Pagination/paginationComp")%>
+            <%- include("../../common/Pagination/paginationComp") %>
           </div>
           <div class="A3-row-2">
             <table>
