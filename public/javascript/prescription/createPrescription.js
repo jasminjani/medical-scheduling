@@ -56,7 +56,7 @@ const submitPrescription = async () => {
       let resjson=await res.json();
       alert(resjson.msg);
       insert_id = resjson.insert_id;
-      location.href = location.origin+`/doctorDashboard/`;
+      location.href = location.origin+`/doctor/dashboard/`;
     }
   }
   catch(error){
@@ -106,7 +106,7 @@ async function showDetails() {
   try {
 
     let patient_id = document.getElementById("id").value;
-    // console.log(patient_id)
+
     const url = `/doctor/patient/prescription/${patient_id}`;
     let  response = await fetch(url)
     let result = await response.json();
@@ -120,9 +120,9 @@ async function showDetails() {
 showDetails();
 
 let date=new Date();
-// console.log(date.getTimezoneOffset());
-// console.log(date.toISOString());
-// console.log(date.toUTCString());
+console.log(date.getTimezoneOffset());
+console.log(date.toISOString());
+console.log(date.toUTCString());
 let newutcdate=new Date(date.toUTCString());
 
 function utcformat(d){
@@ -144,23 +144,23 @@ function utcformat(d){
 }
 
 const utcdate=date.toISOString();
-// console.log("utc date:"+utcdate);
+console.log("utc date:"+utcdate);
 const utcwithoutmili=utcdate.slice(0, -5) + "Z";
-// console.log("utcwithoutmili"+utcwithoutmili);
+console.log("utcwithoutmili"+utcwithoutmili);
 const finalutcdate=new Date(utcwithoutmili)
-// console.log("finalutcdate"+finalutcdate.toISOString());
+console.log("finalutcdate"+finalutcdate.toISOString());
 
 const offsetMinutes = finalutcdate.getTimezoneOffset();
-// console.log("Time Zone Offset (minutes):", offsetMinutes);
+console.log("Time Zone Offset (minutes):", offsetMinutes);
 
 // Step 3:
 const localTime = new Date(finalutcdate.getTime() - offsetMinutes * 60 * 1000);
-// console.log(localTime+"localtime");
-// console.log("Local Time:", localTime.toISOString());
+console.log(localTime+"localtime");
+console.log("Local Time:", localTime.toISOString());
 
 // Display Local Time
 const localTimeString = localTime.toUTCString();
-// console.log(localTimeString);
+console.log(localTimeString);
 
 
 
