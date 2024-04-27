@@ -576,8 +576,8 @@ exports.nearByDoctores = async (req, res) => {
       acc[id].specialities.push(speciality)
       return acc;
     }, {}));
-    console.log("object ",data);
-    res.send({data})
+    console.log("object ", data);
+    res.send({ data })
 
   } catch (error) {
     return res.status(500).json({
@@ -663,12 +663,18 @@ exports.rating = async (req, res) => {
 exports.updateRating = async (req, res) => {
   try {
 
-    const { patient_id } = req.params;
-    let query = `delete from rating_and_reviews where patient_id=?`;
+    const { doctor_id } = req.params;
 
-    console.log("Data deleted!!");
+    const { rating, review } = req.body;
 
-    let [data] = await conn.query(query, [patient_id]);
+    const patient_id = req.user.id;
+
+    let query = `update rating_and_reviews set rating = ? and review = ? where doctor_id = ? and patient_id = ?`;
+
+    let [data] = await conn.query(query, [rating, review, doctor_id, patient_id]);
+
+    res.redirect(`/patient/bookslots/${doctor_id}`);
+
   }
   catch (error) {
     return res.status(500).json({

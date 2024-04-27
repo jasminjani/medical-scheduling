@@ -1,14 +1,17 @@
+
+
+const fetchDataFun = async () => {
+ 
+  let fetchdata = await fetch(`/doctor/reviews/all`)
+  let data = await fetchdata.json()
+  return data
+}
+
 let search = document.getElementById("search").value
 let pagefield = 1
 let currentPage = 1
 let length = 0
 let pageno = document.getElementById("pageno")
-
-const fetchDataFun = async () => {
-  let fetchdata = await fetch(`/doctor/reviews`)
-  let data = await fetchdata.json()
-  return data
-}
 
 const searchFetchDataFun = async ()=>{
   let fetchdata

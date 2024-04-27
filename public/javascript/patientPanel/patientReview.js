@@ -18,13 +18,33 @@ const generateStar = async (rating) => {
 	return stars;
 }
 
+//update data 
+const updateData = async (data) => {
+	const { value: formValues } = await Swal.fire({
+		title: "Multiple inputs",
+		html: `
+			<input type="number" value=${data.rating} name="rating" id="swal-input1" class="swal-input1" placeholder="Enter rating" min="0" max="5">
+		`,
+		focusConfirm: false,
+		preConfirm: () => {
+			return [
+				document.getElementById("swal-input1").value,
+				document.getElementById("swal-input2").value
+			];
+		}
+	});
+	if (formValues) {
+		Swal.fire(JSON.stringify(formValues));
+	}
+}
+
 //generate reviews of doctor
 const generateReviewData = async (review, id) => {
 	const html = `
 		<div class="A6-reviewContent card-1">
 		<div class="row-1">
 			<h4 class="reviewName">${review.patient_id === id ? "Your Review" : `${review.fname} ${review.lname}`}</h4>
-			${review.patient_id === id ? `<i class="fa-solid fa-pen"></i>` : ""}
+			${review.patient_id === id ? `<i class="fa-solid fa-pen" onclick='updateData(${JSON.stringify(review)})'></i>` : ""}
 		</div>
 		<div class="row-2">
 			<h4>${await generateStar(review.rating)}</h4>

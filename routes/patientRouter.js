@@ -28,6 +28,7 @@ const {
   getBookingSlots,
   rating,
   getDoctorRating,
+  updateRating,
 } = require("../controllers/patientController");
 const {
   becomeDoctorDetail,
@@ -118,6 +119,8 @@ router.route("/generate/:id").get(generatePDF);
 router.route("/review").post(rating);
 
 router.route("/review/:doctor_id").get(getDoctorRating);
+
+router.route("/review/update/:doctor_id").get(updateRating);
 
 
 
