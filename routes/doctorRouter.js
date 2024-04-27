@@ -159,8 +159,7 @@ router.route("/dates").get(getDates);
 router.route("/slots/:date").get(getAllSlots);
 router.route("/delete/:slot_id").get(deleteSlot);
 
-router.route("/searchReview/:search").get(searchReview);
-router.route("/searchPatientData/:search").get(getPatientSearchData);
+
 
 // /generatePDFofprescripton/:id
 router.route("/generate/:id").get(generatePDF);
