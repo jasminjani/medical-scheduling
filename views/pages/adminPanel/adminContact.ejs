@@ -96,8 +96,15 @@
 
     async function viewMessage(id) {
       let allMessage = await getMessage();
+      let data = allMessage.filter((m) => {
 
-      // Swal.fire(message);
+        if (m.id == id) {
+          return m.message;
+        }
+
+      });
+
+      Swal.fire(data[0].message);
     }
 
   </script>
