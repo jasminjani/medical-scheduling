@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
   <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css" />
   <script src="/sweetalert2/sweetalert2.min.js" defer></script>
-  
+
   <style>
     #a5-patient-doctor-active {
       background-color: #0969da;
@@ -37,25 +37,6 @@
           <div class="container">
             <div class="booking-page">
               <div class="doctor-profile">
-                <!-- <div class="doctor-img">
-                <img src="/assets/doctor4.jpg" alt="" />
-              </div>
-              <div class="doctor-details">
-                <p class="name"><span>Name: </span>Alpesh</p>
-                <p class="qualification"><span>qualification: </span>MBBS</p>
-                <p class="speciality"><span>speciality: </span>neurologist</p>
-                <p class="fees"><span>fees: </span>250 rs</p>
-                <p class="hospital-name"><span>clinic/hospital: </span>ALPHA</p>
-                <p class="address"><span>address: </span> ahmedabad</p>
-                <div class="rating">
-                  <img src="/assets/gstar.png" width="15" alt="" />
-                  <img src="/assets/gstar.png" width="15" alt="" />
-                  <img src="/assets/gstar.png" width="15" alt="" />
-                  <img src="/assets/gstar.png" width="15" alt="" />
-                  <img src="/assets/gstar.png" width="15" alt="" />
-                  <span id="review-count">(200)</span>
-                </div>
-              </div> -->
               </div>
 
               <div class="appointmentForm">
@@ -81,51 +62,10 @@
             <div class="A6-rating-review">
               <div class="A6-showReview">
                 <div class="A6-caption">
-                  <h3 id="A6-heading">Patient Reviews</h3>
+                  <h3 id="A6-heading">Reviews</h3>
                   <div class="A6-review">
-                    <div class="A6-reviewContent card-1">
-                      <h4 class="reviewName">Dixit Kaneriya</h4>
-                      <i class='fa fa-star' style='font-size:24px'></i>
-                      <i class='fa fa-star' style='font-size:24px'></i>
-                      <i class='fa fa-star' style='font-size:24px'></i>
-                      <i class='fa fa-star' style='font-size:24px'></i>
-                      <i class='fa fa-star' style='font-size:24px'></i>
-                        
-                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus, culpa sapiente. Similique odio nostrum excepturi!</p>
-                    </div>
+                    <div class="A6-reviewContent card-1"></div>
                     <br>
-                    <div class="A6-reviewContent card-2">
-                      <h4 class="reviewName">Dixit Kaneriya</h4>
-                      <i class='fa fa-star' style='font-size:24px'></i>
-                      <i class='fa fa-star' style='font-size:24px'></i>
-                      <i class='fa fa-star' style='font-size:24px'></i>
-                      <i class='fa fa-star' style='font-size:24px'></i>
-                      <i class='fa fa-star' style='font-size:24px'></i>
-                      
-                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus, culpa sapiente. Similique odio nostrum excepturi!</p>
-                    </div>
-                    <br>
-                    <div class="A6-reviewContent card-3">
-                      <h4 class="reviewName">Dixit Kaneriya</h4>
-                      <i class='fa fa-star' style='font-size:24px'></i>
-                      <i class='fa fa-star' style='font-size:24px'></i>
-                      <i class='fa fa-star' style='font-size:24px'></i>
-                      <i class='fa fa-star' style='font-size:24px'></i>
-                      <i class='fa fa-star' style='font-size:24px'></i>
-                      
-                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus, culpa sapiente. Similique odio nostrum excepturi!</p>
-                    </div>
-                    <br>
-                    <div class="A6-reviewContent card-4">
-                      <h4 class="reviewName">Dixit Kaneriya</h4>
-                      <i class='fa fa-star' style='font-size:24px'></i>
-                      <i class='fa fa-star' style='font-size:24px'></i>
-                      <i class='fa fa-star' style='font-size:24px'></i>
-                      <i class='fa fa-star' style='font-size:24px'></i>
-                      <i class='fa fa-star' style='font-size:24px'></i>
-                      
-                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus, culpa sapiente. Similique odio nostrum excepturi!</p>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -152,11 +92,12 @@
                   </div>
                   <form id="reviewForm" method="post">
                     <input type="hidden" name="doctor_id" id="doctor_id" value=<%=doctor_id%>>
-                    <b style="display: none;">Rating :</b> <input type="text" name="rating" id="output" readonly style="display: none;">
+                    <b style="display: none;">Rating :</b> <input type="text" name="rating" id="output" readonly
+                      style="display: none;">
                     <br><br>
                     <div class="reviewPatient">
                       <label for="review"><b>Review:</b></label>
-                      <textarea name="patientReview" id="rev" cols="20" rows="2">  
+                      <textarea name="patientReview" id="rev" cols="20" rows="2">
                       </textarea>
                     </div>
                     <br>
@@ -164,7 +105,7 @@
                   </form>
                 </div>
               </div>
-              
+
             </div>
           </div>
         </main>

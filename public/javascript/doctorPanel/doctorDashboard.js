@@ -124,7 +124,7 @@ const fetchAppointmentData = async () => {
                 <td>${index + 1}</td>
                 <td>${element.patient_name}</td>
                 <td>${element.appointment_time}</td>
-                <td><input type="button" value="Add Prescription" onclick="addPrescription(${element.patient_id},${element.booking_id})" id="addprescription-btn"></td>
+                <td><input type="button" value="Add Prescription" onclick="addPrescription(${element.booking_id})" id="addprescription-btn"></td>
                 <td><input type="hidden" value="${element.booking_id}" id="booking_id"></td>
             </tr>`;
       table.innerHTML += str;
@@ -136,8 +136,9 @@ const fetchAppointmentData = async () => {
 
 }
 
-const addPrescription = async (patient_id, booking_id) => {
-  location.href = `/doctor/prescription/${patient_id}/${booking_id}`;
+const addPrescription=async(booking_id)=>{
+  // location.href =`/doctor/prescription/${patient_id}/${booking_id}`;
+  location.href =`/doctor/prescription/${booking_id}`;
 }
 
 fetchAppointmentData();

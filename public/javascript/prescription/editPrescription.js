@@ -2,7 +2,7 @@
   // console.log(id);
 
   let id=document.getElementById("id").value;
-
+  console.log(id)
   const fetchdata=async(id)=>{
     try{
       console.log(id)
@@ -42,7 +42,7 @@
               location.href=`/doctor/prescriptiondetails`;
     }
     catch(error){
-    logger.error(error);
+        console.log(error);
     }          
   }
 

@@ -106,7 +106,8 @@ exports.createDoctor = async (req, res) => {
     //doctor_id get token
     const doctor_id = req.user.id;
 
-    const {
+    let {
+      otherSpeciality,
       speciality,
       name,
       location,
@@ -179,14 +180,31 @@ exports.createDoctor = async (req, res) => {
 
     try {
       await conn.query(
-        `insert into doctor_details (doctor_id,hospital_id,qualification,consultancy_fees) values (?,?,?,?)`,
-        [doctor_id, hospital_id, qualification, consultancy_fees]
+        `insert into doctor_details (doctor_id,hospital_id,qualification,consultancy_fees, approved) values (?,?,?,?,?)`,
+        [doctor_id, hospital_id, qualification, consultancy_fees, 0]
       );
     } catch (error) {
       return res.status(500).json({
         success: false,
         message: error.message,
       });
+    }
+
+    if (otherSpeciality) {
+      try {
+        const [newSpeciality] = await conn.query(
+          `INSERT INTO specialities (speciality, approved) VALUES (?,?)`,
+          [otherSpeciality, 0]
+        );
+
+        speciality = newSpeciality.insertId;
+
+      } catch (error) {
+        return res.status(500).json({
+          success: false,
+          message: error.message,
+        });
+      }
     }
 
     try {
@@ -501,7 +519,6 @@ exports.updateGetDoctorData = async (req, res) => {
 
 exports.updateDoctorDetails = async (req, res) => {
   //doctor_id get token
-  console.log(req.body);
   let doctor_id = req.user.id;
   const {
     fname,
@@ -538,7 +555,7 @@ exports.updateDoctorDetails = async (req, res) => {
         [fname, lname, dob, gender, phone, address, doctor_id, 2]
       );
     } catch (error) {
-      console.log(error);
+      logger.error(error);
       return res.json({
         success: false,
         message: error.message,
@@ -581,7 +598,7 @@ exports.updateDoctorDetails = async (req, res) => {
         [speciality, doctor_id]
       );
     } catch (error) {
-      console.log(error);
+      logger.error(error);
       return res.json({
         success: false,
         message: error.message,
@@ -591,8 +608,8 @@ exports.updateDoctorDetails = async (req, res) => {
     if (!profile_picture == "") {
       try {
         await conn.query(
-          `update profile_pictures set is_active = ? where user_id = ?`,
-          [0, doctor_id]
+          `update profile_pictures set is_active = 0 where user_id = ?`,
+          [doctor_id]
         );
       } catch (error) {
         return res.json({
@@ -614,9 +631,21 @@ exports.updateDoctorDetails = async (req, res) => {
       }
     }
 
+    let result;
+    try {
+      [result] = await conn.query(` select u.id,u.fname,u.lname,u.email,u.gender,u.dob,u.phone,u.city,u.address,u.role_id,pp.profile_picture as profile from users as u left join profile_pictures as pp on u.id = pp.user_id where pp.is_active =1 and u.id = ?;`,[doctor_id])
+    } catch (error) {
+      return res.json({
+        success: false,
+        message: error.message,
+      });
+    }
+
+    result[0].token = req.cookies.token;
+
     return res
       .status(200)
-      .json({ success: true, message: "Updated successfully" });
+      .json({ success: true, message: "Updated successfully",data:result });
   } catch (error) {
     console.log(error);
     return res.json({
@@ -687,8 +716,8 @@ exports.createHospital = async (req, res) => {
 
 exports.home = async (req, res) => {
   try {
-    let {patient_id,booking_id}=req.params;
-    return res.render("pages/Prescription/createPrescription.ejs",{patient_id,booking_id});
+    let {booking_id}=req.params;
+    return res.render("pages/Prescription/createPrescription.ejs",{booking_id});
   } catch (error) {
     console.log(error.message);
   }
@@ -712,14 +741,15 @@ exports.updateDetailsData = async (req, res) => {
 exports.createPrescription = async (req, res) => {
   try {
     const doctor_id = req.user.id;
-    const { patient_id, prescription, diagnosis, booking_id } = req.body;
+    const { prescription, diagnosis, booking_id } = req.body;
 
-    const query = `INSERT INTO prescriptions(doctor_id,patient_id,prescription,diagnoses,booking_id) values (?,?,?,?,?)`;
+    const query = `INSERT INTO prescriptions(doctor_id,patient_id,prescription,diagnoses,booking_id) 
+    values (?,(select patient_id from slot_bookings where id=?),?,?,?);`;
 
     if (prescription && diagnosis) {
       let result = await conn.query(query, [
         doctor_id,
-        patient_id,
+        booking_id,
         prescription,
         diagnosis,
         booking_id,
@@ -868,30 +898,30 @@ exports.createSlots = async (req, res) => {
             const start_time = slot[0].trim();
             const end_time = slot[1].trim();
 
+            // try {
+            //   const query =
+            //     "select * from time_slots where doctor_id = ? and date = ? and end_time <= ?";
+
+            //   const [isValid] = await conn.query(query, [
+            //     doctor_id,
+            //     dayArray[i][0],
+            //     start_time,
+            //   ]);
+            // } catch (error) {
+            //   return res
+            //     .status(500)
+            //     .json({ success: false, message: error.message });
+            // }
+
             try {
               const query =
-                "select * from time_slots where doctor_id = ? and date = ? and end_time <= ?";
-
-              const [isValid] = await conn.query(query, [
-                doctor_id,
-                dayArray[i][0],
-                start_time,
-              ]);
-            } catch (error) {
-              return res
-                .status(500)
-                .json({ success: false, message: error.message });
-            }
-
-            try {
-              const query =
-                "insert into time_slots (`doctor_id`,`date`,`start_time`,`end_time`) values (?,?,?,?)";
+                `insert into time_slots (doctor_id,date,start_time,end_time) values (?,?,CONVERT_TZ(?, @@session.time_zone, '+00:00'),CONVERT_TZ(?, @@session.time_zone, '+00:00'))`;
 
               const [slots] = await conn.query(query, [
                 doctor_id,
-                dayArray[i][0],
-                start_time,
-                end_time,
+                dayArray[i][0],         
+                `${dayArray[i][0]} ${start_time}`,
+                `${dayArray[i][0]} ${end_time}`,
               ]);
             } catch (error) {
               return res
@@ -1035,3 +1065,4 @@ exports.deleteSlot = async (req, res) => {
     return res.status(500).json({ success: false, message: error.message });
   }
 };
+

@@ -181,11 +181,12 @@ router.route("/prescriptions").get(getPrescriptionOfDoctor);
 router.route("/patient/prescription/:patient_id").get(showDetails);
 
 // TODO : change route
-router.route("/prescription/:patient_id/:booking_id").get(home);
+router.route("/prescription/:booking_id").get(home);
 
 router.route("/prescriptiondetails").get(allPatientPriscription);
 
 // /editprescription/:id
 router.route("/prescription/edit/:id").get(editPrescriptionHome);
+
 
 module.exports = router;

@@ -55,6 +55,14 @@
   border-radius: 50%;
 }
 
+.user-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: block;
+  overflow: hidden;
+}
+
 .user {
   display: none;
   align-items: center;
@@ -70,9 +78,7 @@
 }
 
 .user .logo a img {
-  border-radius: 50%;
   width: 100%;
-  height: 100%;
 }
 
 
@@ -297,7 +303,8 @@
   /* border: 1px solid tomato; */
 }
 
-#speciality, #a5-doctorCity {
+#speciality,
+#a5-doctorCity {
   background-color: #e8f2fd;
   border: none;
   min-width: 200px;
