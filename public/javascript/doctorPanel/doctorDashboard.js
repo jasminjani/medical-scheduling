@@ -1,39 +1,35 @@
-
-const fetchCountData = async () => {
+  const fetchCountData = async () => {
   const fetchData = await fetch(`/doctor/analytics`)
   const data = await fetchData.json()
-  let key = Object.keys(data[0])
-  key.forEach(element => {
-    if (element == 'patient') {
-      document.getElementById(element).innerHTML = `<h4>${data[0][element]}</h4>`
+
+  data.forEach(element => {
+    console.log(element["revenue"]);
+    document.getElementById("patient").innerHTML = `<h4>${element["patient"]}</h4>`
+
+    if (element["revenue"] == null) {
+      document.getElementById("revenue").innerHTML = `<h4>0</h4>`
     }
-    if (element == 'revenue') {
-      if(data[0][element] == null)
-      {
-        document.getElementById(element).innerHTML = `<h4>0</h4>`
-      }
-      else
-      {
-      document.getElementById(element).innerHTML = `<h4>${data[0][element]}</h4>`
-      }
+    else {
+      document.getElementById("revenue").innerHTML = `<h4>${element["revenue"]}</h4>`
     }
-    if (element == 'slot') {
-      document.getElementById("appointment").innerHTML = `<h4>${data[0][element]}</h4>`
-    }
+    document.getElementById("appointment").innerHTML = `<h4>${element["slot"]}</h4>`
   });
 }
 fetchCountData()
 
 const fetchReviewData = async () => {
-
+  let feedbackCard = document.getElementById("feedbackCard")
   const fetchData = await fetch(`/doctor/reviews/all`)
   const data = await fetchData.json()
   let key = Object.keys(data)
-  let feedbackCard = document.getElementById("feedbackCard")
 
+  if(data.length == 0)
+  {
+    feedbackCard.innerHTML = "<h2 style='align-item:center'>Data Not Found!</h2>"
+  }
   
-  key.forEach(element => {
-
+key.forEach(element => {
+  
     let dtkey = Object.keys(data[element])
 
     let div1Card = document.createElement("div")
@@ -107,85 +103,41 @@ const fetchReviewData = async () => {
     div2CardBox.appendChild(div3Color)
     div1Card.appendChild(div2CardBox)
     feedbackCard.appendChild(div1Card)
-
-
-  });
-}
-
-
+});
+  };
 fetchReviewData()
 
-// const fetchAppointMents = async () => {
-//   let fetchData = await fetch('/dashBoardAppointments')
-//   let data = await fetchData.json()
-//   let key = Object.keys(data)
-//   console.log(data);
-//   console.log(key);
-//   let count = 1;
+const fetchAppointmentData = async () => {
+  try {
 
-
-//   key.forEach(element => {
-//     let dtkey = Object.keys(data[element])
-//     let table = document.getElementById("appointmentTable")
-//     let div1 = document.createElement('div')
-//     let countdiv = document.createElement("div")
-//     countdiv.textContent = count++
-//     div1.appendChild(countdiv)
-//     div1.setAttribute("class", "a7-table-data")
-//     dtkey.forEach(item => {
-//       if (item == 'patient_id') {
-//         let btn = document.createElement("div")
-//         btn.textContent = "Add Prescription"
-//         btn.setAttribute("id", "hh")
-//         btn.setAttribute("onclick", `location.href ='/prescription/${data[element][item]}'`)
-//         btn.setAttribute("class", "a7-btn-style a5-btn")
-//         div1.appendChild(btn)
-//       } else {
-
-//         let divspan = document.createElement("div")
-//         let span = document.createElement('span')
-//         span.setAttribute("class", "a7-table-border")
-//         span.textContent = data[element][item]
-//         divspan.appendChild(span)
-//         div1.appendChild(divspan)
-
-//       }
-//     });
-
-//     table.appendChild(div1)
-//   });
-// }
-
-// fetchAppointMents()
-
-
-const fetchAppointmentData=async()=>{
-  try{
+    let table = document.getElementById("appointmentTable");
     let fetchData = await fetch('/doctor/appointments/today')
     let data = await fetchData.json()
-    
+    console.log(data.length);
+    if(data.length === 0){
+      table.innerHTML = "<h2 style='text-align: center; margin-top: 100px;'>Data Not Found!</h2>"
+    }
 
     data.forEach(function (element, index) {
-          let table = document.getElementById("appointmentTable");
-          let str = `
+      let str = `
             <tr>
-                <td>${index+1}</td>
+                <td>${index + 1}</td>
                 <td>${element.patient_name}</td>
                 <td>${element.appointment_time}</td>
                 <td><input type="button" value="Add Prescription" onclick="addPrescription(${element.patient_id},${element.booking_id})" id="addprescription-btn"></td>
                 <td><input type="hidden" value="${element.booking_id}" id="booking_id"></td>
             </tr>`;
-              table.innerHTML += str;
-            });
+      table.innerHTML += str;
+    });
   }
-  catch(error){
+  catch (error) {
     console.log(error);
   }
 
 }
 
-const addPrescription=async(patient_id,booking_id)=>{
-  location.href =`/doctor/prescription/${patient_id}/${booking_id}`;
+const addPrescription = async (patient_id, booking_id) => {
+  location.href = `/doctor/prescription/${patient_id}/${booking_id}`;
 }
 
 fetchAppointmentData();
