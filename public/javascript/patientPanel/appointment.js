@@ -179,7 +179,7 @@ const getDoctorData = async () => {
     <p class="name"><span>Name: </span>${doctor.fname + " " + doctor.lname}</p>
     <p class="qualification"><span>qualification: </span>${doctor.qualification}</p>
     <p class="speciality"><span>speciality: </span>${doctor.specialities.map((speciality) => `${speciality.toUpperCase()}`)}</p>
-    <p class="fees"><span>fees: </span>Rs. ${doctor.consultancy_fees}</p>
+    <p class="fees"><span>Fees: </span>Rs. ${doctor.consultancy_fees}</p>
     <p class="hospital-name"><span>clinic/hospital: </span>${doctor.hospital_name}</p>
     <p class="address"><span>city: </span> ${doctor.city}</p>
     <p class="address"><span>address: </span> ${doctor.location}</p>
