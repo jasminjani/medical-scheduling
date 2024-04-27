@@ -297,7 +297,7 @@
   /* border: 1px solid tomato; */
 }
 
-#speciality {
+#speciality, #a5-doctorCity {
   background-color: #e8f2fd;
   border: none;
   min-width: 200px;

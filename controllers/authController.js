@@ -16,7 +16,7 @@ const generateCityCombo = async () => {
     return html;
   }
 
-  let html = `<option value="">--Select State--</option>`;
+  let html = `<option value="">--Select City--</option>`;
 
   result.forEach((value) => {
     html += `<option value="${value.city}">${value.city} </option>`;
@@ -110,7 +110,8 @@ exports.contactUsHomePage = async (req, res) => {
 exports.allDoctors = async (req, res) => {
   try {
     let html = await specialitiesCombo();
-    res.render('./pages/patientPanel/allDoctors', { html })
+    let city = await generateCityCombo();
+    res.render('./pages/patientPanel/allDoctors', { html, city })
   } catch (error) {
     logger.error(error.message)
   }

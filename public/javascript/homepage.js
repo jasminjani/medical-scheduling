@@ -86,23 +86,51 @@ const putDoctorOnScreen = async (data) => {
 search.addEventListener("click", async (e) => {
   let speciality = document.getElementById("speciality");
   let doctorName = document.getElementById("dname");
+  let doctorCity = document.getElementById('a5-doctorCity');
 
-  if (speciality.value && doctorName.value) {
+  if (speciality.value && doctorName.value && doctorCity.value) {
     let filteredDoctor = data.filter((doctor) => {
-      return doctorName.value === doctor.fname + " " + doctor.lname;
+      return (doctorName.value === doctor.fname + " " + doctor.lname && doctor.specialities.includes(speciality.value) && doctor.city.includes(doctorCity.value));
     });
     putDoctorOnScreen(filteredDoctor);
+
+  } else if (speciality.value && doctorName.value) {
+    let filteredDoctor = data.filter((doctor) => {
+      return (doctorName.value === doctor.fname + " " + doctor.lname && doctor.specialities.includes(speciality.value));
+    });
+    putDoctorOnScreen(filteredDoctor);
+
+  } else if (doctorName.value && doctorCity.value) {
+    let filteredDoctor = data.filter((doctor) => {
+      return (doctorName.value === doctor.fname + " " + doctor.lname && doctor.city.includes(doctorCity.value));
+    });
+    putDoctorOnScreen(filteredDoctor);
+
+  } else if (speciality.value && doctorCity.value) {
+    let filteredDoctor = data.filter((doctor) => {
+      return (doctor.specialities.includes(speciality.value) && doctor.city.includes(doctorCity.value));
+    });
+    putDoctorOnScreen(filteredDoctor);
+
   } else if (speciality.value) {
     let filteredDoctor = data.filter((doctor) => {
       return doctor.specialities.includes(speciality.value);
     });
-
     putDoctorOnScreen(filteredDoctor);
+
   } else if (doctorName.value) {
     let filteredDoctor = data.filter((doctor) => {
       return doctorName.value === doctor.fname + " " + doctor.lname;
     });
     putDoctorOnScreen(filteredDoctor);
+
+  } else if (doctorCity.value) {
+    let filteredDoctor = data.filter((doctor) => {
+      return doctor.city.includes(doctorCity.value);
+    });
+    console.log("filteredDoctor : ",filteredDoctor);
+    putDoctorOnScreen(filteredDoctor);
+
   } else {
     putDoctorOnScreen(data);
   }
@@ -124,11 +152,24 @@ becomeDoctor?.addEventListener("click", async (e) => {
     window.location.href = "/patient/create";
   } else {
     Swal.fire({
-      title: "Already Requested",
       icon: "success",
+      title: "Already Requested",
+      // text: "Something went wrong!",
+      footer: '<p style="color: #7066e0; cursor: pointer;" onclick="statusKnown()">Know Status!</p>'
     });
   }
 });
+
+async function statusKnown() {
+  const userStatus = await fetch("/patient/knowStatus")
+  const data = await userStatus.json()
+  if (data[0]["approved"] == -1) Swal.fire({
+    icon: "error",
+    title: "Request Rejected!",
+    footer: '<a href="/patient/updateBecomeDoctorDetails" style="color: #7066e0; cursor: pointer;" onclick="statusKnown()">Update Details</a>'
+  });
+  if (data[0]["approved"] == 0) Swal.fire("Request Pending!", "", "info")
+}
 
 async function isLoggedIn() {
   let user = await fetch("/current-user", {

@@ -4,7 +4,7 @@ const fetchData=async()=>{
   try{
     let res = await fetch(`/doctor/prescriptions`);
     let resjson=await res.json()
-    data=resjson.result[0] || [];
+    data=resjson.result || [];
   }
   catch(error){
     console.error(error);
@@ -13,13 +13,13 @@ const fetchData=async()=>{
 
 const main=async()=>{
   await fetchData();
-  pagination();
+  pagination(data);
 }
 
 main();    
 
 const editPrescription= async (id) =>{
-  location.href = `/editprescription/${id}`;
+  location.href = `/doctor/prescription/edit/${id}`;
 }
 
 const generatePDF = async (id) => {
@@ -61,5 +61,4 @@ const searchPatient=async()=>{
         //   });
         // };
         
-        // fetchData();
       
