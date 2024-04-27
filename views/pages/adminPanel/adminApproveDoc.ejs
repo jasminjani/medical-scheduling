@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
   <link rel="stylesheet" href="/css/adminPanel/adminApproveDoc.css">
+  <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css">
+  <script src="/sweetalert2/sweetalert2.min.js"></script>
   <style>
     #a5-admin-doctor-active {
       background-color: #0969da;
@@ -200,8 +202,26 @@
       getAllDoctors();
 
       async function deleteDoctor(id) {
-        let resp = await fetch(`/admin/doctors/delete/${id}`);
-        location.reload();
+
+        await Swal.fire({
+        title: "Are you sure?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#0969da",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Delete it!"
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            let resp = await fetch(`/admin/doctors/delete/${id}`);
+            await Swal.fire({
+              title: "Delted!",
+              text: "Doctor has been deleted.",
+              icon: "success"
+            });   
+            location.reload();
+          }
+        });
+
       }
 
       async function approveDoc(id) {

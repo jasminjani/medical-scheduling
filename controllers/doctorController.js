@@ -106,7 +106,8 @@ exports.createDoctor = async (req, res) => {
     //doctor_id get token
     const doctor_id = req.user.id;
 
-    const {
+    let {
+      otherSpeciality,
       speciality,
       name,
       location,
@@ -179,14 +180,31 @@ exports.createDoctor = async (req, res) => {
 
     try {
       await conn.query(
-        `insert into doctor_details (doctor_id,hospital_id,qualification,consultancy_fees) values (?,?,?,?)`,
-        [doctor_id, hospital_id, qualification, consultancy_fees]
+        `insert into doctor_details (doctor_id,hospital_id,qualification,consultancy_fees, approved) values (?,?,?,?,?)`,
+        [doctor_id, hospital_id, qualification, consultancy_fees, 0]
       );
     } catch (error) {
       return res.status(500).json({
         success: false,
         message: error.message,
       });
+    }
+
+    if (otherSpeciality) {
+      try {
+        const [newSpeciality] = await conn.query(
+          `INSERT INTO specialities (speciality, approved) VALUES (?,?)`,
+          [otherSpeciality, 0]
+        );
+
+        speciality = newSpeciality.insertId;
+
+      } catch (error) {
+        return res.status(500).json({
+          success: false,
+          message: error.message,
+        });
+      }
     }
 
     try {
