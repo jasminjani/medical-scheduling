@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
   <link rel="stylesheet" href="/css/adminPanel/adminApproveDoc.css">
+  <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css">
+  <script src="/sweetalert2/sweetalert2.min.js"></script>
   <style>
     #a5-admin-speciality-active {
       background-color: #0969da;
@@ -29,39 +31,39 @@
   <div class="a5-main-container">
     <div class="a2-approve-table-div">
       <%- include('../../common/newSidebar/adminSidebar.ejs') %>
-      <div class="a2-container">
-        <div class="a5-flex-btn">
-          <!-- <a href="/admin" style="text-decoration: none; color: black;"> -->
-          <p onclick="window.location.href=`/admin`" class="a2-back-btn a2-btn">
-            <i class="fa-solid fa-arrow-left"></i>
-            Back
-          </p>
-          <!-- </a> -->
+        <div class="a2-container">
+          <div class="a5-flex-btn">
+            <!-- <a href="/admin" style="text-decoration: none; color: black;"> -->
+            <p onclick="window.location.href=`/admin`" class="a2-back-btn a2-btn">
+              <i class="fa-solid fa-arrow-left"></i>
+              Back
+            </p>
+            <!-- </a> -->
+          </div>
+
+          <h2 class="a2-approve-h2">All Doctors Specialties</h2>
+
+          <table class="a2-approve-table">
+            <tr class="approve-tbl-head">
+              <th>Sr. No.</th>
+              <th>Specialty Name</th>
+            </tr>
+            <tbody id="a2-tbody"></tbody>
+          </table>
+
+          <h2 class="a2-approve-h2">Pending Request</h2>
+
+          <table class="a2-approve-table" id="pending-request-tbl">
+            <tr class="approve-tbl-head">
+              <th>Sr. No.</th>
+              <th>Specialty Name</th>
+              <th>Add Specialty</th>
+            </tr>
+            <tbody id="pending-speciality"></tbody>
+
+          </table>
+          <h3 class="a2-no-data" style="text-align: center; padding: 20px;">No pending Request</h3>
         </div>
-
-        <h2 class="a2-approve-h2">All Doctors Specialties</h2>
-
-        <table class="a2-approve-table">
-          <tr class="approve-tbl-head">
-            <th>Sr. No.</th>
-            <th>Specialty Name</th>
-          </tr>
-          <tbody id="a2-tbody"></tbody>
-        </table>
-
-        <h2 class="a2-approve-h2">Pending Request</h2>
-
-        <table class="a2-approve-table" id="pending-request-tbl">
-          <tr class="approve-tbl-head">
-            <th>Sr. No.</th>
-            <th>Specialty Name</th>
-            <th>Add Specialty</th>
-          </tr>
-          <tbody id="pending-speciality"></tbody>
-
-        </table>
-        <h3 class="a2-no-data" style="text-align: center; padding: 20px;">No pending Request</h3>
-      </div>
     </div>
   </div>
 
@@ -113,16 +115,35 @@
     getNewSpecialty();
 
     async function addSpecialty(id) {
-      let response = await fetch("/admin/add-specialty", {
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: id }),
-      });
 
-      if (response.ok) {
-        alert("Add Specialty successfully ");
-        location.reload();
-      }
+      await Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#0969da",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Add it!"
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+
+            let response = await fetch("/admin/specialities/add", {
+              method: "post",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ id: id }),
+            });
+
+            await Swal.fire({
+              title: "Added!",
+            text: "Specialty added successfully.",
+            icon: "success"
+            });   
+            if (response.ok) {
+              // alert("Specialty added successfully ");
+              location.reload();
+            }
+          }
+        });
     }
   </script>
 </body>
