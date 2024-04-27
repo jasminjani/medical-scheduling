@@ -5,6 +5,7 @@
 
   const fetchdata=async(id)=>{
     try{
+      console.log(id)
       let res=await fetch(`/doctor/prescription/update/${id}`);
       let resjson=await res.json();
 
@@ -22,7 +23,7 @@
       console.error(error);
     }
   }
-
+  
   fetchdata(id);
 
   const editPrescription=async(id)=>{

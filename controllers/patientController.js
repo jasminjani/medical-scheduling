@@ -2,8 +2,9 @@ const conn = require('../config/dbConnection')
 const logger = require('../utils/pino')
 let PDFDocument = require("pdfkit");
 
-exports.patientDashboard = (req, res) => {
-  res.render("pages/patientPanel/patientDashboard");
+exports.patientDashboard = async (req, res) => {
+  let html = await this.specialitiesCombo();
+  res.render('pages/patientPanel/patientDashboard', { html });
 };
 
 exports.patientStatus = async (req, res) => {
@@ -555,9 +556,29 @@ exports.nearByDoctores = async (req, res) => {
       });
     }
 
-    const sql = `SELECT * FROM clinic_hospitals JOIN doctor_details ON doctor_details.hospital_id = clinic_hospitals.id JOIN users ON users.id =doctor_details.doctor_id WHERE users.is_deleted = 0 AND clinic_hospitals.city in (select city from users where id = ?)`;
-    const [nearByDoctores] = await conn.query(sql, [patientId]);
-    res.send(nearByDoctores);
+    const sql = `SELECT u.id, u.fname, u.lname, dd.qualification, dd.consultancy_fees, ch.name AS hospital_name, ch.city,
+    ch.location,pp.profile_picture,s.speciality,COUNT(rr.id) AS total_reviews,AVG(rr.rating) AS rating
+    FROM users AS u
+    INNER JOIN doctor_details AS dd ON u.id = dd.doctor_id AND dd.approved = 1
+    INNER JOIN profile_pictures AS pp ON u.id = pp.user_id AND pp.is_active = 1
+    INNER JOIN doctor_has_specialities AS ds ON u.id = ds.doctor_id
+    INNER JOIN specialities AS s ON ds.speciality_id = s.id
+    INNER JOIN clinic_hospitals AS ch ON dd.hospital_id = ch.id
+    LEFT JOIN rating_and_reviews AS rr ON u.id = rr.doctor_id
+    WHERE u.is_deleted = 0 AND ch.city in (select city from users where id = ?)
+    GROUP BY u.id,pp.created_at,pp.profile_picture,s.speciality,dd.qualification,dd.consultancy_fees,ch.name, ch.city,ch.location 
+    ORDER BY rating DESC`;
+
+    let [result] = await conn.query(sql, [patientId]);
+
+    let data = Object.values(result.reduce((acc, { id, fname, lname, qualification, consultancy_fees, hospital_name, city, location, profile_picture, speciality, total_reviews, rating }) => {
+      acc[id] ??= { id, fname, lname, qualification, consultancy_fees, hospital_name, city, location, profile_picture, total_reviews, rating, specialities: [] };
+      acc[id].specialities.push(speciality)
+      return acc;
+    }, {}));
+    console.log("object ",data);
+    res.send({data})
+
   } catch (error) {
     return res.status(500).json({
       success: false,
@@ -566,7 +587,7 @@ exports.nearByDoctores = async (req, res) => {
   }
 };
 
-// MATCH CITY BASED ON SEARCH
+// MATCH CITY BASED ON SEARCH NOT IN USE
 exports.nearByDoctoresOnSearch = async (req, res) => {
   try {
     let { city } = req.body;
@@ -686,4 +707,92 @@ exports.getBookingSlots = async (req, res) => {
   const doctor_id = req.params.id;
   let html = await this.specialitiesCombo();
   return res.render('pages/patientPanel/appointment', { html, doctor_id })
+}
+
+
+// update become a doctor form
+
+exports.knowStatus = async (req, res) => {
+  const doctor_id = req.user.id
+  try {
+    const [status] = await conn.query(`select approved from doctor_details where doctor_id = ?;`, [doctor_id])
+    return res.status(200).json(status)
+  } catch (error) {
+    return res.json({
+      success: false,
+      message: error.message
+    })
+  }
+}
+
+exports.updateBecomeDoctorDetails = async (req, res) => {
+  res.render("pages/doctorPanel/becomeDoctorDetails")
+}
+
+exports.updateBecomeDoctorData = async (req, res) => {
+  const doctor_id = req.user.id
+  try {
+    const [result] = await conn.query(` select doctor_details.id as doctor_details_id,doctor_details.hospital_id,specialities.id as speciality_id, qualification, consultancy_fees,name as hospital_name,location,gst_no,city,pincode from doctor_details inner join clinic_hospitals on doctor_details.hospital_id = clinic_hospitals.id inner join doctor_has_specialities on doctor_details.doctor_id = doctor_has_specialities.doctor_id inner join specialities on doctor_has_specialities.speciality_id = specialities.id where doctor_details.doctor_id = ?;`, [doctor_id])
+    res.status(200).json(result)
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message
+    })
+  }
+}
+
+
+exports.updatePostBecomeDoctor = async (req, res) => {
+
+  const { doctor_details_id, hospital_id, qualification, consultancy_fees, speciality_id, hospital_name, address, gst_no, city, pincode } = req.body
+  const doctor_id = req.user.id
+
+  if (!hospital_id || !speciality_id || !doctor_id) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error!"
+    })
+  }
+
+  try {
+    try {
+      await conn.query(`update clinic_hospitals set name = ?, location = ?, gst_no =?, city = ?, pincode = ? where clinic_hospitals.id = ? `, [hospital_name, address, gst_no, city, pincode, hospital_id])
+
+    } catch (error) {
+      console.log(error);
+      return res.status(403).json({
+        success: false,
+        message: error.message
+      })
+    }
+
+    try {
+      const [result] = await conn.query(`update doctor_has_specialities set speciality_id = ? where doctor_id = ?`, [speciality_id, doctor_id])
+      console.log(result);
+    } catch (error) {
+      return res.status(403).json({
+        success: false,
+        message: error.message
+      })
+    }
+
+    try {
+      await conn.query(`update doctor_details set qualification = ?, consultancy_fees = ?, approved = ? where doctor_id =? and doctor_details.id = ?`, [qualification, consultancy_fees, 0, doctor_id, doctor_details_id])
+
+    } catch (error) {
+
+      return res.status(403).json({
+        success: false,
+        message: error.message
+      })
+    }
+    return res.status(200).json({ success: true })
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: error.message
+    })
+  }
 }
