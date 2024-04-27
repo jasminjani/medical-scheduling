@@ -11,11 +11,11 @@ const getDoctors = async () => {
     data = await data.json();
     // let patientCity = data.patientCity
     data = data.data;
-   
+
     // copyData = data;
     // let matchedDoctor = [];
     // data.forEach((doctor) => { if (patientCity == doctor.city) { matchedDoctor.push(doctor) } })
- 
+      // console.log("matchedDoctor : ",matchedDoctor);
     localStorage.setItem("doctors", JSON.stringify(data));
     // putDoctorOnScreen(matchedDoctor);
     putDoctorOnScreen(data);

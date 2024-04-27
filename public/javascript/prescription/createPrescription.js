@@ -91,7 +91,7 @@ const back = async () => {
 
   if(!insert_id){
     if(confirm("you've not added the prescription!are you sure you want to exit?")){
-      location.href = location.origin+`/doctorDashboard/`;
+      location.href = location.origin+`/doctor/dashboard/`;
     }
   }
   else{

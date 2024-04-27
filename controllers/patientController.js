@@ -503,7 +503,7 @@ exports.getSingleSlots = async (req, res) => {
     let result;
     try {
       const query = `select * from time_slots 
-      where timestampdiff(second,current_timestamp(),concat(time_slots.date," ",time_slots.start_time))>0
+      where timestampdiff(second,utc_timestamp(),time_slots.start_time)>0
       and doctor_id = ? and date = ? and is_booked = 0 and is_deleted = 0;`;
 
       [result] = await conn.query(query, [doctor_id, date]);
@@ -517,8 +517,8 @@ exports.getSingleSlots = async (req, res) => {
       });
     }
 
-    let html = await generateSlotCombo(result);
-    return res.status(200).json({ success: true, html: html });
+    // let html = await generateSlotCombo(result);
+    return res.status(200).json({ success: true, result:result });
     // return res.render('pages/patientPanel/appointment')
   } catch (error) {
     logger.error(error.message);
@@ -669,31 +669,6 @@ exports.cancelSlot = async (req, res) => {
   }
 };
 
-exports.rating = async (req, res) => {
-  try {
-
-
-    const { patient_id, doctor_id } = req.params;
-    const { rating, review } = req.body;
-
-    let query = `insert into rating_and_reviews (patient_id, doctor_id, rating, review) values(?,?,?,?)`;
-
-    let [data] = await conn.query(query, [
-      patient_id,
-      doctor_id,
-      rating,
-      review,
-    ]);
-  } catch (error) {
-    logger.error(error.message);
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
-  }
-};
-
-
 exports.updateRating = async (req, res) => {
   try {
     const { patient_id } = req.params;
@@ -742,7 +717,6 @@ exports.nearByDoctores = async (req, res) => {
       acc[id].specialities.push(speciality)
       return acc;
     }, {}));
-
     res.send({ data })
 
   } catch (error) {
@@ -778,7 +752,6 @@ exports.nearByDoctoresOnSearch = async (req, res) => {
   }
 };
 
-
 exports.rating = async (req, res) => {
   try {
 
@@ -803,6 +776,18 @@ exports.rating = async (req, res) => {
 
     try {
 
+      const query = "select * from prescriptions where patient_id = ? and doctor_id = ?";
+
+      const [isPatientExist] = await conn.query(query, [patient_id, doctor_id]);
+
+      if (isPatientExist.length === 0) return res.status(500).json({ success: false, message: "You can not rate the doctor" })
+
+    } catch (error) {
+      return res.status(500).json({ success: false, message: error.message })
+    }
+
+    try {
+
       const query = "insert into rating_and_reviews (`patient_id`,`doctor_id`,`rating`,`review`) values (?,?,?,?)";
 
       const [addReview] = await conn.query(query, [patient_id, doctor_id, rating, patientReview.trim()]);
@@ -822,12 +807,58 @@ exports.rating = async (req, res) => {
   }
   catch (error) {
     logger.error(error.message);
-    res.status(500).json({
+    return res.status(500).json({ success: false, message: error.message })
+  }
+}
+
+exports.updateRating = async (req, res) => {
+  try {
+
+    const { doctor_id } = req.params;
+
+    const { rating, review } = req.body;
+
+    const patient_id = req.user.id;
+
+    let query = `update rating_and_reviews set rating = ? and review = ? where doctor_id = ? and patient_id = ?`;
+
+    let [data] = await conn.query(query, [rating, review, doctor_id, patient_id]);
+
+    res.redirect(`/patient/bookslots/${doctor_id}`);
+
+  }
+  catch (error) {
+    logger.error(error.message);
+    return res.status(500).json({
       success: false,
       message: error.message,
     });
   }
 }
+
+exports.getDoctorRating = async (req, res) => {
+  try {
+
+    const { doctor_id } = req.params;
+
+    const id = req.user.id;
+
+    const query = "select * from rating_and_reviews inner join users on users.id = rating_and_reviews.patient_id where rating_and_reviews.doctor_id = ?";
+
+    let [data] = await conn.query(query, [doctor_id]);
+
+    const [myReview] = data.filter((d) => { return id === d.patient_id });
+
+    const patientReview = data.filter((d) => { return id !== d.patient_id });
+
+    return res.status(200).json({ success: true, myReview, patientReview, id })
+
+  }
+  catch (error) {
+    return res.status(500).json({ success: false, message: error.message })
+  }
+}
+
 
 
 exports.getBookingSlots = async (req, res) => {
@@ -943,5 +974,93 @@ exports.updatePostBecomeDoctor = async (req, res) => {
       success: false,
       message: error.message,
     });
+  }
+}
+
+
+// update become a doctor form
+
+exports.knowStatus = async (req, res) => {
+  const doctor_id = req.user.id
+  try {
+    const [status] = await conn.query(`select approved from doctor_details where doctor_id = ?;`, [doctor_id])
+    return res.status(200).json(status)
+  } catch (error) {
+    return res.json({
+      success: false,
+      message: error.message
+    })
+  }
+}
+
+exports.updateBecomeDoctorDetails = async (req, res) => {
+  res.render("pages/doctorPanel/becomeDoctorDetails")
+}
+
+exports.updateBecomeDoctorData = async (req, res) => {
+  const doctor_id = req.user.id
+  try {
+    const [result] = await conn.query(` select doctor_details.id as doctor_details_id,doctor_details.hospital_id,specialities.id as speciality_id, qualification, consultancy_fees,name as hospital_name,location,gst_no,city,pincode from doctor_details inner join clinic_hospitals on doctor_details.hospital_id = clinic_hospitals.id inner join doctor_has_specialities on doctor_details.doctor_id = doctor_has_specialities.doctor_id inner join specialities on doctor_has_specialities.speciality_id = specialities.id where doctor_details.doctor_id = ?;`, [doctor_id])
+    res.status(200).json(result)
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message
+    })
+  }
+}
+
+
+exports.updatePostBecomeDoctor = async (req, res) => {
+
+  const { doctor_details_id, hospital_id, qualification, consultancy_fees, speciality_id, hospital_name, address, gst_no, city, pincode } = req.body
+  const doctor_id = req.user.id
+
+  if (!hospital_id || !speciality_id || !doctor_id) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error!"
+    })
+  }
+
+  try {
+    try {
+      await conn.query(`update clinic_hospitals set name = ?, location = ?, gst_no =?, city = ?, pincode = ? where clinic_hospitals.id = ? `, [hospital_name, address, gst_no, city, pincode, hospital_id])
+
+    } catch (error) {
+      console.log(error);
+      return res.status(403).json({
+        success: false,
+        message: error.message
+      })
+    }
+
+    try {
+      const [result] = await conn.query(`update doctor_has_specialities set speciality_id = ? where doctor_id = ?`, [speciality_id, doctor_id])
+      console.log(result);
+    } catch (error) {
+      return res.status(403).json({
+        success: false,
+        message: error.message
+      })
+    }
+
+    try {
+      await conn.query(`update doctor_details set qualification = ?, consultancy_fees = ?, approved = ? where doctor_id =? and doctor_details.id = ?`, [qualification, consultancy_fees, 0, doctor_id, doctor_details_id])
+
+    } catch (error) {
+
+      return res.status(403).json({
+        success: false,
+        message: error.message
+      })
+    }
+    return res.status(200).json({ success: true })
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: error.message
+    })
   }
 }

@@ -18,11 +18,11 @@ const generateCityCombo = async () => {
     }
     
     let html = `<option value="">--Select City--</option>`;
-    
+
     result.forEach((value) => {
       html += `<option value="${value.city}">${value.city} </option>`;
     });
-    
+
     return html;
   } catch (error) {
     logger.error(error.message);

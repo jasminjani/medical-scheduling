@@ -2,10 +2,10 @@
 
 
   let id=document.getElementById("id").value;
-
+  console.log(id)
   const fetchdata=async(id)=>{
     try{
-
+   
       let res=await fetch(`/doctor/prescription/update/${id}`);
       let resjson=await res.json();
 
@@ -42,7 +42,7 @@
               location.href=`/doctor/prescriptiondetails`;
     }
     catch(error){
-    logger.error(error);
+        console.log(error);
     }          
   }
 

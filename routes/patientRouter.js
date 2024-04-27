@@ -26,11 +26,9 @@ const {
   patientProfileUpdateData,
   bookingSlot,
   getBookingSlots,
-  updateBecomeDoctorDetails,
-  updatePostBecomeDoctor,
-  updateBecomeDoctorData,
-  knowStatus,
-  nearByDoctores,
+  rating,
+  getDoctorRating,
+  updateRating,
 } = require("../controllers/patientController");
 const {
   becomeDoctorDetail,
@@ -117,13 +115,13 @@ router.route("/getprescriptionofuser").get(getPrescriptionOfUser);
 // d p
 router.route("/generate/:id").get(generatePDF);
 
+//patient review doctor
+router.route("/review").post(rating);
 
-router.route("/updateBecomeDoctorDetails").get(updateBecomeDoctorDetails).post(updatePostBecomeDoctor);
-router.route("/updateBecomeDoctorData").get(updateBecomeDoctorData)
-router.route("/knowStatus").get(knowStatus)
+router.route("/review/:doctor_id").get(getDoctorRating);
 
-// patient dashboard nearby doctor
-router.route("/getNearByDoctor").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), nearByDoctores);
+router.route("/review/update/:doctor_id").get(updateRating);
+
 
 
 module.exports = router;

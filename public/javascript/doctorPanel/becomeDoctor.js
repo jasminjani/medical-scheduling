@@ -2,24 +2,58 @@ let submit = document.getElementById('submit');
 let update = document.getElementById('update');
 
 async function specialitiesValidation(){
-  let newSpeciality = document.getElementById('otherSpeciality');
+
   let isValid = true;
+  let otherSpeciality_id;
+
   const fetchData = await fetch("/specialities");
   const specialities = await fetchData.json();
 
-  await specialities.forEach(Element => {
+  await specialities.forEach(element => {
+    if(element.speciality.toLowerCase() == "other") {
+      otherSpeciality_id = element.speciality_id
+    }
+  })
 
-    if (Element.speciality.toLowerCase() == newSpeciality.value.toLowerCase()) { 
+  if (document.getElementById('speciality').value == otherSpeciality_id) {
+
+    let newSpeciality = document.getElementById('otherSpeciality');
+
+    if(newSpeciality.value.trim() === "") {             
       let p = document.createElement("p");
       newSpeciality.insertAdjacentElement("afterend", p);
-      p.innerHTML = "speciality already exist";
+      p.innerHTML = "*required";
       p.classList.add("validated");
       p.style.color = "red";
       p.style.margin = "0";
       p.style.fontSize = "12px";
       isValid = false;
     }
-  })
+
+    await specialities.forEach(Element => {
+      if (Element.speciality.toLowerCase() == newSpeciality.value.toLowerCase()) { 
+        let p = document.createElement("p");
+        newSpeciality.insertAdjacentElement("afterend", p);
+        p.innerHTML = "speciality already exist";
+        p.classList.add("validated");
+        p.style.color = "red";
+        p.style.margin = "0";
+        p.style.fontSize = "12px";
+        isValid = false;
+      }
+    })
+
+          // let newSpeciality = document.getElementById('otherSpeciality').value;
+      // const fetchData = await fetch("/specialities");
+      // const specialities = await fetchData.json();
+      // if (speciality == 24 ) {
+      //   specialities.forEach(Element => {
+      //     console.log("specialitie : ",Element.speciality);
+      //     if (Element.speciality == newSpeciality) { console.log("speciality already exist"); }
+      //   })
+      // }
+  }
+
   return isValid;
 }
 
@@ -150,17 +184,18 @@ submit.addEventListener('click',async(e)=>{
     
     let qualification = document.getElementById('qualification').value
     let consultancyFees = document.getElementById('consultancy_fees').value
-    let phone = document.getElementById('phone').value
+    // let phone = document.getElementById('phone').value
     let speciality = document.getElementById('speciality').value
     let hname = document.getElementById('hname').value
     let hlocation = document.getElementById('address').value
     let gstno = document.getElementById('gst').value
     let hcity = document.getElementById('city').value
     let pincode = document.getElementById('pincode').value
+    let otherSpeciality = document.getElementById('otherSpeciality').value;
     
     let data = await fetch('/patient/create',{
         method:"post",
-        body:JSON.stringify({speciality:speciality,name:hname,location:hlocation,gst_no:gstno,city:hcity,pincode:pincode,qualification:qualification,consultancy_fees:consultancyFees}),
+        body:JSON.stringify({otherSpeciality:otherSpeciality, speciality:speciality,name:hname,location:hlocation,gst_no:gstno,city:hcity,pincode:pincode,qualification:qualification,consultancy_fees:consultancyFees}),
         headers:{
             "Content-Type":"application/json"
         }

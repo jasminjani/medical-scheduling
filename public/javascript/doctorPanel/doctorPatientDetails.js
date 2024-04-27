@@ -9,24 +9,17 @@ const patientAppointmentDetail = async () => {
     }
   })
   let data = await fetchdata.json()
-
-  let key = Object.keys(data)
-  key.forEach(element => {
-    let dtkey = Object.keys(data[element])
-    dtkey.forEach(item => {
-      if (item == "Appointment Date") {
-
+      data.forEach(element => {
         document.getElementById("trdetail").innerHTML += `
               <tr>
-              <td class="tddata">${data[element][item]}</td>
+              <td class="tddata">${element["Appointment Date"]}</td>
               <td>
-                  <p onclick=show('a5-popup','${data[element][item]}') class="a5-btn">Detail</p>
+                  <p onclick=show('a5-popup','${element["Appointment Date"]}') class="a5-btn">Detail</p>
                 </td>
                 </tr>`
-      }
-    });
-  });
-}
+      });
+  }
+
 
 const profileDetailData = async () => {
   let fetchData = await fetch(`/doctor/patient/view/${Id}`)
@@ -71,8 +64,7 @@ let show = async function (id, date) {
   })
   let data = await fetchData.json();
   data = data.data
-  const key = Object.keys(data)
-
+  
   document.getElementById("appointmentdt").innerHTML = "";
   document.getElementById("mediBox").innerHTML = "";
 
