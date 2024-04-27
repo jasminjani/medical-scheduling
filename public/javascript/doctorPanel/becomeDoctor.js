@@ -1,5 +1,27 @@
 let submit = document.getElementById('submit');
+let update = document.getElementById('update');
 
+async function specialitiesValidation(){
+  let newSpeciality = document.getElementById('otherSpeciality');
+  let isValid = true;
+  const fetchData = await fetch("/specialities");
+  const specialities = await fetchData.json();
+
+  await specialities.forEach(Element => {
+    // console.log("specialitie : ",Element.speciality.toLowerCase());
+    if (Element.speciality.toLowerCase() == newSpeciality.value.toLowerCase()) { 
+      let p = document.createElement("p");
+      newSpeciality.insertAdjacentElement("afterend", p);
+      p.innerHTML = "speciality already exist";
+      p.classList.add("validated");
+      p.style.color = "red";
+      p.style.margin = "0";
+      p.style.fontSize = "12px";
+      isValid = false;
+    }
+  })
+  return isValid;
+}
 
 function validate() {
     let isvalid = true;
@@ -16,7 +38,7 @@ function validate() {
     }
   
     // empty fields and email and phone number validation
-    dvalid.forEach((field) => {
+    dvalid.forEach( async (field) => {
       if (field.value.trim() === "") {
         let p = document.createElement("p");
         field.insertAdjacentElement("afterend", p);
@@ -27,6 +49,33 @@ function validate() {
         p.style.fontSize = "12px";
         isvalid = false;
       }
+
+      if (field.name == "speciality" && field.value == 24) {
+
+        let newSpeciality = document.getElementById('otherSpeciality');
+        // document.getElementById('otherSpeciality').classList.add("dvalid");
+
+        if(newSpeciality.value.trim() === "") {             
+          let p = document.createElement("p");
+          newSpeciality.insertAdjacentElement("afterend", p);
+          p.innerHTML = "*required";
+          p.classList.add("validated");
+          p.style.color = "red";
+          p.style.margin = "0";
+          p.style.fontSize = "12px";
+          isvalid = false;
+        }
+      }
+
+      // let newSpeciality = document.getElementById('otherSpeciality').value;
+      // const fetchData = await fetch("/specialities");
+      // const specialities = await fetchData.json();
+      // if (speciality == 24 ) {
+      //   specialities.forEach(Element => {
+      //     console.log("specialitie : ",Element.speciality);
+      //     if (Element.speciality == newSpeciality) { console.log("speciality already exist"); }
+      //   })
+      // }
   
       if (
         field.name == "phone" &&
@@ -97,7 +146,7 @@ function validate() {
 submit.addEventListener('click',async(e)=>{
     e.preventDefault();
 
-    if(validate()){
+    if(validate() && await specialitiesValidation()){
     
     let qualification = document.getElementById('qualification').value
     let consultancyFees = document.getElementById('consultancy_fees').value
@@ -129,3 +178,72 @@ submit.addEventListener('click',async(e)=>{
 
     }
 })
+
+
+
+const fetchUpdateData = async () => {
+  const fetchData = await fetch("/patient/updateBecomeDoctorData")
+  const data = await fetchData.json()
+  data.forEach(element => {
+    document.getElementById("qualification").value = element["qualification"]
+    document.getElementById("consultancy_fees").value = element["consultancy_fees"]
+    document.getElementById("speciality").value = element["speciality_id"]
+    document.getElementById("hname").value = element["hospital_name"]
+    document.getElementById("address").value = element["location"]
+    document.getElementById("gst").value = element["gst_no"]
+    document.getElementById("city").value = element["city"]
+    document.getElementById("pincode").value = element["pincode"]
+    document.getElementById("hospital_id").value = element["hospital_id"]
+    document.getElementById("doctor_details_id").value = element["doctor_details_id"]
+  });
+}
+
+fetchUpdateData()
+
+
+const postUpdateData = async () => {
+
+  if (validate()) {
+    let doctor_details_id = document.getElementById("doctor_details_id").value
+    let hospital_id = document.getElementById("hospital_id").value
+    let qualification = document.getElementById("qualification").value
+    let consultancy_fees = document.getElementById("consultancy_fees").value
+    let speciality_id = document.getElementById("speciality").value
+    let hospital_name = document.getElementById("hname").value
+    let address = document.getElementById("address").value
+    let gst_no = document.getElementById("gst").value
+    let city = document.getElementById("city").value
+    let pincode = document.getElementById("pincode").value
+
+
+    let fetchData = await fetch("/patient/updateBecomeDoctorDetails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ "doctor_details_id": doctor_details_id, "hospital_id": hospital_id, "qualification": qualification, "consultancy_fees": consultancy_fees, "speciality_id": speciality_id, "hospital_name": hospital_name, "address": address, "gst_no": gst_no, "city": city, "pincode": pincode })
+    })
+
+    const { success } = await fetchData.json()
+    if (success) {
+      Swal.fire({
+        title: "Update Successfully!",
+        icon: "success"
+      });
+      window.location = "/"
+
+    
+    }
+
+  }
+}
+
+
+
+
+update.addEventListener("click", postUpdateData)
+
+if (window.location == "/patient/updateBecomeDoctorDetails") {
+  submit.style.display = "none"
+  update.style.display = "block"
+}

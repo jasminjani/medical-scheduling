@@ -5,7 +5,6 @@ const multer = require("multer");
 const imgUpload = multer({ storage: imgStorage });
 const passport = require("passport");
 const {
-  getPendingDoctorById,
   updateGetDoctorDisplay,
   updateDoctorDetails,
   createHospital,
@@ -14,9 +13,7 @@ const {
   dashBoardReviews,
   dashBoardCount,
   doctorData,
-  getCityCombo,
   updateGetDoctorData,
-  doctorReviewData,
   getPatientData,
   getPatientHistoryDetail,
   patientHistoryData,
@@ -46,7 +43,6 @@ const {
   home,
   allPatientPriscription,
   editPrescriptionHome,
-  allSpecialities,
   getSlotsPage,
 } = require("../controllers/doctorController");
 const { isDoctor } = require("../middlewares/authMiddleware");
@@ -83,13 +79,13 @@ router.route("/analytics").get(dashBoardCount);
 // /doctorData
 router.route("/data").get(doctorData);
 
-router.route("/cityCombo").get(getCityCombo);
+
 
 // /updateDoctorData
 router.route("/updateDoctorData").get(updateGetDoctorData);
 
 // TODO : remove with /reviews/all
-router.route("/reviews").get(doctorReviewData);
+
 
 // /getPatientData
 router.route("/patients").get(getPatientData);
@@ -101,7 +97,7 @@ router
   .get(getPatientHistoryDetail)
   .post(patientHistoryData);
 
-router.route("/reviews/:id").get(doctorReviewData);
+// router.route("/reviews/:id").get(doctorReviewData);
 
 // Router show doctor details date:- 12-04-2024
 
@@ -122,7 +118,7 @@ router
   .route("/patientPrescriptionData/:patient_id")
   .post(patientPrescriptionData);
 
-router.route("/specialities").get(allSpecialities);
+
 
 //jasmin jani dt:- 18/04/2024
 
