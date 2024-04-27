@@ -26,7 +26,7 @@ function dateValidation(year, month, day) {
     Number(year.value.trim()) > new Date().getFullYear()
   ) {
     let p = document.createElement("p");
-    console.log(Number(year.value.trim()) <= new Date().getFullYear());
+    
     year.insertAdjacentElement("afterend", p);
     p.innerHTML = "*Invalid Year";
     p.classList.add("validated");
@@ -273,7 +273,7 @@ submit.addEventListener("click", async (e) => {
       });
 
       data = await data.json();
-      console.log(data.user)
+   
       if (data?.success) {
         let activelink = document.getElementsByClassName("active-link");
         for (let i = 0; i < activelink.length; i++) {

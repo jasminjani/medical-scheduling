@@ -83,6 +83,33 @@ function validate() {
         p.style.fontSize = "12px";
         isvalid = false;
       }
+
+      if (field.name == "speciality" && field.value == 24) {
+
+        let newSpeciality = document.getElementById('otherSpeciality');
+        // document.getElementById('otherSpeciality').classList.add("dvalid");
+
+        if(newSpeciality.value.trim() === "") {             
+          let p = document.createElement("p");
+          newSpeciality.insertAdjacentElement("afterend", p);
+          p.innerHTML = "*required";
+          p.classList.add("validated");
+          p.style.color = "red";
+          p.style.margin = "0";
+          p.style.fontSize = "12px";
+          isvalid = false;
+        }
+      }
+
+      // let newSpeciality = document.getElementById('otherSpeciality').value;
+      // const fetchData = await fetch("/specialities");
+      // const specialities = await fetchData.json();
+      // if (speciality == 24 ) {
+      //   specialities.forEach(Element => {
+      //     console.log("specialitie : ",Element.speciality);
+      //     if (Element.speciality == newSpeciality) { console.log("speciality already exist"); }
+      //   })
+      // }
   
       if (
         field.name == "phone" &&

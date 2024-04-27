@@ -1,7 +1,7 @@
 
 const patientAppointmentDetail = async () => {
   let Id = window.location.pathname.split("/").pop()
-  console.log(Id)
+
   let fetchdata = await fetch(`/doctor/patients/history/${Id}`,{
     method:"POST",
     headers:{
