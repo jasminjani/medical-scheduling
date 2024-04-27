@@ -5,9 +5,9 @@ let length = 0
 let pageno = document.getElementById("pageno")
 
 const fetchDataFun = async () => {
- 
   let fetchdata = await fetch(`/doctor/reviews`)
   let data = await fetchdata.json()
+  console.log(data);
   return data
 }
 
@@ -19,7 +19,7 @@ const searchFetchDataFun = async ()=>{
   return data
 }
 
-  let data = await fetchDataFun()
+  let data = await fetchDataFun();
 
   if (search) {
 

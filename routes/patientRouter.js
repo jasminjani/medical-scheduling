@@ -26,6 +26,8 @@ const {
   patientProfileUpdateData,
   bookingSlot,
   getBookingSlots,
+  rating,
+  getDoctorRating,
 } = require("../controllers/patientController");
 const {
   becomeDoctorDetail,
@@ -111,5 +113,12 @@ router.route("/getprescriptionofuser").get(getPrescriptionOfUser);
 
 // d p
 router.route("/generate/:id").get(generatePDF);
+
+//patient review doctor
+router.route("/review").post(rating);
+
+router.route("/review/:doctor_id").get(getDoctorRating);
+
+
 
 module.exports = router;

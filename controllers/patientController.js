@@ -94,7 +94,7 @@ exports.patientDetails = async (req, res) => {
       success: true,
       message: "patient details empty",
     });
-  } catch (error) {}
+  } catch (error) { }
 };
 
 exports.patientViewProfile = async (req, res) => {
@@ -351,9 +351,8 @@ exports.specialitiesCombo = async () => {
   let html = "";
 
   result.forEach((speciality) => {
-    html += `<option value=${speciality.speciality} data-unique="${
-      speciality.id
-    }">${speciality.speciality.toUpperCase()}</option>`;
+    html += `<option value=${speciality.speciality} data-unique="${speciality.id
+      }">${speciality.speciality.toUpperCase()}</option>`;
   });
 
   return html;
@@ -381,9 +380,8 @@ const generateSlotCombo = async (result) => {
   let html = `<option value="">--Select slot--</option>`;
 
   result.forEach((slot) => {
-    html += `<option value=${slot.start_time + "-" + slot.id} data-sid="${
-      slot.id
-    }">${slot.start_time + " - " + slot.end_time}</option>`;
+    html += `<option value=${slot.start_time + "-" + slot.id} data-sid="${slot.id
+      }">${slot.start_time + " - " + slot.end_time}</option>`;
   });
 
   return html;
@@ -529,32 +527,6 @@ exports.cancelSlot = async (req, res) => {
   }
 };
 
-exports.rating = async (req, res) => {
-  try {
-    // console.log(req.params);
-    console.log(req.body);
-
-    const { patient_id, doctor_id } = req.params;
-    const { rating, review } = req.body;
-
-    let query = `insert into rating_and_reviews (patient_id, doctor_id, rating, review) values(?,?,?,?)`;
-    console.log("Data added to DB");
-    // console.log(query);
-
-    let [data] = await conn.query(query, [
-      patient_id,
-      doctor_id,
-      rating,
-      review,
-    ]);
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: error.message,
-    });
-  }
-};
-
 exports.updateRating = async (req, res) => {
   try {
     const { patient_id } = req.params;
@@ -617,7 +589,6 @@ exports.nearByDoctoresOnSearch = async (req, res) => {
   }
 };
 
-
 exports.rating = async (req, res) => {
   try {
 
@@ -631,6 +602,18 @@ exports.rating = async (req, res) => {
       const [isReviewExist] = await conn.query(query, [patient_id, doctor_id]);
 
       if (isReviewExist.length !== 0) return res.status(500).json({ success: false, message: "Review already added" })
+
+    } catch (error) {
+      return res.status(500).json({ success: false, message: error.message })
+    }
+
+    try {
+
+      const query = "select * from prescriptions where patient_id = ? and doctor_id = ?";
+
+      const [isPatientExist] = await conn.query(query, [patient_id, doctor_id]);
+
+      if (isPatientExist.length === 0) return res.status(500).json({ success: false, message: "You can not rate the doctor" })
 
     } catch (error) {
       return res.status(500).json({ success: false, message: error.message })
@@ -652,12 +635,51 @@ exports.rating = async (req, res) => {
 
   }
   catch (error) {
+    return res.status(500).json({ success: false, message: error.message })
+  }
+}
+
+exports.updateRating = async (req, res) => {
+  try {
+
+    const { patient_id } = req.params;
+    let query = `delete from rating_and_reviews where patient_id=?`;
+
+    console.log("Data deleted!!");
+
+    let [data] = await conn.query(query, [patient_id]);
+  }
+  catch (error) {
     return res.status(500).json({
       success: false,
       message: error.message
     })
   }
 }
+
+exports.getDoctorRating = async (req, res) => {
+  try {
+
+    const { doctor_id } = req.params;
+
+    const id = req.user.id;
+
+    const query = "select * from rating_and_reviews inner join users on users.id = rating_and_reviews.patient_id where rating_and_reviews.doctor_id = ?";
+
+    let [data] = await conn.query(query, [doctor_id]);
+
+    const [myReview] = data.filter((d) => { return id === d.patient_id });
+
+    const patientReview = data.filter((d) => { return id !== d.patient_id });
+
+    return res.status(200).json({ success: true, myReview, patientReview, id })
+
+  }
+  catch (error) {
+    return res.status(500).json({ success: false, message: error.message })
+  }
+}
+
 
 
 exports.getBookingSlots = async (req, res) => {

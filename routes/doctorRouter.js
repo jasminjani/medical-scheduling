@@ -193,4 +193,5 @@ router.route("/prescriptiondetails").get(allPatientPriscription);
 // /editprescription/:id
 router.route("/prescription/edit/:id").get(editPrescriptionHome);
 
+
 module.exports = router;

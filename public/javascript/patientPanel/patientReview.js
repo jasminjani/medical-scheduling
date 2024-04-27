@@ -5,19 +5,55 @@ let stars =
 let output =
 	document.getElementById("output");
 
-const getReviews = async () => {
-	const id = window.location.href.split("/").pop();
+// generate stars from rating
+const generateStar = async (rating) => {
+	let stars = "";
+	for (let i = 0; i < 5; i++) {
+		if (i >= rating) {
+			stars += `<i class="fa-solid fa-star"></i>`;
+		} else {
+			stars += `<i class="fa-solid fa-star gold"></i>`;
+		}
+	}
+	return stars;
+}
 
-	const response = await fetch(`http://localhost:8000/review/${id}`, {
+//generate reviews of doctor
+const generateReviewData = async (review, id) => {
+	const html = `
+		<div class="A6-reviewContent card-1">
+		<div class="row-1">
+			<h4 class="reviewName">${review.patient_id === id ? "Your Review" : `${review.fname} ${review.lname}`}</h4>
+			${review.patient_id === id ? `<i class="fa-solid fa-pen"></i>` : ""}
+		</div>
+		<div class="row-2">
+			<h4>${await generateStar(review.rating)}</h4>
+		</div>
+		<p>${review.review}</p>
+		</div>
+	`
+	return html;
+}
+
+const getReviews = async () => {
+	const d_id = window.location.href.split("/").pop();
+
+	const response = await fetch(`http://localhost:8000/patient/review/${d_id}`, {
 		method: "GET",
 		headers: {
 			"Content-type": "application/x-www-form-urlencoded"
 		},
 	});
 
-	const {message} = await response.json();
+	const { myReview, patientReview, id } = await response.json();
 
-	console.log(message);
+	const reviewContainer = document.getElementsByClassName("A6-review")[0];
+
+	myReview && patientReview ? reviewContainer.innerHTML = await generateReviewData(myReview, id) : reviewContainer.innerHTML = `<img id="dataNotFound" src="/assets/noReview.png" alt="not found"/>`;
+
+	patientReview.map(async (review) => {
+		reviewContainer.innerHTML += await generateReviewData(review, id);
+	})
 }
 
 //review add
@@ -27,7 +63,7 @@ const submitRate = async () => {
 	const params = new URLSearchParams(formData);
 	const data = await new Response(params).text();
 
-	const response = await fetch("http://localhost:8000/review", {
+	const response = await fetch("http://localhost:8000/patient/review", {
 		method: "POST",
 		headers: {
 			"Content-type": "application/x-www-form-urlencoded"
