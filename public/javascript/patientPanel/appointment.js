@@ -139,7 +139,26 @@ const getSlots = async (e) => {
     });
 
     data = await data.json();
-    appointments.innerHTML = data.html;
+    let result = data.result;
+    let html = `<option value="">--Select slot--</option>`;
+    result.forEach((slot) => {
+      let timezoneoffset = new Date().getTimezoneOffset();
+      slot.start_time = new Date(slot.start_time).getTime();
+      slot.start_time -= (timezoneoffset * 60 * 1000);
+      slot.start_time = new Date(slot.start_time).toLocaleTimeString('en-US')
+      console.log(slot.start_time)
+
+      slot.end_time = new Date(slot.end_time).getTime();
+      slot.end_time -= (timezoneoffset * 60 * 1000);
+      slot.end_time = new Date(slot.end_time).toLocaleTimeString('en-US')
+      console.log(slot.end_time)
+      // dt = dt.toLocaleString('en-US',{timeZone:userTimezone})
+      html += `<option value=${slot.start_time + "-" + slot.id} data-sid="${
+        slot.id
+      }">${slot.start_time + " - " + slot.end_time}</option>`;
+    });
+
+    appointments.innerHTML = html;
   }
 }
 
