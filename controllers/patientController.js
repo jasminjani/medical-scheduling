@@ -398,7 +398,7 @@ exports.getSingleSlots = async (req, res) => {
     let result;
     try {
       const query = `select * from time_slots 
-      where timestampdiff(second,current_timestamp(),concat(time_slots.date," ",time_slots.start_time))>0
+      where timestampdiff(second,utc_timestamp(),time_slots.start_time)>0
       and doctor_id = ? and date = ? and is_booked = 0 and is_deleted = 0;`;
 
       [result] = await conn.query(query, [doctor_id, date]);
@@ -408,8 +408,8 @@ exports.getSingleSlots = async (req, res) => {
       return res.status(500).json({ success: false, message: error.message });
     }
 
-    let html = await generateSlotCombo(result);
-    return res.status(200).json({ success: true, html: html });
+    // let html = await generateSlotCombo(result);
+    return res.status(200).json({ success: true, result:result });
     // return res.render('pages/patientPanel/appointment')
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });

@@ -916,30 +916,30 @@ exports.createSlots = async (req, res) => {
             const start_time = slot[0].trim();
             const end_time = slot[1].trim();
 
+            // try {
+            //   const query =
+            //     "select * from time_slots where doctor_id = ? and date = ? and end_time <= ?";
+
+            //   const [isValid] = await conn.query(query, [
+            //     doctor_id,
+            //     dayArray[i][0],
+            //     start_time,
+            //   ]);
+            // } catch (error) {
+            //   return res
+            //     .status(500)
+            //     .json({ success: false, message: error.message });
+            // }
+
             try {
               const query =
-                "select * from time_slots where doctor_id = ? and date = ? and end_time <= ?";
-
-              const [isValid] = await conn.query(query, [
-                doctor_id,
-                dayArray[i][0],
-                start_time,
-              ]);
-            } catch (error) {
-              return res
-                .status(500)
-                .json({ success: false, message: error.message });
-            }
-
-            try {
-              const query =
-                "insert into time_slots (`doctor_id`,`date`,`start_time`,`end_time`) values (?,?,?,?)";
+                `insert into time_slots (doctor_id,date,start_time,end_time) values (?,?,CONVERT_TZ(?, @@session.time_zone, '+00:00'),CONVERT_TZ(?, @@session.time_zone, '+00:00'))`;
 
               const [slots] = await conn.query(query, [
                 doctor_id,
-                dayArray[i][0],
-                start_time,
-                end_time,
+                dayArray[i][0],         
+                `${dayArray[i][0]} ${start_time}`,
+                `${dayArray[i][0]} ${end_time}`,
               ]);
             } catch (error) {
               return res
