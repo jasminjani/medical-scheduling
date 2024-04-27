@@ -8,7 +8,7 @@ function validate() {
   let dvalid = document.querySelectorAll(".dvalid");
 
   let validated = document.querySelectorAll(".validated");
-  console.log(validated);
+
   // remove if any error message is in frontend
   if (validated?.length) {
     validated.forEach((item) => {
@@ -38,9 +38,9 @@ slotBook.addEventListener("click", async (e) => {
   if (validate() && date.value.trim()) {
     let doctors = JSON.parse(localStorage.getItem('doctors'))
     let doctorId = document.getElementById('did').value;
-    console.log(doctorId)
+
     let fees = doctors.filter((doctor) => doctor.id = doctorId)[0].consultancy_fees;
-    console.log(fees)
+
     let selectedSlotId = appointments.options.selectedIndex;
     let slotId = appointments.children[selectedSlotId].dataset.sid;
 
@@ -76,7 +76,7 @@ slotBook.addEventListener("click", async (e) => {
             method:"POST",
             body:formData
           })
-          console.log(await patient.json())
+         
       });
     }
 
@@ -101,7 +101,7 @@ slotBook.addEventListener("click", async (e) => {
             "Content-Type": "application/json",
           },
         });
-        console.log(await d.json());
+      
 
         Swal.fire("Payment Done!", "Your Slot is Booked", "success").then(
           (result) => {
@@ -160,7 +160,7 @@ const getDoctorData = async () => {
   if (!isNaN(id)) {
     let doctors = JSON.parse(localStorage.getItem("doctors") || "[]");
     let doctor = doctors.filter((doctor) => doctor.id === id)[0];
-    // console.log(doctor)
+
 
     let stars = "";
     for (let i = 0; i < 5; i++) {

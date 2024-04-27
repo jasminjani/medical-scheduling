@@ -35,20 +35,28 @@ exports.dashboardStatus = async (req, res) => {
   }
 };
 
-exports.contactToAdmin = async (req,res)=>{
+exports.contactToAdmin = async (req, res) => {
   try {
     res.render('pages/adminPanel/adminContact')
   } catch (error) {
     logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 }
 
-exports.getAllMessage = async (req,res)=>{
+exports.getAllMessage = async (req, res) => {
   try {
     let [result] = await conn.query('select * from contact_us');
     res.json(result);
   } catch (error) {
     logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 }
 
@@ -60,25 +68,31 @@ exports.getAllDoctors = async (req, res) => {
     inner join clinic_hospitals c on b.hospital_id = c.id  order by a.id`;
 
     const [result] = await conn.query(sql2);
-    console.log(result);
     res.json(result);
   } catch (error) {
     logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
 exports.deleteDoctor = async (req, res) => {
   try {
-    
+
     const docID = req.params.id;
-    console.log(docID);
-  
+
     const sql = `update doctor_details JOIN users ON doctor_details.doctor_id = users.id set doctor_details.approved = -1, users.role_id = 1 where doctor_details.doctor_id = ?`;
     let [result] = await conn.query(sql, [docID]);
-  
+
     res.status(200).json();
   } catch (error) {
     logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -93,7 +107,6 @@ exports.individualDoctor = async (req, res) => {
     where b.approved in (-1,0) and a.id = ?`;
 
     let [result] = await conn.query(sql, [docID]);
-    // console.log(result);
 
     if (result.length === 0) {
       res.send("not valid doctor");
@@ -102,6 +115,10 @@ exports.individualDoctor = async (req, res) => {
     }
   } catch (error) {
     logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -111,6 +128,10 @@ exports.individualDoctorRend = async (req, res) => {
     res.render("pages/adminPanel/adminApproveSpecificDoctor.ejs", { docID });
   } catch (error) {
     logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -125,7 +146,6 @@ exports.showDoctorDetail = async (req, res) => {
     where b.approved = 1 and a.id = ?`;
 
     let [result] = await conn.query(sql, [docID]);
-    // console.log(result);
 
     if (result.length === 0) {
       res.send("not valid doctor");
@@ -134,6 +154,10 @@ exports.showDoctorDetail = async (req, res) => {
     }
   } catch (error) {
     logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -143,13 +167,16 @@ exports.showDoctorDetailRend = async (req, res) => {
     res.render("pages/adminPanel/adminShowOneDoc.ejs", { docID });
   } catch (error) {
     logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
 exports.approveDoctor = async (req, res) => {
   try {
     const docID = req.params.id;
-    // console.log(typeof docID);
 
     let sql1 = `update doctor_details set approved=1 where doctor_id =? and approved in (-1,0)`;
     let sql2 = `update users set role_id = 2 where id = ? and role_id =1`;
@@ -160,13 +187,16 @@ exports.approveDoctor = async (req, res) => {
     res.status(200).send();
   } catch (error) {
     logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
 exports.rejectDoctor = async (req, res) => {
   try {
     const docID = req.params.id;
-    // console.log(typeof docID);
 
     let sql1 = `update doctor_details set approved=-1 where doctor_id =? and approved=0`;
 
@@ -175,6 +205,10 @@ exports.rejectDoctor = async (req, res) => {
     res.status(200).send();
   } catch (error) {
     logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -191,7 +225,6 @@ exports.getSpecialties = async (req, res) => {
 };
 
 exports.deleteSpecialty = async (req, res) => {
-  // console.log(req.body.id);
   try {
     await conn.query("update specialities set approved = 0 where id = ?", [
       req.body.id,
@@ -199,6 +232,10 @@ exports.deleteSpecialty = async (req, res) => {
     res.status(200).send();
   } catch (error) {
     logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -210,6 +247,10 @@ exports.getNewSpecialties = async (req, res) => {
     res.json(result);
   } catch (error) {
     logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -221,27 +262,76 @@ exports.addNewSpecialties = async (req, res) => {
     res.status(200).send();
   } catch (error) {
     logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
 exports.adminDashboard = (req, res) => {
-  res.render("pages/adminPanel/adminDashboard");
+  try {
+    res.render("pages/adminPanel/adminDashboard");
+    
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 exports.adminDeleteDoctors = (req, res) => {
-  res.render("pages/adminPanel/adminApproveDoc");
+  try {
+    res.render("pages/adminPanel/adminApproveDoc");
+    
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 exports.adminApproveDoctors = (req, res) => {
-  res.render("pages/adminPanel/adminApproveDoc");
+  try {
+    res.render("pages/adminPanel/adminApproveDoc");
+    
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 exports.adminGetAllPatients = (req, res) => {
-  res.render("pages/adminPanel/adminShowPatient");
+  try {
+    res.render("pages/adminPanel/adminShowPatient");
+    
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 exports.adminAddSpecialites = (req, res) => {
-  res.render("pages/adminPanel/addDocSpecialty");
+  try {
+    res.render("pages/adminPanel/addDocSpecialty");
+    
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 exports.displayAllPatient = async (req, res) => {
@@ -249,7 +339,7 @@ exports.displayAllPatient = async (req, res) => {
     res.render("pages/adminPanel/allPatientDetail");
   } catch (error) {
     logger.error(error.message);
-    return res.status(500).json({
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -264,7 +354,7 @@ exports.getAllPatients = async (req, res) => {
     res.json(allPatient);
   } catch (error) {
     logger.error(error.message);
-    return res.status(500).json({
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -287,7 +377,7 @@ exports.searchPatientByName = async (req, res) => {
     res.send({ allPatient: searchedPatient });
   } catch (error) {
     logger.error(error.message);
-    return res.status(500).json({
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -299,7 +389,7 @@ exports.patientAllAppointment = async (req, res) => {
     res.render("pages/adminPanel/patientAllAppointment");
   } catch (error) {
     logger.error(error.message);
-    return res.status(500).json({
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -349,15 +439,13 @@ exports.getPatientAllAppointment = async (req, res) => {
     //     message: error.message
     //   })
     // }
-    // console.log(allAppointment);
-    // console.log(patientDetails);
-    res.send({
+    res.json({
       patientDetails: patientDetails,
       allAppointment: allAppointment,
     });
   } catch (error) {
     logger.error(error.message);
-    return res.status(500).json({
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -391,17 +479,10 @@ exports.appointmentDetails = async (req, res) => {
     res.send({ appointmentData: appointmentData });
   } catch (error) {
     logger.error(error.message);
-    return res.status(500).json({
+    res.status(500).json({
       success: false,
       message: error.message,
     });
   }
 };
 
-exports.profilePhoto = (req, res) => {
-  // let user = req.user;
-  let { id, fname, lname, email } = req.user;
-  // console.log(user);
-
-  res.json({ id: id, name: `${fname} ${lname}`, email: email });
-};

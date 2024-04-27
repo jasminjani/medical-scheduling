@@ -17,9 +17,6 @@ const searchFetchDataFun = async()=>{
 
 let a = document.getElementById("a5-tbody").offsetParent
 
-console.log(a);
-
-
 
 let currentPage = 1;
 const pagefield = 1;

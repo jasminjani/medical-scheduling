@@ -60,7 +60,7 @@ submit.addEventListener("click", async (e) => {
       });
 
       data = await data.json();
-      console.log(data);
+     
 
       if (data.success) {
         let div = document.createElement("div");

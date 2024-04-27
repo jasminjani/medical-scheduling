@@ -22,7 +22,7 @@ function showTestimonials(index){
     let position = -index*260 + 'px';
     carousel.style = `transition:all .5s ease-in-out;`
     carousel.style.transform = 'translateX('+ position +')'
-    console.log(position)
+    
   }
 
 

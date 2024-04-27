@@ -2,7 +2,7 @@ const pino = require('pino');
 
 const date = new Date();
 let fileName = `pino-logger-${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}.log`;
-// console.log(fileName);
+
 
 const transport = pino.transport({
   targets: [

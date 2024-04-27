@@ -1,7 +1,7 @@
 
 const patientAppointmentDetail = async () => {
   let Id = window.location.pathname.split("/").pop()
-  console.log(Id)
+
   let fetchdata = await fetch(`/doctor/patients/history/${Id}`,{
     method:"POST",
     headers:{
@@ -9,7 +9,7 @@ const patientAppointmentDetail = async () => {
     }
   })
   let data = await fetchdata.json()
-  console.log(data)
+
   let key = Object.keys(data)
   key.forEach(element => {
     let dtkey = Object.keys(data[element])
@@ -72,7 +72,7 @@ let show = async function (id, date) {
   let data = await fetchData.json();
   data = data.data
   const key = Object.keys(data)
-  console.log(data.length);
+
   document.getElementById("appointmentdt").innerHTML = "";
   document.getElementById("mediBox").innerHTML = "";
 

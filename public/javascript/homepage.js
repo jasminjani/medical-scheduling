@@ -9,7 +9,7 @@ const getDoctors = async () => {
     });
     data = await data.json();
     data = data.data;
-    console.log(data);
+   
     localStorage.setItem("doctors", JSON.stringify(data));
     putDoctorOnScreen(data);
     setDatalist(data);
@@ -128,7 +128,7 @@ search.addEventListener("click", async (e) => {
     let filteredDoctor = data.filter((doctor) => {
       return doctor.city.includes(doctorCity.value);
     });
-    console.log("filteredDoctor : ",filteredDoctor);
+   
     putDoctorOnScreen(filteredDoctor);
 
   } else {
@@ -147,7 +147,7 @@ becomeDoctor?.addEventListener("click", async (e) => {
     },
   });
   data = await data.json();
-  console.log(data);
+  
   if (data.success) {
     window.location.href = "/patient/create";
   } else {
@@ -180,7 +180,7 @@ async function isLoggedIn() {
   });
 
   user = await user.json();
-  console.log(user);
+
   if (user.success) {
     return true;
   }
@@ -264,7 +264,6 @@ async function sendMessage() {
       });
     }
   }
-  // console.log(data.name);
 }
 
 function isValidMessage() {

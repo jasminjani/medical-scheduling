@@ -1,4 +1,5 @@
 const fs = require('fs');
+const logger = require('../utils/pino');
 
 exports.allRequestLogs = (req, res, next) => {
   try {
@@ -12,11 +13,11 @@ exports.allRequestLogs = (req, res, next) => {
 
     fs.appendFileSync(fileName, fullURL, (err) => {
       if (err) {
-        console.log("Error in write URL");
+        logger.error("Error in write URL");
       }
     });
   } catch (error) {
-    console.log("some error in allRequestLogs.js middleware so create folder  : uploads/requestLogs");
+    logger.error("some error in allRequestLogs.js middleware so create folder  : uploads/requestLogs");
   }
 
   next()

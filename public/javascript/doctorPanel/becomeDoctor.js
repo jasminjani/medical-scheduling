@@ -8,7 +8,7 @@ async function specialitiesValidation(){
   const specialities = await fetchData.json();
 
   await specialities.forEach(Element => {
-    // console.log("specialitie : ",Element.speciality.toLowerCase());
+
     if (Element.speciality.toLowerCase() == newSpeciality.value.toLowerCase()) { 
       let p = document.createElement("p");
       newSpeciality.insertAdjacentElement("afterend", p);

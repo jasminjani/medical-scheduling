@@ -1,5 +1,6 @@
 const dotenv = require("dotenv");
 const conn = require("../config/dbConnection");
+const logger = require("../utils/pino");
 const jwtStrategy = require("passport-jwt").Strategy;
 dotenv.config();
 
@@ -29,6 +30,7 @@ exports.passportConfig = (passport) => {
         [result] = await conn.query("select u.*,pp.profile_picture from users as u inner join profile_pictures as pp on u.id = pp.user_id where pp.is_active=1 and u.id=?;", [id]);
       } catch (error) {
         // if any error during query execution
+        logger.error(error)
         return next(error, false);
       }
 
@@ -53,6 +55,7 @@ exports.isAdmin = async (req, res, next) => {
         [id]
       );
     } catch (error) {
+      logger.error(error);
       return res.status(500).json({
         success: false,
         error: error.message,
@@ -65,6 +68,7 @@ exports.isAdmin = async (req, res, next) => {
 
     next();
   } catch (error) {
+    logger.error(error);
     return res.status(401).json({
       success: false,
       error: error.message,
@@ -82,6 +86,7 @@ exports.isPatient = async (req, res, next) => {
         [id]
       );
     } catch (error) {
+      logger.error(error);
       return res.status(500).json({
         success: false,
         error: error.message,
@@ -94,6 +99,7 @@ exports.isPatient = async (req, res, next) => {
 
     next();
   } catch (error) {
+    logger.error(error);
     return res.status(401).json({
       success: false,
       error: error.message,
@@ -111,6 +117,7 @@ exports.isDoctor = async (req, res, next) => {
         [id]
       );
     } catch (error) {
+      logger.error(error)
       return res.status(500).json({
         success: false,
         error: error.message,
@@ -123,6 +130,7 @@ exports.isDoctor = async (req, res, next) => {
 
     next();
   } catch (error) {
+    logger.error(error)
     return res.status(401).json({
       success: false,
       error: error.message,
@@ -131,7 +139,7 @@ exports.isDoctor = async (req, res, next) => {
 };
 
 
-exports.roleHasPermissions = async(req,res,next)=>{
+exports.roleHasPermissions = async (req, res, next) => {
   try {
     let url = req.baseUrl + req.path;
     url = url.split("/");
@@ -140,7 +148,7 @@ exports.roleHasPermissions = async(req,res,next)=>{
     let id = url.pop();
 
     url = url.join("/");
-    if(isNaN(id)){
+    if (isNaN(id)) {
       url += `/${id}`
     }
 
@@ -149,21 +157,22 @@ exports.roleHasPermissions = async(req,res,next)=>{
     let sql = `select * from role_has_permissions as rp inner join permissions p on rp.permission_id = p.id where rp.role_id = ? and p.permission=?`;
     let result;
     try {
-      [result] = await conn.query(sql,[roleId,url])
+      [result] = await conn.query(sql, [roleId, url])
     } catch (error) {
-      
+      logger.error(error)
     }
 
-    if(result.length == 0){
+    if (result.length == 0) {
       return res.render('./common/404')
     }
 
     next()
 
   } catch (error) {
+    logger.error(error)
     return res.json({
-      success:false,
-      message:error.message
+      success: false,
+      message: error.message
     })
   }
 }

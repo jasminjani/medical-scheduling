@@ -53,7 +53,7 @@ function gfg(n) {
 		else if (n == 5) cls = "five";
 		stars[i].className = "star " + cls;
 
-		console.log(n);
+	
 
 	}
 	// output.innerText = "Rating is: " + n + "/5";

@@ -119,8 +119,6 @@ fetchReviewData()
 //   let fetchData = await fetch('/dashBoardAppointments')
 //   let data = await fetchData.json()
 //   let key = Object.keys(data)
-//   console.log(data);
-//   console.log(key);
 //   let count = 1;
 
 

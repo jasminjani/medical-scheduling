@@ -2,37 +2,96 @@ const conn = require('../config/dbConnection')
 const logger = require('../utils/pino')
 
 exports.doctorDashBoard = (req, res) => {
-  res.render("pages/doctorPanel/doctorDashboard");
+  try {
+    res.render("pages/doctorPanel/doctorDashboard");
+
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 exports.doctorDisplay = async (req, res) => {
-  await res.render("pages/doctorPanel/doctorViewProfile");
+  try {
+    await res.render("pages/doctorPanel/doctorViewProfile");
+
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 exports.updateGetDoctorDisplay = async (req, res) => {
-  await res.render("pages/doctorPanel/doctorProfileUpdate");
+  try {
+    await res.render("pages/doctorPanel/doctorProfileUpdate");
+
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 exports.getDoctorReview = async (req, res) => {
-  await res.render("pages/doctorPanel/doctorReview");
+  try {
+    await res.render("pages/doctorPanel/doctorReview");
+
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 exports.getPatientDetail = async (req, res) => {
-  await res.render("pages/doctorPanel/doctorPatientHistory");
+  try {
+    await res.render("pages/doctorPanel/doctorPatientHistory");
+
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 exports.getPatientHistoryDetail = async (req, res) => {
-  await res.render("pages/doctorPanel/doctorPatientDetails");
+  try {
+    await res.render("pages/doctorPanel/doctorPatientDetails");
+
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 exports.becomeDoctorDetail = async (req, res) => {
-  res.render("pages/doctorPanel/becomeDoctorDetails");
+  try {
+    res.render("pages/doctorPanel/becomeDoctorDetails");
+
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
-exports.logoutController = async (req, res) => {
-  res.clearCookie("token");
-  res.status(200).redirect("/login");
-};
 
 exports.dashBoardCount = async (req, res) => {
   let doctor_id = req.user.id;
@@ -43,7 +102,8 @@ exports.dashBoardCount = async (req, res) => {
     );
     res.json(result);
   } catch (error) {
-    return res.json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -59,7 +119,11 @@ exports.dashBoardReviews = async (req, res) => {
     );
     res.json(result);
   } catch (error) {
-    return res.json({ success: false, message: error.message });
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -72,7 +136,8 @@ exports.dashBoardAppointments = async (req, res) => {
     );
     res.json(result);
   } catch (error) {
-    return res.json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -94,7 +159,8 @@ exports.dashBoardTodayAppointments = async (req, res) => {
 
     res.json(result);
   } catch (error) {
-    return res.json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -205,8 +271,8 @@ exports.createDoctor = async (req, res) => {
       message: "inserted Successfully",
     });
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -234,7 +300,8 @@ exports.getPendingDoctorById = async (req, res) => {
       message: "User not requested",
     });
   } catch (error) {
-    return res.json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -246,7 +313,8 @@ exports.getCityCombo = async (req, res) => {
     const [result] = await conn.query(`select * from cities order by city`);
     res.json(result);
   } catch (error) {
-    return res.status(500).json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -262,7 +330,8 @@ exports.getPatientData = async (req, res) => {
     );
     res.json(result);
   } catch (error) {
-    return res.json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -280,8 +349,9 @@ exports.patientHistoryData = async (req, res) => {
 
     res.json(result);
   } catch (error) {
-    console.log(error);
-    return res.json({
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
       message: error.message,
     });
   }
@@ -297,7 +367,8 @@ exports.patientDetailsData = async (req, res) => {
     );
     res.json(result);
   } catch (error) {
-    return res.json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -309,18 +380,19 @@ exports.patientPrescriptionData = async (req, res) => {
   const doctor_id = req.user.id;
   const date = req.body.date;
 
-  console.log(patient_id,doctor_id,date)
+
   try {
     const [result] = await conn.query(
       `select time_slots.start_time as "Start Time",time_slots.end_time as "End Time",prescriptions.diagnoses as "Diagnoses",prescriptions.prescription as "Prescriptions" from prescriptions inner join slot_bookings on prescriptions.booking_id = slot_bookings.id inner join time_slots on slot_bookings.slot_id =time_slots.id where prescriptions.patient_id = ? and prescriptions.doctor_id = ? and time_slots.date = ? and time_slots.is_booked = 1;`,
       [patient_id, doctor_id, date]
     );
     res.json({
-      success:true,
-      data:result
+      success: true,
+      data: result
     });
   } catch (error) {
-    return res.json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -328,7 +400,16 @@ exports.patientPrescriptionData = async (req, res) => {
 };
 
 exports.doctorPanelPaymentHistory = async (req, res) => {
-  await res.render("pages/doctorPanel/viewpayment");
+  try {
+    await res.render("pages/doctorPanel/viewpayment");
+
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 exports.showpaymentHistory = async (req, res) => {
@@ -353,6 +434,7 @@ exports.showpaymentHistory = async (req, res) => {
 
     res.send({ patientHistory: patientHistory });
   } catch (error) {
+    logger.error(error.message);
     res.status(500).json({
       success: false,
       message: error.message,
@@ -385,6 +467,7 @@ exports.searchPaymentHistory = async (req, res) => {
 
     res.send({ patientHistory: patientHistory });
   } catch (error) {
+    logger.error(error.message);
     res.status(500).json({
       success: false,
       message: error.message,
@@ -393,7 +476,16 @@ exports.searchPaymentHistory = async (req, res) => {
 };
 
 exports.patientPaymentHistory = async (req, res) => {
-  await res.render("pages/doctorPanel/patientPaymentHistory");
+  try {
+    await res.render("pages/doctorPanel/patientPaymentHistory");
+
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 exports.showPatientPayment = async (req, res) => {
@@ -422,6 +514,7 @@ exports.showPatientPayment = async (req, res) => {
 
     res.send({ paymentDetails: paymentDetails });
   } catch (error) {
+    logger.error(error.message);
     res.status(500).json({
       success: false,
       message: error.message,
@@ -458,6 +551,7 @@ exports.searchPatientPayment = async (req, res) => {
 
     res.send({ paymentDetails: paymentDetails });
   } catch (error) {
+    logger.error(error.message);
     res.status(500).json({
       success: false,
       message: error.message,
@@ -475,7 +569,8 @@ exports.doctorData = async (req, res) => {
     );
     res.json(result);
   } catch (error) {
-    return res.status(500).json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -493,7 +588,8 @@ exports.updateGetDoctorData = async (req, res) => {
     );
     res.json(result);
   } catch (error) {
-    return res.status(500).json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -502,7 +598,7 @@ exports.updateGetDoctorData = async (req, res) => {
 
 exports.updateDoctorDetails = async (req, res) => {
   //doctor_id get token
-  console.log(req.body);
+
   let doctor_id = req.user.id;
   const {
     fname,
@@ -539,8 +635,8 @@ exports.updateDoctorDetails = async (req, res) => {
         [fname, lname, dob, gender, phone, address, doctor_id, 2]
       );
     } catch (error) {
-      console.log(error);
-      return res.json({
+      logger.error(error.message);
+      return res.status(500).json({
         success: false,
         message: error.message,
       });
@@ -582,8 +678,8 @@ exports.updateDoctorDetails = async (req, res) => {
         [speciality, doctor_id]
       );
     } catch (error) {
-      console.log(error);
-      return res.json({
+      logger.error(error.message);
+      return res.status(500).json({
         success: false,
         message: error.message,
       });
@@ -619,8 +715,8 @@ exports.updateDoctorDetails = async (req, res) => {
       .status(200)
       .json({ success: true, message: "Updated successfully" });
   } catch (error) {
-    console.log(error);
-    return res.json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -638,7 +734,8 @@ exports.searchReview = async (req, res) => {
     );
     res.status(200).json(result);
   } catch (error) {
-    return res.json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -655,7 +752,8 @@ exports.getPatientSearchData = async (req, res) => {
     );
     res.json(result);
   } catch (error) {
-    return res.json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -671,7 +769,8 @@ exports.getDoctorSideBarDetail = async (req, res) => {
     );
     res.json(result);
   } catch (error) {
-    return res.status(500).json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -685,7 +784,8 @@ exports.allSpecialities = async (req, res) => {
     );
     res.json(result);
   } catch (error) {
-    return res.status(500).json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -714,7 +814,8 @@ exports.createHospital = async (req, res) => {
     ]);
     res.send(createHospital);
   } catch (error) {
-    return res.status(500).json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -723,10 +824,14 @@ exports.createHospital = async (req, res) => {
 
 exports.home = async (req, res) => {
   try {
-    let {patient_id,booking_id}=req.params;
-    return res.render("pages/Prescription/createPrescription.ejs",{patient_id,booking_id});
+    let { patient_id, booking_id } = req.params;
+    return res.render("pages/Prescription/createPrescription.ejs", { patient_id, booking_id });
   } catch (error) {
-    console.log(error.message);
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -735,10 +840,11 @@ exports.updateDetailsData = async (req, res) => {
     const id = req.params.id;
     let query = `select concat(users.fname," ",users.lname) as patient_name,convert(prescriptions.created_at,date) as appointment_date,diagnoses,prescription from prescriptions join users on prescriptions.patient_id= users.id where prescriptions.id=?`;
     let [result] = await conn.query(query, [id]);
-    console.log(result)
+
     res.status(200).json({ success: true, result });
   } catch (error) {
-    return res.status(500).json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -771,7 +877,8 @@ exports.createPrescription = async (req, res) => {
       });
     }
   } catch (error) {
-    return res.status(500).json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -780,7 +887,7 @@ exports.createPrescription = async (req, res) => {
 
 exports.updatePrescription = async (req, res) => {
   try {
-    console.log("in updateprescription");
+
     const id = req.params.id;
     const { prescription, diagnosis } = req.body;
     let query = `UPDATE prescriptions SET diagnoses=?,prescription=? where id=? `;
@@ -789,7 +896,8 @@ exports.updatePrescription = async (req, res) => {
       msg: "Updation in prescriptions completed",
     });
   } catch (error) {
-    return res.status(500).json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -804,12 +912,12 @@ exports.getPrescriptionOfDoctor = async (req, res) => {
     const [result2] = await conn.query(query, [id]);
     return res.status(200).json({ success: true, result: result2 });
   } catch (error) {
-    return res.status(500).json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
   }
-  0;
 };
 
 exports.editPrescriptionHome = async (req, res) => {
@@ -817,7 +925,8 @@ exports.editPrescriptionHome = async (req, res) => {
     const id = req.params.id;
     return res.render("pages/Prescription/editPrescription.ejs", { id });
   } catch (error) {
-    return res.status(500).json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -847,11 +956,12 @@ exports.showDetails = async (req, res) => {
     WHERE
     users.id = ?`;
     const [result] = await conn.query(query, [id]);
-    // console.log(result);
+
     res.json(result);
     // res.render("pages/createPrescription.ejs", { result });
   } catch (error) {
-    return res.status(500).json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -862,7 +972,11 @@ exports.createSlotsPage = async (req, res) => {
   try {
     res.render("pages/slotPanel/addSlots");
   } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -870,7 +984,11 @@ exports.allPatientPriscription = async (req, res) => {
   try {
     return res.render("pages/Prescription/prescriptionOfAllPatient.ejs");
   } catch (error) {
-    console.log(error.message);
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -882,7 +1000,8 @@ exports.getPrescriptionOfUser = async (req, res) => {
     const result = await conn.query(query, [id]);
     return res.status(200).json({ success: true, message: result });
   } catch (error) {
-    return res.status(500).json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -942,8 +1061,11 @@ exports.createSlots = async (req, res) => {
       .status(200)
       .json({ success: true, message: "slots created successfully" });
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({ success: false, message: error.message });
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -952,7 +1074,11 @@ exports.getUpcomingSlotPage = async (req, res) => {
   try {
     res.render("pages/slotPanel/upcomingSlots");
   } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -961,7 +1087,11 @@ exports.getSlotsPage = async (req, res) => {
   try {
     res.render("pages/slotPanel/upcomingSlots");
   } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 }
 
@@ -979,11 +1109,18 @@ exports.getDates = async (req, res) => {
 
       return res.status(200).json({ success: true, message: data });
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({ success: false, message: error.message });
+      logger.error(error.message);
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
     }
   } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -993,7 +1130,7 @@ exports.getAllSlots = async (req, res) => {
     // const { doctor_id, date } = req.params;
     const { date } = req.params;
     const doctor_id = req.user.id;
-    // console.log(doctor_id);
+
     try {
       // const query = 'SELECT time_slots.id,time_slots.date,time_slots.start_time,time_slots.end_time,users.fname as patient_name,users.phone FROM time_slots left join slot_bookings on time_slots.id = slot_bookings.slot_id left join users on slot_bookings.patient_id = users.id where time_slots.doctor_id = ? and time_slots.date >= CAST(NOW() as DATE) and time_slots.is_deleted = ? and date = ? and slot_bookings.is_canceled != ? order by time_slots.date';
 
@@ -1004,11 +1141,18 @@ exports.getAllSlots = async (req, res) => {
 
       return res.status(200).json({ success: true, message: data });
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({ success: false, message: error.message });
+      logger.error(error.message);
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
     }
   } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -1029,8 +1173,11 @@ exports.deleteSlot = async (req, res) => {
           .status(500)
           .json({ success: false, message: "you can not cancel this slot" });
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({ success: false, message: error.message });
+      logger.error(error.message);
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
     }
 
     try {
@@ -1039,9 +1186,11 @@ exports.deleteSlot = async (req, res) => {
 
       const [deleted] = await conn.query(query, [1, slot_id]);
     } catch (error) {
-      console.log(error);
-
-      return res.status(500).json({ success: false, message: error.message });
+      logger.error(error.message);
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
     }
 
     try {
@@ -1050,9 +1199,11 @@ exports.deleteSlot = async (req, res) => {
 
       const [deleted] = await conn.query(query, [1, slot_id]);
     } catch (error) {
-      console.log(error);
-
-      return res.status(500).json({ success: false, message: error.message });
+      logger.error(error.message);
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
     }
 
     try {
@@ -1063,11 +1214,17 @@ exports.deleteSlot = async (req, res) => {
       // return res.status(200).json({ success: true, message: "slot deleted successfully" });
       res.redirect("/doctor/upcomingSlots");
     } catch (error) {
-      console.log(error);
-
-      return res.status(500).json({ success: false, message: error.message });
+      logger.error(error.message);
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
     }
   } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
