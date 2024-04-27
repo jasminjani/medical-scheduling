@@ -9,34 +9,31 @@ const fetchData = async () => {
   return data
 }
 
-const searchFetchDataFun = async()=>{
-  let fetchData = await fetch(`/doctor/searchPatientData/${search}`)
-  let data = await fetchData.json()
-  return data
-}
-
-let a = document.getElementById("a5-tbody").offsetParent
-
-console.log(a);
-
-
-
 let currentPage = 1;
 const pagefield = 1;
 let length = 0;
 let pageno = document.getElementById("pageno");
+
+
 const pagination = async () => {
+  try {
+
    data = await fetchData()
   if (search) {
     data = data.filter((obj) => {
       return obj.name.includes(search) 
     })
   }
-
+  
+  
   length = data.length;
+    if (length == 0) {
+      document.getElementById("a5-tbody").innerHTML += "<tr><td colspan='5'  style='text-align:center'>Data Not Found!</td></tr>"
+    }
   pageno.innerHTML = currentPage;
 
-  const endIndex = currentPage * pagefield;
+
+ const endIndex = currentPage * pagefield;
   const startIndex = endIndex - pagefield;
   const pageItems = data.slice(startIndex, endIndex);
 
@@ -52,6 +49,10 @@ const pagination = async () => {
   </tr>`
   })
   document.getElementById("a5-tbody").innerHTML += tabledata;
+  } catch (error) {
+      console.log(error);
+  }
+
 }
 
 const removeFun = async () => {
