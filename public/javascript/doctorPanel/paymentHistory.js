@@ -1,3 +1,5 @@
+let copyResult = [];
+
 
 async function fetchPaymentHistory() {
   try {
@@ -10,6 +12,7 @@ async function fetchPaymentHistory() {
       }
     })
     const result = await response.json()
+    copyResult = result;
 
     await appendPaymentHistory(result)
   } catch (error) {
@@ -20,19 +23,33 @@ async function fetchPaymentHistory() {
 
 async function searchPaymentHistory() {
   try {
-
+    let result;
     let searchedData = document.getElementById('a5-searchPatient').value;
+    if (!searchedData) {
+      // searchedData = ``;
+      result = copyResult;
+    } else {
 
     const url = `/doctor/searchedPaymentHistory/${searchedData}`;
     const response = await fetch(url)
-    const result = await response.json()
-  
+    result = await response.json()
+    }
 
     await appendPaymentHistory(result);
   } catch (error) {
     console.log(error);
   }
 }
+
+let searchBtn = document.getElementById('a5-btn-search');
+
+searchBtn.addEventListener('keyup', function (event) {
+  try {
+    if (event.key === 'Enter') {
+      searchPaymentHistory();
+    }
+  } catch (e) { console.log(e); }
+});
 
 
 async function appendPaymentHistory(result) {
@@ -48,6 +65,10 @@ async function appendPaymentHistory(result) {
 
     document.getElementById('a5-tbody').innerHTML = html;
     let index = 1;
+
+    if (result.patientHistory.length == 0) {
+      return document.getElementById('a5-tbody').innerHTML += `<tr><td colspan='5'>No Data Found !</td></tr>`
+    }
 
     result.patientHistory.forEach(element => {
       let html2 = `<tr>

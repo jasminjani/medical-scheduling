@@ -19,14 +19,12 @@ async function searchPatientPayment() {
 
     let searchedData = document.getElementById('a5-searchPatient').value;
     if (!searchedData) {
-      result = copyResult;
-    } else {
-
-      const url = `/searchedPatientPayment/${searchedData}`;
-      const response = await fetch(url);
-      result = await response.json();
+      searchedData = "";
     }
 
+    const url = `/patient/payments/${searchedData}`;
+    const response = await fetch(url);
+    result = await response.json();
     await appendPatientPayment();
   } catch (error) {
     console.log(error);
