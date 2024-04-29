@@ -46,6 +46,15 @@ const getSlots = async (date) => {
   table.innerHTML = "";
 
   message.forEach(element => {
+    let timezoneOffset = new Date().getTimezoneOffset();
+    // start time
+    element.start_time = new Date(element.start_time).getTime();
+    element.start_time -= (timezoneOffset * 60 * 1000);
+    element.start_time = new Date(element.start_time).toLocaleTimeString();
+    // end time
+    element.end_time = new Date(element.end_time).getTime();
+    element.end_time -= (timezoneOffset * 60 * 1000);
+    element.end_time = new Date(element.end_time).toLocaleTimeString();
     table.innerHTML += `
       <tr>
         <td>${element.start_time}</td>
