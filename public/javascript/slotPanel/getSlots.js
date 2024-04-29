@@ -1,6 +1,7 @@
 window.location.href.split("/").pop() === "upcomingSlots" ? document.getElementById("A3-view").style.backgroundColor = "#3984af" : "";
 
 
+
 // Add Doctor id from cookie
 const getDates = async () => {
   const response = await fetch("/doctor/dates", {
@@ -83,7 +84,8 @@ const openDeleteModal = async (slot_id) => {
         icon: "success",
       }).then((result) => {
         if (result.isConfirmed) {
-          window.location.href = `/doctor/delete/${slot_id}`;
+          socket.emit("deleteSlot","Slot deleted successfully")
+          // window.location.href = `/doctor/delete/${slot_id}`;
         }
       })
     }
