@@ -21,46 +21,44 @@
         <div class="logo">
           <a href=""><img src="/assets/final-logo.png" alt="logo" /></a>
         </div>
-          <nav class="nav-items">
-            <ul>
-              <li><a href="/">Home</a></li>
-              <li><a href="#about-us">About Us</a></li>
-              <li><a href="#contact-us">Contact</a></li>
-              <li id="login"><a href="/login">Login</a></li>
-              <li id="logout"><a href="/logout" onclick="logout(event)">Logout</a></li>
-              <li id="register"><a href="/register">Register</a></li>
-              <li id="become-doctor"><a href="/patient/create">Become A Doctor</a></li>
-              <li id="book-appointment">
-                <a href="/patient/doctors/all" class="book-appointment"
-                  >Book Your Appointment</a
-                >
-              </li>
-            </ul>
-          </nav>
-          <div class="user" id="logged-user">
-            <p class="name">Alpesh</p>
-            <div class="logo">
-              <a href="" class="user-img"><img src="/assets/logo.png" alt="logo" /></a>
-            </div>
+        <nav class="nav-items">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="#about-us">About Us</a></li>
+            <li><a href="#contact-us">Contact</a></li>
+            <li id="login"><a href="/login">Login</a></li>
+            <li id="logout"><a href="/logout" onclick="logout(event)">Logout</a></li>
+            <li id="register"><a href="/register">Register</a></li>
+            <li id="become-doctor"><a href="/patient/create">Become A Doctor</a></li>
+            <li id="book-appointment">
+              <a href="/patient/doctors/all" class="book-appointment">Book Your Appointment</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="user" id="logged-user">
+          <p class="name">Alpesh</p>
+          <div class="logo">
+            <a href="" class="user-img"><img src="/assets/logo.png" alt="logo" /></a>
           </div>
+        </div>
       </div>
     </div>
   </header>
 
-    <!-- main content -->
-    <main id="main">
-      <!-- hero section -->
-      <section class="hero-section">
-        <div class="container">
-          <div class="hero">
-            <div class="hero-left">
-              <h1 class="hero-title">Book Your Doctor Appointment</h1>
-              <p class="hero-subtitle">
-                A Healthier Tomorrow Starts Today: Schedule Your Appointment!
-                Your Wellness, Our Expertise: Set Up Your Appointment Today.
-              </p>
-              <a class="btn" href="/patient/doctors/all">Book Your Appointment</a>
-            </div>
+  <!-- main content -->
+  <main id="main">
+    <!-- hero section -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero">
+          <div class="hero-left">
+            <h1 class="hero-title">Book Your Doctor Appointment</h1>
+            <p class="hero-subtitle">
+              A Healthier Tomorrow Starts Today: Schedule Your Appointment!
+              Your Wellness, Our Expertise: Set Up Your Appointment Today.
+            </p>
+            <a class="btn" href="/patient/doctors/all">Book Your Appointment</a>
+          </div>
 
           <div class="hero-right">
             <img src="/assets/doctor.png" alt="" />
@@ -273,6 +271,40 @@
     </section>
   </main>
 
+
+  <!-- chat chat window -->
+  <p id="a2-show-window-btn">Show</p>
+  <div class="a2-chat-window">
+    <div class="a2-chat-nav">
+      <h3>Ashish Zapadiya</h3>
+    </div>
+    <div class="a2-chat-message">
+      <div>
+        <p class="text-align-start">Hey there! 👋</p>
+      </div>
+      <div>
+        <p class="text-align-end">My Name is Ashish</p>
+      </div>
+      <div>
+        <p class="text-align-start">Pleased to meet you Ashish 😇</p>
+        <p class="text-align-start">how would you like me to assist you today?</p>
+      </div>
+      <div>
+        <p class="text-align-end">Book an Appointment</p>
+      </div>
+      <div>
+        <p class="text-align-start">Sure, goto this <a href="http://localhost:8000/">localhost:8000</a> </p>
+      </div>
+
+    </div>
+    <div class="a2-chat-input-div">
+      <form action="javascript:void(0)" class="a2-chat-form">
+        <input type="text" class="a2-chat-input">
+        <input type="submit" value="Send" class="a2-chat-submit">
+      </form>
+    </div>
+  </div>
+
   <!-- footer section -->
   <footer id="footer">
     <div class="container">
@@ -289,9 +321,11 @@
     </div>
   </footer>
 
+
   <script src="/javascript/homepage.js"></script>
   <script src="/javascript/auth/logout.js"></script>
   <script src="/javascript/carousel.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
 </body>
 
 </html>
