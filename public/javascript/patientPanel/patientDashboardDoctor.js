@@ -3,6 +3,10 @@ const becomeDoctor = document.getElementById("become-doctor");
 let data;
 // let copyData = [];
 
+socket.on('recieved',(msg)=>{
+  console.log(msg);
+})
+
 const getDoctors = async () => {
   try {
     data = await fetch("/patient/getNearByDoctor", {
