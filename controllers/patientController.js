@@ -244,9 +244,22 @@ exports.postPatientProfileUpdate = async (req, res) => {
         });
       }
     }
+
+    let result;
+    try {
+      [result] = await conn.query(` select u.id,u.fname,u.lname,u.email,u.gender,u.dob,u.phone,u.city,u.address,u.role_id,pp.profile_picture as profile from users as u left join profile_pictures as pp on u.id = pp.user_id where pp.is_active =1 and u.id = ?;`,[patient_id])
+    } catch (error) {
+      return res.json({
+        success: false,
+        message: error.message,
+      });
+    }
+
+    result[0].token = req.cookies.token;
+
     return res
       .status(200)
-      .json({ success: true, message: "Updated Successfully" });
+      .json({ success: true, message: "Updated successfully",data:result });
   } catch (error) {
     logger.error(error.message);
     res.status(500).json({
@@ -482,17 +495,6 @@ exports.DoctorCobmo = async (req, res) => {
       message: error.message,
     });
   }
-};
-
-const generateSlotCombo = async (result) => {
-  let html = `<option value="">--Select slot--</option>`;
-
-  result.forEach((slot) => {
-    html += `<option value=${slot.start_time + "-" + slot.id} data-sid="${slot.id
-      }">${slot.start_time + " - " + slot.end_time}</option>`;
-  });
-
-  return html;
 };
 
 // Patients can see the slots of doctors

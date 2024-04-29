@@ -80,11 +80,20 @@ async function appendPatientPaymentDetails(result) {
     document.getElementById('a5-tbody').innerHTML = html;
     let index = 1;
 
+    let timezoneoffset = new Date().getTimezoneOffset();
     result.paymentDetails.forEach(element => {
+      let start_time = new Date(element.start_time).getTime();
+      start_time -= (timezoneoffset * 60 * 1000);
+      start_time = new Date(start_time).toLocaleTimeString('en-US')
+      console.log(start_time)
+  
+      let end_time = new Date(element.end_time).getTime();
+      end_time -= (timezoneoffset * 60 * 1000);
+      end_time = new Date(end_time).toLocaleTimeString('en-US')
       let html2 = `<tr>
               <td>${index++}</td>
               <td>${element.slote_date}</td>
-              <td>${element.start_time + " - " + element.end_time}</td>
+              <td>${start_time + " - " + end_time}</td>
               <td>${element.payment_amount}</td>
               <td>${element.payment_date}</td>
             </tr>`
