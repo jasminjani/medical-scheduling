@@ -221,6 +221,12 @@ display: flex;
   padding: 25px 0 0 35px;
 }
 
+.a7-para-review{
+  height: 100px;
+    width: 150px;
+    overflow: scroll;
+    word-wrap: break-word;
+}
 
 .black-banner {
   flex-direction: row;

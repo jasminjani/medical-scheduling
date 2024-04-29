@@ -23,6 +23,7 @@ const fetchReviewData = async () => {
   const data = await fetchData.json()
   let key = Object.keys(data)
 
+ 
   if(data.length == 0)
   {
     feedbackCard.innerHTML = "<h2 style='align-item:center'>Data Not Found!</h2>"
@@ -77,9 +78,7 @@ key.forEach(element => {
       }
       else if (item == "review") {
         let para = document.createElement("p")
-        para.style.height = '100px'
-        para.style.width = '200px'
-        para.style.overflow = 'scroll'
+        para.setAttribute("class","para-review")
         para.textContent = data[element][item]
         div6TextContent.appendChild(para)
       }
@@ -95,7 +94,6 @@ key.forEach(element => {
       }
     });
 
-
     div3Color.appendChild(div4Profile)
     div3Color.appendChild(div5Rating)
     div3Color.appendChild(div6TextContent)
@@ -105,6 +103,8 @@ key.forEach(element => {
     feedbackCard.appendChild(div1Card)
 });
   };
+
+  
 fetchReviewData()
 
 const fetchAppointmentData = async () => {
@@ -137,7 +137,7 @@ const fetchAppointmentData = async () => {
 }
 
 const addPrescription=async(booking_id)=>{
-  // location.href =`/doctor/prescription/${patient_id}/${booking_id}`;
+
   location.href =`/doctor/prescription/${booking_id}`;
 }
 
