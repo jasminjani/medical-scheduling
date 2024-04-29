@@ -45,7 +45,7 @@ const getPastSlots = async () => {
         <td>${element.day}</td>
         <td>${element.start_time}-${element.end_time}</td>
         <td><input type="button" value="Details" onclick='getDetails(${JSON.stringify(element)})'></td>
-        <td><a href=/generate/${element.prescription_id}><input type="button" value="Get PDF"></a></td>
+        <td><a href='/patient/generate/${element.prescription_id}'><input type="button" value="Get PDF"></a></td>
       </tr>
     `
   });
