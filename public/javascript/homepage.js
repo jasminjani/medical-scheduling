@@ -9,7 +9,7 @@ const getDoctors = async () => {
     });
     data = await data.json();
     data = data.data;
-   
+
     localStorage.setItem("doctors", JSON.stringify(data));
     putDoctorOnScreen(data);
     setDatalist(data);
@@ -128,7 +128,7 @@ search.addEventListener("click", async (e) => {
     let filteredDoctor = data.filter((doctor) => {
       return doctor.city.includes(doctorCity.value);
     });
-   
+
     putDoctorOnScreen(filteredDoctor);
 
   } else {
@@ -147,7 +147,7 @@ becomeDoctor?.addEventListener("click", async (e) => {
     },
   });
   data = await data.json();
-  
+
   if (data.success) {
     window.location.href = "/patient/create";
   } else {
@@ -314,3 +314,15 @@ function isValidMessage() {
   return isValid;
 
 }
+
+
+
+
+// show chat message
+let showBtn = document.getElementById('a2-show-window-btn');
+let showChat = document.querySelector('.a2-chat-window');
+showChat.classList.add('a2-hide-box')
+
+showBtn.addEventListener('click', () => {
+  showChat.classList.toggle('a2-hide-box')
+});
