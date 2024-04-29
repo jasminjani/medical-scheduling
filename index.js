@@ -4,6 +4,7 @@ const app = express();
 const path = require("path");
 const logger = require('./utils/pino'); 
 require("dotenv").config();
+const socketio = require('socket.io');
 
 const PORT = process.env.PORT;
 
@@ -34,6 +35,32 @@ const { allRequestLogs } = require("./middlewares/allRequestLogs");
 app.use("/", allRequestLogs, rootRouter);
 
 // server is running on PORT
-app.listen(PORT, () => {
+const server=app.listen(PORT, () => {
   logger.info(`server is running on port: http://localhost:${PORT}`);
 });
+
+const io=socketio(server);
+const { generatePDF } = require("./controllers/pdfController");
+
+
+io.on('connection',(socket)=>{
+  console.log(`New connection: ${socket.id}`);
+
+  socket.emit('connectmsg','thank you for connecting')
+
+  // socket.on('message', (data) => {
+  //       console.log(`New message from : ${data}`);
+  //   })
+
+  socket.on('generatePDF',async()=>{
+    try{
+      console.log("in socket generate pdf");
+      const filename=await generatePDF();
+      console.log(filename);
+      socket.emit('pdfready',filename);
+    }
+    catch(error){
+      console.log(error);
+    }
+  })
+})

@@ -23,7 +23,42 @@ const editPrescription= async (id) =>{
 }
 
 const generatePDF = async (id) => {
-  location.href = `/doctor/generate/${id}`;
+  // location.href = `/doctor/generate/${id}`;
+ const socket = io();
+
+ socket.emit('generatePDF');
+
+ socket.on('pdfready',async(filename)=>{
+
+    let timerInterval;
+     await Swal.fire({
+      title: "Auto close alert!",
+      html: "please wait.. your pdf will be generated in <b></b>",
+      timer: 2000,
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading();
+        const timer = Swal.getPopup().querySelector("b");
+        timerInterval = setInterval(() => {
+          timer.textContent = `${Swal.getTimerLeft()}`;
+        }, 100);
+      },
+      willClose: () => {
+        clearInterval(timerInterval);
+      }
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log("I was closed by the timer");
+      }
+    });
+    document.getElementById("pdfViewer").innerHTML=`<embed src="/pdfs/${filename}" width="800px" height="1000px" />`;
+
+  
+ })
+
+
+
 };
 
 const searchPatient=async()=>{
@@ -35,6 +70,7 @@ const searchPatient=async()=>{
     home();
 
 }
+
 
 
 

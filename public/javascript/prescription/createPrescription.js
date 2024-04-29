@@ -118,53 +118,6 @@ async function showDetails() {
 
 showDetails();
 
-let date=new Date();
-
-let newutcdate=new Date(date.toUTCString());
-
-function utcformat(d){
-    d= new Date(d);
-    var tail= 'GMT', D= [d.getUTCFullYear(), d.getUTCMonth()+1, d.getUTCDate()],
-    T= [d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds()];
-    if(+T[0]> 12){
-        T[0]-= 12;
-        tail= ' PM '+tail;
-    }
-    else tail= ' AM '+tail;
-    var i= 3;
-    while(i){
-        --i;
-        if(D[i]<10) D[i]= '0'+D[i];
-        if(T[i]<10) T[i]= '0'+T[i];
-    }
-    return D.join('/')+' '+T.join(':')+ tail;
-}
-
-const utcdate=date.toISOString();
-
-const utcwithoutmili=utcdate.slice(0, -5) + "Z";
-
-const finalutcdate=new Date(utcwithoutmili)
-
-
-const offsetMinutes = finalutcdate.getTimezoneOffset();
-
-
-// Step 3:
-const localTime = new Date(finalutcdate.getTime() - offsetMinutes * 60 * 1000);
-
-
-// Display Local Time
-const localTimeString = localTime.toUTCString();
-
-
-
-function utcToLocal(utcdate){
-  const offset=utcdate.getTimezoneOffset();
-  const localtime=new Date(utcdate.getTime()- offset * 60 * 1000);
-  const localTimeString = localtime.toLocaleString();
-  return localTimeString;
-}
 
 async function appendPatientDetails(result) {
   try {
