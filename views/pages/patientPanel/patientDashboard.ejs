@@ -243,6 +243,15 @@
     let showBtn = document.getElementById('a2-show-window-btn');
     let showChat = document.querySelector('.a2-chat-window');
     showChat.classList.add('a2-hide-box')
+  showBtn.addEventListener('click', () => {
+    showChat.classList.toggle('a2-hide-box')
+  });
+
+</script>
+
+  <script>
+
+    document.querySelector('.a2-patient-name').innerHTML = `${user.fname + " " + user.lname}`;
 
     showBtn.addEventListener('click', () => {
       showChat.classList.toggle('a2-hide-box')
@@ -250,10 +259,6 @@
 
   </script>
   <script>
-
-    document.querySelector('.a2-patient-name').innerHTML = `${user.fname + " " + user.lname}`;
-
-
 
     async function getPatientData() {
       let resp = await fetch(`/patient/analytics`);
@@ -338,6 +343,11 @@
     const handleClose = () => {
       document.getElementsByClassName("A3-modal")[0].style.visibility = "hidden";
     }
+  </script>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
   </script>
 
 </body>
