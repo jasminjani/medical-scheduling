@@ -1,5 +1,5 @@
 const conn = require('../config/dbConnection')
-const logger = require('../utils/pino')
+const logger = require('../utils/pino');
 
 exports.doctorDashBoard = (req, res) => {
   res.render("pages/doctorPanel/doctorDashboard");

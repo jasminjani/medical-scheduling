@@ -528,22 +528,6 @@ exports.cancelSlot = async (req, res) => {
   }
 };
 
-exports.updateRating = async (req, res) => {
-  try {
-    const { patient_id } = req.params;
-    let query = `delete from rating_and_reviews where patient_id=?`;
-
-    console.log("Data deleted!!");
-
-    let [data] = await conn.query(query, [patient_id]);
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: error.message,
-    });
-  }
-};
-
 // MATCH DEFAULT CITY OF USER
 exports.nearByDoctores = async (req, res) => {
   try {
@@ -665,11 +649,11 @@ exports.updateRating = async (req, res) => {
 
     const { doctor_id } = req.params;
 
-    const { rating, review } = req.body;
+    const { rating, review } = req.query;
 
     const patient_id = req.user.id;
 
-    let query = `update rating_and_reviews set rating = ? and review = ? where doctor_id = ? and patient_id = ?`;
+    let query = `update rating_and_reviews set rating = ?,review = ? where doctor_id = ? and patient_id = ?`;
 
     let [data] = await conn.query(query, [rating, review, doctor_id, patient_id]);
 
