@@ -23,6 +23,7 @@ const fetchReviewData = async () => {
   const data = await fetchData.json()
   let key = Object.keys(data)
 
+ 
   if(data.length == 0)
   {
     feedbackCard.innerHTML = "<h2 style='align-item:center'>Data Not Found!</h2>"
@@ -77,9 +78,7 @@ key.forEach(element => {
       }
       else if (item == "review") {
         let para = document.createElement("p")
-        para.style.height = '100px'
-        para.style.width = '200px'
-        para.style.overflow = 'scroll'
+        para.setAttribute("class","para-review")
         para.textContent = data[element][item]
         div6TextContent.appendChild(para)
       }
@@ -95,7 +94,6 @@ key.forEach(element => {
       }
     });
 
-
     div3Color.appendChild(div4Profile)
     div3Color.appendChild(div5Rating)
     div3Color.appendChild(div6TextContent)
@@ -105,6 +103,8 @@ key.forEach(element => {
     feedbackCard.appendChild(div1Card)
 });
   };
+
+  
 fetchReviewData()
 
 const fetchAppointmentData = async () => {
@@ -113,17 +113,27 @@ const fetchAppointmentData = async () => {
     let table = document.getElementById("appointmentTable");
     let fetchData = await fetch('/doctor/appointments/today')
     let data = await fetchData.json()
-    console.log(data.length);
+    console.log(data);
     if(data.length === 0){
       table.innerHTML = "<h2 style='text-align: center; margin-top: 100px;'>Data Not Found!</h2>"
     }
 
+    let timezoneoffset = new Date().getTimezoneOffset();
     data.forEach(function (element, index) {
+
+      element.start_time = new Date(element.start_time).getTime();
+      element.start_time -= (timezoneoffset * 60 * 1000);
+      element.start_time = new Date(element.start_time).toLocaleTimeString('en-US')
+
+      element.end_time = new Date(element.end_time).getTime();
+      element.end_time -= (timezoneoffset * 60 * 1000);
+      element.end_time = new Date(element.end_time).toLocaleTimeString('en-US')
+
       let str = `
             <tr>
                 <td>${index + 1}</td>
                 <td>${element.patient_name}</td>
-                <td>${element.appointment_time}</td>
+                <td>${element.start_time}-${element.end_time}</td>
                 <td><input type="button" value="Add Prescription" onclick="addPrescription(${element.booking_id})" id="addprescription-btn"></td>
                 <td><input type="hidden" value="${element.booking_id}" id="booking_id"></td>
             </tr>`;
@@ -137,7 +147,7 @@ const fetchAppointmentData = async () => {
 }
 
 const addPrescription=async(booking_id)=>{
-  // location.href =`/doctor/prescription/${patient_id}/${booking_id}`;
+
   location.href =`/doctor/prescription/${booking_id}`;
 }
 

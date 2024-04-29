@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
   <!-- CSS for container -->
+  <link rel="stylesheet" href="/css/loaderComponent.css">
+  <script src="/javascript/loaderComponent.js"></script>
   <link rel="stylesheet" href="/css/adminPanel/patientsAllAppoinment.css">
   <style>
     #a5-doctor-payment-active {
@@ -27,6 +29,7 @@
 </head>
 
 <body onload="fetchPatientPaymentData()">
+  <div class="center" id="loader"></div>
   <div class="a5-main-container">
     <div class="a5-container">
       <%- include('../../common/newSidebar/doctorSidebar') %>

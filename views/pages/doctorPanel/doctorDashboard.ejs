@@ -8,6 +8,11 @@
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
   <link rel="stylesheet" href="/css/adminPanel/allPatientDetails.css">
   <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css">
+  <link rel="stylesheet" href="/css/loaderComponent.css">
+  <script src="/javascript/loaderComponent.js"></script>
+    <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css" />
+
+    <script src="/sweetalert2/sweetalert2.min.js"></script>
   <style>
     #a5-doctor-dashboard-active {
       background-color: #0969da;
@@ -19,7 +24,8 @@
     #a5-doctor-dashboard-active i {
       color: #ffffff;
     }
-  </style>
+
+</style>
   <script src="/javascript/doctorPanel/doctorDashboard.js" defer></script>
   <title>Dashboard</title>
 </head>
@@ -27,7 +33,7 @@
 <body>
 
   <!-- Main -->
-
+  <div class="center" id="loader" > </div>
   <div class="a7-main-container">
     <div class="a7-container">
       <%- include(`../../common/newSidebar/doctorSidebar.ejs`) %>
@@ -102,6 +108,7 @@
         </div>
     </div>
   </div>
+
 </body>
 
 </html>

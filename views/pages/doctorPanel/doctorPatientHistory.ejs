@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="/css/adminPanel/allPatientDetails.css">
   <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css">
   <link rel="stylesheet" href="/css/Pagination/paginationComp.css" />
+    <link rel="stylesheet" href="/css/loaderComponent.css">
+  <script src="/javascript/loaderComponent.js"></script>
    <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css" />
     <script src="/sweetalert2/sweetalert2.min.js"></script>
   <style>
@@ -50,6 +52,7 @@
   <title>View Patient History</title>
 </head>
 <body>
+  <div class="center" id="loader"></div>
   <div class="a5-container">
     <div class="main-container">
     <%- include('../../common/newSidebar/doctorSidebar') %>
