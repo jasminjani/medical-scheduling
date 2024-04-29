@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="/css/adminPanel/allPatientDetails.css" />
     <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css" />
     <link rel="stylesheet" href="/css/Pagination/paginationComp.css" />
+      <link rel="stylesheet" href="/css/loaderComponent.css">
+      <script src="/javascript/loaderComponent.js"></script>
     <style>
       #a5-doctor-payment-active {
         background-color: #0969da;
@@ -27,6 +29,7 @@
     <title>View Payment</title>
   </head>
   <body onload="fetchPaymentHistory()">
+    <div class="center" id="loader"></div>
     <div class="a5-container">
       <div class="main-container">
       <%- include('../../common/newSidebar/doctorSidebar') %>

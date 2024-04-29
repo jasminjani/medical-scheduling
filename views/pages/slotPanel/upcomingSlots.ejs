@@ -1,39 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Slots</title>
+    <link rel="stylesheet" href="/css/loaderComponent.css" />
+    <script src="/javascript/loaderComponent.js"></script>
+    <link rel="stylesheet" href="/css/slotPanel/upcomingSlots.css" />
+    <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
+    <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
+    <style>
+      #a5-doctor-schedule-active {
+        background-color: #0969da;
+        transform: translate(5px);
+        border-radius: 5px;
+      }
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>All Slots</title>
-  <link rel="stylesheet" href="/css/slotPanel/upcomingSlots.css">
-  <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
-  <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
-  <style>
-    #a5-doctor-schedule-active {
-      background-color: #0969da;
-      transform: translate(5px);
-      border-radius: 5px;
-    }
+      #a5-doctor-schedule-active a,
+      #a5-doctor-schedule-active i {
+        color: #ffffff;
+      }
+    </style>
+    <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css" />
+    <script src="/sweetalert2/sweetalert2.min.js" defer></script>
+  </head>
 
-    #a5-doctor-schedule-active a,
-    #a5-doctor-schedule-active i {
-      color: #ffffff;
-    }
-  </style>
-  <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css">
-  <script src="/sweetalert2/sweetalert2.min.js" defer></script>
-</head>
-
-<body>
-  <section id="A3-allslot">
-    <div class="A3-main-container">
-      <%- include("../../common/newSidebar/doctorSidebar") %>
+  <body>
+    <div class="center" id="loader"></div>
+    <section id="A3-allslot">
+      <div class="A3-main-container">
+        <%- include("../../common/newSidebar/doctorSidebar") %>
         <div class="A3-container">
           <div class="A3-row-1">
-            <a id="A3-view" href="/doctor/upcomingSlots" style="color: white; font-weight: bold;"><i
-                class="fa-regular fa-eye"></i> All Appointments</a>
-            <a id="A3-add" href="/doctor/addSlot" style="color: black; font-weight: bold;"><i class="fa-solid fa-plus">
-              </i> Generate Slots</a>
+            <a
+              id="A3-view"
+              href="/doctor/upcomingSlots"
+              style="color: white; font-weight: bold"
+              ><i class="fa-regular fa-eye"></i> All Appointments</a
+            >
+            <a
+              id="A3-add"
+              href="/doctor/addSlot"
+              style="color: black; font-weight: bold"
+              ><i class="fa-solid fa-plus"> </i> Generate Slots</a
+            >
           </div>
           <div class="A3-row-2">
             <table>
@@ -50,7 +60,7 @@
           <div class="A3-modal">
             <div class="A3-row-3">
               <h3 id="A3-modal-date">Date</h3>
-              <input type="button" value="Close" onclick="handleClose()">
+              <input type="button" value="Close" onclick="handleClose()" />
             </div>
             <table>
               <thead>
@@ -66,10 +76,9 @@
             </table>
           </div>
         </div>
-    </div>
-  </section>
+      </div>
+    </section>
 
-  <script src="/javascript/slotPanel/getSlots.js"></script>
-</body>
-
+    <script src="/javascript/slotPanel/getSlots.js"></script>
+  </body>
 </html>
