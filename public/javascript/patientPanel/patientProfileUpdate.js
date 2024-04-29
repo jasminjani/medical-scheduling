@@ -57,9 +57,10 @@ const profileFun = () => {
     method:"POST",
   body:formData
       })
-  const {success} = await fetchData.json();
-
-  if (success) {
+  const data = await fetchData.json();
+console.log(data)
+  if (data.success) {
+    localStorage.setItem('userinfo',JSON.stringify(data.data[0]))
     Swal.fire({
       title: "Good job!",
       text: "Update Successfully!",

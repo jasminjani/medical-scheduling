@@ -141,8 +141,8 @@ const getSlots = async (e) => {
     data = await data.json();
     let result = data.result;
     let html = `<option value="">--Select slot--</option>`;
+    let timezoneoffset = new Date().getTimezoneOffset();
     result.forEach((slot) => {
-      let timezoneoffset = new Date().getTimezoneOffset();
       slot.start_time = new Date(slot.start_time).getTime();
       slot.start_time -= (timezoneoffset * 60 * 1000);
       slot.start_time = new Date(slot.start_time).toLocaleTimeString('en-US')
