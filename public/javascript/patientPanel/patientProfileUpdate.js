@@ -16,7 +16,7 @@ const patientProfileFetchData = async () => {
       document.getElementById("updateImage").innerHTML = `<img src="/imgs/${data[0][element]}" alt="" height="200px" width="200px" /> <span onclick='profileFun()'>Cancel</span>`
     }
     else {
-      console.log(element);
+     
       document.getElementsByName(element)[0].value = data[0][element]
 
     }

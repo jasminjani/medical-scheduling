@@ -17,7 +17,7 @@ const getUpcomingSlots = async () => {
     },
   });
   const { success, data } = await response.json();
-  console.log(data)
+
 
   totalPage = Math.ceil(data.length / limit);
 
@@ -106,7 +106,7 @@ const cancelSlot = async (slot_id, patient_id) => {
 
 const getDetails = async (data) => {
 
-  console.log(data);
+
   
   const modal = document.getElementsByClassName("A3-modal")[0];
   modal.style.visibility = "visible";

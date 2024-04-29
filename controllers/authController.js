@@ -9,20 +9,24 @@ dotenv.config();
 
 // city combo
 const generateCityCombo = async () => {
-  let [result] = await conn.query("select * from cities order by city");
+  try {
+    let [result] = await conn.query("select * from cities order by city");
+    
+    if (!result.length) {
+      let html = "";
+      return html;
+    }
+    
+    let html = `<option value="">--Select City--</option>`;
 
-  if (!result.length) {
-    let html = "";
+    result.forEach((value) => {
+      html += `<option value="${value.city}">${value.city} </option>`;
+    });
+
     return html;
+  } catch (error) {
+    logger.error(error.message);
   }
-
-  let html = `<option value="">--Select City--</option>`;
-
-  result.forEach((value) => {
-    html += `<option value="${value.city}">${value.city} </option>`;
-  });
-
-  return html;
 };
 
 exports.getDoctorDetails = async (req, res) => {
@@ -69,11 +73,10 @@ exports.getDoctorDetails = async (req, res) => {
     })
 
   } catch (error) {
-    logger.error(error.message)
-    return res.status(500).json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
-      error: error.message,
-      message: "Internal server Error",
+      message: error.message,
     });
   }
 
@@ -85,6 +88,10 @@ exports.homePage = async (req, res) => {
     return res.render('./common/homepage', { html })
   } catch (error) {
     logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -100,10 +107,11 @@ exports.contactUsHomePage = async (req, res) => {
       message: "Data inserted .."
     });
   } catch (error) {
+    logger.error(error.message);
     res.status(500).json({
       success: false,
-      error: error.message
-    })
+      message: error.message,
+    });
   }
 }
 
@@ -113,7 +121,11 @@ exports.allDoctors = async (req, res) => {
     let city = await generateCityCombo();
     res.render('./pages/patientPanel/allDoctors', { html, city })
   } catch (error) {
-    logger.error(error.message)
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 }
 
@@ -124,6 +136,10 @@ exports.getCreateUserForm = async (req, res) => {
     return res.render("./pages/auth/register", { html });
   } catch (error) {
     logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -132,7 +148,11 @@ exports.getLoginForm = async (req, res) => {
   try {
     return res.render("./pages/auth/login");
   } catch (error) {
-    logger.error(error.message)
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -297,7 +317,6 @@ exports.createUser = async (req, res) => {
     });
   } catch (error) {
     logger.error(error.message);
-    // any error occur during the registration
     res.status(500).json({
       success: false,
       message: error.message,
@@ -420,9 +439,10 @@ exports.login = async (req, res) => {
       });
     }
   } catch (error) {
-    return res.status(500).json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
-      message: error,
+      message: error.message,
     });
   }
 };
@@ -448,7 +468,9 @@ exports.getAllUser = async (req, res) => {
       users: result,
     });
   } catch (error) {
+    logger.error(error.message);
     res.status(500).json({
+      success: false,
       message: error.message,
     });
   }
@@ -491,6 +513,7 @@ exports.getUserById = async (req, res) => {
       user: newObj,
     });
   } catch (error) {
+    logger.error(error.message);
     res.status(500).json({
       success: false,
       message: error.message,
@@ -548,6 +571,7 @@ exports.deleteUser = async (req, res) => {
       message: "user deleted successfully",
     });
   } catch (error) {
+    logger.error(error.message);
     res.status(500).json({
       success: false,
       message: error.message,
@@ -575,6 +599,7 @@ exports.activationForm = async (req, res) => {
 
     return res.render("./pages/auth/activationForm", { html });
   } catch (error) {
+    logger.error(error.message);
     res.status(500).json({
       success: false,
       message: error.message,
@@ -642,6 +667,7 @@ exports.activationAccount = async (req, res) => {
   </div>`;
     return res.render("./pages/auth/activationForm", { html });
   } catch (error) {
+    logger.error(error.message);
     res.status(500).json({
       success: false,
       message: error.message,
@@ -689,6 +715,7 @@ exports.generateToken = async (req, res) => {
       token: newToken,
     });
   } catch (error) {
+    logger.error(error.message);
     res.status(500).json({
       success: false,
       message: error.message,
@@ -703,7 +730,9 @@ exports.logout = async (req, res) => {
       message: "user Logged out successfully",
     });
   } catch (error) {
+    logger.error(error.message);
     res.status(500).json({
+      success: false,
       message: error.message,
     });
   }
@@ -721,7 +750,9 @@ exports.forgotPassword = async (req, res) => {
 
     return res.render("pages/auth/forgotPass", { html });
   } catch (error) {
+    logger.error(error.message);
     res.status(500).json({
+      success: false,
       message: error.message,
     });
   }
@@ -766,7 +797,9 @@ exports.forgotPassLink = async (req, res) => {
       token: verification_token,
     });
   } catch (error) {
+    logger.error(error.message);
     res.status(500).json({
+      success: false,
       message: error.message,
     });
   }
@@ -828,7 +861,9 @@ exports.createPasswordForm = async (req, res) => {
 
     return res.render("./pages/auth/resetPass", { html });
   } catch (error) {
+    logger.error(error.message);
     res.status(500).json({
+      success: false,
       message: error.message,
     });
   }
@@ -905,7 +940,9 @@ exports.updatePassword = async (req, res) => {
       message: "Password Created successfully",
     });
   } catch (error) {
+    logger.error(error.message);
     res.status(500).json({
+      success: false,
       message: error.message,
     });
   }
@@ -918,9 +955,10 @@ exports.getCurrentUser = async (req, res) => {
       user: req.user,
     });
   } catch (error) {
-    return res.json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
-      error: error.message,
+      message: error.message,
     });
   }
 };

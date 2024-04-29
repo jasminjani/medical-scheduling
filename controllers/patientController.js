@@ -3,39 +3,57 @@ const logger = require('../utils/pino')
 let PDFDocument = require("pdfkit");
 
 exports.patientDashboard = async (req, res) => {
-  let html = await this.specialitiesCombo();
-  res.render('pages/patientPanel/patientDashboard', { html });
+  try {
+    let html = await this.specialitiesCombo();
+    res.render('pages/patientPanel/patientDashboard', { html });
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 exports.patientStatus = async (req, res) => {
-  let id = req.user.id;
-  let date = new Date();
-  // let fullDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
-  let fullDate = date.toISOString().slice(0, 10);
-  // console.log(fullDate);
 
-  let [doctorCount] = await conn.query(
-    "select count(*) doctorCount from doctor_details where approved =1"
-  );
-  let [patientCount] = await conn.query(
-    "select count(*) patientCount from users where role_id = 1"
-  );
-  let [patientTotalBooking] = await conn.query(
-    "select count(*) patientTotalBooking from slot_bookings where patient_id = ?",
-    [id]
-  );
-  let [TodaysBooking] = await conn.query(
-    `select count(*) TodaysBooking from slot_bookings a
-  join time_slots b on a.slot_id = b.id   where b.date = ? and a.patient_id = ?`,
-    [fullDate, id]
-  );
+  try {
+    let id = req.user.id;
+    let date = new Date();
+    // let fullDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+    let fullDate = date.toISOString().slice(0, 10);
 
-  res.json([
-    doctorCount[0],
-    patientCount[0],
-    patientTotalBooking[0],
-    TodaysBooking[0],
-  ]);
+
+    let [doctorCount] = await conn.query(
+      "select count(*) doctorCount from doctor_details where approved =1"
+    );
+    let [patientCount] = await conn.query(
+      "select count(*) patientCount from users where role_id = 1"
+    );
+    let [patientTotalBooking] = await conn.query(
+      "select count(*) patientTotalBooking from slot_bookings where patient_id = ?",
+      [id]
+    );
+    let [TodaysBooking] = await conn.query(
+      `select count(*) TodaysBooking from slot_bookings a
+    join time_slots b on a.slot_id = b.id   where b.date = ? and a.patient_id = ?`,
+      [fullDate, id]
+    );
+
+    res.json([
+      doctorCount[0],
+      patientCount[0],
+      patientTotalBooking[0],
+      TodaysBooking[0],
+    ]);
+
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 exports.addPatientDetails = async (req, res) => {
@@ -57,9 +75,10 @@ exports.addPatientDetails = async (req, res) => {
         [[patientId, bloodgroup, medicalHistory]]
       );
     } catch (error) {
-      return res.json({
+      logger.error(error.message);
+      return res.status(500).json({
         success: false,
-        message: "Internal Server Error",
+        message: error.message,
       });
     }
 
@@ -68,9 +87,10 @@ exports.addPatientDetails = async (req, res) => {
       message: "data inserted successfully",
     });
   } catch (error) {
-    return res.json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
-      message: "Internal Server Error",
+      message: error.message,
     });
   }
 };
@@ -95,11 +115,26 @@ exports.patientDetails = async (req, res) => {
       success: true,
       message: "patient details empty",
     });
-  } catch (error) { }
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 exports.patientViewProfile = async (req, res) => {
-  res.render("pages/patientPanel/patientProfileView");
+  try {
+    res.render("pages/patientPanel/patientProfileView");
+
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 exports.patientViewProfileData = async (req, res) => {
@@ -111,7 +146,8 @@ exports.patientViewProfileData = async (req, res) => {
     );
     res.json(result);
   } catch (error) {
-    return res.json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -119,7 +155,16 @@ exports.patientViewProfileData = async (req, res) => {
 };
 
 exports.getpatientProfileUpdate = async (req, res) => {
-  res.render("pages/patientPanel/patientProfileUpdate");
+  try {
+    res.render("pages/patientPanel/patientProfileUpdate");
+
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 exports.patientProfileUpdateData = async (req, res) => {
@@ -131,7 +176,8 @@ exports.patientProfileUpdateData = async (req, res) => {
     );
     res.json(result);
   } catch (error) {
-    return res.json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -164,7 +210,8 @@ exports.postPatientProfileUpdate = async (req, res) => {
         [fname, lname, dob, phone, address, city, gender, patient_id, 1]
       );
     } catch (error) {
-      return res.json({
+      logger.error(error.message);
+      return res.status(500).json({
         success: false,
         message: error.message,
       });
@@ -177,7 +224,8 @@ exports.postPatientProfileUpdate = async (req, res) => {
           [0, patient_id]
         );
       } catch (error) {
-        return res.json({
+        logger.error(error.message);
+        return res.status(500).json({
           success: false,
           message: error.message,
         });
@@ -189,7 +237,8 @@ exports.postPatientProfileUpdate = async (req, res) => {
           [profile_picture, patient_id]
         );
       } catch (error) {
-        return res.json({
+        logger.error(error.message);
+        return res.status(500).json({
           success: false,
           message: error.message,
         });
@@ -199,7 +248,8 @@ exports.postPatientProfileUpdate = async (req, res) => {
       .status(200)
       .json({ success: true, message: "Updated Successfully" });
   } catch (error) {
-    return res.json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -212,15 +262,14 @@ exports.patientAllAppointment = async (req, res) => {
 
     const sql = `SELECT users.id, users.fname, users.lname, users.email, users.gender, users.phone, users.city, users.dob, users.address, patient_details.blood_group FROM users JOIN patient_details ON users.id = patient_details.patient_id WHERE users.id = ? AND users.is_deleted = 0`;
     const [patientDetails] = await conn.query(sql, [patient_id]);
-    // await console.log(patientDetails);
 
-    // const sql2 = ``;
 
     res.render("pages/adminPanel/patientAllAppointment", {
       patientDetails: patientDetails,
     });
   } catch (error) {
-    return res.status(500).json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -231,7 +280,8 @@ exports.patientProfile = async (req, res) => {
   try {
     res.render("pages/patientPanel/patientProfile");
   } catch (error) {
-    return res.status(500).json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -242,7 +292,8 @@ exports.patientPastProfile = async (req, res) => {
   try {
     res.render("pages/patientPanel/patientPastBookings");
   } catch (error) {
-    return res.status(500).json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -265,10 +316,18 @@ exports.patientUpcomingBookings = async (req, res) => {
 
       return res.status(200).json({ success: true, data: data });
     } catch (error) {
-      return res.status(500).json({ success: false, message: error.message });
+      logger.error(error.message);
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
     }
   } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -288,11 +347,18 @@ exports.patientPastBookings = async (req, res) => {
 
       return res.status(200).json({ success: true, message: data });
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({ success: false, message: error.message });
+      logger.error(error.message);
+      res.status(500).json({
+        success: false,
+        message: error.message,
+      });
     }
   } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -310,10 +376,18 @@ exports.patientPayments = async (req, res) => {
 
       return res.status(200).json({ success: true, message: data });
     } catch (error) {
-      return res.status(500).json({ success: false, message: error.message });
+      logger.error(error.message);
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
     }
   } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -334,47 +408,80 @@ exports.searchPatientPayment = async (req, res) => {
 
       return res.status(200).json({ success: true, message: data });
     } catch (error) {
-      return res.status(500).json({ success: false, message: error.message });
+      logger.error(error.message);
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
     }
   } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
 exports.patientPanelPaymentHistory = async (req, res) => {
-  await res.render("pages/patientPanel/paymentHistory");
+  try {
+    await res.render("pages/patientPanel/paymentHistory");
+
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 exports.specialitiesCombo = async () => {
-  let sql = "select * from specialities where approved = 1 order by speciality";
-  let [result] = await conn.query(sql);
 
-  let html = "";
+  try {
 
-  result.forEach((speciality) => {
-    html += `<option value=${speciality.speciality} data-unique="${speciality.id
-      }">${speciality.speciality.toUpperCase()}</option>`;
-  });
+    let sql = "select * from specialities where approved = 1 order by speciality";
+    let [result] = await conn.query(sql);
 
-  return html;
+    let html = "";
+
+    result.forEach((speciality) => {
+      html += `<option value=${speciality.speciality} data-unique="${speciality.id
+        }">${speciality.speciality.toUpperCase()}</option>`;
+    });
+    return html;
+
+  } catch (error) {
+    logger.error(error.message);
+  }
 };
 
 // doctorCombo Data
 exports.DoctorCobmo = async (req, res) => {
-  let id = req.body.id;
 
-  let sql = `select d.doctor_id as doctor_id, concat(u.fname," ", u.lname) as name, dd.consultancy_fees from doctor_has_specialities as d 
-  inner join 
-  users as u on d.doctor_id = u.id inner join doctor_details as dd on d.doctor_id= dd.doctor_id where speciality_id=?;`;
-  let [result] = await conn.query(sql, [id]);
+  try {
+    let id = req.body.id;
 
-  let html = `<option value="">--Select Doctor--</option>`;
+    let sql = `select d.doctor_id as doctor_id, concat(u.fname," ", u.lname) as name, dd.consultancy_fees from doctor_has_specialities as d 
+    inner join 
+    users as u on d.doctor_id = u.id inner join doctor_details as dd on d.doctor_id= dd.doctor_id where speciality_id=?;`;
+    let [result] = await conn.query(sql, [id]);
 
-  result.forEach((doctor) => {
-    html += `<option value=${doctor.name} data-consultancy_fees="${doctor.consultancy_fees}" data-did="${doctor.doctor_id}">${doctor.name}</option>`;
-  });
+    let html = `<option value="">--Select Doctor--</option>`;
 
-  return res.json({ html: html });
+    result.forEach((doctor) => {
+      html += `<option value=${doctor.name} data-consultancy_fees="${doctor.consultancy_fees}" data-did="${doctor.doctor_id}">${doctor.name}</option>`;
+    });
+
+    return res.json({ html: html });
+
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 const generateSlotCombo = async (result) => {
@@ -396,21 +503,29 @@ exports.getSingleSlots = async (req, res) => {
     let result;
     try {
       const query = `select * from time_slots 
-      where timestampdiff(second,current_timestamp(),concat(time_slots.date," ",time_slots.start_time))>0
+      where timestampdiff(second,utc_timestamp(),time_slots.start_time)>0
       and doctor_id = ? and date = ? and is_booked = 0 and is_deleted = 0;`;
 
       [result] = await conn.query(query, [doctor_id, date]);
 
-      console.log(result);
+
     } catch (error) {
-      return res.status(500).json({ success: false, message: error.message });
+      logger.error(error.message);
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
     }
 
-    let html = await generateSlotCombo(result);
-    return res.status(200).json({ success: true, html: html });
+    // let html = await generateSlotCombo(result);
+    return res.status(200).json({ success: true, result:result });
     // return res.render('pages/patientPanel/appointment')
   } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -425,14 +540,18 @@ exports.bookingSlot = async (req, res) => {
 
       const [slotExist] = await conn.query(query, [slotId, 0, 1, 1]);
 
-      // console.log(slotExist);
+
 
       if (slotExist.length !== 0)
         return res
           .status(404)
           .json({ success: false, message: "slot already booked" });
     } catch (error) {
-      return res.status(500).json({ success: false, message: error.message });
+      logger.error(error.message);
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
     }
 
     try {
@@ -467,11 +586,18 @@ exports.bookingSlot = async (req, res) => {
         .status(200)
         .json({ success: true, message: "slot booked successfully" });
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({ success: false, message: error.message });
+      logger.error(error.message);
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
     }
   } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -492,7 +618,11 @@ exports.cancelSlot = async (req, res) => {
           .status(500)
           .json({ success: false, message: "you can not cancel this slot" });
     } catch (error) {
-      return res.status(500).json({ success: false, message: error.message });
+      logger.error(error.message);
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
     }
 
     try {
@@ -501,7 +631,11 @@ exports.cancelSlot = async (req, res) => {
 
       const [canceled] = await conn.query(query, [1, slot_id, patient_id]);
     } catch (error) {
-      return res.status(500).json({ success: false, message: error.message });
+      logger.error(error.message);
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
     }
 
     try {
@@ -509,7 +643,11 @@ exports.cancelSlot = async (req, res) => {
 
       const [canceled] = await conn.query(query, [0, slot_id]);
     } catch (error) {
-      return res.status(500).json({ success: false, message: error.message });
+      logger.error(error.message);
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
     }
 
     try {
@@ -520,8 +658,11 @@ exports.cancelSlot = async (req, res) => {
       // return res.status(200).json({ success: true, message: "slot canceled successfully" });
       return res.redirect("/patient/upcomingSlots");
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({ success: false, message: error.message });
+      logger.error(error.message);
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
     }
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
@@ -560,11 +701,11 @@ exports.nearByDoctores = async (req, res) => {
       acc[id].specialities.push(speciality)
       return acc;
     }, {}));
-    console.log("object ", data);
     res.send({ data })
 
   } catch (error) {
-    return res.status(500).json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -587,7 +728,8 @@ exports.nearByDoctoresOnSearch = async (req, res) => {
     const [nearByDoctoresOnSearch] = await conn.query(sql);
     res.send(nearByDoctoresOnSearch);
   } catch (error) {
-    return res.status(500).json({
+    logger.error(error.message);
+    res.status(500).json({
       success: false,
       message: error.message,
     });
@@ -609,7 +751,11 @@ exports.rating = async (req, res) => {
       if (isReviewExist.length !== 0) return res.status(500).json({ success: false, message: "Review already added" })
 
     } catch (error) {
-      return res.status(500).json({ success: false, message: error.message })
+      logger.error(error.message);
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
     }
 
     try {
@@ -633,13 +779,18 @@ exports.rating = async (req, res) => {
       return res.status(500).json({ success: true, message: "Review added successfully" })
 
     } catch (error) {
-      return res.status(500).json({ success: false, message: error.message })
+      logger.error(error.message);
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
     }
 
 
 
   }
   catch (error) {
+    logger.error(error.message);
     return res.status(500).json({ success: false, message: error.message })
   }
 }
@@ -661,10 +812,11 @@ exports.updateRating = async (req, res) => {
 
   }
   catch (error) {
+    logger.error(error.message);
     return res.status(500).json({
       success: false,
-      message: error.message
-    })
+      message: error.message,
+    });
   }
 }
 
@@ -694,9 +846,119 @@ exports.getDoctorRating = async (req, res) => {
 
 
 exports.getBookingSlots = async (req, res) => {
-  const doctor_id = req.params.id;
-  let html = await this.specialitiesCombo();
-  return res.render('pages/patientPanel/appointment', { html, doctor_id })
+  try {
+    const doctor_id = req.params.id;
+    let html = await this.specialitiesCombo();
+    return res.render('pages/patientPanel/appointment', { html, doctor_id })
+
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+}
+
+
+// update become a doctor form
+
+exports.knowStatus = async (req, res) => {
+  const doctor_id = req.user.id
+  try {
+    const [status] = await conn.query(`select approved from doctor_details where doctor_id = ?;`, [doctor_id])
+    return res.status(200).json(status)
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+}
+
+exports.updateBecomeDoctorDetails = async (req, res) => {
+  try {
+    res.render("pages/doctorPanel/becomeDoctorDetails")
+
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+}
+
+exports.updateBecomeDoctorData = async (req, res) => {
+  const doctor_id = req.user.id
+  try {
+    const [result] = await conn.query(` select doctor_details.id as doctor_details_id,doctor_details.hospital_id,specialities.id as speciality_id, qualification, consultancy_fees,name as hospital_name,location,gst_no,city,pincode from doctor_details inner join clinic_hospitals on doctor_details.hospital_id = clinic_hospitals.id inner join doctor_has_specialities on doctor_details.doctor_id = doctor_has_specialities.doctor_id inner join specialities on doctor_has_specialities.speciality_id = specialities.id where doctor_details.doctor_id = ?;`, [doctor_id])
+    res.status(200).json(result)
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+}
+
+
+exports.updatePostBecomeDoctor = async (req, res) => {
+
+  const { doctor_details_id, hospital_id, qualification, consultancy_fees, speciality_id, hospital_name, address, gst_no, city, pincode } = req.body
+  const doctor_id = req.user.id
+
+  if (!hospital_id || !speciality_id || !doctor_id) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error!"
+    })
+  }
+
+  try {
+    try {
+      await conn.query(`update clinic_hospitals set name = ?, location = ?, gst_no =?, city = ?, pincode = ? where clinic_hospitals.id = ? `, [hospital_name, address, gst_no, city, pincode, hospital_id])
+
+    } catch (error) {
+      logger.error(error.message);
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
+    }
+
+    try {
+      const [result] = await conn.query(`update doctor_has_specialities set speciality_id = ? where doctor_id = ?`, [speciality_id, doctor_id])
+
+    } catch (error) {
+      logger.error(error.message);
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
+    }
+
+    try {
+      await conn.query(`update doctor_details set qualification = ?, consultancy_fees = ?, approved = ? where doctor_id =? and doctor_details.id = ?`, [qualification, consultancy_fees, 0, doctor_id, doctor_details_id])
+
+    } catch (error) {
+
+      logger.error(error.message);
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
+    }
+    return res.status(200).json({ success: true })
+  } catch (error) {
+    logger.error(error.message);
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 }
 
 

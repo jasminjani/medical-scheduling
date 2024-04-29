@@ -15,7 +15,7 @@ const getDoctors = async () => {
     data = await data.json();
     // let patientCity = data.patientCity
     data = data.data;
-    console.log(data);
+
     // copyData = data;
     // let matchedDoctor = [];
     // data.forEach((doctor) => { if (patientCity == doctor.city) { matchedDoctor.push(doctor) } })

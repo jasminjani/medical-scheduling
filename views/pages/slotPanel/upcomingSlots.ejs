@@ -27,11 +27,13 @@
 <body>
   <section id="A3-allslot">
     <div class="A3-main-container">
-      <%-include("../../common/newSidebar/doctorSidebar")%>
+      <%- include("../../common/newSidebar/doctorSidebar") %>
         <div class="A3-container">
           <div class="A3-row-1">
-            <a id="A3-view" href="/doctor/upcomingSlots"><i class="fa-regular fa-eye"></i></a>
-            <a id="A3-add" href="/doctor/addSlot"><i class="fa-solid fa-plus"></i></a>
+            <a id="A3-view" href="/doctor/upcomingSlots" style="color: white; font-weight: bold;"><i
+                class="fa-regular fa-eye"></i> All Appointments</a>
+            <a id="A3-add" href="/doctor/addSlot" style="color: black; font-weight: bold;"><i class="fa-solid fa-plus">
+              </i> Generate Slots</a>
           </div>
           <div class="A3-row-2">
             <table>

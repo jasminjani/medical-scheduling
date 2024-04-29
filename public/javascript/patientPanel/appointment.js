@@ -8,7 +8,7 @@ function validate() {
   let dvalid = document.querySelectorAll(".dvalid");
 
   let validated = document.querySelectorAll(".validated");
-  console.log(validated);
+
   // remove if any error message is in frontend
   if (validated?.length) {
     validated.forEach((item) => {
@@ -38,9 +38,9 @@ slotBook.addEventListener("click", async (e) => {
   if (validate() && date.value.trim()) {
     let doctors = JSON.parse(localStorage.getItem('doctors'))
     let doctorId = document.getElementById('did').value;
-    console.log(doctorId)
+
     let fees = doctors.filter((doctor) => doctor.id = doctorId)[0].consultancy_fees;
-    console.log(fees)
+
     let selectedSlotId = appointments.options.selectedIndex;
     let slotId = appointments.children[selectedSlotId].dataset.sid;
 
@@ -76,7 +76,7 @@ slotBook.addEventListener("click", async (e) => {
             method:"POST",
             body:formData
           })
-          console.log(await patient.json())
+         
       });
     }
 
@@ -101,7 +101,7 @@ slotBook.addEventListener("click", async (e) => {
             "Content-Type": "application/json",
           },
         });
-        console.log(await d.json());
+      
 
         Swal.fire("Payment Done!", "Your Slot is Booked", "success").then(
           (result) => {
@@ -139,7 +139,26 @@ const getSlots = async (e) => {
     });
 
     data = await data.json();
-    appointments.innerHTML = data.html;
+    let result = data.result;
+    let html = `<option value="">--Select slot--</option>`;
+    result.forEach((slot) => {
+      let timezoneoffset = new Date().getTimezoneOffset();
+      slot.start_time = new Date(slot.start_time).getTime();
+      slot.start_time -= (timezoneoffset * 60 * 1000);
+      slot.start_time = new Date(slot.start_time).toLocaleTimeString('en-US')
+      console.log(slot.start_time)
+
+      slot.end_time = new Date(slot.end_time).getTime();
+      slot.end_time -= (timezoneoffset * 60 * 1000);
+      slot.end_time = new Date(slot.end_time).toLocaleTimeString('en-US')
+      console.log(slot.end_time)
+      // dt = dt.toLocaleString('en-US',{timeZone:userTimezone})
+      html += `<option value=${slot.start_time + "-" + slot.id} data-sid="${
+        slot.id
+      }">${slot.start_time + " - " + slot.end_time}</option>`;
+    });
+
+    appointments.innerHTML = html;
   }
 }
 
@@ -160,7 +179,7 @@ const getDoctorData = async () => {
   if (!isNaN(id)) {
     let doctors = JSON.parse(localStorage.getItem("doctors") || "[]");
     let doctor = doctors.filter((doctor) => doctor.id === id)[0];
-    // console.log(doctor)
+
 
     let stars = "";
     for (let i = 0; i < 5; i++) {
@@ -179,7 +198,7 @@ const getDoctorData = async () => {
     <p class="name"><span>Name: </span>${doctor.fname + " " + doctor.lname}</p>
     <p class="qualification"><span>qualification: </span>${doctor.qualification}</p>
     <p class="speciality"><span>speciality: </span>${doctor.specialities.map((speciality) => `${speciality.toUpperCase()}`)}</p>
-    <p class="fees"><span>fees: </span>Rs. ${doctor.consultancy_fees}</p>
+    <p class="fees"><span>Fees: </span>Rs. ${doctor.consultancy_fees}</p>
     <p class="hospital-name"><span>clinic/hospital: </span>${doctor.hospital_name}</p>
     <p class="address"><span>city: </span> ${doctor.city}</p>
     <p class="address"><span>address: </span> ${doctor.location}</p>

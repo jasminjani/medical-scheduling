@@ -37,7 +37,6 @@ app.use("/", allRequestLogs, rootRouter);
 // server is running on PORT
 const server = app.listen(PORT, () => {
   logger.info(`server is running on port: http://localhost:${PORT}`);
-  // console.log(`server is running on port: http://localhost:${PORT}`);
 });
 
 const io = new Server(server);

@@ -159,8 +159,7 @@ router.route("/dates").get(getDates);
 router.route("/slots/:date").get(getAllSlots);
 router.route("/delete/:slot_id").get(deleteSlot);
 
-router.route("/searchReview/:search").get(searchReview);
-router.route("/searchPatientData/:search").get(getPatientSearchData);
+
 
 // /generatePDFofprescripton/:id
 router.route("/generate/:id").get(generatePDF);
@@ -182,7 +181,7 @@ router.route("/prescriptions").get(getPrescriptionOfDoctor);
 router.route("/patient/prescription/:patient_id").get(showDetails);
 
 // TODO : change route
-router.route("/prescription/:patient_id/:booking_id").get(home);
+router.route("/prescription/:booking_id").get(home);
 
 router.route("/prescriptiondetails").get(allPatientPriscription);
 

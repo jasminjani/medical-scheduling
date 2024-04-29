@@ -45,7 +45,7 @@ const searchPatient=async()=>{
             //   );
             //   resjson = await res.json();
             
-            //   console.log(resjson.message[0]);
+            
             //   resjson.message[0].forEach(function (element, index) {
               //     let table = document.getElementById("myTable");
               //     let str = `

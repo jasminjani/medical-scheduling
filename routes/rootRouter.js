@@ -14,4 +14,7 @@ router.use('/patient', patientRouter)
 router.route("/cityCombo").get(getCityCombo);
 router.route("/specialities").get(allSpecialities);
 
+router.use("*",(req,res)=>{
+  return res.render('common/404')
+})
 module.exports = router;

@@ -20,7 +20,7 @@ function depAll() {
   // document.getElementById('depMedicine').style.color = "black"
   // document.getElementById('depPedia').style.backgroundColor = "white"
   // document.getElementById('depPedia').style.color = "black"
-  console.log("all");
+  
 }
 
 function depCardio() {
@@ -42,7 +42,7 @@ function depCardio() {
   // document.getElementById('depMedicine').style.color = "black"
   // document.getElementById('depPedia').style.backgroundColor = "white"
   // document.getElementById('depPedia').style.color = "black"
-  console.log("cardio");
+  
 }
 
 function depDental() {
@@ -63,7 +63,7 @@ function depDental() {
   // document.getElementById('depMedicine').style.color = "black"
   // document.getElementById('depPedia').style.backgroundColor = "white"
   // document.getElementById('depPedia').style.color = "black"
-  console.log("dental");
+
 }
 
 function depNeuro() {
@@ -84,7 +84,7 @@ function depNeuro() {
   // document.getElementById('depMedicine').style.color = "black"
   // document.getElementById('depPedia').style.backgroundColor = "white"
   // document.getElementById('depPedia').style.color = "black"
-  console.log("neuro");
+
 }
 
 function depMed() {
@@ -105,7 +105,7 @@ function depMed() {
   // document.getElementById('depNeurology').style.color = "black"
   // document.getElementById('depPedia').style.backgroundColor = "white"
   // document.getElementById('depPedia').style.color = "black"
-  console.log("medicine");
+ 
 }
 
 function depPedia() {
@@ -126,15 +126,5 @@ function depPedia() {
   // document.getElementById('depNeurology').style.color = "black"
   // document.getElementById('depMedicine').style.backgroundColor = "white"
   // document.getElementById('depMedicine').style.color = "black"
-  console.log("pedia");
+
 }
-
-
-
-// function depAll(){
-//   console.log("Hello");
-// }
-
-// function depCardio(){
-//   console.log("Helo2");
-// }

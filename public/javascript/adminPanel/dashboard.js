@@ -7,7 +7,7 @@ const getDoctors = async () => {
     });
     data = await data.json();
     data = data.data;
-    console.log(data);
+  
     localStorage.setItem('doctors',JSON.stringify(data))
     putDoctorOnScreen(data);
   } catch (error) {

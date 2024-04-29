@@ -32,8 +32,11 @@ const pagination = async () => {
     })
   }
 
-
   length = data.length;
+  if(length == 0)
+  {
+    document.getElementById("a5-tbody").innerHTML += "<tr><td colspan='5'  style='text-align:center'>Data Not Found!</td></tr>"
+  }
   pageno.innerHTML = currentPage;
 
   const endIndex = currentPage * pagefield;

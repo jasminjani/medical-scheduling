@@ -30,7 +30,7 @@ const getPastSlots = async () => {
    }
 
   message.slice((page - 1) * limit, page * limit).forEach(element => {
-    console.log(element);
+  
     table.innerHTML += `
       <tr>
         <td>${element.date}</td>
