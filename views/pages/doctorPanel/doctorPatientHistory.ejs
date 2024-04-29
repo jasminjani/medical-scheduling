@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="/css/adminPanel/allPatientDetails.css">
   <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css">
   <link rel="stylesheet" href="/css/Pagination/paginationComp.css" />
+    <link rel="stylesheet" href="/css/loaderComponent.css">
+  <script src="/javascript/loaderComponent.js"></script>
    <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css" />
     <script src="/sweetalert2/sweetalert2.min.js"></script>
   <style>
@@ -49,7 +51,7 @@
   <script src="/javascript/doctorPanel/doctorPatientHistory.js" defer></script>
   <title>View Patient History</title>
 </head>
-<body>
+<body onload="fetchData()">
   <div class="a5-container">
     <div class="main-container">
     <%- include('../../common/newSidebar/doctorSidebar') %>
@@ -72,7 +74,7 @@
               <option value="phone">Contact</option>
             </select></div>
           </div>    -->
-          <p id="a5-btn-search" tabindex="2" onclick="location.reload()">Search</p>
+          <p id="a5-btn-search" tabindex="2" onclick="searchPatientDetails()">Search</p>
 
          
         </div>
@@ -89,12 +91,13 @@
         </div>
           <div class="a5-user-table">
             <table id="a5-user-table">
+              <tr>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>More Details</th>
+              </tr>
               <tbody id="a5-tbody">
-                <tr>
-                  <th>Name</th>
-                  <th>Contact</th>
-                  <th>More Details</th>
-                </tr>
+
               </tbody>
             </table>
           </div>

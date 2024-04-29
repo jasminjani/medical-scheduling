@@ -8,13 +8,15 @@
   <title>Medical Scheduling</title>
   <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css">
   <script src="/sweetalert2/sweetalert2.min.js"></script>
+   <link rel="stylesheet" href="/css/loaderComponent.css">
+  <script src="/javascript/loaderComponent.js"></script>
   <link rel="stylesheet" href="/css/homepage.css" />
 
 </head>
 
 <body>
   <!-- Header section -->
-
+  <div class="center" id="loader"></div>
   <header class="header">
     <div class="container">
       <div class="navbar">
@@ -32,8 +34,7 @@
               <li id="become-doctor"><a href="/patient/create">Become A Doctor</a></li>
               <li id="book-appointment">
                 <a href="/patient/doctors/all" class="book-appointment"
-                  >Book Your Appointment</a
-                >
+                  >Book Your Appointment</a>
               </li>
             </ul>
           </nav>
@@ -43,24 +44,25 @@
               <a href="" class="user-img"><img src="/assets/logo.png" alt="logo" /></a>
             </div>
           </div>
+        </div>
       </div>
     </div>
   </header>
 
-    <!-- main content -->
-    <main id="main">
-      <!-- hero section -->
-      <section class="hero-section">
-        <div class="container">
-          <div class="hero">
-            <div class="hero-left">
-              <h1 class="hero-title">Book Your Doctor Appointment</h1>
-              <p class="hero-subtitle">
-                A Healthier Tomorrow Starts Today: Schedule Your Appointment!
-                Your Wellness, Our Expertise: Set Up Your Appointment Today.
-              </p>
-              <a class="btn" href="/patient/doctors/all">Book Your Appointment</a>
-            </div>
+  <!-- main content -->
+  <main id="main">
+    <!-- hero section -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero">
+          <div class="hero-left">
+            <h1 class="hero-title">Book Your Doctor Appointment</h1>
+            <p class="hero-subtitle">
+              A Healthier Tomorrow Starts Today: Schedule Your Appointment!
+              Your Wellness, Our Expertise: Set Up Your Appointment Today.
+            </p>
+            <a class="btn" href="/patient/doctors/all">Book Your Appointment</a>
+          </div>
 
           <div class="hero-right">
             <img src="/assets/doctor.png" alt="" />
@@ -273,6 +275,40 @@
     </section>
   </main>
 
+
+  <!-- chat chat window -->
+  <p id="a2-show-window-btn">Show</p>
+  <div class="a2-chat-window">
+    <div class="a2-chat-nav">
+      <h3>Ashish Zapadiya</h3>
+    </div>
+    <div class="a2-chat-message">
+      <div>
+        <p class="text-align-start">Hey there! 👋</p>
+      </div>
+      <div>
+        <p class="text-align-end">My Name is Ashish</p>
+      </div>
+      <div>
+        <p class="text-align-start">Pleased to meet you Ashish 😇</p>
+        <p class="text-align-start">how would you like me to assist you today?</p>
+      </div>
+      <div>
+        <p class="text-align-end">Book an Appointment</p>
+      </div>
+      <div>
+        <p class="text-align-start">Sure, goto this <a href="http://localhost:8000/">localhost:8000</a> </p>
+      </div>
+
+    </div>
+    <div class="a2-chat-input-div">
+      <form action="javascript:void(0)" class="a2-chat-form">
+        <input type="text" class="a2-chat-input">
+        <input type="submit" value="Send" class="a2-chat-submit">
+      </form>
+    </div>
+  </div>
+
   <!-- footer section -->
   <footer id="footer">
     <div class="container">
@@ -289,9 +325,26 @@
     </div>
   </footer>
 
+
   <script src="/javascript/homepage.js"></script>
   <script src="/javascript/auth/logout.js"></script>
   <script src="/javascript/carousel.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+  socket.on("connect", () => {
+    let userInfo = JSON.parse(localStorage.getItem('userinfo'));
+    if(userInfo && userInfo.id){
+      console.log(socket.id); 
+      socket.emit('reminder',userInfo.email);
+
+      socket.on(`reminder-${userInfo.email}`,(msg)=>{
+        console.log(msg)
+      })
+    }
+
+});
+</script>
 </body>
 
 </html>

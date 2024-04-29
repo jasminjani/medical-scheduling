@@ -29,11 +29,12 @@ const {
   rating,
   getDoctorRating,
   updateRating,
+  nearByDoctores,
+  searchPatientPaymentHistory,
 } = require("../controllers/patientController");
 const {
   becomeDoctorDetail,
   createDoctor,
-  searchPatientPayment,
   getPrescriptionOfUser,
   getPendingDoctorById,
 } = require("../controllers/doctorController");
@@ -71,8 +72,8 @@ router.route("/payments").get(patientPayments);
 // /patient-paymentHistory
 router.route("/payments/history").get(patientPanelPaymentHistory);
 
-// TODO : remove route
-router.route("/searchedPatientPayment/:searchedData").get(searchPatientPayment);
+// patient's search payment history routes
+router.route("/payments/:searchedData").get(searchPatientPaymentHistory);
 
 router.route("/doctors/all").get(allDoctors);
 
@@ -122,6 +123,7 @@ router.route("/review/:doctor_id").get(getDoctorRating);
 
 router.route("/review/update/:doctor_id").get(updateRating);
 
-
+// for display patient near by doctor
+router.route("/getNearByDoctor").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), nearByDoctores);
 
 module.exports = router;

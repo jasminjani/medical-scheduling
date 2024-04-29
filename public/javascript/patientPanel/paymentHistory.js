@@ -19,14 +19,12 @@ async function searchPatientPayment() {
 
     let searchedData = document.getElementById('a5-searchPatient').value;
     if (!searchedData) {
-      result = copyResult;
-    } else {
-
-      const url = `http://localhost:8000/searchedPatientPayment/${searchedData}`;
-      const response = await fetch(url);
-      result = await response.json();
+      searchedData = "";
     }
 
+    const url = `/patient/payments/${searchedData}`;
+    const response = await fetch(url);
+    result = await response.json();
     await appendPatientPayment();
   } catch (error) {
     console.log(error);
@@ -83,14 +81,22 @@ async function appendPatientPayment() {
       return document.getElementById('a5-tbody').innerHTML += `<tr><td colspan='6'>No Data Found !</td></tr>`
     }
 
+    let timezoneoffset = new Date().getTimezoneOffset();
     data.forEach(element => {
+    let start_time = new Date(element.start_time).getTime();
+    start_time -= (timezoneoffset * 60 * 1000);
+    start_time = new Date(start_time).toLocaleTimeString('en-US')
+    console.log(start_time)
 
+    let end_time = new Date(element.end_time).getTime();
+    end_time -= (timezoneoffset * 60 * 1000);
+    end_time = new Date(end_time).toLocaleTimeString('en-US')
       let html2 = `<tr>
           <td>${index++}</td>
           <td>${element.doctor_name}</td>
           <td>${element.email}</td>
           <td>${element.date}</td>
-          <td>${element.start_time + " - " + element.end_time}</td>
+          <td>${start_time + " - " + end_time}</td>
           <td>${element.payment_amount}</td>
         </tr>`
 

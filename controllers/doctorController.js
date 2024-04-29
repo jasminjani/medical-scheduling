@@ -1,5 +1,5 @@
 const conn = require('../config/dbConnection')
-const logger = require('../utils/pino')
+const logger = require('../utils/pino');
 
 exports.doctorDashBoard = (req, res) => {
   try {
@@ -149,7 +149,7 @@ exports.dashBoardTodayAppointments = async (req, res) => {
   try {
     let [result] = await conn.query(
       `select concat(users_patient.fname," ",users_patient.lname) as patient_name,slot_bookings.patient_id,
-    concat(time_slots.start_time," ",time_slots.end_time) as appointment_time,slot_bookings.id as booking_id from slot_bookings
+    time_slots.start_time,time_slots.end_time,slot_bookings.id as booking_id from slot_bookings
     join time_slots on time_slots.id=slot_bookings.slot_id
     join users as users_patient on slot_bookings.patient_id=users_patient.id
     left join prescriptions on prescriptions.booking_id=slot_bookings.id
@@ -356,12 +356,32 @@ exports.getPatientData = async (req, res) => {
   }
 };
 
+exports.getSearchPatientData = async (req, res) => {
+  try {
+    const id = req.user.id;
+    const {search} = req.params;
+    
+    const [result] = await conn.query(
+      `select slot_bookings.patient_id, concat(fname," ",lname)as name,phone from slot_bookings left join time_slots on slot_bookings.slot_id = time_slots.id inner join patient_details on slot_bookings.patient_id = patient_details.patient_id inner join users on patient_details.patient_id = users.id where time_slots.doctor_id = ? AND (users.fname LIKE '${search}%' OR users.lname LIKE '${search}%' OR users.phone LIKE '${search}%') group by patient_details.id `,
+      [id]
+    );
+    res.json(result);
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 exports.patientHistoryData = async (req, res) => {
   try {
     const patient_id = req.params.patient_id;
     const doctor_id = req.user.id;
     const [result] = await conn.query(
-      `select  date as "Appointment Date"  from slot_bookings inner join time_slots on slot_bookings.slot_id = time_slots.id where slot_bookings.patient_id = ? and time_slots.doctor_id = ? group by (date)`,
+      `select  date as "Appointment Date"  from slot_bookings inner join time_slots on slot_bookings.slot_id = time_slots.id where slot_bookings.patient_id = ? and time_slots.doctor_id = ? and 
+      timestampdiff(second,now(),time_slots.start_time)<0 group by (date)`,
       [patient_id, doctor_id]
     );
 
@@ -857,10 +877,10 @@ exports.createPrescription = async (req, res) => {
         diagnosis,
         booking_id,
       ]);
-      const insert_id = JSON.stringify(result[0].insertId);
+      const insert_id = result[0].insertId;
       res.json({
         msg: "Prescription Added Successfully",
-        insert_id,
+        insert_id:insert_id,
       });
     } else {
       res.json({
@@ -927,7 +947,7 @@ exports.editPrescriptionHome = async (req, res) => {
 exports.showDetails = async (req, res) => {
   try {
     // A7 params patient_id
-    const id = req.params.patient_id;
+    const id = req.params.id;
     const query = `SELECT
     users.id,
     users.fname,
@@ -944,8 +964,8 @@ exports.showDetails = async (req, res) => {
     LEFT JOIN
     patient_details ON users.id = patient_details.patient_id
     join profile_pictures on profile_pictures.user_id=users.id
-    WHERE
-    users.id = ?`;
+    WHERE profile_pictures.is_active = 1 and
+    users.id = (select patient_id from slot_bookings where id = ? )`;
     const [result] = await conn.query(query, [id]);
 
     res.json(result);

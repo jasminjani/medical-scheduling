@@ -104,9 +104,9 @@ const back = async () => {
 async function showDetails() {
   try {
 
-    let patient_id = document.getElementById("id").value;
-
-    const url = `/doctor/patient/prescription/${patient_id}`;
+    let slot_bookings_id = window.location.pathname.split("/").pop();
+    console.log(slot_bookings_id)
+    const url = `/doctor/patient/prescription/${slot_bookings_id}`;
     let  response = await fetch(url)
     let result = await response.json();
 

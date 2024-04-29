@@ -29,13 +29,21 @@ const getPastSlots = async () => {
     return table.innerHTML = "<tr><td colspan='5'>No Data Found !</td></tr>"
    }
 
+   let timezoneoffset = new Date().getTimezoneOffset();
   message.slice((page - 1) * limit, page * limit).forEach(element => {
-  
+    element.start_time = new Date(element.start_time).getTime();
+    element.start_time -= (timezoneoffset * 60 * 1000);
+    element.start_time = new Date(element.start_time).toLocaleTimeString('en-US')
+    console.log(element.start_time)
+
+    element.end_time = new Date(element.end_time).getTime();
+    element.end_time -= (timezoneoffset * 60 * 1000);
+    element.end_time = new Date(element.end_time).toLocaleTimeString('en-US')
     table.innerHTML += `
       <tr>
         <td>${element.date}</td>
         <td>${element.day}</td>
-        <td>${element.start_time.slice(0, -3)}-${element.end_time.slice(0, -3)}</td>
+        <td>${element.start_time}-${element.end_time}</td>
         <td><input type="button" value="Details" onclick='getDetails(${JSON.stringify(element)})'></td>
         <td><a href='/patient/generate/${element.prescription_id}'><input type="button" value="Get PDF"></a></td>
       </tr>

@@ -1,6 +1,7 @@
 window.location.href.split("/").pop() === "upcomingSlots" ? document.getElementById("A3-view").style.backgroundColor = "#3984af" : "";
 
 
+
 // Add Doctor id from cookie
 const getDates = async () => {
   const response = await fetch("/doctor/dates", {
@@ -45,6 +46,15 @@ const getSlots = async (date) => {
   table.innerHTML = "";
 
   message.forEach(element => {
+    let timezoneOffset = new Date().getTimezoneOffset();
+    // start time
+    element.start_time = new Date(element.start_time).getTime();
+    element.start_time -= (timezoneOffset * 60 * 1000);
+    element.start_time = new Date(element.start_time).toLocaleTimeString();
+    // end time
+    element.end_time = new Date(element.end_time).getTime();
+    element.end_time -= (timezoneOffset * 60 * 1000);
+    element.end_time = new Date(element.end_time).toLocaleTimeString();
     table.innerHTML += `
       <tr>
         <td>${element.start_time}</td>
@@ -74,7 +84,8 @@ const openDeleteModal = async (slot_id) => {
         icon: "success",
       }).then((result) => {
         if (result.isConfirmed) {
-          window.location.href = `/doctor/delete/${slot_id}`;
+          socket.emit("deleteSlot","Slot deleted successfully")
+          // window.location.href = `/doctor/delete/${slot_id}`;
         }
       })
     }

@@ -1,12 +1,35 @@
+let data;
+let dataCopy = [];
 
-
-let search = document.getElementById("search").value
+// let search = document.getElementById("search").value
 
 
 const fetchData = async () => {
   let fetchdata = await fetch(`/doctor/patients`)
-  let data = await fetchdata.json()
-  return data
+  data = await fetchdata.json();
+  dataCopy = data;
+  // return data
+  await pagination();
+}
+
+const searchPatientDetails = async () => {
+  try {
+
+    let searchedData = document.getElementById('search').value;
+    if (!searchedData) {
+      // searchedData = "";
+      data = dataCopy;
+    } else {
+
+    const url = `/doctor/patients-detail/${searchedData}`;  
+    const response = await fetch(url);
+    data = await response.json();
+    }
+    // return data;
+    await pagination();
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 let currentPage = 1;
@@ -18,18 +41,19 @@ let pageno = document.getElementById("pageno");
 const pagination = async () => {
   try {
 
-   data = await fetchData()
-  if (search) {
-    data = data.filter((obj) => {
-      return obj.name.includes(search) 
-    })
-  }
+  //  data = await fetchData()
+  // if (search) {
+  //   data = data.filter((obj) => {
+  //     return obj.name.includes(search) 
+  //   })
+  // }
   
   
   length = data.length;
     if (length == 0) {
-      document.getElementById("a5-tbody").innerHTML += "<tr><td colspan='5'  style='text-align:center'>Data Not Found!</td></tr>"
+      document.getElementById("a5-tbody").innerHTML = `<tr><td colspan='3'  style='text-align:center'>Data Not Found!</td></tr>`;
     }
+    else {
   pageno.innerHTML = currentPage;
 
 
@@ -38,6 +62,7 @@ const pagination = async () => {
   const pageItems = data.slice(startIndex, endIndex);
 
   let tabledata = "";
+  document.getElementById("a5-tbody").innerHTML = tabledata;
 
   pageItems.map((value) => {
     let patient_id = value.patient_id
@@ -49,6 +74,7 @@ const pagination = async () => {
   </tr>`
   })
   document.getElementById("a5-tbody").innerHTML += tabledata;
+}
   } catch (error) {
       console.log(error);
   }
@@ -71,7 +97,7 @@ if (currentPage == 1) {
 function firstpageFun() {
   currentPage = 1;
   pagination()
-  removeFun()
+  // removeFun()
   if (currentPage != length / pagefield) {
     document.getElementById('endbtn').disabled = false;
     document.getElementById('nextbtn').disabled = false;
@@ -86,7 +112,7 @@ function prevButtonFun() {
   if (currentPage > 1) {
     currentPage--;
     pagination()
-    removeFun()
+    // removeFun()
     document.getElementById('endbtn')
 
   }
@@ -114,14 +140,14 @@ function nextButtonFun() {
     document.getElementById('nextbtn').disabled = true
   }
   pagination()
-  removeFun()
+  // removeFun()
 }
 
 function lastpageFun() {
   lastpage = Math.ceil(length / pagefield);
   currentPage = lastpage
   pagination()
-  removeFun()
+  // removeFun()
   if (currentPage != 1) {
     document.getElementById('homebtn').disabled = false;
     document.getElementById('previousbtn').disabled = false;
@@ -136,5 +162,5 @@ document.querySelector('#homebtn').addEventListener("click", firstpageFun)
 document.querySelector('#endbtn').addEventListener("click", lastpageFun)
 document.querySelector('#previousbtn').addEventListener("click", prevButtonFun)
 document.querySelector('#nextbtn').addEventListener("click", nextButtonFun)
-pagination()
+// pagination()
 
