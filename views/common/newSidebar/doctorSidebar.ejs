@@ -42,9 +42,9 @@
   </div>
 </div>
 
-<script src="/javascript/auth/logout.js"></script>
-<script src="/javascript/doctorPanel/sidebar.js"></script>
-<script>
+<script src="/javascript/auth/logout.js" defer></script>
+<script src="/javascript/doctorPanel/sidebar.js" defer></script>
+<script defer>
   const userData = JSON.parse(localStorage.getItem('userinfo'));
 
 document.getElementById('profile').setAttribute('src',`/imgs/${userData.profile}`);
