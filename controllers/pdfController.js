@@ -1,10 +1,17 @@
 const conn = require("../config/dbConnection");
 let PDFDocument = require("pdfkit");
+const {v4: uuidv4}=require('uuid')
 const logger = require("../utils/pino");
+const fs=require('fs');
+// const socketio = require('socket.io');
+// const express = require("express");
+// const app = express();
+// const server=require('http').createServer(app);
+
 
 exports.generatePDF = async (req, res) => {
   try {
-    const id = req.params.id;
+    const id = 25;
     logger.info(id);
 
     const query = `select prescriptions.prescription,prescriptions.diagnoses,prescriptions.created_at,
@@ -28,13 +35,17 @@ exports.generatePDF = async (req, res) => {
     const [result] = await conn.query(query,[id]);
     const appointment_date = result[0].created_at.toString().slice(0, 10);
 
-    res.setHeader(
-      "Content-disposition",
-      `attachment; filename=prescription-${result[0].patient_nametient_name}.pdf`
-    );
-    res.setHeader("Content-type", "application/pdf");
+    // res.setHeader(
+    //   "Content-disposition",
+    //   `inline; filename=prescription-${result[0].patient_name}.pdf`
+    // );
+    // res.setHeader("Content-type", "application/pdf");
+
+    const filename=uuidv4()+`prescription-${result[0].patient_name}.pdf`
 
     let doc = new PDFDocument({ margin: 50 });
+
+    const stream=fs.createWriteStream(`public/pdfs/${filename}`);
 
     //header
 	  doc.image('public/assets/final-logo.png', 50, 42, { width: 70 })
@@ -112,9 +123,9 @@ exports.generatePDF = async (req, res) => {
     //footer
     doc.image('public/assets/curved_line.png',10, 670, { width: 600,height:150})
 
-    doc.pipe(res);
+    doc.pipe(stream);
     doc.end();
-
+    return filename;
 
 
   } catch (error) {
@@ -125,3 +136,17 @@ exports.generatePDF = async (req, res) => {
     });
   }
 };
+
+// const io=socketio(server);
+
+// io.on('connection',(socket)=>{
+//   console.log(`New connection: ${socket.id}`);
+
+//   socket.emit('connectmsg','thank you for connecting');
+
+//   socket.on('message', (data) => {
+//         console.log(`New message from : ${data}`);
+//     })
+// })
+
+
