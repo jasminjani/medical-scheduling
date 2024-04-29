@@ -2,7 +2,8 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const app = express();
 const path = require("path");
-const logger = require('./utils/pino'); 
+const logger = require('./utils/pino');
+const { Server } = require("socket.io");
 require("dotenv").config();
 
 const PORT = process.env.PORT;
@@ -34,6 +35,14 @@ const { allRequestLogs } = require("./middlewares/allRequestLogs");
 app.use("/", allRequestLogs, rootRouter);
 
 // server is running on PORT
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   logger.info(`server is running on port: http://localhost:${PORT}`);
 });
+
+const io = new Server(server);
+
+io.on("connection", (socket) => {
+  socket.on("deleteSlot", (msg) => {
+    msg ? socket.emit("received", "your slot deleted") : 0
+  });
+})
