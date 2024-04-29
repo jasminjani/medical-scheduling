@@ -356,6 +356,25 @@ exports.getPatientData = async (req, res) => {
   }
 };
 
+exports.getSearchPatientData = async (req, res) => {
+  try {
+    const id = req.user.id;
+    const {search} = req.params;
+    
+    const [result] = await conn.query(
+      `select slot_bookings.patient_id, concat(fname," ",lname)as name,phone from slot_bookings left join time_slots on slot_bookings.slot_id = time_slots.id inner join patient_details on slot_bookings.patient_id = patient_details.patient_id inner join users on patient_details.patient_id = users.id where time_slots.doctor_id = ? AND (users.fname LIKE '${search}%' OR users.lname LIKE '${search}%' OR users.phone LIKE '${search}%') group by patient_details.id `,
+      [id]
+    );
+    res.json(result);
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 exports.patientHistoryData = async (req, res) => {
   try {
     const patient_id = req.params.patient_id;

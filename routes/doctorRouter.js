@@ -44,6 +44,7 @@ const {
   allPatientPriscription,
   editPrescriptionHome,
   getSlotsPage,
+  getSearchPatientData,
 } = require("../controllers/doctorController");
 const { isDoctor } = require("../middlewares/authMiddleware");
 const { allDoctors } = require("../controllers/authController");
@@ -90,6 +91,9 @@ router.route("/updateDoctorData").get(updateGetDoctorData);
 // /getPatientData
 router.route("/patients").get(getPatientData);
 
+// /get searched PatientData
+router.route("/patients-detail/:search").get(getSearchPatientData);
+
 // /getpatientHistoryData/:patient_id
 // /viewPatientHistory/:patient_id
 router
@@ -130,6 +134,7 @@ router
   .get(doctorPanelPaymentHistory)
   .post(showpaymentHistory);
 
+  // payment hiostory search routes
 router.route("/searchedPaymentHistory/:search").get(searchPaymentHistory);
 
 // for patient payment history in payment history
