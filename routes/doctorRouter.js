@@ -183,7 +183,7 @@ router.route("/prescription/create").post(createPrescription);
 router.route("/prescriptions").get(getPrescriptionOfDoctor);
 
 // /createprescription/:patient_id
-router.route("/patient/prescription/:patient_id").get(showDetails);
+router.route("/patient/prescription/:id").get(showDetails);
 
 // TODO : change route
 router.route("/prescription/:booking_id").get(home);

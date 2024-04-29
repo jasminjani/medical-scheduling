@@ -244,9 +244,22 @@ exports.postPatientProfileUpdate = async (req, res) => {
         });
       }
     }
+
+    let result;
+    try {
+      [result] = await conn.query(` select u.id,u.fname,u.lname,u.email,u.gender,u.dob,u.phone,u.city,u.address,u.role_id,pp.profile_picture as profile from users as u left join profile_pictures as pp on u.id = pp.user_id where pp.is_active =1 and u.id = ?;`,[patient_id])
+    } catch (error) {
+      return res.json({
+        success: false,
+        message: error.message,
+      });
+    }
+
+    result[0].token = req.cookies.token;
+
     return res
       .status(200)
-      .json({ success: true, message: "Updated Successfully" });
+      .json({ success: true, message: "Updated successfully",data:result });
   } catch (error) {
     logger.error(error.message);
     res.status(500).json({
@@ -484,17 +497,6 @@ exports.DoctorCobmo = async (req, res) => {
   }
 };
 
-const generateSlotCombo = async (result) => {
-  let html = `<option value="">--Select slot--</option>`;
-
-  result.forEach((slot) => {
-    html += `<option value=${slot.start_time + "-" + slot.id} data-sid="${slot.id
-      }">${slot.start_time + " - " + slot.end_time}</option>`;
-  });
-
-  return html;
-};
-
 // Patients can see the slots of doctors
 exports.getSingleSlots = async (req, res) => {
   try {
@@ -669,22 +671,6 @@ exports.cancelSlot = async (req, res) => {
   }
 };
 
-exports.updateRating = async (req, res) => {
-  try {
-    const { patient_id } = req.params;
-    let query = `delete from rating_and_reviews where patient_id=?`;
-
-
-    let [data] = await conn.query(query, [patient_id]);
-  } catch (error) {
-    logger.error(error.message);
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
-  }
-};
-
 // MATCH DEFAULT CITY OF USER
 exports.nearByDoctores = async (req, res) => {
   try {
@@ -816,11 +802,11 @@ exports.updateRating = async (req, res) => {
 
     const { doctor_id } = req.params;
 
-    const { rating, review } = req.body;
+    const { rating, review } = req.query;
 
     const patient_id = req.user.id;
 
-    let query = `update rating_and_reviews set rating = ? and review = ? where doctor_id = ? and patient_id = ?`;
+    let query = `update rating_and_reviews set rating = ?,review = ? where doctor_id = ? and patient_id = ?`;
 
     let [data] = await conn.query(query, [rating, review, doctor_id, patient_id]);
 
