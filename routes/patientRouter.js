@@ -31,6 +31,10 @@ const {
   updateRating,
   nearByDoctores,
   searchPatientPaymentHistory,
+  updateBecomeDoctorDetails,
+  updatePostBecomeDoctor,
+  updateBecomeDoctorData,
+  knowStatus,
 } = require("../controllers/patientController");
 const {
   becomeDoctorDetail,
@@ -122,6 +126,14 @@ router.route("/review").post(rating);
 router.route("/review/:doctor_id").get(getDoctorRating);
 
 router.route("/review/update/:doctor_id").get(updateRating);
+
+
+
+router.route("/updateBecomeDoctorDetails").get(updateBecomeDoctorDetails).post(updatePostBecomeDoctor);
+router.route("/updateBecomeDoctorData").get(updateBecomeDoctorData)
+router.route("/knowStatus").get(knowStatus)
+
+
 
 // for display patient near by doctor
 router.route("/getNearByDoctor").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), nearByDoctores);

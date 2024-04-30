@@ -1,7 +1,7 @@
 let submit = document.getElementById('submit');
 let update = document.getElementById('update');
 
-async function specialitiesValidation(){
+async function specialitiesValidation() {
 
   let isValid = true;
   let otherSpeciality_id;
@@ -10,7 +10,7 @@ async function specialitiesValidation(){
   const specialities = await fetchData.json();
 
   await specialities.forEach(element => {
-    if(element.speciality.toLowerCase() == "other") {
+    if (element.speciality.toLowerCase() == "other") {
       otherSpeciality_id = element.speciality_id
     }
   })
@@ -19,7 +19,7 @@ async function specialitiesValidation(){
 
     let newSpeciality = document.getElementById('otherSpeciality');
 
-    if(newSpeciality.value.trim() === "") {             
+    if (newSpeciality.value.trim() === "") {
       let p = document.createElement("p");
       newSpeciality.insertAdjacentElement("afterend", p);
       p.innerHTML = "*required";
@@ -31,7 +31,7 @@ async function specialitiesValidation(){
     }
 
     await specialities.forEach(Element => {
-      if (Element.speciality.toLowerCase() == newSpeciality.value.toLowerCase()) { 
+      if (Element.speciality.toLowerCase() == newSpeciality.value.toLowerCase()) {
         let p = document.createElement("p");
         newSpeciality.insertAdjacentElement("afterend", p);
         p.innerHTML = "speciality already exist";
@@ -43,39 +43,55 @@ async function specialitiesValidation(){
       }
     })
 
-          // let newSpeciality = document.getElementById('otherSpeciality').value;
-      // const fetchData = await fetch("/specialities");
-      // const specialities = await fetchData.json();
-      // if (speciality == 24 ) {
-      //   specialities.forEach(Element => {
-      //     console.log("specialitie : ",Element.speciality);
-      //     if (Element.speciality == newSpeciality) { console.log("speciality already exist"); }
-      //   })
-      // }
+    // let newSpeciality = document.getElementById('otherSpeciality').value;
+    // const fetchData = await fetch("/specialities");
+    // const specialities = await fetchData.json();
+    // if (speciality == 24 ) {
+    //   specialities.forEach(Element => {
+    //     console.log("specialitie : ",Element.speciality);
+    //     if (Element.speciality == newSpeciality) { console.log("speciality already exist"); }
+    //   })
+    // }
   }
 
   return isValid;
 }
 
 function validate() {
-    let isvalid = true;
-  
-    let dvalid = document.querySelectorAll(".dvalid");
-  
-    let validated = document.querySelectorAll(".validated");
-  
-    // remove if any error message is in frontend
-    if (validated?.length) {
-      validated.forEach((item) => {
-        item.remove();
-      });
+  let isvalid = true;
+
+  let dvalid = document.querySelectorAll(".dvalid");
+
+  let validated = document.querySelectorAll(".validated");
+
+  // remove if any error message is in frontend
+  if (validated?.length) {
+    validated.forEach((item) => {
+      item.remove();
+    });
+  }
+
+  // empty fields and email and phone number validation
+  dvalid.forEach(async (field) => {
+    if (field.value.trim() === "") {
+      let p = document.createElement("p");
+      field.insertAdjacentElement("afterend", p);
+      p.innerHTML = "*required";
+      p.classList.add("validated");
+      p.style.color = "red";
+      p.style.margin = "0";
+      p.style.fontSize = "12px";
+      isvalid = false;
     }
-  
-    // empty fields and email and phone number validation
-    dvalid.forEach( async (field) => {
-      if (field.value.trim() === "") {
+
+    if (field.name == "speciality" && field.value == 24) {
+
+      let newSpeciality = document.getElementById('otherSpeciality');
+      // document.getElementById('otherSpeciality').classList.add("dvalid");
+
+      if (newSpeciality.value.trim() === "") {
         let p = document.createElement("p");
-        field.insertAdjacentElement("afterend", p);
+        newSpeciality.insertAdjacentElement("afterend", p);
         p.innerHTML = "*required";
         p.classList.add("validated");
         p.style.color = "red";
@@ -83,105 +99,89 @@ function validate() {
         p.style.fontSize = "12px";
         isvalid = false;
       }
+    }
 
-      if (field.name == "speciality" && field.value == 24) {
+    // let newSpeciality = document.getElementById('otherSpeciality').value;
+    // const fetchData = await fetch("/specialities");
+    // const specialities = await fetchData.json();
+    // if (speciality == 24 ) {
+    //   specialities.forEach(Element => {
+    //     console.log("specialitie : ",Element.speciality);
+    //     if (Element.speciality == newSpeciality) { console.log("speciality already exist"); }
+    //   })
+    // }
 
-        let newSpeciality = document.getElementById('otherSpeciality');
-        // document.getElementById('otherSpeciality').classList.add("dvalid");
+    if (
+      field.name == "phone" &&
+      field.value.trim() !== "" &&
+      field.value.trim().length !== 10
+    ) {
+      let p = document.createElement("p");
+      field.insertAdjacentElement("afterend", p);
+      p.innerHTML = "mobile number length should be 10";
+      p.classList.add("validated");
+      p.style.color = "red";
+      p.style.margin = "0";
+      p.style.fontSize = "12px";
+      isvalid = false;
+    }
 
-        if(newSpeciality.value.trim() === "") {             
-          let p = document.createElement("p");
-          newSpeciality.insertAdjacentElement("afterend", p);
-          p.innerHTML = "*required";
-          p.classList.add("validated");
-          p.style.color = "red";
-          p.style.margin = "0";
-          p.style.fontSize = "12px";
-          isvalid = false;
-        }
-      }
+    if (
+      field.name == "consultancy_fees" &&
+      field.value.trim() !== "" &&
+      isNaN(field.value.trim())
+    ) {
+      let p = document.createElement("p");
+      field.insertAdjacentElement("afterend", p);
+      p.innerHTML = "Please enter a Number";
+      p.classList.add("validated");
+      p.style.color = "red";
+      p.style.margin = "0";
+      p.style.fontSize = "12px";
+      isvalid = false;
+    }
 
-      // let newSpeciality = document.getElementById('otherSpeciality').value;
-      // const fetchData = await fetch("/specialities");
-      // const specialities = await fetchData.json();
-      // if (speciality == 24 ) {
-      //   specialities.forEach(Element => {
-      //     console.log("specialitie : ",Element.speciality);
-      //     if (Element.speciality == newSpeciality) { console.log("speciality already exist"); }
-      //   })
-      // }
-  
-      if (
-        field.name == "phone" &&
-        field.value.trim() !== "" &&
-        field.value.trim().length !== 10
-      ) {
-        let p = document.createElement("p");
-        field.insertAdjacentElement("afterend", p);
-        p.innerHTML = "mobile number length should be 10";
-        p.classList.add("validated");
-        p.style.color = "red";
-        p.style.margin = "0";
-        p.style.fontSize = "12px";
-        isvalid = false;
-      }
+    if (
+      field.name == "pincode" &&
+      field.value.trim() !== "" &&
+      isNaN(field.value.trim())
+    ) {
+      let p = document.createElement("p");
+      field.insertAdjacentElement("afterend", p);
+      p.innerHTML = "Please enter a Number";
+      p.classList.add("validated");
+      p.style.color = "red";
+      p.style.margin = "0";
+      p.style.fontSize = "12px";
+      isvalid = false;
+    }
+    else if (
+      field.name == "pincode" &&
+      field.value.trim() !== "" &&
+      field.value.trim().length !== 6
+    ) {
+      let p = document.createElement("p");
+      field.insertAdjacentElement("afterend", p);
+      p.innerHTML = "Please enter a valid number";
+      p.classList.add("validated");
+      p.style.color = "red";
+      p.style.margin = "0";
+      p.style.fontSize = "12px";
+      isvalid = false;
+    }
+  });
 
-      if (
-        field.name == "consultancy_fees" &&
-        field.value.trim() !== "" &&
-        isNaN(field.value.trim())
-      ) {
-        let p = document.createElement("p");
-        field.insertAdjacentElement("afterend", p);
-        p.innerHTML = "Please enter a Number";
-        p.classList.add("validated");
-        p.style.color = "red";
-        p.style.margin = "0";
-        p.style.fontSize = "12px";
-        isvalid = false;
-      }
-
-      if (
-        field.name == "pincode" &&
-        field.value.trim() !== "" &&
-        isNaN(field.value.trim())
-      ) {
-        let p = document.createElement("p");
-        field.insertAdjacentElement("afterend", p);
-        p.innerHTML = "Please enter a Number";
-        p.classList.add("validated");
-        p.style.color = "red";
-        p.style.margin = "0";
-        p.style.fontSize = "12px";
-        isvalid = false;
-      }
-      else if (
-        field.name == "pincode" &&
-        field.value.trim() !== "" &&
-        field.value.trim().length !==6
-      ) {
-        let p = document.createElement("p");
-        field.insertAdjacentElement("afterend", p);
-        p.innerHTML = "Please enter a valid number";
-        p.classList.add("validated");
-        p.style.color = "red";
-        p.style.margin = "0";
-        p.style.fontSize = "12px";
-        isvalid = false;
-      }
-    });
-  
-    return isvalid;
-  }
-  
+  return isvalid;
+}
 
 
 
-submit.addEventListener('click',async(e)=>{
-    e.preventDefault();
 
-    if(validate() && await specialitiesValidation()){
-    
+submit.addEventListener('click', async (e) => {
+  e.preventDefault();
+
+  if (validate() && await specialitiesValidation()) {
+
     let qualification = document.getElementById('qualification').value
     let consultancyFees = document.getElementById('consultancy_fees').value
     // let phone = document.getElementById('phone').value
@@ -192,26 +192,26 @@ submit.addEventListener('click',async(e)=>{
     let hcity = document.getElementById('city').value
     let pincode = document.getElementById('pincode').value
     let otherSpeciality = document.getElementById('otherSpeciality').value;
-    
-    let data = await fetch('/patient/create',{
-        method:"post",
-        body:JSON.stringify({otherSpeciality:otherSpeciality, speciality:speciality,name:hname,location:hlocation,gst_no:gstno,city:hcity,pincode:pincode,qualification:qualification,consultancy_fees:consultancyFees}),
-        headers:{
-            "Content-Type":"application/json"
-        }
+
+    let data = await fetch('/patient/create', {
+      method: "post",
+      body: JSON.stringify({ otherSpeciality: otherSpeciality, speciality: speciality, name: hname, location: hlocation, gst_no: gstno, city: hcity, pincode: pincode, qualification: qualification, consultancy_fees: consultancyFees }),
+      headers: {
+        "Content-Type": "application/json"
+      }
     });
 
     data = await data.json();
 
-    if(data.success){
-        window.location = "/patient"
+    if (data.success) {
+      window.location = "/patient"
     }
-    else{
-        document.querySelector('.link').innerHTML = data.message
-        document.querySelector('.link').style.color = "red";
+    else {
+      document.querySelector('.link').innerHTML = data.message
+      document.querySelector('.link').style.color = "red";
     }
 
-    }
+  }
 })
 
 
@@ -267,7 +267,7 @@ const postUpdateData = async () => {
       });
       window.location = "/"
 
-    
+
     }
 
   }
@@ -278,7 +278,7 @@ const postUpdateData = async () => {
 
 update.addEventListener("click", postUpdateData)
 
-if (window.location == "/patient/updateBecomeDoctorDetails") {
+if (window.location.pathname == "/patient/updateBecomeDoctorDetails") {
   submit.style.display = "none"
   update.style.display = "block"
 }
