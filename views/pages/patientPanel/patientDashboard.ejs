@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
   <link rel="stylesheet" href="/css/patientCSS/patientDashboard.css" />
-
   <link rel="stylesheet" href="/css/patientCSS/patientProfile.css" />
   <link rel="stylesheet" href="/css/homepage.css" />
   <script src="/javascript/patientPanel/patientDashboardDoctor.js" defer></script>
@@ -30,9 +29,14 @@
 
 <body onload="getUpcomingSlots()">
   <div class="center" id="loader"></div>
+
+  <!-- Header Section -->
+
+   <%- include(`../../common/newSidebar/patientNav.ejs`) %>
+
+  
   <div class="a5-main-container">
     <div class="a5-container">
-      <%- include('../../common/newSidebar/patientSidebar.ejs') %>
         <div class="a2-patient-dashboard">
           <div class="a2-container a2-patient-home">
             <div class="a2-patient-hero-section">
@@ -202,7 +206,7 @@
           </div>
 
           <!-- chat chat window -->
-          <p id="a2-show-window-btn">Show</p>
+          <p id="a2-show-window-btn"><i class="fa fa-ticket" aria-hidden="true" style="rotate: 120deg;"></i></p>
           <div class="a2-chat-window">
             <div class="a2-chat-nav">
               <h3>Ashish Zapadiya</h3>

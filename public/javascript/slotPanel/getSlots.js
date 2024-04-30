@@ -10,7 +10,7 @@ const getDates = async () => {
       "Content-type": "application/json"
     }
   });
- 
+
   const { message } = await response.json();
 
   const table = document.getElementById("date-body");
@@ -84,8 +84,8 @@ const openDeleteModal = async (slot_id) => {
         icon: "success",
       }).then((result) => {
         if (result.isConfirmed) {
-          socket.emit("deleteSlot","Slot deleted successfully")
-          // window.location.href = `/doctor/delete/${slot_id}`;
+          socket.emit("deleteSlot", "Slot deleted successfully")
+          window.location.href = `/doctor/delete/${slot_id}`;
         }
       })
     }

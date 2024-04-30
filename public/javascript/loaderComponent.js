@@ -1,4 +1,6 @@
 
+try {
+  
 ( document.onreadystatechange =() =>{
       if (document.readyState !== "complete") {
     document.querySelector(
@@ -12,5 +14,8 @@
   "body").style.visibility = "visible";
       }
   })();
+} catch (error) {
+    
+}
 
   // Immediatly Invoked Function Expressions (IIFEs) 

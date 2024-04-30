@@ -196,12 +196,12 @@ const getDoctorData = async () => {
   <div class="doctor-details">
     <input type="hidden" value="${doctor.id}" id="did">
     <p class="name"><span>Name: </span>${doctor.fname + " " + doctor.lname}</p>
-    <p class="qualification"><span>qualification: </span>${doctor.qualification}</p>
-    <p class="speciality"><span>speciality: </span>${doctor.specialities.map((speciality) => `${speciality.toUpperCase()}`)}</p>
+    <p class="qualification"><span>Qualification: </span>${doctor.qualification}</p>
+    <p class="qualification"><span>Speciality: </span>${doctor.specialities.map((speciality) => `${speciality.toUpperCase()}`)}</p>
     <p class="fees"><span>Fees: </span>Rs. ${doctor.consultancy_fees}</p>
-    <p class="hospital-name"><span>clinic/hospital: </span>${doctor.hospital_name}</p>
-    <p class="address"><span>city: </span> ${doctor.city}</p>
-    <p class="address"><span>address: </span> ${doctor.location}</p>
+    <p class="hospital-name"><span>Clinic/hospital: </span>${doctor.hospital_name}</p>
+    <p class="address"><span>City: </span> ${doctor.city}</p>
+    <p class="address"><span>Address: </span> ${doctor.location}</p>
     <div class="rating">
     ${stars}
       <span id="review-count">(${doctor.total_reviews})</span>
