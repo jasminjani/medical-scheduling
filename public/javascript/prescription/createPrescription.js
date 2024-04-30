@@ -54,7 +54,13 @@ const submitPrescription = async () => {
         body: obj,
       });
       let resjson=await res.json();
-      alert(resjson.msg);
+      await Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Prescription has been saved",
+      showConfirmButton: false,
+      timer: 1500
+      });
       insert_id = resjson.insert_id;
       location.href = location.origin+`/doctor/dashboard/`;
     }
@@ -90,9 +96,16 @@ const generatePDF = async () => {
 const back = async () => {
 
   if(!insert_id){
-    if(confirm("you've not added the prescription!are you sure you want to exit?")){
-      location.href = location.origin+`/doctor/dashboard/`;
-    }
+    Swal.fire({
+      title: "you've not added the prescription!are you sure you want to exit?",
+      showCancelButton: true,
+      confirmButtonText: "Exit",
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        location.href = location.origin+`/doctor/dashboard/`;
+      }
+    });
   }
   else{
     location.href = location.origin+`/doctorDashboard/`;

@@ -8,10 +8,9 @@ const fs=require('fs');
 // const server=require('http').createServer(app);
 
 
-exports.generatePDF = async (req, res) => {
+exports.generatePDF = async (id) => {
   try {
-    const id = 25;
-    logger.info(id);
+    // const id = req.params.id;
 
     const query = `select prescriptions.prescription,prescriptions.diagnoses,prescriptions.created_at,
         concat(users_patient.fname," ",users_patient.lname) as patient_name,
@@ -40,11 +39,11 @@ exports.generatePDF = async (req, res) => {
     // );
     // res.setHeader("Content-type", "application/pdf");
 
-    const filename=crypto.randomUUID()+`prescription-${result[0].patient_name}.pdf`
+    const filename=crypto.randomUUID()+`.pdf`
 
     let doc = new PDFDocument({ margin: 50 });
 
-    const stream=fs.createWriteStream(`public/pdfs/${filename}`);
+    const stream=fs.createWriteStream(`uploads/pdfs/${filename}`);
 
     //header
 	  doc.image('public/assets/final-logo.png', 50, 42, { width: 70 })
@@ -129,10 +128,10 @@ exports.generatePDF = async (req, res) => {
 
   } catch (error) {
     logger.error(error);
-    return res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    // return res.status(500).json({
+    //   success: false,
+    //   message: error.message,
+    // });
   }
 };
 
