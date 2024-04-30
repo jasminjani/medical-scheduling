@@ -85,9 +85,9 @@ router.route("/patient/getAll").get(getAllPatients);
 // /admin/all-patient
 router.route("/patient/all").get(displayAllPatient);
 
-// TODO : delete route
+// patient search router
 router
-  .route("/admin/display-search-patient/:searchedName")
+  .route("/display-search-patient/:searchedName")
   .get(searchPatientByName);
 
 // patient appointment details
