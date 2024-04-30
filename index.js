@@ -65,15 +65,35 @@ io.on("connection", (socket) => {
     msg ? io.emit(`cancel-slot-${msg.doctor_id}`, msg) : 0
   })
 
-  socket.on('generatePDF', async () => {
-    try {
-      console.log("in socket generate pdf");
-      const filename = await generatePDF();
-      console.log(filename);
-      socket.emit('pdfready', filename);
+  socket.on('generatePDF',async(id)=>{
+    try{
+      const filename=await generatePDF(id);
+      socket.emit('pdfready',filename);
     }
     catch (error) {
       console.log(error);
+    }
+  })
+
+  socket.on('downloadPDF',async(filename)=>{
+    try{
+      if(fs.existsSync(`uploads/pdfs/${filename}`)){
+      const file=fs.readFileSync(`uploads/pdfs/${filename}`)
+      socket.emit('pdfFile',{filename,file})
+      }
+    }catch(error){
+      console.log("error in downloading PDF",error);
+    }
+  })
+
+  socket.on('deletePDF',(filename)=>{
+    try{
+      if(fs.existsSync(`uploads/pdfs/${filename}`)){
+        const file=fs.unlinkSync(`uploads/pdfs/${filename}`);
+      }
+    }
+    catch(error){
+      console.log("error in deleting pdf",error);
     }
   })
 
