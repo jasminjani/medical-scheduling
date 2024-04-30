@@ -23,17 +23,16 @@ async function fetchPaymentHistory() {
 
 async function searchPaymentHistory() {
   try {
-    let result;
+    
     let searchedData = document.getElementById('a5-searchPatient').value;
-    if (!searchedData) {
-      // searchedData = ``;
-      result = copyResult;
-    } else {
+    // if (typeof searchedData === "string" && searchedData.length === 0) {
+      if (!searchedData) {
+        searchedData = "null";
+      }
 
     const url = `/doctor/searchedPaymentHistory/${searchedData}`;
     const response = await fetch(url)
-    result = await response.json()
-    }
+    let result = await response.json()
 
     await appendPaymentHistory(result);
   } catch (error) {

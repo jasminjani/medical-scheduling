@@ -45,6 +45,7 @@ const {
   editPrescriptionHome,
   getSlotsPage,
   getSearchPatientData,
+  searchReviews,
 } = require("../controllers/doctorController");
 const { isDoctor } = require("../middlewares/authMiddleware");
 const { allDoctors } = require("../controllers/authController");
@@ -73,6 +74,9 @@ router.route("/appointments/today").get(dashBoardTodayAppointments);
 
 // /dashBoardReviews
 router.route("/reviews/all").get(dashBoardReviews);
+
+// /dashBoardReviews
+router.route("/searchReview/:search").get(searchReviews);
 
 // /dashBoardCount
 router.route("/analytics").get(dashBoardCount);

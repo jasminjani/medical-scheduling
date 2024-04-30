@@ -13,12 +13,14 @@
       transform: translate(5px);
       border-radius: 5px;
     }
-  
+
     #a5-admin-patient-active a,
     #a5-admin-patient-active i {
       color: #ffffff;
     }
-    </style>
+  </style>
+    <!-- PAGGINATION CSS -->
+    <link rel="stylesheet" href="/css/Pagination/paginationComp.css" />
   <script src="/javascript/adminPanel/allPatientDetail.js" defer></script>
   <title>All User Details</title>
 </head>
@@ -27,25 +29,40 @@
   <div class="a5-container">
     <div class="main-container">
       <%- include('../../common/newSidebar/adminSidebar') %>
-      <div class="a5-section">
-        <div class="a5-search">
-          <div class="a5-searchbox">
-            <img src="/assets/adminPanel/icons/search.svg" alt="">
-            <input type="text" name="searchUser" id="a5-searchPatient" placeholder="Search Patient name" tabindex="1">
+        <div class="a5-section">
+          <div class="a5-search a5-search-backBtn">
+            <p class="a5-back-btn" onclick="window.location.href=`/admin`" tabindex="2">
+              <i class="fa-solid fa-arrow-left"></i> Back
+            </p>
+            <div class="a5-searchbox a5-searchbox-center">    
+              <img src="/assets/adminPanel/icons/search.svg" alt="">
+              <input type="text" class="a5-search-input" name="searchUser" id="a5-searchPatient" placeholder="Search here" tabindex="1">
+            </div>
           </div>
-          <p id="a5-btn-search" onclick="searchPatient()" tabindex="2">Search</p>
-        </div>
-        <div class="a5-all-user">
-          <p class="a2-back-btn a2-btn" onclick="window.location.href=`/admin`">
-            <i class="fa-solid fa-arrow-left"></i> Back
-          </p>
 
-          <h2>All Patients</h2>
+          <div class="a5-all-user a5-pagination-flex">
+            <h2>All Patients</h2>
+            <div class="A4-Pagination-component a5-pagination-all-btn">
+              <div class="home"><button id="homebtn">
+                  << </button>
+              </div>
+              <div class="previous"><button id="previousbtn">
+                  < </button>
+              </div>
+              <div class="pagenumber">
+                <p id="pageno">1</p>
+              </div>
+              <div class="next"><button id="nextbtn">></button></div>
+              <div class="end"><button id="endbtn">>></button></div>
+            </div>
+          </div>
+  
 
-          <div class="a5-user-table">
+          <div class="a5-all-user">
 
-            <table id="a5-user-table">
-              <tbody id="a5-tbody">
+            <div class="a5-user-table">
+
+              <table id="a5-user-table">
                 <tr>
                   <th>Sr no.</th>
                   <th>First name</th>
@@ -53,12 +70,14 @@
                   <th>email</th>
                   <th>Details</th>
                 </tr>
-              </tbody>
-            </table>
+                <tbody id="a5-tbody">
 
+                </tbody>
+              </table>
+
+            </div>
           </div>
         </div>
-      </div>
     </div>
 </body>
 

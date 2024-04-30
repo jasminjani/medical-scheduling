@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Patient Payment History</title>
+    <!-- PAGGINATION CSS -->
+    <link rel="stylesheet" href="/css/Pagination/paginationComp.css" />
        <link rel="stylesheet" href="/css/loaderComponent.css">
       <script src="/javascript/loaderComponent.js"></script>
   <!-- CSS for Sidebar -->
@@ -17,6 +19,7 @@
   <!-- JS  -->
   <script src="/javascript/patientPanel/paymentHistory.js" defer></script>
   <style>
+    /* ACTIVE SIDEBAR CSS */
     #a5-patient-payment-active {
       background-color: #0969da;
       transform: translate(5px);
@@ -49,6 +52,23 @@
         </div>
 
         <div class="a5-all-user">
+          <div class="A4-Pagination-component a5-pagination-center">
+            <div class="home"><button id="homebtn">
+                << </button>
+            </div>
+            <div class="previous"><button id="previousbtn">
+                < </button>
+            </div>
+            <div class="pagenumber">
+              <p id="pageno">1</p>
+            </div>
+            <div class="next"><button id="nextbtn">></button></div>
+            <div class="end"><button id="endbtn">>></button></div>
+          </div>
+        </div>
+
+
+        <div class="a5-all-user">
           <div class="table-heading">
 
             <h2>Payment History</h2>
@@ -63,6 +83,14 @@
           <div class="a5-user-table">
 
             <table id="a5-user-table">
+              <tr>
+                <th>Sr no.</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Date</th>
+                <th>Appointment time</th>
+                <th>Amount</th>
+              </tr>
               <tbody id="a5-tbody">
 
               </tbody>

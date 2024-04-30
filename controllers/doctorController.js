@@ -127,6 +127,36 @@ exports.dashBoardReviews = async (req, res) => {
   }
 };
 
+exports.searchReviews = async (req, res) => {
+  try {
+    let doctor_id = req.user.id;
+    let {search} = req.params
+
+    if (search == "null") {
+      search = ""
+    }
+
+    if (!doctor_id) {
+      return res.status(500).json({
+        success: false,
+        message: "doctor id not found"
+      });
+    }
+
+    let [result] = await conn.query(
+      `select concat(fname," ",lname) as Name,email,rating,review,profile_picture,convert(rating_and_reviews.created_at,date) as date from rating_and_reviews inner join users on rating_and_reviews.patient_id = users.id inner join profile_pictures on rating_and_reviews.patient_id = profile_pictures.user_id where doctor_id=? and profile_pictures.is_active = ? AND (users.fname LIKE '${search}%' OR users.lname LIKE '${search}%' OR rating_and_reviews.rating LIKE '${search}%' OR rating_and_reviews.review LIKE '${search}%')`,
+      [doctor_id, 1]
+    );
+    res.json(result);
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 exports.dashBoardAppointments = async (req, res) => {
   let doctor_id = req.user.id;
   try {
@@ -359,12 +389,17 @@ exports.getPatientData = async (req, res) => {
 exports.getSearchPatientData = async (req, res) => {
   try {
     const id = req.user.id;
-    const {search} = req.params;
-    
+    let { search } = req.params;
+
+    if (search == "null") {
+      search = ""
+    }
+
     const [result] = await conn.query(
       `select slot_bookings.patient_id, concat(fname," ",lname)as name,phone from slot_bookings left join time_slots on slot_bookings.slot_id = time_slots.id inner join patient_details on slot_bookings.patient_id = patient_details.patient_id inner join users on patient_details.patient_id = users.id where time_slots.doctor_id = ? AND (users.fname LIKE '${search}%' OR users.lname LIKE '${search}%' OR users.phone LIKE '${search}%') group by patient_details.id `,
       [id]
     );
+
     res.json(result);
   } catch (error) {
     logger.error(error.message);
@@ -484,6 +519,10 @@ exports.searchPaymentHistory = async (req, res) => {
     let doctor_id = req.user.id;
     // let doctor_id = 2;
     let { search } = req.params;
+
+    if (search == "null") {
+      search = ""
+    }
 
     if (!doctor_id) {
       return res.status(500).json({

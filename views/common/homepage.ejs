@@ -345,6 +345,17 @@
 
 });
 </script>
+
+<script>
+  // show chat message
+let showBtn = document.getElementById('a2-show-window-btn');
+let showChat = document.querySelector('.a2-chat-window');
+showChat.classList.add('a2-hide-box')
+
+showBtn.addEventListener('click', () => {
+  showChat.classList.toggle('a2-hide-box')
+});
+</script>
 </body>
 
 </html>
