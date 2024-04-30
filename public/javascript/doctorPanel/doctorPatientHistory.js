@@ -1,36 +1,46 @@
 let data;
-let dataCopy = [];
 
 // let search = document.getElementById("search").value
 
 
 const fetchData = async () => {
-  let fetchdata = await fetch(`/doctor/patients`)
-  data = await fetchdata.json();
-  dataCopy = data;
-  // return data
-  await pagination();
+  try {
+    let fetchdata = await fetch(`/doctor/patients`)
+    data = await fetchdata.json();
+    // return data
+    await pagination();
+  } catch {
+    console.log(error);
+  }
 }
 
 const searchPatientDetails = async () => {
   try {
 
     let searchedData = document.getElementById('search').value;
+    // if (typeof searchedData === "string" && searchedData.length === 0) {
     if (!searchedData) {
-      // searchedData = "";
-      data = dataCopy;
-    } else {
-
-    const url = `/doctor/patients-detail/${searchedData}`;  
+      searchedData = "null";
+    }
+    const url = `/doctor/patients-detail/${searchedData}`;
     const response = await fetch(url);
     data = await response.json();
-    }
     // return data;
     await pagination();
   } catch (error) {
     console.log(error);
   }
 }
+
+let searchBtn = document.getElementById('a5-btn-search');
+
+searchBtn.addEventListener('keyup', function (event) {
+  try {
+    if (event.key === 'Enter') {
+      searchPatientDetails();
+    }
+  } catch (e) { console.log(e); }
+});
 
 let currentPage = 1;
 const pagefield = 1;
@@ -41,42 +51,42 @@ let pageno = document.getElementById("pageno");
 const pagination = async () => {
   try {
 
-  //  data = await fetchData()
-  // if (search) {
-  //   data = data.filter((obj) => {
-  //     return obj.name.includes(search) 
-  //   })
-  // }
-  
-  
-  length = data.length;
+    //  data = await fetchData()
+    // if (search) {
+    //   data = data.filter((obj) => {
+    //     return obj.name.includes(search) 
+    //   })
+    // }
+
+
+    length = data.length;
     if (length == 0) {
       document.getElementById("a5-tbody").innerHTML = `<tr><td colspan='3'  style='text-align:center'>Data Not Found!</td></tr>`;
     }
     else {
-  pageno.innerHTML = currentPage;
+      pageno.innerHTML = currentPage;
 
 
- const endIndex = currentPage * pagefield;
-  const startIndex = endIndex - pagefield;
-  const pageItems = data.slice(startIndex, endIndex);
+      const endIndex = currentPage * pagefield;
+      const startIndex = endIndex - pagefield;
+      const pageItems = data.slice(startIndex, endIndex);
 
-  let tabledata = "";
-  document.getElementById("a5-tbody").innerHTML = tabledata;
+      let tabledata = "";
+      document.getElementById("a5-tbody").innerHTML = tabledata;
 
-  pageItems.map((value) => {
-    let patient_id = value.patient_id
-    tabledata += `<tr>
+      pageItems.map((value) => {
+        let patient_id = value.patient_id
+        tabledata += `<tr>
     <td hidden >${patient_id}</td>
     <td>${value.name}</td>
     <td>${value.phone}</td>
     <td><p class="a5-btn" onclick='window.location.href ="/doctor/patients/history/${patient_id}"'>View More</a></td>
   </tr>`
-  })
-  document.getElementById("a5-tbody").innerHTML += tabledata;
-}
+      })
+      document.getElementById("a5-tbody").innerHTML += tabledata;
+    }
   } catch (error) {
-      console.log(error);
+    console.log(error);
   }
 
 }

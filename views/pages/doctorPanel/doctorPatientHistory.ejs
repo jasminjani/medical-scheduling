@@ -13,6 +13,8 @@
   <script src="/javascript/loaderComponent.js"></script>
    <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css" />
     <script src="/sweetalert2/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="/css/loaderComponent.css">
+    <script src="/javascript/loaderComponent.js"></script>
   <style>
     #a5-doctor-patient-active {
       background-color: #0969da;
@@ -52,9 +54,8 @@
   <title>View Patient History</title>
 </head>
 <body onload="fetchData()">
-
+  <script src="/javascript/loaderComponent.js"></script>
   <div class="center" id="loader"></div>
-  
   <div class="a5-container">
     <div class="main-container">
     <%- include('../../common/newSidebar/doctorSidebar') %>
@@ -63,7 +64,7 @@
       <div class="a5-search">
         <div class="a5-searchbox">
           <img src="/assets/adminPanel/icons/search.svg" alt="">
-          <input type="text" name="searchUser" id="search" placeholder="Search Patient name" tabindex="1">
+          <input type="text" name="searchUser" id="search" placeholder="Search here" tabindex="1">
         </div>
         <!-- <div class="A7-Sorting-header">
           <div class="sorting-filter">

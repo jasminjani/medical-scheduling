@@ -28,12 +28,7 @@
     <title>view Feedback</title>
   </head>
 
-  </style>
-  <script src="/javascript/doctorPanel/doctorReview.js" defer></script>
-  <title>view Feedback</title>
-</head>
-
-<body>
+<body onload="fetchDataFun()">
   <div class="center" id="loader"></div>
   <div class="a5-container">
     <div class="main-container">
@@ -42,9 +37,9 @@
           <div class="a5-search">
             <div class="a5-searchbox">
               <img src="/assets/adminPanel/icons/search.svg" alt="">
-              <input type="text" name="searchUser" id="search" placeholder="Search Patient name" tabindex="1">
+              <input type="text" name="searchUser" id="search" placeholder="Search here" tabindex="1">
             </div>
-            <p id="a5-btn-search" tabindex="2" onclick="location.reload()">Search</p>
+            <p id="a5-btn-search" tabindex="2" onclick="searchPatientReview()">Search</p>
           </div>
           
 
@@ -67,13 +62,13 @@
           </div>
           <div class="a5-user-table"></div>
           <table id="a5-user-table">
+            <tr>
+              <th>Name</th>
+              <th>Rating</th>
+              <th>Message</th>
+              <th>Date</th>
+            </tr>
             <tbody id="a5-tbody">
-              <tr>
-                <th>Name</th>
-                <th>Rating</th>
-                <th>Message</th>
-                <th>Date</th>
-              </tr>
               <!-- fetch data database -->
             </tbody>
           </table>

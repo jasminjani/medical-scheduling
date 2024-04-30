@@ -1,10 +1,15 @@
-
+let data;
 
 const fetchDataFun = async () => {
- 
-  let fetchdata = await fetch(`/doctor/reviews/all`)
-  let data = await fetchdata.json()
-  return data
+  try {
+    let fetchdata = await fetch(`/doctor/reviews/all`)
+    data = await fetchdata.json()
+    // return data
+    await pagination();
+
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 let search = document.getElementById("search").value
@@ -13,40 +18,70 @@ let currentPage = 1
 let length = 0
 let pageno = document.getElementById("pageno")
 
-const searchFetchDataFun = async ()=>{
-  let fetchdata
-  let data
-  fetchdata = await fetch(`/doctor/searchReview/${search}`)
-  data = await fetchdata.json()
-  return data
+// const searchFetchDataFun = async ()=>{
+//   let fetchdata
+//   let data
+//   fetchdata = await fetch(`/doctor/searchReview/${search}`)
+//   data = await fetchdata.json()
+//   return data
+// }
+
+const searchPatientReview = async () => {
+  try {
+
+    let searchedData = document.getElementById('search').value;
+    // if (typeof searchedData === "string" && searchedData.length === 0) {
+    if (!searchedData) {
+      searchedData = "null";
+    }
+
+    const url = `/doctor/searchReview/${searchedData}`;
+    const response = await fetch(url);
+    data = await response.json();
+    // return data;
+    await pagination();
+
+  } catch (error) {
+    console.log(error);
+  }
 }
+
+let searchBtn = document.getElementById('a5-btn-search');
+
+searchBtn.addEventListener('keyup', function (event) {
+  try {
+    if (event.key === 'Enter') {
+      searchPatientReview();
+    }
+  } catch (e) { console.log(e); }
+});
 
 const pagination = async () => {
 
-  let data = await fetchDataFun()
-   
-  if (search) {
+  // let data = await fetchDataFun()
 
-    data = data.filter((obj) => {
-      return obj.Name.includes(search) || obj.review.includes(search) || obj.date.includes(search)
-    })
-  }
+  // if (search) {
+
+  //   data = data.filter((obj) => {
+  //     return obj.Name.includes(search) || obj.review.includes(search) || obj.date.includes(search)
+  //   })
+  // }
 
   length = data.length;
-  if(length == 0)
-  {
-    document.getElementById("a5-tbody").innerHTML += "<tr><td colspan='5'  style='text-align:center'>Data Not Found!</td></tr>"
-  }
-  pageno.innerHTML = currentPage;
+  if (length == 0) {
+    document.getElementById("a5-tbody").innerHTML = "<tr><td colspan='5'  style='text-align:center'>Data Not Found!</td></tr>"
+  } else {
+    pageno.innerHTML = currentPage;
 
-  const endIndex = currentPage * pagefield;
-  const startIndex = endIndex - pagefield;
-  const pageItems = data.slice(startIndex, endIndex);
+    const endIndex = currentPage * pagefield;
+    const startIndex = endIndex - pagefield;
+    const pageItems = data.slice(startIndex, endIndex);
 
-  let tabledata = "";
+    let tabledata = "";
+    document.getElementById("a5-tbody").innerHTML = tabledata;
 
-  pageItems.map((value) => {
-    tabledata += `<tr>
+    pageItems.map((value) => {
+      tabledata += `<tr>
           
           <td hidden>${value.date}</td>
           <td class="csearch">${value.Name}</td>
@@ -54,26 +89,27 @@ const pagination = async () => {
           <td class="A7-review-message csearch">${value.review}</td>
           <td class="csearch">${value.date}</td>
         </tr>`
-  })
+    })
 
-  document.getElementById("a5-tbody").innerHTML += tabledata;
+    document.getElementById("a5-tbody").innerHTML += tabledata;
+  }
 }
 
-const removeFun = async () => {
-  document.getElementById("a5-tbody").innerHTML = `<tr>
-                  <th>Name </th>
-                <th>Rating</th>
-                <th>Message</th>
-                <th>Date</th>
-                </tr>`
-}
+// const removeFun = async () => {
+//   document.getElementById("a5-tbody").innerHTML = `<tr>
+//                   <th>Name </th>
+//                 <th>Rating</th>
+//                 <th>Message</th>
+//                 <th>Date</th>
+//                 </tr>`
+// }
 
 
 
 function firstpageFun() {
   currentPage = 1;
   pagination()
-  removeFun()
+  // removeFun()
   if (currentPage != length / pagefield) {
     document.getElementById('endbtn').disabled = false;
     document.getElementById('nextbtn').disabled = false;
@@ -88,7 +124,7 @@ function prevButtonFun() {
   if (currentPage > 1) {
     currentPage--;
     pagination()
-    removeFun()
+    // removeFun()
     document.getElementById('endbtn')
 
   }
@@ -116,14 +152,14 @@ function nextButtonFun() {
     document.getElementById('nextbtn').disabled = true
   }
   pagination()
-  removeFun()
+  // removeFun()
 }
 
 function lastpageFun() {
   lastpage = Math.ceil(length / pagefield);
   currentPage = lastpage
   pagination()
-  removeFun()
+  // removeFun()
   if (currentPage != 1) {
     document.getElementById('homebtn').disabled = false;
     document.getElementById('previousbtn').disabled = false;
@@ -139,9 +175,9 @@ document.querySelector('#endbtn').addEventListener("click", lastpageFun)
 document.querySelector('#previousbtn').addEventListener("click", prevButtonFun)
 document.querySelector('#nextbtn').addEventListener("click", nextButtonFun)
 
- document.getElementById("a5-btn-search").addEventListener("click",pagination)
+document.getElementById("a5-btn-search").addEventListener("click", pagination)
 
 
-pagination()
+// pagination()
 
 

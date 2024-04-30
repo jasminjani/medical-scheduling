@@ -101,6 +101,40 @@ th {
   background-color: var(--blue);
 }
 
+.a5-search-backBtn {
+  justify-content: space-between;
+}
+
+.a5-search-input {
+  padding-left: 10px;
+}
+
+.a5-back-btn {
+  height: 37px;
+  width: 100px;
+  border-radius: 3px;
+  background-color: var(--light-blue);
+  padding: 9px;
+}
+
+.a5-back-btn:hover {
+  cursor: pointer;
+  color: var(--white);
+  background-color: var(--blue);
+}
+
+.a5-searchbox-center {
+  margin: 0 auto;
+}
+
+.a5-pagination-flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.a5-pagination-all-btn {
+  margin: 0;
+}
 
 .a2-btn {
   width: 80px;

@@ -363,16 +363,13 @@ exports.getAllPatients = async (req, res) => {
 
 exports.searchPatientByName = async (req, res) => {
   try {
-    const { searchedName } = req.params;
+    let { searchedName } = req.params;
 
-    if (!searchedName) {
-      return res.status(500).json({
-        success: false,
-        message: "Please serch name",
-      });
+    if (searchedName == "null") {
+      searchedName = "";
     }
 
-    const sql = `SELECT id, fname, lname, email FROM users WHERE role_id = 1 AND is_deleted = 0 AND (fname LIKE '${searchedName}%' OR lname LIKE '${searchedName}%')`;
+    const sql = `SELECT id, fname, lname, email FROM users WHERE role_id = 1 AND is_deleted = 0 AND (fname LIKE '${searchedName}%' OR lname LIKE '${searchedName}%' OR email LIKE '${searchedName}%')`;
     const [searchedPatient] = await conn.query(sql);
     res.send({ allPatient: searchedPatient });
   } catch (error) {
