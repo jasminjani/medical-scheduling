@@ -2,13 +2,10 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const app = express();
 const http = require("http");
-// const server = http.createServer(app);
 const { Server } = require("socket.io");
-// const io = socket(server);
 const path = require("path");
 const logger = require("./utils/pino");
 require("dotenv").config();
-const socketio = require('socket.io');
 
 const PORT = process.env.PORT;
 
@@ -28,28 +25,25 @@ const { generatePDF } = require("./controllers/pdfController");
 
 // socket initialization
 io.on("connection", (socket) => {
-  // console.log(socket.client.id);
-  // console.log(socket.id);
 
-  socket.on("reminder", (userEmail) => {
-    console.log(userEmail);
-    socket.emit(`reminder-${userEmail}`, "Your appointment");
-  });
+  socket.emit('connectmsg', 'thank you for connecting');
 
-  socket.emit('connectmsg','thank you for connecting')
+  socket.on('delete-slot', (msg) => {
+    msg ? io.emit(`delete-slot-${msg.patient_id}`, msg) : 0
+  })
 
-  // socket.on('message', (data) => {
-  //       console.log(`New message from : ${data}`);
-  //   })
+  socket.on('cancel-slot', (msg) => {
+    msg ? io.emit(`cancel-slot-${msg.doctor_id}`, msg) : 0
+  })
 
-  socket.on('generatePDF',async()=>{
-    try{
+  socket.on('generatePDF', async () => {
+    try {
       console.log("in socket generate pdf");
-      const filename=await generatePDF();
+      const filename = await generatePDF();
       console.log(filename);
-      socket.emit('pdfready',filename);
+      socket.emit('pdfready', filename);
     }
-    catch(error){
+    catch (error) {
       console.log(error);
     }
   })
@@ -57,6 +51,7 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     console.log("A user disconnected");
   });
+
 });
 
 // set view engine
