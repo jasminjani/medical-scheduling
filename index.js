@@ -24,6 +24,8 @@ const server = app.listen(PORT, () => {
 
 const io = new Server(server);
 
+const { generatePDF } = require("./controllers/pdfController");
+
 // socket initialization
 io.on("connection", (socket) => {
   // console.log(socket.client.id);
@@ -33,6 +35,24 @@ io.on("connection", (socket) => {
     console.log(userEmail);
     socket.emit(`reminder-${userEmail}`, "Your appointment");
   });
+
+  socket.emit('connectmsg','thank you for connecting')
+
+  // socket.on('message', (data) => {
+  //       console.log(`New message from : ${data}`);
+  //   })
+
+  socket.on('generatePDF',async()=>{
+    try{
+      console.log("in socket generate pdf");
+      const filename=await generatePDF();
+      console.log(filename);
+      socket.emit('pdfready',filename);
+    }
+    catch(error){
+      console.log(error);
+    }
+  })
 
   socket.on("disconnect", () => {
     console.log("A user disconnected");
@@ -62,33 +82,3 @@ const { allRequestLogs } = require("./middlewares/allRequestLogs");
 
 app.use("/", allRequestLogs, rootRouter);
 
-// server is running on PORT
-const server=app.listen(PORT, () => {
-  logger.info(`server is running on port: http://localhost:${PORT}`);
-});
-
-const io=socketio(server);
-const { generatePDF } = require("./controllers/pdfController");
-
-
-io.on('connection',(socket)=>{
-  console.log(`New connection: ${socket.id}`);
-
-  socket.emit('connectmsg','thank you for connecting')
-
-  // socket.on('message', (data) => {
-  //       console.log(`New message from : ${data}`);
-  //   })
-
-  socket.on('generatePDF',async()=>{
-    try{
-      console.log("in socket generate pdf");
-      const filename=await generatePDF();
-      console.log(filename);
-      socket.emit('pdfready',filename);
-    }
-    catch(error){
-      console.log(error);
-    }
-  })
-})
