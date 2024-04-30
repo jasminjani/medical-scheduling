@@ -2,6 +2,12 @@ let date = document.getElementById("date");
 let appointments = document.getElementById("appointments");
 let slotBook = document.getElementById("slotBook");
 
+const socket = io();
+// delete booked slot from dropdown which  is booked by other during single user check the slot
+socket.on('madechanges',()=>{
+  getSlots();
+})
+
 function validate() {
   let isvalid = true;
 
@@ -76,7 +82,6 @@ slotBook.addEventListener("click", async (e) => {
             method:"POST",
             body:formData
           })
-         
       });
     }
 
@@ -102,6 +107,12 @@ slotBook.addEventListener("click", async (e) => {
           },
         });
       
+        d = await d.json();
+
+        if(d.success){
+          // make message for change slot
+          socket.emit('changeslot')
+        }
 
         Swal.fire("Payment Done!", "Your Slot is Booked", "success").then(
           (result) => {
@@ -146,12 +157,12 @@ const getSlots = async (e) => {
       slot.start_time = new Date(slot.start_time).getTime();
       slot.start_time -= (timezoneoffset * 60 * 1000);
       slot.start_time = new Date(slot.start_time).toLocaleTimeString('en-US')
-      console.log(slot.start_time)
+      // console.log(slot.start_time)
 
       slot.end_time = new Date(slot.end_time).getTime();
       slot.end_time -= (timezoneoffset * 60 * 1000);
       slot.end_time = new Date(slot.end_time).toLocaleTimeString('en-US')
-      console.log(slot.end_time)
+      // console.log(slot.end_time)
       // dt = dt.toLocaleString('en-US',{timeZone:userTimezone})
       html += `<option value=${slot.start_time + "-" + slot.id} data-sid="${
         slot.id
@@ -196,12 +207,12 @@ const getDoctorData = async () => {
   <div class="doctor-details">
     <input type="hidden" value="${doctor.id}" id="did">
     <p class="name"><span>Name: </span>${doctor.fname + " " + doctor.lname}</p>
-    <p class="qualification"><span>qualification: </span>${doctor.qualification}</p>
-    <p class="speciality"><span>speciality: </span>${doctor.specialities.map((speciality) => `${speciality.toUpperCase()}`)}</p>
+    <p class="qualification"><span>Qualification: </span>${doctor.qualification}</p>
+    <p class="qualification"><span>Speciality: </span>${doctor.specialities.map((speciality) => `${speciality.toUpperCase()}`)}</p>
     <p class="fees"><span>Fees: </span>Rs. ${doctor.consultancy_fees}</p>
-    <p class="hospital-name"><span>clinic/hospital: </span>${doctor.hospital_name}</p>
-    <p class="address"><span>city: </span> ${doctor.city}</p>
-    <p class="address"><span>address: </span> ${doctor.location}</p>
+    <p class="hospital-name"><span>Clinic/hospital: </span>${doctor.hospital_name}</p>
+    <p class="address"><span>City: </span> ${doctor.city}</p>
+    <p class="address"><span>Address: </span> ${doctor.location}</p>
     <div class="rating">
     ${stars}
       <span id="review-count">(${doctor.total_reviews})</span>
