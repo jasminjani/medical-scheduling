@@ -16,7 +16,7 @@ const getPastSlots = async () => {
   });
 
   const {success, message } = await response.json();
-
+  console.log(message)
   totalPage = Math.ceil(message.length / limit);
 
   if (totalPage <= 1) document.getElementsByClassName("A4-Pagination-component")[0].style.visibility = "hidden";
