@@ -2,6 +2,12 @@ let date = document.getElementById("date");
 let appointments = document.getElementById("appointments");
 let slotBook = document.getElementById("slotBook");
 
+const socket = io();
+// delete booked slot from dropdown which  is booked by other during single user check the slot
+socket.on('madechanges',()=>{
+  getSlots();
+})
+
 function validate() {
   let isvalid = true;
 
@@ -76,7 +82,6 @@ slotBook.addEventListener("click", async (e) => {
             method:"POST",
             body:formData
           })
-         
       });
     }
 
@@ -102,6 +107,12 @@ slotBook.addEventListener("click", async (e) => {
           },
         });
       
+        d = await d.json();
+
+        if(d.success){
+          // make message for change slot
+          socket.emit('changeslot')
+        }
 
         Swal.fire("Payment Done!", "Your Slot is Booked", "success").then(
           (result) => {
@@ -146,12 +157,12 @@ const getSlots = async (e) => {
       slot.start_time = new Date(slot.start_time).getTime();
       slot.start_time -= (timezoneoffset * 60 * 1000);
       slot.start_time = new Date(slot.start_time).toLocaleTimeString('en-US')
-      console.log(slot.start_time)
+      // console.log(slot.start_time)
 
       slot.end_time = new Date(slot.end_time).getTime();
       slot.end_time -= (timezoneoffset * 60 * 1000);
       slot.end_time = new Date(slot.end_time).toLocaleTimeString('en-US')
-      console.log(slot.end_time)
+      // console.log(slot.end_time)
       // dt = dt.toLocaleString('en-US',{timeZone:userTimezone})
       html += `<option value=${slot.start_time + "-" + slot.id} data-sid="${
         slot.id

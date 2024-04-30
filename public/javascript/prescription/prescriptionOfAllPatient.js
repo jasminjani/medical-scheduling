@@ -1,3 +1,5 @@
+
+
 let data=[];
 
 const fetchData=async()=>{
@@ -22,44 +24,70 @@ const editPrescription= async (id) =>{
   location.href = `/doctor/prescription/edit/${id}`;
 }
 
-const generatePDF = async (id) => {
-  // location.href = `/doctor/generate/${id}`;
- const socket = io();
+// document.getElementById("download-Btn").style.display='none';
+// document.getElementById("cross").style.display='none';
 
- socket.emit('generatePDF');
+// const generatePDF = async (id) => {
+//   // location.href = `/doctor/generate/${id}`;
+//  const socket = io();
 
- socket.on('pdfready',async(filename)=>{
+//  socket.emit('generatePDF',`${id}`);
 
-    let timerInterval;
-     await Swal.fire({
-      title: "Auto close alert!",
-      html: "please wait.. your pdf will be generated in <b></b>",
-      timer: 2000,
-      timerProgressBar: true,
-      didOpen: () => {
-        Swal.showLoading();
-        const timer = Swal.getPopup().querySelector("b");
-        timerInterval = setInterval(() => {
-          timer.textContent = `${Swal.getTimerLeft()}`;
-        }, 100);
-      },
-      willClose: () => {
-        clearInterval(timerInterval);
-      }
-    }).then((result) => {
-      /* Read more about handling dismissals below */
-      if (result.dismiss === Swal.DismissReason.timer) {
-        console.log("I was closed by the timer");
-      }
-    });
-    document.getElementById("pdfViewer").innerHTML=`<embed src="/pdfs/${filename}" width="800px" height="1000px" />`;
+//  socket.on('pdfready',async(filename)=>{
 
-  
- })
+//     let timerInterval;
+//      await Swal.fire({
+//       title: "Please wait...",
+//       html: "your pdf will be generated in <b></b>",
+//       timer: 2000,
+//       timerProgressBar: true,
+//       didOpen: () => {
+//         Swal.showLoading();
+//         const timer = Swal.getPopup().querySelector("b");
+//         timerInterval = setInterval(() => {
+//           timer.textContent = `${Swal.getTimerLeft()}`;
+//         }, 100);
+//       },
+//       willClose: () => {
+//         clearInterval(timerInterval);
+//       }
+//     }).then((result) => {
+//       /* Read more about handling dismissals below */
+//       if (result.dismiss === Swal.DismissReason.timer) {
+//         console.log("I was closed by the timer");
+//       }
+//     });
+//     document.getElementById("pdfViewer").innerHTML=`<embed src="/pdfs/${filename}" width="800px" height="1050px" />`;
+//  })
+
+ 
+//  document.getElementById("download-Btn").addEventListener('click',async()=>{
+//   const filename=document.getElementById("pdfViewer").querySelector('embed').src.split('/').pop();
+//   await socket.emit('downloadPDF',filename);
+//   socket.emit('deletePDF',filename);
+//  })
+
+//  document.getElementById("cross").addEventListener('click',async()=>{
+//   const filename=document.getElementById("pdfViewer").querySelector('embed').src.split('/').pop();
+//   socket.emit('deletePDF',filename);
+//   window.location.href=`/doctor/prescriptiondetails`;
+//  })
+
+//  socket.on('pdfFile',({filename,file})=>{
+//   const blob=new Blob([file],{type:'application/pdf'});
+//   const link=document.createElement('a');
+//   link.href=URL.createObjectURL(blob);
+//   link.download=filename;
+//   link.click();
+//  });
+
+//  document.getElementById('pdfViewer').style.display='block';
+//  document.getElementById('fade').style.display='block';
+//  document.getElementById("download-Btn").style.display='block';
+//  document.getElementById("cross").style.display='block';
 
 
-
-};
+// };
 
 const searchPatient=async()=>{
     const input=document.getElementById("a5-searchPatient").value;
@@ -70,31 +98,5 @@ const searchPatient=async()=>{
     home();
 
 }
-
-
-
-
-
-  // const fetchData = async () => {
-          //   res = await fetch(
-            //     window.location.origin + `/getprescriptionofdoctor`
-            //   );
-            //   resjson = await res.json();
-            
-            
-            //   resjson.message[0].forEach(function (element, index) {
-              //     let table = document.getElementById("myTable");
-              //     let str = `
-              //       <tr>
-                //         <td>${index + 1}</td>
-                //         <td>${element.created_at}</td>
-                //         <td>${element.patient_name}</td>
-                //         <td>${element.diagnoses}</td>
-        //         <td><input type="button" value="Get PDF" onclick="generatePDF(${element.id})"><input type="button" value="Edit Prescription"></td>
-        //       </tr>
-        //     `;
-        //     table.innerHTML += str;
-        //   });
-        // };
         
       
