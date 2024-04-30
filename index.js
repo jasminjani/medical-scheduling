@@ -9,6 +9,7 @@ const path = require("path");
 const logger = require("./utils/pino");
 require("dotenv").config();
 const socketio = require('socket.io');
+const fs=require('fs')
 
 const PORT = process.env.PORT;
 
@@ -42,15 +43,35 @@ io.on("connection", (socket) => {
   //       console.log(`New message from : ${data}`);
   //   })
 
-  socket.on('generatePDF',async()=>{
+  socket.on('generatePDF',async(id)=>{
     try{
-      console.log("in socket generate pdf");
-      const filename=await generatePDF();
-      console.log(filename);
+      const filename=await generatePDF(id);
       socket.emit('pdfready',filename);
     }
     catch(error){
       console.log(error);
+    }
+  })
+
+  socket.on('downloadPDF',async(filename)=>{
+    try{
+      if(fs.existsSync(`uploads/pdfs/${filename}`)){
+      const file=fs.readFileSync(`uploads/pdfs/${filename}`)
+      socket.emit('pdfFile',{filename,file})
+      }
+    }catch(error){
+      console.log("error in downloading PDF",error);
+    }
+  })
+
+  socket.on('deletePDF',(filename)=>{
+    try{
+      if(fs.existsSync(`uploads/pdfs/${filename}`)){
+        const file=fs.unlinkSync(`uploads/pdfs/${filename}`);
+      }
+    }
+    catch(error){
+      console.log("error in deleting pdf",error);
     }
   })
 

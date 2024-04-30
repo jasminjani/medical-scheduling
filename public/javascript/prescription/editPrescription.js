@@ -38,8 +38,18 @@
                   method: "POST",
                   body: obj
               });
-              alert("Prescription updated successfully");
-              location.href=`/doctor/prescriptiondetails`;
+
+
+      await Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Prescription updated successfully!",
+      showConfirmButton: false,
+      timer: 1500
+      });
+    
+      location.href=`/doctor/prescriptiondetails`;
+    
     }
     catch(error){
         console.log(error);

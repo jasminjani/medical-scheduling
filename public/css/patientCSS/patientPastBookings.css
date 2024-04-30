@@ -18,7 +18,6 @@ html {
 body {
   margin: 0;
   padding: 0;
-  overflow: hidden;
 }
 
 .A3-main-container{
@@ -197,3 +196,4 @@ th {
   align-items: center;
   justify-content: space-between;
 }
+
