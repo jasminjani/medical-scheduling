@@ -6,9 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Medical Scheduling</title>
+  <link rel="shortcut icon" href="/assets/medical-team.png" type="image/x-icon">
   <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css">
   <script src="/sweetalert2/sweetalert2.min.js"></script>
-   <link rel="stylesheet" href="/css/loaderComponent.css">
+  <link rel="stylesheet" href="/css/loaderComponent.css">
   <script src="/javascript/loaderComponent.js" defer></script>
   <link rel="stylesheet" href="/css/homepage.css" />
 
@@ -23,29 +24,28 @@
         <div class="logo">
           <a href=""><img src="/assets/final-logo.png" alt="logo" /></a>
         </div>
-          <nav class="nav-items">
-            <ul>
-              <li><a href="/">Home</a></li>
-              <li><a href="#about-us">About Us</a></li>
-              <li><a href="#contact-us">Contact</a></li>
-              <li id="login"><a href="/login">Login</a></li>
-              <li id="logout"><a href="/logout" onclick="logout(event)">Logout</a></li>
-              <li id="register"><a href="/register">Register</a></li>
-              <li id="become-doctor"><a href="/patient/create">Become A Doctor</a></li>
-              <li id="book-appointment">
-                <a href="/patient/doctors/all" class="book-appointment"
-                  >Book Your Appointment</a>
-              </li>
-            </ul>
-          </nav>
-          <div class="user" id="logged-user">
-            <p class="name">Alpesh</p>
-            <div class="logo">
-              <a href="" class="user-img"><img src="/assets/logo.png" alt="logo" /></a>
-            </div>
+        <nav class="nav-items">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="#about-us">About Us</a></li>
+            <li><a href="#contact-us">Contact</a></li>
+            <li id="login"><a href="/login">Login</a></li>
+            <li id="logout"><a href="/logout" onclick="logout(event)">Logout</a></li>
+            <li id="register"><a href="/register">Register</a></li>
+            <li id="become-doctor"><a href="/patient/create">Become A Doctor</a></li>
+            <li id="book-appointment">
+              <a href="/patient/doctors/all" class="book-appointment">Book Your Appointment</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="user" id="logged-user">
+          <p class="name">Alpesh</p>
+          <div class="logo">
+            <a href="" class="user-img"><img src="/assets/logo.png" alt="logo" /></a>
           </div>
         </div>
       </div>
+    </div>
     </div>
   </header>
 
@@ -143,13 +143,13 @@
             <p class="or">OR</p>
             <div class="doctor-names">
               <input type="text" name="dname" id="dname" list="doctor-name" placeholder="Search Doctor by name" />
-          
+
               <datalist id="doctor-name">
                 <!-- <option value="ms">MS</option>
                                 <option value="md">MD</option>
                                 <option value="mbbs">MBBS</option> -->
               </datalist>
-          
+
               <div class="search-btn">
                 <input type="submit" class="btn" value="Search" id="search-doctor" />
               </div>
@@ -158,8 +158,9 @@
 
           <div class="swipe-btns">
             <!-- button pushed from js -->
-            <button class="left-swipe"> << </button>
-            <button class="right-swipe"> >> </button>
+            <button class="left-swipe">
+              << </button>
+                <button class="right-swipe"> >> </button>
           </div>
           <div class="doctors">
             <div class="cards">
@@ -338,21 +339,21 @@
   <script src="/javascript/auth/logout.js"></script>
   <script src="/javascript/carousel.js"></script>
   <script src="/socket.io/socket.io.js"></script>
-<script>
-  const socket = io();
-  socket.on("connect", () => {
-    let userInfo = JSON.parse(localStorage.getItem('userinfo'));
-    if(userInfo && userInfo.id){
-      
-      socket.emit('reminder',userInfo.email);
+  <script>
+    const socket = io();
+    socket.on("connect", () => {
+      let userInfo = JSON.parse(localStorage.getItem('userinfo'));
+      if (userInfo && userInfo.id) {
 
-      socket.on(`reminder-${userInfo.email}`,(msg)=>{
-        console.log(msg)
-      })
-    }
+        socket.emit('reminder', userInfo.email);
 
-});
-</script>
+        socket.on(`reminder-${userInfo.email}`, (msg) => {
+          console.log(msg)
+        })
+      }
+
+    });
+  </script>
 </body>
 
 </html>
