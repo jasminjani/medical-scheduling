@@ -8,7 +8,7 @@
   <title>Medical Scheduling</title>
   <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css">
   <script src="/sweetalert2/sweetalert2.min.js"></script>
-   <link rel="stylesheet" href="/css/loaderComponent.css">
+  <link rel="stylesheet" href="/css/loaderComponent.css">
   <script src="/javascript/loaderComponent.js"></script>
   <link rel="stylesheet" href="/css/homepage.css" />
 
@@ -23,29 +23,28 @@
         <div class="logo">
           <a href=""><img src="/assets/final-logo.png" alt="logo" /></a>
         </div>
-          <nav class="nav-items">
-            <ul>
-              <li><a href="/">Home</a></li>
-              <li><a href="#about-us">About Us</a></li>
-              <li><a href="#contact-us">Contact</a></li>
-              <li id="login"><a href="/login">Login</a></li>
-              <li id="logout"><a href="/logout" onclick="logout(event)">Logout</a></li>
-              <li id="register"><a href="/register">Register</a></li>
-              <li id="become-doctor"><a href="/patient/create">Become A Doctor</a></li>
-              <li id="book-appointment">
-                <a href="/patient/doctors/all" class="book-appointment"
-                  >Book Your Appointment</a>
-              </li>
-            </ul>
-          </nav>
-          <div class="user" id="logged-user">
-            <p class="name">Alpesh</p>
-            <div class="logo">
-              <a href="" class="user-img"><img src="/assets/logo.png" alt="logo" /></a>
-            </div>
+        <nav class="nav-items">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="#about-us">About Us</a></li>
+            <li><a href="#contact-us">Contact</a></li>
+            <li id="login"><a href="/login">Login</a></li>
+            <li id="logout"><a href="/logout" onclick="logout(event)">Logout</a></li>
+            <li id="register"><a href="/register">Register</a></li>
+            <li id="become-doctor"><a href="/patient/create">Become A Doctor</a></li>
+            <li id="book-appointment">
+              <a href="/patient/doctors/all" class="book-appointment">Book Your Appointment</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="user" id="logged-user">
+          <p class="name">Alpesh</p>
+          <div class="logo">
+            <a href="" class="user-img"><img src="/assets/logo.png" alt="logo" /></a>
           </div>
         </div>
       </div>
+    </div>
     </div>
   </header>
 
@@ -324,13 +323,28 @@
       </div>
     </div>
   </footer>
-
-
   <script src="/javascript/homepage.js"></script>
   <script src="/javascript/auth/logout.js"></script>
   <script src="/javascript/carousel.js"></script>
   <script src="/socket.io/socket.io.js"></script>
-  <script src="/javascript/common/upcomingNotification.js"></script>
+  <script>
+    const socket = io();
+    socket.on("connect", () => {
+      let userInfo = JSON.parse(localStorage.getItem('userinfo'));
+      if (userInfo && userInfo.id) {
+        socket.emit('reminder', userInfo.email);
+        socket.on(`reminder-${userInfo.email}`, (msg) => {
+          console.log(msg)
+        })
+        socket.on(`delete-slot-${userInfo.id}`, (msg) => {
+          Swal.fire("Your " + msg.date + " slot from " + msg.start_time + "-" + msg.end_time + " has been canceled" );
+        })
+        socket.on(`cancel-slot-${userInfo.id}`, (msg) => {
+          Swal.fire(msg.date + " slot from " + msg.start_time + "-" + msg.end_time + " has been canceled" );
+        })
+      }
+    });
+  </script>
 </body>
 
 </html>

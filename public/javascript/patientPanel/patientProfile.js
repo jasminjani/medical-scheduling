@@ -50,7 +50,7 @@ const getUpcomingSlots = async () => {
         <td>${element.day}</td>
         <td>${element.start_time}-${element.end_time}</td>
         <td><input type="button" value="Details" onclick='getDetails(${JSON.stringify(element)})'/></td>
-        <td><input type="button" value="Cancel" onclick="cancelSlot(${element.id},${element.patient_id})"></td>
+        <td><input type="button" value="Cancel" onclick='cancelSlot(${JSON.stringify(element)})'></td>
       </tr>
     `;
   });
@@ -88,7 +88,8 @@ const end = () => {
   }
 };
 
-const cancelSlot = async (slot_id, patient_id) => {
+const cancelSlot = async (element) => {
+  console.log(element);
   Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
@@ -105,7 +106,8 @@ const cancelSlot = async (slot_id, patient_id) => {
         icon: "success",
       }).then((result) => {
         if (result.isConfirmed) {
-          window.location = `/patient/cancel/${slot_id}`;
+          socket.emit('cancel-slot', element);
+          window.location = `/patient/cancel/${element.id}`;
         }
       });
     }
@@ -115,7 +117,7 @@ const cancelSlot = async (slot_id, patient_id) => {
 const getDetails = async (data) => {
 
 
-  
+
   const modal = document.getElementsByClassName("A3-modal")[0];
   modal.style.visibility = "visible";
 
