@@ -11,12 +11,12 @@ dotenv.config();
 const generateCityCombo = async () => {
   try {
     let [result] = await conn.query("select * from cities order by city");
-    
+
     if (!result.length) {
       let html = "";
       return html;
     }
-    
+
     let html = `<option value="">--Select City--</option>`;
 
     result.forEach((value) => {
@@ -85,7 +85,9 @@ exports.getDoctorDetails = async (req, res) => {
 exports.homePage = async (req, res) => {
   try {
     let html = await specialitiesCombo();
-    return res.render('./common/homepage', { html })
+    let city = await generateCityCombo();
+    return res.render('./common/homepage', { html, city });
+    
   } catch (error) {
     logger.error(error.message);
     res.status(500).json({

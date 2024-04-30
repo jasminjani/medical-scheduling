@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css">
   <script src="/sweetalert2/sweetalert2.min.js"></script>
    <link rel="stylesheet" href="/css/loaderComponent.css">
-  <script src="/javascript/loaderComponent.js"></script>
+  <script src="/javascript/loaderComponent.js" defer></script>
   <link rel="stylesheet" href="/css/homepage.css" />
 
 </head>
@@ -129,21 +129,27 @@
         <div class="all-doctors">
           <div class="search-doctor">
             <div class="specialities">
+              <select name="speciality" id="a5-doctorCity">
+                <%- city %>
+              </select>
+            </div>
+            <p class="or">OR</p>
+            <div class="specialities">
               <select name="speciality" id="speciality">
-                <option value="">Select speciality</option>
+                <option value="">--Select Speciality--</option>
                 <%- html %>
               </select>
             </div>
             <p class="or">OR</p>
             <div class="doctor-names">
               <input type="text" name="dname" id="dname" list="doctor-name" placeholder="Search Doctor by name" />
-
+          
               <datalist id="doctor-name">
                 <!-- <option value="ms">MS</option>
-                  <option value="md">MD</option>
-                  <option value="mbbs">MBBS</option> -->
+                                <option value="md">MD</option>
+                                <option value="mbbs">MBBS</option> -->
               </datalist>
-
+          
               <div class="search-btn">
                 <input type="submit" class="btn" value="Search" id="search-doctor" />
               </div>
@@ -152,6 +158,8 @@
 
           <div class="swipe-btns">
             <!-- button pushed from js -->
+            <button class="left-swipe"> << </button>
+            <button class="right-swipe"> >> </button>
           </div>
           <div class="doctors">
             <div class="cards">
@@ -335,7 +343,7 @@
   socket.on("connect", () => {
     let userInfo = JSON.parse(localStorage.getItem('userinfo'));
     if(userInfo && userInfo.id){
-      console.log(socket.id); 
+      
       socket.emit('reminder',userInfo.email);
 
       socket.on(`reminder-${userInfo.email}`,(msg)=>{
