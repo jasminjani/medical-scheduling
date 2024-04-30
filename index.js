@@ -26,11 +26,40 @@ const { generatePDF } = require("./controllers/pdfController");
 // socket initialization
 io.on("connection", (socket) => {
 
-  socket.emit('connectmsg', 'thank you for connecting');
+  socket.on("reminder",async(userEmail) => {
+    let result;
+    try {
+      [result] = await conn.query(`select concat(users_patient.fname," ",users_patient.lname) as patient_name,
+      concat(users_doctor.fname," ",users_doctor.lname) as doctor_name,users_patient.email,slot_bookings.patient_id,
+        time_slots.start_time,time_slots.end_time,slot_bookings.id as booking_id from slot_bookings
+        inner join time_slots on time_slots.id=slot_bookings.slot_id
+        inner join users as users_patient on slot_bookings.patient_id=users_patient.id
+        inner join users as users_doctor on time_slots.doctor_id = users_doctor.id
+        where time_slots.date=curdate() &&
+        slot_bookings.id not in (select booking_id from prescriptions) &&
+        timestampdiff(minute,utc_timestamp(),time_slots.start_time) between 0 and 120
+        && slot_bookings.is_canceled = 0 && slot_bookings.is_deleted=0;`);
+    } catch (error) {
+      logger.error(error)
+      console.log(error)
+    }
 
-  socket.on('delete-slot', (msg) => {
-    msg ? io.emit(`delete-slot-${msg.patient_id}`, msg) : 0
+    result.forEach((data)=>{
+      socket.emit(`reminder-${data.email}`, {
+        message:`today appointment is booked with ${data.doctor_name}`,
+        startTime:data.start_time,
+        endTime: data.end_time
+      });
+    })
+
+  });
+
+  // user req for change slot
+  socket.on('changeslot',()=>{
+    socket.broadcast.emit('madechanges')
   })
+
+  socket.emit('connectmsg','thank you for connecting')
 
   socket.on('cancel-slot', (msg) => {
     msg ? io.emit(`cancel-slot-${msg.doctor_id}`, msg) : 0
@@ -74,6 +103,7 @@ app.use(express.urlencoded({ extended: true }));
 // use root router in index file
 const rootRouter = require("./routes/rootRouter");
 const { allRequestLogs } = require("./middlewares/allRequestLogs");
+const conn = require("./config/dbConnection");
 
 app.use("/", allRequestLogs, rootRouter);
 

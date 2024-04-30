@@ -1,38 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Patients Dashboard</title>
+    <link rel="stylesheet" href="/css/loaderComponent.css" />
+    <script src="/javascript/loaderComponent.js"></script>
+    <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
+    <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
+    <link rel="stylesheet" href="/css/patientCSS/patientDashboard.css" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Patients Dashboard</title>
-     <link rel="stylesheet" href="/css/loaderComponent.css">
-      <script src="/javascript/loaderComponent.js"></script>
-  <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
-  <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
-  <link rel="stylesheet" href="/css/patientCSS/patientDashboard.css" />
+    <link rel="stylesheet" href="/css/patientCSS/patientProfile.css" />
+    <link rel="stylesheet" href="/css/homepage.css" />
+    <script
+      src="/javascript/patientPanel/patientDashboardDoctor.js"
+      defer
+    ></script>
+    <style>
+      #a5-patient-dashboard-active {
+        background-color: #0969da;
+        transform: translate(5px);
+        border-radius: 5px;
+      }
 
-  <link rel="stylesheet" href="/css/patientCSS/patientProfile.css" />
-  <link rel="stylesheet" href="/css/homepage.css" />
-  <script src="/javascript/patientPanel/patientDashboardDoctor.js" defer></script>
-  <style>
-    #a5-patient-dashboard-active {
-      background-color: #0969da;
-      transform: translate(5px);
-      border-radius: 5px;
-    }
+      #a5-patient-dashboard-active a,
+      #a5-patient-dashboard-active i {
+        color: #ffffff;
+      }
+    </style>
+  </head>
 
-    #a5-patient-dashboard-active a,
-    #a5-patient-dashboard-active i {
-      color: #ffffff;
-    }
-  </style>
-</head>
-
-<body onload="getUpcomingSlots()">
-  <div class="center" id="loader"></div>
-  <div class="a5-main-container">
-    <div class="a5-container">
-      <%- include('../../common/newSidebar/patientSidebar.ejs') %>
+  <body onload="getUpcomingSlots()">
+    <div class="center" id="loader"></div>
+    <div class="a5-main-container">
+      <div class="a5-container">
+        <%- include('../../common/newSidebar/patientSidebar.ejs') %>
         <div class="a2-patient-dashboard">
           <div class="a2-container a2-patient-home">
             <div class="a2-patient-hero-section">
@@ -59,7 +61,9 @@
                     <span id="doctors-count"></span> All Doctors
                   </div>
                   <div class="card-itams">
-                    <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
+                    <i
+                      class="fa-solid fa-briefcase-medical a5-list-item-img"
+                    ></i>
                   </div>
                 </div>
                 <div class="a2-card">
@@ -67,7 +71,9 @@
                     <span id="patients-count"></span> All Patients
                   </div>
                   <div class="card-itams">
-                    <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
+                    <i
+                      class="fa-solid fa-briefcase-medical a5-list-item-img"
+                    ></i>
                   </div>
                 </div>
                 <div class="a2-card">
@@ -75,7 +81,9 @@
                     <span id="today-booking-count"></span> Today's Booking
                   </div>
                   <div class="card-itams">
-                    <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
+                    <i
+                      class="fa-solid fa-briefcase-medical a5-list-item-img"
+                    ></i>
                   </div>
                 </div>
                 <div class="a2-card">
@@ -83,7 +91,9 @@
                     <span id="total-booking-count"></span> My Total Booking
                   </div>
                   <div class="card-itams">
-                    <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
+                    <i
+                      class="fa-solid fa-briefcase-medical a5-list-item-img"
+                    ></i>
                   </div>
                 </div>
               </div>
@@ -109,7 +119,11 @@
                 <div class="A3-modal">
                   <div class="A3-row-3">
                     <h3 id="A3-modal-date">Date</h3>
-                    <input type="button" value="Close" onclick="handleClose()" />
+                    <input
+                      type="button"
+                      value="Close"
+                      onclick="handleClose()"
+                    />
                   </div>
                   <div class="card">
                     <div class="col">
@@ -130,7 +144,6 @@
             </div>
           </div>
 
-
           <div class="section-heading">
             <p class="steps-title">Your Nearby Doctors</p>
           </div>
@@ -146,7 +159,13 @@
               </div>
               <p class="or">OR</p>
               <div class="doctor-names">
-                <input type="text" name="dname" id="dname" list="doctor-name" placeholder="Search Doctor by name" />
+                <input
+                  type="text"
+                  name="dname"
+                  id="dname"
+                  list="doctor-name"
+                  placeholder="Search Doctor by name"
+                />
 
                 <datalist id="doctor-name">
                   <!-- <option value="ms">MS</option>
@@ -155,7 +174,12 @@
                 </datalist>
 
                 <div class="search-btn">
-                  <input type="submit" class="btn" value="Search" id="search-doctor" />
+                  <input
+                    type="submit"
+                    class="btn"
+                    value="Search"
+                    id="search-doctor"
+                  />
                 </div>
               </div>
             </div>
@@ -216,108 +240,127 @@
               </div>
               <div>
                 <p class="text-align-start">Pleased to meet you Ashish 😇</p>
-                <p class="text-align-start">how would you like me to assist you today?</p>
+                <p class="text-align-start">
+                  how would you like me to assist you today?
+                </p>
               </div>
               <div>
                 <p class="text-align-end">Book an Appointment</p>
               </div>
               <div>
-                <p class="text-align-start">Sure, goto this <a href="http://localhost:8000/">localhost:8000</a> </p>
+                <p class="text-align-start">
+                  Sure, goto this
+                  <a href="http://localhost:8000/">localhost:8000</a>
+                </p>
               </div>
-
             </div>
             <div class="a2-chat-input-div">
               <form action="javascript:void(0)" class="a2-chat-form">
-                <input type="text" class="a2-chat-input">
-                <input type="submit" value="Send" class="a2-chat-submit">
+                <input type="text" class="a2-chat-input" />
+                <input type="submit" value="Send" class="a2-chat-submit" />
               </form>
             </div>
           </div>
-
         </div>
+      </div>
     </div>
-  </div>
 
-
-  <script>
-    // show chat message
-    let showBtn = document.getElementById('a2-show-window-btn');
-    let showChat = document.querySelector('.a2-chat-window');
-    showChat.classList.add('a2-hide-box')
-  showBtn.addEventListener('click', () => {
-    showChat.classList.toggle('a2-hide-box')
-  });
-
-</script>
-
-  <script>
-
-    document.querySelector('.a2-patient-name').innerHTML = `${user.fname + " " + user.lname}`;
-
-    showBtn.addEventListener('click', () => {
-      showChat.classList.toggle('a2-hide-box')
-    });
-
-  </script>
-  <script>
-
-    async function getPatientData() {
-      let resp = await fetch(`/patient/analytics`);
-      let data = await resp.json();
-
-      document.getElementById('doctors-count').innerHTML = data[0]?.doctorCount;
-      document.getElementById('patients-count').innerHTML = data[1]?.patientCount;
-      document.getElementById('today-booking-count').innerHTML = data[3]?.TodaysBooking;
-      document.getElementById('total-booking-count').innerHTML = data[2]?.patientTotalBooking;
-
-    }
-
-    getPatientData();
-  </script>
-
-
-  <!-- Upcoming slots script -->
-  <script>
-    console.log("inside patient");
-    const getUpcomingSlots = async () => {
-      let user = JSON.parse(localStorage.getItem('userinfo'));
-      const response = await fetch(`/patient/bookings/${user.id}`, {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json"
-        }
+    <script>
+      // show chat message
+      let showBtn = document.getElementById("a2-show-window-btn");
+      let showChat = document.querySelector(".a2-chat-window");
+      showChat.classList.add("a2-hide-box");
+      showBtn.addEventListener("click", () => {
+        showChat.classList.toggle("a2-hide-box");
       });
+    </script>
 
-      let { success, data } = await response.json();
+    <script>
+      document.querySelector(".a2-patient-name").innerHTML = `${
+        user.fname + " " + user.lname
+      }`;
 
-      const todaysAppointment = data.filter((e) => { return new Date(e.date) < new Date() });
+      showBtn.addEventListener("click", () => {
+        showChat.classList.toggle("a2-hide-box");
+      });
+    </script>
+    <script>
+      async function getPatientData() {
+        let resp = await fetch(`/patient/analytics`);
+        let data = await resp.json();
 
-      const table = document.getElementById("date-body");
-
-      table.innerHTML = "";
-
-      if (todaysAppointment.length == 0) {
-        return table.innerHTML = "<tr><td colspan='5'>No Data Found !</td></tr>"
+        document.getElementById("doctors-count").innerHTML =
+          data[0]?.doctorCount;
+        document.getElementById("patients-count").innerHTML =
+          data[1]?.patientCount;
+        document.getElementById("today-booking-count").innerHTML =
+          data[3]?.TodaysBooking;
+        document.getElementById("total-booking-count").innerHTML =
+          data[2]?.patientTotalBooking;
       }
 
-      todaysAppointment.forEach(element => {
-        table.innerHTML += `
+      getPatientData();
+    </script>
+
+    <!-- Upcoming slots script -->
+    <script>
+      console.log("inside patient");
+      const getUpcomingSlots = async () => {
+        let user = JSON.parse(localStorage.getItem("userinfo"));
+        const response = await fetch(`/patient/bookings/${user.id}`, {
+          method: "GET",
+          headers: {
+            "Content-type": "application/json",
+          },
+        });
+
+        let { success, data } = await response.json();
+
+        const todaysAppointment = data.filter((e) => {
+          return new Date(e.date) < new Date();
+        });
+
+        const table = document.getElementById("date-body");
+
+        table.innerHTML = "";
+
+        if (todaysAppointment.length == 0) {
+          return (table.innerHTML =
+            "<tr><td colspan='5'>No Data Found !</td></tr>");
+        }
+
+        let timezoneoffset = new Date().getTimezoneOffset();
+        todaysAppointment.forEach((element) => {
+          element.start_time = new Date(element.start_time).getTime();
+          element.start_time -= timezoneoffset * 60 * 1000;
+          element.start_time = new Date(element.start_time).toLocaleTimeString(
+            "en-US"
+          );
+          console.log(element.start_time);
+
+          element.end_time = new Date(element.end_time).getTime();
+          element.end_time -= timezoneoffset * 60 * 1000;
+          element.end_time = new Date(element.end_time).toLocaleTimeString("en-US");
+          console.log(element.end_time);
+          table.innerHTML += `
             <tr>
               <td>${element.date}</td>
               <td>${element.day}</td>
-              <td>${element.start_time.slice(0, -3)}-${element.end_time.slice(0, -3)}</td>
-              <td><input type="button" class="view-btn" value="Details" onclick='getDetails(${JSON.stringify(element)})'></td>
+              <td>${element.start_time}-${element.end_time}</td>
+              <td><input type="button" class="view-btn" value="Details" onclick='getDetails(${JSON.stringify(
+                element
+              )})'></td>
             </tr>
-            `
-      });
-    }
+            `;
+        });
+      };
 
-    const getDetails = async (data) => {
-      const modal = document.getElementsByClassName("A3-modal")[0];
+      const getDetails = async (data) => {
+        const modal = document.getElementsByClassName("A3-modal")[0];
 
-      modal.style.visibility = "visible";
+        modal.style.visibility = "visible";
 
-      modal.innerHTML = `
+        modal.innerHTML = `
       <div class="A3-row-3">
         <h3 id="A3-modal-date">Booking : ${data.booking_date}</h3>
         <input type="button" class="view-btn" value="Close" onclick="handleClose()">
