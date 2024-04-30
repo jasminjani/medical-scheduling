@@ -11,12 +11,12 @@ dotenv.config();
 const generateCityCombo = async () => {
   try {
     let [result] = await conn.query("select * from cities order by city");
-    
+
     if (!result.length) {
       let html = "";
       return html;
     }
-    
+
     let html = `<option value="">--Select City--</option>`;
 
     result.forEach((value) => {
@@ -85,7 +85,9 @@ exports.getDoctorDetails = async (req, res) => {
 exports.homePage = async (req, res) => {
   try {
     let html = await specialitiesCombo();
-    return res.render('./common/homepage', { html })
+    let city = await generateCityCombo();
+    return res.render('./common/homepage', { html, city });
+
   } catch (error) {
     logger.error(error.message);
     res.status(500).json({
@@ -230,6 +232,7 @@ exports.createUser = async (req, res) => {
     // generate hashpassword
     let hashPassword;
     try {
+      
       let bcryptsalt = await bcrypt.genSaltSync(10);
       hashPassword = await bcrypt.hash(password, bcryptsalt);
     } catch (error) {
@@ -240,6 +243,7 @@ exports.createUser = async (req, res) => {
       });
     }
 
+    // A string containing a randomly generated, 36 character long v4 UUID.
     let verification_token = crypto.randomUUID();
 
     // make query for insert the data
@@ -696,6 +700,7 @@ exports.generateToken = async (req, res) => {
       });
     }
 
+    // A string containing a randomly generated, 36 character long v4 UUID.
     let newToken = crypto.randomUUID();
     try {
       [result] = await conn.query(
