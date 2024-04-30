@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Medical Scheduling</title>
-  <link rel="shortcut icon" href="/assets/medical-team.png" type="image/x-icon">
+     <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
   <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css">
   <script src="/sweetalert2/sweetalert2.min.js"></script>
   <link rel="stylesheet" href="/css/loaderComponent.css">
-  <script src="/javascript/loaderComponent.js" defer></script>
+  <script src="/javascript/loaderComponent.js"></script>
   <link rel="stylesheet" href="/css/homepage.css" />
 
 </head>
@@ -286,7 +286,7 @@
 
 
   <!-- chat chat window -->
-  <p id="a2-show-window-btn">Show</p>
+  <p id="a2-show-window-btn"><i class="fa fa-ticket" aria-hidden="true" style="rotate: 120deg;"></i></p>
   <div class="a2-chat-window">
     <div class="a2-chat-nav">
       <h3>Ashish Zapadiya</h3>
@@ -333,8 +333,6 @@
       </div>
     </div>
   </footer>
-
-
   <script src="/javascript/homepage.js"></script>
   <script src="/javascript/auth/logout.js"></script>
   <script src="/javascript/carousel.js"></script>
@@ -344,14 +342,17 @@
     socket.on("connect", () => {
       let userInfo = JSON.parse(localStorage.getItem('userinfo'));
       if (userInfo && userInfo.id) {
-
         socket.emit('reminder', userInfo.email);
-
         socket.on(`reminder-${userInfo.email}`, (msg) => {
           console.log(msg)
         })
+        socket.on(`delete-slot-${userInfo.id}`, (msg) => {
+          Swal.fire("Your " + msg.date + " slot from " + msg.start_time + "-" + msg.end_time + " has been canceled" );
+        })
+        socket.on(`cancel-slot-${userInfo.id}`, (msg) => {
+          Swal.fire(msg.date + " slot from " + msg.start_time + "-" + msg.end_time + " has been canceled" );
+        })
       }
-
     });
   </script>
 </body>

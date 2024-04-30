@@ -24,7 +24,7 @@ const updateData = async (data) => {
 		title: "Multiple inputs",
 		html: `
 			<input type="number" id="swal-input1" class="swal2-input" name="rating" value=${data.rating} min="0" max="5">
-   		<input id="swal-input2" class="swal2-input" name="review" value=${data.review}>
+   		<input id="swal-input2" class="swal2-input" name="review" value="${data.review}">
 		`,
 		focusConfirm: false,
 		preConfirm: () => {
@@ -40,9 +40,9 @@ const updateData = async (data) => {
 			review: formValues[1]
 		}
 
-		if(d.rating > 5 || d.rating < 0) return Swal.fire("Select rating from 0-5");
+		if (d.rating > 5 || d.rating < 0) return Swal.fire("Select rating from 0-5");
 
-		const response = await fetch(`http://localhost:8000/patient/review/update/${data.doctor_id}/?rating=${d.rating || data.rating}&review=${d.review || data.review}`, {
+		const response = await fetch(`http://localhost:8000/patient/review/update/${data.doctor_id}/?rating=${!d.rating ? data.rating : d.rating}&review=${!d.review ? data.review : d.review}`, {
 			method: "GET",
 			headers: {
 				"Content-type": "application/x-www-form-urlencoded"

@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
   <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css" />
+    <link rel="stylesheet" href="/css/homepage.css" />
   <script src="/sweetalert2/sweetalert2.min.js" defer></script>
 
   <style>
@@ -28,12 +29,14 @@
 </head>
 
 <body>
-<div class="center" id="loader"></div>
-  <div class="a5-main-container" id="A6-body">
+  <!-- Add NavBar -->
+  <div class="center" id="loader"></div>
+  <%- include(`../../common/newSidebar/patientNav.ejs`) %>
+  <div class="a5-main-container" id="A6-body" style="padding: 10px;">
 
     <div class="a5-container">
 
-      <%- include('../../common/newSidebar/patientSidebar') %>
+    
 
         <main class="main">
           <div class="container">
@@ -59,7 +62,7 @@
                 <input type="submit" name="booked" id="slotBook" value="Book" class="submit" />
               </div>
             </div>
-            <hr>
+         
             <br><br>
             <div class="A6-rating-review">
               <div class="A6-showReview">
@@ -123,6 +126,7 @@
     </div>
   </div>
 
+  <script src="/socket.io/socket.io.js"></script>
   <script src="/javascript/patientPanel/patientReview.js"></script>
   <script src="/javascript/patientPanel/appointment.js"></script>
 </body>
