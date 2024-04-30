@@ -10,9 +10,9 @@
     <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
     <link rel="stylesheet" href="/css/homepage.css" />
     <style>
-      .our-doctors-section {
-        margin-left: 350px;
-      }
+        /* .our-doctors-section {
+          margin-left: 300px;
+        } */
 
     #a5-patient-doctor-active {
       background-color: #0969da;
@@ -40,10 +40,12 @@
   </head>
   <body>
     <div class="center" id="loader"></div>
+<!-- Add NavBar -->
+   <%- include(`../../common/newSidebar/patientNav.ejs`) %>
     <div class="main-container">
       <!-- our doctor section -->
       <div class="doctors-container">
-        <%- include('../../common/newSidebar/patientSidebar.ejs') %>
+      
         <div class="our-doctors-section">
           <div class="a5-container">
             <div class="section-heading">

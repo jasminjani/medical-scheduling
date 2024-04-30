@@ -30,7 +30,8 @@ const fetchReviewData = async () => {
   }
   
 key.forEach(element => {
-  
+  `<div>
+  </div>`
     let dtkey = Object.keys(data[element])
 
     let div1Card = document.createElement("div")
@@ -56,7 +57,7 @@ key.forEach(element => {
       }
       else if (item == 'rating') {
 
-        for (let i = 0; i < 5; i++) {
+       for (let i = 0; i < 5; i++) {
 
           if (i >= data[element][item]) {
             let img = document.createElement("img")

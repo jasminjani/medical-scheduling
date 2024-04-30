@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Patient Payment History</title>
+   <link rel="stylesheet" href="/css/homepage.css" />
        <link rel="stylesheet" href="/css/loaderComponent.css">
       <script src="/javascript/loaderComponent.js"></script>
   <!-- CSS for Sidebar -->
@@ -32,11 +33,11 @@
 
 <body onload="fetchPatientPayment()">
   <div class="center" id="loader"></div>
+      <%- include(`../../common/newSidebar/patientNav.ejs`) %>
   <div class="a5-container">
 
     <div class="a5-main-container">
-      <%- include('../../common/newSidebar/patientSidebar') %>
-      <div class="a5-inner-container">
+      <div class="a5-inner-container" style="max-width: 1000px;  margin: 0 auto;">
         <div class="a5-inner-section">
 
           <div class="a5-search">
