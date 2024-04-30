@@ -129,8 +129,14 @@
         <div class="all-doctors">
           <div class="search-doctor">
             <div class="specialities">
+              <select name="speciality" id="a5-doctorCity">
+                <%- city %>
+              </select>
+            </div>
+            <p class="or">OR</p>
+            <div class="specialities">
               <select name="speciality" id="speciality">
-                <option value="">Select speciality</option>
+                <option value="">--Select Speciality--</option>
                 <%- html %>
               </select>
             </div>
@@ -140,8 +146,8 @@
 
               <datalist id="doctor-name">
                 <!-- <option value="ms">MS</option>
-                  <option value="md">MD</option>
-                  <option value="mbbs">MBBS</option> -->
+                                <option value="md">MD</option>
+                                <option value="mbbs">MBBS</option> -->
               </datalist>
 
               <div class="search-btn">
@@ -152,6 +158,9 @@
 
           <div class="swipe-btns">
             <!-- button pushed from js -->
+            <button class="left-swipe">
+              << </button>
+                <button class="right-swipe"> >> </button>
           </div>
           <div class="doctors">
             <div class="cards">

@@ -7,8 +7,8 @@ const getDoctors = async () => {
     });
     data = await data.json();
     data = data.data;
-  
-    localStorage.setItem('doctors',JSON.stringify(data))
+
+    localStorage.setItem('doctors', JSON.stringify(data))
     putDoctorOnScreen(data);
   } catch (error) {
     console.log(error);
@@ -51,10 +51,10 @@ const putDoctorOnScreen = async (data) => {
       </div>
       <div class="specialities">
         ${doctor.specialities
-          .map((speciality) => {
-            return `<p class="speciality">${speciality}</p>`;
-          })
-          .join("")}
+        .map((speciality) => {
+          return `<p class="speciality">${speciality}</p>`;
+        })
+        .join("")}
       </div>
     <p class="rating">
      ${stars} <span class="total-reviews">(${doctor.total_reviews})</span>
