@@ -1,6 +1,5 @@
 const conn = require("../config/dbConnection");
 let PDFDocument = require("pdfkit");
-const {v4: uuidv4}=require('uuid')
 const logger = require("../utils/pino");
 const fs=require('fs');
 // const socketio = require('socket.io');
@@ -41,7 +40,7 @@ exports.generatePDF = async (req, res) => {
     // );
     // res.setHeader("Content-type", "application/pdf");
 
-    const filename=uuidv4()+`prescription-${result[0].patient_name}.pdf`
+    const filename=crypto.randomUUID()+`prescription-${result[0].patient_name}.pdf`
 
     let doc = new PDFDocument({ margin: 50 });
 
