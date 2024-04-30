@@ -1,7 +1,5 @@
 window.location.href.split("/").pop() === "upcomingSlots" ? document.getElementById("A3-view").style.backgroundColor = "#3984af" : "";
 
-
-
 // Add Doctor id from cookie
 const getDates = async () => {
   const response = await fetch("/doctor/dates", {
@@ -39,6 +37,8 @@ const getSlots = async (date) => {
 
   const { message } = await response.json();
 
+  console.log(message);
+
   document.getElementById("A3-modal-date").innerHTML = date;
 
   const table = document.getElementById("slot-body");
@@ -61,13 +61,13 @@ const getSlots = async (date) => {
         <td>${element.end_time}</td>
         <td>${element.patient_name ? element.patient_name : "-"}</td>
         <td>${element.phone ? element.phone : "-"}</td>
-        <td>${!element.is_canceled ? `<input type="button" value="Delete" onclick=openDeleteModal(${element.id}) />` : `Canceled`}</td>
+        <td>${!element.is_canceled ? `<input type="button" value="Delete" onclick='openDeleteModal(${JSON.stringify(element)})' />` : `Closed/Canceled`}</td>
       </tr>
     `
   });
 }
 
-const openDeleteModal = async (slot_id) => {
+const openDeleteModal = async (element) => {
   Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
@@ -84,8 +84,8 @@ const openDeleteModal = async (slot_id) => {
         icon: "success",
       }).then((result) => {
         if (result.isConfirmed) {
-          socket.emit("deleteSlot", "Slot deleted successfully")
-          window.location.href = `/doctor/delete/${slot_id}`;
+          socket.emit(`delete-slot`, element);
+          window.location.href = `/doctor/delete/${element.id}`; 
         }
       })
     }
