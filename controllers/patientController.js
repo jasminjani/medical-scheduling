@@ -698,7 +698,7 @@ exports.nearByDoctores = async (req, res) => {
 
     let [result] = await conn.query(sql, [patientId]);
 
-    let data = Object.values(result.reduce((acc, { id, fncityuame, lname, qualification, consultancy_fees, hospital_name, city, location, profile_picture, speciality, total_reviews, rating }) => {
+    let data = Object.values(result.reduce((acc, { id, fname, lname, qualification, consultancy_fees, hospital_name, city, location, profile_picture, speciality, total_reviews, rating }) => {
       acc[id] ??= { id, fname, lname, qualification, consultancy_fees, hospital_name, city, location, profile_picture, total_reviews, rating, specialities: [] };
       acc[id].specialities.push(speciality)
       return acc;
