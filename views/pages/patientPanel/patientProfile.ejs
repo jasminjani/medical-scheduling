@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Patient Profile</title>
+   <link rel="stylesheet" href="/css/homepage.css" />
   <link rel="stylesheet" href="/css/loaderComponent.css">
   <script src="/javascript/loaderComponent.js"></script>
   <link rel="stylesheet" href="/css/patientCSS/patientProfile.css" />
@@ -29,10 +30,12 @@
 
 <body onload="getUpcomingSlots()">
   <div class="center" id="loader"></div>
+    <!-- Header Section -->
+   <%- include(`../../common/newSidebar/patientNav.ejs`) %>
   <section id="A3-allslot">
     <div class="A3-main-container">
-      <%- include("../../common/newSidebar/patientSidebar") %>
-        <div class="A3-container">
+
+        <div class="A3-container" style="max-width: 1000px; margin: 0 auto;">
           <div class="A3-row-1">
             <a id="A3-upcoming" href="/patient/upcomingSlots" style="color: white; font-weight: bold;"><i
                 class="fa-solid fa-arrow-up"></i> Upcoming Slots</a>

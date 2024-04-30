@@ -283,7 +283,9 @@ display: flex;
 }
 
 .a7-mr-300 {
-  margin-left: 300px;
+max-width: 1000px;
+  padding: 20px;
+  margin: 0 auto;
 }
 
 .A7-review-message{
