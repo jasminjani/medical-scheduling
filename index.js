@@ -3,6 +3,7 @@ const cookieParser = require("cookie-parser");
 const app = express();
 const { Server } = require("socket.io");
 const path = require("path");
+const fs=require('fs');
 const logger = require("./utils/pino");
 const fs = require("fs");
 require("dotenv").config();
@@ -71,12 +72,13 @@ io.on("connection", (socket) => {
     msg ? io.emit(`cancel-slot-${msg.doctor_id}`, msg) : 0;
   });
 
-  socket.on("generatePDF", async (id) => {
-    try {
-      const filename = await generatePDF(id);
-      socket.emit("pdfready", filename);
-    } catch (error) {
-      console.log(error);
+  socket.on('generatePDF',async(id)=>{
+    try{
+      const filename=await generatePDF(id);
+      socket.emit('pdfready',filename);
+    }
+    catch (error) {
+      logger.error(error);
     }
   });
 
@@ -86,8 +88,8 @@ io.on("connection", (socket) => {
         const file = fs.readFileSync(`uploads/pdfs/${filename}`);
         socket.emit("pdfFile", { filename, file });
       }
-    } catch (error) {
-      console.log("error in downloading PDF", error);
+    }catch(error){
+      logger.error("error in downloading PDF",error);
     }
   });
 

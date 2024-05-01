@@ -74,6 +74,7 @@ async function appendPatientPaymentDetails(result) {
                   <th>Slot Date</th>
                   <th>Slot Time</th>
                   <th>Amount</th>
+                  <th>Status</th>
                   <th>Payment Date</th>
                 </tr>`;
 
@@ -90,11 +91,18 @@ async function appendPatientPaymentDetails(result) {
       let end_time = new Date(element.end_time).getTime();
       end_time -= (timezoneoffset * 60 * 1000);
       end_time = new Date(end_time).toLocaleTimeString('en-US')
+      let refundStatus;
+      if (element.is_refunded == 1) {
+        refundStatus = "refund"
+      } else if (element.is_refunded == 0) {
+        refundStatus = "success"
+      }
       let html2 = `<tr>
               <td>${index++}</td>
               <td>${element.slote_date}</td>
               <td>${start_time + " - " + end_time}</td>
               <td>${element.payment_amount}</td>
+              <td>${refundStatus}</td>
               <td>${element.payment_date}</td>
             </tr>`
 

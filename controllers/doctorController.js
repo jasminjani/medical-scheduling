@@ -360,7 +360,7 @@ exports.getPendingDoctorById = async (req, res) => {
 
 exports.getCityCombo = async (req, res) => {
   try {
-    const [result] = await conn.query(`select * from cities order by city`);
+    const [result] = await conn.query(`select city from cities order by city`);
     res.json(result);
   } catch (error) {
     logger.error(error.message);
@@ -579,7 +579,7 @@ exports.showPatientPayment = async (req, res) => {
       });
     }
 
-    const sql = `SELECT  profile_pictures.profile_picture,time_slots.doctor_id, time_slots.date AS slote_date, time_slots.start_time, time_slots.end_time, slot_bookings.slot_id, slot_bookings.patient_id, slot_bookings.booking_date AS payment_date, payments.payment_amount, users.fname, users.lname, users.email, users.gender, users.phone, users.city, users.dob, users.address, patient_details.blood_group
+    const sql = `SELECT payments.is_refunded, profile_pictures.profile_picture,time_slots.doctor_id, time_slots.date AS slote_date, time_slots.start_time, time_slots.end_time, slot_bookings.slot_id, slot_bookings.patient_id, slot_bookings.booking_date AS payment_date, payments.payment_amount, users.fname, users.lname, users.email, users.gender, users.phone, users.city, users.dob, users.address, patient_details.blood_group
     FROM time_slots
     LEFT JOIN slot_bookings ON time_slots.id = slot_bookings.slot_id
     LEFT JOIN payments ON time_slots.id = payments.slot_id
@@ -1075,20 +1075,6 @@ exports.createSlots = async (req, res) => {
             const start_time = slot[0].trim();
             const end_time = slot[1].trim();
 
-            // try {
-            //   const query =
-            //     "select * from time_slots where doctor_id = ? and date = ? and end_time <= ?";
-
-            //   const [isValid] = await conn.query(query, [
-            //     doctor_id,
-            //     dayArray[i][0],
-            //     start_time,
-            //   ]);
-            // } catch (error) {
-            //   return res
-            //     .status(500)
-            //     .json({ success: false, message: error.message });
-            // }
 
             try {
               const query =

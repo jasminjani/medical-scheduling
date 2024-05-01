@@ -204,7 +204,7 @@ th {
   height: 50px;
   width: 162px;
   left: 165px;
-  top: 720px;
+  top: 780px;
   border: 1px solid var(--light-blue);
   border-radius: 7px;
   cursor: pointer;
@@ -226,8 +226,8 @@ th {
   overflow: auto;
   height: 33px;
   width: 31px;
-  left: 675px;
-  top: -481px;
+  left: 670px;
+  top: -386px;
   border: 1px solid var(--light-blue);
   cursor: pointer;
 }
