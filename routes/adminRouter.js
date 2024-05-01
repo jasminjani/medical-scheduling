@@ -27,6 +27,7 @@ const {
   adminDashboard,
   contactToAdmin,
   getAllMessage,
+  updatePatient,
 } = require("../controllers/adminController");
 const passport = require("passport");
 
@@ -98,6 +99,11 @@ router.route("/patient/appointment/:patient_id").get(patientAllAppointment);
 router
   .route("/patient/getAppointment/:patient_id")
   .get(getPatientAllAppointment);
+
+// /admin/update-patient/:patient_id
+router
+  .route("/patient/approve-reject")
+  .post(updatePatient);
 
 // /admin/patient-appointment/:patient_id/:slot_id
 // slot_id req.body

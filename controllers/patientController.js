@@ -358,7 +358,7 @@ exports.patientPastBookings = async (req, res) => {
         inner join doctor_details on time_slots.doctor_id = doctor_details.doctor_id 
         inner join clinic_hospitals on doctor_details.hospital_id = clinic_hospitals.id  
         where slot_bookings.patient_id = ? and slot_bookings.is_canceled = 0 
-        and timestampdiff(minute,utc_timestamp(),time_slots.start_time)<0
+        and timestampdiff(minute,utc_timestamp(),time_slots.start_time) < 0
         and slot_bookings.is_deleted = 0 and time_slots.date <= CAST(NOW() as DATE) 
         order by time_slots.date desc;`
 
