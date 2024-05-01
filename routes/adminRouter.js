@@ -1,7 +1,9 @@
 const express = require("express");
+const passport = require("passport");
+const { isAdmin } = require("../middlewares/authMiddleware");
+
 const router = express.Router();
 
-const { isAdmin } = require("../middlewares/authMiddleware");
 const {
   dashboardStatus,
   deleteDoctor,
@@ -28,7 +30,7 @@ const {
   contactToAdmin,
   getAllMessage,
 } = require("../controllers/adminController");
-const passport = require("passport");
+
 
 router.use(
   passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),

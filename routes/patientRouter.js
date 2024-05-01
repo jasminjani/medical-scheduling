@@ -1,11 +1,14 @@
 const express = require("express");
-const router = express.Router();
-const { imgStorage, fileStorage } = require("../utils/multer");
 const multer = require("multer");
-const fileUpload = multer({ storage: fileStorage });
-const imgUpload = multer({ storage: imgStorage });
-const { isPatient } = require("../middlewares/authMiddleware");
 const passport = require("passport");
+const { isPatient } = require("../middlewares/authMiddleware");
+const { imgStorage, fileStorage } = require("../utils/multer");
+
+
+const imgUpload = multer({ storage: imgStorage });
+const fileUpload = multer({ storage: fileStorage });
+const router = express.Router();
+
 const {
   patientProfile,
   patientPastProfile,
@@ -44,6 +47,8 @@ const {
 } = require("../controllers/doctorController");
 const { allDoctors } = require("../controllers/authController");
 const { generatePDF } = require("../controllers/pdfController");
+
+
 // Patients panel details(patientAllControllers)
 router.use(
   passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
