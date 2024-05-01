@@ -59,8 +59,14 @@
   overflow: auto;
   height: 33px;
   width: 31px;
-  left: 1031px;
-  top: -445px;
+  left: 670px;
+  top: -404px;
   border: 1px solid var(--light-blue);
   cursor: pointer;
+}
+.custom-swal-container{
+  
+  .swal2-popup{
+    width: 865px;
+  }
 }
