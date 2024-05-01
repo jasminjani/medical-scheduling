@@ -37,12 +37,6 @@ const putDoctorOnScreen = async (data) => {
 
   let card = "";
 
-  if (data.length > 4) {
-    let swipebtns = document.querySelector(".swipe-btns");
-    swipebtns.innerHTML = `<button class="left-swipe"><<</button>
-    <button class="right-swipe">>></button>`;
-  }
-
   if (data.length <= 0) {
     cards.style.justifyContent = "center";
     return (cards.innerHTML = "<p class='not-found'>No Data Found !</p>");
@@ -79,6 +73,12 @@ const putDoctorOnScreen = async (data) => {
   });
 
   // if cards div has j-c : center then make it fs
+  if (data.length > 4) {
+    let swipebtns = document.querySelector(".swipe-btns");
+    swipebtns.innerHTML = `<button class="left-swipe"><<</button>
+    <button class="right-swipe">>></button>`;
+    carousel();
+  }
   cards.style.justifyContent = "start";
   cards.innerHTML = card;
 };

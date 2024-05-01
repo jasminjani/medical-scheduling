@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { imgStorage } = require("../utils/multer");
+const { imgStorage,imageFilter } = require("../utils/multer");
 const multer = require("multer");
-const imgUpload = multer({ storage: imgStorage });
+const imgUpload = multer({ storage: imgStorage,fileFilter:imageFilter});
 const passport = require("passport");
 const {
   homePage,
@@ -13,8 +13,6 @@ const {
   login,
   getCurrentUser,
   logout,
-  getUserById,
-  deleteUser,
   generateToken,
   activationForm,
   activationAccount,
@@ -50,11 +48,7 @@ router
     passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
     logout
   );
-
-router.route("/user/:id").post(getUserById);
-
-router.route("/user/:id").delete(deleteUser);
-
+  
 router.route("/generatetoken").post(generateToken);
 
 router.route("/account-activation").get(activationForm);
