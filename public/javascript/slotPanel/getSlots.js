@@ -37,8 +37,6 @@ const getSlots = async (date) => {
 
   const { message } = await response.json();
 
-  console.log(message);
-
   document.getElementById("A3-modal-date").innerHTML = date;
 
   const table = document.getElementById("slot-body");
