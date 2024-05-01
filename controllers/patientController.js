@@ -1,6 +1,6 @@
 const conn = require('../config/dbConnection')
 const logger = require('../utils/pino')
-let PDFDocument = require("pdfkit");
+
 
 exports.patientDashboard = async (req, res) => {
   try {

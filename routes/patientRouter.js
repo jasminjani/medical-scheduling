@@ -54,6 +54,16 @@ router.use(
   passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
   isPatient
 );
+
+
+// patient Dashboard
+// /patient route 
+router.route("/").get(patientDashboard);
+
+// /patient/analytics
+router.route("/analytics").get(patientStatus);
+
+
 // /patientUpcomingSlots
 router.route("/upcomingSlots").get(patientProfile);
 
@@ -90,11 +100,7 @@ router.route("/doctors/all").get(allDoctors);
 // /getPendingDoctor
 router.route("/doctor/pending").post(getPendingDoctorById);
 
-// /patient route
-router.route("/").get(patientDashboard);
 
-// /patient-status/:id
-router.route("/analytics").get(patientStatus);
 
 // /patient-details
 router.route("/details").post(patientDetails);
