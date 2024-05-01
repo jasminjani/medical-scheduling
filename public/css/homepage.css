@@ -369,7 +369,7 @@ color: #244e6d;
 
 .all-doctors .doctors {
   /* max-width: 600px; */
-  /* width: 100%; */
+  width: 100%;
   /* border:  1px solid black; */
   padding: 10px 20px;
 }
@@ -395,7 +395,7 @@ color: #244e6d;
 
 .cards {
   display: flex;
-  gap: 60px;
+  gap: 50px;
 }
 
 

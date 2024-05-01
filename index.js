@@ -1,10 +1,10 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const app = express();
-const http = require("http");
 const { Server } = require("socket.io");
 const path = require("path");
 const logger = require("./utils/pino");
+const fs = require("fs");
 require("dotenv").config();
 
 const PORT = process.env.PORT;
@@ -25,82 +25,85 @@ const { generatePDF } = require("./controllers/pdfController");
 
 // socket initialization
 io.on("connection", (socket) => {
-
-  socket.on("reminder",async(userEmail) => {
+  socket.on("reminder", async (userEmail) => {
     let result;
     try {
-      [result] = await conn.query(`select concat(users_patient.fname," ",users_patient.lname) as patient_name,
-      concat(users_doctor.fname," ",users_doctor.lname) as doctor_name,users_patient.email,slot_bookings.patient_id,
-        time_slots.start_time,time_slots.end_time,slot_bookings.id as booking_id from slot_bookings
-        inner join time_slots on time_slots.id=slot_bookings.slot_id
-        inner join users as users_patient on slot_bookings.patient_id=users_patient.id
-        inner join users as users_doctor on time_slots.doctor_id = users_doctor.id
-        where time_slots.date=curdate() &&
-        slot_bookings.id not in (select booking_id from prescriptions) &&
-        timestampdiff(minute,utc_timestamp(),time_slots.start_time) between 0 and 120
-        && slot_bookings.is_canceled = 0 && slot_bookings.is_deleted=0;`);
+      [result] = await conn.query(
+        `select u.email,n.* from notifications as n inner join users as u on u.id = n.user_id where timestampdiff(minute,n.start_at,utc_timestamp) between 0 and 120 and status=0`
+      );
+      // [result] = await conn.query(`select concat(users_patient.fname," ",users_patient.lname) as patient_name,
+      // concat(users_doctor.fname," ",users_doctor.lname) as doctor_name,users_patient.email,slot_bookings.patient_id,
+      //   time_slots.start_time,time_slots.end_time,slot_bookings.id as booking_id from slot_bookings
+      //   inner join time_slots on time_slots.id=slot_bookings.slot_id
+      //   inner join users as users_patient on slot_bookings.patient_id=users_patient.id
+      //   inner join users as users_doctor on time_slots.doctor_id = users_doctor.id
+      //   where time_slots.date=curdate() &&
+      //   slot_bookings.id not in (select booking_id from prescriptions) &&
+      //   timestampdiff(minute,utc_timestamp(),time_slots.start_time) between 0 and 120
+      //   && slot_bookings.is_canceled = 0 && slot_bookings.is_deleted=0;`);
     } catch (error) {
-      logger.error(error)
-      console.log(error)
-    }
-
-    result.forEach((data)=>{
-      socket.emit(`reminder-${data.email}`, {
-        message:`today appointment is booked with ${data.doctor_name}`,
-        startTime:data.start_time,
-        endTime: data.end_time
-      });
-    })
-
-  });
-
-  // user req for change slot
-  socket.on('changeslot',()=>{
-    socket.broadcast.emit('madechanges')
-  })
-
-  socket.emit('connectmsg','thank you for connecting')
-
-  socket.on('cancel-slot', (msg) => {
-    msg ? io.emit(`cancel-slot-${msg.doctor_id}`, msg) : 0
-  })
-
-  socket.on('generatePDF',async(id)=>{
-    try{
-      const filename=await generatePDF(id);
-      socket.emit('pdfready',filename);
-    }
-    catch (error) {
+      logger.error(error);
       console.log(error);
     }
-  })
 
-  socket.on('downloadPDF',async(filename)=>{
-    try{
-      if(fs.existsSync(`uploads/pdfs/${filename}`)){
-      const file=fs.readFileSync(`uploads/pdfs/${filename}`)
-      socket.emit('pdfFile',{filename,file})
-      }
-    }catch(error){
-      console.log("error in downloading PDF",error);
-    }
-  })
-
-  socket.on('deletePDF',(filename)=>{
-    try{
-      if(fs.existsSync(`uploads/pdfs/${filename}`)){
-        const file=fs.unlinkSync(`uploads/pdfs/${filename}`);
-      }
-    }
-    catch(error){
-      console.log("error in deleting pdf",error);
-    }
-  })
-
-  socket.on("disconnect", () => {
-    console.log("A user disconnected");
+    result.forEach((data) => {
+      socket.emit(`reminder-${data.email}`, data);
+    });
   });
 
+  socket.on("notification", async (email) => {
+    let [data] = await conn.query(
+      `select * from notifications where user_id = (select id from users where email = ?) and date(end_at)= curdate() and 
+    timestampdiff(second,utc_timestamp,end_at)>0`,
+      [email]
+    );
+
+    socket.emit(`notification-${email}`, data);
+  });
+  // user req for change slot
+  socket.on("changeslot", () => {
+    socket.broadcast.emit("madechanges");
+  });
+
+  socket.emit("connectmsg", "thank you for connecting");
+
+  socket.on("cancel-slot", (msg) => {
+    msg ? io.emit(`cancel-slot-${msg.doctor_id}`, msg) : 0;
+  });
+
+  socket.on("generatePDF", async (id) => {
+    try {
+      const filename = await generatePDF(id);
+      socket.emit("pdfready", filename);
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+  socket.on("downloadPDF", async (filename) => {
+    try {
+      if (fs.existsSync(`uploads/pdfs/${filename}`)) {
+        const file = fs.readFileSync(`uploads/pdfs/${filename}`);
+        socket.emit("pdfFile", { filename, file });
+      }
+    } catch (error) {
+      console.log("error in downloading PDF", error);
+    }
+  });
+
+  socket.on("deletePDF", (filename) => {
+    try {
+      if (fs.existsSync(`uploads/pdfs/${filename}`)) {
+        const file = fs.unlinkSync(`uploads/pdfs/${filename}`);
+      }
+    } catch (error) {
+      console.log("error in deleting pdf", error);
+    }
+  });
+
+  socket.on("disconnect", () => {
+    // console.log("A user disconnected");
+  });
 });
 
 // set view engine
@@ -126,4 +129,3 @@ const { allRequestLogs } = require("./middlewares/allRequestLogs");
 const conn = require("./config/dbConnection");
 
 app.use("/", allRequestLogs, rootRouter);
-

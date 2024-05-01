@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { imgStorage } = require("../utils/multer");
+const { imgStorage,imageFilter } = require("../utils/multer");
 const multer = require("multer");
-const imgUpload = multer({ storage: imgStorage });
+const imgUpload = multer({ storage: imgStorage,fileFilter:imageFilter });
 const passport = require("passport");
 const {
   updateGetDoctorDisplay,
