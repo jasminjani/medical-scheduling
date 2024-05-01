@@ -4,7 +4,9 @@
   --blue: #0969da;
   --white: #ffffff;
   --black: black;
-  --darkblue: darkblue
+  --darkblue: darkblue;
+  --red: red;
+  --light-red: rgb(255, 128, 128);
 }
 
 * {
@@ -220,4 +222,22 @@ h2 {
   display: flex;
   align-items: center;
   gap: 50px;
+}
+
+/* add or delete user css */
+.a5-table-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.a5-approve-reject {
+  border-radius: 4px;
+  padding: 8px;
+  padding-top: 9px;
+  background-color: var(--light-red);
+}
+
+.a5-approve-reject:hover {
+  background-color: var(--red);
+  cursor: pointer;
 }
