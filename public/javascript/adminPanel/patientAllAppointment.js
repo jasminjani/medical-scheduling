@@ -1,4 +1,6 @@
+let patientActiveStatus;
 
+// ===== ONLOAD PATIENT APPOINTMENT DATA FETCH FUNCTION ====
 async function fetchPatientAllAppointment() {
   try {
     let patient_id = window.location.href.split('/').pop();
@@ -15,7 +17,7 @@ async function fetchPatientAllAppointment() {
   }
 }
 
-
+// ===== DISPLAYING PATIENT DETAIL FUNCTION =====
 async function appendPatientDetails(result) {
   try {
 
@@ -58,12 +60,75 @@ async function appendPatientDetails(result) {
 
     document.getElementById('a5-patient-basic-details').innerHTML = html;
 
+    if(result.patientDetails[0].is_deleted == 0) {
+      document.getElementById('a5-active-status').innerHTML = "Remove Patient";
+      patientActiveStatus = 0;
+    } else if(result.patientDetails[0].is_deleted == 1) {
+      document.getElementById('a5-active-status').innerHTML = "Add Patient";
+      patientActiveStatus = 1;
+    }
+
   } catch (error) {
     console.log(error);
   }
 }
 
+// ===== ADD OR DELETE PATIENT FUNCTION  =====
+async function approveReject() {
+  try {
+    let text;
+    let postfix;
 
+    if(patientActiveStatus == 1) {
+      text = "add"
+      postfix = "ed"
+    } else if(patientActiveStatus == 0) {
+      text = "remove";
+      postfix = "d";
+    }
+
+    await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#0969da",
+      cancelButtonColor: "#d33",
+      confirmButtonText: `Yes, ${text} Patient!`
+      
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+
+        let patient_id = window.location.href.split('/').pop();
+        console.log("u id ",patient_id);
+        console.log("u status ",patientActiveStatus);
+
+        const response = await fetch(`/admin/patient/approve-reject`, {
+          method: "POST",
+          body: JSON.stringify({ patient_id: patient_id, activeStatus : patientActiveStatus }),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+        console.log(response);
+
+        await Swal.fire({
+          title: `${text}${postfix}!`,
+          text: `Patient ${text}${postfix} successfully.`,
+          icon: "success"
+        });
+        if (response.ok) {
+          location.reload();
+        }
+      }
+    });
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// ===== DISPLAY PATIENT APPOINTMENT FUNCTION =====
 async function appendPatientAllAppointment(result) {
   try {
 
@@ -101,7 +166,7 @@ async function appendPatientAllAppointment(result) {
   }
 }
 
-
+// ===== GETTING ID OF POPUP =====
 funcId = function (id) {
   try {
     return document.getElementById(id);
@@ -110,6 +175,7 @@ funcId = function (id) {
   }
 }
 
+// ===== SHOW POPUP FUNCTION =====
 let show = async function (id, slot_id) {
   try {
 
@@ -188,6 +254,7 @@ let show = async function (id, slot_id) {
   }
 }
 
+// ===== HIDE POPUP FUNCTION =====
 let hide = function (id) {
   try {
     funcId(id).style.display = 'none';

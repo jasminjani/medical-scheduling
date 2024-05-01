@@ -272,7 +272,7 @@ exports.addNewSpecialties = async (req, res) => {
 exports.adminDashboard = (req, res) => {
   try {
     res.render("pages/adminPanel/adminDashboard");
-    
+
   } catch (error) {
     logger.error(error.message);
     res.status(500).json({
@@ -285,7 +285,7 @@ exports.adminDashboard = (req, res) => {
 exports.adminDeleteDoctors = (req, res) => {
   try {
     res.render("pages/adminPanel/adminApproveDoc");
-    
+
   } catch (error) {
     logger.error(error.message);
     res.status(500).json({
@@ -311,7 +311,7 @@ exports.adminApproveDoctors = (req, res) => {
 exports.adminGetAllPatients = (req, res) => {
   try {
     res.render("pages/adminPanel/adminShowPatient");
-    
+
   } catch (error) {
     logger.error(error.message);
     res.status(500).json({
@@ -324,7 +324,7 @@ exports.adminGetAllPatients = (req, res) => {
 exports.adminAddSpecialites = (req, res) => {
   try {
     res.render("pages/adminPanel/addDocSpecialty");
-    
+
   } catch (error) {
     logger.error(error.message);
     res.status(500).json({
@@ -348,7 +348,7 @@ exports.displayAllPatient = async (req, res) => {
 
 exports.getAllPatients = async (req, res) => {
   try {
-    const sql = `SELECT id, fname, lname, email FROM users WHERE role_id = 1 AND is_deleted = 0`;
+    const sql = `SELECT id, fname, lname, email FROM users WHERE role_id = 1`;
     const [allPatient] = await conn.query(sql);
 
     res.json(allPatient);
@@ -369,7 +369,7 @@ exports.searchPatientByName = async (req, res) => {
       searchedName = "";
     }
 
-    const sql = `SELECT id, fname, lname, email FROM users WHERE role_id = 1 AND is_deleted = 0 AND (fname LIKE '${searchedName}%' OR lname LIKE '${searchedName}%' OR email LIKE '${searchedName}%')`;
+    const sql = `SELECT id, fname, lname, email FROM users WHERE role_id = 1 AND (fname LIKE '${searchedName}%' OR lname LIKE '${searchedName}%' OR email LIKE '${searchedName}%')`;
     const [searchedPatient] = await conn.query(sql);
     res.send({ allPatient: searchedPatient });
   } catch (error) {
@@ -405,7 +405,7 @@ exports.getPatientAllAppointment = async (req, res) => {
     }
 
     // try {
-    const sql = `SELECT users.id, users.fname, users.lname, users.email, users.gender, users.phone, users.city, users.dob, users.address, patient_details.blood_group, profile_pictures.profile_picture
+    const sql = `SELECT users.id, users.is_deleted, users.fname, users.lname, users.email, users.gender, users.phone, users.city, users.dob, users.address, patient_details.blood_group, profile_pictures.profile_picture
       FROM users 
       LEFT JOIN patient_details ON users.id = patient_details.patient_id 
       LEFT JOIN profile_pictures ON users.id = profile_pictures.user_id
@@ -448,6 +448,41 @@ exports.getPatientAllAppointment = async (req, res) => {
     });
   }
 };
+
+exports.updatePatient = async (req, res) => {
+  try {
+
+    let { patient_id, activeStatus } = req.body;
+
+    if (!patient_id || !activeStatus) {
+      res.status(500).json({
+        success: false,
+        message: "patient id or patient active status not found"
+      })
+    }
+    if (activeStatus == 0) {
+      activeStatus = 1;
+    } else if (activeStatus == 1) {
+      activeStatus = 0;
+    }
+
+    console.log("patient id ", patient_id);
+    console.log("status  ", activeStatus);
+
+    const sql = `UPDATE users SET is_deleted = ? WHERE id = ?`;
+
+    const [updatePatient] = await conn.query(sql, [activeStatus, patient_id]);
+
+    res.status(200).send();
+
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+}
 
 exports.appointmentDetails = async (req, res) => {
   try {

@@ -577,7 +577,7 @@ exports.showPatientPayment = async (req, res) => {
       });
     }
 
-    const sql = `SELECT  profile_pictures.profile_picture,time_slots.doctor_id, time_slots.date AS slote_date, time_slots.start_time, time_slots.end_time, slot_bookings.slot_id, slot_bookings.patient_id, slot_bookings.booking_date AS payment_date, payments.payment_amount, users.fname, users.lname, users.email, users.gender, users.phone, users.city, users.dob, users.address, patient_details.blood_group
+    const sql = `SELECT payments.is_refunded, profile_pictures.profile_picture,time_slots.doctor_id, time_slots.date AS slote_date, time_slots.start_time, time_slots.end_time, slot_bookings.slot_id, slot_bookings.patient_id, slot_bookings.booking_date AS payment_date, payments.payment_amount, users.fname, users.lname, users.email, users.gender, users.phone, users.city, users.dob, users.address, patient_details.blood_group
     FROM time_slots
     LEFT JOIN slot_bookings ON time_slots.id = slot_bookings.slot_id
     LEFT JOIN payments ON time_slots.id = payments.slot_id
