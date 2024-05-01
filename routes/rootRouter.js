@@ -1,11 +1,11 @@
 const express = require('express');
-const router = express.Router();
 const authRouter = require('./authRouter')
 const doctorRouter = require('./doctorRouter')
 const adminRouter = require('./adminRouter')
 const patientRouter = require('./patientRouter');
 const { getCityCombo, allSpecialities } = require('../controllers/doctorController');
 
+const router = express.Router();
 router.use("/", authRouter);
 router.use("/doctor", doctorRouter);
 router.use('/admin', adminRouter);

@@ -20,7 +20,6 @@ const {
   forgotPassLink,
   createPasswordForm,
   updatePassword,
-  allDoctors,
   contactUsHomePage,
 } = require("../controllers/authController");
 
