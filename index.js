@@ -5,7 +5,6 @@ const { Server } = require("socket.io");
 const path = require("path");
 const fs=require('fs');
 const logger = require("./utils/pino");
-const fs = require("fs");
 require("dotenv").config();
 
 const PORT = process.env.PORT;

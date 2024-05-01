@@ -6,13 +6,9 @@ const fileUpload = multer({ storage: fileStorage,fileFilter:fileFilter });
 const imgUpload = multer({ storage: imgStorage,fileFilter:imageFilter });
 const { isPatient } = require("../middlewares/authMiddleware");
 const passport = require("passport");
-const { isPatient } = require("../middlewares/authMiddleware");
-const { imgStorage, fileStorage } = require("../utils/multer");
 
 
-const imgUpload = multer({ storage: imgStorage });
-const fileUpload = multer({ storage: fileStorage });
-const router = express.Router();
+
 
 const {
   patientProfile,
