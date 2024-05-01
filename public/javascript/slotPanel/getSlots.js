@@ -50,10 +50,13 @@ const getSlots = async (date) => {
     // start time
     element.start_time = new Date(element.start_time).getTime();
     element.start_time -= (timezoneOffset * 60 * 1000);
+    const checkStartTime = ((element.start_time - new Date().getTime()) / (1000 * 60 * 60))
     element.start_time = new Date(element.start_time).toLocaleTimeString();
     // end time
     element.end_time = new Date(element.end_time).getTime();
     element.end_time -= (timezoneOffset * 60 * 1000);
+    const checkEndTime = ((element.end_time - new Date().getTime()) / (1000 * 60 * 60))
+    console.log(checkEndTime);
     element.end_time = new Date(element.end_time).toLocaleTimeString();
     table.innerHTML += `
       <tr>
@@ -61,13 +64,14 @@ const getSlots = async (date) => {
         <td>${element.end_time}</td>
         <td>${element.patient_name ? element.patient_name : "-"}</td>
         <td>${element.phone ? element.phone : "-"}</td>
-        <td>${!element.is_canceled ? `<input type="button" value="Delete" onclick='openDeleteModal(${JSON.stringify(element)})' />` : `Closed/Canceled`}</td>
+        <td>${!element.is_canceled && checkEndTime > 0 ? `<input type="button" value="Delete" onclick='openDeleteModal(${JSON.stringify(element)},${checkStartTime})' />` : `Closed/Canceled`}</td>
       </tr>
     `
   });
 }
 
-const openDeleteModal = async (element) => {
+const openDeleteModal = async (element,time) => {
+  if(time <= 2) return Swal.fire("You can not delete slot before 2 hours");
   Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
@@ -85,7 +89,7 @@ const openDeleteModal = async (element) => {
       }).then((result) => {
         if (result.isConfirmed) {
           socket.emit(`delete-slot`, element);
-          window.location.href = `/doctor/delete/${element.id}`; 
+          // window.location.href = `/doctor/delete/${element.id}`; 
         }
       })
     }
