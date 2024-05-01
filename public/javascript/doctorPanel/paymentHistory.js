@@ -15,7 +15,6 @@ let pageno = document.getElementById("pageno");
 
 async function fetchPaymentHistory() {
   try {
-
     const url = `/doctor/payment/history`;
     const response = await fetch(url,{
       method:"POST",
