@@ -1,6 +1,7 @@
 const conn = require('../config/dbConnection')
 const logger = require('../utils/pino')
 
+
 exports.patientDashboard = async (req, res) => {
   try {
     let html = await this.specialitiesCombo();

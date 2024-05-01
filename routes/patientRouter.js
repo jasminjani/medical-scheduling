@@ -6,6 +6,14 @@ const fileUpload = multer({ storage: fileStorage,fileFilter:fileFilter });
 const imgUpload = multer({ storage: imgStorage,fileFilter:imageFilter });
 const { isPatient } = require("../middlewares/authMiddleware");
 const passport = require("passport");
+const { isPatient } = require("../middlewares/authMiddleware");
+const { imgStorage, fileStorage } = require("../utils/multer");
+
+
+const imgUpload = multer({ storage: imgStorage });
+const fileUpload = multer({ storage: fileStorage });
+const router = express.Router();
+
 const {
   patientProfile,
   patientPastProfile,
@@ -44,11 +52,23 @@ const {
 } = require("../controllers/doctorController");
 const { allDoctors, updateNotification } = require("../controllers/authController");
 const { generatePDF } = require("../controllers/pdfController");
+
+
 // Patients panel details(patientAllControllers)
 router.use(
   passport.authenticate("jwt", { session: false, failureRedirect: "/login" }),
   isPatient
 );
+
+
+// patient Dashboard
+// /patient route 
+router.route("/").get(patientDashboard);
+
+// /patient/analytics
+router.route("/analytics").get(patientStatus);
+
+
 // /patientUpcomingSlots
 router.route("/upcomingSlots").get(patientProfile);
 
@@ -85,11 +105,7 @@ router.route("/doctors/all").get(allDoctors);
 // /getPendingDoctor
 router.route("/doctor/pending").post(getPendingDoctorById);
 
-// /patient route
-router.route("/").get(patientDashboard);
 
-// /patient-status/:id
-router.route("/analytics").get(patientStatus);
 
 // /patient-details
 router.route("/details").post(patientDetails);
