@@ -238,7 +238,7 @@ fetchUpdateData()
 
 const postUpdateData = async () => {
 
-  if (validate()) {
+  if (validate() && await specialitiesValidation()) {
     let doctor_details_id = document.getElementById("doctor_details_id").value
     let hospital_id = document.getElementById("hospital_id").value
     let qualification = document.getElementById("qualification").value
@@ -249,6 +249,7 @@ const postUpdateData = async () => {
     let gst_no = document.getElementById("gst").value
     let city = document.getElementById("city").value
     let pincode = document.getElementById("pincode").value
+    let otherSpeciality = document.getElementById('otherSpeciality').value;
 
 
     let fetchData = await fetch("/patient/updateBecomeDoctorDetails", {
@@ -256,7 +257,7 @@ const postUpdateData = async () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ "doctor_details_id": doctor_details_id, "hospital_id": hospital_id, "qualification": qualification, "consultancy_fees": consultancy_fees, "speciality_id": speciality_id, "hospital_name": hospital_name, "address": address, "gst_no": gst_no, "city": city, "pincode": pincode })
+      body: JSON.stringify({ "otherSpeciality": otherSpeciality,"doctor_details_id": doctor_details_id, "hospital_id": hospital_id, "qualification": qualification, "consultancy_fees": consultancy_fees, "speciality_id": speciality_id, "hospital_name": hospital_name, "address": address, "gst_no": gst_no, "city": city, "pincode": pincode })
     })
 
     const { success } = await fetchData.json()

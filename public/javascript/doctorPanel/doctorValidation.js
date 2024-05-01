@@ -1,3 +1,59 @@
+async function specialitiesValidation() {
+
+  let isValid = true;
+  let otherSpeciality_id;
+
+  const fetchData = await fetch("/specialities");
+  const specialities = await fetchData.json();
+
+  await specialities.forEach(element => {
+    if (element.speciality.toLowerCase() == "other") {
+      otherSpeciality_id = element.speciality_id
+    }
+  })
+
+  if (document.getElementById('speciality').value == otherSpeciality_id) {
+
+    let newSpeciality = document.getElementById('otherSpeciality');
+
+    if (newSpeciality.value.trim() === "") {
+      let p = document.createElement("p");
+      newSpeciality.insertAdjacentElement("afterend", p);
+      p.innerHTML = "*required";
+      p.classList.add("validated");
+      p.style.color = "red";
+      p.style.margin = "0";
+      p.style.fontSize = "12px";
+      isValid = false;
+    }
+
+    await specialities.forEach(Element => {
+      if (Element.speciality.toLowerCase() == newSpeciality.value.toLowerCase()) {
+        let p = document.createElement("p");
+        newSpeciality.insertAdjacentElement("afterend", p);
+        p.innerHTML = "speciality already exist";
+        p.classList.add("validated");
+        p.style.color = "red";
+        p.style.margin = "0";
+        p.style.fontSize = "12px";
+        isValid = false;
+      }
+    })
+
+    // let newSpeciality = document.getElementById('otherSpeciality').value;
+    // const fetchData = await fetch("/specialities");
+    // const specialities = await fetchData.json();
+    // if (speciality == 24 ) {
+    //   specialities.forEach(Element => {
+    //     console.log("specialitie : ",Element.speciality);
+    //     if (Element.speciality == newSpeciality) { console.log("speciality already exist"); }
+    //   })
+    // }
+  }
+
+  return isValid;
+}
+
 function validate() {
   let isvalid = true;
 
@@ -75,7 +131,7 @@ function validate() {
 }
 
 const postData = async () => {
-  if (validate()) {
+  if (validate() && await specialitiesValidation()) {
     let id = document.getElementById("id").value;
     let hospital_id = document.getElementById("hospital_id").value;
     let doctor_id = document.getElementById("doctor_id").value;
@@ -96,6 +152,7 @@ const postData = async () => {
     let speciality = document.getElementById("speciality").value;
     let pincode = document.getElementById("pincode").value;
     let gender = male.checked ? male.value : female.value;
+    let otherSpeciality = document.getElementById('otherSpeciality').value;
     const formData = new FormData();
     formData.append("doctor_id", doctor_id);
     formData.append("hospital_id", hospital_id);
@@ -115,6 +172,7 @@ const postData = async () => {
     formData.append("gst_no", gstno);
     formData.append("location", location);
     formData.append("pincode", pincode);
+    formData.append("otherSpeciality",otherSpeciality);
     let fetchData = await fetch("/doctor/profile/update", {
       method: "POST",
       body: formData,

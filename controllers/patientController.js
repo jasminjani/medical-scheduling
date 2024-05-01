@@ -917,8 +917,9 @@ exports.updateBecomeDoctorData = async (req, res) => {
 
 
 exports.updatePostBecomeDoctor = async (req, res) => {
+  // console.log("kya hal chal");
 
-  const { doctor_details_id, hospital_id, qualification, consultancy_fees, speciality_id, hospital_name, address, gst_no, city, pincode } = req.body
+  let { otherSpeciality, doctor_details_id, hospital_id, qualification, consultancy_fees, speciality_id, hospital_name, address, gst_no, city, pincode } = req.body
   const doctor_id = req.user.id
 
   if (!hospital_id || !speciality_id || !doctor_id) {
@@ -938,6 +939,24 @@ exports.updatePostBecomeDoctor = async (req, res) => {
         success: false,
         message: error.message,
       });
+    }
+
+    if (otherSpeciality) {
+      console.log("inside other speciality");
+      try {
+        const [newSpeciality] = await conn.query(
+          `INSERT INTO specialities (speciality, approved) VALUES (?,?)`,
+          [otherSpeciality, 0]
+        );
+
+        speciality_id = newSpeciality.insertId;
+
+      } catch (error) {
+        return res.status(500).json({
+          success: false,
+          message: error.message,
+        });
+      }
     }
 
     try {

@@ -5,7 +5,10 @@
         const data = await fetchData.json()
         data.forEach(element => {
           document.getElementById("speciality").innerHTML += `
-          <option value=${element["speciality_id"]}>${element["speciality"]}</option>`
+          <option value=${element["speciality_id"]}>${element["speciality"]}</option>`;
+          if (element["speciality"].toLowerCase() == "other") {
+            otherSpeciality_id = element["speciality_id"];
+          }
         });
       }
  
