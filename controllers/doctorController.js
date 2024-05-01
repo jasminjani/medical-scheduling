@@ -678,6 +678,7 @@ exports.updateDoctorDetails = async (req, res) => {
   //doctor_id get token
   let doctor_id = req.user.id;
   const {
+    otherSpeciality,
     fname,
     lname,
     dob,
@@ -747,6 +748,24 @@ exports.updateDoctorDetails = async (req, res) => {
         success: false,
         message: error.message,
       });
+    }
+
+    if (otherSpeciality) {
+      
+      try {
+        const [newSpeciality] = await conn.query(
+          `INSERT INTO specialities (speciality, approved) VALUES (?,?)`,
+          [otherSpeciality, 0]
+        );
+
+        speciality = newSpeciality.insertId;
+
+      } catch (error) {
+        return res.status(500).json({
+          success: false,
+          message: error.message,
+        });
+      }
     }
 
     try {
