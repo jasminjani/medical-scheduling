@@ -97,7 +97,7 @@ exports.dashBoardCount = async (req, res) => {
   let doctor_id = req.user.id;
   try {
     let [result] = await conn.query(
-      `select sum(payment_amount) as revenue, count(patient_id) as patient, count(slot_id) as slot from payments where doctor_id = ? and is_refunded = ?;`,
+      `select sum(payment_amount) as revenue, count(distinct patient_id) as patient, count(slot_id) as slot from payments where doctor_id = ? and is_refunded = ?;`,
       [doctor_id, 0]
     );
     res.json(result);
@@ -183,7 +183,9 @@ exports.dashBoardTodayAppointments = async (req, res) => {
     join time_slots on time_slots.id=slot_bookings.slot_id
     join users as users_patient on slot_bookings.patient_id=users_patient.id
     left join prescriptions on prescriptions.booking_id=slot_bookings.id
-    where time_slots.doctor_id=? && time_slots.date=curdate() && prescriptions.id is null && slot_bookings.is_canceled = 0 && slot_bookings.is_deleted=0`,
+    where time_slots.doctor_id=? && time_slots.date=curdate() &&
+    timestampdiff(minute,utc_timestamp,time_slots.start_time)>0
+    && prescriptions.id is null && slot_bookings.is_canceled = 0 && slot_bookings.is_deleted=0`,
       [doctor_id]
     );
 
@@ -358,7 +360,7 @@ exports.getPendingDoctorById = async (req, res) => {
 
 exports.getCityCombo = async (req, res) => {
   try {
-    const [result] = await conn.query(`select * from cities order by city`);
+    const [result] = await conn.query(`select city from cities order by city`);
     res.json(result);
   } catch (error) {
     logger.error(error.message);
@@ -577,7 +579,7 @@ exports.showPatientPayment = async (req, res) => {
       });
     }
 
-    const sql = `SELECT  profile_pictures.profile_picture,time_slots.doctor_id, time_slots.date AS slote_date, time_slots.start_time, time_slots.end_time, slot_bookings.slot_id, slot_bookings.patient_id, slot_bookings.booking_date AS payment_date, payments.payment_amount, users.fname, users.lname, users.email, users.gender, users.phone, users.city, users.dob, users.address, patient_details.blood_group
+    const sql = `SELECT payments.is_refunded, profile_pictures.profile_picture,time_slots.doctor_id, time_slots.date AS slote_date, time_slots.start_time, time_slots.end_time, slot_bookings.slot_id, slot_bookings.patient_id, slot_bookings.booking_date AS payment_date, payments.payment_amount, users.fname, users.lname, users.email, users.gender, users.phone, users.city, users.dob, users.address, patient_details.blood_group
     FROM time_slots
     LEFT JOIN slot_bookings ON time_slots.id = slot_bookings.slot_id
     LEFT JOIN payments ON time_slots.id = payments.slot_id
@@ -676,6 +678,7 @@ exports.updateDoctorDetails = async (req, res) => {
   //doctor_id get token
   let doctor_id = req.user.id;
   const {
+    otherSpeciality,
     fname,
     lname,
     dob,
@@ -745,6 +748,24 @@ exports.updateDoctorDetails = async (req, res) => {
         success: false,
         message: error.message,
       });
+    }
+
+    if (otherSpeciality) {
+      
+      try {
+        const [newSpeciality] = await conn.query(
+          `INSERT INTO specialities (speciality, approved) VALUES (?,?)`,
+          [otherSpeciality, 0]
+        );
+
+        speciality = newSpeciality.insertId;
+
+      } catch (error) {
+        return res.status(500).json({
+          success: false,
+          message: error.message,
+        });
+      }
     }
 
     try {
@@ -1073,20 +1094,6 @@ exports.createSlots = async (req, res) => {
             const start_time = slot[0].trim();
             const end_time = slot[1].trim();
 
-            // try {
-            //   const query =
-            //     "select * from time_slots where doctor_id = ? and date = ? and end_time <= ?";
-
-            //   const [isValid] = await conn.query(query, [
-            //     doctor_id,
-            //     dayArray[i][0],
-            //     start_time,
-            //   ]);
-            // } catch (error) {
-            //   return res
-            //     .status(500)
-            //     .json({ success: false, message: error.message });
-            // }
 
             try {
               const query =

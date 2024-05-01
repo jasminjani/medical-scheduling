@@ -66,6 +66,7 @@ exports.getDoctorDetails = async (req, res) => {
       return acc;
     }, {}))
 
+    result.sort((a,b)=> Number(b.rating ) - Number(a.rating))
     // logger.info(result)
     return res.json({
       success: true,
@@ -313,8 +314,6 @@ exports.createUser = async (req, res) => {
       });
     }
 
-    result[0].activation_token = verification_token;
-
     return res.json({
       success: true,
       user: result[0],
@@ -402,7 +401,7 @@ exports.login = async (req, res) => {
       };
 
       // remove password from the user obj
-      let { password: _, created_at, deleted_at, updated_at, is_active, token_created_at, is_deleted, activation_token, ...newObj } = result[0];
+      let { password:_, created_at, deleted_at, updated_at, is_active, token_created_at, is_deleted, activation_token, ...newObj } = result[0];
       // generate token
       let token = jwt.sign(payload, process.env.JWT_SECRET, {
         expiresIn: "1d",
@@ -442,80 +441,6 @@ exports.login = async (req, res) => {
         message: "Incorrect Email or Password",
       });
     }
-  } catch (error) {
-    logger.error(error.message);
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
-  }
-};
-
-// get => /user , get all deleted or not deleted user
-exports.getAllUser = async (req, res) => {
-  try {
-    // execute query for get all users
-    let result;
-    try {
-      let sql = "select * from users order by id;";
-      [result] = await conn.query(sql);
-    } catch (error) {
-      return res.status(500).json({
-        success: false,
-        message: "Internal server Error",
-      });
-    }
-
-    // user present the return res
-    return res.json({
-      success: true,
-      users: result,
-    });
-  } catch (error) {
-    logger.error(error.message);
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
-  }
-};
-
-// get => /user/:id
-exports.getUserById = async (req, res) => {
-  try {
-    // get userid from the params
-    let id = req.params.id;
-
-    let result;
-    // executer the query
-    try {
-      let sql = "select * from users where id=?";
-      [result] = await conn.query(sql, [id]);
-    } catch (error) {
-      return res.status(500).json({
-        success: false,
-        message: error.message,
-      });
-    }
-
-    // if user not found
-    if (result.length <= 0) {
-      return res.status(400).json({
-        success: false,
-        message: "User not found",
-      });
-    }
-
-    // user found
-
-    // remove password field from the user obj
-    let { password: _, ...newObj } = result[0];
-
-    // return res
-    return res.json({
-      success: true,
-      user: newObj,
-    });
   } catch (error) {
     logger.error(error.message);
     res.status(500).json({
@@ -967,3 +892,39 @@ exports.getCurrentUser = async (req, res) => {
     });
   }
 };
+
+
+exports.updateNotification = async(req,res)=>{
+  try {
+    let id = req.body.id;
+    let result;
+    try {
+      [result] = await conn.query("update notifications set status=1 where id =?",[id]);
+    } catch (error) {
+      logger.error(error);
+      return res.json({
+        success:false,
+        message:error.message
+      })
+    }
+
+    if(!result.affectedRows){
+      return res.json({
+        success:false,
+        message:"no row found for update"
+      })
+    }
+
+    return res.json({
+      success:true,
+      message:"notification updated successfully"
+    })
+
+  } catch (error) {
+    logger.error(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+}

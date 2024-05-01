@@ -319,8 +319,7 @@ exports.patientUpcomingBookings = async (req, res) => {
 
     try {
       const query =
-        `select time_slots.id,time_slots.doctor_id,slot_bookings.patient_id, slot_bookings.booking_date, time_slots.date,DAYNAME(time_slots.date) as day, time_slots.start_time,time_slots.end_time,users.fname, users.lname,users.email,users.phone,doctor_details.qualification, doctor_details.approved,doctor_details.consultancy_fees,clinic_hospitals.name, clinic_hospitals.location,clinic_hospitals.pincode,prescriptions.id as prescription_id from slot_bookings left join prescriptions on prescriptions.booking_id = slot_bookings.id inner join time_slots on slot_bookings.slot_id = time_slots.id inner join users on time_slots.doctor_id = users.id inner join doctor_details on time_slots.doctor_id = doctor_details.doctor_id inner join clinic_hospitals on doctor_details.hospital_id = clinic_hospitals.id  where slot_bookings.patient_id = ? and slot_bookings.is_canceled = ?  and timestampdiff(minute,utc_timestamp(),time_slots.start_time)>0 and
-         slot_bookings.is_deleted = ? and time_slots.date >= CAST(NOW() as DATE) order by time_slots.date`;
+        `select time_slots.id,time_slots.doctor_id,slot_bookings.patient_id, slot_bookings.booking_date, time_slots.date,DAYNAME(time_slots.date) as day, time_slots.start_time,time_slots.end_time,users.fname, users.lname,users.email,users.phone,doctor_details.qualification, doctor_details.approved,doctor_details.consultancy_fees,clinic_hospitals.name, clinic_hospitals.location,clinic_hospitals.pincode,prescriptions.id as prescription_id from slot_bookings left join prescriptions on prescriptions.booking_id = slot_bookings.id inner join time_slots on slot_bookings.slot_id = time_slots.id inner join users on time_slots.doctor_id = users.id inner join doctor_details on time_slots.doctor_id = doctor_details.doctor_id inner join clinic_hospitals on doctor_details.hospital_id = clinic_hospitals.id  where slot_bookings.patient_id = ? and slot_bookings.is_canceled = ?  and timestampdiff(minute,utc_timestamp(),time_slots.start_time)>0 and slot_bookings.is_deleted = ? and time_slots.date >= CAST(NOW() as DATE) order by time_slots.date`;
 
       let [data] = await conn.query(query, [patient_id, 0, 0]);
 
@@ -359,8 +358,8 @@ exports.patientPastBookings = async (req, res) => {
         inner join users on time_slots.doctor_id = users.id 
         inner join doctor_details on time_slots.doctor_id = doctor_details.doctor_id 
         inner join clinic_hospitals on doctor_details.hospital_id = clinic_hospitals.id  
-        where slot_bookings.patient_id = 12 and slot_bookings.is_canceled = 0 
-        and timestampdiff(minute,utc_timestamp(),time_slots.start_time)<0
+        where slot_bookings.patient_id = ? and slot_bookings.is_canceled = 0 
+        and timestampdiff(minute,utc_timestamp(),time_slots.start_time) < 0
         and slot_bookings.is_deleted = 0 and time_slots.date <= CAST(NOW() as DATE) 
         order by time_slots.date desc;`
 
@@ -592,6 +591,16 @@ exports.bookingSlot = async (req, res) => {
         slotId,
         paymentAmount,
       ]);
+
+      try {
+        await conn.query(`insert into notifications (user_id,message,type,start_at,end_at)
+        values 
+        (?,concat("Your appointment booked with"," ", (select concat(fname," ", lname) from users where id = ?)),"upcoming",
+        (select timestampadd(hour,-2,start_time)as start_at from time_slots where id=?),
+        (select start_time from time_slots where id = ?));`,[patientId,doctorId,slotId,slotId,slotId])
+      } catch (error) {
+        
+      }
 
       return res
         .status(200)
@@ -917,8 +926,9 @@ exports.updateBecomeDoctorData = async (req, res) => {
 
 
 exports.updatePostBecomeDoctor = async (req, res) => {
+  // console.log("kya hal chal");
 
-  const { doctor_details_id, hospital_id, qualification, consultancy_fees, speciality_id, hospital_name, address, gst_no, city, pincode } = req.body
+  let { otherSpeciality, doctor_details_id, hospital_id, qualification, consultancy_fees, speciality_id, hospital_name, address, gst_no, city, pincode } = req.body
   const doctor_id = req.user.id
 
   if (!hospital_id || !speciality_id || !doctor_id) {
@@ -938,6 +948,24 @@ exports.updatePostBecomeDoctor = async (req, res) => {
         success: false,
         message: error.message,
       });
+    }
+
+    if (otherSpeciality) {
+      console.log("inside other speciality");
+      try {
+        const [newSpeciality] = await conn.query(
+          `INSERT INTO specialities (speciality, approved) VALUES (?,?)`,
+          [otherSpeciality, 0]
+        );
+
+        speciality_id = newSpeciality.insertId;
+
+      } catch (error) {
+        return res.status(500).json({
+          success: false,
+          message: error.message,
+        });
+      }
     }
 
     try {

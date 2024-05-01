@@ -15,7 +15,7 @@
   <script src="/sweetalert2/sweetalert2.min.js"></script>
   <script src="/javascript/doctorPanel/fetchSpeciality.js" defer></script>
   <script src="/javascript/doctorPanel/fetchCity.js" defer></script>
-  <script src="/javascript/doctorPanel/doctorProfileUpdate.js" defer></script>
+  <script src="/javascript/doctorPanel/doctorProfileUpdate.js" de fer></script>
   <script src="/javascript/doctorPanel/doctorValidation.js" defer></script>
 
   <title>Edit Profile</title>
@@ -26,7 +26,7 @@
 <div class="center" id="loader"></div>
   <div class="a7-container">
     <%- include('../../common/newSidebar/doctorSidebar.ejs') %>
-      <div class="a7-main-profile a7-mr-300" style="margin-left: 300px;">
+      <div class="a7-main-profile a7-mr-300" style="margin-left: 280px;">
         <div class="a7-profile-section">
           <div class="a7-profile-title">
             <h1>Edit Profile Details</h1>
@@ -88,9 +88,10 @@
                     </div>
                     <div class="a7-field-inp">
                       <label for="">Speciality:</label>
-                      <select name="speciality" id="speciality" class="dvalid">
+                      <select name="speciality" id="speciality" class="dvalid" onchange="specialityChange()">
                         <option value="">--Select Speciality--</option>
                       </select>
+                      <input type="text" name="otherSpeciality" id="otherSpeciality" placeholder="Enetr New Speciality" style="display: none;">
                     </div>
                     <div class="a7-field-inp">
                       <label for="">Consultancy Fees:</label>

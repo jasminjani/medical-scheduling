@@ -37,7 +37,7 @@
 /* header section */
 
 .header {
-  padding: 10px 0;
+  padding: 5px 0;
   box-shadow: 0 0 10px black;
 }
 
@@ -49,9 +49,8 @@
 }
 
 .logo {
-  width: 50px;
-  height: 50px;
-  border: 1px solid rgb(187, 187, 187);
+  width: 85px;
+  height: 75px;
   border-radius: 50%;
 }
 
@@ -86,10 +85,12 @@ color: #244e6d;
   gap: 4px;
 }
 
-
+.user .name{
+  font-size: 19px;
+}
 .user .logo {
-  width: 35px;
-  height: 35px;
+  width: 58px;
+  height: 55px;
   border: 1px solid rgb(187, 187, 187);
   border-radius: 50%;
 }
@@ -369,7 +370,7 @@ color: #244e6d;
 
 .all-doctors .doctors {
   /* max-width: 600px; */
-  /* width: 100%; */
+  width: 100%;
   /* border:  1px solid black; */
   padding: 10px 20px;
 }
@@ -395,7 +396,7 @@ color: #244e6d;
 
 .cards {
   display: flex;
-  gap: 60px;
+  gap: 50px;
 }
 
 
