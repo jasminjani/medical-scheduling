@@ -18,7 +18,6 @@ const getUpcomingSlots = async () => {
   });
   const { success, data } = await response.json();
 
-
   totalPage = Math.ceil(data.length / limit);
 
   if (totalPage <= 1)
@@ -38,6 +37,7 @@ const getUpcomingSlots = async () => {
   data.slice((page - 1) * limit, page * limit).forEach((element) => {
     element.start_time = new Date(element.start_time).getTime();
     element.start_time -= (timezoneoffset * 60 * 1000);
+    const checkStartTime = ((element.start_time - new Date().getTime()) / (1000 * 60 * 60))
     element.start_time = new Date(element.start_time).toLocaleTimeString('en-US')
     console.log(element.start_time)
 
@@ -50,7 +50,7 @@ const getUpcomingSlots = async () => {
         <td>${element.day}</td>
         <td>${element.start_time}-${element.end_time}</td>
         <td><input type="button" value="Details" onclick='getDetails(${JSON.stringify(element)})'/></td>
-        <td><input type="button" value="Cancel" onclick='cancelSlot(${JSON.stringify(element)})'></td>
+        <td><input type="button" value="Cancel" onclick='cancelSlot(${JSON.stringify(element)},${checkStartTime})'></td>
       </tr>
     `;
   });
@@ -88,8 +88,8 @@ const end = () => {
   }
 };
 
-const cancelSlot = async (element) => {
-  console.log(element);
+const cancelSlot = async (element,time) => {
+  if(time <= 2) return Swal.fire("You can not cancel slot before 2 hours");
   Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
@@ -115,8 +115,6 @@ const cancelSlot = async (element) => {
 };
 
 const getDetails = async (data) => {
-
-
 
   const modal = document.getElementsByClassName("A3-modal")[0];
   modal.style.visibility = "visible";
