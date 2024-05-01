@@ -97,7 +97,7 @@ exports.dashBoardCount = async (req, res) => {
   let doctor_id = req.user.id;
   try {
     let [result] = await conn.query(
-      `select sum(payment_amount) as revenue, count(patient_id) as patient, count(slot_id) as slot from payments where doctor_id = ? and is_refunded = ?;`,
+      `select sum(payment_amount) as revenue, count(distinct patient_id) as patient, count(slot_id) as slot from payments where doctor_id = ? and is_refunded = ?;`,
       [doctor_id, 0]
     );
     res.json(result);
@@ -183,7 +183,9 @@ exports.dashBoardTodayAppointments = async (req, res) => {
     join time_slots on time_slots.id=slot_bookings.slot_id
     join users as users_patient on slot_bookings.patient_id=users_patient.id
     left join prescriptions on prescriptions.booking_id=slot_bookings.id
-    where time_slots.doctor_id=? && time_slots.date=curdate() && prescriptions.id is null && slot_bookings.is_canceled = 0 && slot_bookings.is_deleted=0`,
+    where time_slots.doctor_id=? && time_slots.date=curdate() &&
+    timestampdiff(minute,utc_timestamp,time_slots.start_time)>0
+    && prescriptions.id is null && slot_bookings.is_canceled = 0 && slot_bookings.is_deleted=0`,
       [doctor_id]
     );
 

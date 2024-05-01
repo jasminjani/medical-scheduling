@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const { imgStorage, fileStorage } = require("../utils/multer");
+const { imgStorage, fileStorage,imageFilter,fileFilter } = require("../utils/multer");
 const multer = require("multer");
-const fileUpload = multer({ storage: fileStorage });
-const imgUpload = multer({ storage: imgStorage });
+const fileUpload = multer({ storage: fileStorage,fileFilter:fileFilter });
+const imgUpload = multer({ storage: imgStorage,fileFilter:imageFilter });
 const { isPatient } = require("../middlewares/authMiddleware");
 const passport = require("passport");
 const {
@@ -42,7 +42,7 @@ const {
   getPrescriptionOfUser,
   getPendingDoctorById,
 } = require("../controllers/doctorController");
-const { allDoctors } = require("../controllers/authController");
+const { allDoctors, updateNotification } = require("../controllers/authController");
 const { generatePDF } = require("../controllers/pdfController");
 // Patients panel details(patientAllControllers)
 router.use(
@@ -136,6 +136,8 @@ router.route("/knowStatus").get(knowStatus)
 
 
 // for display patient near by doctor
-router.route("/getNearByDoctor").get(passport.authenticate('jwt', { session: false, failureRedirect: "/login" }), nearByDoctores);
+router.route("/getNearByDoctor").get(nearByDoctores);
+
+router.route("/notification").put(updateNotification)
 
 module.exports = router;

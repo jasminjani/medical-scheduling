@@ -337,25 +337,7 @@
   <script src="/javascript/auth/logout.js"></script>
   <script src="/javascript/carousel.js"></script>
   <script src="/socket.io/socket.io.js"></script>
-  <script>
-    const socket = io();
-    socket.on("connect", () => {
-      let userInfo = JSON.parse(localStorage.getItem('userinfo'));
-      if (userInfo && userInfo.id) {
-        socket.emit('reminder', userInfo.email);
-        socket.on(`reminder-${userInfo.email}`, (msg) => {
-          console.log(msg)
-        })
-        socket.on(`delete-slot-${userInfo.id}`, (msg) => {
-          Swal.fire("Your " + msg.date + " slot from " + msg.start_time + "-" + msg.end_time + " has been canceled" );
-        })
-        socket.on(`cancel-slot-${userInfo.id}`, (msg) => {
-          Swal.fire(msg.date + " slot from " + msg.start_time + "-" + msg.end_time + " has been canceled" );
-        })
-      }
-    });
-  </script>
-
+  <script src="/javascript/common/upcomingNotification.js"></script>
 <script>
   // show chat message
 let showBtn = document.getElementById('a2-show-window-btn');
