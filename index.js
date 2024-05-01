@@ -4,6 +4,7 @@ const app = express();
 const http = require("http");
 const { Server } = require("socket.io");
 const path = require("path");
+const fs=require('fs');
 const logger = require("./utils/pino");
 require("dotenv").config();
 
@@ -71,7 +72,7 @@ io.on("connection", (socket) => {
       socket.emit('pdfready',filename);
     }
     catch (error) {
-      console.log(error);
+      logger.error(error);
     }
   })
 
@@ -82,7 +83,7 @@ io.on("connection", (socket) => {
       socket.emit('pdfFile',{filename,file})
       }
     }catch(error){
-      console.log("error in downloading PDF",error);
+      logger.error("error in downloading PDF",error);
     }
   })
 
@@ -93,12 +94,12 @@ io.on("connection", (socket) => {
       }
     }
     catch(error){
-      console.log("error in deleting pdf",error);
+      logger.error("error in deleting pdf",error);
     }
   })
 
   socket.on("disconnect", () => {
-    console.log("A user disconnected");
+    logger.info("A user disconnected");
   });
 
 });
