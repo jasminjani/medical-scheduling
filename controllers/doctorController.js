@@ -358,7 +358,7 @@ exports.getPendingDoctorById = async (req, res) => {
 
 exports.getCityCombo = async (req, res) => {
   try {
-    const [result] = await conn.query(`select * from cities order by city`);
+    const [result] = await conn.query(`select city from cities order by city`);
     res.json(result);
   } catch (error) {
     logger.error(error.message);
@@ -1073,20 +1073,6 @@ exports.createSlots = async (req, res) => {
             const start_time = slot[0].trim();
             const end_time = slot[1].trim();
 
-            // try {
-            //   const query =
-            //     "select * from time_slots where doctor_id = ? and date = ? and end_time <= ?";
-
-            //   const [isValid] = await conn.query(query, [
-            //     doctor_id,
-            //     dayArray[i][0],
-            //     start_time,
-            //   ]);
-            // } catch (error) {
-            //   return res
-            //     .status(500)
-            //     .json({ success: false, message: error.message });
-            // }
 
             try {
               const query =
