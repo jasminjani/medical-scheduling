@@ -35,8 +35,6 @@ for (let i = 1; i < sortedSlots.length; i++) {
   return true;
 }
 
-
-
 const handleChange = (e) => {
   if (new Date(e.target.value) > sunday || new Date(e.target.value) < today + 1) {
     e.target.value = "";
@@ -61,6 +59,7 @@ const handleInput = (times, i) => {
       let [hours, minutes] = startTime.split(":").map(Number);
       minutes += Number(slotGap);
       hours += Math.floor(minutes / 60);
+      hours = hours % 24;
       minutes = minutes % 60;
       const endTime = hours.toString().padStart(2, "0") + ":" + minutes.toString().padStart(2, "0");
       e.target.value += "-" + endTime;
@@ -131,6 +130,7 @@ const handleGenerate = async (e) => {
       icon:'warning',
     })
   }
+  
   const isValid = slotData.every((daySlot) => checkSlotOverlap(daySlot));
 
   if (isValid) {
