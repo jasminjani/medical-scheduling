@@ -15,7 +15,7 @@ const getPastSlots = async () => {
     }
   });
 
-  const { success, message } = await response.json();
+  const {success, message } = await response.json();
   // console.log(message)
   totalPage = Math.ceil(message.length / limit);
 
@@ -46,19 +46,9 @@ const getPastSlots = async () => {
         <td>${element.day}</td>
         <td>${element.start_time}-${element.end_time}</td>
         <td><input type="button" value="Details" onclick='getDetails(${JSON.stringify(element)})'></td>
-        <td><input type="button" value="Get PDF" onclick="generatePDF(${element.prescription_id})"></td>
-      </tr>`;
-
-    } else {
-      table.innerHTML += `
-      <tr>
-        <td>${element.date}</td>
-        <td>${element.day}</td>
-        <td>${element.start_time}-${element.end_time}</td>
-        <td><input type="button" value="Details" onclick='getDetails(${JSON.stringify(element)})'></td>
-        <td><input type="button" value="Not Visited" ></td>
-      </tr>`;
-    }
+        <td>${element.prescription_id !== null ? `<input type="button" value="Get PDF" onclick="generatePDF(${element.prescription_id})">` : `-`}</td>
+      </tr>
+    `
   });
 }
 

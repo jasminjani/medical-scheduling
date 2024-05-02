@@ -2,9 +2,7 @@ let date = document.getElementById("date");
 let appointments = document.getElementById("appointments");
 let slotBook = document.getElementById("slotBook");
 
-
 // const socket = io();
-
 // delete booked slot from dropdown which  is booked by other during single user check the slot
 socket.on('madechanges', () => {
   getSlots();
@@ -47,7 +45,7 @@ slotBook.addEventListener("click", async (e) => {
     let doctors = JSON.parse(localStorage.getItem('doctors'))
     let doctorId = document.getElementById('did').value;
 
-    let fees = doctors.filter((doctor) => doctor.id = doctorId)[0].consultancy_fees;
+    let fees = doctors.filter((doctor) => doctor.id == doctorId)[0].consultancy_fees;
 
     let selectedSlotId = appointments.options.selectedIndex;
     let slotId = appointments.children[selectedSlotId].dataset.sid;
@@ -114,15 +112,16 @@ slotBook.addEventListener("click", async (e) => {
         if (d.success) {
           // make message for change slot
           socket.emit('changeslot')
+          socket.emit('notification',userInfo.email)
+          Swal.fire("Payment Done!", "Your Slot is Booked", "success").then(
+            (result) => {
+              if (result.isConfirmed) {
+                window.location.reload();
+              }
+            }
+          );
         }
 
-        Swal.fire("Payment Done!", "Your Slot is Booked", "success").then(
-          (result) => {
-            if (result.isConfirmed) {
-              window.location.reload();
-            }
-          }
-        );
         // window.location.reload()
       }
     });
@@ -185,10 +184,25 @@ appointments.addEventListener("change", async (e) => {
   appointments.children[0].setAttribute("disabled", "true");
 });
 
+const getDoctors = async () => {
+  try {
+    let data = await fetch("/alldoctors", {
+      method: "GET",
+    });
+    data = await data.json();
+    data = data.data;
+
+    localStorage.setItem("doctors", JSON.stringify(data));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const getDoctorData = async () => {
   let id = window.location.pathname.split("/");
   id = Number(id[id.length - 1]);
   if (!isNaN(id)) {
+    await getDoctors();
     let doctors = JSON.parse(localStorage.getItem("doctors") || "[]");
     let doctor = doctors.filter((doctor) => doctor.id === id)[0];
 

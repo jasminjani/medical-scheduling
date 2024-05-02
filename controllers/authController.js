@@ -343,7 +343,7 @@ exports.login = async (req, res) => {
     // execute the query to find user in DB by email
     let result;
     try {
-      let sql = "select * from users where email=? and is_active=1";
+      let sql = "select * from users where email=? and is_active=1 AND is_deleted = 0";
       [result] = await conn.query(sql, [email]);
     } catch (error) {
       return res.status(500).json({
@@ -565,7 +565,7 @@ exports.activationAccount = async (req, res) => {
     let diff = new Date(Date.now()) - new Date(result[0].token_created_at);
     let mins = Math.floor((diff % 86400000) / 60000); // minutes
 
-    if (mins > 30) {
+    if (mins > 1) {
       let html = ` <div class="success-page">
       <div>
         <img src="/assets/linkExpire.png" alt="Verification link has been expired!">

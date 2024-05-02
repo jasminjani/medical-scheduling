@@ -50,7 +50,7 @@ searchBtn.addEventListener('keyup', function (event) {
     if (event.key === 'Enter') {
       searchPatientPayment();
     }
-  } catch (e) { console.log(e); }
+  } catch (error) { console.log(error); }
 });
 
 // ====== FUNCTION FOR DIFFRENCIATE SUCCESS AND REFUND PAYMENT =======
@@ -144,7 +144,7 @@ const pagination = async () => {
     let start_time = new Date(element.start_time).getTime();
     start_time -= (timezoneoffset * 60 * 1000);
     start_time = new Date(start_time).toLocaleTimeString('en-US')
-    console.log(start_time)
+    // console.log(start_time)
 
     let end_time = new Date(element.end_time).getTime();
     end_time -= (timezoneoffset * 60 * 1000);

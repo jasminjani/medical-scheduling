@@ -5,11 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Patient Payment History</title>
-    <!-- PAGGINATION CSS -->
-    <link rel="stylesheet" href="/css/Pagination/paginationComp.css" />
-   <link rel="stylesheet" href="/css/homepage.css" />
-       <link rel="stylesheet" href="/css/loaderComponent.css">
-      <script src="/javascript/loaderComponent.js"></script>
+  <!-- PAGGINATION CSS -->
+  <link rel="stylesheet" href="/css/Pagination/paginationComp.css" />
+  <link rel="stylesheet" href="/css/homepage.css" />
+  <link rel="stylesheet" href="/css/loaderComponent.css">
+  <script src="/javascript/loaderComponent.js"></script>
   <!-- CSS for Sidebar -->
   <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
@@ -36,76 +36,74 @@
 
 <body onload="fetchPatientPayment()">
   <div class="center" id="loader"></div>
-      <%- include(`../../common/newSidebar/patientNav.ejs`) %>
-  <div class="a5-container">
+  <%- include(`../../common/newSidebar/patientNav.ejs`) %>
+    <div class="a5-container">
 
-    <div class="a5-main-container">
-      <div class="a5-inner-container" style="max-width: 1000px;  margin: 0 auto;">
-        <div class="a5-inner-section">
+      <div class="a5-main-container">
+        <div class="a5-inner-container" style="max-width: 1000px;  margin: 0 auto;">
+          <div class="a5-inner-section">
 
-          <div class="a5-search">
-            <div class="a5-searchbox">
-              <img src="/assets/adminPanel/icons/search.svg" alt="">
-              <input type="text" name="searchUser" id="a5-searchPatient" placeholder="Search" tabindex="1">
-            </div>
-            <p id="a5-btn-search" onclick="searchPatientPayment()" on tabindex="2">Search</p>
-          </div>
-        </div>
-
-        <div class="a5-all-user">
-          <div class="A4-Pagination-component a5-pagination-center">
-            <div class="home"><button id="homebtn">
-                << </button>
-            </div>
-            <div class="previous"><button id="previousbtn">
-                < </button>
-            </div>
-            <div class="pagenumber">
-              <p id="pageno">1</p>
-            </div>
-            <div class="next"><button id="nextbtn">></button></div>
-            <div class="end"><button id="endbtn">>></button></div>
-          </div>
-        </div>
-
-
-        <div class="a5-all-user">
-          <div class="table-heading">
-
-            <h2>Payment History</h2>
-            <div class="combo-box">Status :
-              <select name="status" id="paymentStatus" onchange="changeStatus()">
-                <option value="0" selected>Success</option>
-                <option value="1">Refund</option>
-              </select>
+            <div class="a5-search">
+              <div class="a5-searchbox">
+                <img src="/assets/adminPanel/icons/search.svg" alt="">
+                <input type="text" name="searchUser" id="a5-searchPatient" placeholder="Search" tabindex="1">
+              </div>
+              <p id="a5-btn-search" onclick="searchPatientPayment()" on tabindex="2">Search</p>
             </div>
           </div>
 
-          <div class="a5-user-table">
-
-            <table id="a5-user-table">
-              <tr>
-                <th>Sr no.</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Date</th>
-                <th>Appointment time</th>
-                <th>Amount</th>
-              </tr>
-              <tbody id="a5-tbody">
-
-              </tbody>
-            </table>
-
+          <div class="a5-all-user">
+            <div class="A4-Pagination-component a5-pagination-center">
+              <div class="home"><button id="homebtn"> << </button>
+              </div>
+              <div class="previous"><button id="previousbtn"> < </button>
+              </div>
+              <div class="pagenumber">
+                <p id="pageno">1</p>
+              </div>
+              <div class="next"><button id="nextbtn">></button></div>
+              <div class="end"><button id="endbtn">>></button></div>
+            </div>
           </div>
 
+
+          <div class="a5-all-user">
+            <div class="table-heading">
+
+              <h2>Payment History</h2>
+              <div class="combo-box">Status :
+                <select name="status" id="paymentStatus" onchange="changeStatus()">
+                  <option value="0" selected>Success</option>
+                  <option value="1">Refund</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="a5-user-table">
+
+              <table id="a5-user-table">
+                <tr>
+                  <th>Sr no.</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Date</th>
+                  <th>Appointment time</th>
+                  <th>Amount</th>
+                </tr>
+                <tbody id="a5-tbody">
+
+                </tbody>
+              </table>
+
+            </div>
+
+          </div>
         </div>
       </div>
+
     </div>
 
-  </div>
-
-  </div>
+    </div>
 
 
 </body>

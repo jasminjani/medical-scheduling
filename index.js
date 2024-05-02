@@ -57,23 +57,32 @@ io.on("connection", (socket) => {
       //   && slot_bookings.is_canceled = 0 && slot_bookings.is_deleted=0;`);
     } catch (error) {
       logger.error(error);
-      console.log(error);
+      // console.log(error);
     }
 
     result.forEach((data) => {
+      console.log(data);
       socket.emit(`reminder-${data.email}`, data);
     });
   });
 
-  socket.on("notification", async (email) => {
+  socket.on("notification", async (user) => {
     let [data] = await conn.query(
-      `select * from notifications where user_id = (select id from users where email = ?) and date(end_at)= curdate() and 
-    timestampdiff(second,utc_timestamp,end_at)>0`,
-      [email]
+      `select * from notifications where user_id = ? and (date(end_at)= curdate() or 
+    timestampdiff(second,utc_timestamp,end_at)>0)`,
+      [user.id]
     );
-
-    socket.emit(`notification-${email}`, data);
+    socket.emit(`notification-${user.email}`, data.sort((a,b)=> new Date(b.end_at).getTime() - new Date(a.end_at).getTime()));
   });
+
+  socket.on("delete-slot", (msg) => {
+    msg ? io.emit(`delete-slot-${msg.patient_id}`, msg) : 0;
+  });
+
+  socket.on("cancel-slot", (msg) => {
+    msg ? io.emit(`cancel-slot-${msg.doctor_id}`, msg) : 0;
+  });
+
   // user req for change slot
   socket.on("changeslot", () => {
     socket.broadcast.emit("madechanges");
@@ -112,7 +121,8 @@ io.on("connection", (socket) => {
         const file = fs.unlinkSync(`uploads/pdfs/${filename}`);
       }
     } catch (error) {
-      console.log("error in deleting pdf", error);
+      // console.log("error in deleting pdf", error);
+      logger.error("error in deleting pdf", error);
     }
   });
 

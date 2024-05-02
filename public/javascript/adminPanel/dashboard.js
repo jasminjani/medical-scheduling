@@ -65,6 +65,7 @@ const putDoctorOnScreen = async (data) => {
   // if cards div has j-c : center then make it fs
   cards.style.justifyContent = "start";
   cards.innerHTML = card;
+  carousel();
 };
 
 getDoctors();

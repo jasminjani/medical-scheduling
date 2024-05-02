@@ -466,8 +466,8 @@ exports.updatePatient = async (req, res) => {
       activeStatus = 0;
     }
 
-    console.log("patient id ", patient_id);
-    console.log("status  ", activeStatus);
+    // console.log("patient id ", patient_id);
+    // console.log("status  ", activeStatus);
 
     const sql = `UPDATE users SET is_deleted = ? WHERE id = ?`;
 
@@ -495,16 +495,19 @@ exports.appointmentDetails = async (req, res) => {
       });
     }
 
-    const sql3 = `SELECT slot_bookings.patient_id, users.fname, users.lname, slot_bookings.slot_id, time_slots.doctor_id, specialities.speciality, clinic_hospitals.name, time_slots.date, payments.payment_amount, payments.is_refunded, time_slots.start_time, time_slots.end_time, prescriptions.prescription, prescriptions.diagnoses 
-    FROM slot_bookings JOIN time_slots ON slot_bookings.slot_id = time_slots.id 
-    LEFT JOIN doctor_has_specialities ON time_slots.doctor_id = doctor_has_specialities.doctor_id 
-    LEFT JOIN specialities ON doctor_has_specialities.speciality_id = specialities.id 
-    LEFT JOIN doctor_details ON time_slots.doctor_id = doctor_details.doctor_id 
-    LEFT JOIN clinic_hospitals ON doctor_details.hospital_id = clinic_hospitals.id 
-    LEFT JOIN users ON time_slots.doctor_id = users.id 
-    LEFT JOIN payments ON slot_bookings.slot_id = payments.slot_id
-    LEFT JOIN prescriptions ON time_slots.doctor_id = prescriptions.doctor_id
-    WHERE slot_bookings.slot_id = ?`;
+    const sql3 = `SELECT slot_bookings.patient_id, users.fname, users.lname, slot_bookings.slot_id, 
+    time_slots.doctor_id, specialities.speciality, clinic_hospitals.name, time_slots.date, 
+    payments.payment_amount, payments.is_refunded, time_slots.start_time, time_slots.end_time, 
+    prescriptions.prescription, prescriptions.diagnoses FROM slot_bookings 
+    inner JOIN time_slots ON slot_bookings.slot_id = time_slots.id 
+    inner JOIN doctor_has_specialities ON time_slots.doctor_id = doctor_has_specialities.doctor_id 
+    inner JOIN specialities ON doctor_has_specialities.speciality_id = specialities.id 
+    inner JOIN doctor_details ON time_slots.doctor_id = doctor_details.doctor_id 
+    inner JOIN clinic_hospitals ON doctor_details.hospital_id = clinic_hospitals.id 
+    inner JOIN users ON time_slots.doctor_id = users.id 
+    inner JOIN payments ON slot_bookings.slot_id = payments.slot_id 
+    LEFT JOIN prescriptions ON prescriptions.booking_id = slot_bookings.id
+    WHERE slot_bookings.slot_id = ?;`;
 
     const [appointmentData] = await conn.query(sql3, [slot_id]);
 
