@@ -61,6 +61,7 @@ io.on("connection", (socket) => {
     }
 
     result.forEach((data) => {
+      console.log(data);
       socket.emit(`reminder-${data.email}`, data);
     });
   });
@@ -73,6 +74,15 @@ io.on("connection", (socket) => {
     );
     socket.emit(`notification-${user.email}`, data.sort((a,b)=> new Date(b.end_at).getTime() - new Date(a.end_at).getTime()));
   });
+
+  socket.on("delete-slot", (msg) => {
+    msg ? io.emit(`delete-slot-${msg.patient_id}`, msg) : 0;
+  });
+
+  socket.on("cancel-slot", (msg) => {
+    msg ? io.emit(`cancel-slot-${msg.doctor_id}`, msg) : 0;
+  });
+
   // user req for change slot
   socket.on("changeslot", () => {
     socket.broadcast.emit("madechanges");
