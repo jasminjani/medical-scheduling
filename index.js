@@ -66,13 +66,13 @@ io.on("connection", (socket) => {
     });
   });
 
-  socket.on("notification", async (email) => {
+  socket.on("notification", async (user) => {
     let [data] = await conn.query(
-      `select * from notifications where user_id = (select id from users where email = ?) and date(end_at)= curdate() or 
-    timestampdiff(second,utc_timestamp,end_at)>0`,
-      [email]
+      `select * from notifications where user_id = ? and (date(end_at)= curdate() or 
+    timestampdiff(second,utc_timestamp,end_at)>0)`,
+      [user.id]
     );
-    socket.emit(`notification-${email}`, data.sort((a,b)=> new Date(b.end_at).getTime() - new Date(a.end_at).getTime()));
+    socket.emit(`notification-${user.email}`, data.sort((a,b)=> new Date(b.end_at).getTime() - new Date(a.end_at).getTime()));
   });
 
   socket.on("delete-slot", (msg) => {
