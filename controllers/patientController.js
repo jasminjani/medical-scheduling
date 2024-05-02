@@ -59,7 +59,7 @@ exports.patientStatus = async (req, res) => {
 exports.addPatientDetails = async (req, res) => {
   try {
     const { patientId, bloodgroup } = req.body;
-    const medicalHistory = req.file.filename || "";
+    const medicalHistory = req.file?.filename || "";
 
     if (!patientId) {
       return res.json({

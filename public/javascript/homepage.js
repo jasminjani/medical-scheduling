@@ -179,7 +179,9 @@ async function isLoggedIn() {
       "Content-Type": "application/json",
     },
   });
-
+  if(user.headers.get("content-type").split(";")[0] == "text/html"){
+    return false;
+  }
   user = await user.json();
 
   if (user.success) {

@@ -2,7 +2,11 @@ let submit = document.getElementById("submit");
 
 function validate() {
   let isvalid = true;
+  let errors = document.querySelectorAll('.error');
 
+  errors.forEach((error)=>{
+    error.remove();
+  })
   let dvalid = document.querySelectorAll(".dvalid");
 
   let validated = document.querySelectorAll(".validated");
@@ -77,6 +81,11 @@ submit.addEventListener("click", async (e) => {
 
         document.querySelector(".container").appendChild(div);
       } else {
+        let errors = document.querySelectorAll('.error');
+
+        errors.forEach((error)=>{
+          error.remove();
+        })
         let p = document.createElement("p");
         p.classList.add("error");
         p.style.color = "red";
