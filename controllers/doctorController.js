@@ -184,7 +184,7 @@ exports.dashBoardTodayAppointments = async (req, res) => {
     join users as users_patient on slot_bookings.patient_id=users_patient.id
     left join prescriptions on prescriptions.booking_id=slot_bookings.id
     where time_slots.doctor_id=? && time_slots.date=curdate() &&
-    timestampdiff(minute,utc_timestamp,time_slots.start_time)>0
+    timestampdiff(minute,utc_timestamp,time_slots.end_time)>0
     && prescriptions.id is null && slot_bookings.is_canceled = 0 && slot_bookings.is_deleted=0`,
       [doctor_id]
     );
