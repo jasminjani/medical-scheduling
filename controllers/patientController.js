@@ -247,7 +247,7 @@ exports.postPatientProfileUpdate = async (req, res) => {
 
     let result;
     try {
-      [result] = await conn.query(` select u.id,u.fname,u.lname,u.email,u.gender,u.dob,u.phone,u.city,u.address,u.role_id,pp.profile_picture as profile from users as u left join profile_pictures as pp on u.id = pp.user_id where pp.is_active =1 and u.id = ?;`,[patient_id])
+      [result] = await conn.query(` select u.id,u.fname,u.lname,u.email,u.gender,u.dob,u.phone,u.city,u.address,u.role_id,pp.profile_picture as profile from users as u left join profile_pictures as pp on u.id = pp.user_id where pp.is_active =1 and u.id = ?;`, [patient_id])
     } catch (error) {
       return res.json({
         success: false,
@@ -259,7 +259,7 @@ exports.postPatientProfileUpdate = async (req, res) => {
 
     return res
       .status(200)
-      .json({ success: true, message: "Updated successfully",data:result });
+      .json({ success: true, message: "Updated successfully", data: result });
   } catch (error) {
     logger.error(error.message);
     res.status(500).json({
@@ -528,7 +528,7 @@ exports.getSingleSlots = async (req, res) => {
     }
 
     // let html = await generateSlotCombo(result);
-    return res.status(200).json({ success: true, result:result });
+    return res.status(200).json({ success: true, result: result });
     // return res.render('pages/patientPanel/appointment')
   } catch (error) {
     logger.error(error.message);
@@ -597,9 +597,13 @@ exports.bookingSlot = async (req, res) => {
         values 
         (?,concat("Your appointment booked with"," ", (select concat(fname," ", lname) from users where id = ?)),"upcoming",
         (select timestampadd(hour,-2,start_time)as start_at from time_slots where id=?),
-        (select start_time from time_slots where id = ?));`,[patientId,doctorId,slotId,slotId,slotId])
+        (select start_time from time_slots where id = ?));`, [patientId, doctorId, slotId, slotId, slotId])
       } catch (error) {
-        
+        logger.error(error.message);
+        return res.status(500).json({
+          success: false,
+          message: error.message,
+        });
       }
 
       return res

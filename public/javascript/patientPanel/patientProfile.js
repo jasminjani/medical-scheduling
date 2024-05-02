@@ -107,7 +107,7 @@ const cancelSlot = async (element,time) => {
       }).then((result) => {
         if (result.isConfirmed) {
           socket.emit('cancel-slot', element);
-          window.location = `/patient/cancel/${element.id}`;
+          // window.location = `/patient/cancel/${element.id}`;
         }
       });
     }

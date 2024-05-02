@@ -57,19 +57,19 @@ const getSlots = async (date) => {
     console.log(checkEndTime);
     element.end_time = new Date(element.end_time).toLocaleTimeString();
     table.innerHTML += `
-      <tr>
+      <tr style=${element.is_canceled && checkEndTime > 0 ? "background-color:#3984af;" : ""}>
         <td>${element.start_time}</td>
         <td>${element.end_time}</td>
         <td>${element.patient_name ? element.patient_name : "-"}</td>
         <td>${element.phone ? element.phone : "-"}</td>
-        <td>${!element.is_canceled && checkEndTime > 0 ? `<input type="button" value="Delete" onclick='openDeleteModal(${JSON.stringify(element)},${checkStartTime})' />` : `Closed/Canceled`}</td>
+        <td>${!element.is_canceled && checkEndTime > 0 ? `<input type="button" value="Delete" onclick='openDeleteModal(${JSON.stringify(element)},${checkStartTime})' />` : checkEndTime < 0 ? `<input type="button" value="Closed"/>` : `<input type="button" value="Delete" onclick='openDeleteModal(${JSON.stringify(element)},${checkStartTime})' />`}</td>
       </tr>
     `
   });
 }
 
-const openDeleteModal = async (element,time) => {
-  if(time <= 2) return Swal.fire("You can not delete slot before 2 hours");
+const openDeleteModal = async (element, time) => {
+  if (time <= 2 && !element.is_canceled) return Swal.fire("You can not delete slot before 2 hours");
   Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
@@ -87,7 +87,7 @@ const openDeleteModal = async (element,time) => {
       }).then((result) => {
         if (result.isConfirmed) {
           socket.emit(`delete-slot`, element);
-          // window.location.href = `/doctor/delete/${element.id}`; 
+          window.location.href = `/doctor/delete/${element.id}`;
         }
       })
     }

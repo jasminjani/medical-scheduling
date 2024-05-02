@@ -3,7 +3,7 @@ const cookieParser = require("cookie-parser");
 const app = express();
 const { Server } = require("socket.io");
 const path = require("path");
-const fs=require('fs');
+const fs = require('fs');
 const logger = require("./utils/pino");
 require("dotenv").config();
 
@@ -47,6 +47,7 @@ io.on("connection", (socket) => {
     }
 
     result.forEach((data) => {
+      console.log(data);
       socket.emit(`reminder-${data.email}`, data);
     });
   });
@@ -57,9 +58,17 @@ io.on("connection", (socket) => {
     timestampdiff(second,utc_timestamp,end_at)>0`,
       [email]
     );
-
     socket.emit(`notification-${email}`, data);
   });
+
+  socket.on("delete-slot", (msg) => {
+    msg ? io.emit(`delete-slot-${msg.patient_id}`, msg) : 0;
+  });
+
+  socket.on("cancel-slot", (msg) => {
+    msg ? io.emit(`cancel-slot-${msg.doctor_id}`, msg) : 0;
+  });
+
   // user req for change slot
   socket.on("changeslot", () => {
     socket.broadcast.emit("madechanges");
@@ -67,14 +76,10 @@ io.on("connection", (socket) => {
 
   socket.emit("connectmsg", "thank you for connecting");
 
-  socket.on("cancel-slot", (msg) => {
-    msg ? io.emit(`cancel-slot-${msg.doctor_id}`, msg) : 0;
-  });
-
-  socket.on('generatePDF',async(id)=>{
-    try{
-      const filename=await generatePDF(id);
-      socket.emit('pdfready',filename);
+  socket.on('generatePDF', async (id) => {
+    try {
+      const filename = await generatePDF(id);
+      socket.emit('pdfready', filename);
     }
     catch (error) {
       logger.error(error);
@@ -87,8 +92,8 @@ io.on("connection", (socket) => {
         const file = fs.readFileSync(`uploads/pdfs/${filename}`);
         socket.emit("pdfFile", { filename, file });
       }
-    }catch(error){
-      logger.error("error in downloading PDF",error);
+    } catch (error) {
+      logger.error("error in downloading PDF", error);
     }
   });
 
