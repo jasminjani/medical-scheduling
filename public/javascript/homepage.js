@@ -146,6 +146,7 @@ becomeDoctor?.addEventListener("click", async (e) => {
       "Content-Type": "application/json",
     },
   });
+
   data = await data.json();
 
   if (data.success) {

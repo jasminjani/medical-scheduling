@@ -1,9 +1,30 @@
-const socket = io();
-socket.on("connect", () => {
-  let userInfo = JSON.parse(localStorage.getItem('userinfo'));
-  if (userInfo && userInfo.id) {
+  const socket = io();
+  socket.on("connect", () => {
+    let userInfo = JSON.parse(localStorage.getItem('userinfo'));
+    if(userInfo && userInfo.id){
+      // console.log(socket.id); 
+      socket.emit('reminder',userInfo.email);
 
-    socket.emit('reminder', userInfo.email);
+      let timezoneOffset = new Date().getTimezoneOffset();
+      socket.on(`reminder-${userInfo.email}`,(data)=>{
+        // console.log(data)
+        let startTime = new Date(data.end_at).getTime();
+        startTime -= (timezoneOffset * 60 * 1000);
+        startTime = new Date(startTime).toLocaleTimeString();
+        Swal.fire({
+          title:data.message + ` at ${startTime}`
+        }).then(async(result)=>{
+          if(result.isConfirmed){
+            await fetch("/patient/notification",{
+              method:"PUT",
+              body:JSON.stringify({id:data.id}),
+              headers:{
+                "Content-Type":"application/json"
+              }
+            })
+          }
+        })
+      })
 
     let timezoneOffset = new Date().getTimezoneOffset();
     socket.on(`reminder-${userInfo.email}`, (data) => {

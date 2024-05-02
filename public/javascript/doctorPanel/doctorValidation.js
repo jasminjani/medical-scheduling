@@ -185,7 +185,7 @@ const postData = async () => {
         text: "Update Successfully!",
         icon: "success",
       }).then((result)=>{
-        console.log('fired')
+        // console.log('fired')
       });
     }
   }

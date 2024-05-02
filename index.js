@@ -25,6 +25,20 @@ const { generatePDF } = require("./controllers/pdfController");
 
 // socket initialization
 io.on("connection", (socket) => {
+
+  let req = socket.handshake;
+  let url = req.headers.referer;
+  let time = new Date(req.time).toLocaleString();
+  let fullURL = `${time} : SOCKET :  ${url} \n`;
+
+  let fileName = `uploads/requestLogs/requestURL.log`;
+
+  fs.appendFileSync(fileName, fullURL, (err) => {
+    if (err) {
+      logger.error("Error in write URL");
+    }
+  });
+
   socket.on("reminder", async (userEmail) => {
     let result;
     try {
@@ -54,11 +68,11 @@ io.on("connection", (socket) => {
 
   socket.on("notification", async (email) => {
     let [data] = await conn.query(
-      `select * from notifications where user_id = (select id from users where email = ?) and date(end_at)= curdate() and 
+      `select * from notifications where user_id = (select id from users where email = ?) and date(end_at)= curdate() or 
     timestampdiff(second,utc_timestamp,end_at)>0`,
       [email]
     );
-    socket.emit(`notification-${email}`, data);
+    socket.emit(`notification-${email}`, data.sort((a,b)=> new Date(b.end_at).getTime() - new Date(a.end_at).getTime()));
   });
 
   socket.on("delete-slot", (msg) => {
@@ -75,6 +89,10 @@ io.on("connection", (socket) => {
   });
 
   socket.emit("connectmsg", "thank you for connecting");
+
+  socket.on("cancel-slot", (msg) => {
+    msg ? io.emit(`cancel-slot-${msg.doctor_id}`, msg) : 0;
+  });
 
   socket.on('generatePDF', async (id) => {
     try {

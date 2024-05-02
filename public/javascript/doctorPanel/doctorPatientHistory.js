@@ -39,7 +39,7 @@ searchBtn.addEventListener('keyup', function (event) {
     if (event.key === 'Enter') {
       searchPatientDetails();
     }
-  } catch (e) { console.log(e); }
+  } catch (error) { console.log(error); }
 });
 
 let currentPage = 1;

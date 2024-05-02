@@ -16,7 +16,7 @@ const getPastSlots = async () => {
   });
 
   const {success, message } = await response.json();
-  console.log(message)
+  // console.log(message)
   totalPage = Math.ceil(message.length / limit);
 
   if (totalPage <= 1) document.getElementsByClassName("A4-Pagination-component")[0].style.visibility = "hidden";
@@ -34,7 +34,7 @@ const getPastSlots = async () => {
     element.start_time = new Date(element.start_time).getTime();
     element.start_time -= (timezoneoffset * 60 * 1000);
     element.start_time = new Date(element.start_time).toLocaleTimeString('en-US')
-    console.log(element.start_time)
+    // console.log(element.start_time)
 
     element.end_time = new Date(element.end_time).getTime();
     element.end_time -= (timezoneoffset * 60 * 1000);
@@ -45,7 +45,7 @@ const getPastSlots = async () => {
         <td>${element.day}</td>
         <td>${element.start_time}-${element.end_time}</td>
         <td><input type="button" value="Details" onclick='getDetails(${JSON.stringify(element)})'></td>
-        <td><input type="button" value="Get PDF" onclick="generatePDF(${element.prescription_id})"></td>
+        <td>${element.prescription_id !== null ? `<input type="button" value="Get PDF" onclick="generatePDF(${element.prescription_id})">` : `-`}</td>
       </tr>
     `
   });

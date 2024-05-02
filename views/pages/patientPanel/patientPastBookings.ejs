@@ -15,6 +15,9 @@
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
   <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css" />
   <script src="/sweetalert2/sweetalert2.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+  <script src="/javascript/patientPanel/patientPastBookings.js" defer></script>
+  <script src="/javascript/prescription/generatePDF.js"></script>
   <style>
     #a5-patient-session-active {
       background-color: #0969da;
@@ -82,15 +85,13 @@
             </div>
           </div>
         </div>
-        <div class="white_content" id="pdfViewer"></div>
+        <!-- <div class="white_content" id="pdfViewer"></div>
             <input type="button" value="Download" id="download-Btn" class="download-btn">
             <input type="button" value="✖️" id="cross" class="cross-btn">         
             <div id="fade" class="black_overlay"></div>
-    </div>
+    </div> -->
   </section>
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="/javascript/patientPanel/patientPastBookings.js" defer></script>
-  <script src="/javascript/prescription/generatePDF.js"></script>
+
 </body>
 
 </html>
