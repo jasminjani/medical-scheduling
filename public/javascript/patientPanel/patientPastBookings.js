@@ -15,8 +15,8 @@ const getPastSlots = async () => {
     }
   });
 
-  const {success, message } = await response.json();
-  console.log(message)
+  const { success, message } = await response.json();
+  // console.log(message)
   totalPage = Math.ceil(message.length / limit);
 
   if (totalPage <= 1) document.getElementsByClassName("A4-Pagination-component")[0].style.visibility = "hidden";
@@ -25,29 +25,40 @@ const getPastSlots = async () => {
 
   table.innerHTML = "";
 
-  if(message.length == 0 || !success){
+  if (message.length == 0 || !success) {
     return table.innerHTML = "<tr><td colspan='5'>No Data Found !</td></tr>"
-   }
+  }
 
-   let timezoneoffset = new Date().getTimezoneOffset();
+  let timezoneoffset = new Date().getTimezoneOffset();
   message.slice((page - 1) * limit, page * limit).forEach(element => {
     element.start_time = new Date(element.start_time).getTime();
     element.start_time -= (timezoneoffset * 60 * 1000);
     element.start_time = new Date(element.start_time).toLocaleTimeString('en-US')
-    console.log(element.start_time)
+    // console.log(element.start_time)
 
     element.end_time = new Date(element.end_time).getTime();
     element.end_time -= (timezoneoffset * 60 * 1000);
     element.end_time = new Date(element.end_time).toLocaleTimeString('en-US')
-    table.innerHTML += `
+    if (element.prescription_id) {
+      table.innerHTML += `
       <tr>
         <td>${element.date}</td>
         <td>${element.day}</td>
         <td>${element.start_time}-${element.end_time}</td>
         <td><input type="button" value="Details" onclick='getDetails(${JSON.stringify(element)})'></td>
         <td><input type="button" value="Get PDF" onclick="generatePDF(${element.prescription_id})"></td>
-      </tr>
-    `
+      </tr>`;
+
+    } else {
+      table.innerHTML += `
+      <tr>
+        <td>${element.date}</td>
+        <td>${element.day}</td>
+        <td>${element.start_time}-${element.end_time}</td>
+        <td><input type="button" value="Details" onclick='getDetails(${JSON.stringify(element)})'></td>
+        <td><input type="button" value="Not Visited" ></td>
+      </tr>`;
+    }
   });
 }
 

@@ -118,7 +118,7 @@ async function showDetails() {
   try {
 
     let slot_bookings_id = window.location.pathname.split("/").pop();
-    console.log(slot_bookings_id)
+    // console.log(slot_bookings_id)
     const url = `/doctor/patient/prescription/${slot_bookings_id}`;
     let  response = await fetch(url)
     let result = await response.json();
