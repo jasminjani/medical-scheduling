@@ -6,6 +6,9 @@
   : (div.style.display = "block");
       }
 
+
+
+      
   async function fetchData(id){
     let res=await fetch(`/admin/doctorDetails/${id}`);
   let resjson=await res.json();
@@ -22,7 +25,7 @@
         });
       }
 
-  fetchData(`<%=docID %>`);
+  fetchData(window.location.pathname.split("/").pop());
 
   async function approveDoctor(id) {
 
