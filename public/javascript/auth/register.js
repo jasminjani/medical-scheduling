@@ -120,7 +120,7 @@ function validate() {
       if (!field.value.match(emailRegex)) {
         let p = document.createElement("p");
         field.insertAdjacentElement("afterend", p);
-        p.innerHTML = "Invalid Email syntax ";
+        p.innerHTML = "Invalid Email syntax";
         p.classList.add("validated");
         p.style.color = "red";
         p.style.margin = "0";
@@ -145,26 +145,7 @@ function validate() {
     }
   });
 
-  //date of birth validation
-  let year = document.getElementById("year");
-  let month = document.getElementById("month");
-  let day = document.getElementById("day");
-  isvalid = dateValidation(year, month, day);
-
-  if (isvalid && year.value && month.value && day.value) {
-    let date = `${year.value.trim()}-${month.value.trim()}-${day.value.trim()}`;
-    if (isNaN(new Date(date))) {
-      let p = document.createElement("p");
-      year.parentElement.parentElement.insertAdjacentElement("afterend", p);
-      p.innerHTML = "*Invalid Date";
-      p.classList.add("validated");
-      p.style.color = "red";
-      p.style.margin = "0";
-      p.style.fontSize = "12px";
-      isvalid = false;
-    }
-  }
-  // gender validation
+   // gender validation
   let male = document.getElementById("male");
   let feMale = document.getElementById("female");
 
@@ -179,6 +160,26 @@ function validate() {
     p.style.margin = "0";
     p.style.fontSize = "12px";
     isvalid = false;
+  }
+  
+  //date of birth validation
+  let year = document.getElementById("year");
+  let month = document.getElementById("month");
+  let day = document.getElementById("day");
+  let isValidDate = dateValidation(year, month, day);
+
+  if (isValidDate && isvalid && year.value && month.value && day.value) {
+    let date = `${year.value.trim()}-${month.value.trim()}-${day.value.trim()}`;
+    if (isNaN(new Date(date))) {
+      let p = document.createElement("p");
+      year.parentElement.parentElement.insertAdjacentElement("afterend", p);
+      p.innerHTML = "*Invalid Date";
+      p.classList.add("validated");
+      p.style.color = "red";
+      p.style.margin = "0";
+      p.style.fontSize = "12px";
+      isvalid = false;
+    }
   }
 
   return isvalid;

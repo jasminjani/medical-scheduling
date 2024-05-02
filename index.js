@@ -3,7 +3,7 @@ const cookieParser = require("cookie-parser");
 const app = express();
 const { Server } = require("socket.io");
 const path = require("path");
-const fs=require('fs');
+const fs = require('fs');
 const logger = require("./utils/pino");
 require("dotenv").config();
 
@@ -25,6 +25,20 @@ const { generatePDF } = require("./controllers/pdfController");
 
 // socket initialization
 io.on("connection", (socket) => {
+
+  let req = socket.handshake;
+  let url = req.headers.referer;
+  let time = new Date(req.time).toLocaleString();
+  let fullURL = `${time} : SOCKET :  ${url} \n`;
+
+  let fileName = `uploads/requestLogs/requestURL.log`;
+
+  fs.appendFileSync(fileName, fullURL, (err) => {
+    if (err) {
+      logger.error("Error in write URL");
+    }
+  });
+
   socket.on("reminder", async (userEmail) => {
     let result;
     try {
@@ -43,23 +57,32 @@ io.on("connection", (socket) => {
       //   && slot_bookings.is_canceled = 0 && slot_bookings.is_deleted=0;`);
     } catch (error) {
       logger.error(error);
-      console.log(error);
+      // console.log(error);
     }
 
     result.forEach((data) => {
+      console.log(data);
       socket.emit(`reminder-${data.email}`, data);
     });
   });
 
-  socket.on("notification", async (email) => {
+  socket.on("notification", async (user) => {
     let [data] = await conn.query(
-      `select * from notifications where user_id = (select id from users where email = ?) and date(end_at)= curdate() and 
-    timestampdiff(second,utc_timestamp,end_at)>0`,
-      [email]
+      `select * from notifications where user_id = ? and (date(end_at)= curdate() or 
+    timestampdiff(second,utc_timestamp,end_at)>0)`,
+      [user.id]
     );
-
-    socket.emit(`notification-${email}`, data);
+    socket.emit(`notification-${user.email}`, data.sort((a,b)=> new Date(b.end_at).getTime() - new Date(a.end_at).getTime()));
   });
+
+  socket.on("delete-slot", (msg) => {
+    msg ? io.emit(`delete-slot-${msg.patient_id}`, msg) : 0;
+  });
+
+  socket.on("cancel-slot", (msg) => {
+    msg ? io.emit(`cancel-slot-${msg.doctor_id}`, msg) : 0;
+  });
+
   // user req for change slot
   socket.on("changeslot", () => {
     socket.broadcast.emit("madechanges");
@@ -71,10 +94,10 @@ io.on("connection", (socket) => {
     msg ? io.emit(`cancel-slot-${msg.doctor_id}`, msg) : 0;
   });
 
-  socket.on('generatePDF',async(id)=>{
-    try{
-      const filename=await generatePDF(id);
-      socket.emit('pdfready',filename);
+  socket.on('generatePDF', async (id) => {
+    try {
+      const filename = await generatePDF(id);
+      socket.emit('pdfready', filename);
     }
     catch (error) {
       logger.error(error);
@@ -87,8 +110,8 @@ io.on("connection", (socket) => {
         const file = fs.readFileSync(`uploads/pdfs/${filename}`);
         socket.emit("pdfFile", { filename, file });
       }
-    }catch(error){
-      logger.error("error in downloading PDF",error);
+    } catch (error) {
+      logger.error("error in downloading PDF", error);
     }
   });
 
@@ -98,7 +121,8 @@ io.on("connection", (socket) => {
         const file = fs.unlinkSync(`uploads/pdfs/${filename}`);
       }
     } catch (error) {
-      console.log("error in deleting pdf", error);
+      // console.log("error in deleting pdf", error);
+      logger.error("error in deleting pdf", error);
     }
   });
 
