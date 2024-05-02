@@ -34,7 +34,7 @@ socket.on("connect", () => {
   let user = JSON.parse(localStorage.getItem("userinfo"));
 
   if (user && user.id) {
-    socket.emit("notification", user.email);
+    socket.emit("notification", {email:user.email,id:user.id});
 
     socket.on(`notification-${user.email}`, (data) => {
       let totalNotification = document.querySelector(".no-notification");
