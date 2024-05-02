@@ -25,11 +25,11 @@ const getPastSlots = async () => {
 
   table.innerHTML = "";
 
-  if(message.length == 0 || !success){
+  if (message.length == 0 || !success) {
     return table.innerHTML = "<tr><td colspan='5'>No Data Found !</td></tr>"
-   }
+  }
 
-   let timezoneoffset = new Date().getTimezoneOffset();
+  let timezoneoffset = new Date().getTimezoneOffset();
   message.slice((page - 1) * limit, page * limit).forEach(element => {
     element.start_time = new Date(element.start_time).getTime();
     element.start_time -= (timezoneoffset * 60 * 1000);
@@ -39,7 +39,8 @@ const getPastSlots = async () => {
     element.end_time = new Date(element.end_time).getTime();
     element.end_time -= (timezoneoffset * 60 * 1000);
     element.end_time = new Date(element.end_time).toLocaleTimeString('en-US')
-    table.innerHTML += `
+    if (element.prescription_id) {
+      table.innerHTML += `
       <tr>
         <td>${element.date}</td>
         <td>${element.day}</td>
