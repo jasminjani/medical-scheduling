@@ -100,8 +100,8 @@ async function approveReject() {
       if (result.isConfirmed) {
 
         let patient_id = window.location.href.split('/').pop();
-        console.log("u id ",patient_id);
-        console.log("u status ",patientActiveStatus);
+        // console.log("u id ",patient_id);
+        // console.log("u status ",patientActiveStatus);
 
         const response = await fetch(`/admin/patient/approve-reject`, {
           method: "POST",
@@ -110,7 +110,7 @@ async function approveReject() {
             "Content-Type": "application/json"
           }
         });
-        console.log(response);
+        // console.log(response);
 
         await Swal.fire({
           title: `${text}${postfix}!`,

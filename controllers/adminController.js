@@ -466,8 +466,8 @@ exports.updatePatient = async (req, res) => {
       activeStatus = 0;
     }
 
-    console.log("patient id ", patient_id);
-    console.log("status  ", activeStatus);
+    // console.log("patient id ", patient_id);
+    // console.log("status  ", activeStatus);
 
     const sql = `UPDATE users SET is_deleted = ? WHERE id = ?`;
 
