@@ -43,11 +43,15 @@
 </div>
 
 <script src="/javascript/auth/logout.js" defer></script>
-<script src="/javascript/doctorPanel/sidebar.js" defer></script>
+<!-- <script src="/javascript/doctorPanel/sidebar.js" defer></script> -->
 <script defer>
   const userData = JSON.parse(localStorage.getItem('userinfo'));
-
-document.getElementById('profile').setAttribute('src',`/imgs/${userData.profile}`);
+  if(userData.profile){
+    document.getElementById('profile').setAttribute('src',`/imgs/${userData.profile}`);
+  }
+  else{
+    document.getElementById('profile').setAttribute('src',`/assets/profile.png`);
+  }
 document.getElementById('name').innerHTML = `${userData.fname + " " + userData.lname}`;
 document.getElementById('email').innerHTML = userData.email;
 </script>

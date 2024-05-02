@@ -107,9 +107,13 @@
   margin: 15px 0;
 }
 td {
-   text-align: center;
+  text-align: center;
   padding: 10px 12px;
+  word-wrap: anywhere;
 }
+/* #buttons{
+  min-width: 300px
+} */
 th {
   box-shadow: 0 2px var(--blue);
   padding: 10px 0;
@@ -248,4 +252,14 @@ th {
   width: 500px;
   height: 200px;
 } */
+div:where(.swal2-container).swal2-center>.swal2-popup {
+  grid-column:2;
+  grid-row:2;
+  place-self:center center;
+  width: 800px;
+}
+div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
 
+  background-color: var(--blue);
+
+}
