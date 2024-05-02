@@ -1,4 +1,9 @@
+// Pagination Declare Global Variable
 let data;
+let pagefield = 1
+let currentPage = 1
+let length = 0
+let pageno = document.getElementById("pageno")
 
 const fetchDataFun = async () => {
   try {
@@ -10,15 +15,6 @@ const fetchDataFun = async () => {
     console.log(error);
   }
 }
-
-let search = document.getElementById("search").value
-let pagefield = 1
-let currentPage = 1
-let length = 0
-let pageno = document.getElementById("pageno")
-
-
-
 const searchPatientReview = async () => {
   try {
 
