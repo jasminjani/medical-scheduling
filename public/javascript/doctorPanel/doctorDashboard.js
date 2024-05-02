@@ -118,12 +118,11 @@ const fetchAppointmentData = async () => {
     if(data.length === 0){
       table.innerHTML = "<h2 style='text-align: center; margin-top: 100px;'>Data Not Found!</h2>"
     }
-
     let timezoneoffset = new Date().getTimezoneOffset();
     data.forEach(function (element, index) {
-
       element.start_time = new Date(element.start_time).getTime();
       element.start_time -= (timezoneoffset * 60 * 1000);
+      let startDate = element.start_time;
       element.start_time = new Date(element.start_time).toLocaleTimeString('en-US')
 
       element.end_time = new Date(element.end_time).getTime();
@@ -135,7 +134,7 @@ const fetchAppointmentData = async () => {
                 <td>${index + 1}</td>
                 <td>${element.patient_name}</td>
                 <td>${element.start_time}-${element.end_time}</td>
-                <td><input type="button" value="Add Prescription" onclick="addPrescription(${element.booking_id})" id="addprescription-btn"></td>
+                <td><input type="button" ${startDate >= Date.now() ? `disabled`: ''} value="Add Prescription" onclick="addPrescription(${element.booking_id})" id="addprescription-btn"></td>
                 <td><input type="hidden" value="${element.booking_id}" id="booking_id"></td>
             </tr>`;
       table.innerHTML += str;

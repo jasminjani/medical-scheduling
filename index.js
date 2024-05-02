@@ -53,12 +53,11 @@ io.on("connection", (socket) => {
 
   socket.on("notification", async (email) => {
     let [data] = await conn.query(
-      `select * from notifications where user_id = (select id from users where email = ?) and date(end_at)= curdate() and 
+      `select * from notifications where user_id = (select id from users where email = ?) and date(end_at)= curdate() or 
     timestampdiff(second,utc_timestamp,end_at)>0`,
       [email]
     );
-
-    socket.emit(`notification-${email}`, data);
+    socket.emit(`notification-${email}`, data.sort((a,b)=> new Date(b.end_at).getTime() - new Date(a.end_at).getTime()));
   });
   // user req for change slot
   socket.on("changeslot", () => {
