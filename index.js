@@ -57,7 +57,7 @@ io.on("connection", (socket) => {
       //   && slot_bookings.is_canceled = 0 && slot_bookings.is_deleted=0;`);
     } catch (error) {
       logger.error(error);
-      console.log(error);
+      // console.log(error);
     }
 
     result.forEach((data) => {
@@ -121,7 +121,8 @@ io.on("connection", (socket) => {
         const file = fs.unlinkSync(`uploads/pdfs/${filename}`);
       }
     } catch (error) {
-      console.log("error in deleting pdf", error);
+      // console.log("error in deleting pdf", error);
+      logger.error("error in deleting pdf", error);
     }
   });
 
