@@ -3,7 +3,7 @@ const cookieParser = require("cookie-parser");
 const app = express();
 const { Server } = require("socket.io");
 const path = require("path");
-const fs=require('fs');
+const fs = require('fs');
 const logger = require("./utils/pino");
 require("dotenv").config();
 
@@ -25,6 +25,20 @@ const { generatePDF } = require("./controllers/pdfController");
 
 // socket initialization
 io.on("connection", (socket) => {
+
+  let req = socket.handshake;
+  let url = req.headers.referer;
+  let time = new Date(req.time).toLocaleString();
+  let fullURL = `${time} : SOCKET :  ${url} \n`;
+
+  let fileName = `uploads/requestLogs/requestURL.log`;
+
+  fs.appendFileSync(fileName, fullURL, (err) => {
+    if (err) {
+      logger.error("Error in write URL");
+    }
+  });
+
   socket.on("reminder", async (userEmail) => {
     let result;
     try {
@@ -70,10 +84,10 @@ io.on("connection", (socket) => {
     msg ? io.emit(`cancel-slot-${msg.doctor_id}`, msg) : 0;
   });
 
-  socket.on('generatePDF',async(id)=>{
-    try{
-      const filename=await generatePDF(id);
-      socket.emit('pdfready',filename);
+  socket.on('generatePDF', async (id) => {
+    try {
+      const filename = await generatePDF(id);
+      socket.emit('pdfready', filename);
     }
     catch (error) {
       logger.error(error);
@@ -86,8 +100,8 @@ io.on("connection", (socket) => {
         const file = fs.readFileSync(`uploads/pdfs/${filename}`);
         socket.emit("pdfFile", { filename, file });
       }
-    }catch(error){
-      logger.error("error in downloading PDF",error);
+    } catch (error) {
+      logger.error("error in downloading PDF", error);
     }
   });
 

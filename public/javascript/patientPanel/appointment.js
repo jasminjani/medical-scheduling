@@ -2,9 +2,11 @@ let date = document.getElementById("date");
 let appointments = document.getElementById("appointments");
 let slotBook = document.getElementById("slotBook");
 
+
 // const socket = io();
+
 // delete booked slot from dropdown which  is booked by other during single user check the slot
-socket.on('madechanges',()=>{
+socket.on('madechanges', () => {
   getSlots();
 })
 
@@ -52,11 +54,11 @@ slotBook.addEventListener("click", async (e) => {
 
     let userInfo = JSON.parse(localStorage.getItem('userinfo'))
 
-    let patientDetails = await fetch("/patient/details",{
-      method:"POST",
-      body:JSON.stringify({id:userInfo.id}),
-      headers:{
-        "Content-Type":"application/json"
+    let patientDetails = await fetch("/patient/details", {
+      method: "POST",
+      body: JSON.stringify({ id: userInfo.id }),
+      headers: {
+        "Content-Type": "application/json"
       }
     })
 
@@ -70,18 +72,18 @@ slotBook.addEventListener("click", async (e) => {
           '<lable>Blood Group : <input type="text" id="bloodGroup" class="bloodGroup" placeholder="Enter Blood Group"></label> <br> <br> <br>' +
           '<lable>Medical History : <input type="file" accept="application/pdf" id="medicalHistory" class="medicalHistory"></label>',
         showCancelButton: true,
-      }).then(async(result)=>{
-          bloodGroup = document.getElementById('bloodGroup').value;
-          medicalHistory = document.getElementById('medicalHistory').files[0];
-          let formData = new FormData();
-          formData.append('patientId',userInfo.id)
-          formData.append('bloodgroup',bloodGroup)
-          formData.append('medicalHistory',medicalHistory)
+      }).then(async (result) => {
+        bloodGroup = document.getElementById('bloodGroup').value;
+        medicalHistory = document.getElementById('medicalHistory').files[0];
+        let formData = new FormData();
+        formData.append('patientId', userInfo.id)
+        formData.append('bloodgroup', bloodGroup)
+        formData.append('medicalHistory', medicalHistory)
 
-          let patient = await fetch("/patient/otherDetails",{
-            method:"POST",
-            body:formData
-          })
+        let patient = await fetch("/patient/otherDetails", {
+          method: "POST",
+          body: formData
+        })
       });
     }
 
@@ -106,10 +108,10 @@ slotBook.addEventListener("click", async (e) => {
             "Content-Type": "application/json",
           },
         });
-      
+
         d = await d.json();
 
-        if(d.success){
+        if (d.success) {
           // make message for change slot
           socket.emit('changeslot')
           socket.emit('notification',userInfo.email)
@@ -165,9 +167,8 @@ const getSlots = async (e) => {
       slot.end_time = new Date(slot.end_time).toLocaleTimeString('en-US')
       // console.log(slot.end_time)
       // dt = dt.toLocaleString('en-US',{timeZone:userTimezone})
-      html += `<option value=${slot.start_time + "-" + slot.id} data-sid="${
-        slot.id
-      }">${slot.start_time + " - " + slot.end_time}</option>`;
+      html += `<option value=${slot.start_time + "-" + slot.id} data-sid="${slot.id
+        }">${slot.start_time + " - " + slot.end_time}</option>`;
     });
 
     appointments.innerHTML = html;
