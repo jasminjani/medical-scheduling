@@ -954,7 +954,7 @@ exports.updatePostBecomeDoctor = async (req, res) => {
     }
 
     if (otherSpeciality) {
-      console.log("inside other speciality");
+      // console.log("inside other speciality");
       try {
         const [newSpeciality] = await conn.query(
           `INSERT INTO specialities (speciality, approved) VALUES (?,?)`,
@@ -1063,7 +1063,7 @@ exports.updatePostBecomeDoctor = async (req, res) => {
 
     try {
       const [result] = await conn.query(`update doctor_has_specialities set speciality_id = ? where doctor_id = ?`, [speciality_id, doctor_id])
-      console.log(result);
+      // console.log(result);
     } catch (error) {
       return res.status(403).json({
         success: false,

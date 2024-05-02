@@ -2,9 +2,7 @@ let date = document.getElementById("date");
 let appointments = document.getElementById("appointments");
 let slotBook = document.getElementById("slotBook");
 
-
 // const socket = io();
-
 // delete booked slot from dropdown which  is booked by other during single user check the slot
 socket.on('madechanges', () => {
   getSlots();
