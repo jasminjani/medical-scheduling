@@ -2,7 +2,7 @@ let date = document.getElementById("date");
 let appointments = document.getElementById("appointments");
 let slotBook = document.getElementById("slotBook");
 
-const socket = io();
+// const socket = io();
 // delete booked slot from dropdown which  is booked by other during single user check the slot
 socket.on('madechanges',()=>{
   getSlots();
@@ -45,7 +45,7 @@ slotBook.addEventListener("click", async (e) => {
     let doctors = JSON.parse(localStorage.getItem('doctors'))
     let doctorId = document.getElementById('did').value;
 
-    let fees = doctors.filter((doctor) => doctor.id = doctorId)[0].consultancy_fees;
+    let fees = doctors.filter((doctor) => doctor.id == doctorId)[0].consultancy_fees;
 
     let selectedSlotId = appointments.options.selectedIndex;
     let slotId = appointments.children[selectedSlotId].dataset.sid;

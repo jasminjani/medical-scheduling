@@ -54,7 +54,7 @@ const getSlots = async (date) => {
     element.end_time = new Date(element.end_time).getTime();
     element.end_time -= (timezoneOffset * 60 * 1000);
     const checkEndTime = ((element.end_time - new Date().getTime()) / (1000 * 60 * 60))
-    console.log(checkEndTime);
+    // console.log(checkEndTime);
     element.end_time = new Date(element.end_time).toLocaleTimeString();
     table.innerHTML += `
       <tr>

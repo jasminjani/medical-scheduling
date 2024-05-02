@@ -109,7 +109,7 @@ const submitRate = async () => {
 	Swal.fire(result.message);
 
 	gfg(0);
-	console.log(document.getElementById("rev"));
+	// console.log(document.getElementById("rev"));
 	document.getElementById("rev").value = ""
 }
 

@@ -1,9 +1,8 @@
-  const fetchCountData = async () => {
+const fetchCountData = async () => {
   const fetchData = await fetch(`/doctor/analytics`)
   const data = await fetchData.json()
 
   data.forEach(element => {
-    console.log(element["revenue"]);
     document.getElementById("patient").innerHTML = `<h4>${element["patient"]}</h4>`
 
     if (element["revenue"] == null) {
@@ -23,14 +22,13 @@ const fetchReviewData = async () => {
   const data = await fetchData.json()
   let key = Object.keys(data)
 
- 
-  if(data.length == 0)
-  {
+
+  if (data.length == 0) {
     feedbackCard.innerHTML = "<h2 style='align-item:center'>Data Not Found!</h2>"
   }
-  
-key.forEach(element => {
-  `<div>
+
+  key.forEach(element => {
+    `<div>
   </div>`
     let dtkey = Object.keys(data[element])
 
@@ -57,7 +55,7 @@ key.forEach(element => {
       }
       else if (item == 'rating') {
 
-       for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 5; i++) {
 
           if (i >= data[element][item]) {
             let img = document.createElement("img")
@@ -79,7 +77,7 @@ key.forEach(element => {
       }
       else if (item == "review") {
         let para = document.createElement("p")
-        para.setAttribute("class","para-review")
+        para.setAttribute("class", "para-review")
         para.textContent = data[element][item]
         div6TextContent.appendChild(para)
       }
@@ -94,7 +92,6 @@ key.forEach(element => {
         div7Signature.appendChild(email)
       }
     });
-
     div3Color.appendChild(div4Profile)
     div3Color.appendChild(div5Rating)
     div3Color.appendChild(div6TextContent)
@@ -102,20 +99,19 @@ key.forEach(element => {
     div2CardBox.appendChild(div3Color)
     div1Card.appendChild(div2CardBox)
     feedbackCard.appendChild(div1Card)
-});
-  };
+  });
+};
 
-  
+
 fetchReviewData()
 
 const fetchAppointmentData = async () => {
   try {
-
     let table = document.getElementById("appointmentTable");
     let fetchData = await fetch('/doctor/appointments/today')
     let data = await fetchData.json()
-    console.log(data);
-    if(data.length === 0){
+    // console.log(data);
+    if (data.length === 0) {
       table.innerHTML = "<h2 style='text-align: center; margin-top: 100px;'>Data Not Found!</h2>"
     }
 
@@ -144,12 +140,12 @@ const fetchAppointmentData = async () => {
   catch (error) {
     console.log(error);
   }
-
 }
 
-const addPrescription=async(booking_id)=>{
+const addPrescription = async (booking_id) => {
 
-  location.href =`/doctor/prescription/${booking_id}`;
+  location.href = `/doctor/prescription/${booking_id}`;
+
 }
 
 fetchAppointmentData();

@@ -58,7 +58,7 @@ const profileFun = () => {
   body:formData
       })
   const data = await fetchData.json();
-console.log(data)
+// console.log(data)
   if (data.success) {
     localStorage.setItem('userinfo',JSON.stringify(data.data[0]))
     Swal.fire({

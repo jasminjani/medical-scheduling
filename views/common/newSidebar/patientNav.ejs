@@ -71,6 +71,8 @@
 
   .a7-toggle{
     position: relative;
+    display: flex;
+    align-items: center;
   }
 
   .a7-profile-card{
@@ -127,8 +129,8 @@ position: absolute;
             
           <label class="name"></label>   
           <div class="a7-toggle">
-          <div class="logo" id="logoBtn">
-            <img class="user-img" alt="logo" />
+          <div class="a7-logo" id="logoBtn">
+            <img class="user-img" alt="logo" style="height: 50px; width: 50px;"/>
           </div>
           <div class="a7-menu" id="viewMenu">
             <div class="a7-profile-card">
@@ -179,9 +181,6 @@ viewMenu.classList.add('a7-hide-card')
 logoBtn.addEventListener("click",()=>{
   viewMenu.classList.toggle('a7-hide-card')
 })
-
-
-
 </script>
 
 
