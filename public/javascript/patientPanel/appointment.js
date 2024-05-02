@@ -112,15 +112,16 @@ slotBook.addEventListener("click", async (e) => {
         if (d.success) {
           // make message for change slot
           socket.emit('changeslot')
+          socket.emit('notification',userInfo.email)
+          Swal.fire("Payment Done!", "Your Slot is Booked", "success").then(
+            (result) => {
+              if (result.isConfirmed) {
+                window.location.reload();
+              }
+            }
+          );
         }
 
-        Swal.fire("Payment Done!", "Your Slot is Booked", "success").then(
-          (result) => {
-            if (result.isConfirmed) {
-              window.location.reload();
-            }
-          }
-        );
         // window.location.reload()
       }
     });
@@ -183,10 +184,25 @@ appointments.addEventListener("change", async (e) => {
   appointments.children[0].setAttribute("disabled", "true");
 });
 
+const getDoctors = async () => {
+  try {
+    let data = await fetch("/alldoctors", {
+      method: "GET",
+    });
+    data = await data.json();
+    data = data.data;
+
+    localStorage.setItem("doctors", JSON.stringify(data));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const getDoctorData = async () => {
   let id = window.location.pathname.split("/");
   id = Number(id[id.length - 1]);
   if (!isNaN(id)) {
+    await getDoctors();
     let doctors = JSON.parse(localStorage.getItem("doctors") || "[]");
     let doctor = doctors.filter((doctor) => doctor.id === id)[0];
 

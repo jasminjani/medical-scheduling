@@ -42,12 +42,19 @@ const updateData = async (data) => {
 
 		if (d.rating > 5 || d.rating < 0) return Swal.fire("Select rating from 0-5");
 
-		const response = await fetch(`http://localhost:8000/patient/review/update/${data.doctor_id}/?rating=${!d.rating ? data.rating : d.rating}&review=${!d.review ? data.review : d.review}`, {
+		let response = await fetch(`/patient/review/update/${data.doctor_id}/?rating=${!d.rating ? data.rating : d.rating}&review=${!d.review ? data.review : d.review}`, {
 			method: "GET",
 			headers: {
 				"Content-type": "application/x-www-form-urlencoded"
 			},
 		});
+
+		response = await response.json();
+
+		if(response.success){
+			await getReviews();
+			await getDoctorData();
+		}
 	}
 }
 
@@ -71,7 +78,7 @@ const generateReviewData = async (review, id) => {
 const getReviews = async () => {
 	const d_id = window.location.href.split("/").pop();
 
-	const response = await fetch(`http://localhost:8000/patient/review/${d_id}`, {
+	const response = await fetch(`/patient/review/${d_id}`, {
 		method: "GET",
 		headers: {
 			"Content-type": "application/x-www-form-urlencoded"
@@ -96,7 +103,7 @@ const submitRate = async () => {
 	const params = new URLSearchParams(formData);
 	const data = await new Response(params).text();
 
-	const response = await fetch("http://localhost:8000/patient/review", {
+	const response = await fetch("/patient/review", {
 		method: "POST",
 		headers: {
 			"Content-type": "application/x-www-form-urlencoded"
@@ -106,11 +113,14 @@ const submitRate = async () => {
 
 	const result = await response.json();
 
-	Swal.fire(result.message);
+	Swal.fire(result.message).then(async()=>{
+		await getReviews();
+		await getDoctorData();
+	});
 
 	gfg(0);
-	// console.log(document.getElementById("rev"));
-	document.getElementById("rev").value = ""
+	console.log(document.getElementById("review"));
+	document.getElementById("review").value = ""
 }
 
 function closeThanks() {

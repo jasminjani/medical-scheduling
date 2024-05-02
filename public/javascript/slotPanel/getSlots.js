@@ -42,7 +42,7 @@ const getSlots = async (date) => {
   const table = document.getElementById("slot-body");
 
   table.innerHTML = "";
-
+  message.sort((a,b)=> new Date(a.start_time).getTime() - new Date(b.start_time).getTime())
   message.forEach(element => {
     let timezoneOffset = new Date().getTimezoneOffset();
     // start time

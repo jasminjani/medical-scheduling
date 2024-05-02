@@ -828,7 +828,10 @@ exports.updateRating = async (req, res) => {
 
     let [data] = await conn.query(query, [rating, review, doctor_id, patient_id]);
 
-    res.redirect(`/patient/bookslots/${doctor_id}`);
+    return res.json({
+      success:true,
+      message:"Review Updated Successfully"
+    })
 
   }
   catch (error) {

@@ -234,10 +234,10 @@ let show = async function (id, slot_id) {
                 </div>
                 <div class="a5-prescription">
                   <p><span class="a5-bold">Prescription :</span>
-                    ${result.appointmentData[0].prescription}
+                    ${result.appointmentData[0].prescription ?? "<span style='color:red'>No Data Found</span>"}
                   </p>
                   <p><span class="a5-bold">Diagnosis :</span>
-                    ${result.appointmentData[0].diagnoses}
+                    ${result.appointmentData[0].diagnoses ?? "<span style='color:red'>No Data Found</span>"}
                   </p>
                 </div>
               </div>
