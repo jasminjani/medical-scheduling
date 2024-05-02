@@ -136,7 +136,7 @@
 
         const data = await resp.json();
 
-        console.log(data);
+        // console.log(data);
         let allPendingDoctors = data.filter((e) => {
           return e.approved === 0 ? e : false;
         });
@@ -164,7 +164,7 @@
         const rejectedTbody = document.getElementById(
           "a2-rejected-doctors-tbody"
         );
-        console.log(allPendingDoctors);
+        // console.log(allPendingDoctors);
         allPendingDoctors.forEach((doc, i) => {
           let str = `<tr>
             <td>${++i}</td>

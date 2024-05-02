@@ -139,12 +139,12 @@
       async function fetchData(id){
         let res=await fetch(`/admin/doctorDetails/${id}`);
         let resjson=await res.json();
-        console.log(resjson.result[0]);
+        // console.log(resjson.result[0]);
 
         let tabledata=document.getElementsByClassName("A4-table-content");
-        console.log(tabledata);
+        // console.log(tabledata);
         let keys=Object.keys(resjson.result[0]);
-        console.log(keys);
+        // console.log(keys);
         let i=0;
         keys.forEach(element => {
           tabledata[i].innerText=resjson.result[0][element];
@@ -165,7 +165,7 @@
         confirmButtonText: "Yes, Approve!"
         }).then(async (result) => {
           if (result.isConfirmed) {
-            console.log(id);
+            // console.log(id);
             const resp = await fetch(`/admin/doctor/approve/${id}`);
             await Swal.fire({
               title: "Approved!",
@@ -188,7 +188,7 @@
         confirmButtonText: "Yes, Reject!"
         }).then(async (result) => {
           if (result.isConfirmed) {
-            console.log(id);
+            // console.log(id);
             const resp = await fetch(`/admin/doctor/reject/${id}`);
             await Swal.fire({
               title: "Rejected!",

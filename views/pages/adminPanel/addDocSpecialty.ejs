@@ -72,7 +72,7 @@
       let response = await fetch("/admin/specialties");
 
       let allSpecialties = await response.json();
-      console.log(allSpecialties);
+      // console.log(allSpecialties);
       const tbody = document.getElementById("a2-tbody");
 
       allSpecialties.forEach((specialties, i) => {
@@ -92,7 +92,7 @@
       let response = await fetch("/admin/specialities/new");
 
       let newSpecialty = await response.json();
-      console.log(newSpecialty);
+      // console.log(newSpecialty);
       const tbody = document.getElementById("pending-speciality");
 
       if (newSpecialty.length) {
