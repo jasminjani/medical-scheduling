@@ -144,11 +144,15 @@ const handleGenerate = async (e) => {
     const { success } = await response.json();
 
     if (success) {
+      formdata.reset();
       Swal.fire({
         icon: "success",
         text: "Slots generated!",
-        footer: '<a href="/doctor/upcomingSlots">See all slots</a>',
-      });
+      }).then((result)=>{
+        if(result.isConfirmed){
+          window.location.href = "/doctor/upcomingSlots";
+        }
+      })
     }
   } else {
     Swal.fire({

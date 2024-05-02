@@ -22,7 +22,7 @@ exports.fileStorage = multer.diskStorage({
 
 exports.fileFilter = function (req, file, cb) {
   const extension = path.extname(file.originalname).toLowerCase();
-  console.log(extension);
+  // console.log(extension);
   const mimetyp = file.mimetype;
   if (extension !== ".pdf" || mimetyp !== "application/pdf") {
     return cb("error message", true);

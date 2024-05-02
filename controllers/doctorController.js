@@ -130,7 +130,7 @@ exports.dashBoardReviews = async (req, res) => {
 exports.searchReviews = async (req, res) => {
   try {
     let doctor_id = req.user.id;
-    let {search} = req.params
+    let { search } = req.params
 
     if (search == "null") {
       search = ""
@@ -184,7 +184,7 @@ exports.dashBoardTodayAppointments = async (req, res) => {
     join users as users_patient on slot_bookings.patient_id=users_patient.id
     left join prescriptions on prescriptions.booking_id=slot_bookings.id
     where time_slots.doctor_id=? && time_slots.date=curdate() &&
-    timestampdiff(minute,utc_timestamp,time_slots.start_time)>0
+    timestampdiff(minute,utc_timestamp,time_slots.end_time)>0
     && prescriptions.id is null && slot_bookings.is_canceled = 0 && slot_bookings.is_deleted=0`,
       [doctor_id]
     );
@@ -461,8 +461,8 @@ exports.patientPrescriptionData = async (req, res) => {
       [patient_id, doctor_id, date]
     );
     res.json({
-      success:true,
-      data:result
+      success: true,
+      data: result
     });
   } catch (error) {
     logger.error(error.message);
@@ -751,7 +751,7 @@ exports.updateDoctorDetails = async (req, res) => {
     }
 
     if (otherSpeciality) {
-      
+
       try {
         const [newSpeciality] = await conn.query(
           `INSERT INTO specialities (speciality, approved) VALUES (?,?)`,
@@ -809,7 +809,7 @@ exports.updateDoctorDetails = async (req, res) => {
 
     let result;
     try {
-      [result] = await conn.query(` select u.id,u.fname,u.lname,u.email,u.gender,u.dob,u.phone,u.city,u.address,u.role_id,pp.profile_picture as profile from users as u left join profile_pictures as pp on u.id = pp.user_id where pp.is_active =1 and u.id = ?;`,[doctor_id])
+      [result] = await conn.query(` select u.id,u.fname,u.lname,u.email,u.gender,u.dob,u.phone,u.city,u.address,u.role_id,pp.profile_picture as profile from users as u left join profile_pictures as pp on u.id = pp.user_id where pp.is_active =1 and u.id = ?;`, [doctor_id])
     } catch (error) {
       return res.json({
         success: false,
@@ -821,7 +821,7 @@ exports.updateDoctorDetails = async (req, res) => {
 
     return res
       .status(200)
-      .json({ success: true, message: "Updated successfully",data:result });
+      .json({ success: true, message: "Updated successfully", data: result });
   } catch (error) {
     logger.error(error.message);
     res.status(500).json({
@@ -895,8 +895,8 @@ exports.createHospital = async (req, res) => {
 
 exports.home = async (req, res) => {
   try {
-    let {booking_id}=req.params;
-    return res.render("pages/Prescription/createPrescription.ejs",{booking_id});
+    let { booking_id } = req.params;
+    return res.render("pages/Prescription/createPrescription.ejs", { booking_id });
   } catch (error) {
     logger.error(error.message);
     res.status(500).json({
@@ -940,7 +940,7 @@ exports.createPrescription = async (req, res) => {
       const insert_id = result[0].insertId;
       res.json({
         msg: "Prescription Added Successfully",
-        insert_id:insert_id,
+        insert_id: insert_id,
       });
     } else {
       res.json({
@@ -1101,7 +1101,7 @@ exports.createSlots = async (req, res) => {
 
               const [slots] = await conn.query(query, [
                 doctor_id,
-                dayArray[i][0],         
+                dayArray[i][0],
                 `${dayArray[i][0]} ${start_time}`,
                 `${dayArray[i][0]} ${end_time}`,
               ]);
@@ -1266,6 +1266,20 @@ exports.deleteSlot = async (req, res) => {
       const query = "update payments set is_refunded = ? where slot_id = ?";
 
       const [refunded] = await conn.query(query, [1, slot_id]);
+
+      try {
+        await conn.query(`insert into notifications (user_id,message,type,start_at,end_at)
+        values 
+        ((select patient_id from slot_bookings where slot_id = ?),concat("Your appointment booked with"," ", (select concat(fname," ", lname) from users where id = ?)," canceled"),"delete",
+        NOW(),
+        (select start_time from time_slots where id = ?));`, [slot_id, doctor_id, slot_id, slot_id, slot_id]);
+      } catch (error) {
+        logger.error(error.message);
+        return res.status(500).json({
+          success: false,
+          message: error.message,
+        });
+      }
 
       // return res.status(200).json({ success: true, message: "slot deleted successfully" });
       res.redirect("/doctor/upcomingSlots");

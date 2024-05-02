@@ -39,7 +39,7 @@ const getUpcomingSlots = async () => {
     element.start_time -= (timezoneoffset * 60 * 1000);
     const checkStartTime = ((element.start_time - new Date().getTime()) / (1000 * 60 * 60))
     element.start_time = new Date(element.start_time).toLocaleTimeString('en-US')
-    console.log(element.start_time)
+    // console.log(element.start_time)
 
     element.end_time = new Date(element.end_time).getTime();
     element.end_time -= (timezoneoffset * 60 * 1000);
@@ -107,7 +107,7 @@ const cancelSlot = async (element,time) => {
       }).then((result) => {
         if (result.isConfirmed) {
           socket.emit('cancel-slot', element);
-          window.location = `/patient/cancel/${element.id}`;
+          // window.location = `/patient/cancel/${element.id}`;
         }
       });
     }

@@ -100,6 +100,8 @@ async function approveReject() {
       if (result.isConfirmed) {
 
         let patient_id = window.location.href.split('/').pop();
+        // console.log("u id ",patient_id);
+        // console.log("u status ",patientActiveStatus);
 
         const response = await fetch(`/admin/patient/approve-reject`, {
           method: "POST",
@@ -108,6 +110,7 @@ async function approveReject() {
             "Content-Type": "application/json"
           }
         });
+        // console.log(response);
 
         await Swal.fire({
           title: `${text}${postfix}!`,
@@ -231,10 +234,10 @@ let show = async function (id, slot_id) {
                 </div>
                 <div class="a5-prescription">
                   <p><span class="a5-bold">Prescription :</span>
-                    ${result.appointmentData[0].prescription}
+                    ${result.appointmentData[0].prescription ?? "<span style='color:red'>No Data Found</span>"}
                   </p>
                   <p><span class="a5-bold">Diagnosis :</span>
-                    ${result.appointmentData[0].diagnoses}
+                    ${result.appointmentData[0].diagnoses ?? "<span style='color:red'>No Data Found</span>"}
                   </p>
                 </div>
               </div>

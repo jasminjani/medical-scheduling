@@ -2,7 +2,7 @@
 
 
   let id=document.getElementById("id").value;
-  console.log(id)
+  // console.log(id)
   const fetchdata=async(id)=>{
     try{
    
