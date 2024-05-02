@@ -7,7 +7,7 @@ exports.allRequestLogs = (req, res, next) => {
     let time = new Date().toLocaleString();
 
     // let fullURL = `${req.ip.split(':').pop()} ${req.method} ${req.protocol}://${req.get('host')}${req.originalUrl} \n`;
-    let fullURL = `${time} ${req.method} ${req.protocol}://${req.get('host')}${req.originalUrl} \n`;
+    let fullURL = `${time} : ${req.method} : ${req.protocol}://${req.get('host')}${req.originalUrl} \n`;
 
     let fileName = 'uploads/requestLogs/requestURL.log';
 
