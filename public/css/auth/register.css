@@ -16,6 +16,19 @@ body {
   min-height: 100vh;
 }
 
+.logo{
+  width: 50px;
+  /* position: absolute; */
+
+  top: 10px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 1px solid rgb(182, 180, 180);
+}
+
+.logo img{
+  width: 100%;
+}
 
 .form {
   display: flex;
@@ -24,6 +37,10 @@ body {
   justify-content: center;
   gap: 10px;
   height: 90%;
+}
+
+.form h2{
+  color: #0054d3;
 }
 
 .content {
@@ -137,7 +154,7 @@ form input:focus{
 }
 
 .mv-btn a{
-  color: black;
+  color: #0054d3;
   font-weight: bold;
 }
 
