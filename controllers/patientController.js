@@ -933,7 +933,6 @@ exports.updateBecomeDoctorData = async (req, res) => {
 
 
 exports.updatePostBecomeDoctor = async (req, res) => {
-  // console.log("kya hal chal");
 
   let { otherSpeciality, doctor_details_id, hospital_id, qualification, consultancy_fees, speciality_id, hospital_name, address, gst_no, city, pincode } = req.body
   const doctor_id = req.user.id
@@ -944,7 +943,6 @@ exports.updatePostBecomeDoctor = async (req, res) => {
       message: "Internal Server Error!"
     })
   }
-
   try {
     try {
       await conn.query(`update clinic_hospitals set name = ?, location = ?, gst_no =?, city = ?, pincode = ? where clinic_hospitals.id = ? `, [hospital_name, address, gst_no, city, pincode, hospital_id])
@@ -958,7 +956,6 @@ exports.updatePostBecomeDoctor = async (req, res) => {
     }
 
     if (otherSpeciality) {
-      // console.log("inside other speciality");
       try {
         const [newSpeciality] = await conn.query(
           `INSERT INTO specialities (speciality, approved) VALUES (?,?)`,
@@ -994,7 +991,7 @@ exports.updatePostBecomeDoctor = async (req, res) => {
       logger.error(error.message);
       return res.status(500).json({
         success: false,
-        message: error.message,
+        message: error.message
       });
     }
     return res.status(200).json({ success: true })
@@ -1043,7 +1040,7 @@ exports.updateBecomeDoctorData = async (req, res) => {
 
 exports.updatePostBecomeDoctor = async (req, res) => {
 
-  const { doctor_details_id, hospital_id, qualification, consultancy_fees, speciality_id, hospital_name, address, gst_no, city, pincode } = req.body
+  let { otherSpeciality, doctor_details_id, hospital_id, qualification, consultancy_fees, speciality_id, hospital_name, address, gst_no, city, pincode } = req.body
   const doctor_id = req.user.id
 
   if (!hospital_id || !speciality_id || !doctor_id) {
@@ -1063,6 +1060,23 @@ exports.updatePostBecomeDoctor = async (req, res) => {
         success: false,
         message: error.message
       })
+    }
+
+    if (otherSpeciality) {
+      try {
+        const [newSpeciality] = await conn.query(
+          `INSERT INTO specialities (speciality, approved) VALUES (?,?)`,
+          [otherSpeciality, 0]
+        );
+
+        speciality_id = newSpeciality.insertId;
+
+      } catch (error) {
+        return res.status(500).json({
+          success: false,
+          message: error.message,
+        });
+      }
     }
 
     try {
