@@ -43,7 +43,7 @@ searchBtn.addEventListener('keyup', function (event) {
 });
 
 let currentPage = 1;
-const pagefield = 1;
+const pagefield = 10;
 let length = 0;
 let pageno = document.getElementById("pageno");
 
