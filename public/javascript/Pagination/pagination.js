@@ -21,7 +21,7 @@ const pagination = async()=>{
         <td>${value.created_at}</td>
         <td>${value.patient_name}</td>
         <td>${value.diagnoses}</td>
-        <td><input type="button" value="Get PDF" onclick="generatePDF(${value.id})" id="A4-getpdf-btn"><input type="button" value="Edit Prescription" onclick="editPrescription(${value.id})" id="A4-editprescription-btn"></td>
+        <td id="buttons"><input type="button" value="Get PDF" onclick="generatePDF(${value.id})" id="A4-getpdf-btn"><input type="button" value="Edit Prescription" onclick="editPrescription(${value.id})" id="A4-editprescription-btn"></td>
       </tr>`
   })
 

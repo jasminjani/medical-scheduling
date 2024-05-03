@@ -213,13 +213,15 @@ const toggleLoginLogout = async () => {
     let userRedirect = document.querySelector("#logged-user .logo a");
 
     if (userInfo.role_id == 1) {
-      userRedirect.setAttribute("href", "/patient");
+      userRedirect.setAttribute("href", "/");
     } else if (userInfo.role_id == 2) {
+      document.getElementById("patient-dashboard")?.remove();
       document.getElementById("become-doctor")?.remove();
-      document.getElementById("book-appointment").remove();
+      document.getElementById("book-appointment")?.remove();
       userRedirect.setAttribute("href", "/doctor/dashboard");
     } else if (userInfo.role_id == 3) {
-      document.getElementById("book-appointment").remove();
+      document.getElementById("patient-dashboard")?.remove();
+      document.getElementById("book-appointment")?.remove();
       document.getElementById("become-doctor")?.remove();
       userRedirect.setAttribute("href", "/admin");
     }
