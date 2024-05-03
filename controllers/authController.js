@@ -565,7 +565,7 @@ exports.activationAccount = async (req, res) => {
     let diff = new Date(Date.now()) - new Date(result[0].token_created_at);
     let mins = Math.floor((diff % 86400000) / 60000); // minutes
 
-    if (mins > 1) {
+    if (mins > 30) {
       let html = ` <div class="success-page">
       <div>
         <img src="/assets/linkExpire.png" alt="Verification link has been expired!">
