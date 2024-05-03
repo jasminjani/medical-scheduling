@@ -18,5 +18,5 @@
         });
       }
 
-  fetchData(`<%=docID %>`);
+  fetchData(window.location.pathname.split("/").pop());
 
