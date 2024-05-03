@@ -344,6 +344,7 @@ exports.patientUpcomingBookings = async (req, res) => {
 exports.patientPastBookings = async (req, res) => {
   try {
     const { patient_id } = req.params;
+    console.log(patient_id);
     try {
       const query =
         `select time_slots.id,time_slots.doctor_id,slot_bookings.patient_id, 
