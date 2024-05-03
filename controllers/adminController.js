@@ -469,9 +469,17 @@ exports.updatePatient = async (req, res) => {
     // console.log("patient id ", patient_id);
     // console.log("status  ", activeStatus);
 
-    const sql = `UPDATE users SET is_deleted = ? WHERE id = ?`;
+    const sql = `UPDATE users SET is_deleted = ?, deleted_at=? WHERE id = ?`;
 
-    const [updatePatient] = await conn.query(sql, [activeStatus, patient_id]);
+    const [updatePatient] = await conn.query(sql, [activeStatus, new Date(Date.now()), patient_id]);
+
+    // check deleted or not
+    if (!updatePatient.affectedRows) {
+      return res.status(400).json({
+        success: false,
+        message: "error in deleting the data"
+      });
+    }
 
     res.status(200).send();
 
