@@ -26,26 +26,6 @@
         })
       })
 
-    let timezoneOffset = new Date().getTimezoneOffset();
-    socket.on(`reminder-${userInfo.email}`, (data) => {
-      let startTime = new Date(data.end_at).getTime();
-      startTime -= (timezoneOffset * 60 * 1000);
-      startTime = new Date(startTime).toLocaleTimeString();
-      Swal.fire({
-        title: data.message + ` at ${startTime}`
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          await fetch("/patient/notification", {
-            method: "PUT",
-            body: JSON.stringify({ id: data.id }),
-            headers: {
-              "Content-Type": "application/json"
-            }
-          })
-        }
-      })
-    })
-
     socket.on(`delete-slot-${userInfo.id}`, (msg) => {
       Swal.fire(new Date(msg.date).toLocaleString().split(",")[0] + " slot from " + msg.start_time + "-" + msg.end_time + " has been canceled");
     })
