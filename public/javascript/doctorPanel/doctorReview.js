@@ -1,6 +1,6 @@
 // Pagination Declare Global Variable
 let data;
-let pagefield = 1
+let pagefield = 10
 let currentPage = 1
 let length = 0
 let pageno = document.getElementById("pageno")

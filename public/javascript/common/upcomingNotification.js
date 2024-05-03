@@ -33,7 +33,5 @@
     socket.on(`cancel-slot-${userInfo.id}`, (msg) => {
       Swal.fire(new Date(msg.date).toLocaleString().split(",")[0] + " slot from " + msg.start_time + "-" + msg.end_time + " has been canceled");
     })
-
   }
-
 });
