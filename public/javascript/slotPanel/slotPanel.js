@@ -2,7 +2,14 @@ const form = document.getElementById("myform");
 const rows = form.getElementsByClassName("row");
 const today = new Date();
 const currentDay = today.getDay();
+
+// Date validation
+const sundayOffset = 7 - currentDay;
+const sunday = new Date(today);
+sunday.setDate(today.getDate() + sundayOffset);
+
 const minDate = today.toISOString().substring(0, 10);
+const maxDate = sunday.toISOString().substring(0, 10);
 
 window.location.href.split("/").pop() === "addSlot"
   ? (document.getElementById("A3-add").style.backgroundColor = "#3984af")
@@ -14,10 +21,10 @@ function checkSlotOverlap(slots) {
     let timeB = b.split("-")[0].trim();
 
     return timeA.localeCompare(timeB, undefined, { numeric: true });
-  });
+});
 
-  // console.log(slots);
-  for (let i = 1; i < sortedSlots.length; i++) {
+
+for (let i = 1; i < sortedSlots.length; i++) {
     let prevSlotEndTime = sortedSlots[i - 1].split("-")[1].trim();
     let currSlotStartTime = sortedSlots[i].split("-")[0].trim();
 
@@ -28,13 +35,9 @@ function checkSlotOverlap(slots) {
   return true;
 }
 
-// Date validation
-const sundayOffset = 7 - currentDay;
-const sunday = new Date(today);
-sunday.setDate(today.getDate() + sundayOffset);
-
 const handleChange = (e) => {
-  if (new Date(e.target.value) > sunday) {
+  if (new Date(e.target.value) > sunday || new Date(e.target.value) < today + 1) {
+    e.target.value = "";
     return Swal.fire("Please select date of this week only");
   }
 }
@@ -45,14 +48,18 @@ const handleInput = (times, i) => {
   newNode.setAttribute("name", `day${i + 1}`);
   newNode.setAttribute("class", "A3-time");
   newNode.setAttribute("placeholder", "hh:mm");
-  newNode.addEventListener("mouseover", handleFocus(newNode));
   times.insertBefore(newNode, times.children[times.children.length - 1])
     .addEventListener("change", (e) => {
+      if (!/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/.test(e.target.value)) {
+        e.target.value = "";
+        return Swal.fire("Please enter date in hh:mm format in 24 hour format");
+      }
       let startTime = e.target.value;
       const slotGap = document.getElementById("slot_gap").value;
       let [hours, minutes] = startTime.split(":").map(Number);
       minutes += Number(slotGap);
       hours += Math.floor(minutes / 60);
+      hours = hours % 24;
       minutes = minutes % 60;
       const endTime = hours.toString().padStart(2, "0") + ":" + minutes.toString().padStart(2, "0");
       e.target.value += "-" + endTime;
@@ -78,6 +85,7 @@ for (let i = 0; i < rows.length; i++) {
   const times = rows[i].getElementsByClassName("times")[0];
   const date = rows[i].getElementsByClassName("date")[0];
   date.getElementsByTagName("input")[0].setAttribute("min", minDate);
+  date.getElementsByTagName("input")[0].setAttribute("max", maxDate);
   handleButton(addButton, date, times, i);
 }
 
@@ -122,10 +130,11 @@ const handleGenerate = async (e) => {
       icon:'warning',
     })
   }
+  
   const isValid = slotData.every((daySlot) => checkSlotOverlap(daySlot));
-  console.log(isValid)
+
   if (isValid) {
-    const response = await fetch("/slot", {
+    const response = await fetch("/doctor/slot", {
       method: "POST",
       headers: {
         "Content-type": "application/x-www-form-urlencoded",
@@ -135,11 +144,15 @@ const handleGenerate = async (e) => {
     const { success } = await response.json();
 
     if (success) {
+      formdata.reset();
       Swal.fire({
         icon: "success",
         text: "Slots generated!",
-        footer: '<a href="/upcomingSlots">See all slots</a>',
-      });
+      }).then((result)=>{
+        if(result.isConfirmed){
+          window.location.href = "/doctor/upcomingSlots";
+        }
+      })
     }
   } else {
     Swal.fire({
@@ -149,8 +162,3 @@ const handleGenerate = async (e) => {
   }
 };
 
-const handleFocus = (input) => {
-  const popUp = document.createElement("input");
-  popUp.setAttribute("type", "time");
-  popUp.setAttribute("id", "popup");
-};

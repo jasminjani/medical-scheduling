@@ -5,12 +5,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Patients Dashboard</title>
-
+  <link rel="stylesheet" href="/css/loaderComponent.css" />
+  <script src="/javascript/loaderComponent.js"></script>
   <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
   <link rel="stylesheet" href="/css/patientCSS/patientDashboard.css" />
 
   <link rel="stylesheet" href="/css/patientCSS/patientProfile.css" />
+  <link rel="stylesheet" href="/css/homepage.css" />
+  <script src="/javascript/patientPanel/patientDashboardDoctor.js" defer></script>
   <style>
     #a5-patient-dashboard-active {
       background-color: #0969da;
@@ -26,200 +29,223 @@
 </head>
 
 <body onload="getUpcomingSlots()">
+  <div class="center" id="loader"></div>
 
-  <div class="a5-main-container">
-    <div class="a5-container">
-      <%- include('../../common/newSidebar/patientSidebar.ejs') %>
-      <div class="a2-patient-dashboard">
-        <div class="a2-container a2-patient-home">
-          <div class="a2-patient-hero-section">
-            <img src="/assets/patient-dashboard.jpg" alt="" />
-            <div class="a2-patient-hero-text">
-              <h3>Welcome</h3>
-              <h2 class="a2-patient-name"></h2>
-              <div>
-                <p>Have't any idea about doctors? no problem !</p>
-                <p>let's jumping to <b>"All Doctors"</b> section</p>
-                <p>Track your past and future appointments history.</p>
-                <p>
-                  Also find out the expected arrival time of your doctor or
-                  medical consultant.
-                </p>
+  <!-- Header Section -->
+
+  <%- include(`../../common/newSidebar/patientNav.ejs`) %>
+
+
+    <div class="a5-main-container">
+      <div class="a5-container">
+        <div class="a2-patient-dashboard">
+          <div class="a2-container a2-patient-home">
+            <div class="a2-patient-hero-section">
+              <img src="/assets/patient-dashboard.jpg" alt="" />
+              <div class="a2-patient-hero-text">
+                <h3>Welcome</h3>
+                <h2 class="a2-patient-name"></h2>
+                <div>
+                  <p>Have't any idea about doctors? no problem !</p>
+                  <p>let's jumping to <b>"All Doctors"</b> section</p>
+                  <p>Track your past and future appointments history.</p>
+                  <p>
+                    Also find out the expected arrival time of your doctor or
+                    medical consultant.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="a2-status-booking">
+              <div class="a2-patient-status">
+                <div class="a2-card">
+                  <div class="card-itams">
+                    <span id="doctors-count"></span> All Doctors
+                  </div>
+                  <div class="card-itams">
+                    <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
+                  </div>
+                </div>
+                <div class="a2-card">
+                  <div class="card-itams">
+                    <span id="patients-count"></span> All Patients
+                  </div>
+                  <div class="card-itams">
+                    <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
+                  </div>
+                </div>
+                <div class="a2-card">
+                  <div class="card-itams">
+                    <span id="today-booking-count"></span> Today's Booking
+                  </div>
+                  <div class="card-itams">
+                    <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
+                  </div>
+                </div>
+                <div class="a2-card">
+                  <div class="card-itams">
+                    <span id="total-booking-count"></span> My Total Booking
+                  </div>
+                  <div class="card-itams">
+                    <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="a2-upcoming-booking">
+                <div class="row">
+                  <h3>Today's Appointments</h3>
+                  <a href="/patient/upcomingSlots">View all</a>
+                </div>
+                <div class="A3-row-2">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Day</th>
+                        <th>Slot</th>
+                        <th>Details</th>
+                      </tr>
+                    </thead>
+                    <tbody id="date-body"></tbody>
+                  </table>
+                </div>
+                <div class="A3-modal">
+                  <div class="A3-row-3">
+                    <h3 id="A3-modal-date">Date</h3>
+                    <input type="button" value="Close" onclick="handleClose()" />
+                  </div>
+                  <div class="card">
+                    <div class="col">
+                      <p>Doctor name</p>
+                      <p>Doctor email</p>
+                      <p>Doctor phone</p>
+                      <p>Doctor qualification</p>
+                    </div>
+                    <div class="col">
+                      <p>Consultancy fee</p>
+                      <p>hosp name</p>
+                      <p>hosp loc</p>
+                      <p>hosp pincode</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          <div class="a2-status-booking">
-            <div class="a2-patient-status">
-              <div class="a2-card">
-                <div class="card-itams">
-                  <span id="doctors-count"></span> All Doctors
-                </div>
-                <div class="card-itams">
-                  <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
-                </div>
+          <div class="section-heading">
+            <p class="steps-title">Your Nearby Doctors</p>
+          </div>
+
+          <!-- search bar of doctor -->
+          <div class="all-doctors">
+            <div class="search-doctor">
+              <div class="specialities">
+                <select name="speciality" id="speciality">
+                  <option value="">Select speciality</option>
+                  <%- html %>
+                </select>
               </div>
-              <div class="a2-card">
-                <div class="card-itams">
-                  <span id="patients-count"></span> All Patients
-                </div>
-                <div class="card-itams">
-                  <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
-                </div>
-              </div>
-              <div class="a2-card">
-                <div class="card-itams">
-                  <span id="today-booking-count"></span> Today's Booking
-                </div>
-                <div class="card-itams">
-                  <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
-                </div>
-              </div>
-              <div class="a2-card">
-                <div class="card-itams">
-                  <span id="total-booking-count"></span> My Total Booking
-                </div>
-                <div class="card-itams">
-                  <i class="fa-solid fa-briefcase-medical a5-list-item-img"></i>
+              <p class="or">OR</p>
+              <div class="doctor-names">
+                <input type="text" name="dname" id="dname" list="doctor-name" placeholder="Search Doctor by name" />
+
+                <datalist id="doctor-name">
+                  <!-- <option value="ms">MS</option>
+                      <option value="md">MD</option>
+                      <option value="mbbs">MBBS</option> -->
+                </datalist>
+
+                <div class="search-btn">
+                  <input type="submit" class="btn" value="Search" id="search-doctor" />
                 </div>
               </div>
             </div>
 
-            <div class="a2-upcoming-booking">
-              <div class="row">
-                <h3>Today's Appointments</h3>
-                <a href="/patientUpcomingSlots">View all</a>
-              </div>
-              <div class="A3-row-2">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Date</th>
-                      <th>Day</th>
-                      <th>Slot</th>
-                      <th>Details</th>
-                    </tr>
-                  </thead>
-                  <tbody id="date-body"></tbody>
-                </table>
-              </div>
-              <div class="A3-modal">
-                <div class="A3-row-3">
-                  <h3 id="A3-modal-date">Date</h3>
-                  <input type="button" value="Close" onclick="handleClose()" />
+            <div class="swipe-btns">
+              <!-- button pushed from js -->
+            </div>
+            <div class="doctors">
+              <div class="cards">
+                <!-- <div class="card">
+                  <div class="img">
+                    <img src="/assets/doctor.png" alt="" />
+                  </div>
+                  <div class="details">
+                    <p class="name">doctor1</p>
+                    <p class="speciality">MS</p>
+                  </div>
+                  <p class="rating">
+                    <img src="/assets/gstar.png" width="15px" alt="" />
+                    <img src="/assets/gstar.png" width="15px" alt="" />
+                    <img src="/assets/gstar.png" width="15px" alt="" />
+                    <img src="/assets/gstar.png" width="15px" alt="" />
+                    <img src="/assets/gstar.png" width="15px" alt="" />
+                  </p>
                 </div>
                 <div class="card">
-                  <div class="col">
-                    <p>Doctor name</p>
-                    <p>Doctor email</p>
-                    <p>Doctor phone</p>
-                    <p>Doctor qualification</p>
+                  <div class="img">
+                    <img src="/assets/doctor.png" alt="" />
                   </div>
-                  <div class="col">
-                    <p>Consultancy fee</p>
-                    <p>hosp name</p>
-                    <p>hosp loc</p>
-                    <p>hosp pincode</p>
+                  <div class="details">
+                    <p class="name">doctor2</p>
+                    <p class="speciality">MS</p>
                   </div>
-                </div>
+                  <p class="rating">
+                    <img src="/assets/gstar.png" width="15px" alt="" />
+                    <img src="/assets/gstar.png" width="15px" alt="" />
+                    <img src="/assets/gstar.png" width="15px" alt="" />
+                    <img src="/assets/gstar.png" width="15px" alt="" />
+                    <img src="/assets/gstar.png" width="15px" alt="" />
+                  </p>
+                </div> -->
               </div>
+            </div>
+          </div>
+
+          <!-- chat chat window -->
+          <p id="a2-show-window-btn"><i class="fa fa-ticket" aria-hidden="true" style="rotate: 120deg;"></i></p>
+          <div class="a2-chat-window">
+            <div class="a2-chat-nav">
+              <h3>Ashish Zapadiya</h3>
+            </div>
+            <div class="a2-chat-message">
+              <div>
+                <p class="text-align-start">Hey there! 👋</p>
+              </div>
+              <div>
+                <p class="text-align-end">My Name is Ashish</p>
+              </div>
+              <div>
+                <p class="text-align-start">Pleased to meet you Ashish 😇</p>
+                <p class="text-align-start">
+                  how would you like me to assist you today?
+                </p>
+              </div>
+              <div>
+                <p class="text-align-end">Book an Appointment</p>
+              </div>
+              <div>
+                <p class="text-align-start">
+                  Sure, goto this
+                  <a href="http://localhost:8000/">localhost:8000</a>
+                </p>
+              </div>
+            </div>
+            <div class="a2-chat-input-div">
+              <form action="javascript:void(0)" class="a2-chat-form">
+                <input type="text" class="a2-chat-input" />
+                <input type="submit" value="Send" class="a2-chat-submit" />
+              </form>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-    <script>
-
-      document.querySelector('.a2-patient-name').innerHTML = `${user.fname + " " + user.lname}`;
-
-
-
-      async function getPatientData() {
-        let resp = await fetch(`/patient-status/${user.id}`);
-        let data = await resp.json();
-
-        document.getElementById('doctors-count').innerHTML = data[0]?.doctorCount;
-        document.getElementById('patients-count').innerHTML = data[1]?.patientCount;
-        document.getElementById('today-booking-count').innerHTML = data[3]?.TodaysBooking;
-        document.getElementById('total-booking-count').innerHTML = data[2]?.patientTotalBooking;
-
-      }
-
-      getPatientData();
-    </script>
-
-
-    <!-- Upcoming slots script -->
-    <script>
-      console.log("inside patient");
-      const getUpcomingSlots = async () => {
-        let user = JSON.parse(localStorage.getItem('userinfo'));
-        const response = await fetch(`/bookings/${user.id}`, {
-          method: "GET",
-          headers: {
-            "Content-type": "application/json"
-          }
-        });
-
-        let { success, data } = await response.json();
-
-        const todaysAppointment = data.filter((e) => { return new Date(e.date) < new Date() });
-
-        const table = document.getElementById("date-body");
-
-        table.innerHTML = "";
-
-        if (todaysAppointment.length == 0) {
-          return table.innerHTML = "<tr><td colspan='5'>No Data Found !</td></tr>"
-        }
-
-        todaysAppointment.forEach(element => {
-          table.innerHTML += `
-            <tr>
-              <td>${element.date}</td>
-              <td>${element.day}</td>
-              <td>${element.start_time.slice(0, -3)}-${element.end_time.slice(0, -3)}</td>
-              <td><input type="button" class="view-btn" value="Details" onclick='getDetails(${JSON.stringify(element)})'></td>
-            </tr>
-            `
-        });
-      }
-
-      const getDetails = async (data) => {
-        const modal = document.getElementsByClassName("A3-modal")[0];
-
-        modal.style.visibility = "visible";
-
-        modal.innerHTML = `
-      <div class="A3-row-3">
-        <h3 id="A3-modal-date">Booking : ${data.booking_date}</h3>
-        <input type="button" class="view-btn" value="Close" onclick="handleClose()">
-      </div>
-      <h4>Doctor Details</h4>
-      <div class="card">
-          <div class="col">
-    <p><i class="fa-solid fa-user-doctor"></i>${data.fname} ${data.lname}<img src="/assets/tick.png" alt="tick"/></p>
-            <p><i class="fa-regular fa-envelope"></i>${data.email}</p>
-            <p><i class="fa-solid fa-phone"></i>${data.phone}</p>
-            <p><i class="fa-solid fa-book"></i>${data.qualification}</p>
-          </div>
-          <div class="col">
-            <p><i class="fa-solid fa-indian-rupee-sign"></i>${data.consultancy_fees}</p>
-            <p><i class="fa-regular fa-hospital"></i>${data.name}</p>
-            <p><i class="fa-solid fa-location-dot"></i>${data.location}</p>
-            <p><i class="fa-solid fa-pen"></i>${data.pincode}</p>
-        </div>
-      </div>
-  `
-      }
-
-
-      const handleClose = () => {
-        document.getElementsByClassName("A3-modal")[0].style.visibility = "hidden";
-      }
-    </script>
+ 
 
 </body>
 

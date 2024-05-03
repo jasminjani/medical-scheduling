@@ -1,49 +1,94 @@
-let search = document.getElementById("search").value
+let data;
+
+// let search = document.getElementById("search").value
+
+
 const fetchData = async () => {
-  let fetchdata = await fetch(`/getPatientData`)
-  let data = await fetchdata.json()
-  return data
+  try {
+    let fetchdata = await fetch(`/doctor/patients`)
+    data = await fetchdata.json();
+    // return data
+    await pagination();
+  } catch {
+    console.log(error);
+  }
 }
 
-const searchFetchDataFun = async()=>{
-  let fetchData = await fetch(`/searchPatientData/${search}`)
-  let data = await fetchData.json()
-  return data
+const searchPatientDetails = async () => {
+  try {
+
+    let searchedData = document.getElementById('search').value;
+    // if (typeof searchedData === "string" && searchedData.length === 0) {
+    if (!searchedData) {
+      searchedData = "null";
+    }
+    const url = `/doctor/patients-detail/${searchedData}`;
+    const response = await fetch(url);
+    data = await response.json();
+    // return data;
+    await pagination();
+  } catch (error) {
+    console.log(error);
+  }
 }
+
+let searchBtn = document.getElementById('a5-btn-search');
+
+searchBtn.addEventListener('keyup', function (event) {
+  try {
+    if (event.key === 'Enter') {
+      searchPatientDetails();
+    }
+  } catch (error) { console.log(error); }
+});
 
 let currentPage = 1;
-const pagefield = 1;
+const pagefield = 10;
 let length = 0;
 let pageno = document.getElementById("pageno");
+
+
 const pagination = async () => {
-  let data 
-  if (search) {
-    data = await searchFetchDataFun()
-  }
-  else {
-    data = await fetchData()
-  }
+  try {
+
+    //  data = await fetchData()
+    // if (search) {
+    //   data = data.filter((obj) => {
+    //     return obj.name.includes(search) 
+    //   })
+    // }
 
 
-  length = data.length;
-  pageno.innerHTML = currentPage;
+    length = data.length;
+    if (length == 0) {
+      document.getElementById("a5-tbody").innerHTML = `<tr><td colspan='3'  style='text-align:center'>Data Not Found!</td></tr>`;
+    }
+    else {
+      pageno.innerHTML = currentPage;
 
-  const endIndex = currentPage * pagefield;
-  const startIndex = endIndex - pagefield;
-  const pageItems = data.slice(startIndex, endIndex);
 
-  let tabledata = "";
+      const endIndex = currentPage * pagefield;
+      const startIndex = endIndex - pagefield;
+      const pageItems = data.slice(startIndex, endIndex);
 
-  pageItems.map((value) => {
-    let patient_id = value.patient_id
-    tabledata += `<tr>
+      let tabledata = "";
+      document.getElementById("a5-tbody").innerHTML = tabledata;
+
+      pageItems.map((value) => {
+        let patient_id = value.patient_id
+        tabledata += `<tr>
     <td hidden >${patient_id}</td>
     <td>${value.name}</td>
     <td>${value.phone}</td>
-    <td><p class="a5-btn" onclick='window.location.href ="/viewPatientHistory/${patient_id}"'>View More</a></td>
+    <td><p class="a5-btn" onclick='window.location.href ="/doctor/patients/history/${patient_id}"'>View More</a></td>
   </tr>`
-  })
-  document.getElementById("a5-tbody").innerHTML += tabledata;
+      })
+      document.getElementById("a5-tbody").innerHTML += tabledata;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
 }
 
 const removeFun = async () => {
@@ -62,7 +107,7 @@ if (currentPage == 1) {
 function firstpageFun() {
   currentPage = 1;
   pagination()
-  removeFun()
+  // removeFun()
   if (currentPage != length / pagefield) {
     document.getElementById('endbtn').disabled = false;
     document.getElementById('nextbtn').disabled = false;
@@ -77,7 +122,7 @@ function prevButtonFun() {
   if (currentPage > 1) {
     currentPage--;
     pagination()
-    removeFun()
+    // removeFun()
     document.getElementById('endbtn')
 
   }
@@ -105,14 +150,14 @@ function nextButtonFun() {
     document.getElementById('nextbtn').disabled = true
   }
   pagination()
-  removeFun()
+  // removeFun()
 }
 
 function lastpageFun() {
   lastpage = Math.ceil(length / pagefield);
   currentPage = lastpage
   pagination()
-  removeFun()
+  // removeFun()
   if (currentPage != 1) {
     document.getElementById('homebtn').disabled = false;
     document.getElementById('previousbtn').disabled = false;
@@ -127,5 +172,5 @@ document.querySelector('#homebtn').addEventListener("click", firstpageFun)
 document.querySelector('#endbtn').addEventListener("click", lastpageFun)
 document.querySelector('#previousbtn').addEventListener("click", prevButtonFun)
 document.querySelector('#nextbtn').addEventListener("click", nextButtonFun)
-pagination()
+// pagination()
 

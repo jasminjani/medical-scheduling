@@ -1,23 +1,20 @@
 const express = require('express');
-const doctorRouter = require('./doctorRouter');
-const hospitalRouter = require('./hospitalRoute');
-const prescriptionRouter = require('./prescriptionRoutes');
-const userRouter = require('./userRoute');
-const nearByDoctorsRouter = require('./nearByDoctorsRouter');
+const authRouter = require('./authRouter')
+const doctorRouter = require('./doctorRouter')
+const adminRouter = require('./adminRouter')
+const patientRouter = require('./patientRouter');
+const { getCityCombo, allSpecialities } = require('../controllers/doctorController');
+
 const router = express.Router();
-const { demoHomeController } = require('../controllers/demoHomecontroller');
-const { adminRouter } = require('./adminPanelRouter');
-const patientRouter = require('./patientPanelRouter');
+router.use("/", authRouter);
+router.use("/doctor", doctorRouter);
+router.use('/admin', adminRouter);
+router.use('/patient', patientRouter)
 
-router.use("/", userRouter);
-router.use("/", doctorRouter);
-router.use("/", hospitalRouter);
-router.use("/", prescriptionRouter);
-router.use('/', nearByDoctorsRouter);
-router.use('/', adminRouter);
-router.use('/', patientRouter)
+router.route("/cityCombo").get(getCityCombo);
+router.route("/specialities").get(allSpecialities);
 
-
-router.get('/demo', demoHomeController);
-
+router.use("*",(req,res)=>{
+  return res.render('common/404')
+})
 module.exports = router;

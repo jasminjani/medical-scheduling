@@ -1,0 +1,161 @@
+
+<style>
+  .show-notification{
+  position: absolute;
+  top: 50px;
+  z-index: 1; 
+  background-color: #d2ebf9;
+  padding: 5px; 
+  width: 450px;
+  word-wrap: break-word;
+  }
+
+  .a7-notification-card{
+ padding: 10px;
+  background-color: ghostwhite;
+  color: #4b6d86;
+  height: 300px;
+  overflow: scroll;
+  cursor: pointer;
+  }
+  .hr-line{
+    background-color: #1d4868;
+    height: 1px;
+    margin: 5px 0px;
+  }
+
+  .notification-hover{
+   border: 1px solid #27506f;
+   padding: 10px;
+  }
+
+  .notification-hover:hover{
+    background-color: #b3d3ea;
+    color: white;
+    padding: 12px;
+  }
+
+  .no-notification{
+    position: absolute;
+    bottom: 32px;
+    right: 0px;
+    background-color: red;
+    border-radius: 100%;
+    font-size: 15px;
+    padding: 1px 7px;
+  }
+
+  .a7-notification-pd{
+    display: flex;
+  flex-direction: column;
+  gap: 10px;
+  }
+
+  .a7-hide-card{
+    display: none;
+  }
+
+  .card-1{
+  background-color: #27506f;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+
+  .card-1 a{
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .a7-toggle{
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .a7-profile-card{
+    padding: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+  .a7-menu{
+position: absolute;
+  background-color: #d2ebf9;;
+  width: 100px;
+  border-radius: 10px;
+  padding: 5px;
+  right: -15px;
+  top: 55px;
+  }
+
+
+</style>
+  <header class="header">
+    <div class="container" style="min-height: 0;">
+      <div class="navbar">
+        <div class="logo">
+          <a href="/"><img src="/assets/final-logo.png" alt="logo" /></a>
+        </div>
+          <nav class="nav-items">
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/patient">Dashboard</a></li>
+              <li id="login"><a href="/patient/doctors/all">All Doctors</a></li>
+              <li id="Scheduled Sessions"><a href="/patient/upcomingSlots">Scheduled Sessions</a></li>
+              <li id="become-doctor"><a href="/patient/payments/history">Payment History</a></li>
+            </ul>
+            
+          </nav>
+          <!-- Notification -->
+              <div class="a7-toggle">
+            <div class="notification" id="notification">
+              <div class="no-notification"></div>
+           <i class="fa fa-bell" aria-hidden="true" style="color: #27506f;"></i>
+            </div>
+            <div class="show-notification" id="displNotification"  >
+              <div class="a7-notification-card" >
+                <div class="a7-notification-pd" >
+ 
+                </div>
+              </div>
+            </div> 
+            </div>   
+        
+          <div class="account">
+            
+          <label class="name"></label>   
+          <div class="a7-toggle">
+          <div class="a7-logo" id="logoBtn">
+            <img class="user-img" alt="logo" style="height: 50px; width: 50px;"/>
+          </div>
+          <div class="a7-menu" id="viewMenu">
+            <div class="a7-profile-card">
+              <div class="card-1">
+                 <a href="/patient/view/profile"><span class="a7-font">Profile</span></a>
+              </div>
+              <div class="card-1">
+                  <a><span class="a7-font" onclick="logout(event)">Logout</span></a>
+              </div>
+            </div>
+            
+          </div>
+         
+      </div>
+      </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/javascript/common/patientNotification.js"></script>
+<script src="/javascript/auth/logout.js"></script>
+
+
+
+

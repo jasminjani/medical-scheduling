@@ -8,14 +8,14 @@
 }
 
 * {
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   margin: 0px;
   padding: 0px;
 }
 
-.a5-main-container{
+.main-container{
   max-width: 1280px;
-  margin: 0 auto;
+  margin: 0px auto;
 }
 
 .a5-section {
@@ -34,6 +34,12 @@ input {
   border: none;
   outline: none;
   width: 400px;
+}
+
+.a5-heading{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 #a5-btn-search {
@@ -65,7 +71,7 @@ input {
   border-collapse: collapse;
   border: 1px solid var(--brown);
   border-radius: 5px;
-  width: 86%;
+  width: 100%;
   margin: 15px 0;
 }
 
@@ -95,6 +101,40 @@ th {
   background-color: var(--blue);
 }
 
+.a5-search-backBtn {
+  justify-content: space-between;
+}
+
+.a5-search-input {
+  padding-left: 10px;
+}
+
+.a5-back-btn {
+  height: 37px;
+  width: 100px;
+  border-radius: 3px;
+  background-color: var(--light-blue);
+  padding: 9px;
+}
+
+.a5-back-btn:hover {
+  cursor: pointer;
+  color: var(--white);
+  background-color: var(--blue);
+}
+
+.a5-searchbox-center {
+  margin: 0 auto;
+}
+
+.a5-pagination-flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.a5-pagination-all-btn {
+  margin: 0;
+}
 
 .a2-btn {
   width: 80px;

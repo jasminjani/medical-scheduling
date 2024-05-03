@@ -8,17 +8,19 @@
   <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css">
   <link rel="stylesheet" href="/css/doctorPanel/profile.css">
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
+    <link rel="stylesheet" href="/css/loaderComponent.css">
+  <script src="/javascript/loaderComponent.js"></script>
   <script src="/javascript/doctorPanel/doctorProfile.js" defer></script>
 
   <title>Doctor Profile</title>
 </head>
 
 <body>
-
+  <div class="center" id="loader"></div>
   <div class="a7-container">
   <%- include('../../common/newSidebar/doctorSidebar.ejs') %>
    
-    <div class="a7-main-profile a7-mr-300">
+    <div class="a7-main-profile a7-mr-300" style="margin-left: 280px;">
 
       <div class="a7-profile-section">
 

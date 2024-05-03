@@ -4,17 +4,48 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Doctor Details</title>
-    <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
+    <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/auth/register.css" />
+    <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css">
+      <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
+      <!-- loader component -->
+      <link rel="stylesheet" href="/css/homepage.css" />
+       <link rel="stylesheet" href="/css/loaderComponent.css">
+       <script src="/javascript/loaderComponent.js"></script>
+    <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css" />
+    <script src="/sweetalert2/sweetalert2.min.js"></script>
     <script src="/javascript/doctorPanel/fetchSpeciality.js" defer></script>
     <script src="/javascript/doctorPanel/fetchCity.js" defer></script>
   </head>
   <body>
-    <div class="container">
-      <div class="form">
+    <div class="center" id="loader"></div>
+    <%- include(`../../common/newSidebar/patientNav.ejs`) %>
+    <div class="a7-container">
+      
+      <div class="form" style="margin-top: 40px;">
         <div class="content">
           <h2>Register Doctor Details</h2>
-          <form action="" class="user" method="post">
+          <form class="fname">
+            <div class="a7-field-inp">
+              <input
+                type="text"
+                name="doctor_details_id"
+                id="doctor_details_id"
+                class="a7-form-input"
+                value=""
+                hidden
+              />
+            </div>
+            <div class="fname">
+              <input
+                type="text"
+                name="hospital_id"
+                id="hospital_id"
+                class="a7-form-input"
+                value=""
+                hidden
+              />
+            </div>
             <div class="fname">
               <label for="fname">Qualification: </label>
               <input
@@ -37,21 +68,12 @@
               />
             </div>
 
-              <div class="phone">
-                <label for="phone">Phone Number: </label>
-                <input
-                  type="text"
-                  id="phone"
-                  name="phone"
-                  class="dvalid"
-                  placeholder="Enter Phone Number"
-                />
-              </div>
             <div class="city">
               <label for="city">Speciality:</label>
-              <select name="speciality" id="speciality" class="dvalid">
+              <select name="speciality" id="speciality" class="dvalid" onchange="specialityChange()">
                 <option value="">--Select Speciality--</option>
               </select>
+              <input type="text" name="otherSpeciality" id="otherSpeciality" placeholder="Enetr New Speciality" style="display: none;">
             </div>
             <div class="phone">
               <label for="hname">Hospital Name: </label>
@@ -104,6 +126,12 @@
             </div>
             <div class="submit">
               <input type="submit" id="submit" value="Become A Doctor" />
+              <input
+                type="button"
+                id="update"
+                value="Update"
+                style="display: none"
+              />
             </div>
           </form>
           <div class="link"></div>

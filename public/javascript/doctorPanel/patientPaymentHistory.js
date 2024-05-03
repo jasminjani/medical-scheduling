@@ -4,8 +4,13 @@ async function fetchPatientPaymentData() {
 
     let patient_id = window.location.href.split('/').pop();
 
-    const url = `/showPatientHistoryData/${patient_id}`;
-    const response = await fetch(url)
+    const url = `/doctor/payment/history/${patient_id}`;
+    const response = await fetch(url,{
+      method:"POST",
+      headers:{
+        'Content-Type':"application/json"
+      }
+    })
     const result = await response.json();
 
     await appendPatientDetails(result);
@@ -69,18 +74,35 @@ async function appendPatientPaymentDetails(result) {
                   <th>Slot Date</th>
                   <th>Slot Time</th>
                   <th>Amount</th>
+                  <th>Status</th>
                   <th>Payment Date</th>
                 </tr>`;
 
     document.getElementById('a5-tbody').innerHTML = html;
     let index = 1;
 
+    let timezoneoffset = new Date().getTimezoneOffset();
     result.paymentDetails.forEach(element => {
+      let start_time = new Date(element.start_time).getTime();
+      start_time -= (timezoneoffset * 60 * 1000);
+      start_time = new Date(start_time).toLocaleTimeString('en-US')
+      // console.log(start_time)
+  
+      let end_time = new Date(element.end_time).getTime();
+      end_time -= (timezoneoffset * 60 * 1000);
+      end_time = new Date(end_time).toLocaleTimeString('en-US')
+      let refundStatus;
+      if (element.is_refunded == 1) {
+        refundStatus = "refund"
+      } else if (element.is_refunded == 0) {
+        refundStatus = "success"
+      }
       let html2 = `<tr>
               <td>${index++}</td>
               <td>${element.slote_date}</td>
-              <td>${element.start_time + " - " + element.end_time}</td>
+              <td>${start_time + " - " + end_time}</td>
               <td>${element.payment_amount}</td>
+              <td>${refundStatus}</td>
               <td>${element.payment_date}</td>
             </tr>`
 

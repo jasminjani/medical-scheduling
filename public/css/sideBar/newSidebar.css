@@ -5,7 +5,7 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.main-container{
+.main-container {
   max-width: 1440px;
   margin: 0 auto;
   width: 100%;
@@ -35,14 +35,21 @@ a {
 }
 
 .a5-profileimage {
-  height: 80px;
-  width: 76px;
-  border-radius: 50px;
-  background-color: #c8c6c6;
+  width: 100%;
+  height: 100%;
+
 }
 
 .a5-profilephoto {
   padding-top: 20px;
+}
+
+.a5-profilephoto>a {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: block;
+  overflow: hidden;
 }
 
 .a5-accountname {

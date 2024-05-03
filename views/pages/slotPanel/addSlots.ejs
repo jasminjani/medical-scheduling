@@ -6,8 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <!-- <link href="/stylesheets/output.css" rel="stylesheet"> -->
-  <link rel="stylesheet" href="css/slotPanel/slotPanel.css">
-  <link rel="stylesheet" href="fontawesome-free-6.5.2-web/css/all.min.css">
+  <link rel="stylesheet" href="/css/loaderComponent.css">
+  <script src="/javascript/loaderComponent.js"></script>
+  <link rel="stylesheet" href="/css/slotPanel/slotPanel.css">
+  <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
   <style>
     #a5-doctor-schedule-active {
@@ -21,19 +23,24 @@
       color: #ffffff;
     }
   </style>
-  <script src="javascript/slotPanel/slotPanel.js" defer></script>
+  <script src="/javascript/slotPanel/slotPanel.js" defer></script>
   <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css">
   <script src="/sweetalert2/sweetalert2.min.js"></script>
 </head>
 
 <body>
+  <div class="center" id="loader"></div>
   <section id="A3-Slot">
     <div class="A3-main-container">
-      <%-include("../../common/newSidebar/doctorSidebar")%>
+      <%- include('../../common/newSidebar/doctorSidebar') %>
         <div class="A3-container">
           <div class="A3-row-1">
-            <a id="A3-view" href="/upcomingSlots"><i class="fa-regular fa-eye"></i></a>
-            <a id="A3-add" href="/addSlot"><i class="fa-solid fa-plus"></i></a>
+            <a id="A3-view" href="/doctor/upcomingSlots" style="color: black; font-weight: bold;"><i
+                class="fa-regular fa-eye"></i>
+              All Appointments</a>
+            <a id="A3-add" href="/doctor/addSlot" style="color: white; font-weight: bold;"><i class="fa-solid fa-plus">
+              </i>
+              Generate Slots</a>
           </div>
           <div class="A3-main">
             <div class="row">
@@ -51,10 +58,11 @@
                 </select>
               </span>
             </div>
-            <form id="myform" method="post">
+            <form id="myform" method="post" action="javascript:void(0)">
               <div class="row">
                 <div class="date">
-                  <input type="date" name="day1[]" id="date_1" onchange="handleChange(event)">
+                  <input type="date" name="day1[]" id="date_1" onkeydown="event.preventDefault()"
+                    onchange="handleChange(event)">
                 </div>
                 <div class="times">
                   <!-- <input type="text" name="day1" class="A3-time" id="abcd"> -->
@@ -65,7 +73,7 @@
               <hr>
               <div class="row">
                 <div class="date">
-                  <input type="date" name="day2[]" id="date_2" onchange="handleChange(this)">
+                  <input type="date" name="day2[]" id="date_2" onchange="handleChange(event)">
                 </div>
                 <div class="times">
                   <!-- <input type="text" name="day1" class="A3-time"> -->
@@ -76,7 +84,7 @@
               <hr>
               <div class="row">
                 <div class="date">
-                  <input type="date" name="day3[]" id="date_3" onchange="handleChange(this)">
+                  <input type="date" name="day3[]" id="date_3" onchange="handleChange(event)">
                 </div>
                 <div class="times">
                   <!-- <input type="text" name="day1" class="A3-time"> -->
@@ -87,7 +95,7 @@
               <hr>
               <div class="row">
                 <div class="date">
-                  <input type="date" name="day4[]" id="date_4" onchange="handleChange(this)">
+                  <input type="date" name="day4[]" id="date_4" onchange="handleChange(event)">
                 </div>
                 <div class="times">
                   <!-- <input type="text" name="day1"> -->
@@ -98,7 +106,7 @@
               <hr>
               <div class="row">
                 <div class="date">
-                  <input type="date" name="day5[]" id="date_5" onchange="handleChange(this)">
+                  <input type="date" name="day5[]" id="date_5" onchange="handleChange(event)">
                 </div>
                 <div class="times">
                   <!-- <input type="text" name="day1" class="A3-time"> -->
@@ -109,7 +117,7 @@
               <hr>
               <div class="row">
                 <div class="date">
-                  <input type="date" name="day6[]" id="date_6" onchange="handleChange(this)">
+                  <input type="date" name="day6[]" id="date_6" onchange="handleChange(event)">
                 </div>
                 <div class="times">
                   <!-- <input type="text" name="day1" class="A3-time"> -->
@@ -120,7 +128,7 @@
               <hr>
               <div class="row">
                 <div class="date">
-                  <input type="date" name="day7[]" id="date_7" onchange="handleChange(this)">
+                  <input type="date" name="day7[]" id="date_7" onchange="handleChange(event)">
                 </div>
                 <div class="times">
                   <!-- <input type="text" name="day1" class="A3-time"> -->

@@ -1,3 +1,13 @@
+.a5-main-container{
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.a5-inner-container{
+  padding: 10px;
+  margin-left: 350px;
+}
+
 td {
   text-align: center;
   padding: 15px 0;
@@ -21,4 +31,8 @@ select {
   height: 38px;
   font-size: inherit;
   font-family: inherit;
+}
+
+.a5-pagination-center {
+  justify-content: center;
 }

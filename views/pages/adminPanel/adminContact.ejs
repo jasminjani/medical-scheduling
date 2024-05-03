@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard</title>
+
+  <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
+  <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
+  <link rel="stylesheet" href="/css/adminPanel/adminApproveDoc.css">
+  <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css">
+  <script src="/sweetalert2/sweetalert2.min.js"></script>
+
+  <style>
+    #a5-admin-contact-active {
+      background-color: #0969da;
+      transform: translate(5px);
+      border-radius: 5px;
+    }
+
+    #a5-admin-contact-active a,
+    #a5-admin-contact-active i {
+      color: #ffffff;
+    }
+  </style>
+  <script src="/javascript/adminPanel/adminContact.js" defer></script>
+</head>
+
+<body>
+  <div class="a5-main-container">
+    <div class="a2-approve-table-div">
+      <%- include('../../common/newSidebar/adminSidebar.ejs') %>
+        <div class="a2-container">
+
+          <p onclick="window.location.href=`/admin`" class="a2-back-btn a2-btn">
+            <i class="fa-solid fa-arrow-left"></i> Back
+          </p>
+
+          <div class="pending-doctors">
+
+            <table class="a2-approve-table">
+              <tr class="approve-tbl-head">
+
+                <th>No.</th>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Mobile No.</th>
+                <th>City</th>
+                <th>Role</th>
+                <th>Message</th>
+              </tr>
+
+              <tbody id="contact-tbl-body"></tbody>
+
+            </table>
+          </div>
+
+        </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

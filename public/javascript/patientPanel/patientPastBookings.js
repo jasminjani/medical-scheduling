@@ -1,4 +1,4 @@
-window.location.href.split("/").pop() === "patientPastSlots" ? document.getElementById("A3-past").style.backgroundColor = "#3984af" : "";
+window.location.href.split("/").pop() === "pastSlots" ? document.getElementById("A3-past").style.backgroundColor = "#3984af" : "";
 
 let page = 1;
 
@@ -8,7 +8,7 @@ let totalPage;
 
 const getPastSlots = async () => {
   let user = JSON.parse(localStorage.getItem('userinfo'));
-  const response = await fetch(`/pastbookings/${user.id}`, {
+  const response = await fetch(`/patient/pastbookings/${user.id}`, {
     method: "GET",
     headers: {
       "Content-type": "application/json"
@@ -16,7 +16,8 @@ const getPastSlots = async () => {
   });
 
   const {success, message } = await response.json();
-
+  console.log(message);
+  // console.log(message)
   totalPage = Math.ceil(message.length / limit);
 
   if (totalPage <= 1) document.getElementsByClassName("A4-Pagination-component")[0].style.visibility = "hidden";
@@ -25,21 +26,29 @@ const getPastSlots = async () => {
 
   table.innerHTML = "";
 
-  if(message.length == 0 || !success){
+  if (message.length == 0 || !success) {
     return table.innerHTML = "<tr><td colspan='5'>No Data Found !</td></tr>"
-   }
+  }
+  
 
+  let timezoneoffset = new Date().getTimezoneOffset();
   message.slice((page - 1) * limit, page * limit).forEach(element => {
-    console.log(element);
-    table.innerHTML += `
+    element.start_time = new Date(element.start_time).getTime();
+    element.start_time -= (timezoneoffset * 60 * 1000);
+    element.start_time = new Date(element.start_time).toLocaleTimeString('en-US')
+    // console.log(element.start_time)
+
+    element.end_time = new Date(element.end_time).getTime();
+    element.end_time -= (timezoneoffset * 60 * 1000);
+    element.end_time = new Date(element.end_time).toLocaleTimeString('en-US')
+      table.innerHTML += `
       <tr>
         <td>${element.date}</td>
         <td>${element.day}</td>
-        <td>${element.start_time.slice(0, -3)}-${element.end_time.slice(0, -3)}</td>
+        <td>${element.start_time}-${element.end_time}</td>
         <td><input type="button" value="Details" onclick='getDetails(${JSON.stringify(element)})'></td>
-        <td><a href=/generatePDFofprescripton/${element.prescription_id}><input type="button" value="Get PDF"></a></td>
-      </tr>
-    `
+        <td>${element.prescription_id !== null ? `<input type="button" value="Get PDF" onclick="generatePDF(${element.prescription_id})">` : `-`}</td>
+      </tr>`;
   });
 }
 

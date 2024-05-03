@@ -4,3 +4,4 @@
 **/.vscode
 **/uploads
 **/server.log
+**/*.log

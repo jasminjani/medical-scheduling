@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
   <link rel="stylesheet" href="/css/adminPanel/adminApproveDoc.css">
+  <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css">
+  <script src="/sweetalert2/sweetalert2.min.js"></script>
   <style>
     #a5-admin-speciality-active {
       background-color: #0969da;
@@ -27,10 +29,8 @@
 <body>
 
   <div class="a5-main-container">
-
-    <%- include('../../common/newSidebar/adminSidebar.ejs') %>
-
-      <div class="a2-approve-table-div">
+    <div class="a2-approve-table-div">
+      <%- include('../../common/newSidebar/adminSidebar.ejs') %>
         <div class="a2-container">
           <div class="a5-flex-btn">
             <!-- <a href="/admin" style="text-decoration: none; color: black;"> -->
@@ -64,69 +64,9 @@
           </table>
           <h3 class="a2-no-data" style="text-align: center; padding: 20px;">No pending Request</h3>
         </div>
-      </div>
+    </div>
   </div>
-
-  <script>
-    async function makeSpecialtiesTable() {
-      let response = await fetch("/admin/get-specialties");
-
-      let allSpecialties = await response.json();
-      console.log(allSpecialties);
-      const tbody = document.getElementById("a2-tbody");
-
-      allSpecialties.forEach((specialties, i) => {
-        let strTD = `<tr>
-            <td>${++i}</td> 
-            <td>${specialties.speciality}</td>
-            </tr>`;
-        tbody.innerHTML += strTD;
-      });
-    }
-
-
-    makeSpecialtiesTable();
-
-
-    async function getNewSpecialty() {
-      let response = await fetch("/admin/get-new-specialties");
-
-      let newSpecialty = await response.json();
-      console.log(newSpecialty);
-      const tbody = document.getElementById("pending-speciality");
-
-      if (newSpecialty.length) {
-        let reqTable = document.querySelector('.a2-no-data');
-        reqTable.style.display = 'none';
-      } else {
-        let reqTable = document.querySelector('.a2-no-data');
-        reqTable.style.display = 'block';
-      }
-      newSpecialty.forEach((specialties, i) => {
-        let strTD = `<tr>
-            <td>${++i}</td> 
-            <td>${specialties.speciality}</td>
-            <td class="a2-btn" onclick=addSpecialty(${specialties.id})>Add</td>
-            </tr>`;
-        tbody.innerHTML += strTD;
-      });
-    }
-
-    getNewSpecialty();
-
-    async function addSpecialty(id) {
-      let response = await fetch("/admin/add-specialty", {
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: id }),
-      });
-
-      if (response.ok) {
-        alert("Add Specialty successfully ");
-        location.reload();
-      }
-    }
-  </script>
+<script src="/javascript/adminPanel/addDocSpeciality.js" ></script>
 </body>
 
 </html>
