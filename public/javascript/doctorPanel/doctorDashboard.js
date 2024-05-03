@@ -1,38 +1,35 @@
-
 const fetchCountData = async () => {
-  const fetchData = await fetch(`/dashBoardCount`)
+  const fetchData = await fetch(`/doctor/analytics`)
   const data = await fetchData.json()
-  let key = Object.keys(data[0])
-  key.forEach(element => {
-    if (element == 'patient') {
-      document.getElementById(element).innerHTML = `<h4>${data[0][element]}</h4>`
+
+  data.forEach(element => {
+    document.getElementById("patient").innerHTML = `<h4>${element["patient"]}</h4>`
+
+    if (element["revenue"] == null) {
+      document.getElementById("revenue").innerHTML = `<h4>0</h4>`
     }
-    if (element == 'revenue') {
-      if(data[0][element] == null)
-      {
-        document.getElementById(element).innerHTML = `<h4>0</h4>`
-      }
-      else
-      {
-      document.getElementById(element).innerHTML = `<h4>${data[0][element]}</h4>`
-      }
+    else {
+      document.getElementById("revenue").innerHTML = `<h4>${element["revenue"]}</h4>`
     }
-    if (element == 'slot') {
-      document.getElementById("appointment").innerHTML = `<h4>${data[0][element]}</h4>`
-    }
+    document.getElementById("appointment").innerHTML = `<h4>${element["slot"]}</h4>`
   });
 }
 fetchCountData()
 
 const fetchReviewData = async () => {
-
-  const fetchData = await fetch(`/dashBoardReviews`)
+  let feedbackCard = document.getElementById("feedbackCard")
+  const fetchData = await fetch(`/doctor/reviews/all`)
   const data = await fetchData.json()
   let key = Object.keys(data)
-  let feedbackCard = document.getElementById("feedbackCard")
+
+
+  if (data.length == 0) {
+    feedbackCard.innerHTML = "<h2 style='align-item:center'>Data Not Found!</h2>"
+  }
 
   key.forEach(element => {
-
+    `<div>
+  </div>`
     let dtkey = Object.keys(data[element])
 
     let div1Card = document.createElement("div")
@@ -80,9 +77,7 @@ const fetchReviewData = async () => {
       }
       else if (item == "review") {
         let para = document.createElement("p")
-        para.style.height = '100px'
-        para.style.width = '200px'
-        para.style.overflow = 'scroll'
+        para.setAttribute("class", "para-review")
         para.textContent = data[element][item]
         div6TextContent.appendChild(para)
       }
@@ -97,8 +92,6 @@ const fetchReviewData = async () => {
         div7Signature.appendChild(email)
       }
     });
-
-
     div3Color.appendChild(div4Profile)
     div3Color.appendChild(div5Rating)
     div3Color.appendChild(div6TextContent)
@@ -106,88 +99,54 @@ const fetchReviewData = async () => {
     div2CardBox.appendChild(div3Color)
     div1Card.appendChild(div2CardBox)
     feedbackCard.appendChild(div1Card)
-
-
   });
-}
+};
 
 
 fetchReviewData()
 
-// const fetchAppointMents = async () => {
-//   let fetchData = await fetch('/dashBoardAppointments')
-//   let data = await fetchData.json()
-//   let key = Object.keys(data)
-//   console.log(data);
-//   console.log(key);
-//   let count = 1;
-
-
-//   key.forEach(element => {
-//     let dtkey = Object.keys(data[element])
-//     let table = document.getElementById("appointmentTable")
-//     let div1 = document.createElement('div')
-//     let countdiv = document.createElement("div")
-//     countdiv.textContent = count++
-//     div1.appendChild(countdiv)
-//     div1.setAttribute("class", "a7-table-data")
-//     dtkey.forEach(item => {
-//       if (item == 'patient_id') {
-//         let btn = document.createElement("div")
-//         btn.textContent = "Add Prescription"
-//         btn.setAttribute("id", "hh")
-//         btn.setAttribute("onclick", `location.href ='/prescription/${data[element][item]}'`)
-//         btn.setAttribute("class", "a7-btn-style a5-btn")
-//         div1.appendChild(btn)
-//       } else {
-
-//         let divspan = document.createElement("div")
-//         let span = document.createElement('span')
-//         span.setAttribute("class", "a7-table-border")
-//         span.textContent = data[element][item]
-//         divspan.appendChild(span)
-//         div1.appendChild(divspan)
-
-//       }
-//     });
-
-//     table.appendChild(div1)
-//   });
-// }
-
-// fetchAppointMents()
-
-
-const fetchAppointmentData=async()=>{
-  try{
-    let fetchData = await fetch('/dashBoardAppointments')
+const fetchAppointmentData = async () => {
+  try {
+    let table = document.getElementById("appointmentTable");
+    let fetchData = await fetch('/doctor/appointments/today')
     let data = await fetchData.json()
-    let key = Object.keys(data[0])
-    console.log("in fetchAppointmentData");
-    console.log(data);
-    console.log(key);
-
+    // console.log(data);
+    if (data.length === 0) {
+      table.innerHTML = "<h2 style='text-align: center; margin-top: 100px;'>Data Not Found!</h2>"
+    }
+    let timezoneoffset = new Date().getTimezoneOffset();
     data.forEach(function (element, index) {
-          let table = document.getElementById("appointmentTable");
-          let str = `
+      element.start_time = new Date(element.start_time).getTime();
+      element.start_time -= (timezoneoffset * 60 * 1000);
+      let startDate = element.start_time;
+      element.start_time = new Date(element.start_time).toLocaleTimeString('en-US')
+
+      element.end_time = new Date(element.end_time).getTime();
+      element.end_time -= (timezoneoffset * 60 * 1000);
+      element.end_time = new Date(element.end_time).toLocaleTimeString('en-US')
+
+      console.log(startDate,"1");
+      console.log(Date.now());
+      let str = `
             <tr>
-                <td>${index+1}</td>
+                <td>${index + 1}</td>
                 <td>${element.patient_name}</td>
-                <td>${element.appointment_time}</td>
-                <td><input type="button" value="Add Prescription" onclick="addPrescription(${element.patient_id},${element.booking_id})" id="addprescription-btn"></td>
+                <td>${element.start_time}-${element.end_time}</td>
+                <td><input type="button" ${startDate >= Date.now() ? `disabled`: ''} value="Add Prescription" onclick="addPrescription(${element.booking_id})" id="addprescription-btn"></td>
                 <td><input type="hidden" value="${element.booking_id}" id="booking_id"></td>
             </tr>`;
-              table.innerHTML += str;
-            });
+      table.innerHTML += str;
+    });
   }
-  catch(error){
+  catch (error) {
     console.log(error);
   }
-
 }
 
-const addPrescription=async(patient_id,booking_id)=>{
-  location.href =`/prescription/${patient_id}/${booking_id}`;
+const addPrescription = async (booking_id) => {
+
+  location.href = `/doctor/prescription/${booking_id}`;
+
 }
 
 fetchAppointmentData();

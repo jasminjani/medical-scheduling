@@ -1,5 +1,5 @@
 const patientProfileFetchData = async () => {
-  const fetchData = await fetch('/patientProfileUpdateData')
+  const fetchData = await fetch('/patient/update/profileData')
   const data = await fetchData.json()
   const key = Object.keys(data[0])
   key.forEach(element => {
@@ -16,7 +16,7 @@ const patientProfileFetchData = async () => {
       document.getElementById("updateImage").innerHTML = `<img src="/imgs/${data[0][element]}" alt="" height="200px" width="200px" /> <span onclick='profileFun()'>Cancel</span>`
     }
     else {
-      console.log(element);
+     
       document.getElementsByName(element)[0].value = data[0][element]
 
     }
@@ -53,13 +53,14 @@ const profileFun = () => {
   formData.append("city",city)
   formData.append("gender",gender)
 
-  let fetchData = await fetch('/patientProfileUpdate',{
+  let fetchData = await fetch('/patient/profile/update',{
     method:"POST",
   body:formData
       })
-  const {success} = await fetchData.json();
-
-  if (success) {
+  const data = await fetchData.json();
+// console.log(data)
+  if (data.success) {
+    localStorage.setItem('userinfo',JSON.stringify(data.data[0]))
     Swal.fire({
       title: "Good job!",
       text: "Update Successfully!",

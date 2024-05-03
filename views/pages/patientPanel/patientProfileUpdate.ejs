@@ -4,13 +4,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="/css/homepage.css" />
   <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
+  <link rel="stylesheet" href="/css/loaderComponent.css">
+  <script src="/javascript/loaderComponent.js"></script>
   <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css">
   <link rel="stylesheet" href="/css/doctorPanel/profile.css">
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css">
    <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css">
   <script src="/sweetalert2/sweetalert2.min.js"></script>
-  <!-- <script src="/javascript/doctorPanel/fetchSpeciality.js" defer></script> -->
   <script src="/javascript/doctorPanel/fetchCity.js" defer></script>
  <script src="/javascript/patientPanel/patientProfileUpdate.js" defer></script>
   <script src=" /javascript/doctorPanel/doctorValidation.js"></script>
@@ -18,8 +20,9 @@
 </head>
 
 <body>
+  <div class="center" id="loader"></div>
+     <%- include(`../../common/newSidebar/patientNav.ejs`) %>
   <div class="a7-container">
-  <%- include('../../common/newSidebar/patientSidebar.ejs') %>
     <div class="a7-main-profile a7-mr-300">
       <div class="a7-profile-section">
         <div class="a7-profile-title">

@@ -10,12 +10,11 @@
   padding: 0px;
 }
 
-.a7-container {
-  max-width: 1440px;
+.a7-container{
+  max-width: 1280px;
   margin: 0 auto;
-  /* padding: 0 15px; */
-  width: 100%;
 }
+
 
 .a7-table-title{
   color:#4d4d4d;
@@ -33,7 +32,7 @@
   /* width: 70%;
   margin-left: 300px; */
   max-width: 1080px;
-  width: 100%;
+  width: 73%;
   margin-left: 350px;
 }
 
@@ -193,10 +192,16 @@ border-radius: 0px 0px 0px 25px;
 
 
 .a7-card{
-  display: flex;
+display: flex;
   overflow: scroll;
+  overflow-y: scroll;
+
+  align-items: center;
+  justify-content: center;
+  overflow-y: hidden;
+  }
   /* animation: a7-card-se6 10s linear infinite; */
-}
+
 
 /* @keyframes a7-card {
   0% {
@@ -216,6 +221,12 @@ border-radius: 0px 0px 0px 25px;
   padding: 25px 0 0 35px;
 }
 
+.a7-para-review{
+  height: 100px;
+    width: 150px;
+    overflow: scroll;
+    word-wrap: break-word;
+}
 
 .black-banner {
   flex-direction: row;
@@ -267,10 +278,14 @@ border-radius: 0px 0px 0px 25px;
 
 .a7-text-content-se6 p{
   font-size: 15px;
+  height: 93px;
+  overflow: hidden;
 }
 
 .a7-mr-300 {
-  margin-left: 300px;
+max-width: 1000px;
+  padding: 20px;
+  margin: 0 auto;
 }
 
 .A7-review-message{

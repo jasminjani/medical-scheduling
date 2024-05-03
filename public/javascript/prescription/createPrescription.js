@@ -46,7 +46,7 @@ const submitPrescription = async () => {
 
       const form = document.getElementById("myForm");
       const obj = new URLSearchParams(new FormData(form));
-      let res = await fetch(window.location.origin + `/createprescription`, {
+      let res = await fetch(`/doctor/prescription/create`, {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
@@ -54,9 +54,15 @@ const submitPrescription = async () => {
         body: obj,
       });
       let resjson=await res.json();
-      alert(resjson.msg);
+      await Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Prescription has been saved",
+      showConfirmButton: false,
+      timer: 1500
+      });
       insert_id = resjson.insert_id;
-      location.href = location.origin+`/doctorDashboard/`;
+      location.href = location.origin+`/doctor/dashboard/`;
     }
   }
   catch(error){
@@ -84,16 +90,22 @@ const validate = async () => {
 };
 
 const generatePDF = async () => {
-  location.href = `/generatePDFofprescripton/${insert_id}`;
+  location.href = `/generate/${insert_id}`;
 };
 
 const back = async () => {
 
-  console.log(insert_id);
   if(!insert_id){
-    if(confirm("you've not added the prescription!are you sure you want to exit?")){
-      location.href = location.origin+`/doctorDashboard/`;
-    }
+    Swal.fire({
+      title: "you've not added the prescription!are you sure you want to exit?",
+      showCancelButton: true,
+      confirmButtonText: "Exit",
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        location.href = location.origin+`/doctor/dashboard/`;
+      }
+    });
   }
   else{
     location.href = location.origin+`/doctorDashboard/`;
@@ -105,9 +117,9 @@ const back = async () => {
 async function showDetails() {
   try {
 
-    let patient_id = document.getElementById("id").value;
-
-    const url = `/createprescription/${patient_id}`;
+    let slot_bookings_id = window.location.pathname.split("/").pop();
+    // console.log(slot_bookings_id)
+    const url = `/doctor/patient/prescription/${slot_bookings_id}`;
     let  response = await fetch(url)
     let result = await response.json();
 
@@ -118,27 +130,6 @@ async function showDetails() {
 }
 
 showDetails();
-
-// let date=new Date();
-// alert(utcformat(date));
-
-// function utcformat(d){
-//     d= new Date(d);
-//     var tail= 'GMT', D= [d.getUTCFullYear(), d.getUTCMonth()+1, d.getUTCDate()],
-//     T= [d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds()];
-//     if(+T[0]> 12){
-//         T[0]-= 12;
-//         tail= ' pm '+tail;
-//     }
-//     else tail= ' am '+tail;
-//     var i= 3;
-//     while(i){
-//         --i;
-//         if(D[i]<10) D[i]= '0'+D[i];
-//         if(T[i]<10) T[i]= '0'+T[i];
-//     }
-//     return D.join('/')+' '+T.join(':')+ tail;
-// }
 
 
 async function appendPatientDetails(result) {

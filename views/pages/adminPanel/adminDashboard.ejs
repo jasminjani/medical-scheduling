@@ -20,10 +20,12 @@
         color: #ffffff;
       }
     </style>
+
   </head>
 
   <body>
     <div class="main-container">
+      <div class="a2-container">
       <%- include('../../common/newSidebar/adminSidebar.ejs') %>
       <div class="a2-amdin-dashboard">
         <div class="a2-container">
@@ -73,8 +75,8 @@
               <div class="all-doctors">
                 <h3>Best Performance Doctors</h3>
                 <div class="swipe-btns">
-                  <!-- <button class="left-swipe"><<</button>
-                  <button class="right-swipe">>></button> -->
+                  <button class="left-swipe"> << </button>
+                  <button class="right-swipe"> >> </button>
                 </div>
                 <div class="doctors">
                   <div class="cards">
@@ -188,33 +190,11 @@
           </div>
         </div>
       </div>
+      </div>
   </div>
-
-  <script src="/javascript/carousel.js"></script>
-  <script src="/javascript/adminPanel/dashboard.js"></script>
-
-
-  <script>
-
-    async function fetchStatus() {
-      try {
-
-        const url = `/getDashboardStatus`;
-        const response = await fetch(url);
-        const result = await response.json();
-        console.log(result);
-
-        document.getElementById('doctors-count').innerHTML = result.totalDoctor[0].total_doctor + "+";
-        document.getElementById('patients-count').innerHTML = result.totalPatient[0].total_patient + "+";
-        document.getElementById('appointments-count').innerHTML = result.todayAppointment[0].today_appointment + "+";
-        document.getElementById('revenue-count').innerHTML = result.totalRevenue[0].total_revenue + "+";
-
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    fetchStatus();
-  </script>
+  
+  <script src="/javascript/adminPanel/adminDashboard.js" ></script>
+  <script src="/javascript/carousel.js" ></script>
 </body>
 
 </html>

@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
     <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
     <link rel="stylesheet" href="/css/adminPanel/approveDoctor.css" />
+    <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css">
+    <script src="/sweetalert2/sweetalert2.min.js"></script>
     <style>
       #a5-admin-doctor-active {
         background-color: #0969da;
@@ -20,6 +22,7 @@
         color: #ffffff;
       }
     </style>
+
   </head>
 
   <body>
@@ -29,7 +32,7 @@
       <div class="A4-main">
         <div class="A4-container">
           <a
-            href="/admin/all-doctors"
+            href="/admin/doctors/all"
             style="text-decoration: none; color: black"
           >
             <p class="a2-back-btn a2-btn">
@@ -126,46 +129,6 @@
       </div>
     </div>
 
-    <script>
-      function showClinicDetails() {
-        let div = document.querySelector(".A4-clinic-details-content");
-        div.style.display === "block"
-          ? (div.style.display = "none")
-          : (div.style.display = "block");
-      }
-
-      async function fetchData(id){
-        let res=await fetch(location.origin+`/individual-doctor-details/${id}`);
-        let resjson=await res.json();
-        console.log(resjson.result[0]);
-
-        let tabledata=document.getElementsByClassName("A4-table-content");
-        console.log(tabledata);
-        let keys=Object.keys(resjson.result[0]);
-        console.log(keys);
-        let i=0;
-        keys.forEach(element => {
-          tabledata[i].innerText=resjson.result[0][element];
-          i++
-        });
-      }
-
-      fetchData(`<%=docID %>`);
-
-      async function approveDoctor(id) {
-        console.log(id);
-
-        const resp = await fetch(`/approve-doctor/${id}`);
-        alert("Doctor Approved....!");
-        resp.ok ? (location.href = "/admin/all-doctors") : "";
-      }
-
-      async function rejectDoctor(id) {
-        console.log(id);
-        const resp = await fetch(`/reject-doctor/${id}`);
-        alert("Doctor Rejected....!");
-        resp.ok ? (location.href = "/admin") : "";
-      }
-    </script>
+       <script src="/javascript/adminPanel/adminApproveSpecificDoctor.js" ></script>
   </body>
 </html>

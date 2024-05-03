@@ -1,70 +1,75 @@
-let search = document.getElementById("search").value
-let pagefield = 1
+// Pagination Declare Global Variable
+let data;
+let pagefield = 10
 let currentPage = 1
 let length = 0
 let pageno = document.getElementById("pageno")
 
 const fetchDataFun = async () => {
- 
-  let fetchdata = await fetch(`/reviews`)
-  let data = await fetchdata.json()
-  return data
+  try {
+    let fetchdata = await fetch(`/doctor/reviews/all`)
+    data = await fetchdata.json()
+    await pagination();
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+const searchPatientReview = async () => {
+  try {
+
+    let searchedData = document.getElementById('search').value;
+   
+    if (!searchedData) {
+      searchedData = "null";
+    }
+
+    const url = `/doctor/searchReview/${searchedData}`;
+    const response = await fetch(url);
+    data = await response.json();
+    await pagination();
+
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-const searchFetchDataFun = async ()=>{
-  let fetchdata
-  let data
-  fetchdata = await fetch(`/searchReview/${search}`)
-  data = await fetchdata.json()
-  return data
-}
+let searchBtn = document.getElementById('a5-btn-search');
 
+searchBtn.addEventListener('keyup', function (event) {
+  try {
+    if (event.key === 'Enter') {
+      searchPatientReview();
+    }
+  } catch (error) { console.log(error); }
+});
 
-
-const pagination = async (result) => {
- 
-  let data
-  if(search)
-  {
-    data = await searchFetchDataFun()
-  }
-  else
-  {
-    data = await fetchDataFun()
-  }
-  
+const pagination = async () => {
 
   length = data.length;
-  pageno.innerHTML = currentPage;
+  if (length == 0) {
+    document.getElementById("a5-tbody").innerHTML = "<tr><td colspan='5'  style='text-align:center'>Data Not Found!</td></tr>"
+  } else {
+    pageno.innerHTML = currentPage;
 
-  const endIndex = currentPage * pagefield;
-  const startIndex = endIndex - pagefield;
-  const pageItems = data.slice(startIndex, endIndex);
+    const endIndex = currentPage * pagefield;
+    const startIndex = endIndex - pagefield;
+    const pageItems = data.slice(startIndex, endIndex);
 
-  let tabledata = "";
+    let tabledata = "";
+    document.getElementById("a5-tbody").innerHTML = tabledata;
 
-  pageItems.map((value) => {
-    tabledata += `<tr>
-          
+    pageItems.map((value) => {
+      tabledata += `<tr>      
           <td hidden>${value.date}</td>
-          <td class="csearch">${value.name}</td>
+          <td class="csearch">${value.Name}</td>
           <td class="csearch">${value.rating}</td>
           <td class="A7-review-message csearch">${value.review}</td>
           <td class="csearch">${value.date}</td>
         </tr>`
-  })
-
-  document.getElementById("a5-tbody").innerHTML += tabledata;
-
-}
-
-const removeFun = async () => {
-  document.getElementById("a5-tbody").innerHTML = `<tr>
-                  <th>Name </th>
-                <th>Rating</th>
-                <th>Message</th>
-                <th>Date</th>
-                </tr>`
+    })
+    document.getElementById("a5-tbody").innerHTML += tabledata;
+  }
 }
 
 
@@ -72,7 +77,7 @@ const removeFun = async () => {
 function firstpageFun() {
   currentPage = 1;
   pagination()
-  removeFun()
+ 
   if (currentPage != length / pagefield) {
     document.getElementById('endbtn').disabled = false;
     document.getElementById('nextbtn').disabled = false;
@@ -87,7 +92,7 @@ function prevButtonFun() {
   if (currentPage > 1) {
     currentPage--;
     pagination()
-    removeFun()
+    
     document.getElementById('endbtn')
 
   }
@@ -115,14 +120,14 @@ function nextButtonFun() {
     document.getElementById('nextbtn').disabled = true
   }
   pagination()
-  removeFun()
+ 
 }
 
 function lastpageFun() {
   lastpage = Math.ceil(length / pagefield);
   currentPage = lastpage
   pagination()
-  removeFun()
+ 
   if (currentPage != 1) {
     document.getElementById('homebtn').disabled = false;
     document.getElementById('previousbtn').disabled = false;
@@ -138,14 +143,9 @@ document.querySelector('#endbtn').addEventListener("click", lastpageFun)
 document.querySelector('#previousbtn').addEventListener("click", prevButtonFun)
 document.querySelector('#nextbtn').addEventListener("click", nextButtonFun)
 
+document.getElementById("a5-btn-search").addEventListener("click", pagination)
 
 
-pagination()
+// pagination()
 
 
-const searchStrategy = async () => {
-  let tbl = document.getElementsByClassName("csearch")
-  console.log(tbl);
-}
-
-searchStrategy()

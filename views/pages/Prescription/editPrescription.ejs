@@ -3,10 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Edit Prescription</title>
+       <link rel="stylesheet" href="/css/loaderComponent.css">
+      <script src="/javascript/loaderComponent.js"></script>
   <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
   <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css" />
   <link rel="stylesheet" href="/css/prescription/editPrescription.css"/>
+  <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css">
+  <script src="/sweetalert2/sweetalert2.min.js" defer></script>
   <style>
     #a5-doctor-prescription-active {
       background-color: #0969da;
@@ -22,6 +26,7 @@
   <!-- <script src="/javascript/prescription/editPrescription.js"></script> -->
 </head>
 <body onload="focus()">
+  <div class="center" id="loader"></div>
   <div class="A4-section">
     <div class="A4-container">
       <%- include('../../common/newSidebar/doctorSidebar.ejs') %>
@@ -38,40 +43,12 @@
         <h2 class="A4-p-title">Appointment Date:</h2>
         <p class="A4-p-data"><input type="text" value="" class="A4-table-content" id="data2" name="appointment_date" readonly></p>
         </div>
-        <!-- <div class="A4-content"> -->
-          <!-- <form action="">
-            <div class="firstp">
-            <p class="A4-title">Patient Name</p>
-            <p class="A4-table-content"></p>
-            </div>
-            <div class="firstp">
-            <p class="A4-title">Appointment Date</p>
-            <p class="A4-table-content"></p>
-            </div>
-            <div class="firstp">
-            <p class="A4-title">Diagnosis</p>
-            <p class="A4-table-content"></p>
-            </div>
-            <div class="firstp">
-            <p class="A4-title">Prescription</p>
-            <p class="A4-table-content"></p>
-            </div>
-          </form> -->
-        <!-- </div> -->
         <div class="A4-content">
 
           <h3 class="A4-heading1">Edit your Prescription here:</h3>
           
           <form action="" id="myForm">
           <table class="myTable">
-            <!-- <tr>
-              <td class="A4-table-title">Patient Name</td>
-              <td class="A4-table-data"><input type="text" value="" class="A4-table-content" id="data1" name="patient_name" readonly></td>
-            </tr>
-            <tr>
-              <td class="A4-table-title">Appointment Date</td>
-              <td class="A4-table-data"><input type="text" value="" class="A4-table-content" id="data2" name="appointment_date" readonly></td>
-            </tr> -->
             <tr>
               <td class="A4-table-title">Diagnosis</td>
               <td class="A4-table-data"><input type="text" value="" class="A4-table-content" id="data3" name="diagnosis"></td>
@@ -92,58 +69,6 @@
     </div>
   </div>
   <script src="/javascript/prescription/editPrescription.js"></script>
-  <script>
-  
-    // let id=`<%= id %>`;
-    // console.log(id);
-    // let id=document.getElementById("id").value;
-  
-    // const fetchdata=async(id)=>{
-    //   let res=await fetch(window.location.origin + `/updatedetails/${id}`);
-    //   let resjson=await res.json();
-  
-    //   const ele = document.getElementsByClassName("A4-table-content");
-    //   console.log(ele);
-    //   const keys = Object.keys(resjson.result[0]);
-    //   let i=0;
-  
-    //   keys.forEach((element) => {
-    //       ele[i].value = resjson.result[0][element];
-    //       i++;
-    //   });
-    // }
-    
-    
-    // fetchdata(id);
-  
-    // const editPrescription=async(id)=>{
-  
-    //   try{
-    //   const form = document.getElementById('myForm');
-    //   const obj = new URLSearchParams(new FormData(form));
-    //   let res=await fetch(location.origin+`/updatePrescription/${id}`,
-    //           {
-    //               headers: {
-    //                   'Content-Type': 'application/x-www-form-urlencoded'
-    //               },
-    //               method: "POST",
-    //               body: obj
-    //           });
-    //   alert("Prescription Edited Successfully");
-    //   location.href=`/prescriptiondetails` ;       
-    // }
-    // catch(error){
-    //   console.log(error);
-    // }          
-    // }
-  
-    // const back=async()=>{
-    //   location.href=`/prescriptiondetails`;
-    // }
-    // const focus=async()=>{
-    //   document.getElementById("data3").focus();
-    // }
-  
-  </script>
+
 </body>
 </html>

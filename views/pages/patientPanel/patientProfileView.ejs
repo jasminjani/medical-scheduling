@@ -3,6 +3,9 @@
 
 <head>
   <meta charset="UTF-8">
+      <link rel="stylesheet" href="/css/loaderComponent.css">
+      <link rel="stylesheet" href="/css/homepage.css" />
+      <script src="/javascript/loaderComponent.js"></script>
   <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/doctorPanel/a7dashboard.css">
@@ -14,18 +17,14 @@
 </head>
 
 <body>
-
+  <div class="center" id="loader"></div>
+    <%- include(`../../common/newSidebar/patientNav.ejs`) %>
   <div class="a7-container">
-  <%- include('../../common/newSidebar/patientSidebar.ejs') %>
-   
     <div class="a7-main-profile a7-mr-300">
-
       <div class="a7-profile-section">
-
           <div class="a7-btn-flex-end">
             <div class="a7-edit-btn"><a id="edtbtn" href="">Edit Profile</a></div>
-          </div>
-          
+          </div>         
         <div class="a7-profile-title">
           <h1>Profile Details</h1>
         </div>
@@ -39,7 +38,6 @@
         </div>
       </div>
     </div>
-    </div>
-   
+    </div>   
 </body>
 </html>

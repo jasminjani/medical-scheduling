@@ -6,9 +6,10 @@ async function isLoggedIn(){
       "Content-Type":"application/json"
     }
   })
-
+  if(user.headers.get("content-type").split(";")[0] == "text/html"){
+    return;
+  }
   user = await user.json();
-console.log(user) 
   if(user.success){
     window.location = "/"
   }

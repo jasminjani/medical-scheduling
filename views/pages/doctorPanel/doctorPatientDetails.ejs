@@ -22,27 +22,26 @@
   </style>
   <script src="/javascript/doctorPanel/urlPath.js" defer></script>
   <script src="/javascript/doctorPanel/doctorPatientDetails.js" defer></script>
+    <link rel="stylesheet" href="/css/loaderComponent.css">
+  <script src="/javascript/loaderComponent.js"></script>
   <title>Patient Details</title>
 </head>
 
 <body>
-
+  <div class="center" id="loader"></div>
   <div class="a5-container">
     <%- include('../../common/newSidebar/doctorSidebar') %>
       <div class="a5-section">
         <div class="a5-patient">
-          <div class="a5-patient-img" id="patientProfile" class="A7-profile" >       
+          <div class="a5-patient-img" id="patientProfile" class="A7-profile">
           </div>
           <div class="a5-patient-details">
             <h1 id="patientname">
               <!-- fetch patient Name -->
             </h1>
             <!-- fetch patient basic Detail -->
-            <div class="a5-patient-more-detail">
-              <div class="a5-details" id="patientbasicdetail">
-              </div>
-              <div class="a5-details" id="patientaddressdetail">
-              </div>
+            <div class="a5-patient-more-detail" id="patientbasicdetail">
+             
             </div>
             <!-- fetch patient address -->
             <div class="a5-patient-address" id="patientaddress">
@@ -67,16 +66,17 @@
                     <div class="a5-doctor-more-detail" id="appointmentdt">
                     </div>
                   </div>
-                  <div class="a5-prescription" id="a7-medicineDetail"  >
+
+                  <div class="a5-prescription" >
+                    <div class="a7-mediInfo-color" id="mediBox">
+                      
+                    </div>
                   </div>
+                  <p class="a5-btn" onclick="hide('a5-popup')"> Close </p>
                 </div>
               </div>
-              <p class="a5-btn" onclick="hide('a5-popup')"> Close </p>
             </div>
           </div>
         </div>
-      </div>
-  </div>
-  
 </body>
 </html>

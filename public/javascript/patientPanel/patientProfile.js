@@ -1,4 +1,4 @@
-window.location.href.split("/").pop() === "patientUpcomingSlots"
+window.location.href.split("/").pop() === "upcomingSlots"
   ? (document.getElementById("A3-upcoming").style.backgroundColor = "#3984af")
   : "";
 
@@ -10,13 +10,12 @@ let totalPage;
 
 const getUpcomingSlots = async () => {
   let user = JSON.parse(localStorage.getItem("userinfo"));
-  const response = await fetch(`/bookings/${user.id}`, {
+  const response = await fetch(`/patient/bookings/${user.id}`, {
     method: "GET",
     headers: {
       "Content-type": "application/json",
     },
   });
-
   const { success, data } = await response.json();
 
   totalPage = Math.ceil(data.length / limit);
@@ -34,15 +33,24 @@ const getUpcomingSlots = async () => {
     return (table.innerHTML = "<tr><td colspan='5'>No Data Found !</td></tr>");
   }
 
-
+  let timezoneoffset = new Date().getTimezoneOffset();
   data.slice((page - 1) * limit, page * limit).forEach((element) => {
+    element.start_time = new Date(element.start_time).getTime();
+    element.start_time -= (timezoneoffset * 60 * 1000);
+    const checkStartTime = ((element.start_time - new Date().getTime()) / (1000 * 60 * 60))
+    element.start_time = new Date(element.start_time).toLocaleTimeString('en-US')
+    // console.log(element.start_time)
+
+    element.end_time = new Date(element.end_time).getTime();
+    element.end_time -= (timezoneoffset * 60 * 1000);
+    element.end_time = new Date(element.end_time).toLocaleTimeString('en-US')
     table.innerHTML += `
       <tr>
         <td>${element.date}</td>
         <td>${element.day}</td>
-        <td>${element.start_time.slice(0, -3)}-${element.end_time.slice(0, -3)}</td>
+        <td>${element.start_time}-${element.end_time}</td>
         <td><input type="button" value="Details" onclick='getDetails(${JSON.stringify(element)})'/></td>
-        <td><input type="button" value="Cancel" onclick="cancelSlot(${element.id},${element.patient_id})"></td>
+        <td><input type="button" value="Cancel" onclick='cancelSlot(${JSON.stringify(element)},${checkStartTime})'></td>
       </tr>
     `;
   });
@@ -80,7 +88,8 @@ const end = () => {
   }
 };
 
-const cancelSlot = async (slot_id, patient_id) => {
+const cancelSlot = async (element,time) => {
+  if(time <= 2) return Swal.fire("You can not cancel slot before 2 hours");
   Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
@@ -97,7 +106,8 @@ const cancelSlot = async (slot_id, patient_id) => {
         icon: "success",
       }).then((result) => {
         if (result.isConfirmed) {
-          window.location = `/cancel/${slot_id}`;
+          socket.emit('cancel-slot', element);
+          // window.location = `/patient/cancel/${element.id}`;
         }
       });
     }
@@ -106,8 +116,6 @@ const cancelSlot = async (slot_id, patient_id) => {
 
 const getDetails = async (data) => {
 
-  console.log(data);
-  
   const modal = document.getElementsByClassName("A3-modal")[0];
   modal.style.visibility = "visible";
 

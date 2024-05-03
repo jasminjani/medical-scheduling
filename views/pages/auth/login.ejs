@@ -6,48 +6,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="/css/auth/login.css">
+    <link rel="stylesheet" href="/css/loaderComponent.css" />
+  <script src="/javascript/loaderComponent.js"></script>
+
+    <script src="/javascript/auth/script.js" defer></script>
+    <script src="/javascript/auth/login.js" defer></script>
 </head>
 
 <body>
+  <div class="center" id="loader"></div>
     <div class="container">
         <div class="form">
-            <div class="content">
-            <h2>Login</h2>
+          <div class="img">
+            <img src="/assets/loginimg.jpg" alt="">
+          </div>
+          <div class="content">
+            <div class="logo">
+              <img src="/assets/final-logo.png" alt="">
+            </div>
+            <h2 class="card-title">Login</h2>
             <form action="/login" class="user" method="post">
-                <div class="email">
-                    <label for="email">Email: </label>
-                    <input type="text" name="email" id="email" placeholder="Enter your email" class="dvalid" tabindex="1">
-                </div>
-
-                <div class="password">
-                    <label for="lname">Password:</label>
-                    <input type="password" name="password" id="password" placeholder="Enter your password" class="dvalid" tabindex="2">
-                </div>
-                <div class="forgot-pass">
-                    <p tabindex="4"><a href="/forgot-password" id="forgot-password">Forgot Password?</a></p>
-                </div>
-
-                <div class="submit">
-                    <input type="submit" id="submit" value="Login" tabindex="3">
-                </div>
-
-                <div class="or">
-                    <div class="left"></div>
-                    <p>OR</p>
-                    <div class="right"></div>
-                </div>
-                <div class="mv-btn">
-                    <p>Create New Account? <a href="/register" tabindex="5">register</a></p>
-                </div>
+              <div class="email">
+                <label for="email">Email: </label>
+                <input
+                  type="text"
+                  name="email"
+                  id="email"
+                  placeholder="Enter your email"
+                  class="dvalid"
+                  tabindex="1"
+                />
+              </div>
+  
+              <div class="password">
+                <label for="lname">Password:</label>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="Enter your password"
+                  class="dvalid"
+                  tabindex="2"
+                />
+              </div>
+              <div class="forgot-pass">
+                <p tabindex="4">
+                  <a href="/forgot-password" id="forgot-password"
+                    >Forgot Password?</a
+                  >
+                </p>
+              </div>
+  
+              <div class="submit">
+                <input type="submit" id="submit" value="Login" tabindex="3" />
+              </div>
+  
+              <div class="or">
+                <div class="left"></div>
+                <p>OR</p>
+                <div class="right"></div>
+              </div>
+              <div class="mv-btn">
+                <p>
+                  Create New Account?
+                  <a href="/register" tabindex="5">register</a>
+                </p>
+              </div>
             </form>
             <div class="link"></div>
+          </div>
         </div>
-        </div>
-    </div>
+      </div>
 
 
-    <script src="/javascript/auth/script.js"></script>
-    <script src="/javascript/auth/login.js"></script>
 </body>
 
 </html>

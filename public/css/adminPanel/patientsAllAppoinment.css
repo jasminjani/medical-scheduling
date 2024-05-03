@@ -4,7 +4,9 @@
   --blue: #0969da;
   --white: #ffffff;
   --black: black;
-  --darkblue: darkblue
+  --darkblue: darkblue;
+  --red: red;
+  --light-red: rgb(255, 128, 128);
 }
 
 * {
@@ -14,16 +16,12 @@
 }
 
 .a5-container {
-  max-width: 1440px;
+  max-width: 1280px;
   margin: 0 auto;
-  /* padding: 0 15px; */
-  width: 100%;
 }
 
 .a5-section {
-  max-width: 1080px;
-  /* margin: 0 auto; */
-  width: 100%;
+  padding: 10px;
   margin-left: 350px;
 }
 
@@ -211,17 +209,35 @@ h2 {
   margin: 30px 0;
 }
 
- .a7-div-field {
-   display: flex;
- }
+.a7-div-field {
+  display: flex;
+}
 
- .a7-mediInfo {
-   display: flex;
-   flex-direction: column;
- }
+.a7-mediInfo {
+  display: flex;
+  flex-direction: column;
+}
 
- #a7-medicineDetail {
-   display: flex;
-   align-items: center;
-   gap: 50px;
- }
+#a7-medicineDetail {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+/* add or delete user css */
+.a5-table-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.a5-approve-reject {
+  border-radius: 4px;
+  padding: 8px;
+  padding-top: 9px;
+  background-color: var(--light-red);
+}
+
+.a5-approve-reject:hover {
+  background-color: var(--red);
+  cursor: pointer;
+}

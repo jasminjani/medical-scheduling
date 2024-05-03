@@ -1,102 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Appointment Form</title>
-    <link rel="stylesheet" href="/css/patientCSS/appointment.css" />
-    <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
-    <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
-    <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css" />
-    <script src="/sweetalert2/sweetalert2.min.js" defer></script>
-    <style>
-      #a5-patient-doctor-active {
-        background-color: #0969da;
-        transform: translate(5px);
-        border-radius: 5px;
-      }
-  
-      #a5-patient-doctor-active a,
-      #a5-patient-doctor-active i {
-        color: #ffffff;
-      }
-    </style>
-  </head>
 
-  <body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Appointment Form</title>
+       <link rel="stylesheet" href="/css/loaderComponent.css">
+      <script src="/javascript/loaderComponent.js"></script>
+  <link rel="stylesheet" href="/css/patientCSS/appointment.css" />
+  <link rel="stylesheet" href="/fontawesome-free-6.5.2-web/css/all.min.css">
+  <link rel="stylesheet" href="/css/sideBar/newSidebar.css" />
+  <link rel="stylesheet" href="/sweetalert2/sweetalert2.min.css" />
+    <link rel="stylesheet" href="/css/homepage.css" />
+  <script src="/sweetalert2/sweetalert2.min.js" defer></script>
+ <script src="/socket.io/socket.io.js" defer></script>
+  <script src="/javascript/patientPanel/patientReview.js" defer></script>
+  <script src="/javascript/patientPanel/appointment.js" defer></script>
+  <style>
+    #a5-patient-doctor-active {
+      background-color: #0969da;
+      transform: translate(5px);
+      border-radius: 5px;
+    }
 
-    <div class="a5-main-container">
+    #a5-patient-doctor-active a,
+    #a5-patient-doctor-active i {
+      color: #ffffff;
+    }
+  </style>
+</head>
 
-      <div class="a5-container">
+<body>
+  <!-- Add NavBar -->
+  <div class="center" id="loader"></div>
+  <%- include(`../../common/newSidebar/patientNav.ejs`) %>
+  <div class="a5-main-container" id="A6-body" style="padding: 10px;">
 
-        <%- include('../../common/newSidebar/patientSidebar') %>
+    <div class="a5-container">
+
+    
 
         <main class="main">
           <div class="container">
             <div class="booking-page">
-            <div class="doctor-profile">
-              <!-- <div class="doctor-img">
-                <img src="/assets/doctor4.jpg" alt="" />
+              <div class="doctor-profile">
               </div>
-              <div class="doctor-details">
-                <p class="name"><span>Name: </span>Alpesh</p>
-                <p class="qualification"><span>qualification: </span>MBBS</p>
-                <p class="speciality"><span>speciality: </span>neurologist</p>
-                <p class="fees"><span>fees: </span>250 rs</p>
-                <p class="hospital-name"><span>clinic/hospital: </span>ALPHA</p>
-                <p class="address"><span>address: </span> ahmedabad</p>
-                <div class="rating">
-                  <img src="/assets/gstar.png" width="15" alt="" />
-                  <img src="/assets/gstar.png" width="15" alt="" />
-                  <img src="/assets/gstar.png" width="15" alt="" />
-                  <img src="/assets/gstar.png" width="15" alt="" />
-                  <img src="/assets/gstar.png" width="15" alt="" />
-                  <span id="review-count">(200)</span>
-                </div>
-              </div> -->
-            </div>
 
-            <div class="appointmentForm">
-              <div class="inputs">
-                <div class="date">
-                  <label for="selectDate" class="label">Select Date:</label>
-                  <input
-                    type="date"
-                    name="date"
-                    id="date"
-                    class="dvalid"
-                    placeholder="Select Appointment Date"
-                  />
+              <div class="appointmentForm">
+                <div class="inputs">
+                  <div class="date">
+                    <label for="selectDate" class="label">Select Date:</label>
+                    <input type="date" name="date" id="date" class="dvalid" placeholder="Select Appointment Date" />
+                  </div>
+
+                  <div class="appointments">
+                    <label for="appointments" class="label">Available Slots:</label>
+                    <select name="appointments" class="dvalid" id="appointments">
+                      <option value="">--Select Slot--</option>
+                    </select>
+                  </div>
                 </div>
-      
-                <div class="appointments">
-                  <label for="appointments" class="label">Available Slots:</label>
-                  <select
-                    name="appointments"
-                    class="dvalid"
-                    id="appointments"
-                  >
-                    <option value="">--Select Slot--</option>
-                  </select>
+
+                <input type="submit" name="booked" id="slotBook" value="Book" class="submit" />
+              </div>
+            </div>
+         
+            <br><br>
+            <div class="A6-rating-review">
+              <div class="A6-showReview">
+                <div class="A6-caption">
+                  <h3 id="A6-heading">Reviews</h3>
+                  <div class="A6-review">
+                    <div class="A6-reviewContent card-1"></div>
+                    <br>
+                  </div>
                 </div>
               </div>
 
-              <input
-                type="submit"
-                name="booked"
-                id="slotBook"
-                value="Book"
-                class="submit"
-              />
+              <div class="A6-patientRating">
+                <div id="rate">
+
+                  <div class="heading">
+                    <div>Hi patient mind answering one question?</div>
+                    <div class="textHead">How would you rate the doctor!</div>
+                  </div>
+                  <br>
+                  <div class="ratingStar">
+                    <div onclick="gfg(1)" class="star" id="null"><i class='fa fa-star' style='font-size:24px'></i>
+                    </div>
+                    <div onclick="gfg(2)" class="star" id="null"><i class='fa fa-star' style='font-size:24px'></i>
+                    </div>
+                    <div onclick="gfg(3)" class="star" id="null"><i class='fa fa-star' style='font-size:24px'></i>
+                    </div>
+                    <div onclick="gfg(4)" class="star" id="null"><i class='fa fa-star' style='font-size:24px'></i>
+                    </div>
+                    <div onclick="gfg(5)" class="star" id="null"><i class='fa fa-star' style='font-size:24px'></i>
+                    </div>
+                  </div>
+                  <form id="reviewForm" method="post">
+                    <input type="hidden" name="doctor_id" id="doctor_id" value=<%=doctor_id%>>
+                    <b style="display: none;">Rating :</b> <input type="text" name="rating" id="output" readonly
+                      style="display: none;">
+                    <br><br>
+                    <div class="reviewPatient">
+                      <label for="review"><b>Review:</b></label>
+                      <textarea name="patientReview" id="review" cols="20" rows="2"></textarea>
+                    </div>
+                    <br>
+                    <input type="button" name="ratingDone" id="rateGo" value="Done" onclick="submitRate()">
+                  </form>
+                </div>
+              </div>
+
             </div>
-          </div>
           </div>
         </main>
 
     </div>
 
   </div>
+  <div id="thanks">
+    <div id="thanksText">
+      <h2>Thanks for Rating!!</h2>
+      <br>
+      <input type="button" name="thanksDone" id="thanksGo" value="Go to Screen" onclick="closeThanks()">
+    </div>
+  </div>
 
-    <script src="/javascript/patientPanel/appointment.js"></script>
-  </body>
+ 
+</body>
+
 </html>

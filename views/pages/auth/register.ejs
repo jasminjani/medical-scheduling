@@ -4,14 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/assets/medical-team.png" type="image/x-icon">
     <title>UserData</title>
     <link rel="stylesheet" type="text/css" href="/css/auth/register.css">
+      <link rel="stylesheet" href="/css/loaderComponent.css" />
+     <script src="/javascript/loaderComponent.js"></script>
+     <script src="/javascript/auth/script.js" defer></script>
+    <script src="/javascript/auth/register.js" defer></script>
 </head>
 
 <body>
+    <div class="center" id="loader"></div>
     <div class="container">
         <div class="form">
             <div class="content">
+                <div class="logo">
+                    <img src="/assets/final-logo.png" alt="">
+                  </div>
                 <h2>Registration</h2>
                 <form action="/register" class="user" method="post">
                     <div class="fname">
@@ -90,10 +99,7 @@
         </div>
 
     </div>
-
-
-    <script src="/javascript/auth/script.js"></script>
-    <script src="/javascript/auth/register.js"></script>
+    
 </body>
 
 </html>

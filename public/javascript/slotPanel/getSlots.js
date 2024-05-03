@@ -2,16 +2,18 @@ window.location.href.split("/").pop() === "upcomingSlots" ? document.getElementB
 
 // Add Doctor id from cookie
 const getDates = async () => {
-  const response = await fetch("/dates", {
+  const response = await fetch("/doctor/dates", {
     method: "GET",
     headers: {
       "Content-type": "application/json"
     }
   });
-
   const { message } = await response.json();
 
   const table = document.getElementById("date-body");
+  if(message.length == 0){
+    table.innerHTML = `<tr><td colspan="3">No Data Found </td></tr>`
+  }
 
   message.forEach(element => {
     table.innerHTML += `
@@ -23,12 +25,12 @@ const getDates = async () => {
     `
   });
 }
-
+window.onload = getDates;
 const getSlots = async (date) => {
 
   document.getElementsByClassName("A3-modal")[0].style.visibility = "visible";
 
-  const response = await fetch(`/slots/${date}`, {
+  const response = await fetch(`/doctor/slots/${date}`, {
     method: "GET",
     headers: {
       "Content-type": "application/json"
@@ -42,21 +44,34 @@ const getSlots = async (date) => {
   const table = document.getElementById("slot-body");
 
   table.innerHTML = "";
-
+  message.sort((a,b)=> new Date(a.start_time).getTime() - new Date(b.start_time).getTime())
   message.forEach(element => {
+    let timezoneOffset = new Date().getTimezoneOffset();
+    // start time
+    element.start_time = new Date(element.start_time).getTime();
+    element.start_time -= (timezoneOffset * 60 * 1000);
+    const checkStartTime = ((element.start_time - new Date().getTime()) / (1000 * 60 * 60))
+    element.start_time = new Date(element.start_time).toLocaleTimeString();
+    // end time
+    element.end_time = new Date(element.end_time).getTime();
+    element.end_time -= (timezoneOffset * 60 * 1000);
+    const checkEndTime = ((element.end_time - new Date().getTime()) / (1000 * 60 * 60))
+    // console.log(checkEndTime);
+    element.end_time = new Date(element.end_time).toLocaleTimeString();
     table.innerHTML += `
-      <tr>
+      <tr style=${element.is_canceled && checkEndTime > 0 ? "background-color:#3984af;" : ""}>
         <td>${element.start_time}</td>
         <td>${element.end_time}</td>
         <td>${element.patient_name ? element.patient_name : "-"}</td>
         <td>${element.phone ? element.phone : "-"}</td>
-        <td>${!element.is_canceled ? `<input type="button" value="Delete" onclick=openDeleteModal(${element.id}) />` : `Canceled`}</td>
+        <td>${!element.is_canceled && checkEndTime > 0 ? `<input type="button" value="Delete" onclick='openDeleteModal(${JSON.stringify(element)},${checkStartTime})' />` : checkEndTime < 0 ? `<input type="button" value="Closed"/>` : `<input type="button" value="Delete" onclick='openDeleteModal(${JSON.stringify(element)},${checkStartTime})' />`}</td>
       </tr>
     `
   });
 }
 
-const openDeleteModal = async (slot_id) => {
+const openDeleteModal = async (element, time) => {
+  if (time <= 2 && !element.is_canceled) return Swal.fire("You can not delete slot before 2 hours");
   Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
@@ -73,7 +88,8 @@ const openDeleteModal = async (slot_id) => {
         icon: "success",
       }).then((result) => {
         if (result.isConfirmed) {
-          window.location.href = `/delete/${slot_id}`;
+          socket.emit(`delete-slot`, element);
+          window.location.href = `/doctor/delete/${element.id}`;
         }
       })
     }

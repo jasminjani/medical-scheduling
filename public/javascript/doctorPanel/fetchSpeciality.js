@@ -1,16 +1,27 @@
+   let otherSpeciality_id;
+
    const specialityFetch = async () => {
         const fetchData = await fetch("/specialities")
         const data = await fetchData.json()
-        let key = Object.keys(data)
-        key.forEach(element => {
-          let dtkey = Object.keys(data[element])
-          let option = document.createElement("option")
-          option.value = data[element][dtkey[0]]
-          option.textContent = data[element][dtkey[1]]
-          document.getElementById(dtkey[1]).appendChild(option)
+        data.forEach(element => {
+          document.getElementById("speciality").innerHTML += `
+          <option value=${element["speciality_id"]}>${element["speciality"]}</option>`;
+          if (element["speciality"].toLowerCase() == "other") {
+            otherSpeciality_id = element["speciality_id"];
+          }
         });
       }
-
  
       specialityFetch()
+
+
+function specialityChange() {
+
+  if (document.getElementById('speciality').value == otherSpeciality_id) {
+    document.getElementById('otherSpeciality').style.display = 'block'; 
+  } else {
+    document.getElementById('otherSpeciality').style.display = 'none'; 
+    document.getElementById('otherSpeciality').value = null; 
+  }
+}
   
