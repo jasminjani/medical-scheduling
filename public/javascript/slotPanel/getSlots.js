@@ -8,10 +8,12 @@ const getDates = async () => {
       "Content-type": "application/json"
     }
   });
-
   const { message } = await response.json();
 
   const table = document.getElementById("date-body");
+  if(message.length == 0){
+    table.innerHTML = `<tr><td colspan="3">No Data Found </td></tr>`
+  }
 
   message.forEach(element => {
     table.innerHTML += `
