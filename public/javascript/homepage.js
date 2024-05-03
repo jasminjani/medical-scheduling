@@ -34,11 +34,11 @@ const setDatalist = (data) => {
 
 const putDoctorOnScreen = async (data) => {
   let cards = document.querySelector(".cards");
-
   let card = "";
 
   if (data.length <= 0) {
     cards.style.justifyContent = "center";
+    document.querySelector(".swipe-btns").innerHTML=""
     return (cards.innerHTML = "<p class='not-found'>No Data Found !</p>");
   }
 
@@ -78,6 +78,9 @@ const putDoctorOnScreen = async (data) => {
     swipebtns.innerHTML = `<button class="left-swipe"><<</button>
     <button class="right-swipe">>></button>`;
     carousel();
+  }else{
+    console.log('first')
+    document.querySelector(".swipe-btns").innerHTML=""
   }
   cards.style.justifyContent = "start";
   cards.innerHTML = card;
