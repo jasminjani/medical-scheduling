@@ -39,7 +39,6 @@ const getPastSlots = async () => {
     element.end_time = new Date(element.end_time).getTime();
     element.end_time -= (timezoneoffset * 60 * 1000);
     element.end_time = new Date(element.end_time).toLocaleTimeString('en-US')
-    if (element.prescription_id) {
       table.innerHTML += `
       <tr>
         <td>${element.date}</td>
@@ -48,7 +47,6 @@ const getPastSlots = async () => {
         <td><input type="button" value="Details" onclick='getDetails(${JSON.stringify(element)})'></td>
         <td>${element.prescription_id !== null ? `<input type="button" value="Get PDF" onclick="generatePDF(${element.prescription_id})">` : `-`}</td>
       </tr>`;
-    }
   });
 }
 

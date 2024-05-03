@@ -363,7 +363,7 @@ exports.patientPastBookings = async (req, res) => {
         and slot_bookings.is_deleted = 0 and time_slots.date <= CAST(NOW() as DATE) 
         order by time_slots.date desc;`
 
-      let [data] = await conn.query(query, [patient_id, 0, 0]);
+      let [data] = await conn.query(query, [patient_id]);
 
 
       return res.status(200).json({ success: true, message: data });

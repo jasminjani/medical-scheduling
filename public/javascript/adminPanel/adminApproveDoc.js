@@ -61,6 +61,10 @@
           "a2-rejected-doctors-tbody"
         );
         // console.log(allPendingDoctors);
+        if(allPendingDoctors.length==0){
+          approveTbody.innerHTML = `<tr>
+          <td colspan="5">No Data Found</td></tr>`
+        }
         allPendingDoctors.forEach((doc, i) => {
           let str = `<tr>
             <td>${++i}</td>
@@ -73,6 +77,11 @@
           approveTbody.innerHTML += str;
         });
 
+        if(allDoctors.length==0){
+          allDoctorsTbody.innerHTML = `<tr>
+          <td colspan="5">No Data Found</td></tr>`
+        }
+
         allDoctors.forEach((doc, i) => {
           let tds = `<tr>
           <td>${++i}</td>
@@ -83,6 +92,11 @@
           </tr>`;
           allDoctorsTbody.innerHTML += tds;
         });
+
+        if(rejectedDoctors.length==0){
+          rejectedTbody.innerHTML = `<tr>
+          <td colspan="5">No Data Found</td></tr>`
+        }
 
         rejectedDoctors.forEach((doc, i) => {
           let tds = `<tr>
