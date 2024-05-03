@@ -125,6 +125,8 @@ const fetchAppointmentData = async () => {
       element.end_time -= (timezoneoffset * 60 * 1000);
       element.end_time = new Date(element.end_time).toLocaleTimeString('en-US')
 
+      console.log(startDate,"1");
+      console.log(Date.now());
       let str = `
             <tr>
                 <td>${index + 1}</td>

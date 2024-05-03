@@ -15,7 +15,8 @@ const getPastSlots = async () => {
     }
   });
 
-  const { success, message } = await response.json();
+  const {success, message } = await response.json();
+  console.log(message);
   // console.log(message)
   totalPage = Math.ceil(message.length / limit);
 
@@ -28,6 +29,7 @@ const getPastSlots = async () => {
   if (message.length == 0 || !success) {
     return table.innerHTML = "<tr><td colspan='5'>No Data Found !</td></tr>"
   }
+  
 
   let timezoneoffset = new Date().getTimezoneOffset();
   message.slice((page - 1) * limit, page * limit).forEach(element => {
@@ -39,7 +41,7 @@ const getPastSlots = async () => {
     element.end_time = new Date(element.end_time).getTime();
     element.end_time -= (timezoneoffset * 60 * 1000);
     element.end_time = new Date(element.end_time).toLocaleTimeString('en-US')
-    if (element.prescription_id) {
+
       table.innerHTML += `
       <tr>
         <td>${element.date}</td>
