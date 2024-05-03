@@ -251,7 +251,6 @@ const postUpdateData = async () => {
     let pincode = document.getElementById("pincode").value
     let otherSpeciality = document.getElementById('otherSpeciality').value;
 
-
     let fetchData = await fetch("/patient/updateBecomeDoctorDetails", {
       method: "POST",
       headers: {
@@ -262,7 +261,7 @@ const postUpdateData = async () => {
 
     const { success } = await fetchData.json()
     if (success) {
-      Swal.fire({
+      await Swal.fire({
         title: "Update Successfully!",
         icon: "success"
       });
